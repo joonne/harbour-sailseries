@@ -1,0 +1,45 @@
+Name: harbour-sailseries
+Summary: SailSeries for Sailfish
+Version: 0.5
+Release: 5
+Group: Qt/Qt
+License: Public domain except for the icon
+Sources:
+- '%{name}-%{version}.tar.bz2'
+Description: |-
+Configure: none
+Builder: qtc5
+PkgConfigBR:
+- Qt5Core
+- Qt5Qml
+- Qt5Quick
+- sailfishapp
+
+Requires:
+- libsailfishapp
+Files:
+# Do not include whole %{_datadir}/applications as that would include tests too
+- '%defattr(0644,root,root,0755)'
+- '%{_datadir}/icons/hicolor/86x86/apps/%{name}.png'
+- '%{_datadir}/applications/%{name}.desktop'
+- '%{_datadir}/%{name}/qml'
+
+- '%attr(0755,-,-) %{_bindir}/%{name}'
+PkgBR: []
+
+#SubPackages:
+#    - Name: test
+#      Summary: Tests for the Helloworld Pro for Sailfish
+#      Group: Qt/Qt
+#      Description: |-
+#        Tests package for the Helloworld Pro for Sailfish
+#      AutoDepend: true
+#      PkgConfigBR:
+#      - Qt5QuickTest
+#      Requires:
+#      - qt5-qtdeclarative-import-qttest
+#      Files:
+#        - '%{_bindir}/tst-harbour-sailseries'
+#        - '%{_datadir}/tst-harbour-sailseries/*.qml'
+#        # Script for starting tests on emulator and device
+#        - '%{_datadir}/tst-harbour-sailseries/*.sh'

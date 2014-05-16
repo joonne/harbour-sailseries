@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+X-Nemo-Application-Type=silica-qt5
+Name=SailSeries
+Icon=harbour-sailseries
+Exec=harbour-sailseries
