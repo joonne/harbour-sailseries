@@ -130,7 +130,7 @@ bool DatabaseManager::createDB() {
 
         //-----------------------------------------------------------------
 
-        if(true) {
+        if(createSeriesTable() and createEpisodeTable()) {
 
             qDebug() << "Tables created";
         }
@@ -178,3 +178,41 @@ bool DatabaseManager::createSeriesTable() {
     }
     return ret;
 }
+
+bool DatabaseManager::createEpisodeTable() {
+
+    bool ret = false;
+    if (db.isOpen()) {
+
+        QSqlQuery query(db);
+        ret = query.exec(QString("CREATE TABLE Episode"
+                                 "(id INTEGER PRIMARY KEY NOT NULL , "
+                                 "director VARCHAR(1000), "
+                                 "epimgflag INTEGER, "
+                                 "episodeName VARCHAR(50), "
+                                 "episodeNumber INTEGER, "
+                                 "firstAired VARCHAR(10), "
+                                 "guestStars VARCHAR(1000), "
+                                 "imdbID INTEGER, "
+                                 "language VARCHAR(20), "
+                                 "overview VARCHAR(1000), "
+                                 "productionCode INTEGER, "
+                                 "rating REAL, "
+                                 "ratingCount INTEGER, "
+                                 "seasonNumber INTEGER, "
+                                 "writer VARCHAR(1000), "
+                                 "absoluteNumber INTEGER, "
+                                 "airsAfterSeason INTEGER, "
+                                 "airsBeforeEpisode INTEGER, "
+                                 "airsBeforeSeason INTEGER, "
+                                 "filename VARCHAR(50), "
+                                 "lastupdated VARCHAR(20), "
+                                 "seasonID INTEGER, "
+                                 "seriesID INTEGER REFERENCES Series(id) ON DELETE SET NULL ON UPDATE CASCADE, "
+                                 "thumbAdded VARCHAR(20), "
+                                 "thumbHeight INTEGER, "
+                                 "thumbWidth INTEGER)"));
+    }
+    return ret;
+}
+

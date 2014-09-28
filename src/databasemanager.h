@@ -34,6 +34,7 @@ public:
     bool updateInfoTable(double version);
 
     bool createSeriesTable();
+    bool createEpisodeTable();
 
 signals:
 
