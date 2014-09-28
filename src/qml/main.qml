@@ -4,7 +4,7 @@ import "pages"
 
 ApplicationWindow
 {
-    initialPage: Component { StartPage { } }
+    initialPage: StartPage { }
 }
 
 

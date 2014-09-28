@@ -17,6 +17,12 @@ XMLReader::XMLReader(QObject *parent) :
             SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>&)),
             this,
             SLOT(sslErrors(QNetworkReply*,QList<QSslError>&)));
+
+    connect(myNetWorkAccessManager,
+            SIGNAL(finished(QNetworkReply*)),
+            this,
+            SLOT(bannerFetchFinished(QNetworkReply*)));
+
 }
 
 XMLReader::~XMLReader() {
@@ -65,6 +71,15 @@ void XMLReader::startRequest(QUrl url) {
 
 }
 
+void XMLReader::getServerTime() {
+
+    QString url = "http://thetvdb.com/api/Updates.php?type=none";
+    qDebug() << "Requesting" << url;
+    QUrl finalUrl(url);
+    startRequest(finalUrl);
+
+}
+
 // ---------------------------------------------------
 // slots
 // ---------------------------------------------------
@@ -82,6 +97,14 @@ void XMLReader::replyFinished(QNetworkReply *reply) {
 void XMLReader::sslErrors(QNetworkReply *reply, QList<QSslError> &errors) {
 
 
+}
+
+void XMLReader::bannerFetchFinished(QNetworkReply *reply) {
+
+    QImage* banner = new QImage();
+    banner->loadFromData(reply->readAll());
+
+    reply->deleteLater();
 }
 
 // ---------------------------------------------------
@@ -173,7 +196,7 @@ QMap<QString, QString> XMLReader::parseSeries(QXmlStreamReader &xml) {
             }
             /* We've found banner. */
             if(xml.name() == "banner") {
-                this->addElementDataToMap(xml, series);
+                this->addElementDataToMap(xml, series);    
             }
             /* We've found Overview. */
             if(xml.name() == "Overview") {
@@ -213,7 +236,7 @@ QMap<QString,QString> XMLReader::parseLanguages(QXmlStreamReader &xml) {
     }
     /* Let's get the attributes for language */
     QXmlStreamAttributes attributes = xml.attributes();
-    /* Let's check that person has id attribute. */
+    /* Let's check that language has id attribute. */
     if(attributes.hasAttribute("id")) {
         /* We'll add it to the map. */
         languages["id"] = attributes.value("id").toString();
@@ -261,21 +284,4 @@ void XMLReader::addElementDataToMap(QXmlStreamReader& xml,
     }
     /* Now we can add it to the map.*/
     map.insert(elementName, xml.text().toString());
-}
-
-QString XMLReader::seriesText() {
-
-
-    if(mySeries.size() == 0) {
-
-        return "not found!";
-
-    } else {
-
-        QMap<QString, QString> temp = mySeries.at(0);
-        QString text = temp.find("Overview").value();
-        qDebug() << text;
-        return text;
-
-    }
 }

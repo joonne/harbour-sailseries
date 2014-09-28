@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QPixmap>
+#include <QDebug>
 
 class SeriesData : public QObject
 {
@@ -12,6 +13,7 @@ class SeriesData : public QObject
     Q_PROPERTY(QString SeriesName READ getSeriesName)
     Q_PROPERTY(QString AliasNames READ getAliasNames)
     Q_PROPERTY(QString Banner READ getBanner)
+    Q_PROPERTY(QString Overview READ getOverview)
     Q_PROPERTY(QString FirstAired READ getFirstAired)
     Q_PROPERTY(QString IMDB_ID READ getIMDB_ID)
     Q_PROPERTY(QString zap2it_ID READ getZap2it_ID)
@@ -19,7 +21,7 @@ class SeriesData : public QObject
 public:
     explicit SeriesData(QObject *parent = 0);
     SeriesData(QObject* parent, QString ID, QString language, QString seriesName,
-               QString aliasNames, QString banner, QString firstAired, QString IMDB_ID,
+               QString aliasNames, QString banner, QString overview, QString firstAired, QString IMDB_ID,
                QString zap2it_ID, QString network);
 
     QString getID();
@@ -27,6 +29,7 @@ public:
     QString getSeriesName();
     QString getAliasNames();
     QString getBanner();
+    QString getOverview();
     QString getFirstAired();
     QString getIMDB_ID();
     QString getZap2it_ID();

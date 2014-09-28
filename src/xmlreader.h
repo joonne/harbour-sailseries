@@ -10,11 +10,11 @@
 #include <QNetworkReply>
 #include <QTemporaryFile>
 #include <QList>
+#include <QImage>
 
 class XMLReader : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString seriesText READ seriesText NOTIFY seriesTextChanged)
 public:
     explicit XMLReader(QObject *parent = 0);
     ~XMLReader();
@@ -26,21 +26,20 @@ public:
                                  QMap<QString, QString>& map) const;
     void startRequest(QUrl url);
 
-    Q_INVOKABLE void getLanguages();
-    Q_INVOKABLE void searchSeries(QString text);
+    void getLanguages();
+    void searchSeries(QString text);
     void fetchBanner(QString text);
+    void getServerTime();
 
     QList<QMap<QString,QString> > getSeries();
 
-    QString seriesText();
-
 signals:
-    void seriesTextChanged();
     void readyToPopulate();
 
 public slots:
     void replyFinished(QNetworkReply* reply);
     void sslErrors(QNetworkReply* reply, QList<QSslError>& errors);
+    void bannerFetchFinished(QNetworkReply* reply);
 
 private:
 
@@ -49,7 +48,6 @@ private:
     const QString myMirrorPath;
     QList<QMap<QString,QString> > myLanguages;
     QList<QMap<QString,QString> > mySeries;
-    QString mySeriesText;
 
 };
 

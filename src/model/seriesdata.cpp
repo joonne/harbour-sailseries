@@ -6,20 +6,21 @@ SeriesData::SeriesData(QObject *parent) :
 }
 
 SeriesData::SeriesData(QObject *parent, QString ID, QString language, QString seriesName,
-                       QString aliasNames, QString banner, QString firstAired,
+                       QString aliasNames, QString banner, QString overview, QString firstAired,
                        QString IMDB_ID, QString zap2it_ID, QString network):
     QObject(parent)
 {
-
     myID = ID;
     myLanguage = language;
     mySeriesName = seriesName;
     myAliasNames = aliasNames;
     myBanner = banner;
+    myOverview = overview;
     myFirstAired = firstAired;
     myIMDB_ID = IMDB_ID;
     myZap2it_ID = zap2it_ID;
     myNetwork = network;
+
 }
 
 QString SeriesData::getID() { return myID; }
@@ -31,6 +32,8 @@ QString SeriesData::getSeriesName() { return mySeriesName; }
 QString SeriesData::getAliasNames() { return myAliasNames; }
 
 QString SeriesData::getBanner() { return myBanner; }
+
+QString SeriesData::getOverview() { return myOverview; }
 
 QString SeriesData::getFirstAired() { return myFirstAired; }
 
