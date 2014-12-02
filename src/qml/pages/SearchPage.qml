@@ -1,17 +1,15 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import SeriesModel 1.0
+import DataModel 1.0
 
 Page {
     id: searchpage
 
     SeriesListModel {
         id: listModel
-
     }
 
     property SeriesListModel listModel
-
 
     TextField {
         id: seriesSearch
@@ -21,7 +19,6 @@ Page {
         placeholderText: "Search for a series"
         EnterKey.onClicked: {
             listModel.searchSeries(text)
-            //testmodel.searchSeries(text)
             focus = false
         }
     }
@@ -41,8 +38,8 @@ Page {
             id: listItem
             contentHeight: Theme.itemSizeSmall
             contentWidth: listView.width
-            onPressed: {
-                listModel.selectSeries(listView.currentIndex)
+            onClicked: {
+                listModel.selectSeries(index)
                 pageStack.push(Qt.resolvedUrl("SeriesInfoPage.qml"), {"listModel":listModel})
             }
 

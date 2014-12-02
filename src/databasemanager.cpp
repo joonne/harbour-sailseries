@@ -7,18 +7,24 @@ DatabaseManager::DatabaseManager(QObject *parent) :
 
 DatabaseManager::~DatabaseManager() {
 
+    close();
+
 }
 
 void DatabaseManager::setUpDB() {
 
     if(openDB()) {
 
-        QSqlQuery query(db);
-        query.exec("SELECT count(*) FROM sqlite_master WHERE type = 'table';");
-        int tableCount = query.value(1).toInt();
-        qDebug() << "Tables in database: " << tableCount;
+        //QSqlQuery query(db);
+        //query.exec("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table';");
 
-        if(tableCount == 0) {
+        //qDebug() << query.lastError();
+
+        //int tableCount = query.value(0).toInt();
+        //qDebug() << "Tables in database: " << tableCount;
+
+        // check whether db is empty
+        if(db.tables().size() == 0) {
 
             createDB();
 
@@ -34,7 +40,7 @@ void DatabaseManager::setUpDB() {
         }
     }
 
-    close();
+    //close();
 
 }
 
@@ -42,12 +48,11 @@ bool DatabaseManager::openDB() {
 
     QString dbname = "sailSeries.db.sqlite";
     QString dbpath = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QDir::separator() + dbname;
-    QDir path(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QDir::separator() + dbname);
+    QString dirpath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
+    QDir dir(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
 
-    if(!path.exists()) {
-
-        path.mkpath(dbpath);
-
+    if(!dir.exists()) {
+        dir.mkpath(".");
     }
 
     // Find SQLite driver
@@ -122,6 +127,8 @@ bool DatabaseManager::updateInfoTable(double version) {
 
 bool DatabaseManager::createDB() {
 
+    qDebug() << "creating database!";
+
     if(db.isOpen()) {
 
         //-----------------------------------------------------------------
@@ -159,9 +166,9 @@ bool DatabaseManager::createSeriesTable() {
                                  "contentRating VARCHAR(5), "
                                  "firstAired VARCHAR(10), "
                                  "genre VARCHAR(100), "
-                                 "imdbID integer, "
-                                 "language VARCHAR(20), "
-                                 "network VARCHAR(2) NOT NULL, "
+                                 "imdbID VARCHAR(20), "
+                                 "language VARCHAR(2), "
+                                 "network VARCHAR(20), "
                                  "overview VARCHAR(1000), "
                                  "rating REAL, "
                                  "ratingCount INTEGER, "
@@ -173,8 +180,11 @@ bool DatabaseManager::createSeriesTable() {
                                  "banner VARCHAR(50), "
                                  "fanart VARCHAR(50), "
                                  "lastupdated VARCHAR(20), "
-                                 "posters VARCHAR(50), "
-                                 "zap2itID INTEGER)"));
+                                 "poster VARCHAR(50), "
+                                 "zap2itID VARCHAR(20), "
+                                 "watched INTEGER DEFAULT 0)"));
+
+        qDebug() << query.lastError();
     }
     return ret;
 }
@@ -186,14 +196,14 @@ bool DatabaseManager::createEpisodeTable() {
 
         QSqlQuery query(db);
         ret = query.exec(QString("CREATE TABLE Episode"
-                                 "(id INTEGER PRIMARY KEY NOT NULL , "
+                                 "(id INTEGER PRIMARY KEY NOT NULL, "
                                  "director VARCHAR(1000), "
                                  "epimgflag INTEGER, "
                                  "episodeName VARCHAR(50), "
                                  "episodeNumber INTEGER, "
                                  "firstAired VARCHAR(10), "
                                  "guestStars VARCHAR(1000), "
-                                 "imdbID INTEGER, "
+                                 "imdbID VARCHAR(20), "
                                  "language VARCHAR(20), "
                                  "overview VARCHAR(1000), "
                                  "productionCode INTEGER, "
@@ -211,8 +221,155 @@ bool DatabaseManager::createEpisodeTable() {
                                  "seriesID INTEGER REFERENCES Series(id) ON DELETE SET NULL ON UPDATE CASCADE, "
                                  "thumbAdded VARCHAR(20), "
                                  "thumbHeight INTEGER, "
-                                 "thumbWidth INTEGER)"));
+                                 "thumbWidth INTEGER, "
+                                 "watched INTEGER DEFAULT 0)"));
+
+        qDebug() << query.lastError();
+        qDebug() << query.lastQuery();
     }
     return ret;
 }
 
+bool DatabaseManager::insertSeries(int id, QString actors, QString airsDayOfWeek, QString airsTime,
+                                   QString contentRating, QString firstAired, QString genre, QString imdb_id,
+                                   QString language, QString network, QString overview, double rating,
+                                   int ratingCount, int runtime, QString SeriesName, QString status,
+                                   QString added, int addedby, QString banner, QString fanart,
+                                   QString lastUpdated, QString poster, QString zap2itid, int watched) {
+
+    bool ret = false;
+
+    overview.replace("'","''");
+
+    qDebug() << id;
+    qDebug() << actors;
+    qDebug() << airsDayOfWeek;
+    qDebug() << airsTime;
+    qDebug() << contentRating;
+    qDebug() << firstAired;
+    qDebug() << genre;
+    qDebug() << imdb_id;
+    qDebug() << language;
+    qDebug() << network;
+    qDebug() << overview;
+    qDebug() << rating;
+    qDebug() << ratingCount;
+    qDebug() << runtime;
+    qDebug() << SeriesName;
+    qDebug() << status;
+    qDebug() << added;
+    qDebug() << addedby;
+    qDebug() << banner;
+    qDebug() << fanart;
+    qDebug() << lastUpdated;
+    qDebug() << posters;
+    qDebug() << zap2itid;
+
+    // important !
+    overview.replace("'","''");
+
+    qDebug() << "insertSeries() " << SeriesName;
+
+    if(db.isOpen()) {
+
+        QSqlQuery query(db);
+        ret = query.exec(QString("INSERT INTO Series(id,actors,airsDayOfWeek,airsTime,contentRating,firstAired,genre,imdbID,language,network,overview,rating,ratingCount,runtime,seriesName,status,added,addedBy,banner,fanart,lastupdated,poster,zap2itID,watched) VALUES(%1,'%2','%3','%4','%5','%6','%7','%8','%9','%10','%11',%12,%13,%14,'%15','%16','%17',%18,'%19','%20','%21','%22','%23',%24)")
+                         .arg(id)
+                         .arg(actors)
+                         .arg(airsDayOfWeek)
+                         .arg(airsTime)
+                         .arg(contentRating)
+                         .arg(firstAired)
+                         .arg(genre)
+                         .arg(imdb_id)
+                         .arg(language)
+                         .arg(network)
+                         .arg(overview)
+                         .arg(rating)
+                         .arg(ratingCount)
+                         .arg(runtime)
+                         .arg(SeriesName)
+                         .arg(status)
+                         .arg(added)
+                         .arg(addedby)
+                         .arg(banner)
+                         .arg(fanart)
+                         .arg(lastUpdated)
+                         .arg(poster)
+                         .arg(zap2itid)
+                         .arg(watched));
+
+        qDebug() << query.lastError();
+    }
+
+    return ret;
+
+
+    //    QByteArray bArray;
+    //    QBuffer buffer( &bArray );
+    //    buffer.open( QIODevice::WriteOnly );
+    //    QSqlQuery query(db);
+
+    //    banner.save( &buffer, "PNG" );
+    //    query.prepare("INSERT INTO series (banner) VALUES (?)");
+    //    query.addBindValue(bArray);
+    //    query.exec();
+
+    //    fanart.save( &buffer, "PNG" );
+    //    query.prepare("INSERT INTO series (fanart) VALUES (?)");
+    //    query.addBindValue(bArray);
+    //    query.exec();
+
+}
+
+bool DatabaseManager::insertEpisode(int id, QString director, int epimgflag, QString episodeName,
+                                    int episodeNumber, QString firstAired, QString guestStars, QString imdb_id,
+                                    QString language, QString overview, int productionCode, double rating,
+                                    int ratingCount, int seasonNumber, QString writer, int absoluteNumber,
+                                    int airsAfterSeason, int airsBeforeEpisode, int airsBeforeSeason , QString filename,
+                                    QString lastUpdated, int seasonID, int seriesID, QString thumbAdded,
+                                    int thumbHeight, int thumbWidth, int watched) {
+
+    bool ret = false;
+
+    // important!
+    overview.replace("'","''");
+
+    if(db.isOpen()) {
+
+        QSqlQuery query(db);
+        ret = query.exec(QString("INSERT INTO Episode VALUES(%1,'%2',%3,'%4',%5,'%6','%7','%8','%9','%10',%11,%12,%13,%14,'%15',%16,%17,%18,%19,'%20','%21',%22,%23,'%24',%25,%26,%27)")
+                         .arg(id)
+                         .arg(director)
+                         .arg(epimgflag)
+                         .arg(episodeName)
+                         .arg(episodeNumber)
+                         .arg(firstAired)
+                         .arg(guestStars)
+                         .arg(imdb_id)
+                         .arg(language)
+                         .arg(overview)
+                         .arg(productionCode)
+                         .arg(rating)
+                         .arg(ratingCount)
+                         .arg(seasonNumber)
+                         .arg(writer)
+                         .arg(absoluteNumber)
+                         .arg(airsAfterSeason)
+                         .arg(airsBeforeEpisode)
+                         .arg(airsBeforeSeason)
+                         .arg(filename)
+                         .arg(lastUpdated)
+                         .arg(seasonID)
+                         .arg(seriesID)
+                         .arg(thumbAdded)
+                         .arg(thumbHeight)
+                         .arg(thumbWidth)
+                         .arg(watched));
+
+        qDebug() << query.lastError();
+    }
+
+    return ret;
+
+}

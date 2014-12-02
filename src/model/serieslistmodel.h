@@ -5,10 +5,10 @@
 #include <QQmlContext>
 #include "seriesdata.h"
 #include "../xmlreader.h"
+#include "../databasemanager.h"
 #include <QDebug>
-#include <QVariantList>
-#include <QStringList>
 #include <QQmlListProperty>
+#include <QPixmap>
 
 class seriesListModel : public QObject
 {
@@ -32,6 +32,7 @@ public:
     void populateSeriesList();
     Q_INVOKABLE void searchSeries(QString text);
     Q_INVOKABLE void selectSeries(int index);
+    Q_INVOKABLE void getFullSeriesRecord(QString id);
 
     QQmlListProperty<SeriesData> getSeriesList();
     QString getID();
@@ -45,20 +46,27 @@ public:
     QString getZap2it_ID();
     QString getNetwork();
 
+    void storeSeries();
+    void storeEpisodes();
+
 
 signals:
     void seriesListChanged();
 
 public slots:
     void xmlParseFinished();
+    void getFullSeriesRecordFinished();
 
 private:
     XMLReader* myReader;
     QList<QMap<QString,QString> > mySeries;
+    QList<QMap<QString,QString> > myEpisodes;
+    QPixmap* myBanner;
     QQmlContext* myContext;
     QList<SeriesData*> mySeriesListModel;
     bool isPopulated;
     SeriesData* myInfo;
+    DatabaseManager* mydbmanager;
 
     static int seriesListCount(QQmlListProperty<SeriesData> *prop);
     static SeriesData* seriesListAt(QQmlListProperty<SeriesData> *prop, int index);

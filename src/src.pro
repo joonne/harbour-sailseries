@@ -12,7 +12,13 @@ SOURCES += main.cpp \
     xmlreader.cpp \
     model/seriesdata.cpp \
     model/serieslistmodel.cpp \
-    databasemanager.cpp
+    databasemanager.cpp \
+    model/episodedata.cpp \
+    model/programdata.cpp \
+    model/programlistmodel.cpp \
+    model/datamodel.cpp \
+    model/channelmodel.cpp \
+    model/channelproxymodel.cpp
 
 OTHER_FILES = \
 # You DO NOT want .yaml be listed here as Qt Creator's editor is completely not ready for multi package .yaml's
@@ -26,7 +32,9 @@ OTHER_FILES = \
     qml/main.qml \
     qml/pages/StartPage.qml \
     qml/pages/SeriesInfoPage.qml \
-    qml/pages/SearchPage.qml
+    qml/pages/SearchPage.qml \
+    qml/pages/TVguidePage.qml \
+    qml/pages/Channel.qml
 
 INCLUDEPATH += $$PWD
 
@@ -34,4 +42,10 @@ HEADERS += \
     xmlreader.h \
     model/seriesdata.h \
     model/serieslistmodel.h \
-    databasemanager.h
+    databasemanager.h \
+    model/episodedata.h \
+    model/programdata.h \
+    model/programlistmodel.h \
+    model/datamodel.h \
+    model/channelmodel.h \
+    model/channelproxymodel.h

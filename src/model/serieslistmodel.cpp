@@ -3,17 +3,23 @@
 seriesListModel::seriesListModel(QObject *parent, QQmlContext* context) :
     QObject(parent),
     myReader(new XMLReader),
-    myContext(context){
-
-
+    myContext(context),
+    mydbmanager(new DatabaseManager){
 
     isPopulated = false;
 
     qDebug() << "connecting signal and slot";
     connect(myReader,
-            SIGNAL(readyToPopulate()),
+            SIGNAL(readyToPopulateSeries()),
             this,
             SLOT(xmlParseFinished()));
+
+    connect(myReader,
+            SIGNAL(readyToStoreSeries()),
+            this,
+            SLOT(getFullSeriesRecordFinished()));
+
+    mydbmanager->setUpDB();
 
 }
 
@@ -25,6 +31,7 @@ void seriesListModel::xmlParseFinished() {
 
     qDebug("slotti toimii");
     mySeries = myReader->getSeries();
+    myBanner = myReader->getBanner();
     populateSeriesList();
 }
 
@@ -55,6 +62,11 @@ void seriesListModel::seriesListClear(QQmlListProperty<SeriesData>* prop)
     qobject_cast<seriesListModel*>(prop->object)->mySeriesListModel.clear();
 }
 
+void seriesListModel::getFullSeriesRecordFinished() {
+    storeSeries();
+     storeEpisodes();
+}
+
 // -------------------------------------------------------------------
 // POPULATING DATA
 
@@ -69,33 +81,18 @@ void seriesListModel::populateSeriesList() {
 
             qDebug() << mySeries.size();
 
-            qDebug("indeksointi alkaa");
+            // This is the basic data
             QMap<QString,QString> temp = mySeries.at(i);
-            qDebug("indeksointi loppuu");
             QString seriesid = temp["seriesid"];
-            qDebug("seriesid");
-            QString language = temp["langugage"];
-            qDebug("language");
+            QString language = temp["Langugage"];
             QString seriesName = temp["SeriesName"];
-            qDebug("seriesName");
             QString aliasNames = temp["AliasNames"];
-            qDebug("aliasNames");
             QString banner = temp["banner"];
-            qDebug() << banner;
-            qDebug("banner");
             QString overview = temp["Overview"];
-            qDebug("overview");
             QString firstAired = temp["FirstAired"];
-            qDebug("firstAired");
             QString imdb_id = temp["IMDB_ID"];
-            qDebug("imdb_id");
             QString zap2it_id = temp["zap2it_id"];
-            qDebug("zap2it_id");
             QString network = temp["Network"];
-            qDebug("network");
-
-            qDebug("found series");
-            qDebug("appending stuff to model");
 
             SeriesData* serie = new SeriesData(this, seriesid, language,
                                                seriesName, aliasNames,
@@ -121,6 +118,7 @@ void seriesListModel::searchSeries(QString text) {
 
     mySeriesListModel.clear();
     mySeries.clear();
+    emit seriesListChanged();
     myReader->searchSeries(text);
 }
 
@@ -129,6 +127,205 @@ void seriesListModel::selectSeries(int index) {
     myInfo = mySeriesListModel.at(index);
     qDebug() << "myInfo seriesname: " << myInfo->getSeriesName();
 
+}
+
+void seriesListModel::getFullSeriesRecord(QString id) {
+    myReader->getFullSeriesRecord(id);
+}
+
+void seriesListModel::storeSeries() {
+
+    mySeries = myReader->getSeries();
+    QMap<QString,QString> temp = mySeries.at(0);
+
+    int seriesid;
+    QString actors;
+    QString airsDayOfWeek;
+    QString airsTime;
+    QString contentRating;
+    QString firstAired;
+    QString genre;
+    QString imdb_id;
+    QString language;
+    QString network;
+    QString overview;
+    double rating;
+    int ratingCount;
+    int runtime;
+    QString SeriesName;
+    QString status;
+    QString added;
+    int addedby;
+    QString banner;
+    QString fanart;
+    QString lastUpdated;
+    QString poster;
+    int zap2itid;
+    // int watched;
+
+
+    QMap<QString,QString>::iterator itr = temp.begin();
+    while(itr != temp.end()) {
+
+        if(itr.key() == "seriesid") {
+            seriesid = itr.value().toInt();
+        } else if(itr.key() == "Actors") {
+            actors = itr.value();
+        } else if(itr.key() == "Airs_DayOfWeek") {
+            airsDayOfWeek = itr.value();
+        } else if(itr.key() == "Airs_Time") {
+            airsTime = itr.value();
+        } else if(itr.key() == "ContentRating") {
+            contentRating = itr.value();
+        } else if(itr.key() == "FirstAired") {
+            firstAired = itr.value();
+        } else if(itr.key() == "Genre") {
+            genre = itr.value();
+        } else if(itr.key() == "IMDB_ID") {
+            imdb_id = itr.value();
+        } else if(itr.key() == "Language") {
+            language = itr.value();
+        } else if(itr.key() == "Network") {
+            network = itr.value();
+        } else if(itr.key() == "Overview") {
+            overview = itr.value();
+        } else if(itr.key() == "Rating") {
+            rating = itr.value().toDouble();
+        } else if(itr.key() == "RatingCount") {
+            ratingCount = itr.value().toInt();
+        } else if(itr.key() == "Runtime") {
+            runtime = itr.value().toInt();
+        } else if(itr.key() == "SeriesName") {
+            SeriesName = itr.value();
+        } else if(itr.key() == "Status") {
+            status = itr.value();
+        } else if(itr.key() == "added") {
+            added = itr.value();
+        } else if(itr.key() == "addedBy") {
+            addedby = itr.value().toInt();
+        } else if(itr.key() == "banner") {
+            banner = itr.value();
+        } else if(itr.key() == "fanart") {
+            fanart = itr.value();
+        } else if(itr.key() == "lastupdated") {
+            lastUpdated = itr.value();
+        } else if(itr.key() == "poster") {
+            posters = itr.value();
+        } else if(itr.key() == "zap2it_id") {
+            zap2itid = itr.value();
+        }
+
+        ++itr;
+    }
+    mydbmanager->insertSeries(seriesid,actors,airsDayOfWeek,airsTime,
+                              contentRating,firstAired,genre,
+                              imdb_id,language,network,overview,
+                              rating,ratingCount,runtime,SeriesName,
+                              status,added,addedby,banner,fanart,lastUpdated,
+                              posters,zap2itid,0);
+}
+
+void seriesListModel::storeEpisodes() {
+
+    myEpisodes = myReader->getEpisodes();
+
+    for(int i = 0; i < myEpisodes.size(); ++i) {
+
+        QMap<QString,QString> temp = myEpisodes.at(i);
+
+        int id;
+        QString director;
+        int epimgflag;
+        QString episodeName;
+        int episodeNumber;
+        QString firstAired;
+        QString guestStars;
+        QString imdb_id;
+        QString language;
+        QString overview;
+        int productionCode;
+        double rating;
+        int ratingCount;
+        int seasonNumber;
+        QString writer;
+        int absoluteNumber;
+        int airsAfterSeason;
+        int airsBeforeEpisode;
+        int airsBeforeSeason;
+        QString filename;
+        QString lastUpdated;
+        int seasonID;
+        int seriesID;
+        QString thumbAdded;
+        int thumbHeight;
+        int thumbWidth;
+        //int watched;
+
+        QMap<QString,QString>::iterator itr = temp.begin();
+        while(itr != temp.end()) {
+
+            if(itr.key() == "id") {
+                id = itr.value().toInt();
+            } else if(itr.key() == "Director") {
+                director = itr.value();
+            } else if(itr.key() == "EpImgFlag") {
+                epimgflag = itr.value().toInt();
+            } else if(itr.key() == "EpisodeName") {
+                episodeName = itr.value();
+            } else if(itr.key() == "EpisodeNumber") {
+                episodeNumber = itr.value().toInt();
+            } else if(itr.key() == "FirstAired") {
+                firstAired = itr.value();
+            } else if(itr.key() == "GuestStars") {
+                guestStars = itr.value();
+            } else if(itr.key() == "Language") {
+                language = itr.value();
+            } else if(itr.key() == "Overview") {
+                overview = itr.value();
+            } else if(itr.key() == "IMDB_ID") {
+                imdb_id = itr.value();
+            } else if(itr.key() == "ProductionCode") {
+                productionCode = itr.value().toInt();
+            } else if(itr.key() == "Rating") {
+                rating = itr.value().toDouble();
+            } else if(itr.key() == "RatingCount") {
+                ratingCount = itr.value().toInt();
+            } else if(itr.key() == "SeasonNumber") {
+                seasonNumber = itr.value().toInt();
+            } else if(itr.key() == "Writer") {
+                writer = itr.value();
+            } else if(itr.key() == "absolute_number") {
+                absoluteNumber = itr.value().toInt();
+            } else if(itr.key() == "airsafter_season") {
+                airsAfterSeason = itr.value().toInt();
+            } else if(itr.key() == "airsbefore_episode") {
+                airsBeforeEpisode = itr.value().toInt();
+            } else if(itr.key() == "airsbefore_season") {
+                airsBeforeSeason = itr.value().toInt();
+            } else if(itr.key() == "filename") {
+                filename = itr.value();
+            } else if(itr.key() == "lastupdated") {
+                lastUpdated = itr.value();
+            } else if(itr.key() == "seasonid") {
+                seasonID = itr.value().toInt();
+            } else if(itr.key() == "seriesid") {
+                seriesID = itr.value().toInt();
+            } else if(itr.key() == "thumb_added") {
+                thumbAdded = itr.value();
+            } else if(itr.key() == "thumb_height") {
+                thumbHeight = itr.value().toInt();
+            } else if(itr.key() == "thumb_width") {
+                thumbWidth = itr.value().toInt();
+            }
+
+            ++itr;
+        }
+        mydbmanager->insertEpisode(id,director,epimgflag,episodeName,episodeNumber,firstAired,
+                                   guestStars,imdb_id,language,overview,productionCode,rating,
+                                   ratingCount,seasonNumber,writer,absoluteNumber,airsAfterSeason,
+                                   airsBeforeEpisode,airsBeforeSeason,filename,lastUpdated,seasonID,seriesID,
+                                   thumbAdded,thumbHeight,thumbWidth,0);
+    }
 }
 
 QString seriesListModel::getID() { return myInfo->getID(); }
