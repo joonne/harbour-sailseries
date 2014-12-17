@@ -32,7 +32,7 @@ void DatabaseManager::setUpDB() {
 
             QSqlQuery query(db);
             query.exec("SELECT version FROM information;");
-            double version = query.value(1).toDouble();
+            double version = query.value(0).toDouble();
 
             qDebug() << "Database already created, current version is: " << version;
 
@@ -262,11 +262,8 @@ bool DatabaseManager::insertSeries(int id, QString actors, QString airsDayOfWeek
     qDebug() << banner;
     qDebug() << fanart;
     qDebug() << lastUpdated;
-    qDebug() << posters;
+    qDebug() << poster;
     qDebug() << zap2itid;
-
-    // important !
-    overview.replace("'","''");
 
     qDebug() << "insertSeries() " << SeriesName;
 
@@ -373,3 +370,82 @@ bool DatabaseManager::insertEpisode(int id, QString director, int epimgflag, QSt
     return ret;
 
 }
+
+QList<QList<QString> > DatabaseManager::getSeries() {
+
+    QList<QList<QString> > allSeries;
+
+    if(db.isOpen()) {
+
+        QSqlQuery query(db);
+        query.exec(QString("SELECT banner,poster FROM Series ORDER BY seriesName;"));
+        qDebug() << query.lastError();
+
+        if(query.isSelect()) {
+            while(query.next()) {
+
+                QList<QString> temp;
+
+                QString banner = query.value(0).toString();
+                temp.append(banner);
+                qDebug() << banner;
+
+                QString poster = query.value(1).toString();
+                temp.append(poster);
+                qDebug() << poster;
+
+                allSeries.append(temp);
+
+            }
+
+            return allSeries;
+        }
+
+    }
+}
+
+QList<QList<QString> > DatabaseManager::getStartPageSeries() {
+
+    QList<QList<QString> > allSeries;
+
+    if(db.isOpen()) {
+
+        QSqlQuery query(db);
+        query.exec(QString("SELECT seriesName,network,airsTime,airsDayOfWeek,status FROM Series ORDER BY seriesName;"));
+        qDebug() << query.lastError();
+
+        if(query.isSelect()) {
+            while(query.next()) {
+
+                QList<QString> temp;
+
+                QString seriesName = query.value(0).toString();
+                temp.append(seriesName);
+                qDebug() << seriesName;
+
+                QString network = query.value(1).toString();
+                temp.append(network);
+                qDebug() << network;
+
+                QString airsTime = query.value(2).toString();
+                temp.append(airsTime);
+                qDebug() << airsTime;
+
+                QString airsDayOfWeek = query.value(3).toString();
+                temp.append(airsDayOfWeek);
+                qDebug() << airsDayOfWeek;
+
+                QString status = query.value(4).toString();
+                temp.append(status);
+                qDebug() << status;
+
+                allSeries.append(temp);
+
+            }
+
+            return allSeries;
+        }
+
+    }
+}
+

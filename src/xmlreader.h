@@ -40,7 +40,6 @@ public:
 
     QList<QMap<QString,QString> > getSeries();
     QList<QMap<QString,QString> > getEpisodes();
-    QPixmap *getBanner();
     QList<QMap<QString,QList<QMap<QString,QString> > > > getTVGuide();
 
 signals:
@@ -80,7 +79,6 @@ private:
     QList<QMap<QString,QString> > myLanguages;
     QList<QMap<QString,QString> > mySeries;
     QList<QMap<QString,QString> > myEpisodes;
-    QPixmap* myBanner;
     QList<QMap<QString,QList<QMap<QString,QString> > > > myTVGuide;
     QString currentTVchannel;
 

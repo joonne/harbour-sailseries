@@ -5,11 +5,11 @@ import DataModel 1.0
 Page {
     id: infopage
 
-    property SeriesListModel listModel
+    //property SeriesListModel listModel
 
-    Component.onCompleted: {
-        console.log("SeriesInfoPage on complete " + listModel);
-    }
+//    Component.onCompleted: {
+//        console.log("SeriesInfoPage on complete " + listModel);
+//    }
 
     SilicaFlickable {
         anchors.fill: parent
@@ -18,7 +18,7 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: "Add to my series"
-                onClicked: listModel.getFullSeriesRecord(listModel.ID)
+                onClicked: LISTMODEL.getFullSeriesRecord(LISTMODEL.ID)
             }
         }
 
@@ -27,7 +27,7 @@ Page {
 
             PageHeader {
                 id: header
-                title: listModel.SeriesName
+                title: LISTMODEL.SeriesName
             }
 
             Separator {
@@ -38,7 +38,7 @@ Page {
 
             Image {
                 id: banner
-                source: "http://thetvdb.com/banners/" + listModel.Banner
+                source: "http://thetvdb.com/banners/" + LISTMODEL.Banner
                 sourceSize.width: infopage.width
             }
 
@@ -53,7 +53,7 @@ Page {
                 id: overview
                 label: "Overview"
                 width: infopage.width
-                text: listModel.Overview
+                text: LISTMODEL.Overview
                 readOnly: true
                 color: Theme.secondaryColor
             }
@@ -69,7 +69,7 @@ Page {
             TextField {
                 id: network
                 label: "Network"
-                text: listModel.Network
+                text: LISTMODEL.Network
                 color: Theme.secondaryColor
                 readOnly: true
             }
@@ -79,11 +79,16 @@ Page {
                     id: imdb
                     label: "IMDB"
                     text: "Show at IMDB"
-                    onClicked: Qt.openUrlExternally("http://www.imdb.com/title/" + listModel.IMDB_ID)
+                    onClicked: Qt.openUrlExternally("http://www.imdb.com/title/" + LISTMODEL.IMDB_ID)
                     readOnly: true
                     color: Theme.secondaryColor
                 }
             }
         }
     }
+
+    BusyIndicator {
+           anchors.centerIn: parent
+           running: LISTMODEL.Loading ? true : false
+       }
 }

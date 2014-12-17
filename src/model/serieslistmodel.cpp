@@ -21,6 +21,15 @@ seriesListModel::seriesListModel(QObject *parent, QQmlContext* context) :
 
     mydbmanager->setUpDB();
 
+    myLoading = false;
+
+    posterIndex = 0;
+
+    mode = "default";
+
+    //populateBannerList();
+    populateTodayList();
+
 }
 
 seriesListModel::~seriesListModel() {
@@ -31,7 +40,6 @@ void seriesListModel::xmlParseFinished() {
 
     qDebug("slotti toimii");
     mySeries = myReader->getSeries();
-    myBanner = myReader->getBanner();
     populateSeriesList();
 }
 
@@ -64,7 +72,7 @@ void seriesListModel::seriesListClear(QQmlListProperty<SeriesData>* prop)
 
 void seriesListModel::getFullSeriesRecordFinished() {
     storeSeries();
-     storeEpisodes();
+    storeEpisodes();
 }
 
 // -------------------------------------------------------------------
@@ -114,6 +122,52 @@ void seriesListModel::populateSeriesList() {
     }
 }
 
+void seriesListModel::populateBannerList() {
+
+    QList<QList<QString> > allSeries = mydbmanager->getSeries();
+    qDebug() << "populating banners for " << allSeries.size() << " series.";
+    for(int i = 0; i < allSeries.size(); ++i) {
+        QList<QString> temp = allSeries.at(i);
+        QString banner = temp.at(0);
+        QString poster = temp.at(1);
+        myPosters.append(poster); // this is for the cover !
+        SeriesData* serie = new SeriesData(this,banner,poster);
+        //SeriesData* serie = new SeriesData(this,"1","en","asd","asd",temp.at(i),"asd","asd","asd","asd","asd");
+        mySeriesListModel.append(serie);
+        qDebug() << "appended";
+    }
+    emit seriesListChanged();
+    qDebug() << "signal emitted";
+}
+
+void seriesListModel::populateTodayList() {
+
+    QDate d;
+    QString today = d.currentDate().toString("dddd");
+    qDebug() << today;
+
+    mySeriesListModel.clear();
+    emit seriesListChanged();
+
+    QList<QList<QString> > allSeries = mydbmanager->getStartPageSeries();
+    for(int i = 0; i < allSeries.size(); ++i ) {
+        QList<QString> temp = allSeries.at(i);
+
+        if(temp.at(3) == today and temp.at(4) == "Continuing") {
+
+            QString seriesName = temp.at(0);
+            QString network = temp.at(1);
+            QString airstime = temp.at(2);
+
+            SeriesData* serie = new SeriesData(this,seriesName,network,airstime);
+            mySeriesListModel.append(serie);
+
+        }
+    }
+
+    emit seriesListChanged();
+}
+
 void seriesListModel::searchSeries(QString text) {
 
     mySeriesListModel.clear();
@@ -131,6 +185,8 @@ void seriesListModel::selectSeries(int index) {
 
 void seriesListModel::getFullSeriesRecord(QString id) {
     myReader->getFullSeriesRecord(id);
+    setLoading(true);
+
 }
 
 void seriesListModel::storeSeries() {
@@ -160,7 +216,7 @@ void seriesListModel::storeSeries() {
     QString fanart;
     QString lastUpdated;
     QString poster;
-    int zap2itid;
+    QString zap2itid;
     // int watched;
 
 
@@ -210,7 +266,7 @@ void seriesListModel::storeSeries() {
         } else if(itr.key() == "lastupdated") {
             lastUpdated = itr.value();
         } else if(itr.key() == "poster") {
-            posters = itr.value();
+            poster = itr.value();
         } else if(itr.key() == "zap2it_id") {
             zap2itid = itr.value();
         }
@@ -222,7 +278,7 @@ void seriesListModel::storeSeries() {
                               imdb_id,language,network,overview,
                               rating,ratingCount,runtime,SeriesName,
                               status,added,addedby,banner,fanart,lastUpdated,
-                              posters,zap2itid,0);
+                              poster,zap2itid,0);
 }
 
 void seriesListModel::storeEpisodes() {
@@ -326,6 +382,8 @@ void seriesListModel::storeEpisodes() {
                                    airsBeforeEpisode,airsBeforeSeason,filename,lastUpdated,seasonID,seriesID,
                                    thumbAdded,thumbHeight,thumbWidth,0);
     }
+
+    setLoading(false);
 }
 
 QString seriesListModel::getID() { return myInfo->getID(); }
@@ -348,6 +406,61 @@ QString seriesListModel::getZap2it_ID() { return myInfo->getZap2it_ID(); }
 
 QString seriesListModel::getNetwork() { return myInfo->getNetwork(); }
 
+bool seriesListModel::getLoading() { return myLoading; }
+
+void seriesListModel::setLoading(bool) {
+
+    if(myLoading) {
+        myLoading = false;
+    } else {
+        myLoading = true;
+    }
+    emit loadingChanged();
+}
+
+QString seriesListModel::getPoster() {
+
+    if(myPosters.size() != 0) {
+        return myPosters.at(posterIndex);
+    } else {
+        return "";
+    }
+}
+
+void seriesListModel::setPoster(QString) {
+    ++posterIndex;
+    emit posterChanged();
+}
+
+void seriesListModel::nextPoster() {
+
+    if(posterIndex == myPosters.size()-1) {
+        posterIndex = 0;
+    } else {
+        ++posterIndex;
+    }
+
+    emit posterChanged();
+
+}
+
+QString seriesListModel::getMode() {
+    return mode;
+}
+
+void seriesListModel::setMode(QString newmode) {
+
+    if(mode !=  newmode) {
+        mode = newmode;
+        emit modeChanged();
+    }
+}
+
+// jotain fiksumpaa tähän varmaankin
+void seriesListModel::clearList() {
+    mySeriesListModel.clear();
+    emit seriesListChanged();
+}
 
 
 

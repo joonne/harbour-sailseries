@@ -3,45 +3,28 @@ import Sailfish.Silica 1.0
 import DataModel 1.0
 
 Page {
-    id: searchpage
 
-//    SeriesListModel {
-//        id: listModel
-//    }
-
-//    property SeriesListModel listModel
-
-    Component.onCompleted: LISTMODEL.clearList()
-
-    Component.onDestruction: LISTMODEL.populateTodayList()
-
-    TextField {
-        id: seriesSearch
-        width: searchpage.width
-        anchors.top: searchpage.top
-        anchors.topMargin: 100
-        placeholderText: "Search for a series"
-        EnterKey.onClicked: {
-            LISTMODEL.searchSeries(text)
-            focus = false
-        }
+    SeriesListModel {
+        id: listModel
     }
 
     SilicaListView {
         id: listView
-        anchors.top: seriesSearch.bottom
         height: 800
         width: 540
-        model: LISTMODEL.seriesList
+        model: listModel.seriesList
+
+        header: PageHeader {
+            title: "SailSeries"
+        }
 
         delegate: ListItem {
             id: listItem
             contentHeight: Theme.itemSizeSmall
             contentWidth: listView.width
             onClicked: {
-                LISTMODEL.selectSeries(index)
-                pageStack.push(Qt.resolvedUrl("SeriesInfoPage.qml"))
-                //pageStack.push(Qt.resolvedUrl("SeriesInfoPage.qml"), {"listModel":listModel})
+                listModel.selectSeries(index)
+                pageStack.push(Qt.resolvedUrl("SeriesInfoPage.qml"), {"listModel":listModel})
             }
 
             Column {
@@ -53,9 +36,15 @@ Page {
                 }
                 Label {
                     id: network
-                    text: Network
+                    text: Banner
                     font.pixelSize: Theme.fontSizeSmall
                     color: listItem.highlighted ? Theme.highlightColor : Theme.secondaryColor
+                }
+
+                Image {
+                    id: banner
+                    source: "http://thetvdb.com/banners/" + Banner
+                    sourceSize.width: 540
                 }
             }
         }
@@ -67,4 +56,5 @@ Page {
 
         }
     }
+
 }

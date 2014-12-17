@@ -34,7 +34,10 @@ OTHER_FILES = \
     qml/pages/SeriesInfoPage.qml \
     qml/pages/SearchPage.qml \
     qml/pages/TVguidePage.qml \
-    qml/pages/Channel.qml
+    qml/pages/Channel.qml \
+    qml/pages/MySeriesPage.qml \
+    qml/pages/test.qml \
+    qml/pages/CoverPage.qml
 
 INCLUDEPATH += $$PWD
 

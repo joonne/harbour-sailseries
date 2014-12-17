@@ -9,6 +9,7 @@
 #include <QDebug>
 #include <QQmlListProperty>
 #include <QPixmap>
+#include <QDate>
 
 class seriesListModel : public QObject
 {
@@ -24,15 +25,22 @@ class seriesListModel : public QObject
     Q_PROPERTY(QString IMDB_ID READ getIMDB_ID)
     Q_PROPERTY(QString zap2it_ID READ getZap2it_ID)
     Q_PROPERTY(QString Network READ getNetwork)
+    Q_PROPERTY(bool Loading READ getLoading WRITE setLoading NOTIFY loadingChanged)
+    Q_PROPERTY(QString Poster READ getPoster WRITE setPoster NOTIFY posterChanged)
+    Q_PROPERTY(QString Mode READ getMode WRITE setMode NOTIFY modeChanged)
 
 public:
     explicit seriesListModel(QObject *parent = 0, QQmlContext* context = 0);
     ~seriesListModel();
 
     void populateSeriesList();
+    Q_INVOKABLE void populateBannerList();
+    Q_INVOKABLE void populateTodayList();
     Q_INVOKABLE void searchSeries(QString text);
     Q_INVOKABLE void selectSeries(int index);
     Q_INVOKABLE void getFullSeriesRecord(QString id);
+    Q_INVOKABLE void nextPoster();
+    Q_INVOKABLE void clearList();
 
     QQmlListProperty<SeriesData> getSeriesList();
     QString getID();
@@ -46,12 +54,24 @@ public:
     QString getZap2it_ID();
     QString getNetwork();
 
+    QString getPoster();
+    void setPoster(QString);
+
+    bool getLoading();
+    void setLoading(bool);
+
+    QString getMode();
+    void setMode(QString newmode);
+
     void storeSeries();
     void storeEpisodes();
 
 
 signals:
     void seriesListChanged();
+    void loadingChanged();
+    void posterChanged();
+    void modeChanged();
 
 public slots:
     void xmlParseFinished();
@@ -72,6 +92,12 @@ private:
     static SeriesData* seriesListAt(QQmlListProperty<SeriesData> *prop, int index);
     static void seriesListAppend(QQmlListProperty<SeriesData>* prop, SeriesData* val);
     static void seriesListClear(QQmlListProperty<SeriesData>* prop);
+    bool myLoading;
+
+    QList<QString> myPosters;
+    int posterIndex;
+
+    QString mode;
 
 
 

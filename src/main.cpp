@@ -32,7 +32,10 @@ int main(int argc, char *argv[])
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
     QScopedPointer<QQuickView> view(SailfishApp::createView());
 
-    //QQmlContext* context = view->rootContext();
+    seriesListModel* LISTMODEL = new seriesListModel();
+    //QScopedPointer<QObject> LISTMODEL(seriesListModel());
+    QQmlContext* context = view->rootContext();
+    context->setContextProperty("LISTMODEL",LISTMODEL);
 
     //    Here's how you will add QML components whenever you start using them
     //    Check https://github.com/amarchen/Wikipedia for a more full example

@@ -83,15 +83,10 @@ QList<QMap<QString,QString> > XMLReader::getSeries() {
 
     qDebug("getSeries()");
 
-    if(mySeries.size() > 0) {
-        qDebug() << mySeries.at(0).find("Overview").value();
-    }
     return mySeries;
 }
 
 QList<QMap<QString,QString> > XMLReader::getEpisodes() { return myEpisodes; }
-
-QPixmap* XMLReader::getBanner() { return myBanner; }
 
 QList<QMap<QString,QList<QMap<QString,QString> > > > XMLReader::getTVGuide() {
 
@@ -126,6 +121,7 @@ void XMLReader::replyFinished(QNetworkReply *reply) {
 //    file.write(reply->readAll());
 
     QString data = QString(reply->readAll());
+    qDebug() << data;
     QXmlStreamReader xml(data);
     qDebug() << "Starting to parse xml.";
     parseXML(xml);

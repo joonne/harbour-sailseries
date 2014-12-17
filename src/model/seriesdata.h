@@ -2,13 +2,12 @@
 #define SERIESDATA_H
 
 #include <QObject>
-#include <QPixmap>
 #include <QDebug>
 
 class SeriesData : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(int ID READ getID)
+    Q_PROPERTY(QString ID READ getID)
     Q_PROPERTY(QString Actors READ getActors)
     Q_PROPERTY(QString AirsDayOfWeek READ getAirsDayOfWeek)
     Q_PROPERTY(QString AirsTime READ getAirsTime)
@@ -37,11 +36,11 @@ class SeriesData : public QObject
 public:
     explicit SeriesData(QObject *parent = 0);
 
-    SeriesData(QObject* parent, int ID, QString language, QString seriesName,
+    SeriesData(QObject* parent, QString id, QString language, QString seriesName,
                QString aliasNames, QString banner, QString overview, QString firstAired, QString IMDB_ID,
                QString zap2it_ID, QString network);
 
-    SeriesData(QObject* parent, int id, QString actors, QString airsDayOfWeek,
+    SeriesData(QObject* parent, QString id, QString actors, QString airsDayOfWeek,
                QString airsTime, QString contentRating,
                QString firstAired, QString genre, QString IMDB_ID,
                QString language, QString network, QString overview,
@@ -49,7 +48,11 @@ public:
                QString status, QString added, int addedby, QString banner,
                QString fanart, QString lastUpdated, QString posters, QString zap2itid, int watched);
 
-    int getID();
+    SeriesData(QObject* parent, QString banner, QString poster);
+
+    SeriesData(QObject* parent, QString seriesName, QString network, QString airsTime);
+
+    QString getID();
     QString getActors();
     QString getAirsDayOfWeek();
     QString getAirsTime();
@@ -86,7 +89,7 @@ public slots:
 
 private:
 
-    int myID;
+    QString myID;
     QString myActors;
     QString myAirsDayOfWeek;
     QString myAirsTime;

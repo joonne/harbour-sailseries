@@ -58,6 +58,9 @@ public:
     bool updateSeries();
     bool updateEpisode();
 
+    QList<QList<QString> > getSeries();
+    QList<QList<QString> > getStartPageSeries();
+
 signals:
 
 public slots:

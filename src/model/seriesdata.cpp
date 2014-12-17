@@ -5,12 +5,12 @@ SeriesData::SeriesData(QObject *parent) :
 {
 }
 
-SeriesData::SeriesData(QObject *parent, int ID, QString language, QString seriesName,
+SeriesData::SeriesData(QObject *parent, QString id, QString language, QString seriesName,
                        QString aliasNames, QString banner, QString overview, QString firstAired,
                        QString IMDB_ID, QString zap2it_ID, QString network):
     QObject(parent)
 {
-    myID = ID;
+    myID = id;
     myLanguage = language;
     mySeriesName = seriesName;
     myAliasNames = aliasNames;
@@ -23,7 +23,7 @@ SeriesData::SeriesData(QObject *parent, int ID, QString language, QString series
 
 }
 
-SeriesData::SeriesData(QObject* parent, int id, QString actors, QString airsDayOfWeek,
+SeriesData::SeriesData(QObject* parent, QString id, QString actors, QString airsDayOfWeek,
                        QString airsTime, QString contentRating,
                        QString firstAired, QString genre, QString IMDB_ID,
                        QString language, QString network, QString overview,
@@ -32,7 +32,7 @@ SeriesData::SeriesData(QObject* parent, int id, QString actors, QString airsDayO
                        QString fanart, QString lastUpdated, QString posters, QString zap2itid, int watched):
     QObject(parent)
 {
-    myID = ID;
+    myID = id;
     myActors = actors;
     myAirsDayOfWeek = airsDayOfWeek;
     myAirsTime = airsTime;
@@ -61,7 +61,25 @@ SeriesData::SeriesData(QObject* parent, int id, QString actors, QString airsDayO
 
 }
 
-int SeriesData::getID() { return myID; }
+SeriesData::SeriesData(QObject* parent, QString banner, QString poster):
+    QObject(parent){
+
+    qDebug() << "constructing " << banner;
+    myBanner = banner;
+    myPosters = poster;
+    qDebug() << "done";
+}
+
+SeriesData::SeriesData(QObject *parent, QString seriesName, QString network, QString airsTime):
+    QObject(parent){
+
+    mySeriesName = seriesName;
+    myNetwork = network;
+    myAirsTime = airsTime;
+
+}
+
+QString SeriesData::getID() { return myID; }
 
 QString SeriesData::getActors() { return myActors; }
 
@@ -110,3 +128,11 @@ QString SeriesData::getIMDB_ID() { return myIMDB_ID; }
 QString SeriesData::getZap2it_ID() { return myZap2it_ID; }
 
 QString SeriesData::getNetwork() { return myNetwork; }
+
+void SeriesData::setWatched(int watched) {
+
+    if(myWatched != watched) {
+        myWatched = watched;
+        emit watchedChanged();
+    }
+}
