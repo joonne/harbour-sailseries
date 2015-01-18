@@ -18,7 +18,10 @@ SOURCES += main.cpp \
     model/programlistmodel.cpp \
     model/datamodel.cpp \
     model/channelmodel.cpp \
-    model/channelproxymodel.cpp
+    model/channelproxymodel.cpp \
+    model/episodelistmodel.cpp \
+    model/searchlistmodel.cpp \
+    model/todaylistmodel.cpp
 
 OTHER_FILES = \
 # You DO NOT want .yaml be listed here as Qt Creator's editor is completely not ready for multi package .yaml's
@@ -36,8 +39,13 @@ OTHER_FILES = \
     qml/pages/TVguidePage.qml \
     qml/pages/Channel.qml \
     qml/pages/MySeriesPage.qml \
-    qml/pages/test.qml \
-    qml/pages/CoverPage.qml
+    qml/pages/CoverPage.qml \
+    qml/pages/SeriesViewPage.qml \
+    qml/pages/Episodes.qml \
+    qml/pages/Series.qml \
+    qml/pages/EpisodeOverviewPage.qml \
+    qml/cover/CoverPage.qml \
+    qml/pages/Seasons.qml
 
 INCLUDEPATH += $$PWD
 
@@ -51,4 +59,7 @@ HEADERS += \
     model/programlistmodel.h \
     model/datamodel.h \
     model/channelmodel.h \
-    model/channelproxymodel.h
+    model/channelproxymodel.h \
+    model/episodelistmodel.h \
+    model/searchlistmodel.h \
+    model/todaylistmodel.h

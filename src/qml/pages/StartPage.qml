@@ -1,11 +1,9 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import DataModel 1.0
+import harbour.sailseries.datamodel 1.0
 
 Page {
     id: startpage
-
-    Component.onCompleted: console.log(pageStack.currentPage)
 
     SilicaFlickable {
         anchors.fill: parent
@@ -29,21 +27,15 @@ Page {
                 text: "My series"
                 font.pixelSize: Theme.fontSizeSmall
                 onClicked: {
-                    LISTMODEL.Mode = "mySeries"
+                    DATAMODEL.SeriesListModel.Mode = "mySeries"
                     pageStack.push(Qt.resolvedUrl("MySeriesPage.qml"))
                 }
             }
 
-            //            MenuItem {
-            //                text: "test"
-            //                font.pixelSize: Theme.fontSizeSmall
-            //                onClicked: pageStack.push(Qt.resolvedUrl("test.qml"))
-            //            }
-
-            //            MenuItem {
-            //                text: "TV-Guide"
-            //                onClicked: pageStack.push(Qt.resolvedUrl("TVguidePage.qml"))
-            //            }
+//            MenuItem {
+//                text: "TV-Guide"
+//                onClicked: pageStack.push(Qt.resolvedUrl("TVguidePage.qml"))
+//            }
 
         }
 
@@ -53,11 +45,15 @@ Page {
             height: 0.5 * startpage.height
             width: startpage.width
             anchors.top: header.bottom
-            model: LISTMODEL.seriesList
+            model: DATAMODEL.TodayModel.TodayModel
 
 
-            header: PageHeader {
-                title: "Today"
+            header: TextField {
+                text: "Today"
+                readOnly: true
+                width: listView.width
+                color: Theme.highlightColor
+                font.pixelSize: Theme.fontSizeLarge
             }
 
             delegate: ListItem {
@@ -89,6 +85,10 @@ Page {
                         color: Theme.secondaryColor
                     }
                 }
+            }
+
+            TouchBlocker {
+                anchors.fill: listView
             }
 
             ViewPlaceholder {

@@ -34,17 +34,9 @@ XMLReader::XMLReader(QObject *parent) :
             this,
             SLOT(sslErrors(QNetworkReply*,QList<QSslError>&)));
 
-    connect(myNetWorkAccessManager,
-            SIGNAL(finished(QNetworkReply*)),
-            this,
-            SLOT(bannerFetchFinished(QNetworkReply*)));
-
-    connect(this,
-            SIGNAL(readyToFetchBanner(QString)),
-            this,
-            SLOT(fetchBanner(QString)));
-
     fullRecord = false;
+
+    //getServerTime();
 
 }
 
@@ -62,7 +54,6 @@ void XMLReader::getLanguages() {
 
 void XMLReader::searchSeries(QString text) {
 
-    //mySeries.clear();
     fullRecord = false;
     QString url = myMirrorPath + "/api/GetSeries.php?seriesname=" + text;
     qDebug() << "Requesting" << url;
@@ -73,6 +64,7 @@ void XMLReader::searchSeries(QString text) {
 void XMLReader::getFullSeriesRecord(QString seriesid) {
 
     QString url = myMirrorPath + "/api/" + myApiKey + "/series/" + seriesid + "/all/en.xml";
+    //QString url = myMirrorPath + "/api/" + myApiKey + "/series/" + seriesid + "/all/en.zip";
     qDebug() << "Requesting" << url;
     QUrl finalUrl(url);
     startRequest(finalUrl);
@@ -80,8 +72,6 @@ void XMLReader::getFullSeriesRecord(QString seriesid) {
 }
 
 QList<QMap<QString,QString> > XMLReader::getSeries() {
-
-    qDebug("getSeries()");
 
     return mySeries;
 }
@@ -115,13 +105,30 @@ void XMLReader::getServerTime() {
 
 void XMLReader::replyFinished(QNetworkReply *reply) {
 
-
-//    QFile file( "series_info.xml" );
+    // for writing the data into file
+//    QFile file( "./sailseries_temp/series_info.zip" );
 //    file.open(QIODevice::WriteOnly);
 //    file.write(reply->readAll());
 
+//    QString data;
+
+//    if(fullRecord) {
+
+//        QFile file( "series_info.zip" );
+//        file.open(QIODevice::WriteOnly);
+//        file.write(reply->readAll());
+
+//        return;
+
+//        QByteArray zipped = reply->readAll();
+//        QByteArray unzipped = qUncompress(zipped);
+//        data = QString(unzipped);
+//    } else {
+//        data = QString(reply->readAll());
+//    }
+
     QString data = QString(reply->readAll());
-    qDebug() << data;
+    //qDebug() << data;
     QXmlStreamReader xml(data);
     qDebug() << "Starting to parse xml.";
     parseXML(xml);
@@ -134,24 +141,6 @@ void XMLReader::sslErrors(QNetworkReply *reply, QList<QSslError> &errors) {
     Q_UNUSED(reply);
     Q_UNUSED(errors);
 
-}
-
-// TODO: take image to model.
-void XMLReader::bannerFetchFinished(QNetworkReply *reply) {
-
-//    myBanner = new QPixmap();
-//    myBanner->loadFromData(reply->readAll());
-//    reply->deleteLater();
-//    readyToPopulateSeries();
-//    qDebug() << "new signal emitted";
-}
-
-void XMLReader::fetchBanner(QString banner) {
-
-    QString url = myMirrorPath + "/" + banner;
-    qDebug() << "Requesting" << url;
-    QUrl finalUrl(url);
-    startRequest(finalUrl);
 }
 
 // ---------------------------------------------------
@@ -227,6 +216,9 @@ void XMLReader::parseXML(QXmlStreamReader& xml) {
             if(xml.name() == "Language") {
                 languages.append(this->parseLanguages(xml));
             }
+            if(xml.name() == "Items") {
+                currentServerTime = parseServerTime(xml);
+            }
             /* If it's named entry, we'll dig the information from there.*/
             if(xml.name() == "entry") {
                 //qDebug() << "entry found, parsing the contents.";
@@ -290,6 +282,10 @@ QMap<QString, QString> XMLReader::parseSeries(QXmlStreamReader &xml) {
         if(xml.tokenType() == QXmlStreamReader::StartElement) {
 
             if(xml.name() == "seriesid") {
+                this->addElementDataToMap(xml, series);
+            }
+
+            if(xml.name() == "id") {
                 this->addElementDataToMap(xml, series);
             }
 
@@ -581,6 +577,36 @@ QMap<QString, QString> XMLReader::parseEpisode(QXmlStreamReader &xml) {
         xml.readNext();
     }
     return episode;
+}
+
+QString XMLReader::parseServerTime(QXmlStreamReader &xml) {
+
+    QString serverTime;
+    /* Let's check that we're really getting a series. */
+    if(xml.tokenType() != QXmlStreamReader::StartElement &&
+            xml.name() == "Items") {
+        return serverTime;
+    }
+
+    /* Next element... */
+    xml.readNext();
+
+    while(!(xml.tokenType() == QXmlStreamReader::EndElement &&
+            xml.name() == "Items")) {
+
+        if(xml.tokenType() == QXmlStreamReader::StartElement) {
+
+            if(xml.name() == "Time") {
+
+                xml.readNext();
+                serverTime = xml.text().toString();
+                qDebug() << serverTime;
+            }
+        }
+
+        xml.readNext();
+    }
+    return serverTime;
 }
 
 QMap<QString, QString> XMLReader::parseTVChannel(QXmlStreamReader &xml) {

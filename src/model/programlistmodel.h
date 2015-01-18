@@ -4,42 +4,49 @@
 #include <QObject>
 #include <QQmlListProperty>
 #include <QMap>
-#include "programdata.h"
+#include <QAbstractListModel>
 
-class ProgramListModel : public QObject
+#include "programdata.h"
+#include "../databasemanager.h"
+#include "../xmlreader.h"
+
+class ProgramListModel : public QAbstractListModel
 {
     Q_OBJECT
-    Q_PROPERTY(QQmlListProperty<ProgramData> programList READ getProgramList NOTIFY programListChanged)
-    Q_PROPERTY(QString channel READ getChannel)
+    //Q_PROPERTY(int count READ rowCount NOTIFY countChanged)
 public:
-    explicit ProgramListModel(QObject *parent = 0);
+    enum ProgramListRoles {
+        ChannelNameRole,
+        ProgramNameRole,
+        TimeRole,
+        WeekdayRole,
+        OverviewRole
+    };
 
-    QQmlListProperty<ProgramData> getProgramList();
+    explicit ProgramListModel(QObject *parent = 0, DatabaseManager* dbmanager = 0, XMLReader* reader = 0);
+    ~ProgramListModel();
 
-    Q_INVOKABLE void populatePrograms(QList<QMap<QString,QString> > programs);
-
-    QString getChannel();
+    QVariant data(const QModelIndex& index, int role) const;
+    int rowCount(const QModelIndex& index = QModelIndex()) const;
+    QVariantMap get(const QModelIndex& index) const;
+    void setProgramList(QList<ProgramData> programs);
+    void addProgram(ProgramData* program);
+    void clear();
+    void populateChannel();
 
 signals:
-    void programListChanged();
-    void readyToPopulate();
+    void countChanged();
 
-public slots:
+protected:
+    QHash<int,QByteArray> roleNames();
 
 private:
-
-    QList<ProgramData*> myProgramListModel;
-    bool isPopulated;
-    QString myChannel;
-
-    static int ProgramListCount(QQmlListProperty<ProgramData> *prop);
-    static ProgramData* ProgramListAt(QQmlListProperty<ProgramData> *prop, int index);
-    static void ProgramListAppend(QQmlListProperty<ProgramData>* prop, ProgramData* val);
-    static void ProgramListClear(QQmlListProperty<ProgramData>* prop);
-
-
-
+    QList<ProgramData*> m_programs;
+    DatabaseManager* m_dbmanager;
+    XMLReader* m_reader;
 
 };
+
+Q_DECLARE_METATYPE(ProgramListModel*)
 
 #endif // PROGRAMLISTMODEL_H

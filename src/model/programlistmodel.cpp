@@ -1,94 +1,114 @@
 #include "programlistmodel.h"
 
-ProgramListModel::ProgramListModel(QObject *parent) :
-    QObject(parent)
+ProgramListModel::ProgramListModel(QObject *parent, DatabaseManager *dbmanager, XMLReader *reader) :
+    QAbstractListModel(parent)
 {
-    isPopulated = false;
+    m_dbmanager = dbmanager;
+    m_reader = reader;
+
+    //m_reader->updateTVGuide();
 
 }
 
-QQmlListProperty<ProgramData> ProgramListModel::getProgramList() {
+ProgramListModel::~ProgramListModel() {
 
-    return QQmlListProperty<ProgramData>(this,&myProgramListModel,&ProgramListModel::ProgramListCount,&ProgramListModel::ProgramListAt);
-
-}
-
-void ProgramListModel::ProgramListAppend(QQmlListProperty<ProgramData>* prop, ProgramData* val)
-{
-    ProgramListModel* seriesModel = qobject_cast<ProgramListModel*>(prop->object);
-    seriesModel->myProgramListModel.append(val);
-}
-
-ProgramData* ProgramListModel::ProgramListAt(QQmlListProperty<ProgramData>* prop, int index)
-{
-    return (qobject_cast<ProgramListModel*>(prop->object))->myProgramListModel.at(index);
-}
-
-int ProgramListModel::ProgramListCount(QQmlListProperty<ProgramData>* prop)
-{
-    return qobject_cast<ProgramListModel*>(prop->object)->myProgramListModel.size();
-}
-
-void ProgramListModel::ProgramListClear(QQmlListProperty<ProgramData>* prop)
-{
-    qobject_cast<ProgramListModel*>(prop->object)->myProgramListModel.clear();
-}
-
-//void ProgramListModel::populatePrograms(int channelnumber) {
-
-//    qDebug() << "creating channel number " << channelnumber;
-
-//    if(myPrograms.size() != 0) {
-
-//        QList<QMap<QString,QString> > channel = myPrograms.at(channelnumber-1);
-
-//        qDebug() << "programs in channel " << channelnumber << ": " << channel.size();
-
-//        for(int j = 0; j < channel.size(); ++j) {
-
-//            QMap<QString,QString> program = channel.at(j);
-
-//            QString programName = program["programName"];
-//            QString weekday = program["weekday"];
-//            QString time = program["time"];
-//            myChannel = program["channel"];
-
-//            ProgramData* programdata = new ProgramData(this,programName,weekday,time);
-
-//            myProgramListModel.append(programdata);
-//        }
-
-//        emit programListChanged();
-//        isPopulated = true;
-
-//    } else {
-//        qDebug() << "ei tietoja kanavista";
-//    }
-
-//}
-
-void ProgramListModel::populatePrograms(QList<QMap<QString, QString> > programs) {
-
-    if(!isPopulated) {
-
-        for(int j = 0; j < programs.size(); ++j) {
-
-            QMap<QString,QString> program = programs.at(j);
-
-            QString programName = program["programName"];
-            QString weekday = program["weekday"];
-            QString time = program["time"];
-            myChannel = program["channel"];
-
-            ProgramData* programdata = new ProgramData(this,programName,weekday,time);
-
-            myProgramListModel.append(programdata);
-        }
-
-        emit programListChanged();
-        isPopulated = true;
-
+    foreach(ProgramData* program, m_programs) {
+        delete program;
+        program = 0;
     }
 }
 
-QString ProgramListModel::getChannel() { return myChannel; }
+QHash<int,QByteArray> ProgramListModel::roleNames() {
+
+    QHash<int, QByteArray> roles;
+    roles[ChannelNameRole] = "channelName";
+    roles[ProgramNameRole] = "programName";
+    roles[TimeRole] = "time";
+    roles[WeekdayRole] = "weekday";
+    roles[OverviewRole] = "overview";
+    return roles;
+}
+
+void ProgramListModel::addProgram(ProgramData *program) {
+
+    beginInsertRows(QModelIndex(),rowCount(),rowCount());
+    m_programs.append(program);
+    endInsertRows();
+}
+
+QVariant ProgramListModel::data(const QModelIndex &index, int role) const {
+
+    if(!index.isValid() || index.row() >= m_programs.count()) {
+        return QVariant();
+    }
+
+    ProgramData* program = m_programs.at(index.row());
+
+    switch (role) {
+    case ChannelNameRole:
+        return program->getChannelName();
+    case ProgramNameRole:
+        return program->getProgramName();
+    case TimeRole:
+        return program->getTime();
+    case WeekdayRole:
+        return program->getWeekday();
+    case OverviewRole:
+        return program->getOverview();
+    default:
+        qDebug() << "Unhandled role" << role;
+        return QVariant();
+    }
+}
+
+int ProgramListModel::rowCount(const QModelIndex &index) const {
+
+    Q_UNUSED(index)
+    return m_programs.size();
+}
+
+QVariantMap ProgramListModel::get(const QModelIndex &index) const {
+
+}
+
+void ProgramListModel::setProgramList(QList<ProgramData> programs) {
+
+//    if (m_programs.count() > 0) {
+//        beginRemoveRows(QModelIndex(), 0, m_programs.count() - 1);
+//        m_programs.clear();
+//        endRemoveRows();
+//    }
+
+//    if (programs.count() > 0) {
+//        beginInsertRows(QModelIndex(), 0, m_programs.count() - 1);
+//        m_programs << programs;
+//        endInsertRows();
+//    }
+
+//    emit countChanged();
+}
+
+void ProgramListModel::clear() {
+
+    beginResetModel();
+    m_programs.clear();
+    endResetModel();
+}
+
+void ProgramListModel::populateChannel() {
+
+    QString channelname = "MTV3";
+    QString programname = "salkkarit";
+    QString time = "19:30";
+    QString weekday = "keskiviikko";
+    QString overview = "ohmygod";
+
+    ProgramData* program1 = new ProgramData(this,programname,weekday,time,channelname,overview);
+    ProgramData* program2 = new ProgramData(this,programname,weekday,time,channelname,overview);
+    ProgramData* program3 = new ProgramData(this,programname,weekday,time,channelname,overview);
+    addProgram(program1);
+    addProgram(program2);
+    addProgram(program3);
+    emit countChanged();
+
+}

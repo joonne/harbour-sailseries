@@ -3,18 +3,18 @@
 
 #include <QObject>
 #include <QQmlContext>
-#include "seriesdata.h"
-#include "../xmlreader.h"
-#include "../databasemanager.h"
 #include <QDebug>
 #include <QQmlListProperty>
-#include <QPixmap>
-#include <QDate>
 
-class seriesListModel : public QObject
+#include "seriesdata.h"
+#include "episodedata.h"
+#include "../xmlreader.h"
+#include "../databasemanager.h"
+
+class SeriesListModel : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QQmlListProperty<SeriesData> seriesList READ getSeriesList NOTIFY seriesListChanged)
+    Q_PROPERTY(QQmlListProperty<SeriesData> SeriesList READ getSeriesList NOTIFY seriesListChanged)
     Q_PROPERTY(QString ID READ getID)
     Q_PROPERTY(QString Language READ getLanguage)
     Q_PROPERTY(QString SeriesName READ getSeriesName)
@@ -30,17 +30,13 @@ class seriesListModel : public QObject
     Q_PROPERTY(QString Mode READ getMode WRITE setMode NOTIFY modeChanged)
 
 public:
-    explicit seriesListModel(QObject *parent = 0, QQmlContext* context = 0);
-    ~seriesListModel();
+    explicit SeriesListModel(QObject *parent = 0, QQmlContext* context = 0, DatabaseManager *dbmanager = 0, XMLReader* reader = 0);
+    ~SeriesListModel();
 
     void populateSeriesList();
     Q_INVOKABLE void populateBannerList();
-    Q_INVOKABLE void populateTodayList();
-    Q_INVOKABLE void searchSeries(QString text);
     Q_INVOKABLE void selectSeries(int index);
-    Q_INVOKABLE void getFullSeriesRecord(QString id);
     Q_INVOKABLE void nextPoster();
-    Q_INVOKABLE void clearList();
 
     QQmlListProperty<SeriesData> getSeriesList();
     QString getID();
@@ -65,6 +61,8 @@ public:
 
     void storeSeries();
     void storeEpisodes();
+    Q_INVOKABLE void deleteSeries(int seriesID);
+    Q_INVOKABLE void updateSeries(int seriesID);
 
 
 signals:
@@ -74,32 +72,28 @@ signals:
     void modeChanged();
 
 public slots:
-    void xmlParseFinished();
-    void getFullSeriesRecordFinished();
 
 private:
     XMLReader* myReader;
+    DatabaseManager* mydbmanager;
     QList<QMap<QString,QString> > mySeries;
     QList<QMap<QString,QString> > myEpisodes;
-    QPixmap* myBanner;
     QQmlContext* myContext;
     QList<SeriesData*> mySeriesListModel;
     bool isPopulated;
     SeriesData* myInfo;
-    DatabaseManager* mydbmanager;
 
     static int seriesListCount(QQmlListProperty<SeriesData> *prop);
     static SeriesData* seriesListAt(QQmlListProperty<SeriesData> *prop, int index);
     static void seriesListAppend(QQmlListProperty<SeriesData>* prop, SeriesData* val);
     static void seriesListClear(QQmlListProperty<SeriesData>* prop);
+
     bool myLoading;
 
     QList<QString> myPosters;
     int posterIndex;
 
     QString mode;
-
-
 
 };
 

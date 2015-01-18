@@ -2,51 +2,47 @@
 
 DataModel::DataModel(QObject *parent) :
     QObject(parent),
-    mySeriesListModel(new seriesListModel),
-    myReader(new XMLReader)
+    myReader(new XMLReader),
+    mydbmanager(new DatabaseManager)
 {
+    mydbmanager->setUpDB();
+
+    mySeriesListModel = new SeriesListModel(this,0,mydbmanager,myReader);
+    mySearchListModel = new SearchListModel(this,mydbmanager,myReader);
+    myTodayListModel = new TodayListModel(this,mydbmanager,myReader);
+    myEpisodeListModel = new EpisodeListModel(this,mydbmanager);
+    //myProgramListModel = new ProgramListModel(this,mydbmanager,myReader);
 
     connect(myReader,
             SIGNAL(readyToPopulateChannels()),
             this,
             SLOT(xmlParseFinished()));
 
-    myReader->updateTVGuide();
+    //myReader->updateTVGuide();
 
 }
 
-void DataModel::setDesiredChannel(QString channelName) {
+DataModel::~DataModel() {
 
-    ProgramListModel* channel = new ProgramListModel(this);
+    delete myReader;
+    delete mydbmanager;
 
-    for(int i = 0; i < myPrograms.size(); ++i) {
-        QMap<QString,QList<QMap<QString,QString> > >::const_iterator itr = myPrograms.at(i).begin();
-        while(itr!=myPrograms.at(i).end()) {
-
-            if(itr.key() == channelName) {
-                QList<QMap<QString,QString> > programs = itr.value();
-                channel->populatePrograms(programs);
-                myChannels.append(channel);
-
-                qDebug() << "kanava " << channel->getChannel() << " lisätty.";
-
-                myProgramListModel = myChannels.back();
-                emit programListModelChanged();
-            }
-
-            ++itr;
-        }
-    }
 }
 
 ProgramListModel* DataModel::getProgramListModel() { return myProgramListModel; }
 
-seriesListModel* DataModel::getSeriesListModel() { return mySeriesListModel; }
+SeriesListModel* DataModel::getSeriesListModel() { return mySeriesListModel; }
+
+SearchListModel *DataModel::getSearchModel() { return mySearchListModel; }
+
+TodayListModel* DataModel::getTodayModel() { return myTodayListModel; }
+
+EpisodeListModel* DataModel::getEpisodeListModel() { return myEpisodeListModel; }
 
 void DataModel::xmlParseFinished() {
 
-    myPrograms = myReader->getTVGuide();
-
     qDebug("tv-guiden slotti toimii");
+    myPrograms = myReader->getTVGuide();
+    myProgramListModel->populateChannel();
 
 }

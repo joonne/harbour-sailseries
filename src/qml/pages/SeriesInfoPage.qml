@@ -1,15 +1,9 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import DataModel 1.0
+import harbour.sailseries.datamodel 1.0
 
 Page {
     id: infopage
-
-    //property SeriesListModel listModel
-
-//    Component.onCompleted: {
-//        console.log("SeriesInfoPage on complete " + listModel);
-//    }
 
     SilicaFlickable {
         anchors.fill: parent
@@ -17,61 +11,53 @@ Page {
 
         PullDownMenu {
             MenuItem {
+                visible: DATAMODEL.SearchModel.Added ? enabled = false : enabled = true
                 text: "Add to my series"
-                onClicked: LISTMODEL.getFullSeriesRecord(LISTMODEL.ID)
+                onClicked: DATAMODEL.SearchModel.getFullSeriesRecord(DATAMODEL.SearchModel.ID)
+            }
+
+            MenuItem {
+                visible: DATAMODEL.SearchModel.Added ? enabled = true : enabled = false
+                text: "Already added"
+                // TODO: maybe app could go to MySeriesPage ?
             }
         }
 
         Column {
             id: column
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: Theme.paddingMedium
 
             PageHeader {
                 id: header
-                title: LISTMODEL.SeriesName
-            }
-
-            Separator {
-                height: Theme.PaddingMedium * 3
-                width: infopage.width - Theme.PaddingMedium * 2
-                color: Theme.secondaryColor
+                title: DATAMODEL.SearchModel.SeriesName
             }
 
             Image {
                 id: banner
-                source: "http://thetvdb.com/banners/" + LISTMODEL.Banner
-                sourceSize.width: infopage.width
-            }
+                source: "http://thetvdb.com/banners/" + DATAMODEL.SearchModel.Banner
+                sourceSize.width: infopage.width - Theme.paddingMedium * 2
+                anchors.left: parent.left
+                anchors.leftMargin: Theme.paddingMedium
 
-
-            Separator {
-                height: Theme.PaddingMedium * 3
-                width: infopage.width - Theme.PaddingMedium * 2
-                color: Theme.secondaryColor
             }
 
             TextArea {
                 id: overview
                 label: "Overview"
                 width: infopage.width
-                text: LISTMODEL.Overview
+                text: DATAMODEL.SearchModel.Overview
                 readOnly: true
                 color: Theme.secondaryColor
-            }
-
-
-            Separator {
-                height: Theme.PaddingMedium
-                width: infopage.width - Theme.PaddingMedium * 2
-                color: Theme.secondaryColor
-
             }
 
             TextField {
                 id: network
                 label: "Network"
-                text: LISTMODEL.Network
+                text: DATAMODEL.SearchModel.Network
                 color: Theme.secondaryColor
                 readOnly: true
+                width: infopage.width
             }
 
             BackgroundItem {
@@ -79,9 +65,10 @@ Page {
                     id: imdb
                     label: "IMDB"
                     text: "Show at IMDB"
-                    onClicked: Qt.openUrlExternally("http://www.imdb.com/title/" + LISTMODEL.IMDB_ID)
+                    onClicked: Qt.openUrlExternally("http://www.imdb.com/title/" + DATAMODEL.SearchModel.IMDB_ID)
                     readOnly: true
                     color: Theme.secondaryColor
+                    width: infopage.width
                 }
             }
         }
@@ -89,6 +76,6 @@ Page {
 
     BusyIndicator {
            anchors.centerIn: parent
-           running: LISTMODEL.Loading ? true : false
+           running: DATAMODEL.SearchModel.Loading ? true : false
        }
 }

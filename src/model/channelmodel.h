@@ -10,11 +10,12 @@ class ChannelModel : public QAbstractListModel
     Q_OBJECT
 public:
 
-    enum ProgramRoles {
+    enum ProgramListRoles {
         ChannelNameRole,
         ProgramNameRole,
         TimeRole,
-        WeekdayRole
+        WeekdayRole,
+        OverviewRole
     };
 
     explicit ChannelModel(QObject *parent = 0);

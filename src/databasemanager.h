@@ -13,8 +13,9 @@
 #include <QDebug>
 #include <QPixmap>
 #include <QBuffer>
-#include "xmlreader.h"
 #include <QStringRef>
+#include <QDate>
+#include <QLocale>
 
 class DatabaseManager : public QObject
 {
@@ -58,8 +59,21 @@ public:
     bool updateSeries();
     bool updateEpisode();
 
+    bool deleteSeries(int seriesID);
+    bool deleteAllSeries();
+
     QList<QList<QString> > getSeries();
     QList<QList<QString> > getStartPageSeries();
+    QList<QList<QString> > getEpisodes(int seriesID);
+    QList<QString> getNextEpisodeDetails(int seriesID);
+
+    void toggleWatched(QString episodeID);
+    void markSeasonWatched(int seriesID, int season);
+
+    bool isAlreadyAdded(int seriesID, QString name);
+    int watchedCount(int seriesID);
+    int totalCount(int seriesID);
+    int seasonCount(int seriesID);
 
 signals:
 
@@ -67,7 +81,6 @@ public slots:
 
 private:
     QSqlDatabase db;
-    XMLReader* myReader;
 
 
 };

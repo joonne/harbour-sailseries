@@ -2,7 +2,6 @@
 #define EPISODEDATA_H
 
 #include <QObject>
-#include <QPixmap>
 #include <QDebug>
 
 class EpisodeData : public QObject
@@ -15,7 +14,7 @@ class EpisodeData : public QObject
     Q_PROPERTY(int EpisodeNumber READ getEpisodeNumber NOTIFY episodeNumberChanged)
     Q_PROPERTY(QString FirstAired READ getFirstAired NOTIFY firstAiredChanged)
     Q_PROPERTY(QString GuestStars READ getGuestStars NOTIFY guestStarsChanged)
-    Q_PROPERTY(int IMDB_ID READ getIMDB_ID NOTIFY IMDB_IDChanged)
+    Q_PROPERTY(QString IMDB_ID READ getIMDB_ID NOTIFY IMDB_IDChanged)
     Q_PROPERTY(QString Language READ getLanguage NOTIFY languageChanged)
     Q_PROPERTY(QString Overview READ getOverview NOTIFY overviewChanged)
     Q_PROPERTY(int ProductionCode READ getProductionCode NOTIFY productionCodeChanged)
@@ -39,12 +38,13 @@ class EpisodeData : public QObject
 public:
     explicit EpisodeData(QObject *parent = 0);
     EpisodeData(QObject* parent, int ID, QString director, int epimgflag, QString episodeName,
-                int episodeNumber, QString firstAired, QString guestStars, int IMDB_ID,
+                int episodeNumber, QString firstAired, QString guestStars, QString IMDB_ID,
                 QString language, QString overview, int productionCode, double rating,
                 int ratingCount, int SeasonNumber, QString writer, int absoluteNumber,
                 int airsAfterSeason, int airsBeforeSeason, QString filename, QString lastUpdated,
                 int seasonID, int seriesID, QString thumbAdded, int thumbHeight, int thumbWidth,
                 int watched);
+    EpisodeData(QObject *parent, QString episodeName, int episodeNumber, QString overview, int seasonNumber, int absoluteNumber, QString filename, int watched, int id);
 
     int getID();
     QString getDirector();
@@ -53,7 +53,7 @@ public:
     int getEpisodeNumber();
     QString getFirstAired();
     QString getGuestStars();
-    int getIMDB_ID();
+    QString getIMDB_ID();
     QString getLanguage();
     QString getOverview();
     int getProductionCode();
@@ -113,7 +113,7 @@ private:
     int myEpisodeNumber;
     QString myFirstAired;
     QString myGuestStars;
-    int myIMDB_ID;
+    QString myIMDB_ID;
     QString myLanguage;
     QString myOverview;
     int myProductionCode;

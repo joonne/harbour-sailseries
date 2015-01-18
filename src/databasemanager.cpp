@@ -15,14 +15,6 @@ void DatabaseManager::setUpDB() {
 
     if(openDB()) {
 
-        //QSqlQuery query(db);
-        //query.exec("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table';");
-
-        //qDebug() << query.lastError();
-
-        //int tableCount = query.value(0).toInt();
-        //qDebug() << "Tables in database: " << tableCount;
-
         // check whether db is empty
         if(db.tables().size() == 0) {
 
@@ -39,9 +31,6 @@ void DatabaseManager::setUpDB() {
             updateDB();
         }
     }
-
-    //close();
-
 }
 
 bool DatabaseManager::openDB() {
@@ -159,7 +148,7 @@ bool DatabaseManager::createSeriesTable() {
 
         QSqlQuery query(db);
         ret = query.exec(QString("CREATE TABLE Series"
-                                 "(id INTEGER PRIMARY KEY NOT NULL , "
+                                 "(id INTEGER , "
                                  "actors VARCHAR(1000), "
                                  "airsDayOfWeek VARCHAR(15), "
                                  "airsTime VARCHAR(10), "
@@ -196,7 +185,7 @@ bool DatabaseManager::createEpisodeTable() {
 
         QSqlQuery query(db);
         ret = query.exec(QString("CREATE TABLE Episode"
-                                 "(id INTEGER PRIMARY KEY NOT NULL, "
+                                 "(id INTEGER, "
                                  "director VARCHAR(1000), "
                                  "epimgflag INTEGER, "
                                  "episodeName VARCHAR(50), "
@@ -218,7 +207,7 @@ bool DatabaseManager::createEpisodeTable() {
                                  "filename VARCHAR(50), "
                                  "lastupdated VARCHAR(20), "
                                  "seasonID INTEGER, "
-                                 "seriesID INTEGER REFERENCES Series(id) ON DELETE SET NULL ON UPDATE CASCADE, "
+                                 "seriesID INTEGER, "
                                  "thumbAdded VARCHAR(20), "
                                  "thumbHeight INTEGER, "
                                  "thumbWidth INTEGER, "
@@ -240,6 +229,8 @@ bool DatabaseManager::insertSeries(int id, QString actors, QString airsDayOfWeek
     bool ret = false;
 
     overview.replace("'","''");
+    actors.replace("'","''");
+    SeriesName.replace("'","''");
 
     qDebug() << id;
     qDebug() << actors;
@@ -296,7 +287,12 @@ bool DatabaseManager::insertSeries(int id, QString actors, QString airsDayOfWeek
                          .arg(zap2itid)
                          .arg(watched));
 
-        qDebug() << query.lastError();
+        qDebug() << query.lastError().text();
+
+        if(query.lastError().text() != " ") {
+            qDebug() << query.lastQuery();
+        }
+
     }
 
     return ret;
@@ -331,6 +327,9 @@ bool DatabaseManager::insertEpisode(int id, QString director, int epimgflag, QSt
 
     // important!
     overview.replace("'","''");
+    director.replace("'","''");
+    guestStars.replace("'","''");
+    episodeName.replace("'","''");
 
     if(db.isOpen()) {
 
@@ -364,7 +363,10 @@ bool DatabaseManager::insertEpisode(int id, QString director, int epimgflag, QSt
                          .arg(thumbWidth)
                          .arg(watched));
 
-        qDebug() << query.lastError();
+        qDebug() << query.lastError().text();
+        if(query.lastError().text() != " ") {
+            qDebug() << query.lastQuery();
+        }
     }
 
     return ret;
@@ -378,7 +380,7 @@ QList<QList<QString> > DatabaseManager::getSeries() {
     if(db.isOpen()) {
 
         QSqlQuery query(db);
-        query.exec(QString("SELECT banner,poster FROM Series ORDER BY seriesName;"));
+        query.exec(QString("SELECT banner,poster,seriesName,status,id,overview,imdbID,rating FROM Series ORDER BY seriesName;"));
         qDebug() << query.lastError();
 
         if(query.isSelect()) {
@@ -394,9 +396,33 @@ QList<QList<QString> > DatabaseManager::getSeries() {
                 temp.append(poster);
                 qDebug() << poster;
 
+                QString seriesName = query.value(2).toString();
+                temp.append(seriesName);
+                qDebug() << seriesName;
+
+                QString status = query.value(3).toString();
+                temp.append(status);
+                qDebug() << status;
+
+                int id = query.value(4).toInt();
+                QString idstring = QString::number(id);
+                temp.append(idstring);
+                qDebug() << id;
+
+                QString overview = query.value(5).toString();
+                overview.replace("''","'");
+                temp.append(overview);
+
+                QString imdbID = query.value(6).toString();
+                temp.append(imdbID);
+
+                QString rating = query.value(7).toString();
+                temp.append(rating);
+
                 allSeries.append(temp);
 
             }
+
 
             return allSeries;
         }
@@ -449,3 +475,228 @@ QList<QList<QString> > DatabaseManager::getStartPageSeries() {
     }
 }
 
+QList<QList<QString> > DatabaseManager::getEpisodes(int seriesID) {
+
+    QList<QList<QString> > episodes;
+
+    QSqlQuery query(db);
+    query.exec(QString("SELECT episodeName,episodeNumber,overview,seasonNumber,absoluteNumber,filename,watched,id FROM Episode WHERE seriesID = %1 ORDER BY absoluteNumber").arg(seriesID));
+
+    qDebug() << query.lastError();
+
+    if(query.isSelect()) {
+        while(query.next()) {
+
+            QList<QString> temp;
+
+            QString episodeName = query.value(0).toString();
+            temp.append(episodeName);
+            qDebug() << episodeName;
+
+            QString episodeNumber = query.value(1).toString();
+            temp.append(episodeNumber);
+
+            QString overview = query.value(2).toString();
+            overview.replace("''","'");
+            temp.append(overview);
+
+            QString seasonNumber = query.value(3).toString();
+            temp.append(seasonNumber);
+
+            QString absoluteNumber = query.value(4).toString();
+            temp.append(absoluteNumber);
+
+            QString filename = query.value(5).toString();
+            temp.append(filename);
+
+            QString watched = query.value(6).toString();
+            temp.append(watched);
+
+            QString id = query.value(7).toString();
+            temp.append(id);
+
+            episodes.append(temp);
+
+            qDebug() << query.lastError();
+
+        }
+
+    }
+    return episodes;
+}
+
+void DatabaseManager::toggleWatched(QString episodeID) {
+
+    QSqlQuery query(db);
+    query.exec(QString("SELECT watched FROM Episode WHERE id = %1").arg(episodeID.toInt()));
+    if(query.isSelect()) {
+        while(query.next()) {
+            if(query.value(0).toInt() == 0) {
+                query.exec(QString("UPDATE Episode SET watched = 1 WHERE id = %1").arg(episodeID.toInt()));
+            } else {
+                query.exec(QString("UPDATE Episode SET watched = 0 WHERE id = %1").arg(episodeID.toInt()));
+            }
+        }
+    }
+
+}
+
+bool DatabaseManager::deleteSeries(int seriesID) {
+
+    bool ret1,ret2 = false;
+
+    QSqlQuery query(db);
+    ret1 = query.exec(QString("DELETE FROM Series WHERE id = %1").arg(seriesID));
+    qDebug() << query.lastError();
+    if(ret1) {
+        ret2 = query.exec(QString("DELETE FROM Episode WHERE seriesID = %1").arg(seriesID));
+        qDebug() << query.lastError();
+    }
+
+    db.commit();
+
+    return ret2;
+}
+
+bool DatabaseManager::deleteAllSeries() {
+
+    bool ret1,ret2 = false;
+
+    QSqlQuery query(db);
+    ret1 = query.exec(QString("DELETE FROM Series"));
+    if(ret1) {
+        ret2 = query.exec(QString("DELETE FROM Episode"));
+    }
+
+    db.commit();
+
+    return ret2;
+}
+
+bool DatabaseManager::isAlreadyAdded(int seriesID,QString name) {
+
+    bool ret1,ret2 = false;
+
+    QSqlQuery query(db);
+    ret1 = query.exec(QString("SELECT seriesName FROM Series WHERE id=%1").arg(seriesID));
+    if(ret1) {
+        if(query.isSelect()) {
+            while(query.next()) {
+                if(query.value(0).toString() == name) {
+                    qDebug() << "Series found " << query.value(0).toString() << " == " << name;
+                    ret2 = true;
+                }
+            }
+        }
+    }
+    return ret2;
+}
+
+int DatabaseManager::watchedCount(int seriesID) {
+
+    int watchedCount = 0;
+    QSqlQuery query(db);
+    query.exec(QString("SELECT COUNT(episodeName) FROM Episode WHERE seriesID = %1 AND watched = 1 AND seasonNumber != 0").arg(seriesID));
+    if(query.isSelect()) {
+        while(query.next()) {
+            watchedCount = query.value(0).toInt();
+        }
+    }
+    return watchedCount;
+}
+
+int DatabaseManager::totalCount(int seriesID) {
+
+    int totalCount = 0;
+    QSqlQuery query(db);
+    query.exec(QString("SELECT COUNT(episodeName) FROM Episode WHERE seriesID = %1 AND seasonNumber != 0").arg(seriesID));
+    if(query.isSelect()) {
+        while(query.next()) {
+            totalCount = query.value(0).toInt();
+        }
+    }
+    return totalCount;
+
+}
+
+int DatabaseManager::seasonCount(int seriesID) {
+
+    int seasonCount = 0;
+    QSqlQuery query(db);
+    query.exec(QString("SELECT MAX(seasonNumber) FROM Episode WHERE seriesID = %1").arg(seriesID));
+    if(query.isSelect()) {
+        while(query.next()) {
+            seasonCount = query.value(0).toInt();
+            qDebug() << "number of seasons " << seasonCount;
+        }
+    }
+    return seasonCount;
+}
+
+void DatabaseManager::markSeasonWatched(int seriesID, int season) {
+
+    QSqlQuery query(db);
+    query.exec(QString("UPDATE Episode SET watched=1 WHERE seriesID = %1 AND seasonNumber = %2").arg(seriesID).arg(season));
+    qDebug() << query.lastError();
+
+}
+
+QList<QString> DatabaseManager::getNextEpisodeDetails(int seriesID) {
+
+    QList<QList<QString> > details;
+
+    QSqlQuery query(db);
+    query.exec(QString("SELECT episodeName,episodeNumber,seasonNumber,firstAired FROM Episode WHERE seriesID = %1 ORDER BY absoluteNumber;").arg(seriesID));
+    qDebug() << query.lastError();
+
+    if(query.isSelect()) {
+        while(query.next()) {
+
+            QList<QString> temp;
+
+            QString episodeName = query.value(0).toString();
+            temp.append(episodeName);
+            qDebug() << banner;
+
+            QString episodeNumber = query.value(1).toString();
+            temp.append(episodeNumber);
+            qDebug() << poster;
+
+            QString seasonNumber = query.value(2).toString();
+            temp.append(seasonNumber);
+            qDebug() << seriesName;
+
+            QString firstAired = query.value(3).toString();
+            temp.append(firstAired);
+            qDebug() << status;
+
+            details.append(temp);
+        }
+
+    }
+
+    // Now we find out the actual next episode.
+
+    QDate date = QDateTime::currentDateTime().date();
+    QString ISODate = date.toString(Qt::ISODate);
+    qDebug() << ISODate;
+
+    int daysToNow;
+    int smallest = 1000;
+
+    for(int i = 0; i < details.size(); ++i) {
+
+        QList<QString> temp = details.at(i);
+
+        daysToNow = QDate::fromString(ISODate).daysTo(QDate::fromString(temp.at(3)));
+        qDebug() << daysToNow;
+
+        if(daysToNow > 0) {
+
+            if(daysToNow < smallest) {
+                smallest = daysToNow;
+                qDebug() << smallest;
+            }
+        }
+    }
+}

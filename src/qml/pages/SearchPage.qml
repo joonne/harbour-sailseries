@@ -1,19 +1,13 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import DataModel 1.0
+import harbour.sailseries.datamodel 1.0
 
 Page {
     id: searchpage
 
-//    SeriesListModel {
-//        id: listModel
-//    }
-
-//    property SeriesListModel listModel
-
-    Component.onCompleted: LISTMODEL.clearList()
-
-    Component.onDestruction: LISTMODEL.populateTodayList()
+    Component.onDestruction: {
+        DATAMODEL.SearchModel.clearList()
+    }
 
     TextField {
         id: seriesSearch
@@ -22,7 +16,7 @@ Page {
         anchors.topMargin: 100
         placeholderText: "Search for a series"
         EnterKey.onClicked: {
-            LISTMODEL.searchSeries(text)
+            DATAMODEL.SearchModel.searchSeries(text)
             focus = false
         }
     }
@@ -32,16 +26,16 @@ Page {
         anchors.top: seriesSearch.bottom
         height: 800
         width: 540
-        model: LISTMODEL.seriesList
+        model: DATAMODEL.SearchModel.SearchModel
 
         delegate: ListItem {
             id: listItem
             contentHeight: Theme.itemSizeSmall
             contentWidth: listView.width
             onClicked: {
-                LISTMODEL.selectSeries(index)
+                DATAMODEL.SearchModel.selectSeries(index)
+                DATAMODEL.SearchModel.checkIfAdded(ID,SeriesName)
                 pageStack.push(Qt.resolvedUrl("SeriesInfoPage.qml"))
-                //pageStack.push(Qt.resolvedUrl("SeriesInfoPage.qml"), {"listModel":listModel})
             }
 
             Column {

@@ -5,31 +5,50 @@
 #include "programlistmodel.h"
 #include "serieslistmodel.h"
 #include "../xmlreader.h"
+#include "../databasemanager.h"
+#include "episodelistmodel.h"
+#include "searchlistmodel.h"
+#include "todaylistmodel.h"
 
 class DataModel : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(ProgramListModel* programListModel READ getProgramListModel NOTIFY programListModelChanged)
-    Q_PROPERTY(seriesListModel* SeriesListModel READ getSeriesListModel NOTIFY seriesListModelChanged)
+    Q_PROPERTY(ProgramListModel* ProgramListModel READ getProgramListModel NOTIFY programListModelChanged)
+    Q_PROPERTY(SeriesListModel* SeriesListModel READ getSeriesListModel NOTIFY seriesListModelChanged)
+    Q_PROPERTY(SearchListModel* SearchModel READ getSearchModel NOTIFY searchModelChanged)
+    Q_PROPERTY(TodayListModel* TodayModel READ getTodayModel NOTIFY todayModelChanged)
+    Q_PROPERTY(EpisodeListModel* EpisodeListModel READ getEpisodeListModel NOTIFY episodeListModelChanged)
+
 public:
     explicit DataModel(QObject *parent = 0);
+    ~DataModel();
 
-    Q_INVOKABLE void setDesiredChannel(QString channelName);
     ProgramListModel* getProgramListModel();
-    seriesListModel* getSeriesListModel();
+    SeriesListModel *getSeriesListModel();
+    SearchListModel* getSearchModel();
+    TodayListModel *getTodayModel();
+    EpisodeListModel* getEpisodeListModel();
 
 signals:
     void seriesListModelChanged();
     void programListModelChanged();
+    void searchModelChanged();
+    void todayModelChanged();
+    void episodeListModelChanged();
 
 public slots:
     void xmlParseFinished();
 
 private:
-    QList<ProgramListModel*> myChannels;
     ProgramListModel* myProgramListModel;
-    seriesListModel* mySeriesListModel;
+    SeriesListModel* mySeriesListModel;
+    SearchListModel* mySearchListModel;
+    TodayListModel* myTodayListModel;
+    EpisodeListModel* myEpisodeListModel;
     XMLReader* myReader;
+    DatabaseManager* mydbmanager;
+    QMap<QString,ProgramListModel*> channels;
+
     QList<QMap<QString,QList<QMap<QString,QString> > > > myPrograms;
 
 

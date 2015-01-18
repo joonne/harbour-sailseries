@@ -18,7 +18,7 @@ class SeriesData : public QObject
     Q_PROPERTY(QString Language READ getLanguage)
     Q_PROPERTY(QString Network READ getNetwork)
     Q_PROPERTY(QString Overview READ getOverview)
-    Q_PROPERTY(double Rating READ getRating)
+    Q_PROPERTY(QString Rating READ getRating)
     Q_PROPERTY(int RatingCount READ getRatingCount)
     Q_PROPERTY(int Runtime READ getRuntime)
     Q_PROPERTY(QString SeriesName READ getSeriesName)
@@ -48,7 +48,8 @@ public:
                QString status, QString added, int addedby, QString banner,
                QString fanart, QString lastUpdated, QString posters, QString zap2itid, int watched);
 
-    SeriesData(QObject* parent, QString banner, QString poster);
+    SeriesData(QObject* parent, QString banner, QString poster, QString seriesName, QString status, QString id,
+               QString overview, QString imdbID, QString rating);
 
     SeriesData(QObject* parent, QString seriesName, QString network, QString airsTime);
 
@@ -63,7 +64,7 @@ public:
     QString getLanguage();
     QString getNetwork();
     QString getOverview();
-    double getRating();
+    QString getRating();
     int getRatingCount();
     int getRuntime();
     QString getSeriesName();
@@ -77,8 +78,6 @@ public:
     QString getPosters();
     QString getZap2it_ID();
     int getWatched();
-
-
     void setWatched(int watched);
 
 signals:
@@ -100,7 +99,7 @@ private:
     QString myLanguage;
     QString myNetwork;
     QString myOverview;
-    double myRating;
+    QString myRating;
     int myRatingCount;
     int myRuntime;
     QString mySeriesName;

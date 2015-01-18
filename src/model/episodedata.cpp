@@ -6,7 +6,7 @@ EpisodeData::EpisodeData(QObject *parent) :
 }
 
 EpisodeData::EpisodeData(QObject* parent, int ID, QString director, int epimgflag, QString episodeName,
-                                     int episodeNumber, QString firstAired, QString guestStars, int IMDB_ID,
+                                     int episodeNumber, QString firstAired, QString guestStars, QString IMDB_ID,
                                      QString language, QString overview, int productionCode, double rating,
                                      int ratingCount, int SeasonNumber, QString writer, int absoluteNumber,
                                      int airsAfterSeason, int airsBeforeSeason, QString filename, QString lastUpdated,
@@ -43,6 +43,20 @@ EpisodeData::EpisodeData(QObject* parent, int ID, QString director, int epimgfla
 
 }
 
+EpisodeData::EpisodeData(QObject *parent, QString episodeName, int episodeNumber, QString overview, int seasonNumber, int absoluteNumber, QString filename, int watched, int id):
+    QObject(parent){
+
+    myEpisodeName = episodeName;
+    myEpisodeNumber = episodeNumber;
+    myOverview = overview;
+    mySeasonNumber = seasonNumber;
+    myAbsoluteNumber = absoluteNumber;
+    myFilename = filename;
+    myWatched = watched;
+    myID = id;
+
+}
+
 int EpisodeData::getID() { return myID; }
 
 QString EpisodeData::getDirector() { return myDirector; }
@@ -57,7 +71,7 @@ QString EpisodeData::getFirstAired() { return myFirstAired; }
 
 QString EpisodeData::getGuestStars() { return myGuestStars; }
 
-int EpisodeData::getIMDB_ID() { return myIMDB_ID; }
+QString EpisodeData::getIMDB_ID() { return myIMDB_ID; }
 
 QString EpisodeData::getLanguage() { return myLanguage; }
 

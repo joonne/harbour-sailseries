@@ -14,17 +14,28 @@
 #include "model/programdata.h"
 #include "model/programlistmodel.h"
 #include "model/datamodel.h"
+#include "model/episodedata.h"
+#include "model/episodelistmodel.h"
+#include "model/searchlistmodel.h"
+#include "model/todaylistmodel.h"
 #include <QQmlContext>
 #include <QQmlComponent>
 
 int main(int argc, char *argv[])
 {
 
-    qmlRegisterType<SeriesData>("DataModel", 1, 0, "SeriesData");
-    qmlRegisterType<seriesListModel>("DataModel", 1, 0, "SeriesListModel");
-    qmlRegisterType<ProgramData>("DataModel", 1, 0, "ProgramData");
-    qmlRegisterType<ProgramListModel>("DataModel", 1, 0, "ProgramListModel");
-    qmlRegisterType<DataModel>("DataModel", 1, 0, "DataModel");
+    QCoreApplication::setApplicationName("harbour-sailseries");
+    QCoreApplication::setOrganizationName("harbour-sailseries");
+
+    qmlRegisterType<SeriesData>("harbour.sailseries.datamodel", 1, 0, "SeriesData");
+    qmlRegisterType<SeriesListModel>("harbour.sailseries.datamodel", 1, 0, "SeriesListModel");
+    qmlRegisterType<SearchListModel>("harbour.sailseries.datamodel", 1, 0, "SearchListModel");
+    qmlRegisterType<TodayListModel>("harbour.sailseries.datamodel", 1, 0, "TodayListModel");
+    qmlRegisterType<ProgramData>("harbour.sailseries.datamodel", 1, 0, "ProgramData");
+    qmlRegisterType<ProgramListModel>("harbour.sailseries.datamodel", 1, 0, "ProgramListModel");
+    qmlRegisterType<DataModel>("harbour.sailseries.datamodel", 1, 0, "DataModel");
+    qmlRegisterType<EpisodeData>("harbour.sailseries.datamodel", 1, 0, "EpisodeData");
+    qmlRegisterType<EpisodeListModel>("harbour.sailseries.datamodel", 1, 0, "EpisodeListModel");
 
 
     // For this example, wizard-generates single line code would be good enough,
@@ -32,10 +43,9 @@ int main(int argc, char *argv[])
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
     QScopedPointer<QQuickView> view(SailfishApp::createView());
 
-    seriesListModel* LISTMODEL = new seriesListModel();
-    //QScopedPointer<QObject> LISTMODEL(seriesListModel());
+    DataModel* datamodel = new DataModel();
     QQmlContext* context = view->rootContext();
-    context->setContextProperty("LISTMODEL",LISTMODEL);
+    context->setContextProperty("DATAMODEL",datamodel);
 
     //    Here's how you will add QML components whenever you start using them
     //    Check https://github.com/amarchen/Wikipedia for a more full example

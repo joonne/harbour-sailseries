@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import DataModel 1.0
+import harbour.sailseries.datamodel 1.0
 
 Item {
 
@@ -11,14 +11,14 @@ Item {
     height: channelView.height;
     width: channelView.width;
 
-    property ProgramListModel programlist
-    property ProgramData programData
+//    property ProgramListModel programlist
+//    property ProgramData programData
 
     function initialize(channel) {
         console.log("kutsutaan populointia");
-        dataModel.setDesiredChannel(channel);
-        listview.model = dataModel.programListModel
-        console.log("ProgramListModel" + listview.model)
+        //dataModel.setDesiredChannel(channel);
+        listview.model = DATAMODEL.ProgramListModel
+        console.log("ProgramListModel " + DATAMODEL.ProgramListModel)
         //pageheader.title = programlist.channel
     }
 

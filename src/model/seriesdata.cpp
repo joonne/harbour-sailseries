@@ -61,13 +61,17 @@ SeriesData::SeriesData(QObject* parent, QString id, QString actors, QString airs
 
 }
 
-SeriesData::SeriesData(QObject* parent, QString banner, QString poster):
+SeriesData::SeriesData(QObject* parent, QString banner, QString poster, QString seriesName, QString status, QString id, QString overview, QString imdbID, QString rating):
     QObject(parent){
 
-    qDebug() << "constructing " << banner;
     myBanner = banner;
     myPosters = poster;
-    qDebug() << "done";
+    mySeriesName = seriesName;
+    myStatus = status;
+    myID = id;
+    myOverview = overview;
+    myIMDB_ID = imdbID;
+    myRating = rating;
 }
 
 SeriesData::SeriesData(QObject *parent, QString seriesName, QString network, QString airsTime):
@@ -91,7 +95,7 @@ QString SeriesData::getContentRating() { return myContentRating; }
 
 QString SeriesData::getGenre() { return myGenre; }
 
-double SeriesData::getRating() { return myRating; }
+QString SeriesData::getRating() { return myRating; }
 
 int SeriesData::getRatingCount() { return myRatingCount; }
 

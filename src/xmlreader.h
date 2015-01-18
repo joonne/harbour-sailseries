@@ -12,7 +12,7 @@
 #include <QList>
 #include <QImage>
 #include <QStringRef>
-#include <QPixmap>
+#include <QByteArray>
 
 class XMLReader : public QObject
 {
@@ -26,6 +26,7 @@ public:
     QMap<QString,QString> parseLanguages(QXmlStreamReader& xml);
     QMap<QString,QString> parseEpisode(QXmlStreamReader& xml);
     QMap<QString, QString> parseTVChannel(QXmlStreamReader& xml);
+    QString parseServerTime(QXmlStreamReader& xml);
     void addElementDataToMap(QXmlStreamReader& xml,
                                  QMap<QString, QString>& map) const;
     void startRequest(QUrl url);
@@ -52,8 +53,6 @@ signals:
 public slots:
     void replyFinished(QNetworkReply* reply);
     void sslErrors(QNetworkReply* reply, QList<QSslError>& errors);
-    void bannerFetchFinished(QNetworkReply* reply);
-    void fetchBanner(QString banner);
 
 private:
 
@@ -81,6 +80,7 @@ private:
     QList<QMap<QString,QString> > myEpisodes;
     QList<QMap<QString,QList<QMap<QString,QString> > > > myTVGuide;
     QString currentTVchannel;
+    QString currentServerTime;
 
     bool fullRecord;
 

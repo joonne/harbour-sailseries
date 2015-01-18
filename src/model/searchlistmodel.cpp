@@ -1,57 +1,82 @@
-#include "serieslistmodel.h"
+#include "searchlistmodel.h"
 
-SeriesListModel::SeriesListModel(QObject *parent, QQmlContext* context, DatabaseManager* dbmanager, XMLReader *reader) :
-    QObject(parent),
-    myContext(context){
-
-    myReader = reader;
+SearchListModel::SearchListModel(QObject *parent, DatabaseManager *dbmanager, XMLReader *xmlreader) :
+    QObject(parent)
+{
     mydbmanager = dbmanager;
+    myReader = xmlreader;
 
-    posterIndex = 0;
+    connect(myReader,
+            SIGNAL(readyToPopulateSeries()),
+            this,
+            SLOT(xmlParseFinished()));
 
-    mode = "default";
+    connect(myReader,
+            SIGNAL(readyToStoreSeries()),
+            this,
+            SLOT(getFullSeriesRecordFinished()));
 
+    myLoading = false;
+    myAdded = false;
 }
 
-SeriesListModel::~SeriesListModel() {
+SearchListModel::~SearchListModel() {
 
-    foreach(SeriesData* series, mySeriesListModel) {
+    mydbmanager->close();
+    foreach(SeriesData* series, mySearchListModel) {
         delete series;
         series = 0;
     }
-}
-
-QQmlListProperty<SeriesData> SeriesListModel::getSeriesList() {
-
-    return QQmlListProperty<SeriesData>(this,&mySeriesListModel,&SeriesListModel::seriesListCount,&SeriesListModel::seriesListAt);
 
 }
 
-void SeriesListModel::seriesListAppend(QQmlListProperty<SeriesData>* prop, SeriesData* val)
+QQmlListProperty<SeriesData> SearchListModel::getSearchModel() {
+
+    return QQmlListProperty<SeriesData>(this,&mySearchListModel,&SearchListModel::searchListCount,&SearchListModel::searchListAt);
+
+}
+
+// List handling methods
+
+void SearchListModel::searchListAppend(QQmlListProperty<SeriesData>* prop, SeriesData* val)
 {
-    SeriesListModel* seriesModel = qobject_cast<SeriesListModel*>(prop->object);
-    seriesModel->mySeriesListModel.append(val);
+    SearchListModel* searchModel = qobject_cast<SearchListModel*>(prop->object);
+    searchModel->mySearchListModel.append(val);
 }
 
-SeriesData* SeriesListModel::seriesListAt(QQmlListProperty<SeriesData>* prop, int index)
+SeriesData* SearchListModel::searchListAt(QQmlListProperty<SeriesData>* prop, int index)
 {
-    return (qobject_cast<SeriesListModel*>(prop->object))->mySeriesListModel.at(index);
+    return (qobject_cast<SearchListModel*>(prop->object))->mySearchListModel.at(index);
 }
 
-int SeriesListModel::seriesListCount(QQmlListProperty<SeriesData>* prop)
+int SearchListModel::searchListCount(QQmlListProperty<SeriesData>* prop)
 {
-    return qobject_cast<SeriesListModel*>(prop->object)->mySeriesListModel.size();
+    return qobject_cast<SearchListModel*>(prop->object)->mySearchListModel.size();
 }
 
-void SeriesListModel::seriesListClear(QQmlListProperty<SeriesData>* prop)
+void SearchListModel::searchListClear(QQmlListProperty<SeriesData>* prop)
 {
-    qobject_cast<SeriesListModel*>(prop->object)->mySeriesListModel.clear();
+    qobject_cast<SearchListModel*>(prop->object)->mySearchListModel.clear();
+}
+
+void SearchListModel::xmlParseFinished() {
+
+    qDebug("slotti toimii");
+    mySeries = myReader->getSeries();
+    populateSearchModel();
+}
+
+void SearchListModel::getFullSeriesRecordFinished() {
+
+    storeSeries();
+    storeEpisodes();
 }
 
 // -------------------------------------------------------------------
 // POPULATING DATA
 
-void SeriesListModel::populateSeriesList() {
+void SearchListModel::populateSearchModel() {
+
 
     if(mySeries.size() != 0) {
 
@@ -80,50 +105,40 @@ void SeriesListModel::populateSeriesList() {
                                                imdb_id, zap2it_id, network);
 
 
-            mySeriesListModel.append(serie);
+            mySearchListModel.append(serie);
 
         }
 
 
         // must remember to call signal to let QML side know about populated items..
-        emit seriesListChanged();
+        emit searchModelChanged();
 
-        // mark flag
-        isPopulated = true;
 
     }
 }
 
-void SeriesListModel::populateBannerList() {
+void SearchListModel::searchSeries(QString text) {
 
-    mySeriesListModel.clear();
-    myPosters.clear();
-
-    QList<QList<QString> > allSeries = mydbmanager->getSeries();
-    for(int i = 0; i < allSeries.size(); ++i) {
-        QList<QString> temp = allSeries.at(i);
-        QString banner = temp.at(0);
-        QString poster = temp.at(1);
-        QString seriesName = temp.at(2);
-        QString status = temp.at(3);
-        QString id = temp.at(4);
-        QString overview = temp.at(5);
-        QString imdbID = temp.at(6);
-        QString rating = temp.at(7);
-        myPosters.append(poster); // this is for the cover !
-        SeriesData* serie = new SeriesData(this,banner,poster,seriesName,status,id,overview,imdbID,rating);
-        mySeriesListModel.append(serie);
-    }
-    emit seriesListChanged();
+    mySearchListModel.clear();
+    mySeries.clear();
+    emit searchModelChanged();
+    myReader->searchSeries(text);
 }
 
-void SeriesListModel::selectSeries(int index) {
+void SearchListModel::selectSeries(int index) {
 
-    myInfo = mySeriesListModel.at(index);
+    myInfo = mySearchListModel.at(index);
+    qDebug() << "myInfo seriesname: " << myInfo->getSeriesName();
 
 }
 
-void SeriesListModel::storeSeries() {
+void SearchListModel::getFullSeriesRecord(QString id) {
+    myReader->getFullSeriesRecord(id);
+    setLoading(true);
+
+}
+
+void SearchListModel::storeSeries() {
 
     mySeries = myReader->getSeries();
     QMap<QString,QString> temp = mySeries.at(0);
@@ -216,7 +231,7 @@ void SeriesListModel::storeSeries() {
                               poster,zap2itid,0);
 }
 
-void SeriesListModel::storeEpisodes() {
+void SearchListModel::storeEpisodes() {
 
     myEpisodes = myReader->getEpisodes();
 
@@ -321,29 +336,29 @@ void SeriesListModel::storeEpisodes() {
     setLoading(false);
 }
 
-QString SeriesListModel::getID() { return myInfo->getID(); }
+QString SearchListModel::getID() { return myInfo->getID(); }
 
-QString SeriesListModel::getLanguage() { return myInfo->getLanguage(); }
+QString SearchListModel::getLanguage() { return myInfo->getLanguage(); }
 
-QString SeriesListModel::getSeriesName() { return myInfo->getSeriesName(); }
+QString SearchListModel::getSeriesName() { return myInfo->getSeriesName(); }
 
-QString SeriesListModel::getAliasNames() { return myInfo->getAliasNames(); }
+QString SearchListModel::getAliasNames() { return myInfo->getAliasNames(); }
 
-QString SeriesListModel::getBanner() { return myInfo->getBanner(); }
+QString SearchListModel::getBanner() { return myInfo->getBanner(); }
 
-QString SeriesListModel::getOverview() { return myInfo->getOverview(); }
+QString SearchListModel::getOverview() { return myInfo->getOverview(); }
 
-QString SeriesListModel::getFirstAired() { return myInfo->getFirstAired(); }
+QString SearchListModel::getFirstAired() { return myInfo->getFirstAired(); }
 
-QString SeriesListModel::getIMDB_ID() { return myInfo->getIMDB_ID(); }
+QString SearchListModel::getIMDB_ID() { return myInfo->getIMDB_ID(); }
 
-QString SeriesListModel::getZap2it_ID() { return myInfo->getZap2it_ID(); }
+QString SearchListModel::getZap2it_ID() { return myInfo->getZap2it_ID(); }
 
-QString SeriesListModel::getNetwork() { return myInfo->getNetwork(); }
+QString SearchListModel::getNetwork() { return myInfo->getNetwork(); }
 
-bool SeriesListModel::getLoading() { return myLoading; }
+bool SearchListModel::getLoading() { return myLoading; }
 
-void SeriesListModel::setLoading(bool) {
+void SearchListModel::setLoading(bool) {
 
     if(myLoading) {
         myLoading = false;
@@ -353,59 +368,31 @@ void SeriesListModel::setLoading(bool) {
     emit loadingChanged();
 }
 
-QString SeriesListModel::getPoster() {
+bool SearchListModel::getAdded() { return myAdded; }
 
-    if(myPosters.size() != 0) {
-        return myPosters.at(posterIndex);
+void SearchListModel::setAdded(bool cond) {
+
+    if(myAdded != cond) {
+        myAdded = cond;
+        emit addedChanged();
+    }
+
+}
+
+void SearchListModel::clearList() {
+    mySearchListModel.clear();
+    emit searchModelChanged();
+}
+
+void SearchListModel::checkIfAdded(QString id, QString name) {
+
+    if(mydbmanager->isAlreadyAdded(id.toInt(),name)) {
+        setAdded(true);
+        qDebug() << "already added";
     } else {
-        return "";
+        setAdded(false);
+        qDebug() << "not added";
     }
 }
-
-void SeriesListModel::setPoster(QString) {
-    ++posterIndex;
-    emit posterChanged();
-}
-
-void SeriesListModel::nextPoster() {
-
-    if(posterIndex == myPosters.size()-1) {
-        posterIndex = 0;
-    } else {
-        ++posterIndex;
-    }
-
-    emit posterChanged();
-
-}
-
-QString SeriesListModel::getMode() {
-    return mode;
-}
-
-void SeriesListModel::setMode(QString newmode) {
-
-    if(mode !=  newmode) {
-        mode = newmode;
-        emit modeChanged();
-    }
-}
-
-void SeriesListModel::deleteSeries(int seriesID) {
-
-    mydbmanager->setUpDB();
-    myLoading = true;
-    if(mydbmanager->deleteSeries(seriesID)) {
-        populateBannerList();
-    }
-    myLoading = false;
-}
-
-void SeriesListModel::updateSeries(int seriesID) {
-
-
-}
-
-
 
 

@@ -6,17 +6,21 @@
 class ProgramData : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString programName READ getProgramName)
-    Q_PROPERTY(QString weekday READ getWeekday)
-    Q_PROPERTY(QString time READ getTime)
+    Q_PROPERTY(QString ProgramName READ getProgramName)
+    Q_PROPERTY(QString Weekday READ getWeekday)
+    Q_PROPERTY(QString Time READ getTime)
+    Q_PROPERTY(QString ChannelName READ getChannelName)
+    Q_PROPERTY(QString Overview READ getOverview)
 public:
     explicit ProgramData(QObject *parent = 0);
-    ProgramData(QObject *parent, QString programName, QString weekday, QString time);
+    ProgramData(QObject *parent, QString programName, QString weekday,
+                QString time, QString channelName, QString overview);
 
     QString getProgramName();
     QString getWeekday();
     QString getTime();
-
+    QString getChannelName();
+    QString getOverview();
 
 signals:
 
@@ -26,6 +30,8 @@ private:
     QString myProgramName;
     QString myWeekday;
     QString myTime;
+    QString myChannelName;
+    QString myOverview;
 
 };
 
