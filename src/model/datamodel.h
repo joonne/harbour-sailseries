@@ -37,7 +37,7 @@ signals:
     void episodeListModelChanged();
 
 public slots:
-    void xmlParseFinished();
+    void readyToUpdateModels();
 
 private:
     ProgramListModel* myProgramListModel;
@@ -47,9 +47,9 @@ private:
     EpisodeListModel* myEpisodeListModel;
     XMLReader* myReader;
     DatabaseManager* mydbmanager;
-    QMap<QString,ProgramListModel*> channels;
 
-    QList<QMap<QString,QList<QMap<QString,QString> > > > myPrograms;
+//    QMap<QString,ProgramListModel*> channels;
+//    QList<QMap<QString,QList<QMap<QString,QString> > > > myPrograms;
 
 
 };

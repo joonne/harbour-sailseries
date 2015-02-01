@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import harbour.sailseries.datamodel 1.0
 
 Page {
     id: startpage
@@ -16,6 +15,14 @@ Page {
         PullDownMenu {
 
             MenuItem {
+                text: "About"
+                font.pixelSize: Theme.fontSizeSmall
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
+                }
+            }
+
+            MenuItem {
                 text: "Search for a series"
                 font.pixelSize: Theme.fontSizeSmall
                 onClicked: {
@@ -27,7 +34,7 @@ Page {
                 text: "My series"
                 font.pixelSize: Theme.fontSizeSmall
                 onClicked: {
-                    DATAMODEL.SeriesListModel.Mode = "mySeries"
+                    controller.SeriesListModel.Mode = "mySeries"
                     pageStack.push(Qt.resolvedUrl("MySeriesPage.qml"))
                 }
             }
@@ -42,18 +49,18 @@ Page {
 
         SilicaListView {
             id: listView
-            height: 0.5 * startpage.height
+            height: startpage.height - header.height - 4*Theme.paddingLarge
             width: startpage.width
             anchors.top: header.bottom
-            model: DATAMODEL.TodayModel.TodayModel
-
+            model: controller.TodayModel.TodayModel
 
             header: TextField {
-                text: "Today"
+                text: "On tv tonight"
                 readOnly: true
                 width: listView.width
                 color: Theme.highlightColor
                 font.pixelSize: Theme.fontSizeLarge
+                visible: listView.count !== 0
             }
 
             delegate: ListItem {
@@ -72,15 +79,23 @@ Page {
                     }
 
                     Label {
-                        id: network
-                        text: Network.length === 0 ? text = "Network" : text = Network
+                        id: episodeNumber
+                        text: "Season " + NextEpisodeSeasonNumber + " Episode " + NextEpisodeNumber
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.secondaryColor
                     }
 
                     Label {
-                        id: time
-                        text: AirsTime.length === 0 ? text = "AirsTime" : text = AirsTime
+                        id: episodeName
+                        text: NextEpisodeName
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.secondaryColor
+                    }
+
+
+                    Label {
+                        id: network
+                        text: AirsTime + " @ " + Network
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.secondaryColor
                     }
@@ -93,7 +108,7 @@ Page {
 
             ViewPlaceholder {
                 enabled: listView.count === 0
-                text: "Nothing airs today."
+                text: "Nothing airs today"
                 anchors.centerIn: listView
 
             }

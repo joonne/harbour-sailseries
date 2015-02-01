@@ -16,6 +16,8 @@ ProgramListModel::~ProgramListModel() {
         delete program;
         program = 0;
     }
+
+    qDebug() << "destructing ProgramListModel";
 }
 
 QHash<int,QByteArray> ProgramListModel::roleNames() {
@@ -68,10 +70,13 @@ int ProgramListModel::rowCount(const QModelIndex &index) const {
 }
 
 QVariantMap ProgramListModel::get(const QModelIndex &index) const {
-
+    Q_UNUSED(index)
+    return QVariantMap();
 }
 
 void ProgramListModel::setProgramList(QList<ProgramData> programs) {
+
+    Q_UNUSED(programs)
 
 //    if (m_programs.count() > 0) {
 //        beginRemoveRows(QModelIndex(), 0, m_programs.count() - 1);

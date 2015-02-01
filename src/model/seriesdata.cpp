@@ -29,7 +29,7 @@ SeriesData::SeriesData(QObject* parent, QString id, QString actors, QString airs
                        QString language, QString network, QString overview,
                        double rating, int ratingCount, int runtime, QString seriesName,
                        QString status, QString added, int addedby, QString banner,
-                       QString fanart, QString lastUpdated, QString posters, QString zap2itid, int watched):
+                       QString fanart, QString lastUpdated, QString poster, QString zap2itid, int watched):
     QObject(parent)
 {
     myID = id;
@@ -54,32 +54,47 @@ SeriesData::SeriesData(QObject* parent, QString id, QString actors, QString airs
     myBanner = banner;
     myFanart = fanart;
     myLastUpdated = lastUpdated;
-    myPosters = posters;
+    myPoster = poster;
     myZap2it_ID = zap2itid;
     myWatched = watched;
 
 
 }
 
-SeriesData::SeriesData(QObject* parent, QString banner, QString poster, QString seriesName, QString status, QString id, QString overview, QString imdbID, QString rating):
+SeriesData::SeriesData(QObject* parent, QString banner, QString poster,
+                       QString seriesName, QString status, QString id,
+                       QString overview, QString imdbID, QString rating,
+                       QString nextEpisodeName, QString nextEpisodeNumber,
+                       QString nextEpisodeSeasonNumber, QString daysToNextEpisode,
+                       QString watchedCount, QString totalCount):
     QObject(parent){
 
     myBanner = banner;
-    myPosters = poster;
+    myPoster = poster;
     mySeriesName = seriesName;
     myStatus = status;
     myID = id;
     myOverview = overview;
     myIMDB_ID = imdbID;
     myRating = rating;
+    myNextEpisodeName = nextEpisodeName;
+    myNextEpisodeNumber = nextEpisodeNumber;
+    myNextEpisodeSeasonNumber = nextEpisodeSeasonNumber;
+    myDaysToNextEpisode = daysToNextEpisode;
+    myWatchedCount = watchedCount;
+    myTotalCount = totalCount;
 }
 
-SeriesData::SeriesData(QObject *parent, QString seriesName, QString network, QString airsTime):
+SeriesData::SeriesData(QObject *parent, QString seriesName, QString network, QString airsTime,
+                       QString nextEpisodeName, QString nextEpisodeNumber, QString nextEpisodeSeasonNumber):
     QObject(parent){
 
     mySeriesName = seriesName;
     myNetwork = network;
     myAirsTime = airsTime;
+    myNextEpisodeName = nextEpisodeName;
+    myNextEpisodeNumber = nextEpisodeNumber;
+    myNextEpisodeSeasonNumber = nextEpisodeSeasonNumber;
 
 }
 
@@ -111,7 +126,7 @@ QString SeriesData::getFanart() { return myFanart; }
 
 QString SeriesData::getLastUpdated() { return myLastUpdated; }
 
-QString SeriesData::getPosters() { return myPosters; }
+QString SeriesData::getPoster() { return myPoster; }
 
 int SeriesData::getWatched() { return myWatched; }
 
@@ -140,3 +155,15 @@ void SeriesData::setWatched(int watched) {
         emit watchedChanged();
     }
 }
+
+QString SeriesData::getNextEpisodeName() { return myNextEpisodeName; }
+
+QString SeriesData::getNextEpisodeNumber() { return myNextEpisodeNumber; }
+
+QString SeriesData::getNextEpisodeSeasonNumber() { return myNextEpisodeSeasonNumber; }
+
+QString SeriesData::getDaysToNextEpisode() { return myDaysToNextEpisode; }
+
+QString SeriesData::getWatchedCount() { return myWatchedCount; }
+
+QString SeriesData::getTotalCount() { return myTotalCount; }

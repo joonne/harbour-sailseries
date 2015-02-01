@@ -29,9 +29,16 @@ class SeriesData : public QObject
     Q_PROPERTY(QString Banner READ getBanner)
     Q_PROPERTY(QString Fanart READ getFanart)
     Q_PROPERTY(QString LastUpdated READ getLastUpdated)
-    Q_PROPERTY(QString Posters READ getPosters)
+    Q_PROPERTY(QString Poster READ getPoster)
     Q_PROPERTY(QString zap2it_ID READ getZap2it_ID)
     Q_PROPERTY(int Watched READ getWatched WRITE setWatched NOTIFY watchedChanged)
+
+    Q_PROPERTY(QString NextEpisodeName READ getNextEpisodeName)
+    Q_PROPERTY(QString NextEpisodeNumber READ getNextEpisodeNumber)
+    Q_PROPERTY(QString NextEpisodeSeasonNumber READ getNextEpisodeSeasonNumber)
+    Q_PROPERTY(QString DaysToNextEpisode READ getDaysToNextEpisode)
+    Q_PROPERTY(QString WatchedCount READ getWatchedCount)
+    Q_PROPERTY(QString TotalCount READ getTotalCount)
 
 public:
     explicit SeriesData(QObject *parent = 0);
@@ -46,12 +53,17 @@ public:
                QString language, QString network, QString overview,
                double rating, int ratingCount, int runtime, QString seriesName,
                QString status, QString added, int addedby, QString banner,
-               QString fanart, QString lastUpdated, QString posters, QString zap2itid, int watched);
+               QString fanart, QString lastUpdated, QString poster, QString zap2itid, int watched);
 
+    // BannerList
     SeriesData(QObject* parent, QString banner, QString poster, QString seriesName, QString status, QString id,
-               QString overview, QString imdbID, QString rating);
+               QString overview, QString imdbID, QString rating, QString nextEpisodeName,
+               QString nextEpisodeNumber, QString nextEpisodeSeasonNumber, QString daysToNextEpisode,
+               QString watchedCount, QString totalCount);
 
-    SeriesData(QObject* parent, QString seriesName, QString network, QString airsTime);
+    // TodayList
+    SeriesData(QObject* parent, QString seriesName, QString network, QString airsTime, QString nextEpisodeName,
+               QString nextEpisodeNumber, QString nextEpisodeSeasonNumber);
 
     QString getID();
     QString getActors();
@@ -75,10 +87,17 @@ public:
     QString getBanner();
     QString getFanart();
     QString getLastUpdated();
-    QString getPosters();
+    QString getPoster();
     QString getZap2it_ID();
     int getWatched();
     void setWatched(int watched);
+
+    QString getNextEpisodeName();
+    QString getNextEpisodeNumber();
+    QString getNextEpisodeSeasonNumber();
+    QString getDaysToNextEpisode();
+    QString getWatchedCount();
+    QString getTotalCount();
 
 signals:
 
@@ -110,9 +129,16 @@ private:
     QString myBanner;
     QString myFanart;
     QString myLastUpdated;
-    QString myPosters;
+    QString myPoster;
     QString myZap2it_ID;
     int myWatched;
+
+    QString myNextEpisodeName;
+    QString myNextEpisodeNumber;
+    QString myNextEpisodeSeasonNumber;
+    QString myDaysToNextEpisode;
+    QString myWatchedCount;
+    QString myTotalCount;
 
 };
 

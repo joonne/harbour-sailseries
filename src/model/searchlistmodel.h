@@ -60,6 +60,7 @@ signals:
     void searchModelChanged();
     void loadingChanged();
     void addedChanged();
+    void updateModels();
 
 public slots:
     void xmlParseFinished();

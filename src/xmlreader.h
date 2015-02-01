@@ -18,6 +18,7 @@ class XMLReader : public QObject
 {
     Q_OBJECT
 public:
+
     explicit XMLReader(QObject *parent = 0);
     ~XMLReader();
 
@@ -34,7 +35,7 @@ public:
     void getLanguages();
     void searchSeries(QString text);
     void getServerTime();
-    void getFullSeriesRecord(QString seriesid);
+    void getFullSeriesRecord(QString seriesid,QString method);
 
 
     void updateTVGuide();
@@ -46,13 +47,12 @@ public:
 signals:
     void readyToPopulateSeries();
     void readyToPopulateChannels();
-    void readyToFetchBanner(QString banner);
     void readyToGetBanner();
     void readyToStoreSeries();
+    void readyToUpdateSeries();
 
 public slots:
     void replyFinished(QNetworkReply* reply);
-    void sslErrors(QNetworkReply* reply, QList<QSslError>& errors);
 
 private:
 
@@ -83,6 +83,7 @@ private:
     QString currentServerTime;
 
     bool fullRecord;
+    bool update;
 
 };
 

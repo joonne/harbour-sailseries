@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import harbour.sailseries.datamodel 1.0
 
 Page {
     id: seriesViewPage
@@ -9,7 +8,7 @@ Page {
 
     function initialize() {
 
-        episodes.initialize(seriesID);
+        episodes.seriesID = seriesID
 
     }
 
@@ -20,11 +19,18 @@ Page {
 
         PullDownMenu {
             MenuItem {
-                text: "Remove series"
+                text: "Remove"
                 onClicked: {
                     console.log("poistetaan sarjaa " + seriesID)
-                    DATAMODEL.SeriesListModel.deleteSeries(seriesID)
+                    controller.SeriesListModel.deleteSeries(seriesID)
                     pageStack.pop()
+                }
+            }
+
+            MenuItem {
+                text: "Update"
+                onClicked: {
+                    controller.SeriesListModel.updateSeries(seriesID);
                 }
             }
         }
@@ -47,4 +53,9 @@ Page {
 
 
     }
+
+    BusyIndicator {
+           anchors.centerIn: parent
+           running: controller.SeriesListModel.Loading ? true : false
+       }
 }

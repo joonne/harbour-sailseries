@@ -28,6 +28,13 @@ class SeriesListModel : public QObject
     Q_PROPERTY(bool Loading READ getLoading WRITE setLoading NOTIFY loadingChanged)
     Q_PROPERTY(QString Poster READ getPoster WRITE setPoster NOTIFY posterChanged)
     Q_PROPERTY(QString Mode READ getMode WRITE setMode NOTIFY modeChanged)
+    Q_PROPERTY(QString NextEpisodeName READ getNextEpisodeName)
+    Q_PROPERTY(QString NextEpisodeNumber READ getNextEpisodeNumber)
+    Q_PROPERTY(QString NextEpisodeSeasonNumber READ getNextEpisodeSeasonNumber)
+    Q_PROPERTY(QString DaysToNextEpisode READ getDaysToNextEpisode)
+    Q_PROPERTY(QString Status READ getStatus)
+    Q_PROPERTY(QString Rating READ getRating)
+
 
 public:
     explicit SeriesListModel(QObject *parent = 0, QQmlContext* context = 0, DatabaseManager *dbmanager = 0, XMLReader* reader = 0);
@@ -49,6 +56,12 @@ public:
     QString getIMDB_ID();
     QString getZap2it_ID();
     QString getNetwork();
+    QString getNextEpisodeName();
+    QString getNextEpisodeNumber();
+    QString getNextEpisodeSeasonNumber();
+    QString getDaysToNextEpisode();
+    QString getStatus();
+    QString getRating();
 
     QString getPoster();
     void setPoster(QString);
@@ -62,7 +75,7 @@ public:
     void storeSeries();
     void storeEpisodes();
     Q_INVOKABLE void deleteSeries(int seriesID);
-    Q_INVOKABLE void updateSeries(int seriesID);
+    Q_INVOKABLE void updateSeries(QString seriesID);
 
 
 signals:
@@ -70,8 +83,10 @@ signals:
     void loadingChanged();
     void posterChanged();
     void modeChanged();
+    void updateModels();
 
 public slots:
+    void updateFetchFinished();
 
 private:
     XMLReader* myReader;

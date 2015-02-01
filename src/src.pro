@@ -17,8 +17,6 @@ SOURCES += main.cpp \
     model/programdata.cpp \
     model/programlistmodel.cpp \
     model/datamodel.cpp \
-    model/channelmodel.cpp \
-    model/channelproxymodel.cpp \
     model/episodelistmodel.cpp \
     model/searchlistmodel.cpp \
     model/todaylistmodel.cpp
@@ -31,7 +29,6 @@ OTHER_FILES = \
 # how to kill this particular Creator's plugin
 #    ../rpm/harbour-sailseries.yaml \
     ../rpm/harbour-sailseries.spec \
-    #qml/pages/SailCalc.qml \
     qml/main.qml \
     qml/pages/StartPage.qml \
     qml/pages/SeriesInfoPage.qml \
@@ -45,7 +42,8 @@ OTHER_FILES = \
     qml/pages/Series.qml \
     qml/pages/EpisodeOverviewPage.qml \
     qml/cover/CoverPage.qml \
-    qml/pages/Seasons.qml
+    qml/pages/Seasons.qml \
+    qml/pages/AboutPage.qml
 
 INCLUDEPATH += $$PWD
 
@@ -58,8 +56,6 @@ HEADERS += \
     model/programdata.h \
     model/programlistmodel.h \
     model/datamodel.h \
-    model/channelmodel.h \
-    model/channelproxymodel.h \
     model/episodelistmodel.h \
     model/searchlistmodel.h \
     model/todaylistmodel.h

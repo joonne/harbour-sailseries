@@ -1,12 +1,11 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import harbour.sailseries.datamodel 1.0
 
 Page {
     id: searchpage
 
     Component.onDestruction: {
-        DATAMODEL.SearchModel.clearList()
+        controller.SearchModel.clearList()
     }
 
     TextField {
@@ -16,7 +15,7 @@ Page {
         anchors.topMargin: 100
         placeholderText: "Search for a series"
         EnterKey.onClicked: {
-            DATAMODEL.SearchModel.searchSeries(text)
+            controller.SearchModel.searchSeries(text)
             focus = false
         }
     }
@@ -26,15 +25,15 @@ Page {
         anchors.top: seriesSearch.bottom
         height: 800
         width: 540
-        model: DATAMODEL.SearchModel.SearchModel
+        model: controller.SearchModel.SearchModel
 
         delegate: ListItem {
             id: listItem
             contentHeight: Theme.itemSizeSmall
             contentWidth: listView.width
             onClicked: {
-                DATAMODEL.SearchModel.selectSeries(index)
-                DATAMODEL.SearchModel.checkIfAdded(ID,SeriesName)
+                controller.SearchModel.selectSeries(index)
+                controller.SearchModel.checkIfAdded(ID,SeriesName)
                 pageStack.push(Qt.resolvedUrl("SeriesInfoPage.qml"))
             }
 
@@ -54,9 +53,13 @@ Page {
             }
         }
 
+        VerticalScrollDecorator {
+            id: decorator
+        }
+
         ViewPlaceholder {
             enabled: listView.count === 0
-            text: "Here will be stuff when you search for something."
+            text: "Here will be stuff when you search for something"
             anchors.centerIn: listView
 
         }

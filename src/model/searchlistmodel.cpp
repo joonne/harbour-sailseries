@@ -22,11 +22,12 @@ SearchListModel::SearchListModel(QObject *parent, DatabaseManager *dbmanager, XM
 
 SearchListModel::~SearchListModel() {
 
-    mydbmanager->close();
     foreach(SeriesData* series, mySearchListModel) {
         delete series;
         series = 0;
     }
+
+    qDebug() << "destructing SearchListModel";
 
 }
 
@@ -70,6 +71,7 @@ void SearchListModel::getFullSeriesRecordFinished() {
 
     storeSeries();
     storeEpisodes();
+    emit updateModels();
 }
 
 // -------------------------------------------------------------------
@@ -133,7 +135,7 @@ void SearchListModel::selectSeries(int index) {
 }
 
 void SearchListModel::getFullSeriesRecord(QString id) {
-    myReader->getFullSeriesRecord(id);
+    myReader->getFullSeriesRecord(id,"full");
     setLoading(true);
 
 }

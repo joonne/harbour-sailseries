@@ -11,14 +11,19 @@ DataModel::DataModel(QObject *parent) :
     mySearchListModel = new SearchListModel(this,mydbmanager,myReader);
     myTodayListModel = new TodayListModel(this,mydbmanager,myReader);
     myEpisodeListModel = new EpisodeListModel(this,mydbmanager);
+
     //myProgramListModel = new ProgramListModel(this,mydbmanager,myReader);
-
-    connect(myReader,
-            SIGNAL(readyToPopulateChannels()),
-            this,
-            SLOT(xmlParseFinished()));
-
     //myReader->updateTVGuide();
+
+    connect(mySearchListModel,
+            SIGNAL(updateModels()),
+            this,
+            SLOT(readyToUpdateModels()));
+
+    connect(mySeriesListModel,
+            SIGNAL(updateModels()),
+            this,
+            SLOT(readyToUpdateModels()));
 
 }
 
@@ -26,6 +31,8 @@ DataModel::~DataModel() {
 
     delete myReader;
     delete mydbmanager;
+
+    qDebug() << "destructing DataModel";
 
 }
 
@@ -39,10 +46,6 @@ TodayListModel* DataModel::getTodayModel() { return myTodayListModel; }
 
 EpisodeListModel* DataModel::getEpisodeListModel() { return myEpisodeListModel; }
 
-void DataModel::xmlParseFinished() {
-
-    qDebug("tv-guiden slotti toimii");
-    myPrograms = myReader->getTVGuide();
-    myProgramListModel->populateChannel();
-
+void DataModel::readyToUpdateModels() {
+    myTodayListModel->populateTodayModel();
 }

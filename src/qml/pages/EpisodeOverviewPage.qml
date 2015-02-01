@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import harbour.sailseries.datamodel 1.0
 
 Rectangle {
 
@@ -9,6 +8,15 @@ Rectangle {
             return 400
         } else {
             return banner.width + 2 * Theme.paddingMedium
+        }
+    }
+
+    // small error is better than unnecessary http-request. :D
+    function setSource() {
+        if(episodeBanner.length === 0) {
+            return null;
+        } else {
+            return "http://thetvdb.com/banners/" + episodeBanner;
         }
     }
 
@@ -26,13 +34,12 @@ Rectangle {
         anchors.fill: parent
 
         Column {
-
             anchors.top: parent.top
             anchors.topMargin: Theme.paddingMedium
 
             Image {
                 id: banner
-                source: "http://thetvdb.com/banners/" + episodeBanner
+                source: setSource()
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.paddingMedium
             }

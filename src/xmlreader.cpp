@@ -1,6 +1,4 @@
 #include "xmlreader.h"
-#include <QFile>
-
 
 XMLReader::XMLReader(QObject *parent) :
     QObject(parent),
@@ -29,18 +27,24 @@ XMLReader::XMLReader(QObject *parent) :
             this,
             SLOT(replyFinished(QNetworkReply*)));
 
-    connect(myNetWorkAccessManager,
-            SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>&)),
-            this,
-            SLOT(sslErrors(QNetworkReply*,QList<QSslError>&)));
+//    connect(myNetWorkAccessManager,
+//            SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>&)),
+//            this,
+//            SLOT(sslErrors(QNetworkReply*,QList<QSslError>&)));
 
     fullRecord = false;
+    update = false; // STUPID, FIX THIS SOMEHOW
 
-    //getServerTime();
+    // TODO fix these
+    //qDebug() << QString("%1/api/%2/languages.xml").arg(myMirrorPath).arg(myApiKey);
 
 }
 
 XMLReader::~XMLReader() {
+
+    delete myNetWorkAccessManager;
+    myNetWorkAccessManager = 0;
+    qDebug() << "destructing xmlreader";
 
 }
 
@@ -61,20 +65,23 @@ void XMLReader::searchSeries(QString text) {
     startRequest(finalUrl);
 }
 
-void XMLReader::getFullSeriesRecord(QString seriesid) {
+void XMLReader::getFullSeriesRecord(QString seriesid, QString method) {
+
+    if(method == "full") {
+        fullRecord = true;
+    } else if(method == "update") {
+        update = true;
+        qDebug() << "method = update";
+    }
 
     QString url = myMirrorPath + "/api/" + myApiKey + "/series/" + seriesid + "/all/en.xml";
     //QString url = myMirrorPath + "/api/" + myApiKey + "/series/" + seriesid + "/all/en.zip";
     qDebug() << "Requesting" << url;
     QUrl finalUrl(url);
     startRequest(finalUrl);
-    fullRecord = true;
 }
 
-QList<QMap<QString,QString> > XMLReader::getSeries() {
-
-    return mySeries;
-}
+QList<QMap<QString,QString> > XMLReader::getSeries() { return mySeries; }
 
 QList<QMap<QString,QString> > XMLReader::getEpisodes() { return myEpisodes; }
 
@@ -106,29 +113,25 @@ void XMLReader::getServerTime() {
 void XMLReader::replyFinished(QNetworkReply *reply) {
 
     // for writing the data into file
-//    QFile file( "./sailseries_temp/series_info.zip" );
-//    file.open(QIODevice::WriteOnly);
-//    file.write(reply->readAll());
-
-//    QString data;
-
-//    if(fullRecord) {
-
-//        QFile file( "series_info.zip" );
-//        file.open(QIODevice::WriteOnly);
-//        file.write(reply->readAll());
-
-//        return;
-
-//        QByteArray zipped = reply->readAll();
-//        QByteArray unzipped = qUncompress(zipped);
-//        data = QString(unzipped);
-//    } else {
-//        data = QString(reply->readAll());
-//    }
+    //    QFile file( "./sailseries_temp/series_info.zip" );
+    //    file.open(QIODevice::WriteOnly);
+    //    file.write(reply->readAll());
 
     QString data = QString(reply->readAll());
-    //qDebug() << data;
+
+    // If server is down, do something.
+    if(data.contains("522: Connection timed out")) {
+
+        QMap<QString,QString> temp;
+        temp.insert("SeriesName","Server timeout, try again later.");
+        mySeries.clear();
+        mySeries.append(temp);
+        readyToPopulateSeries();
+
+        reply->deleteLater();
+        return;
+    }
+
     QXmlStreamReader xml(data);
     qDebug() << "Starting to parse xml.";
     parseXML(xml);
@@ -136,13 +139,7 @@ void XMLReader::replyFinished(QNetworkReply *reply) {
     reply->deleteLater();
 }
 
-void XMLReader::sslErrors(QNetworkReply *reply, QList<QSslError> &errors) {
-
-    Q_UNUSED(reply);
-    Q_UNUSED(errors);
-
-}
-
+// These are ugly looking but their are very fast
 // ---------------------------------------------------
 
 void XMLReader::parseXML(QXmlStreamReader& xml) {
@@ -247,11 +244,17 @@ void XMLReader::parseXML(QXmlStreamReader& xml) {
         readyToPopulateChannels();
     }
 
-    if(mySeries.size() != 0 and !fullRecord) {
+    if(mySeries.size() != 0 and !fullRecord and !update) {
         emit readyToPopulateSeries();
     } else if(fullRecord) {
         emit readyToStoreSeries();
+    } else if(update) {
+        emit readyToUpdateSeries();
     }
+
+    // lets init the values.
+    fullRecord = false;
+    update = false;
 }
 
 // Base series record parsing.
@@ -364,15 +367,6 @@ QMap<QString, QString> XMLReader::parseSeries(QXmlStreamReader &xml) {
             /* We've found banner. */
             if(xml.name() == "banner") {
                 this->addElementDataToMap(xml, series);
-
-                xml.readNext();
-
-                if(xml.tokenType() == QXmlStreamReader::Characters) {
-                    QString banner = xml.text().toString();
-                    emit readyToFetchBanner(banner);
-                    //qDebug() << wholeText;
-
-                }
             }
             /* We've found Overview. */
             if(xml.name() == "Overview") {
@@ -647,8 +641,6 @@ QMap<QString, QString> XMLReader::parseTVChannel(QXmlStreamReader &xml) {
             /* We've found <title type="html">. */
             if(xml.name() == "title") {
 
-                //qDebug() << "found title";
-
                 // We are between <title> </title> fields now.
                 xml.readNext();
                 /*
@@ -658,17 +650,11 @@ QMap<QString, QString> XMLReader::parseTVChannel(QXmlStreamReader &xml) {
                 if(xml.tokenType() == QXmlStreamReader::Characters) {
 
                     QString wholeText = xml.text().toString();
-                    //qDebug() << wholeText;
-                    //qDebug() << wholeText.size();
 
                     // We want to parse these attributes to be able to display them.
                     QStringRef weekday(&wholeText,0,2);
                     QStringRef time(&wholeText,3,5);
                     QStringRef programName(&wholeText,9,wholeText.size()-9);
-
-                    //qDebug() << "weekday " << weekday;
-                    //qDebug() << "time " << time;
-                    //qDebug() << "name of the program " << programName;
 
                     /* Now we can add it to the map.*/
 
@@ -683,16 +669,6 @@ QMap<QString, QString> XMLReader::parseTVChannel(QXmlStreamReader &xml) {
         /* ...and next... */
         xml.readNext();
     }
-
-    //    if(program.size() != 0) {
-
-    //        QMap<QString,QString>::iterator itr = program.begin();
-    //        while(itr != program.end()) {
-    //            qDebug() << itr.key() << itr.value();
-    //            ++itr;
-    //        }
-    //    }
-
     return program;
 }
 

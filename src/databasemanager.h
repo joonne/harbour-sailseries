@@ -16,6 +16,7 @@
 #include <QStringRef>
 #include <QDate>
 #include <QLocale>
+#include <QDateTime>
 
 class DatabaseManager : public QObject
 {
@@ -65,7 +66,9 @@ public:
     QList<QList<QString> > getSeries();
     QList<QList<QString> > getStartPageSeries();
     QList<QList<QString> > getEpisodes(int seriesID);
-    QList<QString> getNextEpisodeDetails(int seriesID);
+    QMap<QString, QString> getNextEpisodeDetails(int seriesID);
+    QList<QString> getTodaysEpisodes(int seriesID);
+    QString getStatus(int seriesID);
 
     void toggleWatched(QString episodeID);
     void markSeasonWatched(int seriesID, int season);

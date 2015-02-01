@@ -1,22 +1,38 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import harbour.sailseries.datamodel 1.0
 
 Page {
     id: mySeriesPage
 
     Component.onCompleted: {
-        DATAMODEL.SeriesListModel.populateBannerList()
+        controller.SeriesListModel.populateBannerList()
      }
 
     Component.onDestruction: {
-        DATAMODEL.SeriesListModel.Mode = "default"
+        controller.SeriesListModel.Mode = "default"
+    }
+
+    function nextEpisodeDetails(episodeName,daysTo,status) {
+
+        if(status === "Ended") {
+            return "This show has ended";
+        } else if(daysTo === "today") {
+            return episodeName + " airs today";
+        } else if(daysTo === "tomorrow") {
+            return episodeName + " airs tomorrow";
+        } else if(episodeName.length !== 0) {
+            return episodeName + " airs in " + daysTo + " days";
+        } else if(episodeName.length === 0 && daysTo !== "unknown") {
+            return "Next episode airs in " + daysTo + " days";
+        } else {
+            return "No information about next episode";
+        }
     }
 
     SilicaListView {
         id: listView
         anchors.fill: parent
-        model: DATAMODEL.SeriesListModel.SeriesList
+        model: controller.SeriesListModel.SeriesList
 
         header: PageHeader {
             id: header
@@ -37,14 +53,14 @@ Page {
 
             BackgroundItem {
                 id: background
-                height: banner.height + seriesName.height + 10
+                height: banner.height + seriesName.height + nextEpisode.height + Theme.paddingLarge
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.paddingMedium
                 anchors.right: parent.right
                 anchors.rightMargin: Theme.paddingMedium
                 onClicked: {
                     console.log(ID)
-                    DATAMODEL.SeriesListModel.selectSeries(index)
+                    controller.SeriesListModel.selectSeries(index)
                     pageStack.push(Qt.resolvedUrl("SeriesViewPage.qml"),{seriesID: ID})
                 }
             }
@@ -70,7 +86,20 @@ Page {
                     color: Theme.primaryColor
 
                 }
+
+                Label {
+                    id: nextEpisode
+                    text: nextEpisodeDetails(NextEpisodeName,DaysToNextEpisode,Status)
+                    anchors.left: parent.left
+                    anchors.leftMargin: 2 * Theme.paddingMedium
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                    color: Theme.primaryColor
+                }
             }
+        }
+
+        VerticalScrollDecorator {
+            id: decorator
         }
 
         ViewPlaceholder {

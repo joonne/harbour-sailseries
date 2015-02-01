@@ -15,8 +15,6 @@ ProgramData::ProgramData(QObject *parent, QString programName, QString weekday,
     myTime = time;
     myChannelName = channelName;
     myOverview = overview;
-
-    qDebug() << "creating program: " <<  programName;
 }
 
 QString ProgramData::getProgramName() { return myProgramName; }

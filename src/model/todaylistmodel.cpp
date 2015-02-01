@@ -15,6 +15,7 @@ TodayListModel::~TodayListModel() {
         delete series;
         series = 0;
     }
+    qDebug() << "destructing TodayListModel";
 
 }
 
@@ -56,13 +57,17 @@ void TodayListModel::populateTodayModel() {
     for(int i = 0; i < allSeries.size(); ++i ) {
         QList<QString> temp = allSeries.at(i);
 
-        if(temp.at(3) == today and temp.at(4) == "Continuing") {
+        if(temp.at(3) == today and temp.at(4) == "Continuing" and temp.size() > 5) {
 
             QString seriesName = temp.at(0);
             QString network = temp.at(1);
             QString airstime = temp.at(2);
+            QString episodeName = temp.at(5);
+            QString episodeNumber = temp.at(6);
+            QString seasonNumber = temp.at(7);
 
-            SeriesData* serie = new SeriesData(this,seriesName,network,airstime);
+            SeriesData* serie = new SeriesData(this,seriesName,network,airstime,
+                                               episodeName,episodeNumber,seasonNumber);
             myTodayListModel.append(serie);
 
         }

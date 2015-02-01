@@ -1,20 +1,30 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import harbour.sailseries.datamodel 1.0
 
 Item {
 
     height: seriesView.height;
     width: seriesView.width;
 
-    function initialize(SeriesID) {
-        DATAMODEL.EpisodeListModel.populateEpisodeList(SeriesID)
-        listView.model = DATAMODEL.EpisodeListModel.episodeList
+    property string seriesID
+
+    // initialization is too fast without this
+    Timer {
+        id: timer
+        interval: 600
+        onTriggered: initialize(seriesID)
+    }
+
+    Component.onCompleted: timer.start()
+
+    function initialize(seriesID) {
+        controller.EpisodeListModel.populateEpisodeList(seriesID)
+        listView.model = controller.EpisodeListModel.episodeList
     }
 
     SilicaListView {
         id: listView
-        model: DATAMODEL.EpisodeListModel.episodeList
+        model: controller.EpisodeListModel.episodeList
 
         header: Component {
             PageHeader {
@@ -107,16 +117,23 @@ Item {
                 anchors.top: container.top
                 anchors.topMargin: Theme.paddingMedium
 
+                property string star: "image://theme/icon-l-star"
+                property string favorite: "image://theme/icon-l-favorite"
+
                 MouseArea {
                     id: clickarea
                     onClicked: {
                         Watched === 0 ? Watched = 1 : Watched = 0
-                        DATAMODEL.EpisodeListModel.toggleWatched(ID)
+                        controller.EpisodeListModel.toggleWatched(ID)
                     }
                     anchors.fill: parent
                 }
 
             }
+        }
+
+        VerticalScrollDecorator {
+            id: decorator
         }
     }
 

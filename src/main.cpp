@@ -7,8 +7,9 @@
 #include <QQuickView>
 #include <QQmlEngine>
 #include <QGuiApplication>
-#include <QNetworkAccessManager>
-#include "xmlreader.h"
+#include <QQmlContext>
+#include <QQmlComponent>
+
 #include "model/seriesdata.h"
 #include "model/serieslistmodel.h"
 #include "model/programdata.h"
@@ -18,8 +19,6 @@
 #include "model/episodelistmodel.h"
 #include "model/searchlistmodel.h"
 #include "model/todaylistmodel.h"
-#include <QQmlContext>
-#include <QQmlComponent>
 
 int main(int argc, char *argv[])
 {
@@ -37,15 +36,15 @@ int main(int argc, char *argv[])
     qmlRegisterType<EpisodeData>("harbour.sailseries.datamodel", 1, 0, "EpisodeData");
     qmlRegisterType<EpisodeListModel>("harbour.sailseries.datamodel", 1, 0, "EpisodeListModel");
 
-
     // For this example, wizard-generates single line code would be good enough,
     // but very soon it won't be enough for you anyway, so use this more detailed example from start
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
     QScopedPointer<QQuickView> view(SailfishApp::createView());
 
-    DataModel* datamodel = new DataModel();
+    // This is the public QML datacontroller
+    QScopedPointer<DataModel> datamodel(new DataModel);
     QQmlContext* context = view->rootContext();
-    context->setContextProperty("DATAMODEL",datamodel);
+    context->setContextProperty("controller",datamodel.data());
 
     //    Here's how you will add QML components whenever you start using them
     //    Check https://github.com/amarchen/Wikipedia for a more full example

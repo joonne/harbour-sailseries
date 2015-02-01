@@ -11,6 +11,13 @@ SeriesListModel::SeriesListModel(QObject *parent, QQmlContext* context, Database
 
     mode = "default";
 
+    connect(myReader,
+            SIGNAL(readyToUpdateSeries()),
+            this,
+            SLOT(updateFetchFinished()));
+
+    myLoading = false;
+
 }
 
 SeriesListModel::~SeriesListModel() {
@@ -19,6 +26,16 @@ SeriesListModel::~SeriesListModel() {
         delete series;
         series = 0;
     }
+
+    qDebug() << "destructing SeriesListModel";
+}
+
+void SeriesListModel::updateFetchFinished() {
+
+    storeSeries();
+    storeEpisodes();
+    setLoading(false);
+    populateBannerList();
 }
 
 QQmlListProperty<SeriesData> SeriesListModel::getSeriesList() {
@@ -110,8 +127,19 @@ void SeriesListModel::populateBannerList() {
         QString overview = temp.at(5);
         QString imdbID = temp.at(6);
         QString rating = temp.at(7);
+        QString watchedCount = temp.at(8);
+        QString totalCount = temp.at(9);
+
+        QMap<QString,QString> nextEpisodeDetails = mydbmanager->getNextEpisodeDetails(id.toInt());
+        QString episodeName = nextEpisodeDetails["episodeName"];
+        QString episodeNumber = nextEpisodeDetails["episodeNumber"];
+        QString seasonNumber = nextEpisodeDetails["seasonNumber"];
+        QString daysto = nextEpisodeDetails["daysToNext"];
+
         myPosters.append(poster); // this is for the cover !
-        SeriesData* serie = new SeriesData(this,banner,poster,seriesName,status,id,overview,imdbID,rating);
+        SeriesData* serie = new SeriesData(this,banner,poster,seriesName,status,id,overview,
+                                           imdbID,rating,episodeName,episodeNumber,seasonNumber,daysto,
+                                           watchedCount, totalCount);
         mySeriesListModel.append(serie);
     }
     emit seriesListChanged();
@@ -126,7 +154,7 @@ void SeriesListModel::selectSeries(int index) {
 void SeriesListModel::storeSeries() {
 
     mySeries = myReader->getSeries();
-    QMap<QString,QString> temp = mySeries.at(0);
+    QMap<QString,QString> temp = mySeries.first();
 
     int seriesid;
     QString actors;
@@ -317,8 +345,6 @@ void SeriesListModel::storeEpisodes() {
                                    airsBeforeEpisode,airsBeforeSeason,filename,lastUpdated,seasonID,seriesID,
                                    thumbAdded,thumbHeight,thumbWidth,0);
     }
-
-    setLoading(false);
 }
 
 QString SeriesListModel::getID() { return myInfo->getID(); }
@@ -341,6 +367,18 @@ QString SeriesListModel::getZap2it_ID() { return myInfo->getZap2it_ID(); }
 
 QString SeriesListModel::getNetwork() { return myInfo->getNetwork(); }
 
+QString SeriesListModel::getNextEpisodeName() { return myInfo->getNextEpisodeName(); }
+
+QString SeriesListModel::getNextEpisodeNumber() { return myInfo->getNextEpisodeNumber(); }
+
+QString SeriesListModel::getNextEpisodeSeasonNumber() { return myInfo->getNextEpisodeSeasonNumber(); }
+
+QString SeriesListModel::getDaysToNextEpisode() { return myInfo->getDaysToNextEpisode(); }
+
+QString SeriesListModel::getStatus() { return myInfo->getStatus(); }
+
+QString SeriesListModel::getRating() { return myInfo->getRating(); }
+
 bool SeriesListModel::getLoading() { return myLoading; }
 
 void SeriesListModel::setLoading(bool) {
@@ -355,11 +393,13 @@ void SeriesListModel::setLoading(bool) {
 
 QString SeriesListModel::getPoster() {
 
-    if(myPosters.size() != 0) {
-        return myPosters.at(posterIndex);
-    } else {
-        return "";
-    }
+//    if(myPosters.size() != 0) {
+//        return myPosters.at(posterIndex);
+//    } else {
+//        return "";
+//    }
+
+    return myInfo->getPoster();
 }
 
 void SeriesListModel::setPoster(QString) {
@@ -397,13 +437,15 @@ void SeriesListModel::deleteSeries(int seriesID) {
     myLoading = true;
     if(mydbmanager->deleteSeries(seriesID)) {
         populateBannerList();
+        emit updateModels();
     }
     myLoading = false;
 }
 
-void SeriesListModel::updateSeries(int seriesID) {
+void SeriesListModel::updateSeries(QString seriesID) {
 
-
+    myReader->getFullSeriesRecord(seriesID,"update");
+    setLoading(true);
 }
 
 

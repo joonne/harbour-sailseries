@@ -12,6 +12,8 @@ EpisodeListModel::~EpisodeListModel() {
         delete episode;
         episode = 0;
     }
+
+    qDebug() << "destructing EpisodeListModel";
 }
 
 QQmlListProperty<EpisodeData> EpisodeListModel::getEpisodeList() {
