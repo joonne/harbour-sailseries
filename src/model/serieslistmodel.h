@@ -28,10 +28,10 @@ class SeriesListModel : public QObject
     Q_PROPERTY(bool Loading READ getLoading WRITE setLoading NOTIFY loadingChanged)
     Q_PROPERTY(QString Poster READ getPoster WRITE setPoster NOTIFY posterChanged)
     Q_PROPERTY(QString Mode READ getMode WRITE setMode NOTIFY modeChanged)
-    Q_PROPERTY(QString NextEpisodeName READ getNextEpisodeName)
-    Q_PROPERTY(QString NextEpisodeNumber READ getNextEpisodeNumber)
-    Q_PROPERTY(QString NextEpisodeSeasonNumber READ getNextEpisodeSeasonNumber)
-    Q_PROPERTY(QString DaysToNextEpisode READ getDaysToNextEpisode)
+    Q_PROPERTY(QString NextEpisodeName READ getNextEpisodeName NOTIFY nextEpisodeNameChanged)
+    Q_PROPERTY(QString NextEpisodeNumber READ getNextEpisodeNumber NOTIFY nextEpisodeNumberChanged)
+    Q_PROPERTY(QString NextEpisodeSeasonNumber READ getNextEpisodeSeasonNumber NOTIFY nextEpisodeSeasonNumberChanged)
+    Q_PROPERTY(QString DaysToNextEpisode READ getDaysToNextEpisode NOTIFY daysToNextEpisodeChanged)
     Q_PROPERTY(QString Status READ getStatus)
     Q_PROPERTY(QString Rating READ getRating)
 
@@ -84,6 +84,10 @@ signals:
     void posterChanged();
     void modeChanged();
     void updateModels();
+    void nextEpisodeNameChanged();
+    void nextEpisodeNumberChanged();
+    void nextEpisodeSeasonNumberChanged();
+    void daysToNextEpisodeChanged();
 
 public slots:
     void updateFetchFinished();
@@ -106,6 +110,11 @@ private:
     bool myLoading;
 
     QList<QString> myPosters;
+    QString myPoster;
+    QString myNextEpisodeName;
+    QString myNextEpisodeNumber;
+    QString myNextEpisodeSeasonNumber;
+    QString myDaysToNextEpisode;
     int posterIndex;
 
     QString mode;

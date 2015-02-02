@@ -8,7 +8,7 @@ Page {
         controller.SearchModel.clearList()
     }
 
-    TextField {
+    SearchField {
         id: seriesSearch
         width: searchpage.width
         anchors.top: searchpage.top
@@ -24,7 +24,7 @@ Page {
         id: listView
         anchors.top: seriesSearch.bottom
         height: 800
-        width: 540
+        width: searchpage.width
         model: controller.SearchModel.SearchModel
 
         delegate: ListItem {

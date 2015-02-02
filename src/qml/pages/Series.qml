@@ -26,13 +26,26 @@ Item {
                 anchors.leftMargin: Theme.paddingMedium
             }
 
-            TextField {
-                id: rating
-                label: "Rating"
-                width: seriesViewPage.width
-                text: controller.SeriesListModel.Rating
-                color: Theme.secondaryColor
-                readOnly: true
+            Row {
+
+                TextField {
+                    id: status
+                    label: "Status"
+                    width: seriesViewPage.width / 2
+                    text: controller.SeriesListModel.Status
+                    color: Theme.secondaryColor
+                    readOnly: true
+                }
+
+                TextField {
+                    id: rating
+                    label: "Rating"
+                    width: seriesViewPage.width / 2
+                    text: controller.SeriesListModel.Rating
+                    color: Theme.secondaryColor
+                    readOnly: true
+                }
+
             }
 
             TextArea {

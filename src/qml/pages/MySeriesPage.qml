@@ -59,7 +59,7 @@ Page {
                 anchors.right: parent.right
                 anchors.rightMargin: Theme.paddingMedium
                 onClicked: {
-                    console.log(ID)
+                    controller.SeriesListModel.Mode = "mySeries"
                     controller.SeriesListModel.selectSeries(index)
                     pageStack.push(Qt.resolvedUrl("SeriesViewPage.qml"),{seriesID: ID})
                 }

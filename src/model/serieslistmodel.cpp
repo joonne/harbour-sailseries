@@ -149,6 +149,21 @@ void SeriesListModel::selectSeries(int index) {
 
     myInfo = mySeriesListModel.at(index);
 
+    myPoster = myInfo->getPoster();
+    emit posterChanged();
+
+    myNextEpisodeName = myInfo->getNextEpisodeName();
+    emit nextEpisodeNameChanged();
+
+    myNextEpisodeNumber = myInfo->getNextEpisodeNumber();
+    emit nextEpisodeNumberChanged();
+
+    myNextEpisodeSeasonNumber = myInfo->getNextEpisodeSeasonNumber();
+    emit nextEpisodeSeasonNumberChanged();
+
+    myDaysToNextEpisode = myInfo->getDaysToNextEpisode();
+    emit daysToNextEpisodeChanged();
+
 }
 
 void SeriesListModel::storeSeries() {
@@ -367,13 +382,13 @@ QString SeriesListModel::getZap2it_ID() { return myInfo->getZap2it_ID(); }
 
 QString SeriesListModel::getNetwork() { return myInfo->getNetwork(); }
 
-QString SeriesListModel::getNextEpisodeName() { return myInfo->getNextEpisodeName(); }
+QString SeriesListModel::getNextEpisodeName() { return myNextEpisodeName; }
 
-QString SeriesListModel::getNextEpisodeNumber() { return myInfo->getNextEpisodeNumber(); }
+QString SeriesListModel::getNextEpisodeNumber() { return myNextEpisodeNumber; }
 
-QString SeriesListModel::getNextEpisodeSeasonNumber() { return myInfo->getNextEpisodeSeasonNumber(); }
+QString SeriesListModel::getNextEpisodeSeasonNumber() { return myNextEpisodeSeasonNumber; }
 
-QString SeriesListModel::getDaysToNextEpisode() { return myInfo->getDaysToNextEpisode(); }
+QString SeriesListModel::getDaysToNextEpisode() { return myDaysToNextEpisode; }
 
 QString SeriesListModel::getStatus() { return myInfo->getStatus(); }
 
@@ -393,18 +408,21 @@ void SeriesListModel::setLoading(bool) {
 
 QString SeriesListModel::getPoster() {
 
+    qDebug() << myPoster;
+    return myPoster;
+
 //    if(myPosters.size() != 0) {
 //        return myPosters.at(posterIndex);
 //    } else {
 //        return "";
 //    }
 
-    return myInfo->getPoster();
+    //return myInfo->getPoster();
 }
 
 void SeriesListModel::setPoster(QString) {
-    ++posterIndex;
-    emit posterChanged();
+//    ++posterIndex;
+//    emit posterChanged();
 }
 
 void SeriesListModel::nextPoster() {
@@ -428,6 +446,7 @@ void SeriesListModel::setMode(QString newmode) {
     if(mode !=  newmode) {
         mode = newmode;
         emit modeChanged();
+        qDebug() << "mode changed!";
     }
 }
 

@@ -34,7 +34,6 @@ Page {
                 text: "My series"
                 font.pixelSize: Theme.fontSizeSmall
                 onClicked: {
-                    controller.SeriesListModel.Mode = "mySeries"
                     pageStack.push(Qt.resolvedUrl("MySeriesPage.qml"))
                 }
             }
@@ -55,7 +54,7 @@ Page {
             model: controller.TodayModel.TodayModel
 
             header: TextField {
-                text: "On tv tonight"
+                text: "Today"
                 readOnly: true
                 width: listView.width
                 color: Theme.highlightColor
@@ -100,6 +99,10 @@ Page {
                         color: Theme.secondaryColor
                     }
                 }
+            }
+
+            VerticalScrollDecorator {
+                id: decorator
             }
 
             TouchBlocker {

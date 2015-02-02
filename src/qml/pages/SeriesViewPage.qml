@@ -14,6 +14,8 @@ Page {
 
     Component.onCompleted: initialize()
 
+    Component.onDestruction: controller.SeriesListModel.Mode = "default"
+
     SilicaFlickable {
         anchors.fill: parent
 
