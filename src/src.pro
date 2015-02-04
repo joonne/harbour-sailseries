@@ -4,7 +4,7 @@ TEMPLATE=app
 TARGET = harbour-sailseries
 
 QT += network sql
-
+LIBS +=-lz
 # In the bright future this config line will do a lot of stuff to you
 CONFIG += sailfishapp
 
@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     model/datamodel.cpp \
     model/episodelistmodel.cpp \
     model/searchlistmodel.cpp \
-    model/todaylistmodel.cpp
+    model/todaylistmodel.cpp \
+    qzip.cpp
 
 OTHER_FILES = \
 # You DO NOT want .yaml be listed here as Qt Creator's editor is completely not ready for multi package .yaml's
@@ -58,4 +59,6 @@ HEADERS += \
     model/datamodel.h \
     model/episodelistmodel.h \
     model/searchlistmodel.h \
-    model/todaylistmodel.h
+    model/todaylistmodel.h \
+    qzipreader_p.h \
+    qzipwriter_p.h
