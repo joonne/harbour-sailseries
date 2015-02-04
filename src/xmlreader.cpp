@@ -74,8 +74,8 @@ void XMLReader::getFullSeriesRecord(QString seriesid, QString method) {
         qDebug() << "method = update";
     }
 
-    QString url = myMirrorPath + "/api/" + myApiKey + "/series/" + seriesid + "/all/en.xml";
-    //QString url = myMirrorPath + "/api/" + myApiKey + "/series/" + seriesid + "/all/en.zip";
+    //QString url = myMirrorPath + "/api/" + myApiKey + "/series/" + seriesid + "/all/ru.xml";
+    QString url = myMirrorPath + "/api/" + myApiKey + "/series/" + seriesid + "/all/en.zip";
     qDebug() << "Requesting" << url;
     QUrl finalUrl(url);
     startRequest(finalUrl);
@@ -116,11 +116,11 @@ void XMLReader::replyFinished(QNetworkReply *reply) {
     //    QFile file( "./sailseries_temp/series_info.zip" );
     //    file.open(QIODevice::WriteOnly);
     //    file.write(reply->readAll());
-
-    QString data = QString(reply->readAll());
+QByteArray b=reply->readAll();
+    QBuffer *buf=new QBuffer(&b);
 
     // If server is down, do something.
-    if(data.contains("522: Connection timed out")) {
+    if(buf->buffer().contains("522: Connection timed out")) {
 
         QMap<QString,QString> temp;
         temp.insert("SeriesName","Server timeout, try again later.");
@@ -132,9 +132,15 @@ void XMLReader::replyFinished(QNetworkReply *reply) {
         return;
     }
 
-    QXmlStreamReader xml(data);
-    qDebug() << "Starting to parse xml.";
+if (reply->url().toString().endsWith(".zip")){
+    QZipReader *zip=new QZipReader(buf);
+    QXmlStreamReader xml(zip->fileData("en.xml"));
     parseXML(xml);
+}
+else{
+    QXmlStreamReader xml(buf->buffer());
+    parseXML(xml);
+}
 
     reply->deleteLater();
 }

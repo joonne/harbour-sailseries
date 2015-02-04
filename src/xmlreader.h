@@ -13,6 +13,8 @@
 #include <QImage>
 #include <QStringRef>
 #include <QByteArray>
+#include <QBuffer>
+#include "qzipreader_p.h"
 
 class XMLReader : public QObject
 {
