@@ -1,24 +1,11 @@
 #include "xmlreader.h"
 
+#define APIKEY "88D0BD893851FA78"
+#define MIRRORPATH "http://thetvdb.com"
+
 XMLReader::XMLReader(QObject *parent) :
     QObject(parent),
-    myNetWorkAccessManager(0),
-    myApiKey("88D0BD893851FA78"),
-    myMirrorPath("http://thetvdb.com"),
-    tv1("http://feeds.feedburner.com/ampparit-tv-yle-tv1?format=xml"),
-    tv2("http://feeds.feedburner.com/ampparit-tv-yle-tv2?format=xml"),
-    mtv3("http://feeds.feedburner.com/ampparit-tv-mtv3?format=xml"),
-    nelonen("http://feeds.feedburner.com/ampparit-tv-nelonen?format=xml"),
-    sub("http://feeds.feedburner.com/ampparit-tv-sub?format=xml"),
-    teema("http://feeds.feedburner.com/ampparit-tv-yle-teema?format=xml"),
-    fem("http://feeds.feedburner.com/ampparit-tv-yle-fem?format=xml"),
-    jim("http://feeds.feedburner.com/ampparit-tv-jim?format=xml"),
-    liv("http://feeds.feedburner.com/ampparit-tv-liv?format=xml"),
-    ava("http://feeds.feedburner.com/ampparit-tv-ava?format=xml"),
-    tvviisi("http://feeds.feedburner.com/ampparit-tv-tv-viisi?format=xml"),
-    kutonen("http://feeds.feedburner.com/ampparit-tv-kutonen?format=xml"),
-    fox("http://feeds.feedburner.com/ampparit-tv-fox?format=xml"),
-    elokuvat("http://feeds.feedburner.com/ampparit-tv-elokuvat-perus?format=xml")
+    myNetWorkAccessManager(0)
 {
     myNetWorkAccessManager = new QNetworkAccessManager(this);
 
@@ -26,11 +13,6 @@ XMLReader::XMLReader(QObject *parent) :
             SIGNAL(finished(QNetworkReply*)),
             this,
             SLOT(replyFinished(QNetworkReply*)));
-
-//    connect(myNetWorkAccessManager,
-//            SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>&)),
-//            this,
-//            SLOT(sslErrors(QNetworkReply*,QList<QSslError>&)));
 
     fullRecord = false;
     update = false; // STUPID, FIX THIS SOMEHOW
@@ -50,7 +32,7 @@ XMLReader::~XMLReader() {
 
 void XMLReader::getLanguages() {
 
-    QString url = myMirrorPath + "/api/" + myApiKey + "/languages.xml";
+    QString url = QString(MIRRORPATH) + "/api/" + QString(APIKEY) + "/languages.xml";
     qDebug() << "Requesting" << url;
     QUrl finalUrl(url);
     startRequest(finalUrl);
@@ -59,7 +41,7 @@ void XMLReader::getLanguages() {
 void XMLReader::searchSeries(QString text) {
 
     fullRecord = false;
-    QString url = myMirrorPath + "/api/GetSeries.php?seriesname=" + text;
+    QString url = QString(MIRRORPATH) + "/api/GetSeries.php?seriesname=" + text;
     qDebug() << "Requesting" << url;
     QUrl finalUrl(url);
     startRequest(finalUrl);
@@ -75,7 +57,7 @@ void XMLReader::getFullSeriesRecord(QString seriesid, QString method) {
     }
 
     //QString url = myMirrorPath + "/api/" + myApiKey + "/series/" + seriesid + "/all/ru.xml";
-    QString url = myMirrorPath + "/api/" + myApiKey + "/series/" + seriesid + "/all/en.zip";
+    QString url = QString(MIRRORPATH) + "/api/" + QString(APIKEY) + "/series/" + seriesid + "/all/en.zip";
     qDebug() << "Requesting" << url;
     QUrl finalUrl(url);
     startRequest(finalUrl);
@@ -84,11 +66,6 @@ void XMLReader::getFullSeriesRecord(QString seriesid, QString method) {
 QList<QMap<QString,QString> > XMLReader::getSeries() { return mySeries; }
 
 QList<QMap<QString,QString> > XMLReader::getEpisodes() { return myEpisodes; }
-
-QList<QMap<QString,QList<QMap<QString,QString> > > > XMLReader::getTVGuide() {
-
-    return myTVGuide;
-}
 
 void XMLReader::startRequest(QUrl url) {
 
@@ -116,8 +93,9 @@ void XMLReader::replyFinished(QNetworkReply *reply) {
     //    QFile file( "./sailseries_temp/series_info.zip" );
     //    file.open(QIODevice::WriteOnly);
     //    file.write(reply->readAll());
-QByteArray b=reply->readAll();
-    QBuffer *buf=new QBuffer(&b);
+
+    QByteArray b = reply->readAll();
+    QBuffer* buf = new QBuffer(&b);
 
     // If server is down, do something.
     if(buf->buffer().contains("522: Connection timed out")) {
@@ -126,26 +104,26 @@ QByteArray b=reply->readAll();
         temp.insert("SeriesName","Server timeout, try again later.");
         mySeries.clear();
         mySeries.append(temp);
-        readyToPopulateSeries();
+        emit readyToPopulateSeries();
 
         reply->deleteLater();
         return;
     }
 
-if (reply->url().toString().endsWith(".zip")){
-    QZipReader *zip=new QZipReader(buf);
-    QXmlStreamReader xml(zip->fileData("en.xml"));
-    parseXML(xml);
-}
-else{
-    QXmlStreamReader xml(buf->buffer());
-    parseXML(xml);
-}
+    if (reply->url().toString().endsWith(".zip")){
+        QZipReader *zip=new QZipReader(buf);
+        QXmlStreamReader xml(zip->fileData("en.xml"));
+        parseXML(xml);
+
+    } else{
+        QXmlStreamReader xml(buf->buffer());
+        parseXML(xml);
+    }
 
     reply->deleteLater();
 }
 
-// These are ugly looking but their are very fast
+// These are ugly looking but they are very fast
 // ---------------------------------------------------
 
 void XMLReader::parseXML(QXmlStreamReader& xml) {
@@ -153,7 +131,6 @@ void XMLReader::parseXML(QXmlStreamReader& xml) {
     QList<QMap<QString,QString> > series;
     QList<QMap<QString,QString> > languages;
     QList<QMap<QString,QString> > episodes;
-    QList<QMap<QString,QString> > channel;
 
     /* We'll parse the XML until we reach end of it.*/
     while(!xml.atEnd() &&
@@ -174,12 +151,8 @@ void XMLReader::parseXML(QXmlStreamReader& xml) {
             if(xml.name() == "Languages") {
                 continue;
             }
-            /* If it's named something that the site offers, we'll go to the next.*/
+            /* If it's named title, we'll go to the next.*/
             if(xml.name() == "title") {
-                qDebug() << "found title, lets try to get it";
-                xml.readNext();
-                currentTVchannel = selectChannel(xml.text().toString());
-                qDebug() << xml.text();
                 continue;
             }
             if(xml.name() == "subtitle") {
@@ -222,12 +195,6 @@ void XMLReader::parseXML(QXmlStreamReader& xml) {
             if(xml.name() == "Items") {
                 currentServerTime = parseServerTime(xml);
             }
-            /* If it's named entry, we'll dig the information from there.*/
-            if(xml.name() == "entry") {
-                //qDebug() << "entry found, parsing the contents.";
-                // We want the channel to fill with different program's info.
-                channel.append(this->parseTVChannel(xml));
-            }
         }
     }
     /* Error handling. */
@@ -241,14 +208,6 @@ void XMLReader::parseXML(QXmlStreamReader& xml) {
     myLanguages = languages;
     mySeries = series;
     myEpisodes = episodes;
-
-    // We don't want to append this allways.
-    if(channel.size() != 0) {
-        QMap<QString,QList<QMap<QString,QString> > > temp;
-        temp[currentTVchannel] = channel;
-        myTVGuide.append(temp);
-        readyToPopulateChannels();
-    }
 
     if(mySeries.size() != 0 and !fullRecord and !update) {
         emit readyToPopulateSeries();
@@ -609,75 +568,6 @@ QString XMLReader::parseServerTime(QXmlStreamReader &xml) {
     return serverTime;
 }
 
-QMap<QString, QString> XMLReader::parseTVChannel(QXmlStreamReader &xml) {
-
-    QMap<QString, QString> program;
-    /* Let's check that we're really getting a tvchannel-file. */
-    if(xml.tokenType() != QXmlStreamReader::StartElement &&
-            xml.name() == "entry") {
-        return program;
-    }
-
-    /* Next element... */
-    xml.readNext();
-    /*
-        * We're going to loop over the things because the order might change.
-        * We'll continue the loop until we hit an EndElement named Series.
-        */
-    while(!(xml.tokenType() == QXmlStreamReader::EndElement &&
-            xml.name() == "entry")) {
-
-        if(xml.tokenType() == QXmlStreamReader::StartElement) {
-
-            /* We've found <updated>. */
-            if(xml.name() == "updated") {
-                this->addElementDataToMap(xml, program);
-                //qDebug() << "found updated";
-            }
-            /* We've found <link>. */
-            if(xml.name() == "link") {
-                this->addElementDataToMap(xml, program);
-                //qDebug() << "found link";
-            }
-            /* We've found <id>. */
-            if(xml.name() == "id") {
-                this->addElementDataToMap(xml, program);
-                //qDebug() << "found id";
-            }
-            /* We've found <title type="html">. */
-            if(xml.name() == "title") {
-
-                // We are between <title> </title> fields now.
-                xml.readNext();
-                /*
-                 * This elements needs to contain Characters so we know it's
-                 * actually data, if it's not we'll leave.
-                 */
-                if(xml.tokenType() == QXmlStreamReader::Characters) {
-
-                    QString wholeText = xml.text().toString();
-
-                    // We want to parse these attributes to be able to display them.
-                    QStringRef weekday(&wholeText,0,2);
-                    QStringRef time(&wholeText,3,5);
-                    QStringRef programName(&wholeText,9,wholeText.size()-9);
-
-                    /* Now we can add it to the map.*/
-
-                    program.insert("weekday", weekday.toString());
-                    program.insert("time", time.toString());
-                    program.insert("programName", programName.toString());
-                    // We want know which channel this is
-                    program.insert("channel",currentTVchannel);
-                }
-            }
-        }
-        /* ...and next... */
-        xml.readNext();
-    }
-    return program;
-}
-
 void XMLReader::addElementDataToMap(QXmlStreamReader& xml,
                                     QMap<QString, QString>& map) const {
     /* We need a start element, like <foo> */
@@ -697,55 +587,4 @@ void XMLReader::addElementDataToMap(QXmlStreamReader& xml,
     }
     /* Now we can add it to the map.*/
     map.insert(elementName, xml.text().toString());
-}
-
-void XMLReader::updateTVGuide() {
-
-    QUrl url1(tv1);
-    startRequest(url1);
-
-    QUrl url2(tv2);
-    startRequest(url2);
-
-    QUrl url3(mtv3);
-    startRequest(url3);
-}
-
-QString XMLReader::selectChannel(QString text) {
-
-    QStringRef wholeText(&text);
-
-    qDebug() << wholeText;
-
-    if(wholeText.contains("Yle TV1")) {
-        return "Yle TV1";
-    } else if(wholeText.contains("Yle TV2")) {
-        return "Yle TV2";
-    } else if(wholeText.contains("MTV3")) {
-        return "MTV3";
-    } else if(wholeText.contains("Nelonen")) {
-        return "Nelonen";
-    } else if(wholeText.contains("Sub")) {
-        return "Sub";
-    } else if(wholeText.contains("Yle Teema")) {
-        return "Yle Teema";
-    } else if(wholeText.contains("Yle Fem")) {
-        return "Yle Fem";
-    } else if(wholeText.contains("JIM")) {
-        return "JIM";
-    } else if(wholeText.contains("Liv")) {
-        return "Liv";
-    } else if(wholeText.contains("AVA")) {
-        return "AVA";
-    } else if(wholeText.contains("TV Viisi")) {
-        return "TV Viisi";
-    } else if(wholeText.contains("Kutonen")) {
-        return "Kutonen";
-    } else if(wholeText.contains("FOX")) {
-        return "FOX";
-    } else if(wholeText.contains("Elokuvat peruskanavilta")) {
-        return "Elokuvat peruskanavilta";
-    } else {
-        return "EI KANAVATIETOJA";
-    }
 }

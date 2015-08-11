@@ -82,8 +82,6 @@ void SearchListModel::populateSearchModel() {
 
     if(mySeries.size() != 0) {
 
-        qDebug("getSeries works.");
-
         for(int i = 0; i < mySeries.size(); ++i) {
 
             qDebug() << mySeries.size();
@@ -111,16 +109,15 @@ void SearchListModel::populateSearchModel() {
 
         }
 
-
         // must remember to call signal to let QML side know about populated items..
         emit searchModelChanged();
-
-
+        setLoading(false);
     }
 }
 
 void SearchListModel::searchSeries(QString text) {
 
+    setLoading(true);
     mySearchListModel.clear();
     mySeries.clear();
     emit searchModelChanged();
@@ -130,7 +127,6 @@ void SearchListModel::searchSeries(QString text) {
 void SearchListModel::selectSeries(int index) {
 
     myInfo = mySearchListModel.at(index);
-    qDebug() << "myInfo seriesname: " << myInfo->getSeriesName();
 
 }
 
@@ -267,7 +263,6 @@ void SearchListModel::storeEpisodes() {
         QString thumbAdded;
         int thumbHeight;
         int thumbWidth;
-        //int watched;
 
         QMap<QString,QString>::iterator itr = temp.begin();
         while(itr != temp.end()) {
@@ -332,7 +327,7 @@ void SearchListModel::storeEpisodes() {
                                    guestStars,imdb_id,language,overview,productionCode,rating,
                                    ratingCount,seasonNumber,writer,absoluteNumber,airsAfterSeason,
                                    airsBeforeEpisode,airsBeforeSeason,filename,lastUpdated,seasonID,seriesID,
-                                   thumbAdded,thumbHeight,thumbWidth,0);
+                                   thumbAdded,thumbHeight,thumbWidth);
     }
 
     setLoading(false);

@@ -293,7 +293,6 @@ void SeriesListModel::storeEpisodes() {
         QString thumbAdded;
         int thumbHeight;
         int thumbWidth;
-        //int watched;
 
         QMap<QString,QString>::iterator itr = temp.begin();
         while(itr != temp.end()) {
@@ -358,7 +357,7 @@ void SeriesListModel::storeEpisodes() {
                                    guestStars,imdb_id,language,overview,productionCode,rating,
                                    ratingCount,seasonNumber,writer,absoluteNumber,airsAfterSeason,
                                    airsBeforeEpisode,airsBeforeSeason,filename,lastUpdated,seasonID,seriesID,
-                                   thumbAdded,thumbHeight,thumbWidth,0);
+                                   thumbAdded,thumbHeight,thumbWidth);
     }
 }
 

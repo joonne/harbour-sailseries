@@ -300,22 +300,6 @@ bool DatabaseManager::insertSeries(int id, QString actors, QString airsDayOfWeek
 
     return ret;
 
-
-    //    QByteArray bArray;
-    //    QBuffer buffer( &bArray );
-    //    buffer.open( QIODevice::WriteOnly );
-    //    QSqlQuery query(db);
-
-    //    banner.save( &buffer, "PNG" );
-    //    query.prepare("INSERT INTO series (banner) VALUES (?)");
-    //    query.addBindValue(bArray);
-    //    query.exec();
-
-    //    fanart.save( &buffer, "PNG" );
-    //    query.prepare("INSERT INTO series (fanart) VALUES (?)");
-    //    query.addBindValue(bArray);
-    //    query.exec();
-
 }
 
 bool DatabaseManager::insertEpisode(int id, QString director, int epimgflag, QString episodeName,
@@ -324,7 +308,7 @@ bool DatabaseManager::insertEpisode(int id, QString director, int epimgflag, QSt
                                     int ratingCount, int seasonNumber, QString writer, int absoluteNumber,
                                     int airsAfterSeason, int airsBeforeEpisode, int airsBeforeSeason , QString filename,
                                     QString lastUpdated, int seasonID, int seriesID, QString thumbAdded,
-                                    int thumbHeight, int thumbWidth, int watched) {
+                                    int thumbHeight, int thumbWidth) {
 
     bool ret = false;
 
@@ -364,9 +348,10 @@ bool DatabaseManager::insertEpisode(int id, QString director, int epimgflag, QSt
                          .arg(thumbAdded)
                          .arg(thumbHeight)
                          .arg(thumbWidth)
-                         .arg(watched));
+                         .arg(0));
 
-        //qDebug() << query.lastError().text();
+        qDebug() << query.lastError().text();
+        // HOX! Here something might go wrong
         if(query.lastError().text() != " ") {
             qDebug() << query.lastQuery();
         }
@@ -496,16 +481,17 @@ QList<QList<QString> > DatabaseManager::getEpisodes(int seriesID) {
     QSqlQuery query(db);
     query.exec(QString("SELECT episodeName,episodeNumber,overview,seasonNumber,absoluteNumber,filename,watched,id FROM Episode WHERE seriesID = %1 AND seasonNumber != 0 ORDER BY absoluteNumber").arg(seriesID));
 
-    //qDebug() << query.lastError();
+    qDebug() << query.lastError();
 
     if(query.isSelect()) {
+        qDebug() << "isSelect";
         while(query.next()) {
 
             QList<QString> temp;
 
             QString episodeName = query.value(0).toString();
             temp.append(episodeName);
-            //qDebug() << episodeName;
+            qDebug() << episodeName;
 
             QString episodeNumber = query.value(1).toString();
             temp.append(episodeNumber);
@@ -531,7 +517,7 @@ QList<QList<QString> > DatabaseManager::getEpisodes(int seriesID) {
 
             episodes.append(temp);
 
-            //qDebug() << query.lastError();
+            qDebug() << query.lastError();
 
         }
     }

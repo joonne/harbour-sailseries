@@ -27,5 +27,13 @@ Page {
             anchors.left: parent.left
             anchors.leftMargin: (aboutpage.width - sourcecode.width) / 2
         }
+
+        Button {
+            id: email
+            text: "Send email to developer"
+            onClicked: Qt.openUrlExternally("mailto:jonne.pihlanen@gmail.com?subject=SailSeries&body=Hi,")
+            anchors.left: parent.left
+            anchors.leftMargin: (aboutpage.width - email.width) / 2
+        }
     }
 }

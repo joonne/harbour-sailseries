@@ -10,7 +10,6 @@
 #include <QNetworkReply>
 #include <QTemporaryFile>
 #include <QList>
-#include <QImage>
 #include <QStringRef>
 #include <QByteArray>
 #include <QBuffer>
@@ -28,7 +27,6 @@ public:
     QMap<QString,QString> parseSeries(QXmlStreamReader& xml);
     QMap<QString,QString> parseLanguages(QXmlStreamReader& xml);
     QMap<QString,QString> parseEpisode(QXmlStreamReader& xml);
-    QMap<QString, QString> parseTVChannel(QXmlStreamReader& xml);
     QString parseServerTime(QXmlStreamReader& xml);
     void addElementDataToMap(QXmlStreamReader& xml,
                                  QMap<QString, QString>& map) const;
@@ -39,12 +37,8 @@ public:
     void getServerTime();
     void getFullSeriesRecord(QString seriesid,QString method);
 
-
-    void updateTVGuide();
-
     QList<QMap<QString,QString> > getSeries();
     QList<QMap<QString,QString> > getEpisodes();
-    QList<QMap<QString,QList<QMap<QString,QString> > > > getTVGuide();
 
 signals:
     void readyToPopulateSeries();
@@ -58,30 +52,10 @@ public slots:
 
 private:
 
-    QString selectChannel(QString text);
-
     QNetworkAccessManager* myNetWorkAccessManager;
-    const QString myApiKey;
-    const QString myMirrorPath;
-    const QString tv1;
-    const QString tv2;
-    const QString mtv3;
-    const QString nelonen;
-    const QString sub;
-    const QString teema;
-    const QString fem;
-    const QString jim;
-    const QString liv;
-    const QString ava;
-    const QString tvviisi;
-    const QString kutonen;
-    const QString fox;
-    const QString elokuvat;
     QList<QMap<QString,QString> > myLanguages;
     QList<QMap<QString,QString> > mySeries;
     QList<QMap<QString,QString> > myEpisodes;
-    QList<QMap<QString,QList<QMap<QString,QString> > > > myTVGuide;
-    QString currentTVchannel;
     QString currentServerTime;
 
     bool fullRecord;

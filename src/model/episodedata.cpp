@@ -40,6 +40,7 @@ EpisodeData::EpisodeData(QObject* parent, int ID, QString director, int epimgfla
     myThumbHeight  = thumbHeight;
     myThumbWidth = thumbWidth;
     myWatched = watched;
+    emit watchedChanged(); // testing
 
 }
 
@@ -113,5 +114,16 @@ void EpisodeData::setWatched(int watched) {
     if(myWatched != watched) {
         myWatched = watched;
         emit watchedChanged();
+    }
+}
+
+QString EpisodeData::getWatchedFlagImage() {
+    return myWatchedFlagImage;
+}
+
+void EpisodeData::setWatchedFlagImage(QString imagepath) {
+    if(myWatchedFlagImage != imagepath) {
+        myWatchedFlagImage = imagepath;
+        emit watchedFlagImageChanged();
     }
 }

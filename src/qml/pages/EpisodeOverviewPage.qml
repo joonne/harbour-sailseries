@@ -24,7 +24,9 @@ Rectangle {
     width: setWidth()
     height: banner.height + overview.height + name.height + button.height + 10
     radius: 5
-    color: Theme.rgba(Theme.highlightBackgroundColor, 1.0)
+    color: Theme.rgba(Theme.highlightBackgroundColor, 0.8)
+    border.width: 1
+    border.color: Theme.primaryColor
 
     property string episodeBanner
     property string episodeOverview

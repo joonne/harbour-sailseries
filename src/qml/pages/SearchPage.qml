@@ -64,4 +64,9 @@ Page {
 
         }
     }
+
+    BusyIndicator {
+           anchors.centerIn: parent
+           running: controller.SearchListModel.Loading ? true : false
+       }
 }

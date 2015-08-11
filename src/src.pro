@@ -22,6 +22,8 @@ SOURCES += main.cpp \
     model/todaylistmodel.cpp \
     qzip.cpp
 
+TRANSLATIONS = translation_fi.ts
+
 OTHER_FILES = \
 # You DO NOT want .yaml be listed here as Qt Creator's editor is completely not ready for multi package .yaml's
 #
@@ -44,7 +46,8 @@ OTHER_FILES = \
     qml/pages/EpisodeOverviewPage.qml \
     qml/cover/CoverPage.qml \
     qml/pages/Seasons.qml \
-    qml/pages/AboutPage.qml
+    qml/pages/AboutPage.qml \
+    qml/pages/parser.js
 
 INCLUDEPATH += $$PWD
 

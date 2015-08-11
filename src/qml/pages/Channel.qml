@@ -1,25 +1,20 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import "parser.js" as Parser
 
 Item {
 
-    Component.onCompleted: {
-        console.log("kanava valmis");
-    }
+    property string channelName;
 
     height: channelView.height;
     width: channelView.width;
 
-//    property ProgramListModel programlist
-//    property ProgramData programData
-
     function initialize(channel) {
-        console.log("kutsutaan populointia");
-        //dataModel.setDesiredChannel(channel);
-        listview.model = DATAMODEL.ProgramListModel
-        console.log("ProgramListModel " + DATAMODEL.ProgramListModel)
-        //pageheader.title = programlist.channel
+        channelName = channel;
+        Parser.load(channel);
     }
+
+    ListModel {  id:listModel }
 
     SilicaListView {
         id: listview
@@ -27,27 +22,36 @@ Item {
         header: Component {
             PageHeader {
                 id: pageheader
-                title: "kanava"
+                title: channelName
             }
         }
 
         anchors.fill: parent
-
+        model: listModel
         delegate: ListItem {
 
             width: parent.width
 
             Column {
+                x: Theme.paddingLarge
+                width: parent.width - Theme.paddingLarge
 
                 Label {
-                    text: programName
+                    color: Theme.primaryColor
+                    text: name
                 }
 
                 Label {
-                    text: time
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.secondaryColor
+                    text: start
 
                 }
             }
+        }
+
+        VerticalScrollDecorator {
+            id: decorator
         }
 
         ViewPlaceholder {

@@ -20,6 +20,7 @@ Item {
     function initialize(seriesID) {
         controller.EpisodeListModel.populateEpisodeList(seriesID)
         listView.model = controller.EpisodeListModel.episodeList
+        updateSource()
     }
 
     SilicaListView {
@@ -74,14 +75,14 @@ Item {
 
                     Label {
                         id: seasonNumber
-                        text: "Season " + SeasonNumber
+                        text: qsTr("Season ") + SeasonNumber
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.secondaryColor
                     }
 
                     Label {
                         id: episodeNumber
-                        text: " Episode " + EpisodeNumber
+                        text: qsTr(" Episode ") + EpisodeNumber
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.secondaryColor
                     }
@@ -103,10 +104,16 @@ Item {
             // icon-m-favorite-selected
             // icon-l-check
 
+            property string star: "image://theme/icon-l-star"
+            property string favorite: "image://theme/icon-l-favorite"
+
             function setSource() {
 
-                if(Watched === 0) return "image://theme/icon-l-star"
-                else return "image://theme/icon-l-favorite"
+                if(Watched === 0) {
+                    return star;
+                } else {
+                    return favorite;
+                }
             }
 
             Image {
@@ -116,9 +123,6 @@ Item {
                 anchors.rightMargin: Theme.paddingMedium
                 anchors.top: container.top
                 anchors.topMargin: Theme.paddingMedium
-
-                property string star: "image://theme/icon-l-star"
-                property string favorite: "image://theme/icon-l-favorite"
 
                 MouseArea {
                     id: clickarea
@@ -132,6 +136,7 @@ Item {
             }
         }
 
+
         VerticalScrollDecorator {
             id: decorator
         }
@@ -144,11 +149,11 @@ Item {
     }
 
     // TODO: how to get this around EpisodeOverviewPage
-//    TouchBlocker {
-//        id: blocker
-//        enabled: false
-//        anchors.fill: listView
-//    }
+    //    TouchBlocker {
+    //        id: blocker
+    //        enabled: false
+    //        anchors.fill: listView
+    //    }
 
     ViewPlaceholder {
         enabled: listView.count === 0

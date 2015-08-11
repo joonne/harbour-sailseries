@@ -9,6 +9,7 @@
 #include <QGuiApplication>
 #include <QQmlContext>
 #include <QQmlComponent>
+#include <QTranslator>
 
 #include "model/seriesdata.h"
 #include "model/serieslistmodel.h"
@@ -40,6 +41,10 @@ int main(int argc, char *argv[])
     // but very soon it won't be enough for you anyway, so use this more detailed example from start
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
     QScopedPointer<QQuickView> view(SailfishApp::createView());
+
+    //QTranslator translator;
+    //translator.load("translations_fi");
+    //QCoreApplication::installTranslator(translator);
 
     // This is the public QML datacontroller
     QScopedPointer<DataModel> datamodel(new DataModel);

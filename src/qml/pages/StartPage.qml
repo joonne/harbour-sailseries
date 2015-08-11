@@ -15,7 +15,7 @@ Page {
         PullDownMenu {
 
             MenuItem {
-                text: "About"
+                text: qsTr("About")
                 font.pixelSize: Theme.fontSizeSmall
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
@@ -23,7 +23,7 @@ Page {
             }
 
             MenuItem {
-                text: "Search for a series"
+                text: qsTr("Search for a series")
                 font.pixelSize: Theme.fontSizeSmall
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("SearchPage.qml"))
@@ -31,17 +31,18 @@ Page {
             }
 
             MenuItem {
-                text: "My series"
+                text: qsTr("My series")
                 font.pixelSize: Theme.fontSizeSmall
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("MySeriesPage.qml"))
                 }
             }
 
-//            MenuItem {
-//                text: "TV-Guide"
-//                onClicked: pageStack.push(Qt.resolvedUrl("TVguidePage.qml"))
-//            }
+            MenuItem {
+                text: qsTr("TV Guide")
+                font.pixelSize: Theme.fontSizeSmall
+                onClicked: pageStack.push(Qt.resolvedUrl("TVguidePage.qml"))
+            }
 
         }
 
@@ -54,7 +55,7 @@ Page {
             model: controller.TodayModel.TodayModel
 
             header: TextField {
-                text: "Today"
+                text: qsTr("Today")
                 readOnly: true
                 width: listView.width
                 color: Theme.highlightColor
@@ -73,13 +74,13 @@ Page {
 
                     Label {
                         id: seriesName
-                        text: SeriesName.length === 0 ? text = "SeriesName" : text = SeriesName
+                        text: SeriesName.length === 0 ? text = qsTr("SeriesName") : text = SeriesName
                         color: Theme.primaryColor
                     }
 
                     Label {
                         id: episodeNumber
-                        text: "Season " + NextEpisodeSeasonNumber + " Episode " + NextEpisodeNumber
+                        text: qsTr("Season") + " " + NextEpisodeSeasonNumber + " " + qsTr("Episode") + " " + NextEpisodeNumber
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.secondaryColor
                     }
@@ -111,7 +112,7 @@ Page {
 
             ViewPlaceholder {
                 enabled: listView.count === 0
-                text: "Nothing airs today"
+                text: qsTr("Nothing airs today")
                 anchors.centerIn: listView
 
             }

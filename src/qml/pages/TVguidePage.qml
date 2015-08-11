@@ -19,22 +19,24 @@ Page {
         model: VisualItemModel {
             id: channels
             Channel {id: tv1 }
-            //Channel {id: tv2 }
-            //Channel {id: mtv3 }
+            Channel {id: tv2 }
+            Channel {id: mtv3 }
+            Channel {id: nelonen }
+            Channel {id: subtv }
         }
     }
 
     function initialize() {
 
-        tv1.initialize("Yle TV1");
-        //tv2.initialize("Yle TV2");
-        //mtv3.initialize("MTV3");
-
+        tv1.initialize("yle1");
+        tv2.initialize("yle2");
+        mtv3.initialize("mtv3");
+        nelonen.initialize("nelonen");
+        subtv.initialize("subtv");
     }
 
     Component.onCompleted: {
         console.log("TVGuidePage valmis");
-        //timer.start();
         initialize()
 
     }

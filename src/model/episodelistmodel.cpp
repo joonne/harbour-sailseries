@@ -22,7 +22,7 @@ QQmlListProperty<EpisodeData> EpisodeListModel::getEpisodeList() {
 
 }
 
-// list handling mehtods
+// list handling methods
 
 void EpisodeListModel::episodeListAppend(QQmlListProperty<EpisodeData>* prop, EpisodeData* val)
 {
@@ -50,6 +50,7 @@ void EpisodeListModel::populateEpisodeList(QString seriesID) {
     myEpisodeListModel.clear();
     emit episodeListChanged();
 
+    qDebug() << "getting episodes now";
     QList<QList<QString> > episodes = mydbmanager->getEpisodes(seriesID.toInt());
 
     if(episodes.size() != 0) {
@@ -57,6 +58,7 @@ void EpisodeListModel::populateEpisodeList(QString seriesID) {
         for(int i = 0; i < episodes.size(); ++i) {
 
             QList<QString> temp = episodes.at(i);
+            qDebug() << temp;
 
             QString episodeName = temp.at(0);
             int episodeNumber = temp.at(1).toInt();
