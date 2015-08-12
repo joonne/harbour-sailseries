@@ -37,7 +37,7 @@ Item {
                 spacing: Theme.paddingLarge
                 Button {
                     id: button
-                    text: "Season " + (index + 1) + " watched"
+                    text: "Season " + (index + 1) + " watched / unwatched"
                     anchors.left: parent.left
                     anchors.leftMargin: (item.width - button.width - Theme.paddingMedium - Theme.paddingMedium) / 2
                     onClicked: controller.EpisodeListModel.markSeasonWatched(controller.SeriesListModel.ID,index+1)

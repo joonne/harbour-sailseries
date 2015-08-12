@@ -4,6 +4,8 @@ import Sailfish.Silica 1.0
 Page {
     id: infopage
 
+    Component.onCompleted: busyIndicator.running = false
+
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: column.height
@@ -74,7 +76,8 @@ Page {
     }
 
     BusyIndicator {
-           anchors.centerIn: parent
-           running: controller.SearchModel.Loading ? true : false
+        id: busyIndicator
+        anchors.centerIn: parent
+        running: controller.SearchModel.Loading ? true : false
        }
 }

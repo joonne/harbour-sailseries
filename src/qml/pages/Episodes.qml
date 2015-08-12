@@ -20,7 +20,6 @@ Item {
     function initialize(seriesID) {
         controller.EpisodeListModel.populateEpisodeList(seriesID)
         listView.model = controller.EpisodeListModel.episodeList
-        updateSource()
     }
 
     SilicaListView {
@@ -30,7 +29,7 @@ Item {
         header: Component {
             PageHeader {
                 id: pageheader
-                title: "Episodes"
+                title: qsTr("Episodes")
             }
         }
 
@@ -118,7 +117,7 @@ Item {
 
             Image {
                 id: watched
-                source: setSource()
+                source: Watched === 0 ? star : favorite
                 anchors.right: container.right
                 anchors.rightMargin: Theme.paddingMedium
                 anchors.top: container.top

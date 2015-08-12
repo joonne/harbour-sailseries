@@ -23,7 +23,6 @@ Page {
             MenuItem {
                 text: "Remove"
                 onClicked: {
-                    console.log("poistetaan sarjaa " + seriesID)
                     controller.SeriesListModel.deleteSeries(seriesID)
                     pageStack.pop()
                 }
@@ -38,12 +37,11 @@ Page {
         }
 
         SlideshowView {
+
             id: seriesView
             width: seriesViewPage.width
             height: seriesViewPage.height
             itemWidth: width
-
-
 
             model: VisualItemModel {
                 id: items
@@ -52,8 +50,6 @@ Page {
                 Seasons { id: seasons }
             }
         }
-
-
     }
 
     BusyIndicator {
