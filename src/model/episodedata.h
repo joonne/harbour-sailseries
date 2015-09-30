@@ -44,7 +44,9 @@ public:
                 int airsAfterSeason, int airsBeforeSeason, QString filename, QString lastUpdated,
                 int seasonID, int seriesID, QString thumbAdded, int thumbHeight, int thumbWidth,
                 int watched);
-    EpisodeData(QObject *parent, QString episodeName, int episodeNumber, QString overview, int seasonNumber, int absoluteNumber, QString filename, int watched, int id);
+    EpisodeData(QObject *parent, QString episodeName, int episodeNumber, QString overview,
+                int seasonNumber, int absoluteNumber, QString filename, int watched, int id,
+                QString guestStars, QString writer);
 
     int getID();
     QString getDirector();

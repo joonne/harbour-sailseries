@@ -15,17 +15,17 @@ Page {
     function nextEpisodeDetails(episodeName,daysTo,status) {
 
         if(status === "Ended") {
-            return "This show has ended";
+            return qsTr("This show has ended");
         } else if(daysTo === "today") {
-            return episodeName + " airs today";
+            return episodeName + " " + qsTr("airs today");
         } else if(daysTo === "tomorrow") {
-            return episodeName + " airs tomorrow";
+            return episodeName + " " + qsTr("airs tomorrow");
         } else if(episodeName.length !== 0) {
-            return episodeName + " airs in " + daysTo + " days";
+            return episodeName + " " + qsTr("airs in") + " " + daysTo + " " + qsTr("days");
         } else if(episodeName.length === 0 && daysTo !== "unknown") {
-            return "Next episode airs in " + daysTo + " days";
+            return qsTr("Next episode airs in") + " " + daysTo + " " + qstr("days");
         } else {
-            return "No information about next episode";
+            return qsTr("No information about next episode");
         }
     }
 
@@ -36,7 +36,7 @@ Page {
 
         header: PageHeader {
             id: header
-            title: "My Series"
+            title: qsTr("My Series")
         }
 
         delegate: ListItem {
@@ -104,7 +104,7 @@ Page {
 
         ViewPlaceholder {
             enabled: listView.count === 0
-            text: "Search for series first."
+            text: qsTr("Search for series first.")
             anchors.centerIn: listView
 
         }

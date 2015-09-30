@@ -21,15 +21,13 @@ Page {
 
         PullDownMenu {
             MenuItem {
-                text: "Remove"
-                onClicked: {
-                    controller.SeriesListModel.deleteSeries(seriesID)
-                    pageStack.pop()
-                }
+                text: qsTr("Remove")
+                onClicked: remorse.execute("Removing",
+                                           function() { controller.SeriesListModel.deleteSeries(seriesID); pageStack.pop()})
             }
 
             MenuItem {
-                text: "Update"
+                text:qsTr("Update")
                 onClicked: {
                     controller.SeriesListModel.updateSeries(seriesID);
                 }
@@ -56,4 +54,6 @@ Page {
            anchors.centerIn: parent
            running: controller.SeriesListModel.Loading ? true : false
        }
+
+    RemorsePopup { id: remorse }
 }

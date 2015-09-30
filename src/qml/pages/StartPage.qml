@@ -38,11 +38,11 @@ Page {
                 }
             }
 
-            MenuItem {
-                text: qsTr("TV Guide")
-                font.pixelSize: Theme.fontSizeSmall
-                onClicked: pageStack.push(Qt.resolvedUrl("TVguidePage.qml"))
-            }
+//            MenuItem {
+//                text: qsTr("TV Guide")
+//                font.pixelSize: Theme.fontSizeSmall
+//                onClicked: pageStack.push(Qt.resolvedUrl("TVguidePage.qml"))
+//            }
 
         }
 
@@ -74,7 +74,7 @@ Page {
 
                     Label {
                         id: seriesName
-                        text: SeriesName.length === 0 ? text = qsTr("SeriesName") : text = SeriesName
+                        text: SeriesName.length === 0 ? text = "SeriesName" : text = SeriesName
                         color: Theme.primaryColor
                     }
 

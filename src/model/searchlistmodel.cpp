@@ -131,9 +131,8 @@ void SearchListModel::selectSeries(int index) {
 }
 
 void SearchListModel::getFullSeriesRecord(QString id) {
-    myReader->getFullSeriesRecord(id,"full");
     setLoading(true);
-
+    myReader->getFullSeriesRecord(id,"full");
 }
 
 void SearchListModel::storeSeries() {
@@ -331,6 +330,7 @@ void SearchListModel::storeEpisodes() {
     }
 
     setLoading(false);
+    setAdded(true);
 }
 
 QString SearchListModel::getID() { return myInfo->getID(); }
@@ -377,13 +377,14 @@ void SearchListModel::setAdded(bool cond) {
 }
 
 void SearchListModel::clearList() {
+
     mySearchListModel.clear();
     emit searchModelChanged();
 }
 
 void SearchListModel::checkIfAdded(QString id, QString name) {
 
-    if(mydbmanager->isAlreadyAdded(id.toInt(),name)) {
+    if(mydbmanager->isAlreadyAdded(id.toInt(), name)) {
         setAdded(true);
         qDebug() << "already added";
     } else {

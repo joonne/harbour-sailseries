@@ -1,10 +1,12 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
+import "../components"
+
 Item {
     anchors.top: parent.top
-    height: seriesViewPage.height;
-    width: seriesView.width;
+    height: seriesViewPage.height
+    width: seriesView.width
 
     SilicaFlickable {
         contentHeight: column.height
@@ -30,7 +32,7 @@ Item {
 
                 TextField {
                     id: status
-                    label: "Status"
+                    label: qsTr("Status")
                     width: seriesViewPage.width / 2
                     text: controller.SeriesListModel.Status
                     color: Theme.secondaryColor
@@ -39,7 +41,7 @@ Item {
 
                 TextField {
                     id: rating
-                    label: "Rating"
+                    label: qsTr("Rating")
                     width: seriesViewPage.width / 2
                     text: controller.SeriesListModel.Rating
                     color: Theme.secondaryColor
@@ -50,7 +52,7 @@ Item {
 
             TextArea {
                 id: overview
-                label: "Overview"
+                label: qsTr("Overview")
                 width: seriesViewPage.width
                 height: seriesViewPage.height * 0.4
                 text: controller.SeriesListModel.Overview
@@ -58,15 +60,18 @@ Item {
                 color: Theme.secondaryColor
             }
 
-            BackgroundItem {
-                TextField {
-                    id: imdb
-                    label: "IMDB"
-                    text: "Show at IMDB"
-                    onClicked: Qt.openUrlExternally("http://www.imdb.com/title/" + controller.SeriesListModel.IMDB_ID)
-                    readOnly: true
-                    color: Theme.secondaryColor
-                }
+//            TextExpander {
+//                id: expander
+//                width: seriesView.width
+//                textContent: controller.SeriesListModel.Overview
+//            }
+
+            Button {
+                id: imdb
+                text: "IMDB"
+                onClicked: Qt.openUrlExternally("http://www.imdb.com/title/" + controller.SeriesListModel.IMDB_ID)
+                anchors.left: parent.left
+                anchors.leftMargin: (seriesView.width - imdb.width) / 2
             }
         }
     }

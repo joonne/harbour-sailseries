@@ -44,7 +44,17 @@ EpisodeData::EpisodeData(QObject* parent, int ID, QString director, int epimgfla
 
 }
 
-EpisodeData::EpisodeData(QObject *parent, QString episodeName, int episodeNumber, QString overview, int seasonNumber, int absoluteNumber, QString filename, int watched, int id):
+EpisodeData::EpisodeData(QObject *parent,
+                         QString episodeName,
+                         int episodeNumber,
+                         QString overview,
+                         int seasonNumber,
+                         int absoluteNumber,
+                         QString filename,
+                         int watched,
+                         int id,
+                         QString guestStars,
+                         QString writer):
     QObject(parent){
 
     myEpisodeName = episodeName;
@@ -55,6 +65,8 @@ EpisodeData::EpisodeData(QObject *parent, QString episodeName, int episodeNumber
     myFilename = filename;
     myWatched = watched;
     myID = id;
+    myGuestStars = guestStars;
+    myWriter = writer;
 
 }
 

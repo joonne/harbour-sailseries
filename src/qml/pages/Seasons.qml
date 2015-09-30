@@ -6,7 +6,7 @@ Item {
     height: seriesView.height;
     width: seriesView.width;
 
-    // TODO: Update the icons when season is marked as watched !
+    // HOWTODO: Update the icons when season is marked as watched !
 
     Component.onCompleted: timer.start()
 
@@ -27,7 +27,7 @@ Item {
 
         header: PageHeader {
             id: header
-            title: "Seasons"
+            title: qsTr("Seasons")
         }
 
         delegate: ListItem {
@@ -37,7 +37,7 @@ Item {
                 spacing: Theme.paddingLarge
                 Button {
                     id: button
-                    text: "Season " + (index + 1) + " watched / unwatched"
+                    text: " " + qsTr("Season") + " " + (index + 1) + " " + qsTr("watched") + " "
                     anchors.left: parent.left
                     anchors.leftMargin: (item.width - button.width - Theme.paddingMedium - Theme.paddingMedium) / 2
                     onClicked: controller.EpisodeListModel.markSeasonWatched(controller.SeriesListModel.ID,index+1)

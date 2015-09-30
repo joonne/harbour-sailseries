@@ -10,6 +10,7 @@
 #include <QQmlContext>
 #include <QQmlComponent>
 #include <QTranslator>
+#include <QDebug>
 
 #include "model/seriesdata.h"
 #include "model/serieslistmodel.h"
@@ -42,18 +43,21 @@ int main(int argc, char *argv[])
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
     QScopedPointer<QQuickView> view(SailfishApp::createView());
 
-    //QTranslator translator;
-    //translator.load("translations_fi");
-    //QCoreApplication::installTranslator(translator);
+    // this is for testing other translations
+    // QLocale::setDefault(QLocale(QLocale::Spain, QLocale::Spanish));
+
+    QTranslator *appTranslator = new QTranslator;
+    appTranslator->load("harbour-sailseries-" + QLocale::system().name(), SailfishApp::pathTo("translations").path());
+    app->installTranslator(appTranslator);
 
     // This is the public QML datacontroller
     QScopedPointer<DataModel> datamodel(new DataModel);
     QQmlContext* context = view->rootContext();
     context->setContextProperty("controller",datamodel.data());
 
-    //    Here's how you will add QML components whenever you start using them
-    //    Check https://github.com/amarchen/Wikipedia for a more full example
-    //    view->engine()->addImportPath(SailfishApp::pathTo("qml/components").toString());
+    // Here's how you will add QML components whenever you start using them
+    // Check https://github.com/amarchen/Wikipedia for a more full example
+    view->engine()->addImportPath(SailfishApp::pathTo("qml/components").toString());
     view->setSource(SailfishApp::pathTo("qml/main.qml"));
 
     view->showFullScreen();

@@ -1,7 +1,10 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-Rectangle {
+import "../components"
+
+Page {
+    id: episodeoverviewpage
 
     function setWidth() {
         if(banner.width === 0) {
@@ -20,63 +23,87 @@ Rectangle {
         }
     }
 
-    id: container
-    width: setWidth()
-    height: banner.height + overview.height + name.height + button.height + 10
-    radius: 5
-    color: Theme.rgba(Theme.highlightBackgroundColor, 0.8)
-    border.width: 1
-    border.color: Theme.primaryColor
+    function process(string) {
+
+        if(string.charAt(0) === "|" && string.charAt(string.length - 1) === "|") {
+            var newstring = string.split("|").join(", ")
+            return newstring.substr(2,(newstring.length - 4))
+        } else if(string.charAt(0) === "|") {
+            return string.split("|").join(", ").substr(2)
+        } else {
+            return string.split("|").join(", ")
+        }
+    }
 
     property string episodeBanner
     property string episodeOverview
     property string episodeName
+    property string guestStars
+    property string writer
 
-    BackgroundItem {
+    SilicaFlickable {
         anchors.fill: parent
+        contentHeight: column.height
 
         Column {
+            id: column
             anchors.top: parent.top
             anchors.topMargin: Theme.paddingMedium
+
+            PageHeader {
+                id: header
+                title: episodeName
+            }
 
             Image {
                 id: banner
                 source: setSource()
                 anchors.left: parent.left
-                anchors.leftMargin: Theme.paddingMedium
+                anchors.leftMargin: (episodeoverviewpage.width - banner.width) / 2
+            }
+
+            Item {
+                id: padding
+                height: Theme.paddingLarge
+                width: episodeoverviewpage.width
+            }
+
+//            TextField {
+//                id: name
+//                text: episodeName
+//                readOnly: true
+//                color: Theme.secondaryColor
+//                label: qsTr("Name")
+//                font.pixelSize: Theme.fontSizeSmall
+//                width: episodeoverviewpage.width
+
+//            }
+
+            TextExpander {
+                id: expander
+                width: episodeoverviewpage.width
+                textContent: episodeOverview
             }
 
             TextField {
-                id: name
-                text: episodeName
+                id: writerField
+                width: episodeoverviewpage.width
+                text: process(writer)
+                label: qsTr("Writer")
+                color: Theme.secondaryColor
                 readOnly: true
-                color: "black"
-                label: "Name"
-                font.pixelSize: Theme.fontSizeSmall
-                width: container.width
-
             }
 
             TextArea {
-                id: overview
+                id: guestStarsField
+                width: episodeoverviewpage.width
+                text: process(guestStars)
+//                    guestStars.charAt(0) === "|" ?
+//                          guestStars.split("|").join(", ").substr(2) :
+//                          guestStars.split("|").join(", ")
+                label: qsTr("Guest Stars")
+                color: Theme.secondaryColor
                 readOnly: true
-                text: episodeOverview
-                width: container.width
-                color: "black"
-                height: 250
-                font.pixelSize: Theme.fontSizeSmall
-                label: "Overview"
-            }
-
-            Button {
-                id: button
-                onClicked: {
-                    container.visible = false
-                }
-                text: "Close"
-                color: "black"
-                anchors.left: parent.left
-                anchors.leftMargin: (container.width - button.width) / 2
             }
         }
     }

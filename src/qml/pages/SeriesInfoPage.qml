@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
+import "../components"
+
 Page {
     id: infopage
 
@@ -13,13 +15,17 @@ Page {
         PullDownMenu {
             MenuItem {
                 visible: controller.SearchModel.Added ? enabled = false : enabled = true
-                text: "Add to my series"
-                onClicked: controller.SearchModel.getFullSeriesRecord(controller.SearchModel.ID)
+                text: qsTr("Add to my series")
+                onClicked: {
+                    busyIndicator.running = true
+                    controller.SearchModel.getFullSeriesRecord(controller.SearchModel.ID)
+                    busyIndicator.running = false
+                }
             }
 
             MenuItem {
                 visible: controller.SearchModel.Added ? enabled = true : enabled = false
-                text: "Already added"
+                text: qsTr("Already added")
                 // TODO: maybe app could go to MySeriesPage ?
             }
         }
@@ -43,34 +49,27 @@ Page {
 
             }
 
-            TextArea {
-                id: overview
-                label: "Overview"
+            TextExpander {
+                id: expander
                 width: infopage.width
-                text: controller.SearchModel.Overview
-                readOnly: true
-                color: Theme.secondaryColor
+                textContent: controller.SearchModel.Overview
             }
 
             TextField {
                 id: network
-                label: "Network"
+                label: qsTr("Network")
                 text: controller.SearchModel.Network
                 color: Theme.secondaryColor
                 readOnly: true
                 width: infopage.width
             }
 
-            BackgroundItem {
-                TextField {
-                    id: imdb
-                    label: "IMDB"
-                    text: "Show at IMDB"
-                    onClicked: Qt.openUrlExternally("http://www.imdb.com/title/" + controller.SearchModel.IMDB_ID)
-                    readOnly: true
-                    color: Theme.secondaryColor
-                    width: infopage.width
-                }
+            Button {
+                id: imdb
+                text: "IMDB"
+                onClicked: Qt.openUrlExternally("http://www.imdb.com/title/" + controller.SearchModel.IMDB_ID)
+                anchors.left: parent.left
+                anchors.leftMargin: (infopage.width - imdb.width) / 2
             }
         }
     }

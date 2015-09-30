@@ -13,7 +13,7 @@ Page {
         width: searchpage.width
         anchors.top: searchpage.top
         anchors.topMargin: 100
-        placeholderText: "Search for a series"
+        placeholderText: qsTr("Search for a series")
         EnterKey.onClicked: {
             controller.SearchModel.searchSeries(text)
             focus = false
@@ -59,14 +59,9 @@ Page {
 
         ViewPlaceholder {
             enabled: listView.count === 0
-            text: "Here will be stuff when you search for something"
+            text: qsTr("Here will be stuff when you search for something")
             anchors.centerIn: listView
 
         }
     }
-
-    BusyIndicator {
-           anchors.centerIn: parent
-           running: controller.SearchListModel.Loading ? true : false
-       }
 }

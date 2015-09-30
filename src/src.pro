@@ -22,7 +22,13 @@ SOURCES += main.cpp \
     model/todaylistmodel.cpp \
     qzip.cpp
 
-TRANSLATIONS = translation_fi.ts
+# translations
+translations.files = translations/harbour-sailseries-fi.qm
+translations.path = /usr/share/$${TARGET}
+
+INSTALLS += translations
+
+TRANSLATIONS += translations/harbour-sailseries-fi.ts
 
 OTHER_FILES = \
 # You DO NOT want .yaml be listed here as Qt Creator's editor is completely not ready for multi package .yaml's
@@ -43,11 +49,14 @@ OTHER_FILES = \
     qml/pages/SeriesViewPage.qml \
     qml/pages/Episodes.qml \
     qml/pages/Series.qml \
-    qml/pages/EpisodeOverviewPage.qml \
     qml/cover/CoverPage.qml \
     qml/pages/Seasons.qml \
     qml/pages/AboutPage.qml \
-    qml/pages/parser.js
+    qml/pages/parser.js \
+    qml/components/MoreIndicator.qml \
+    qml/components/TextExpander.qml \
+    qml/pages/EpisodeOverviewPage_orig.qml \
+    qml/pages/EpisodeOverviewPage.qml
 
 INCLUDEPATH += $$PWD
 

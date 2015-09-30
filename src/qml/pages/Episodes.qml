@@ -26,6 +26,8 @@ Item {
         id: listView
         model: controller.EpisodeListModel.episodeList
 
+        Component.onCompleted: console.log("listView updated")
+
         header: Component {
             PageHeader {
                 id: pageheader
@@ -56,11 +58,15 @@ Item {
                 anchors.right: parent.right
                 anchors.rightMargin: Theme.paddingMedium
                 onClicked: {
-                    episodeOverview.episodeBanner = Filename
-                    episodeOverview.episodeOverview = Overview
-                    episodeOverview.episodeName = EpisodeName
-                    episodeOverview.visible = true
+                    pageStack.push(Qt.resolvedUrl("EpisodeOverviewPage.qml"),
+                                   { episodeBanner: Filename,
+                                     episodeOverview: Overview,
+                                     episodeName: EpisodeName,
+                                     guestStars: GuestStars,
+                                     writer: Writer })
                     console.log(Filename)
+                    console.log(GuestStars)
+                    console.log(Writer)
 
                 }
             }
@@ -74,14 +80,14 @@ Item {
 
                     Label {
                         id: seasonNumber
-                        text: qsTr("Season ") + SeasonNumber
+                        text: qsTr("Season") + " " + SeasonNumber
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.secondaryColor
                     }
 
                     Label {
                         id: episodeNumber
-                        text: qsTr(" Episode ") + EpisodeNumber
+                        text: " " + qsTr("Episode") + " " + EpisodeNumber
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.secondaryColor
                     }
@@ -141,22 +147,15 @@ Item {
         }
     }
 
-    EpisodeOverviewPage {
-        id: episodeOverview
-        anchors.centerIn: parent
-        visible: false
-    }
-
-    // TODO: how to get this around EpisodeOverviewPage
-    //    TouchBlocker {
-    //        id: blocker
-    //        enabled: false
-    //        anchors.fill: listView
-    //    }
+//    EpisodeOverviewPage {
+//        id: episodeOverview
+//        anchors.centerIn: parent
+//        visible: false
+//    }
 
     ViewPlaceholder {
         enabled: listView.count === 0
-        text: "No episodes."
+        text: qsTr("No episodes.")
     }
 }
 

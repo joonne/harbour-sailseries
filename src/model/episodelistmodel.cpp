@@ -68,11 +68,23 @@ void EpisodeListModel::populateEpisodeList(QString seriesID) {
             QString filename = temp.at(5);
             int watched = temp.at(6).toInt();
             int id = temp.at(7).toInt();
+            QString guestStars = temp.at(8);
+            QString writer = temp.at(9);
 
             // we don't want the special episodes, they have season number 0.
             if(seasonNumber != 0 ) {
 
-                EpisodeData* episode = new EpisodeData(this,episodeName,episodeNumber,overview,seasonNumber,absoluteNumber,filename,watched,id);
+                EpisodeData* episode = new EpisodeData(this,
+                                                       episodeName,
+                                                       episodeNumber,
+                                                       overview,
+                                                       seasonNumber,
+                                                       absoluteNumber,
+                                                       filename,
+                                                       watched,
+                                                       id,
+                                                       guestStars,
+                                                       writer);
 
                 myEpisodeListModel.append(episode);
             }

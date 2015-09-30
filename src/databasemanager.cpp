@@ -479,12 +479,12 @@ QList<QList<QString> > DatabaseManager::getEpisodes(int seriesID) {
     QList<QList<QString> > episodes;
 
     QSqlQuery query(db);
-    query.exec(QString("SELECT episodeName,episodeNumber,overview,seasonNumber,absoluteNumber,filename,watched,id FROM Episode WHERE seriesID = %1 AND seasonNumber != 0 ORDER BY absoluteNumber").arg(seriesID));
+    query.exec(QString("SELECT episodeName,episodeNumber,overview,seasonNumber,absoluteNumber,filename,watched,id,guestStars,writer FROM Episode WHERE seriesID = %1 AND seasonNumber != 0 ORDER BY absoluteNumber").arg(seriesID));
 
     qDebug() << query.lastError();
 
     if(query.isSelect()) {
-        qDebug() << "isSelect";
+
         while(query.next()) {
 
             QList<QString> temp;
@@ -514,6 +514,12 @@ QList<QList<QString> > DatabaseManager::getEpisodes(int seriesID) {
 
             QString id = query.value(7).toString();
             temp.append(id);
+
+            QString guestStars = query.value(8).toString();
+            temp.append(guestStars);
+
+            QString writer = query.value(9).toString();
+            temp.append(writer);
 
             episodes.append(temp);
 
