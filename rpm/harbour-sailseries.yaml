@@ -3,7 +3,7 @@ Summary: SailSeries for Sailfish
 Version: 0.5
 Release: 5
 Group: Qt/Qt
-License: Public domain except for the icon
+License: GPLv2
 Sources:
 - '%{name}-%{version}.tar.bz2'
 Description: |-
@@ -23,6 +23,7 @@ Files:
 - '%{_datadir}/icons/hicolor/86x86/apps/%{name}.png'
 - '%{_datadir}/applications/%{name}.desktop'
 - '%{_datadir}/%{name}/qml'
+- '%{_datadir}/%{name}/translations'
 
 - '%attr(0755,-,-) %{_bindir}/%{name}'
 PkgBR: []

@@ -8,6 +8,14 @@ Item {
     height: seriesViewPage.height
     width: seriesView.width
 
+    function setStatus(status) {
+        if(status === "Continuing") {
+            return qsTr("Continuing")
+        } else if(status === "Ended") {
+            return qsTr("Ended")
+        }
+    }
+
     SilicaFlickable {
         contentHeight: column.height
 

@@ -62,7 +62,6 @@ void SearchListModel::searchListClear(QQmlListProperty<SeriesData>* prop)
 
 void SearchListModel::xmlParseFinished() {
 
-    qDebug("slotti toimii");
     mySeries = myReader->getSeries();
     populateSearchModel();
 }
@@ -71,6 +70,7 @@ void SearchListModel::getFullSeriesRecordFinished() {
 
     storeSeries();
     storeEpisodes();
+    setLoading(false);
     emit updateModels();
 }
 
@@ -131,8 +131,8 @@ void SearchListModel::selectSeries(int index) {
 }
 
 void SearchListModel::getFullSeriesRecord(QString id) {
-    setLoading(true);
     myReader->getFullSeriesRecord(id,"full");
+    setLoading(true);
 }
 
 void SearchListModel::storeSeries() {
@@ -329,7 +329,6 @@ void SearchListModel::storeEpisodes() {
                                    thumbAdded,thumbHeight,thumbWidth);
     }
 
-    setLoading(false);
     setAdded(true);
 }
 

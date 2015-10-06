@@ -6,8 +6,6 @@ import "../components"
 Page {
     id: infopage
 
-    Component.onCompleted: busyIndicator.running = false
-
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: column.height
@@ -17,9 +15,7 @@ Page {
                 visible: controller.SearchModel.Added ? enabled = false : enabled = true
                 text: qsTr("Add to my series")
                 onClicked: {
-                    busyIndicator.running = true
                     controller.SearchModel.getFullSeriesRecord(controller.SearchModel.ID)
-                    busyIndicator.running = false
                 }
             }
 

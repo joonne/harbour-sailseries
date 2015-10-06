@@ -43,13 +43,6 @@ int main(int argc, char *argv[])
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
     QScopedPointer<QQuickView> view(SailfishApp::createView());
 
-    // this is for testing other translations
-    // QLocale::setDefault(QLocale(QLocale::Spain, QLocale::Spanish));
-
-    QTranslator *appTranslator = new QTranslator;
-    appTranslator->load("harbour-sailseries-" + QLocale::system().name(), SailfishApp::pathTo("translations").path());
-    app->installTranslator(appTranslator);
-
     // This is the public QML datacontroller
     QScopedPointer<DataModel> datamodel(new DataModel);
     QQmlContext* context = view->rootContext();

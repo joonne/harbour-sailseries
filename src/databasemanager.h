@@ -55,7 +55,6 @@ public:
                        int airsAfterSeason, int airsBeforeEpisode, int airsBeforeSeason , QString filename,
                        QString lastUpdated, int seasonID, int seriesID, QString thumbAdded,
                        int thumbHeight, int thumbWidth);
-    bool insertEpisode();
 
     bool updateSeries();
     bool updateEpisode();

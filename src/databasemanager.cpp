@@ -311,6 +311,7 @@ bool DatabaseManager::insertEpisode(int id, QString director, int epimgflag, QSt
                                     int thumbHeight, int thumbWidth) {
 
     bool ret = false;
+    int watched = 0;
 
     // important!
     overview.replace("'","''");
@@ -320,7 +321,18 @@ bool DatabaseManager::insertEpisode(int id, QString director, int epimgflag, QSt
 
     if(db.isOpen()) {
 
+        // lets check the watched flag first, might be slow but this must be done
         QSqlQuery query(db);
+        query.exec(QString("SELECT watched FROM Episode WHERE id = %1").arg(id));
+        qDebug() << query.lastError();
+
+        if(query.isSelect()) {
+
+            while(query.next()) {
+                watched = query.value(0).toInt();
+            }
+        }
+
         ret = query.exec(QString("INSERT OR REPLACE INTO Episode VALUES(%1,'%2',%3,'%4',%5,'%6','%7','%8','%9','%10',%11,%12,%13,%14,'%15',%16,%17,%18,%19,'%20','%21',%22,%23,'%24',%25,%26,%27)")
                          .arg(id)
                          .arg(director)
@@ -348,7 +360,7 @@ bool DatabaseManager::insertEpisode(int id, QString director, int epimgflag, QSt
                          .arg(thumbAdded)
                          .arg(thumbHeight)
                          .arg(thumbWidth)
-                         .arg(0));
+                         .arg(watched));
 
         qDebug() << query.lastError().text();
         // HOX! Here something might go wrong
@@ -538,12 +550,13 @@ void DatabaseManager::toggleWatched(QString episodeID) {
         while(query.next()) {
             if(query.value(0).toInt() == 0) {
                 query.exec(QString("UPDATE Episode SET watched = 1 WHERE id = %1").arg(episodeID.toInt()));
+                qDebug() << query.lastError();
             } else {
                 query.exec(QString("UPDATE Episode SET watched = 0 WHERE id = %1").arg(episodeID.toInt()));
+                qDebug() << query.lastError();
             }
         }
     }
-
 }
 
 bool DatabaseManager::deleteSeries(int seriesID) {

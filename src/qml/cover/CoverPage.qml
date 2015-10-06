@@ -6,7 +6,7 @@ CoverBackground {
 
     Label {
         id: placeholder
-        text: "Nothing airs today"
+        text: qsTr("Nothing airs today")
         font.pixelSize: Theme.fontSizeTiny
         anchors.centerIn: cover
         visible: listView.count === 0 && controller.SeriesListModel.Mode === "default"
@@ -19,17 +19,17 @@ CoverBackground {
     function nextEpisodeDetails(episodeName,daysTo,status) {
 
         if(status === "Ended") {
-            return "This show has ended";
+            return qsTr("This show has ended");
         } else if(daysTo === "today") {
-            return episodeName + " airs today";
+            return episodeName + " " + qsTr("airs today");
         } else if(daysTo === "tommorrow") {
-            return episodeName + " airs tomorrow";
+            return episodeName + " " + qsTr("airs tomorrow");
         } else if(episodeName.length !== 0) {
-            return episodeName + " airs in " + daysTo + " days";
+            return episodeName + " " + qsTr("airs in") + " " + daysTo + " " + qsTr("days");
         } else if(episodeName.length === 0 && daysTo !== "unknown") {
-            return "Next episode airs in " + daysTo + " days";
+            return qsTr("Next episode airs in") + " " + daysTo + " " + qsTr("days");
         } else {
-            return "No information about next episode";
+            return qsTr("No information about next episode");
         }
     }
 
@@ -87,7 +87,7 @@ CoverBackground {
 
     Label {
         id: defaultheader
-        text: "Today"
+        text: qsTr("Today")
         color: Theme.primaryColor
         font.pixelSize: Theme.fontSizeMedium
         anchors.top: cover.top

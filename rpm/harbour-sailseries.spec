@@ -13,8 +13,8 @@ Name:       harbour-sailseries
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    SailSeries for Sailfish
-Version:    0.1
-Release:    1
+Version:    0.5
+Release:    5
 Group:      Qt/Qt
 License:    GPLv2
 Source0:    %{name}-%{version}.tar.bz2
@@ -65,6 +65,7 @@ desktop-file-install --delete-original       \
 %{_datadir}/icons/hicolor/86x86/apps/%{name}.png
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/%{name}/qml
+%{_datadir}/%{name}/translations
 %attr(0755,-,-) %{_bindir}/%{name}
 # >> files
 # << files

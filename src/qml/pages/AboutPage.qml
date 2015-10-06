@@ -80,6 +80,20 @@ Page {
         }
 
         Button {
+            id: transifex
+            text: qsTr("Help with translations")
+            onClicked: Qt.openUrlExternally("https://www.transifex.com/joonne/sailseries/")
+            anchors.left: parent.left
+            anchors.leftMargin: (aboutpage.width - sourcecode.width) / 2
+            width: email.width
+        }
+
+        Item {
+            height: Theme.paddingLarge
+            width: aboutpage.width
+        }
+
+        Button {
             id: email
             text: qsTr("Send email to developer")
             onClicked: Qt.openUrlExternally("mailto:jonne.pihlanen@gmail.com?subject=SailSeries&body=")
@@ -99,6 +113,11 @@ Page {
             font.pixelSize: Theme.fontSizeSmall
             text: qsTr("Thanks to bonapart for the help with qzip.")
 
+        }
+
+        Item {
+            height: Theme.paddingLarge
+            width: aboutpage.width
         }
     }
 }
