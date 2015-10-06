@@ -85,7 +85,7 @@ Page {
                 textContent: episodeOverview
             }
 
-            TextField {
+            TextArea {
                 id: writerField
                 width: episodeoverviewpage.width
                 text: process(writer)

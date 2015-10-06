@@ -267,6 +267,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/pages/SeriesViewPage.qml" line="25"/>
+        <source>Removing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/qml/pages/SeriesViewPage.qml" line="30"/>
         <source>Update</source>
         <translation type="unfinished"></translation>

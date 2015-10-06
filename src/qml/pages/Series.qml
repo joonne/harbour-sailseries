@@ -42,7 +42,7 @@ Item {
                     id: status
                     label: qsTr("Status")
                     width: seriesViewPage.width / 2
-                    text: controller.SeriesListModel.Status
+                    text: setStatus(controller.SeriesListModel.Status)
                     color: Theme.secondaryColor
                     readOnly: true
                 }

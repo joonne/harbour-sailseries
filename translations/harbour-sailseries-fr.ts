@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="fr" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="fr">
 <context>
     <name>AboutPage</name>
     <message>
@@ -242,17 +244,17 @@
 <context>
     <name>SeriesInfoPage</name>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="18"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="16"/>
         <source>Add to my series</source>
         <translation>Ajouter à mes séries</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="28"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="24"/>
         <source>Already added</source>
         <translation>Déjà ajoutée</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="60"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="56"/>
         <source>Network</source>
         <translation>Réseau</translation>
     </message>
@@ -263,6 +265,11 @@
         <location filename="../src/qml/pages/SeriesViewPage.qml" line="24"/>
         <source>Remove</source>
         <translation>Retirer</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesViewPage.qml" line="25"/>
+        <source>Removing</source>
+        <translation>Est retirée</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesViewPage.qml" line="30"/>

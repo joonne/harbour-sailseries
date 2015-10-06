@@ -46,7 +46,7 @@
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="114"/>
         <source>Thanks to bonapart for the help with qzip.</source>
-        <translation>Kiitos bonapart:ille avusta qzip:in kanssa.</translation>
+        <translation>Kiitos bonapart avusta qzipin kanssa.</translation>
     </message>
 </context>
 <context>
@@ -265,6 +265,11 @@
         <location filename="../src/qml/pages/SeriesViewPage.qml" line="24"/>
         <source>Remove</source>
         <translation>Poista</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesViewPage.qml" line="25"/>
+        <source>Removing</source>
+        <translation>Poistetaan</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesViewPage.qml" line="30"/>

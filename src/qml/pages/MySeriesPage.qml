@@ -92,7 +92,7 @@ Page {
                     text: nextEpisodeDetails(NextEpisodeName,DaysToNextEpisode,Status)
                     anchors.left: parent.left
                     anchors.leftMargin: 2 * Theme.paddingMedium
-                    font.pixelSize: Theme.fontSizeExtraSmall
+                    font.pixelSize: Theme.fontSizeTiny
                     color: Theme.primaryColor
                 }
             }
