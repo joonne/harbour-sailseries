@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fi">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="fi" version="2.1">
 <context>
     <name>AboutPage</name>
     <message>
@@ -46,7 +44,7 @@
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="114"/>
         <source>Thanks to bonapart for the help with qzip.</source>
-        <translation>Kiitos bonapart avusta qzipin kanssa.</translation>
+        <translation>Kiitos bonapart:ille avusta qzip:in kanssa.</translation>
     </message>
 </context>
 <context>

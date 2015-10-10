@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="fr" version="2.1">
 <context>
     <name>AboutPage</name>
     <message>
@@ -64,17 +62,17 @@
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="24"/>
         <source>airs today</source>
-        <translation>Diffusé aujourd&apos;hui</translation>
+        <translation>diffusé aujourd&apos;hui</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="26"/>
         <source>airs tomorrow</source>
-        <translation>Diffusé demain</translation>
+        <translation>diffusé demain</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="28"/>
         <source>airs in</source>
-        <translation>Diffusé dans</translation>
+        <translation>diffusé dans</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="28"/>
@@ -144,17 +142,17 @@
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="20"/>
         <source>airs today</source>
-        <translation>Diffusé aujourd&apos;hui</translation>
+        <translation>diffusé aujourd&apos;hui</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="22"/>
         <source>airs tomorrow</source>
-        <translation>Diffusé demain</translation>
+        <translation>diffusé demain</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="24"/>
         <source>airs in</source>
-        <translation>Diffusé dans</translation>
+        <translation>diffusé dans</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="24"/>
@@ -187,7 +185,7 @@
     <message>
         <location filename="../src/qml/pages/SearchPage.qml" line="16"/>
         <source>Search for a series</source>
-        <translation>Recherchez une série</translation>
+        <translation>Rechercher une série</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SearchPage.qml" line="62"/>
@@ -210,7 +208,7 @@
     <message>
         <location filename="../src/qml/pages/Seasons.qml" line="40"/>
         <source>watched</source>
-        <translation>regardés</translation>
+        <translation>visionnée</translation>
     </message>
 </context>
 <context>
@@ -269,7 +267,7 @@
     <message>
         <location filename="../src/qml/pages/SeriesViewPage.qml" line="25"/>
         <source>Removing</source>
-        <translation>Est retirée</translation>
+        <translation>Retirer</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesViewPage.qml" line="30"/>
@@ -287,7 +285,7 @@
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="26"/>
         <source>Search for a series</source>
-        <translation>Recherchez une série</translation>
+        <translation>Rechercher une série</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="34"/>
