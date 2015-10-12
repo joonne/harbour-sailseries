@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="fi" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="fi">
 <context>
     <name>AboutPage</name>
     <message>
@@ -99,37 +101,65 @@
 <context>
     <name>EpisodeOverviewPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="92"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="77"/>
+        <source>First aired</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="93"/>
         <source>Writer</source>
         <translation>Käsikirjoittaja</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="104"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="105"/>
         <source>Guest Stars</source>
         <translation>Vierailevat tähdet</translation>
     </message>
 </context>
 <context>
-    <name>Episodes</name>
+    <name>EpisodesPage</name>
     <message>
-        <location filename="../src/qml/pages/Episodes.qml" line="34"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="26"/>
         <source>Episodes</source>
-        <translation>Jaksot</translation>
+        <translation type="unfinished">Jaksot</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/Episodes.qml" line="83"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="73"/>
         <source>Season</source>
-        <translation>Kausi</translation>
+        <translation type="unfinished">Kausi</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/Episodes.qml" line="90"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="80"/>
         <source>Episode</source>
-        <translation>Jakso</translation>
+        <translation type="unfinished">Jakso</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/Episodes.qml" line="158"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="142"/>
         <source>No episodes.</source>
-        <translation>Ei jaksoja.</translation>
+        <translation type="unfinished">Ei jaksoja.</translation>
+    </message>
+</context>
+<context>
+    <name>Episodes_orig</name>
+    <message>
+        <location filename="../src/qml/pages/Episodes_orig.qml" line="34"/>
+        <source>Episodes</source>
+        <translation type="unfinished">Jaksot</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/Episodes_orig.qml" line="83"/>
+        <source>Season</source>
+        <translation type="unfinished">Kausi</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/Episodes_orig.qml" line="90"/>
+        <source>Episode</source>
+        <translation type="unfinished">Jakso</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/Episodes_orig.qml" line="158"/>
+        <source>No episodes.</source>
+        <translation type="unfinished">Ei jaksoja.</translation>
     </message>
 </context>
 <context>
@@ -175,7 +205,7 @@
         <translation>Omat sarjat</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="107"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="126"/>
         <source>Search for series first.</source>
         <translation>Etsi ensin sarjoja.</translation>
     </message>
@@ -204,11 +234,6 @@
         <location filename="../src/qml/pages/Seasons.qml" line="40"/>
         <source>Season</source>
         <translation>Kausi</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/Seasons.qml" line="40"/>
-        <source>watched</source>
-        <translation>nähty</translation>
     </message>
 </context>
 <context>

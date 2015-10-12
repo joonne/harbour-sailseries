@@ -37,10 +37,14 @@ Item {
                 spacing: Theme.paddingLarge
                 Button {
                     id: button
-                    text: " " + qsTr("Season") + " " + (index + 1) + " " + qsTr("watched") + " "
+                    text: qsTr("Season") + " " + (index + 1)
                     anchors.left: parent.left
                     anchors.leftMargin: (item.width - button.width - Theme.paddingMedium - Theme.paddingMedium) / 2
-                    onClicked: controller.EpisodeListModel.markSeasonWatched(controller.SeriesListModel.ID,index+1)
+                    onClicked: {
+                        console.log(controller.SeriesListModel.ID)
+                        console.log(index + 1)
+                        pageStack.push(Qt.resolvedUrl("EpisodesPage.qml"), { seriesID: controller.SeriesListModel.ID, seasonNumber: index + 1});
+                    }
                 }
             }
         }

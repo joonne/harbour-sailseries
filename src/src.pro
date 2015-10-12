@@ -40,7 +40,6 @@ OTHER_FILES = \
     qml/pages/MySeriesPage.qml \
     qml/pages/CoverPage.qml \
     qml/pages/SeriesViewPage.qml \
-    qml/pages/Episodes.qml \
     qml/pages/Series.qml \
     qml/cover/CoverPage.qml \
     qml/pages/Seasons.qml \
@@ -49,7 +48,9 @@ OTHER_FILES = \
     qml/components/MoreIndicator.qml \
     qml/components/TextExpander.qml \
     qml/pages/EpisodeOverviewPage_orig.qml \
-    qml/pages/EpisodeOverviewPage.qml
+    qml/pages/EpisodeOverviewPage.qml \
+    qml/pages/Episodes_orig.qml \
+    qml/pages/EpisodesPage.qml
 
 INCLUDEPATH += $$PWD
 

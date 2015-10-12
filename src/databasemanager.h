@@ -64,7 +64,7 @@ public:
 
     QList<QList<QString> > getSeries();
     QList<QList<QString> > getStartPageSeries();
-    QList<QList<QString> > getEpisodes(int seriesID);
+    QList<QList<QString> > getEpisodes(int seriesID, int seasonNumber);
     QMap<QString, QString> getNextEpisodeDetails(int seriesID);
     QList<QString> getTodaysEpisodes(int seriesID);
     QString getStatus(int seriesID);

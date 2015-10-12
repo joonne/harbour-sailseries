@@ -40,6 +40,7 @@ Page {
     property string episodeName
     property string guestStars
     property string writer
+    property string firstAired
 
     SilicaFlickable {
         anchors.fill: parent
@@ -68,16 +69,16 @@ Page {
                 width: episodeoverviewpage.width
             }
 
-//            TextField {
-//                id: name
-//                text: episodeName
-//                readOnly: true
-//                color: Theme.secondaryColor
-//                label: qsTr("Name")
-//                font.pixelSize: Theme.fontSizeSmall
-//                width: episodeoverviewpage.width
+            TextField {
+                id: firstAiredField
+                text: firstAired
+                readOnly: true
+                color: Theme.secondaryColor
+                label: qsTr("First aired")
+                font.pixelSize: Theme.fontSizeSmall
+                width: episodeoverviewpage.width
 
-//            }
+            }
 
             TextExpander {
                 id: expander

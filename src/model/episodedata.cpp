@@ -54,7 +54,8 @@ EpisodeData::EpisodeData(QObject *parent,
                          int watched,
                          int id,
                          QString guestStars,
-                         QString writer):
+                         QString writer,
+                         QString firstAired):
     QObject(parent){
 
     myEpisodeName = episodeName;
@@ -67,6 +68,7 @@ EpisodeData::EpisodeData(QObject *parent,
     myID = id;
     myGuestStars = guestStars;
     myWriter = writer;
+    myFirstAired = firstAired;
 
 }
 

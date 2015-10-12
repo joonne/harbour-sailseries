@@ -44,6 +44,21 @@ Page {
             contentHeight: background.height + Theme.paddingMedium
             contentWidth: listView.width
 
+//            menu: ContextMenu {
+//                id: contextMenu
+//                anchors.top: ListView.view.currentItem.bottom
+//                MenuItem {
+//                    text: qsTr("Update")
+//                    onClicked: controller.SeriesListModel.updateSeries(ID)
+//                }
+//                MenuItem {
+//                    text: qsTr("Remove")
+//                    onClicked: remorse.execute(listItem,
+//                                               qsTr("Removing") + " " + controller.SeriesListModel.SeriesName,
+//                                               function() { controller.SeriesListModel.deleteSeries(ID) })
+//                }
+//            }
+
             Rectangle {
                 id: container
                 anchors.fill: background
@@ -63,9 +78,11 @@ Page {
                     controller.SeriesListModel.selectSeries(index)
                     pageStack.push(Qt.resolvedUrl("SeriesViewPage.qml"),{seriesID: ID})
                 }
+//                onPressAndHold: contextMenu.show(ListView.view.currentItem)
             }
 
             Column {
+                id: column
                 spacing: Theme.paddingSmall
 
                 Image {
@@ -96,6 +113,8 @@ Page {
                     color: Theme.primaryColor
                 }
             }
+
+//            RemorseItem { id: remorse }
         }
 
         VerticalScrollDecorator {
@@ -108,6 +127,11 @@ Page {
             anchors.centerIn: listView
 
         }
+
+//        BusyIndicator {
+//               anchors.centerIn: parent
+//               running: controller.SeriesListModel.Loading ? true : false
+//           }
     }
 
 }

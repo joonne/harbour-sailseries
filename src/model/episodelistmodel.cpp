@@ -45,13 +45,12 @@ void EpisodeListModel::episodeListClear(QQmlListProperty<EpisodeData>* prop)
     qobject_cast<EpisodeListModel*>(prop->object)->myEpisodeListModel.clear();
 }
 
-void EpisodeListModel::populateEpisodeList(QString seriesID) {
+void EpisodeListModel::populateEpisodeList(QString seriesID, int seasonNumber) {
 
     myEpisodeListModel.clear();
     emit episodeListChanged();
 
-    qDebug() << "getting episodes now";
-    QList<QList<QString> > episodes = mydbmanager->getEpisodes(seriesID.toInt());
+    QList<QList<QString> > episodes = mydbmanager->getEpisodes(seriesID.toInt(), seasonNumber);
 
     if(episodes.size() != 0) {
 
@@ -70,6 +69,7 @@ void EpisodeListModel::populateEpisodeList(QString seriesID) {
             int id = temp.at(7).toInt();
             QString guestStars = temp.at(8);
             QString writer = temp.at(9);
+            QString firstAired = temp.at(10);
 
             // we don't want the special episodes, they have season number 0.
             if(seasonNumber != 0 ) {
@@ -84,7 +84,8 @@ void EpisodeListModel::populateEpisodeList(QString seriesID) {
                                                        watched,
                                                        id,
                                                        guestStars,
-                                                       writer);
+                                                       writer,
+                                                       firstAired);
 
                 myEpisodeListModel.append(episode);
             }
@@ -104,8 +105,8 @@ void EpisodeListModel::toggleWatched(QString episodeID) {
 
 void EpisodeListModel::markSeasonWatched(QString seriesID, int season) {
 
-    mydbmanager->markSeasonWatched(seriesID.toInt(),season);
-    populateEpisodeList(seriesID);
+    mydbmanager->markSeasonWatched(seriesID.toInt(), season);
+    populateEpisodeList(seriesID, season);
 }
 
 int EpisodeListModel::getSeasonCount(QString seriesID) {

@@ -46,7 +46,7 @@ public:
                 int watched);
     EpisodeData(QObject *parent, QString episodeName, int episodeNumber, QString overview,
                 int seasonNumber, int absoluteNumber, QString filename, int watched, int id,
-                QString guestStars, QString writer);
+                QString guestStars, QString writer, QString firstAired);
 
     int getID();
     QString getDirector();

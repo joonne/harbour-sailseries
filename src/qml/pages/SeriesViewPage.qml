@@ -6,13 +6,13 @@ Page {
 
     property string seriesID
 
-    function initialize() {
+//    function initialize() {
 
-        episodes.seriesID = seriesID
+//        episodes.seriesID = seriesID
 
-    }
+//    }
 
-    Component.onCompleted: initialize()
+//    Component.onCompleted: initialize()
 
     Component.onDestruction: controller.SeriesListModel.Mode = "default"
 
@@ -44,7 +44,7 @@ Page {
             model: VisualItemModel {
                 id: items
                 Series { id: series }
-                Episodes { id: episodes }
+                //Episodes { id: episodes }
                 Seasons { id: seasons }
             }
         }
