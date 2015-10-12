@@ -47,9 +47,7 @@ OTHER_FILES = \
     qml/pages/parser.js \
     qml/components/MoreIndicator.qml \
     qml/components/TextExpander.qml \
-    qml/pages/EpisodeOverviewPage_orig.qml \
     qml/pages/EpisodeOverviewPage.qml \
-    qml/pages/Episodes_orig.qml \
     qml/pages/EpisodesPage.qml
 
 INCLUDEPATH += $$PWD

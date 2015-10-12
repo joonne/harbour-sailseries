@@ -41,8 +41,6 @@ Item {
                     anchors.left: parent.left
                     anchors.leftMargin: (item.width - button.width - Theme.paddingMedium - Theme.paddingMedium) / 2
                     onClicked: {
-                        console.log(controller.SeriesListModel.ID)
-                        console.log(index + 1)
                         pageStack.push(Qt.resolvedUrl("EpisodesPage.qml"), { seriesID: controller.SeriesListModel.ID, seasonNumber: index + 1});
                     }
                 }

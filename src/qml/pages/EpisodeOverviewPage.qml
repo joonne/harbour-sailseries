@@ -6,15 +6,7 @@ import "../components"
 Page {
     id: episodeoverviewpage
 
-    function setWidth() {
-        if(banner.width === 0) {
-            return 400
-        } else {
-            return banner.width + 2 * Theme.paddingMedium
-        }
-    }
-
-    // small error is better than unnecessary http-request. :D
+    // prevents http-request if source is not available
     function setSource() {
         if(episodeBanner.length === 0) {
             return null;
@@ -23,6 +15,7 @@ Page {
         }
     }
 
+    // processes tubes "|" out of the given string
     function process(string) {
 
         if(string.charAt(0) === "|" && string.charAt(string.length - 1) === "|") {
@@ -35,6 +28,7 @@ Page {
         }
     }
 
+    // these are pushed from previous page with the pageStack
     property string episodeBanner
     property string episodeOverview
     property string episodeName
@@ -74,7 +68,7 @@ Page {
                 text: firstAired
                 readOnly: true
                 color: Theme.secondaryColor
-                label: qsTr("First aired")
+                label: qsTr("Original air date")
                 font.pixelSize: Theme.fontSizeSmall
                 width: episodeoverviewpage.width
 
@@ -99,9 +93,6 @@ Page {
                 id: guestStarsField
                 width: episodeoverviewpage.width
                 text: process(guestStars)
-//                    guestStars.charAt(0) === "|" ?
-//                          guestStars.split("|").join(", ").substr(2) :
-//                          guestStars.split("|").join(", ")
                 label: qsTr("Guest Stars")
                 color: Theme.secondaryColor
                 readOnly: true

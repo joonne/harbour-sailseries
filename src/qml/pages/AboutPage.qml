@@ -5,7 +5,7 @@ Page {
     id: aboutpage
 
     property string contributor_qzip: "bonapart"
-    property string contributors: ""
+    property string translator_french: "lunatix, french"
 
     PageHeader {
         id: header
@@ -112,12 +112,8 @@ Page {
             color: Theme.primaryColor
             font.pixelSize: Theme.fontSizeSmall
             text: qsTr("Thanks to bonapart for the help with qzip.")
+            height: (4 * Theme.paddingLarge)
 
-        }
-
-        Item {
-            height: Theme.paddingLarge
-            width: aboutpage.width
         }
     }
 }

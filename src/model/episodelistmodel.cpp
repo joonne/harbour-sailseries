@@ -57,7 +57,7 @@ void EpisodeListModel::populateEpisodeList(QString seriesID, int seasonNumber) {
         for(int i = 0; i < episodes.size(); ++i) {
 
             QList<QString> temp = episodes.at(i);
-            qDebug() << temp;
+            // qDebug() << temp;
 
             QString episodeName = temp.at(0);
             int episodeNumber = temp.at(1).toInt();
@@ -107,6 +107,7 @@ void EpisodeListModel::markSeasonWatched(QString seriesID, int season) {
 
     mydbmanager->markSeasonWatched(seriesID.toInt(), season);
     populateEpisodeList(seriesID, season);
+    emit episodeListChanged();
 }
 
 int EpisodeListModel::getSeasonCount(QString seriesID) {

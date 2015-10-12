@@ -390,19 +390,19 @@ QList<QList<QString> > DatabaseManager::getSeries() {
 
                 QString banner = query.value(0).toString();
                 temp.append(banner);
-                qDebug() << banner;
+                // qDebug() << banner;
 
                 QString poster = query.value(1).toString();
                 temp.append(poster);
-                qDebug() << poster;
+                // qDebug() << poster;
 
                 QString seriesName = query.value(2).toString();
                 temp.append(seriesName);
-                qDebug() << seriesName;
+                // qDebug() << seriesName;
 
                 QString status = query.value(3).toString();
                 temp.append(status);
-                qDebug() << status;
+                // qDebug() << status;
 
                 int id = query.value(4).toInt();
                 QString idstring = QString::number(id);
@@ -493,7 +493,7 @@ QList<QList<QString> > DatabaseManager::getEpisodes(int seriesID, int seasonNumb
     QSqlQuery query(db);
     query.exec(QString("SELECT episodeName,episodeNumber,overview,seasonNumber,absoluteNumber,filename,watched,id,guestStars,writer,firstAired FROM Episode WHERE seriesID = %1 AND seasonNumber = %2 ORDER BY episodeNumber").arg(seriesID).arg(seasonNumber));
 
-    qDebug() << query.lastError();
+    // qDebug() << query.lastError();
 
     if(query.isSelect()) {
 
@@ -503,7 +503,7 @@ QList<QList<QString> > DatabaseManager::getEpisodes(int seriesID, int seasonNumb
 
             QString episodeName = query.value(0).toString();
             temp.append(episodeName);
-            qDebug() << episodeName;
+            // qDebug() << episodeName;
 
             QString episodeNumber = query.value(1).toString();
             temp.append(episodeNumber);
@@ -538,7 +538,7 @@ QList<QList<QString> > DatabaseManager::getEpisodes(int seriesID, int seasonNumb
 
             episodes.append(temp);
 
-            qDebug() << query.lastError();
+            // qDebug() << query.lastError();
 
         }
     }

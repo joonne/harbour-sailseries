@@ -101,17 +101,17 @@
 <context>
     <name>EpisodeOverviewPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="77"/>
-        <source>First aired</source>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="71"/>
+        <source>Original air date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="93"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="87"/>
         <source>Writer</source>
         <translation>Käsikirjoittaja</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="105"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="96"/>
         <source>Guest Stars</source>
         <translation>Vierailevat tähdet</translation>
     </message>
@@ -119,22 +119,27 @@
 <context>
     <name>EpisodesPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="26"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="32"/>
+        <source>I have seen these all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="43"/>
         <source>Episodes</source>
         <translation type="unfinished">Jaksot</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="73"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="90"/>
         <source>Season</source>
         <translation type="unfinished">Kausi</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="80"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="97"/>
         <source>Episode</source>
         <translation type="unfinished">Jakso</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="142"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="159"/>
         <source>No episodes.</source>
         <translation type="unfinished">Ei jaksoja.</translation>
     </message>

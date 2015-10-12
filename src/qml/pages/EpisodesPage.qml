@@ -10,15 +10,30 @@ Page {
     Component.onCompleted: initialize(seriesID, seasonNumber)
 
     function initialize(seriesID, seasonNumber) {
-        console.log(seriesID)
-        console.log(seasonNumber)
         controller.EpisodeListModel.populateEpisodeList(seriesID, seasonNumber)
         listView.model = controller.EpisodeListModel.episodeList
+    }
+
+    function updateFlags() {
+        for(var i = 0; i < listView.count; ++i) {
+            console.log(listView.model.get(i).SeasonNumber);
+        }
     }
 
     SilicaListView {
         id: listView
         model: controller.EpisodeListModel.episodeList
+
+        PullDownMenu {
+            id: pulldownmenu
+
+            MenuItem {
+                text: qsTr("I have seen these all")
+                onClicked: {
+                    controller.EpisodeListModel.markSeasonWatched(seriesID, seasonNumber)
+                }
+            }
+        }
 
         header: Component {
             PageHeader {
@@ -86,7 +101,7 @@ Page {
 
                 Label {
                     id: episodeName
-                    text: EpisodeName
+                    text: EpisodeName + Watched
                     anchors.left: parent.left
                     anchors.leftMargin: 2 * Theme.paddingMedium
                     font.pixelSize: Theme.fontSizeSmall
