@@ -28,6 +28,7 @@ function loaded(programs) {
         listModel.append({
                              "name": programs[index].data.name,
                              "start": programs[index].data.start,
+                             "end": programs[index].data.end,
                              "description": programs[index].data.description
                          });
 

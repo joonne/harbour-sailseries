@@ -119,27 +119,27 @@
 <context>
     <name>EpisodesPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="32"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="31"/>
         <source>I have seen these all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="43"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="41"/>
         <source>Episodes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="90"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="88"/>
         <source>Season</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="97"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="95"/>
         <source>Episode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="159"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="157"/>
         <source>No episodes.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -212,6 +212,14 @@
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="126"/>
         <source>Search for series first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ProgramOverviewPage</name>
+    <message>
+        <location filename="../src/qml/pages/ProgramOverviewPage.qml" line="42"/>
+        <source>Time</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -290,17 +298,17 @@
 <context>
     <name>SeriesViewPage</name>
     <message>
-        <location filename="../src/qml/pages/SeriesViewPage.qml" line="24"/>
+        <location filename="../src/qml/pages/SeriesViewPage.qml" line="16"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesViewPage.qml" line="25"/>
+        <location filename="../src/qml/pages/SeriesViewPage.qml" line="17"/>
         <source>Removing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesViewPage.qml" line="30"/>
+        <location filename="../src/qml/pages/SeriesViewPage.qml" line="22"/>
         <source>Update</source>
         <translation type="unfinished"></translation>
     </message>
@@ -323,22 +331,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="58"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="59"/>
         <source>Today</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="83"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="84"/>
         <source>Season</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="83"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="84"/>
         <source>Episode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="115"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="116"/>
         <source>Nothing airs today</source>
         <translation type="unfinished"></translation>
     </message>

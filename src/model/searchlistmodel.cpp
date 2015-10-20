@@ -1,4 +1,5 @@
 #include "searchlistmodel.h"
+#include "sailfishapp.h"
 
 SearchListModel::SearchListModel(QObject *parent, DatabaseManager *dbmanager, XMLReader *xmlreader) :
     QObject(parent)
@@ -327,6 +328,9 @@ void SearchListModel::storeEpisodes() {
                                    ratingCount,seasonNumber,writer,absoluteNumber,airsAfterSeason,
                                    airsBeforeEpisode,airsBeforeSeason,filename,lastUpdated,seasonID,seriesID,
                                    thumbAdded,thumbHeight,thumbWidth);
+
+        // process pending events to not block UI
+        qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
     }
 
     setAdded(true);

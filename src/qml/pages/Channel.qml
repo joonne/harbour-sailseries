@@ -31,6 +31,13 @@ Item {
         delegate: ListItem {
 
             width: parent.width
+            onClicked: {
+                pageStack.push(Qt.resolvedUrl("ProgramOverviewPage.qml"),
+                               { programName: name,
+                                 programOverview: description,
+                                 start: start,
+                                 end: end})
+            }
 
             Column {
                 x: Theme.paddingLarge
@@ -44,7 +51,7 @@ Item {
                 Label {
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.secondaryColor
-                    text: start
+                    text: start + " - " + end
 
                 }
             }

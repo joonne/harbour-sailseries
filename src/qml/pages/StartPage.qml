@@ -38,6 +38,7 @@ Page {
                 }
             }
 
+            // Upcoming feature or separate app?
 //            MenuItem {
 //                text: qsTr("TV Guide")
 //                font.pixelSize: Theme.fontSizeSmall

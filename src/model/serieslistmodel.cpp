@@ -1,4 +1,5 @@
 #include "serieslistmodel.h"
+#include "sailfishapp.h"
 
 SeriesListModel::SeriesListModel(QObject *parent, QQmlContext* context, DatabaseManager* dbmanager, XMLReader *reader) :
     QObject(parent),
@@ -267,12 +268,12 @@ void SeriesListModel::storeEpisodes() {
 
         QMap<QString,QString> temp = myEpisodes.at(i);
 
-        int id;
-        QString director;
-        int epimgflag;
-        QString episodeName;
-        int episodeNumber;
-        QString firstAired;
+        int id = 0;
+        QString director = "";
+        int epimgflag = 0;
+        QString episodeName = "";
+        int episodeNumber = 0;
+        QString firstAired = "";
         QString guestStars;
         QString imdb_id;
         QString language;
@@ -358,6 +359,9 @@ void SeriesListModel::storeEpisodes() {
                                    ratingCount,seasonNumber,writer,absoluteNumber,airsAfterSeason,
                                    airsBeforeEpisode,airsBeforeSeason,filename,lastUpdated,seasonID,seriesID,
                                    thumbAdded,thumbHeight,thumbWidth);
+
+        // process pending events to not block UI
+        qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
     }
 }
 

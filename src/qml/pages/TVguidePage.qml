@@ -18,11 +18,18 @@ Page {
 
         model: VisualItemModel {
             id: channels
-            Channel {id: tv1 }
-            Channel {id: tv2 }
-            Channel {id: mtv3 }
-            Channel {id: nelonen }
-            Channel {id: subtv }
+            Channel { id: tv1 }
+            Channel { id: tv2 }
+            Channel { id: mtv3 }
+            Channel { id: nelonen }
+            Channel { id: subtv }
+            Channel { id: liv }
+            Channel { id: jim }
+            Channel { id: viisi }
+            Channel { id: kutonen }
+            Channel { id: fox }
+            Channel { id: ava }
+            Channel { id: hero }
         }
     }
 
@@ -33,6 +40,13 @@ Page {
         mtv3.initialize("mtv3");
         nelonen.initialize("nelonen");
         subtv.initialize("subtv");
+        liv.initialize("liv");
+        jim.initialize("jim");
+        viisi.initialize("viisi");
+        kutonen.initialize("kutonen");
+        fox.initialize("fox");
+        ava.initialize("ava");
+        hero.initialize("hero");
     }
 
     Component.onCompleted: {

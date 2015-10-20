@@ -48,7 +48,8 @@ OTHER_FILES = \
     qml/components/MoreIndicator.qml \
     qml/components/TextExpander.qml \
     qml/pages/EpisodeOverviewPage.qml \
-    qml/pages/EpisodesPage.qml
+    qml/pages/EpisodesPage.qml \
+    qml/pages/ProgramOverviewPage.qml
 
 INCLUDEPATH += $$PWD
 

@@ -101,7 +101,7 @@ Page {
 
                 Label {
                     id: episodeName
-                    text: EpisodeName + Watched
+                    text: EpisodeName
                     anchors.left: parent.left
                     anchors.leftMargin: 2 * Theme.paddingMedium
                     font.pixelSize: Theme.fontSizeSmall

@@ -6,14 +6,6 @@ Page {
 
     property string seriesID
 
-//    function initialize() {
-
-//        episodes.seriesID = seriesID
-
-//    }
-
-//    Component.onCompleted: initialize()
-
     Component.onDestruction: controller.SeriesListModel.Mode = "default"
 
     SilicaFlickable {
@@ -44,16 +36,15 @@ Page {
             model: VisualItemModel {
                 id: items
                 Series { id: series }
-                //Episodes { id: episodes }
                 Seasons { id: seasons }
             }
         }
     }
 
     BusyIndicator {
-           anchors.centerIn: parent
-           running: controller.SeriesListModel.Loading ? true : false
-       }
+        anchors.centerIn: parent
+        running: controller.SeriesListModel.Loading ? true : false
+    }
 
     RemorsePopup { id: remorse }
 }

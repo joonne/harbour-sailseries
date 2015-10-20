@@ -39,6 +39,8 @@ signals:
 public slots:
     void readyToUpdateModels();
 
+    void readyToProcessEvent();
+
 private:
     ProgramListModel* myProgramListModel;
     SeriesListModel* mySeriesListModel;

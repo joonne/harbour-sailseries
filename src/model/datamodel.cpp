@@ -36,6 +36,10 @@ DataModel::~DataModel() {
 
 }
 
+void DataModel::readyToProcessEvent() {
+
+}
+
 ProgramListModel* DataModel::getProgramListModel() { return myProgramListModel; }
 
 SeriesListModel* DataModel::getSeriesListModel() { return mySeriesListModel; }
