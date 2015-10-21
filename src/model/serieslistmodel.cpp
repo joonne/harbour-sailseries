@@ -1,5 +1,6 @@
 #include "serieslistmodel.h"
-#include "sailfishapp.h"
+// #include "sailfishapp.h"
+#include "qcoreapplication.h"
 
 SeriesListModel::SeriesListModel(QObject *parent, QQmlContext* context, DatabaseManager* dbmanager, XMLReader *reader) :
     QObject(parent),

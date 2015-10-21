@@ -4,8 +4,8 @@ import Sailfish.Silica 1.0
 Page {
     id: aboutpage
 
-    property string contributor_qzip: "bonapart"
-    property string translator_french: "lunatix, french"
+    property string contributor_qzip: qsTr("bonapart: qzip")
+    property string translator_french: qsTr("lunatix: french translations")
 
     PageHeader {
         id: header
@@ -37,7 +37,7 @@ Page {
         }
 
         Item {
-            height: Theme.paddingLarge
+            height: Theme.paddingMedium
             width: aboutpage.width
         }
 
@@ -61,7 +61,7 @@ Page {
         }
 
         Item {
-            height: Theme.paddingLarge
+            height: Theme.paddingMedium
             width: aboutpage.width
         }
 
@@ -75,7 +75,7 @@ Page {
         }
 
         Item {
-            height: Theme.paddingLarge
+            height: Theme.paddingMedium
             width: aboutpage.width
         }
 
@@ -89,7 +89,7 @@ Page {
         }
 
         Item {
-            height: Theme.paddingLarge
+            height: Theme.paddingMedium
             width: aboutpage.width
         }
 
@@ -102,17 +102,17 @@ Page {
         }
 
         Item {
-            height: Theme.paddingLarge
+            height: Theme.paddingMedium
             width: aboutpage.width
         }
 
-        TextArea {
+        TextField {
             width: aboutpage.width
             readOnly: true
             color: Theme.primaryColor
             font.pixelSize: Theme.fontSizeSmall
-            text: qsTr("Thanks to bonapart for the help with qzip.")
-            height: (4 * Theme.paddingLarge)
+            text: contributor_qzip + " , " + translator_french
+            label: qsTr("Contributors")
 
         }
     }

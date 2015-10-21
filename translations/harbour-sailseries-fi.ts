@@ -4,6 +4,16 @@
 <context>
     <name>AboutPage</name>
     <message>
+        <location filename="../src/qml/pages/AboutPage.qml" line="7"/>
+        <source>bonapart: qzip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/AboutPage.qml" line="8"/>
+        <source>lunatix: french translations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="12"/>
         <source>About SailSeries</source>
         <translation>Tietoa sovelluksesta</translation>
@@ -44,9 +54,9 @@
         <translation>Lähetä sähköpostia kehittäjälle</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="114"/>
-        <source>Thanks to bonapart for the help with qzip.</source>
-        <translation>Kiitos bonapart:ille avusta qzip:in kanssa.</translation>
+        <location filename="../src/qml/pages/AboutPage.qml" line="115"/>
+        <source>Contributors</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -103,7 +113,7 @@
     <message>
         <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="71"/>
         <source>Original air date</source>
-        <translation type="unfinished"></translation>
+        <translation>Ensiesitys</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="87"/>
@@ -121,27 +131,27 @@
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="31"/>
         <source>I have seen these all</source>
-        <translation type="unfinished"></translation>
+        <translation>Olen nähnyt nämä kaikki</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="41"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="42"/>
         <source>Episodes</source>
-        <translation type="unfinished">Jaksot</translation>
+        <translation>Jaksot</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="88"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="89"/>
         <source>Season</source>
-        <translation type="unfinished">Kausi</translation>
+        <translation>Kausi</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="95"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="96"/>
         <source>Episode</source>
-        <translation type="unfinished">Jakso</translation>
+        <translation>Jakso</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="157"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="159"/>
         <source>No episodes.</source>
-        <translation type="unfinished">Ei jaksoja.</translation>
+        <translation>Ei jaksoja.</translation>
     </message>
 </context>
 <context>
@@ -149,22 +159,22 @@
     <message>
         <location filename="../src/qml/pages/Episodes_orig.qml" line="34"/>
         <source>Episodes</source>
-        <translation type="unfinished">Jaksot</translation>
+        <translation>Jaksot</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/Episodes_orig.qml" line="83"/>
         <source>Season</source>
-        <translation type="unfinished">Kausi</translation>
+        <translation>Kausi</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/Episodes_orig.qml" line="90"/>
         <source>Episode</source>
-        <translation type="unfinished">Jakso</translation>
+        <translation>Jakso</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/Episodes_orig.qml" line="158"/>
         <source>No episodes.</source>
-        <translation type="unfinished">Ei jaksoja.</translation>
+        <translation>Ei jaksoja.</translation>
     </message>
 </context>
 <context>
@@ -220,7 +230,7 @@
     <message>
         <location filename="../src/qml/pages/ProgramOverviewPage.qml" line="42"/>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Aika</translation>
     </message>
 </context>
 <context>

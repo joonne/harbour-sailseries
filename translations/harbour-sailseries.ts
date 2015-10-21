@@ -4,6 +4,16 @@
 <context>
     <name>AboutPage</name>
     <message>
+        <location filename="../src/qml/pages/AboutPage.qml" line="7"/>
+        <source>bonapart: qzip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/AboutPage.qml" line="8"/>
+        <source>lunatix: french translations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="12"/>
         <source>About SailSeries</source>
         <translation type="unfinished"></translation>
@@ -44,8 +54,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="114"/>
-        <source>Thanks to bonapart for the help with qzip.</source>
+        <location filename="../src/qml/pages/AboutPage.qml" line="115"/>
+        <source>Contributors</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -124,22 +134,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="41"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="42"/>
         <source>Episodes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="88"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="89"/>
         <source>Season</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="95"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="96"/>
         <source>Episode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="157"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="159"/>
         <source>No episodes.</source>
         <translation type="unfinished"></translation>
     </message>

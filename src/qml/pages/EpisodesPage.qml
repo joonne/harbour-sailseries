@@ -31,6 +31,7 @@ Page {
                 text: qsTr("I have seen these all")
                 onClicked: {
                     controller.EpisodeListModel.markSeasonWatched(seriesID, seasonNumber)
+                    pageStack.pop()
                 }
             }
         }
@@ -133,6 +134,7 @@ Page {
                 anchors.rightMargin: Theme.paddingMedium
                 anchors.top: container.top
                 anchors.topMargin: Theme.paddingMedium
+                cache: false
 
                 MouseArea {
                     id: clickarea

@@ -1,5 +1,6 @@
 #include "searchlistmodel.h"
-#include "sailfishapp.h"
+// #include "sailfishapp.h"
+#include "qcoreapplication.h"
 
 SearchListModel::SearchListModel(QObject *parent, DatabaseManager *dbmanager, XMLReader *xmlreader) :
     QObject(parent)
