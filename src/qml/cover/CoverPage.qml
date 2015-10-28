@@ -39,7 +39,6 @@ CoverBackground {
                 controller.SeriesListModel.NextEpisodeName !== null &&
                 controller.SeriesListModel.DaysToNextEpisode !== null &&
                 controller.SeriesListModel.Status !== null) {
-            console.log("pitäis toimia.")
             return nextEpisodeDetails(controller.SeriesListModel.NextEpisodeName,controller.SeriesListModel.DaysToNextEpisode,controller.SeriesListModel.Status)
         }
     }

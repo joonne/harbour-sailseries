@@ -9,6 +9,7 @@
 #include "episodelistmodel.h"
 #include "searchlistmodel.h"
 #include "todaylistmodel.h"
+#include "seasonlistmodel.h"
 
 class DataModel : public QObject
 {
@@ -18,6 +19,7 @@ class DataModel : public QObject
     Q_PROPERTY(SearchListModel* SearchModel READ getSearchModel NOTIFY searchModelChanged)
     Q_PROPERTY(TodayListModel* TodayModel READ getTodayModel NOTIFY todayModelChanged)
     Q_PROPERTY(EpisodeListModel* EpisodeListModel READ getEpisodeListModel NOTIFY episodeListModelChanged)
+    Q_PROPERTY(SeasonListModel * SeasonListModel READ getSeasonListModel NOTIFY seasonListModelChanged)
 
 public:
     explicit DataModel(QObject *parent = 0);
@@ -28,6 +30,7 @@ public:
     SearchListModel* getSearchModel();
     TodayListModel *getTodayModel();
     EpisodeListModel* getEpisodeListModel();
+    SeasonListModel* getSeasonListModel();
 
 signals:
     void seriesListModelChanged();
@@ -35,11 +38,10 @@ signals:
     void searchModelChanged();
     void todayModelChanged();
     void episodeListModelChanged();
+    void seasonListModelChanged();
 
 public slots:
     void readyToUpdateModels();
-
-    void readyToProcessEvent();
 
 private:
     ProgramListModel* myProgramListModel;
@@ -47,12 +49,9 @@ private:
     SearchListModel* mySearchListModel;
     TodayListModel* myTodayListModel;
     EpisodeListModel* myEpisodeListModel;
+    SeasonListModel* mySeasonListModel;
     XMLReader* myReader;
     DatabaseManager* mydbmanager;
-
-//    QMap<QString,ProgramListModel*> channels;
-//    QList<QMap<QString,QList<QMap<QString,QString> > > > myPrograms;
-
 
 };
 

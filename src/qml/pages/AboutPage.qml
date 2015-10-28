@@ -4,6 +4,9 @@ import Sailfish.Silica 1.0
 Page {
     id: aboutpage
 
+    readonly property string _APP_VERSION: appVersion
+    readonly property string _APP_BUILD_NUMBER: appBuildNum
+
     property string contributor_qzip: qsTr("bonapart: qzip")
     property string translator_french: qsTr("lunatix: french translations")
 
@@ -14,7 +17,7 @@ Page {
 
     Column {
         anchors.top: header.bottom
-        anchors.topMargin: Theme.paddingLarge * 3
+        anchors.topMargin: Theme.paddingLarge * 2
 
         Image {
             id: icon
@@ -34,6 +37,15 @@ Page {
             anchors.left: parent.left
             anchors.leftMargin: (aboutpage.width - appname.width) / 2
             color: Theme.primaryColor
+        }
+
+        Label {
+            id: version
+            text: qsTr("Version") + " " + _APP_VERSION + "." + _APP_BUILD_NUMBER
+            anchors.left: parent.left
+            anchors.leftMargin: (aboutpage.width - version.width) / 2
+            color: Theme.primaryColor
+            font.pixelSize: Theme.fontSizeExtraSmall
         }
 
         Item {

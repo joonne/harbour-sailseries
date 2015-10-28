@@ -35,7 +35,8 @@ public:
     void getLanguages();
     void searchSeries(QString text);
     void getServerTime();
-    void getFullSeriesRecord(QString seriesid,QString method);
+    void getFullSeriesRecord(QString seriesid, QString method);
+    void getBanners(QString seriesid);
 
     QList<QMap<QString,QString> > getSeries();
     QList<QMap<QString,QString> > getEpisodes();

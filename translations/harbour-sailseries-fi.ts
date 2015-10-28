@@ -4,57 +4,62 @@
 <context>
     <name>AboutPage</name>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="7"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="10"/>
         <source>bonapart: qzip</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="8"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="11"/>
         <source>lunatix: french translations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="12"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="15"/>
         <source>About SailSeries</source>
         <translation>Tietoa sovelluksesta</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="49"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="44"/>
+        <source>Version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/AboutPage.qml" line="61"/>
         <source>Created by Jonne Pihlanen.</source>
         <translation>Luonut Jonne Pihlanen.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="50"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="62"/>
         <source>This software is licenced under GPLv2.</source>
         <translation>Tämä ohjelmisto on lisensoitu GPLv2:n mukaisesti.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="51"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="63"/>
         <source>SailSeries fetches all information from a free API at TheTVDB.</source>
         <translation>SailSeries noutaa kaiken tietonsa sivustolla TheTVDB sijaitsevasta rajapinnasta.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="56"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="68"/>
         <source>TheTVDB</source>
         <translation>TheTVDB</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="70"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="82"/>
         <source>Source code in GitHub</source>
         <translation>Lähdekoodi GitHubissa</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="84"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="96"/>
         <source>Help with translations</source>
         <translation>Auta käännösten kanssa</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="98"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="110"/>
         <source>Send email to developer</source>
         <translation>Lähetä sähköpostia kehittäjälle</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="115"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="127"/>
         <source>Contributors</source>
         <translation type="unfinished"></translation>
     </message>
@@ -103,7 +108,7 @@
         <translation>Ei tietoa seuraavasta jaksosta</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="90"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="89"/>
         <source>Today</source>
         <translation>Tänään</translation>
     </message>
@@ -249,14 +254,27 @@
 <context>
     <name>Seasons</name>
     <message>
-        <location filename="../src/qml/pages/Seasons.qml" line="30"/>
+        <location filename="../src/qml/pages/Seasons.qml" line="28"/>
         <source>Seasons</source>
         <translation>Kaudet</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/Seasons.qml" line="40"/>
+        <location filename="../src/qml/pages/Seasons.qml" line="38"/>
         <source>Season</source>
         <translation>Kausi</translation>
+    </message>
+</context>
+<context>
+    <name>SeasonsNew</name>
+    <message>
+        <location filename="../src/qml/pages/SeasonsNew.qml" line="31"/>
+        <source>Seasons</source>
+        <translation type="unfinished">Kaudet</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeasonsNew.qml" line="75"/>
+        <source>Season</source>
+        <translation type="unfinished">Kausi</translation>
     </message>
 </context>
 <context>

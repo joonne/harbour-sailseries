@@ -74,7 +74,9 @@ public:
 
     bool isAlreadyAdded(int seriesID, QString name);
     int watchedCount(int seriesID);
+    int watchedCountBySeason(int seriesID, int seasonNumber);
     int totalCount(int seriesID);
+    int totalCountBySeason(int seriesID, int seasonNumber);
     int seasonCount(int seriesID);
 
 signals:

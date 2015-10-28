@@ -6,8 +6,6 @@ Item {
     height: seriesView.height;
     width: seriesView.width;
 
-    // HOWTODO: Update the icons when season is marked as watched !
-
     Component.onCompleted: timer.start()
 
     // initialization is too fast without this

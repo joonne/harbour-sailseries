@@ -625,11 +625,39 @@ int DatabaseManager::watchedCount(int seriesID) {
     return watchedCount;
 }
 
+int DatabaseManager::watchedCountBySeason(int seriesID, int seasonNumber) {
+
+    int watchedCount = 0;
+    QSqlQuery query(db);
+    query.exec(QString("SELECT COUNT(episodeName) FROM Episode WHERE seriesID = %1 AND watched = 1 AND seasonNumber = %2").arg(seriesID).arg(seasonNumber));
+    if(query.isSelect()) {
+        while(query.next()) {
+            watchedCount = query.value(0).toInt();
+        }
+    }
+    return watchedCount;
+
+}
+
 int DatabaseManager::totalCount(int seriesID) {
 
     int totalCount = 0;
     QSqlQuery query(db);
     query.exec(QString("SELECT COUNT(episodeName) FROM Episode WHERE seriesID = %1 AND seasonNumber != 0").arg(seriesID));
+    if(query.isSelect()) {
+        while(query.next()) {
+            totalCount = query.value(0).toInt();
+        }
+    }
+    return totalCount;
+
+}
+
+int DatabaseManager::totalCountBySeason(int seriesID, int seasonNumber) {
+
+    int totalCount = 0;
+    QSqlQuery query(db);
+    query.exec(QString("SELECT COUNT(episodeName) FROM Episode WHERE seriesID = %1 AND seasonNumber = %2").arg(seriesID).arg(seasonNumber));
     if(query.isSelect()) {
         while(query.next()) {
             totalCount = query.value(0).toInt();

@@ -63,6 +63,14 @@ void XMLReader::getFullSeriesRecord(QString seriesid, QString method) {
     startRequest(finalUrl);
 }
 
+void XMLReader::getBanners(QString seriesid) {
+
+    QString url = QString(MIRRORPATH) + "/api/" + QString(APIKEY) + "/series/" + seriesid + "/banners.xml";
+    qDebug() << "Requesting" << url;
+    QUrl finalUrl(url);
+    startRequest(finalUrl);
+}
+
 QList<QMap<QString,QString> > XMLReader::getSeries() { return mySeries; }
 
 QList<QMap<QString,QString> > XMLReader::getEpisodes() { return myEpisodes; }
@@ -194,6 +202,9 @@ void XMLReader::parseXML(QXmlStreamReader& xml) {
             }
             if(xml.name() == "Items") {
                 currentServerTime = parseServerTime(xml);
+            }
+            if(xml.name() == "Banners") {
+                qDebug() << xml.text();
             }
         }
     }

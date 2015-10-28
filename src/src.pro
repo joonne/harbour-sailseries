@@ -8,6 +8,9 @@ LIBS +=-lz
 # In the bright future this config line will do a lot of stuff to you
 CONFIG += sailfishapp
 
+DEFINES += APP_VERSION=\\\"$$VERSION\\\"
+DEFINES += APP_BUILDNUM=\\\"$$RELEASE\\\"
+
 SOURCES += main.cpp \
     xmlreader.cpp \
     model/seriesdata.cpp \
@@ -20,8 +23,9 @@ SOURCES += main.cpp \
     model/episodelistmodel.cpp \
     model/searchlistmodel.cpp \
     model/todaylistmodel.cpp \
-    qzip.cpp
-
+    qzip.cpp \
+    model/seasondata.cpp \
+    model/seasonlistmodel.cpp
 
 OTHER_FILES = \
 # You DO NOT want .yaml be listed here as Qt Creator's editor is completely not ready for multi package .yaml's
@@ -49,7 +53,8 @@ OTHER_FILES = \
     qml/components/TextExpander.qml \
     qml/pages/EpisodeOverviewPage.qml \
     qml/pages/EpisodesPage.qml \
-    qml/pages/ProgramOverviewPage.qml
+    qml/pages/ProgramOverviewPage.qml \
+    qml/pages/SeasonsNew.qml
 
 INCLUDEPATH += $$PWD
 
@@ -66,4 +71,6 @@ HEADERS += \
     model/searchlistmodel.h \
     model/todaylistmodel.h \
     qzipreader_p.h \
-    qzipwriter_p.h
+    qzipwriter_p.h \
+    model/seasondata.h \
+    model/seasonlistmodel.h
