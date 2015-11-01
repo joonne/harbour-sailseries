@@ -17,9 +17,6 @@ XMLReader::XMLReader(QObject *parent) :
     fullRecord = false;
     update = false; // STUPID, FIX THIS SOMEHOW
 
-    // TODO fix these
-    //qDebug() << QString("%1/api/%2/languages.xml").arg(myMirrorPath).arg(myApiKey);
-
 }
 
 XMLReader::~XMLReader() {
@@ -63,17 +60,11 @@ void XMLReader::getFullSeriesRecord(QString seriesid, QString method) {
     startRequest(finalUrl);
 }
 
-void XMLReader::getBanners(QString seriesid) {
-
-    QString url = QString(MIRRORPATH) + "/api/" + QString(APIKEY) + "/series/" + seriesid + "/banners.xml";
-    qDebug() << "Requesting" << url;
-    QUrl finalUrl(url);
-    startRequest(finalUrl);
-}
-
 QList<QMap<QString,QString> > XMLReader::getSeries() { return mySeries; }
 
 QList<QMap<QString,QString> > XMLReader::getEpisodes() { return myEpisodes; }
+
+QList<QMap<QString,QString> > XMLReader::getBanners() { return myBanners; }
 
 void XMLReader::startRequest(QUrl url) {
 
@@ -82,25 +73,11 @@ void XMLReader::startRequest(QUrl url) {
 
 }
 
-void XMLReader::getServerTime() {
-
-    QString url = "http://thetvdb.com/api/Updates.php?type=none";
-    qDebug() << "Requesting" << url;
-    QUrl finalUrl(url);
-    startRequest(finalUrl);
-
-}
-
 // ---------------------------------------------------
 // slots
 // ---------------------------------------------------
 
 void XMLReader::replyFinished(QNetworkReply *reply) {
-
-    // for writing the data into file
-    //    QFile file( "./sailseries_temp/series_info.zip" );
-    //    file.open(QIODevice::WriteOnly);
-    //    file.write(reply->readAll());
 
     QByteArray b = reply->readAll();
     QBuffer* buf = new QBuffer(&b);
@@ -118,14 +95,41 @@ void XMLReader::replyFinished(QNetworkReply *reply) {
         return;
     }
 
-    if (reply->url().toString().endsWith(".zip")){
-        QZipReader *zip=new QZipReader(buf);
+    if (reply->url().toString().endsWith(".zip")) {
+        QZipReader *zip = new QZipReader(buf);
         QXmlStreamReader xml(zip->fileData("en.xml"));
         parseXML(xml);
+        QXmlStreamReader xml_banners(zip->fileData("banners.xml"));
+        parseXML(xml_banners);
 
-    } else{
+        if(mySeries.size() != 0 and !fullRecord and !update) {
+            emit readyToPopulateSeries();
+        } else if(fullRecord) {
+            emit readyToStoreSeries();
+        } else if(update) {
+            emit readyToUpdateSeries();
+        }
+
+        // lets init the values.
+        fullRecord = false;
+        update = false;
+
+    } else {
+
         QXmlStreamReader xml(buf->buffer());
         parseXML(xml);
+
+        if(mySeries.size() != 0 and !fullRecord and !update) {
+            emit readyToPopulateSeries();
+        } else if(fullRecord) {
+            emit readyToStoreSeries();
+        } else if(update) {
+            emit readyToUpdateSeries();
+        }
+
+        // lets init the values.
+        fullRecord = false;
+        update = false;
     }
 
     reply->deleteLater();
@@ -139,6 +143,7 @@ void XMLReader::parseXML(QXmlStreamReader& xml) {
     QList<QMap<QString,QString> > series;
     QList<QMap<QString,QString> > languages;
     QList<QMap<QString,QString> > episodes;
+    QList<QMap<QString,QString> > banners;
 
     /* We'll parse the XML until we reach end of it.*/
     while(!xml.atEnd() &&
@@ -151,6 +156,7 @@ void XMLReader::parseXML(QXmlStreamReader& xml) {
         }
         /* If token is StartElement, we'll see if we can read it.*/
         if(token == QXmlStreamReader::StartElement) {
+
             /* If it's named Data, we'll go to the next.*/
             if(xml.name() == "Data") {
                 continue;
@@ -159,32 +165,8 @@ void XMLReader::parseXML(QXmlStreamReader& xml) {
             if(xml.name() == "Languages") {
                 continue;
             }
-            /* If it's named title, we'll go to the next.*/
-            if(xml.name() == "title") {
-                continue;
-            }
-            if(xml.name() == "subtitle") {
-                qDebug() << "found subtitle, lets skip it";
-                continue;
-            }
-            if(xml.name() == "updated") {
-                qDebug() << "found update info, lets skip it";
-                continue;
-            }
-            if(xml.name() == "generator") {
-                qDebug() << "found generator, lets skip it";
-                continue;
-            }
-            if(xml.name() == "link") {
-                qDebug() << "found link, lets skip it";
-                continue;
-            }
-            if(xml.name() == "id") {
-                qDebug() << "found id, lets skip it";
-                continue;
-            }
-            if(xml.name() == "atom10:link") {
-                qDebug() << "found atom10 link, lets skip it";
+            /* If it's named Languages, we'll go to the next.*/
+            if(xml.name() == "Banners") {
                 continue;
             }
 
@@ -200,11 +182,8 @@ void XMLReader::parseXML(QXmlStreamReader& xml) {
             if(xml.name() == "Language") {
                 languages.append(this->parseLanguages(xml));
             }
-            if(xml.name() == "Items") {
-                currentServerTime = parseServerTime(xml);
-            }
-            if(xml.name() == "Banners") {
-                qDebug() << xml.text();
+            if(xml.name() == "Banner") {
+                banners.append(this->parseBanner(xml));
             }
         }
     }
@@ -216,21 +195,21 @@ void XMLReader::parseXML(QXmlStreamReader& xml) {
          * and resets its internal state to the initial state. */
     xml.clear();
 
-    myLanguages = languages;
-    mySeries = series;
-    myEpisodes = episodes;
-
-    if(mySeries.size() != 0 and !fullRecord and !update) {
-        emit readyToPopulateSeries();
-    } else if(fullRecord) {
-        emit readyToStoreSeries();
-    } else if(update) {
-        emit readyToUpdateSeries();
+    if(languages.size() != 0) {
+        myLanguages = languages;
     }
 
-    // lets init the values.
-    fullRecord = false;
-    update = false;
+    if(series.size() != 0) {
+        mySeries = series;
+    }
+
+    if(episodes.size() != 0){
+        myEpisodes = episodes;
+    }
+
+    if(banners.size() != 0) {
+        myBanners = banners;
+    }
 }
 
 // Base series record parsing.
@@ -549,34 +528,60 @@ QMap<QString, QString> XMLReader::parseEpisode(QXmlStreamReader &xml) {
     return episode;
 }
 
-QString XMLReader::parseServerTime(QXmlStreamReader &xml) {
+QMap<QString, QString> XMLReader::parseBanner(QXmlStreamReader &xml) {
 
-    QString serverTime;
+    QMap<QString, QString> banner;
     /* Let's check that we're really getting a series. */
     if(xml.tokenType() != QXmlStreamReader::StartElement &&
-            xml.name() == "Items") {
-        return serverTime;
+            xml.name() == "Banner") {
+        return banner;
     }
-
+    /* Let's get the attributes for series */
+    QXmlStreamAttributes attributes = xml.attributes();
+    /* Let's check that banner has id attribute. */
+    if(attributes.hasAttribute("id")) {
+        /* We'll add it to the map. */
+        banner["id"] = attributes.value("id").toString();
+    }
     /* Next element... */
     xml.readNext();
-
+    /*
+        * We're going to loop over the things because the order might change.
+        * We'll continue the loop until we hit an EndElement named Series.
+        */
     while(!(xml.tokenType() == QXmlStreamReader::EndElement &&
-            xml.name() == "Items")) {
+            xml.name() == "Banner")) {
 
         if(xml.tokenType() == QXmlStreamReader::StartElement) {
 
-            if(xml.name() == "Time") {
+            if(xml.name() == "id") {
+                this->addElementDataToMap(xml, banner);
+            }
 
-                xml.readNext();
-                serverTime = xml.text().toString();
-                qDebug() << serverTime;
+            if(xml.name() == "BannerPath") {
+                this->addElementDataToMap(xml, banner);
+            }
+
+            if(xml.name() == "BannerType") {
+                this->addElementDataToMap(xml, banner);
+            }
+
+            if(xml.name() == "BannerType2") {
+                this->addElementDataToMap(xml, banner);
+            }
+
+            if(xml.name() == "Language") {
+                this->addElementDataToMap(xml, banner);
+            }
+
+            if(xml.name() == "Season") {
+                this->addElementDataToMap(xml, banner);
             }
         }
-
+        /* ...and next... */
         xml.readNext();
     }
-    return serverTime;
+    return banner;
 }
 
 void XMLReader::addElementDataToMap(QXmlStreamReader& xml,

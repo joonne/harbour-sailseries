@@ -32,7 +32,6 @@ public:
     QSqlError lastError();
     void close();
     bool createDB();
-    bool updateDB();
 
     bool initializeInfoTable();
     bool createInfoTable();
@@ -40,12 +39,13 @@ public:
 
     bool createSeriesTable();
     bool createEpisodeTable();
+    bool createBannerTable();
 
     bool insertSeries(int id, QString actors, QString airsDayOfWeek,
                       QString airsTime, QString contentRating,
                       QString firstAired, QString genre, QString imdb_id,
                       QString language, QString network, QString overview,
-                      double rating, int ratingCount, int runtime, QString SeriesName,
+                      double rating, int ratingCount, int runtime, QString seriesName,
                       QString status, QString added, int addedby, QString banner,
                       QString fanart, QString lastUpdated, QString poster, QString zap2itid, int watched);
     bool insertEpisode(int id, QString director, int epimgflag, QString episodeName,
@@ -55,6 +55,8 @@ public:
                        int airsAfterSeason, int airsBeforeEpisode, int airsBeforeSeason , QString filename,
                        QString lastUpdated, int seasonID, int seriesID, QString thumbAdded,
                        int thumbHeight, int thumbWidth);
+    bool insertBanner(int id, int seriesID, QString bannerPath, QString bannerType,
+                      QString bannerType2, QString language, int season);
 
     bool updateSeries();
     bool updateEpisode();
@@ -68,6 +70,7 @@ public:
     QMap<QString, QString> getNextEpisodeDetails(int seriesID);
     QList<QString> getTodaysEpisodes(int seriesID);
     QString getStatus(int seriesID);
+    QString getSeasonBanner(int seriesID, int season);
 
     void toggleWatched(QString episodeID);
     void markSeasonWatched(int seriesID, int season);

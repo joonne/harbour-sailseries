@@ -55,6 +55,7 @@ public:
 
     void storeSeries();
     void storeEpisodes();
+    void storeBanners();
 
 signals:
     void searchModelChanged();
@@ -71,6 +72,7 @@ private:
     DatabaseManager* mydbmanager;
     QList<QMap<QString,QString> > mySeries;
     QList<QMap<QString,QString> > myEpisodes;
+    QList<QMap<QString,QString> > myBanners;
     QList<SeriesData*> mySearchListModel;
     SeriesData* myInfo;
 

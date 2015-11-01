@@ -31,6 +31,13 @@ void DatabaseManager::setUpDB() {
                     double version = query.value(1).toDouble();
                     qDebug() << "App name: " << name;
                     qDebug() << "Database version : " << version;
+
+                    if(version == 1.0) {
+                        qDebug() << "Needs first update. Add the Banner table to db";
+                        if(createBannerTable()) {
+                            updateInfoTable(2.0);
+                        }
+                    }
                 }
             }
         }
@@ -123,24 +130,18 @@ bool DatabaseManager::createDB() {
 
     if(db.isOpen()) {
 
-        //-----------------------------------------------------------------
+        if(initializeInfoTable()) {
+            qDebug() << "information table created";
+        }
 
-        if(initializeInfoTable()) qDebug() << "information table created";
-
-        //-----------------------------------------------------------------
-
-        if(createSeriesTable() and createEpisodeTable()) {
+        if(createSeriesTable() and createEpisodeTable() and createBannerTable()) {
 
             qDebug() << "Tables created";
+
+            updateInfoTable(2.0);
         }
     }
 
-    return true;
-}
-
-bool DatabaseManager::updateDB() {
-
-    qDebug() << "päivitetään tietokantaa :)";
     return true;
 }
 
@@ -222,10 +223,31 @@ bool DatabaseManager::createEpisodeTable() {
     return ret;
 }
 
+bool DatabaseManager::createBannerTable() {
+
+    bool ret = false;
+    if (db.isOpen()) {
+
+        QSqlQuery query(db);
+        ret = query.exec(QString("CREATE TABLE Banner"
+                                 "(id INTEGER PRIMARY KEY, "
+                                 "seriesID INTEGER, "
+                                 "bannerPath VARCHAR(50), "
+                                 "bannerType VARCHAR(50), "
+                                 "bannerType2 VARCHAR(50), "
+                                 "language VARCHAR(2), "
+                                 "season INTEGER)"));
+
+        qDebug() << query.lastError();
+        qDebug() << query.lastQuery();
+    }
+    return ret;
+}
+
 bool DatabaseManager::insertSeries(int id, QString actors, QString airsDayOfWeek, QString airsTime,
                                    QString contentRating, QString firstAired, QString genre, QString imdb_id,
                                    QString language, QString network, QString overview, double rating,
-                                   int ratingCount, int runtime, QString SeriesName, QString status,
+                                   int ratingCount, int runtime, QString seriesName, QString status,
                                    QString added, int addedby, QString banner, QString fanart,
                                    QString lastUpdated, QString poster, QString zap2itid, int watched) {
 
@@ -233,33 +255,9 @@ bool DatabaseManager::insertSeries(int id, QString actors, QString airsDayOfWeek
 
     overview.replace("'","''");
     actors.replace("'","''");
-    SeriesName.replace("'","''");
+    seriesName.replace("'","''");
 
-    qDebug() << id;
-    qDebug() << actors;
-    qDebug() << airsDayOfWeek;
-    qDebug() << airsTime;
-    qDebug() << contentRating;
-    qDebug() << firstAired;
-    qDebug() << genre;
-    qDebug() << imdb_id;
-    qDebug() << language;
-    qDebug() << network;
-    qDebug() << overview;
-    qDebug() << rating;
-    qDebug() << ratingCount;
-    qDebug() << runtime;
-    qDebug() << SeriesName;
-    qDebug() << status;
-    qDebug() << added;
-    qDebug() << addedby;
-    qDebug() << banner;
-    qDebug() << fanart;
-    qDebug() << lastUpdated;
-    qDebug() << poster;
-    qDebug() << zap2itid;
-
-    qDebug() << "insertSeries() " << SeriesName;
+    qDebug() << "insertSeries() " << seriesName;
 
     if(db.isOpen()) {
 
@@ -279,7 +277,7 @@ bool DatabaseManager::insertSeries(int id, QString actors, QString airsDayOfWeek
                          .arg(rating)
                          .arg(ratingCount)
                          .arg(runtime)
-                         .arg(SeriesName)
+                         .arg(seriesName)
                          .arg(status)
                          .arg(added)
                          .arg(addedby)
@@ -290,7 +288,7 @@ bool DatabaseManager::insertSeries(int id, QString actors, QString airsDayOfWeek
                          .arg(zap2itid)
                          .arg(watched));
 
-        //qDebug() << query.lastError().text();
+        qDebug() << query.lastError();
 
         if(query.lastError().text() != " ") {
             qDebug() << query.lastQuery();
@@ -322,9 +320,10 @@ bool DatabaseManager::insertEpisode(int id, QString director, int epimgflag, QSt
     if(db.isOpen()) {
 
         // lets check the watched flag first, might be slow but this must be done
+        // in order to keep the flag state
         QSqlQuery query(db);
         query.exec(QString("SELECT watched FROM Episode WHERE id = %1").arg(id));
-        qDebug() << query.lastError();
+        // qDebug() << query.lastError();
 
         if(query.isSelect()) {
 
@@ -363,14 +362,34 @@ bool DatabaseManager::insertEpisode(int id, QString director, int epimgflag, QSt
                          .arg(watched));
 
         qDebug() << query.lastError().text();
-        // HOX! Here something might go wrong
-        if(query.lastError().text() != " ") {
-            qDebug() << query.lastQuery();
-        }
     }
 
     return ret;
 
+}
+
+bool DatabaseManager::insertBanner(int id, int seriesID, QString bannerPath, QString bannerType,
+                                   QString bannerType2, QString language, int season) {
+
+    bool ret = false;
+
+    if(db.isOpen()) {
+
+        QSqlQuery query(db);
+        ret = query.exec(QString("INSERT OR REPLACE INTO Banner VALUES(%1,%2,'%3','%4','%5','%6',%7)")
+                         .arg(id)
+                         .arg(seriesID)
+                         .arg(bannerPath)
+                         .arg(bannerType)
+                         .arg(bannerType2)
+                         .arg(language)
+                         .arg(season));
+
+        qDebug() << query.lastError();
+
+    }
+
+    return ret;
 }
 
 QList<QList<QString> > DatabaseManager::getSeries() {
@@ -390,19 +409,15 @@ QList<QList<QString> > DatabaseManager::getSeries() {
 
                 QString banner = query.value(0).toString();
                 temp.append(banner);
-                // qDebug() << banner;
 
                 QString poster = query.value(1).toString();
                 temp.append(poster);
-                // qDebug() << poster;
 
                 QString seriesName = query.value(2).toString();
                 temp.append(seriesName);
-                // qDebug() << seriesName;
 
                 QString status = query.value(3).toString();
                 temp.append(status);
-                // qDebug() << status;
 
                 int id = query.value(4).toInt();
                 QString idstring = QString::number(id);
@@ -451,11 +466,9 @@ QList<QList<QString> > DatabaseManager::getStartPageSeries() {
 
                 QString seriesName = query.value(0).toString();
                 temp.append(seriesName);
-                //qDebug() << seriesName;
 
                 QString network = query.value(1).toString();
                 temp.append(network);
-                //qDebug() << network;
 
                 QString airsTime = query.value(2).toString();
                 QTime time = QTime::fromString(airsTime,"h:m A");
@@ -465,15 +478,12 @@ QList<QList<QString> > DatabaseManager::getStartPageSeries() {
                 airsTime = time.toString("h:mm");
 
                 temp.append(airsTime);
-                //qDebug() << airsTime;
 
                 QString airsDayOfWeek = query.value(3).toString();
                 temp.append(airsDayOfWeek);
-                //qDebug() << airsDayOfWeek;
 
                 QString status = query.value(4).toString();
                 temp.append(status);
-                //qDebug() << status;
 
                 int id = query.value(5).toInt();
                 temp.append(this->getTodaysEpisodes(id));
@@ -503,7 +513,6 @@ QList<QList<QString> > DatabaseManager::getEpisodes(int seriesID, int seasonNumb
 
             QString episodeName = query.value(0).toString();
             temp.append(episodeName);
-            // qDebug() << episodeName;
 
             QString episodeNumber = query.value(1).toString();
             temp.append(episodeNumber);
@@ -829,4 +838,20 @@ QString DatabaseManager::getStatus(int seriesID) {
         }
     }
     return status;
+}
+
+QString DatabaseManager::getSeasonBanner(int seriesID, int season) {
+
+    QSqlQuery query(db);
+    QString banner;
+    QString bannerType = "season";
+    query.exec(QString("SELECT bannerPath FROM Banner WHERE seriesID=%1 AND bannerType='%2' AND season=%3;").arg(seriesID).arg(bannerType).arg(season));
+    if(query.isSelect()) {
+        while(query.next()) {
+            banner = query.value(0).toString();
+        }
+    }
+    qDebug() << query.lastQuery();
+    qDebug() << query.lastError();
+    return banner;
 }

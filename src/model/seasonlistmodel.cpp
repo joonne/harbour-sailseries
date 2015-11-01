@@ -51,17 +51,21 @@ void SeasonListModel::populateSeasonList(QString seriesID) {
 
     int seasonsCount = mydbmanager->seasonCount(seriesID.toInt());
     qDebug() << "seasonsCount: " + seasonsCount;
+    QString banner = "";
     int watchedCount = 0;
     int totalCount = 0;
 
+
     for(int i = 1; i <= seasonsCount; ++i) {
 
+        banner = mydbmanager->getSeasonBanner(seriesID.toInt(),i);
+        qDebug() << "banner: " + banner;
         watchedCount = mydbmanager->watchedCountBySeason(seriesID.toInt(),i);
         qDebug() << "watchedCount: " + watchedCount;
         totalCount = mydbmanager->totalCountBySeason(seriesID.toInt(),i);
         qDebug() << "totalCount: " + totalCount;
 
-        SeasonData* season = new SeasonData(this, i, "", watchedCount, totalCount);
+        SeasonData* season = new SeasonData(this, i, banner, watchedCount, totalCount);
         mySeasonListModel.append(season);
 
     }

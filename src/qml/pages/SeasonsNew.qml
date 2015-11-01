@@ -46,7 +46,7 @@ Item {
 
             BackgroundItem {
                 id: background
-                height: button.height + row.height + 10
+                height: banner.height + row.height + 10
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.paddingMedium
                 anchors.right: parent.right
@@ -59,16 +59,15 @@ Item {
             Column {
                 spacing: Theme.paddingLarge
 
+                Image {
+                    id: banner
+                    source: "http://thetvdb.com/banners/" + SeasonBanner
+                    sourceSize.height: 10 * Theme.paddingLarge
+                }
+
                 Row {
                     id: row
-
-                    Image {
-                        id: banner
-                        source: "http://thetvdb.com/banners/seasons/247808-1-4.jpg"
-                        sourceSize.height: background.height
-                        anchors.left: parent.left
-                        anchors.leftMargin: Theme.paddingMedium
-                    }
+                    visible: false
 
                     Label {
                         id: seasonNumber

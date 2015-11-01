@@ -36,6 +36,7 @@ void SeriesListModel::updateFetchFinished() {
 
     storeSeries();
     storeEpisodes();
+    storeBanners();
     setLoading(false);
     populateBannerList();
 }
@@ -139,10 +140,10 @@ void SeriesListModel::populateBannerList() {
         QString daysto = nextEpisodeDetails["daysToNext"];
 
         myPosters.append(poster); // this is for the cover !
-        SeriesData* serie = new SeriesData(this,banner,poster,seriesName,status,id,overview,
+        SeriesData* series = new SeriesData(this,banner,poster,seriesName,status,id,overview,
                                            imdbID,rating,episodeName,episodeNumber,seasonNumber,daysto,
                                            watchedCount, totalCount);
-        mySeriesListModel.append(serie);
+        mySeriesListModel.append(series);
     }
     emit seriesListChanged();
 }
@@ -173,31 +174,29 @@ void SeriesListModel::storeSeries() {
     mySeries = myReader->getSeries();
     QMap<QString,QString> temp = mySeries.first();
 
-    int seriesid;
-    QString actors;
-    QString airsDayOfWeek;
-    QString airsTime;
-    QString contentRating;
-    QString firstAired;
-    QString genre;
-    QString imdb_id;
-    QString language;
-    QString network;
-    QString overview;
-    double rating;
-    int ratingCount;
-    int runtime;
-    QString SeriesName;
-    QString status;
-    QString added;
-    int addedby;
-    QString banner;
-    QString fanart;
-    QString lastUpdated;
-    QString poster;
-    QString zap2itid;
-    // int watched;
-
+    int seriesid = 0;
+    QString actors = "";
+    QString airsDayOfWeek = "";
+    QString airsTime = "";
+    QString contentRating = "";
+    QString firstAired = "";
+    QString genre = "";
+    QString imdb_id = "";
+    QString language = "";
+    QString network = "";
+    QString overview = "";
+    double rating = 0;
+    int ratingCount = 0;
+    int runtime = 0;
+    QString SeriesName = "";
+    QString status = "";
+    QString added = "";
+    int addedby = 0;
+    QString banner = "";
+    QString fanart = "";
+    QString lastUpdated = "";
+    QString poster = "";
+    QString zap2itid = "";
 
     QMap<QString,QString>::iterator itr = temp.begin();
     while(itr != temp.end()) {
@@ -275,26 +274,26 @@ void SeriesListModel::storeEpisodes() {
         QString episodeName = "";
         int episodeNumber = 0;
         QString firstAired = "";
-        QString guestStars;
-        QString imdb_id;
-        QString language;
-        QString overview;
-        int productionCode;
-        double rating;
-        int ratingCount;
-        int seasonNumber;
-        QString writer;
-        int absoluteNumber;
-        int airsAfterSeason;
-        int airsBeforeEpisode;
-        int airsBeforeSeason;
-        QString filename;
-        QString lastUpdated;
-        int seasonID;
-        int seriesID;
-        QString thumbAdded;
-        int thumbHeight;
-        int thumbWidth;
+        QString guestStars = "";
+        QString imdb_id = "";
+        QString language = "";
+        QString overview = "";
+        int productionCode = 0;
+        double rating = 0;
+        int ratingCount = 0;
+        int seasonNumber = 0;
+        QString writer = "";
+        int absoluteNumber = 0;
+        int airsAfterSeason = 0;
+        int airsBeforeEpisode = 0;
+        int airsBeforeSeason = 0;
+        QString filename = "";
+        QString lastUpdated = "";
+        int seasonID = 0;
+        int seriesID = 0;
+        QString thumbAdded = "";
+        int thumbHeight = 0;
+        int thumbWidth = 0;
 
         QMap<QString,QString>::iterator itr = temp.begin();
         while(itr != temp.end()) {
@@ -361,8 +360,47 @@ void SeriesListModel::storeEpisodes() {
                                    airsBeforeEpisode,airsBeforeSeason,filename,lastUpdated,seasonID,seriesID,
                                    thumbAdded,thumbHeight,thumbWidth);
 
-        // process pending events to not block UI
+        // process pending events to not freeze the app
         qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+    }
+}
+
+void SeriesListModel::storeBanners() {
+
+    myBanners = myReader->getBanners();
+
+    for(int i = 0; i < myBanners.size(); ++i) {
+
+        QMap<QString,QString> temp = myBanners.at(i);
+
+        int id = 0;
+        int seriesID = myInfo->getID().toInt(); // we are saving info for this series
+        QString bannerPath = "";
+        QString bannerType = "";
+        QString bannerType2 = "";
+        QString language = "";
+        int season = 0;
+
+        QMap<QString,QString>::iterator itr = temp.begin();
+        while(itr != temp.end()) {
+
+            if(itr.key() == "id") {
+                id = itr.value().toInt();
+            } else if(itr.key() == "BannerPath") {
+                bannerPath = itr.value();
+            } else if(itr.key() == "BannerType") {
+                bannerType = itr.value();
+            } else if(itr.key() == "BannerType2") {
+                bannerType2 = itr.value();
+            } else if(itr.key() == "Language") {
+                language = itr.value();
+            } else if(itr.key() == "Season") {
+                season = itr.value().toInt();
+            }
+            ++itr;
+        }
+
+        mydbmanager->insertBanner(id,seriesID,bannerPath,bannerType,bannerType2,language,season);
     }
 }
 
@@ -414,14 +452,6 @@ QString SeriesListModel::getPoster() {
 
     qDebug() << myPoster;
     return myPoster;
-
-//    if(myPosters.size() != 0) {
-//        return myPosters.at(posterIndex);
-//    } else {
-//        return "";
-//    }
-
-    //return myInfo->getPoster();
 }
 
 void SeriesListModel::setPoster(QString) {

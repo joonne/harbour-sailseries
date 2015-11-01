@@ -272,7 +272,7 @@
         <translation type="unfinished">Saisons</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsNew.qml" line="75"/>
+        <location filename="../src/qml/pages/SeasonsNew.qml" line="74"/>
         <source>Season</source>
         <translation type="unfinished">Saison</translation>
     </message>

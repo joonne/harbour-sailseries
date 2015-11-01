@@ -36,7 +36,7 @@ Page {
             model: VisualItemModel {
                 id: items
                 Series { id: series }
-                Seasons { id: seasons }
+                SeasonsNew { id: seasons }
             }
         }
     }

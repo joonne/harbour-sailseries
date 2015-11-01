@@ -32,6 +32,10 @@ SearchListModel::~SearchListModel() {
 
 }
 
+/**
+ * @brief returns listmodel
+ * @return listmodel for the search page
+ */
 QQmlListProperty<SeriesData> SearchListModel::getSearchModel() {
 
     return QQmlListProperty<SeriesData>(this,&mySearchListModel,&SearchListModel::searchListCount,&SearchListModel::searchListAt);
@@ -71,6 +75,7 @@ void SearchListModel::getFullSeriesRecordFinished() {
 
     storeSeries();
     storeEpisodes();
+    storeBanners();
     setLoading(false);
     emit updateModels();
 }
@@ -85,8 +90,6 @@ void SearchListModel::populateSearchModel() {
 
         for(int i = 0; i < mySeries.size(); ++i) {
 
-            qDebug() << mySeries.size();
-
             // This is the basic data
             QMap<QString,QString> temp = mySeries.at(i);
             QString seriesid = temp["seriesid"];
@@ -100,13 +103,13 @@ void SearchListModel::populateSearchModel() {
             QString zap2it_id = temp["zap2it_id"];
             QString network = temp["Network"];
 
-            SeriesData* serie = new SeriesData(this, seriesid, language,
+            SeriesData* series = new SeriesData(this, seriesid, language,
                                                seriesName, aliasNames,
                                                banner, overview, firstAired,
                                                imdb_id, zap2it_id, network);
 
 
-            mySearchListModel.append(serie);
+            mySearchListModel.append(series);
 
         }
 
@@ -116,6 +119,10 @@ void SearchListModel::populateSearchModel() {
     }
 }
 
+/**
+ * @brief search for series
+ * @param text - series name to be searched
+ */
 void SearchListModel::searchSeries(QString text) {
 
     setLoading(true);
@@ -125,108 +132,121 @@ void SearchListModel::searchSeries(QString text) {
     myReader->searchSeries(text);
 }
 
+/**
+ * @brief selects series to be shown in the seriesinfopage
+ * @param index - index of the listmodel
+ */
 void SearchListModel::selectSeries(int index) {
 
     myInfo = mySearchListModel.at(index);
 
 }
 
+/**
+ * @brief get full series record from thetvdb
+ * @param id - id of the series to retrieve
+ */
 void SearchListModel::getFullSeriesRecord(QString id) {
     myReader->getFullSeriesRecord(id,"full");
     setLoading(true);
 }
 
+/**
+ * @brief store series to db
+ */
 void SearchListModel::storeSeries() {
 
     mySeries = myReader->getSeries();
-    QMap<QString,QString> temp = mySeries.at(0);
 
-    int seriesid;
-    QString actors;
-    QString airsDayOfWeek;
-    QString airsTime;
-    QString contentRating;
-    QString firstAired;
-    QString genre;
-    QString imdb_id;
-    QString language;
-    QString network;
-    QString overview;
-    double rating;
-    int ratingCount;
-    int runtime;
-    QString SeriesName;
-    QString status;
-    QString added;
-    int addedby;
-    QString banner;
-    QString fanart;
-    QString lastUpdated;
-    QString poster;
-    QString zap2itid;
-    // int watched;
+    if(mySeries.length() != 0) {
 
+        QMap<QString,QString> temp = mySeries.at(0);
 
-    QMap<QString,QString>::iterator itr = temp.begin();
-    while(itr != temp.end()) {
+        int seriesid = 0;
+        QString actors = "";
+        QString airsDayOfWeek = "";
+        QString airsTime = "";
+        QString contentRating = "";
+        QString firstAired = "";
+        QString genre = "";
+        QString imdb_id = "";
+        QString language = "";
+        QString network = "";
+        QString overview = "";
+        double rating = 0;
+        int ratingCount = 0;
+        int runtime = 0;
+        QString SeriesName = "";
+        QString status = "";
+        QString added = "";
+        int addedby = 0;
+        QString banner = "";
+        QString fanart = "";
+        QString lastUpdated = "";
+        QString poster = "";
+        QString zap2itid = "";
 
-        if(itr.key() == "id") {
-            seriesid = itr.value().toInt();
-        } else if(itr.key() == "Actors") {
-            actors = itr.value();
-        } else if(itr.key() == "Airs_DayOfWeek") {
-            airsDayOfWeek = itr.value();
-        } else if(itr.key() == "Airs_Time") {
-            airsTime = itr.value();
-        } else if(itr.key() == "ContentRating") {
-            contentRating = itr.value();
-        } else if(itr.key() == "FirstAired") {
-            firstAired = itr.value();
-        } else if(itr.key() == "Genre") {
-            genre = itr.value();
-        } else if(itr.key() == "IMDB_ID") {
-            imdb_id = itr.value();
-        } else if(itr.key() == "Language") {
-            language = itr.value();
-        } else if(itr.key() == "Network") {
-            network = itr.value();
-        } else if(itr.key() == "Overview") {
-            overview = itr.value();
-        } else if(itr.key() == "Rating") {
-            rating = itr.value().toDouble();
-        } else if(itr.key() == "RatingCount") {
-            ratingCount = itr.value().toInt();
-        } else if(itr.key() == "Runtime") {
-            runtime = itr.value().toInt();
-        } else if(itr.key() == "SeriesName") {
-            SeriesName = itr.value();
-        } else if(itr.key() == "Status") {
-            status = itr.value();
-        } else if(itr.key() == "added") {
-            added = itr.value();
-        } else if(itr.key() == "addedBy") {
-            addedby = itr.value().toInt();
-        } else if(itr.key() == "banner") {
-            banner = itr.value();
-        } else if(itr.key() == "fanart") {
-            fanart = itr.value();
-        } else if(itr.key() == "lastupdated") {
-            lastUpdated = itr.value();
-        } else if(itr.key() == "poster") {
-            poster = itr.value();
-        } else if(itr.key() == "zap2it_id") {
-            zap2itid = itr.value();
+        QMap<QString,QString>::iterator itr = temp.begin();
+        while(itr != temp.end()) {
+
+            if(itr.key() == "id") {
+                seriesid = itr.value().toInt();
+            } else if(itr.key() == "Actors") {
+                actors = itr.value();
+            } else if(itr.key() == "Airs_DayOfWeek") {
+                airsDayOfWeek = itr.value();
+            } else if(itr.key() == "Airs_Time") {
+                airsTime = itr.value();
+            } else if(itr.key() == "ContentRating") {
+                contentRating = itr.value();
+            } else if(itr.key() == "FirstAired") {
+                firstAired = itr.value();
+            } else if(itr.key() == "Genre") {
+                genre = itr.value();
+            } else if(itr.key() == "IMDB_ID") {
+                imdb_id = itr.value();
+            } else if(itr.key() == "Language") {
+                language = itr.value();
+            } else if(itr.key() == "Network") {
+                network = itr.value();
+            } else if(itr.key() == "Overview") {
+                overview = itr.value();
+            } else if(itr.key() == "Rating") {
+                rating = itr.value().toDouble();
+            } else if(itr.key() == "RatingCount") {
+                ratingCount = itr.value().toInt();
+            } else if(itr.key() == "Runtime") {
+                runtime = itr.value().toInt();
+            } else if(itr.key() == "SeriesName") {
+                SeriesName = itr.value();
+            } else if(itr.key() == "Status") {
+                status = itr.value();
+            } else if(itr.key() == "added") {
+                added = itr.value();
+            } else if(itr.key() == "addedBy") {
+                addedby = itr.value().toInt();
+            } else if(itr.key() == "banner") {
+                banner = itr.value();
+            } else if(itr.key() == "fanart") {
+                fanart = itr.value();
+            } else if(itr.key() == "lastupdated") {
+                lastUpdated = itr.value();
+            } else if(itr.key() == "poster") {
+                poster = itr.value();
+            } else if(itr.key() == "zap2it_id") {
+                zap2itid = itr.value();
+            }
+
+            ++itr;
         }
 
-        ++itr;
+        mydbmanager->insertSeries(seriesid,actors,airsDayOfWeek,airsTime,
+                                  contentRating,firstAired,genre,
+                                  imdb_id,language,network,overview,
+                                  rating,ratingCount,runtime,SeriesName,
+                                  status,added,addedby,banner,fanart,lastUpdated,
+                                  poster,zap2itid,0);
     }
-
-    mydbmanager->insertSeries(seriesid,actors,airsDayOfWeek,airsTime,
-                              contentRating,firstAired,genre,
-                              imdb_id,language,network,overview,
-                              rating,ratingCount,runtime,SeriesName,
-                              status,added,addedby,banner,fanart,lastUpdated,
-                              poster,zap2itid,0);
 }
 
 void SearchListModel::storeEpisodes() {
@@ -237,32 +257,32 @@ void SearchListModel::storeEpisodes() {
 
         QMap<QString,QString> temp = myEpisodes.at(i);
 
-        int id;
-        QString director;
-        int epimgflag;
-        QString episodeName;
-        int episodeNumber;
-        QString firstAired;
-        QString guestStars;
-        QString imdb_id;
-        QString language;
-        QString overview;
-        int productionCode;
-        double rating;
-        int ratingCount;
-        int seasonNumber;
-        QString writer;
-        int absoluteNumber;
-        int airsAfterSeason;
-        int airsBeforeEpisode;
-        int airsBeforeSeason;
-        QString filename;
-        QString lastUpdated;
-        int seasonID;
-        int seriesID;
-        QString thumbAdded;
-        int thumbHeight;
-        int thumbWidth;
+        int id = 0;
+        QString director = "";
+        int epimgflag = 0;
+        QString episodeName = "";
+        int episodeNumber = 0;
+        QString firstAired = "";
+        QString guestStars = "";
+        QString imdb_id = "";
+        QString language = "";
+        QString overview = "";
+        int productionCode = 0;
+        double rating = 0;
+        int ratingCount = 0;
+        int seasonNumber = 0;
+        QString writer = "";
+        int absoluteNumber = 0;
+        int airsAfterSeason = 0;
+        int airsBeforeEpisode = 0;
+        int airsBeforeSeason = 0;
+        QString filename = "";
+        QString lastUpdated = "";
+        int seasonID = 0;
+        int seriesID = 0;
+        QString thumbAdded = "";
+        int thumbHeight = 0;
+        int thumbWidth = 0;
 
         QMap<QString,QString>::iterator itr = temp.begin();
         while(itr != temp.end()) {
@@ -329,11 +349,50 @@ void SearchListModel::storeEpisodes() {
                                    airsBeforeEpisode,airsBeforeSeason,filename,lastUpdated,seasonID,seriesID,
                                    thumbAdded,thumbHeight,thumbWidth);
 
-        // process pending events to not block UI
+        // process pending events to not freeze the app
         qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
     }
 
     setAdded(true);
+}
+
+void SearchListModel::storeBanners() {
+
+    myBanners = myReader->getBanners();
+
+    for(int i = 0; i < myBanners.size(); ++i) {
+
+        QMap<QString,QString> temp = myBanners.at(i);
+
+        int id = 0;
+        int seriesID = myInfo->getID().toInt(); // we are saving info for this series
+        QString bannerPath = "";
+        QString bannerType = "";
+        QString bannerType2 = "";
+        QString language = "";
+        int season = 0;
+
+        QMap<QString,QString>::iterator itr = temp.begin();
+        while(itr != temp.end()) {
+
+            if(itr.key() == "id") {
+                id = itr.value().toInt();
+            } else if(itr.key() == "BannerPath") {
+                bannerPath = itr.value();
+            } else if(itr.key() == "BannerType") {
+                bannerType = itr.value();
+            } else if(itr.key() == "BannerType2") {
+                bannerType2 = itr.value();
+            } else if(itr.key() == "Language") {
+                language = itr.value();
+            } else if(itr.key() == "Season") {
+                season = itr.value().toInt();
+            }
+            ++itr;
+        }
+
+        mydbmanager->insertBanner(id,seriesID,bannerPath,bannerType,bannerType2,language,season);
+    }
 }
 
 QString SearchListModel::getID() { return myInfo->getID(); }

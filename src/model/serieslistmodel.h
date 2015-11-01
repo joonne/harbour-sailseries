@@ -74,6 +74,7 @@ public:
 
     void storeSeries();
     void storeEpisodes();
+    void storeBanners();
     Q_INVOKABLE void deleteSeries(int seriesID);
     Q_INVOKABLE void updateSeries(QString seriesID);
 
@@ -97,6 +98,7 @@ private:
     DatabaseManager* mydbmanager;
     QList<QMap<QString,QString> > mySeries;
     QList<QMap<QString,QString> > myEpisodes;
+    QList<QMap<QString,QString> > myBanners;
     QQmlContext* myContext;
     QList<SeriesData*> mySeriesListModel;
     bool isPopulated;

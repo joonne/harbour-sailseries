@@ -27,24 +27,22 @@ public:
     QMap<QString,QString> parseSeries(QXmlStreamReader& xml);
     QMap<QString,QString> parseLanguages(QXmlStreamReader& xml);
     QMap<QString,QString> parseEpisode(QXmlStreamReader& xml);
-    QString parseServerTime(QXmlStreamReader& xml);
+    QMap<QString,QString> parseBanner(QXmlStreamReader& xml);
     void addElementDataToMap(QXmlStreamReader& xml,
                                  QMap<QString, QString>& map) const;
     void startRequest(QUrl url);
 
     void getLanguages();
     void searchSeries(QString text);
-    void getServerTime();
     void getFullSeriesRecord(QString seriesid, QString method);
-    void getBanners(QString seriesid);
 
     QList<QMap<QString,QString> > getSeries();
     QList<QMap<QString,QString> > getEpisodes();
+    QList<QMap<QString,QString> > getBanners();
 
 signals:
     void readyToPopulateSeries();
     void readyToPopulateChannels();
-    void readyToGetBanner();
     void readyToStoreSeries();
     void readyToUpdateSeries();
 
@@ -57,6 +55,7 @@ private:
     QList<QMap<QString,QString> > myLanguages;
     QList<QMap<QString,QString> > mySeries;
     QList<QMap<QString,QString> > myEpisodes;
+    QList<QMap<QString,QString> > myBanners;
     QString currentServerTime;
 
     bool fullRecord;
