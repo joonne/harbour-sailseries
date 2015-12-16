@@ -134,27 +134,27 @@
 <context>
     <name>EpisodesPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="31"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="27"/>
         <source>I have seen these all</source>
         <translation>J&apos;ai tout visionné</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="42"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="39"/>
         <source>Episodes</source>
         <translation>Episodes</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="89"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="86"/>
         <source>Season</source>
         <translation>Saison</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="96"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="93"/>
         <source>Episode</source>
         <translation>Episode</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="159"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="158"/>
         <source>No episodes.</source>
         <translation>Pas d&apos;épisode.</translation>
     </message>
@@ -272,7 +272,7 @@
         <translation type="unfinished">Saisons</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsNew.qml" line="74"/>
+        <location filename="../src/qml/pages/SeasonsNew.qml" line="80"/>
         <source>Season</source>
         <translation type="unfinished">Saison</translation>
     </message>

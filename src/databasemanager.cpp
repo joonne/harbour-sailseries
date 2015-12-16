@@ -86,6 +86,14 @@ bool DatabaseManager::deleteDB() {
     return QFile::remove(dbpath);
 }
 
+bool DatabaseManager::startTransaction() {
+    db.transaction();
+}
+
+bool DatabaseManager::commit() {
+    db.commit();
+}
+
 bool DatabaseManager::initializeInfoTable() {
 
     bool ret = createInfoTable();

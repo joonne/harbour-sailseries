@@ -46,54 +46,98 @@ Item {
 
             BackgroundItem {
                 id: background
-                height: banner.height + row.height + 10
+                height: 11 * Theme.paddingLarge
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.paddingMedium
                 anchors.right: parent.right
                 anchors.rightMargin: Theme.paddingMedium
                 onClicked: {
+                    model.name += "1";
                     pageStack.push(Qt.resolvedUrl("EpisodesPage.qml"), { seriesID: controller.SeriesListModel.ID, seasonNumber: index + 1});
                 }
             }
 
-            Column {
-                spacing: Theme.paddingLarge
+            Image {
+                id: banner
+                source: "http://thetvdb.com/banners/" + SeasonBanner
+                sourceSize.height: 10 * Theme.paddingLarge
+                anchors.left: background.left
+                anchors.leftMargin: banner.width === 0 ? 0 : Theme.paddingMedium
+                anchors.top: parent.top
+                anchors.topMargin: (background.height - banner.height) / 2
 
-                Image {
-                    id: banner
-                    source: "http://thetvdb.com/banners/" + SeasonBanner
-                    sourceSize.height: 10 * Theme.paddingLarge
+            }
+
+            Row {
+                id: upperrow
+                anchors.top: background.top
+                anchors.topMargin: 2 * Theme.paddingLarge
+                anchors.left: banner.right
+                anchors.leftMargin: (background.width - banner.width - seasonNumber.width) / 2
+
+                Label {
+                    id: seasonNumber
+                    text: qsTr("Season") + " " + (index + 1)
+                    font.pixelSize: Theme.fontSizeLarge
+                }
+            }
+
+            Row {
+                id: middlerow
+                anchors.left: banner.right
+                anchors.leftMargin: (background.width - banner.width - middlerow.width) / 2
+                anchors.top: upperrow.bottom
+                anchors.topMargin: Theme.paddingLarge
+
+                Label {
+                    text: "Watched"
+                    font.pixelSize: Theme.fontSizeExtraSmall
                 }
 
-                Row {
-                    id: row
-                    visible: false
+                Label {
+                    text: " "
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                }
 
-                    Label {
-                        id: seasonNumber
-                        text: qsTr("Season") + " " + (index + 1)
-                    }
+                Label {
+                    id: watchedCount
+                    text: WatchedCount
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                }
 
-                    Label {
-                        text: " "
-                    }
+                Label {
+                    text: " "
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                }
 
-                    Label {
-                        id: watchedCount
-                        text: WatchedCount
-                    }
+                Label {
+                    text: "/"
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                }
 
-                    Label {
-                        text: " / "
-                    }
+                Label {
+                    text: " "
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                }
 
-                    Label {
-                        id: totalCount
-                        text: TotalCount
-                    }
+                Label {
+                    id: totalCount
+                    text: TotalCount
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                }
+
+                Label {
+                    text: " "
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                }
+
+                Label {
+                    text: "episodes"
+                    font.pixelSize: Theme.fontSizeExtraSmall
                 }
             }
         }
+
 
         VerticalScrollDecorator {
             id: decorator

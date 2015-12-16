@@ -158,6 +158,8 @@ void SearchListModel::storeSeries() {
 
     mySeries = myReader->getSeries();
 
+    mydbmanager->startTransaction();
+
     if(mySeries.length() != 0) {
 
         QMap<QString,QString> temp = mySeries.at(0);
@@ -247,11 +249,15 @@ void SearchListModel::storeSeries() {
                                   status,added,addedby,banner,fanart,lastUpdated,
                                   poster,zap2itid,0);
     }
+
+    mydbmanager->commit();
 }
 
 void SearchListModel::storeEpisodes() {
 
     myEpisodes = myReader->getEpisodes();
+
+    mydbmanager->startTransaction();
 
     for(int i = 0; i < myEpisodes.size(); ++i) {
 
@@ -353,12 +359,15 @@ void SearchListModel::storeEpisodes() {
         qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
     }
 
+    mydbmanager->commit();
     setAdded(true);
 }
 
 void SearchListModel::storeBanners() {
 
     myBanners = myReader->getBanners();
+
+    mydbmanager->startTransaction();
 
     for(int i = 0; i < myBanners.size(); ++i) {
 
@@ -392,7 +401,12 @@ void SearchListModel::storeBanners() {
         }
 
         mydbmanager->insertBanner(id,seriesID,bannerPath,bannerType,bannerType2,language,season);
+
+        // process pending events to not freeze the app
+        qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
     }
+
+    mydbmanager->commit();
 }
 
 QString SearchListModel::getID() { return myInfo->getID(); }

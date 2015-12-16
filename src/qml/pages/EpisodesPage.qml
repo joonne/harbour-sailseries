@@ -9,15 +9,11 @@ Page {
 
     Component.onCompleted: initialize(seriesID, seasonNumber)
 
+    Component.onDestruction: controller.SeasonListModel.populateSeasonList(seriesID)
+
     function initialize(seriesID, seasonNumber) {
         controller.EpisodeListModel.populateEpisodeList(seriesID, seasonNumber)
         listView.model = controller.EpisodeListModel.episodeList
-    }
-
-    function updateFlags() {
-        for(var i = 0; i < listView.count; ++i) {
-            console.log(listView.model.get(i).SeasonNumber);
-        }
     }
 
     SilicaListView {
@@ -31,6 +27,7 @@ Page {
                 text: qsTr("I have seen these all")
                 onClicked: {
                     controller.EpisodeListModel.markSeasonWatched(seriesID, seasonNumber)
+                    controller.SeasonListModel.populateSeasonList(seriesID)
                     pageStack.pop()
                 }
             }
@@ -141,6 +138,8 @@ Page {
                     onClicked: {
                         Watched === 0 ? Watched = 1 : Watched = 0
                         controller.EpisodeListModel.toggleWatched(ID)
+                        controller.SeasonListModel.populateSeasonList(seriesID)
+
                     }
                     anchors.fill: parent
                 }

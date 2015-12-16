@@ -134,27 +134,27 @@
 <context>
     <name>EpisodesPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="31"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="27"/>
         <source>I have seen these all</source>
         <translation>Olen nähnyt nämä kaikki</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="42"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="39"/>
         <source>Episodes</source>
         <translation>Jaksot</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="89"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="86"/>
         <source>Season</source>
         <translation>Kausi</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="96"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="93"/>
         <source>Episode</source>
         <translation>Jakso</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="159"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="158"/>
         <source>No episodes.</source>
         <translation>Ei jaksoja.</translation>
     </message>
@@ -272,7 +272,7 @@
         <translation type="unfinished">Kaudet</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsNew.qml" line="74"/>
+        <location filename="../src/qml/pages/SeasonsNew.qml" line="80"/>
         <source>Season</source>
         <translation type="unfinished">Kausi</translation>
     </message>

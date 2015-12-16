@@ -33,6 +33,9 @@ public:
     void close();
     bool createDB();
 
+    bool startTransaction();
+    bool commit();
+
     bool initializeInfoTable();
     bool createInfoTable();
     bool updateInfoTable(double version);
