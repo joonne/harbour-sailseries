@@ -331,12 +331,12 @@
         <translation>Poista</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesViewPage.qml" line="17"/>
+        <location filename="../src/qml/pages/SeriesViewPage.qml" line="18"/>
         <source>Removing</source>
         <translation>Poistetaan</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesViewPage.qml" line="22"/>
+        <location filename="../src/qml/pages/SeriesViewPage.qml" line="24"/>
         <source>Update</source>
         <translation>Päivitä</translation>
     </message>

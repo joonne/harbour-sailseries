@@ -1,5 +1,4 @@
 #include "serieslistmodel.h"
-// #include "sailfishapp.h"
 #include "qcoreapplication.h"
 
 SeriesListModel::SeriesListModel(QObject *parent, QQmlContext* context, DatabaseManager* dbmanager, XMLReader *reader) :
@@ -77,7 +76,8 @@ void SeriesListModel::populateSeriesList() {
 
         qDebug("getSeries works.");
 
-        for(int i = 0; i < mySeries.size(); ++i) {
+        int size = mySeries.size();
+        for(int i = 0; i < size; ++i) {
 
             qDebug() << mySeries.size();
 
@@ -120,7 +120,8 @@ void SeriesListModel::populateBannerList() {
     myPosters.clear();
 
     QList<QList<QString> > allSeries = mydbmanager->getSeries();
-    for(int i = 0; i < allSeries.size(); ++i) {
+    int size = allSeries.size();
+    for(int i = 0; i < size; ++i) {
         QList<QString> temp = allSeries.at(i);
         QString banner = temp.at(0);
         QString poster = temp.at(1);

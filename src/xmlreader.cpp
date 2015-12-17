@@ -165,7 +165,7 @@ void XMLReader::parseXML(QXmlStreamReader& xml) {
             if(xml.name() == "Languages") {
                 continue;
             }
-            /* If it's named Languages, we'll go to the next.*/
+            /* If it's named Banners, we'll go to the next.*/
             if(xml.name() == "Banners") {
                 continue;
             }

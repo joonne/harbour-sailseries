@@ -14,8 +14,10 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Remove")
-                onClicked: remorse.execute(qsTr("Removing"),
+                onClicked: {
+                    remorse.execute(qsTr("Removing"),
                                            function() { controller.SeriesListModel.deleteSeries(seriesID); pageStack.pop()})
+                }
             }
 
             MenuItem {

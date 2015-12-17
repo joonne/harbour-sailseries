@@ -54,7 +54,8 @@ void EpisodeListModel::populateEpisodeList(QString seriesID, int seasonNumber) {
 
     if(episodes.size() != 0) {
 
-        for(int i = 0; i < episodes.size(); ++i) {
+        int size = episodes.size();
+        for(int i = 0; i < size; ++i) {
 
             QList<QString> temp = episodes.at(i);
             // qDebug() << temp;

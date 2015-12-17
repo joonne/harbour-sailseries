@@ -87,11 +87,11 @@ bool DatabaseManager::deleteDB() {
 }
 
 bool DatabaseManager::startTransaction() {
-    db.transaction();
+    return db.transaction();
 }
 
 bool DatabaseManager::commit() {
-    db.commit();
+    return db.commit();
 }
 
 bool DatabaseManager::initializeInfoTable() {
@@ -406,8 +406,10 @@ QList<QList<QString> > DatabaseManager::getSeries() {
 
     if(db.isOpen()) {
 
+        this->startTransaction();
         QSqlQuery query(db);
         query.exec(QString("SELECT banner,poster,seriesName,status,id,overview,imdbID,rating FROM Series ORDER BY seriesName;"));
+        this->commit();
         //qDebug() << query.lastError();
 
         if(query.isSelect()) {
@@ -760,15 +762,15 @@ QList<QString> DatabaseManager::getTodaysEpisodes(int seriesID) {
     return nextEpisode;
 }
 
-// Gets the details of next episode, working.
-
+// Get the details of next episode
 QMap<QString,QString> DatabaseManager::getNextEpisodeDetails(int seriesID) {
 
     QList<QList<QString> > details;
 
+    this->startTransaction();
     QSqlQuery query(db);
-
     query.exec(QString("SELECT episodeName,episodeNumber,seasonNumber,firstAired FROM Episode WHERE seriesID = %1 AND seasonNumber != 0 ORDER BY absoluteNumber;").arg(seriesID));
+    this->commit();
 
     if(query.isSelect()) {
 
@@ -805,7 +807,8 @@ QMap<QString,QString> DatabaseManager::getNextEpisodeDetails(int seriesID) {
     QString ISODate = date.toString(Qt::ISODate);
     int daysTo = 10000;
 
-    for(int i = 0; i < details.size(); ++i) {
+    int size = details.size();
+    for(int i = 0; i < size; ++i) {
 
         QList<QString> temp = details.at(i);
         QString firstAired = temp.at(3);
