@@ -1,6 +1,6 @@
 Name: harbour-sailseries
 Summary: SailSeries for Sailfish
-Version: 0.3
+Version: 0.4
 Release: 1
 Group: Qt/Qt
 License: GPLv2
@@ -9,6 +9,9 @@ Sources:
 Description: |-
 Configure: none
 Builder: qtc5
+QMakeOptions:
+- VERSION=%{version}
+- RELEASE=%{release}
 PkgConfigBR:
 - Qt5Core
 - Qt5Qml

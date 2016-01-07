@@ -5,6 +5,11 @@ Page {
     id: seriesViewPage
 
     property string seriesID
+    property string pageName: "SeriesViewPage"
+
+    function updateModel() {
+        seasons.setModel();
+    }
 
     Component.onDestruction: controller.SeriesListModel.Mode = "default"
 
@@ -16,7 +21,10 @@ Page {
                 text: qsTr("Remove")
                 onClicked: {
                     remorse.execute(qsTr("Removing"),
-                                           function() { controller.SeriesListModel.deleteSeries(seriesID); pageStack.pop()})
+                                           function() {
+                                               controller.SeriesListModel.deleteSeries(seriesID);
+                                               pageStack.pop()
+                                           });
                 }
             }
 
@@ -38,7 +46,7 @@ Page {
             model: VisualItemModel {
                 id: items
                 Series { id: series }
-                SeasonsNew { id: seasons }
+                Seasons { id: seasons }
             }
         }
     }

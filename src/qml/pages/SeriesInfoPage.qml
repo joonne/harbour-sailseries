@@ -28,8 +28,7 @@ Page {
 
         Column {
             id: column
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: Theme.paddingMedium
+            spacing: Theme.paddingSmall
 
             PageHeader {
                 id: header
@@ -74,5 +73,5 @@ Page {
         id: busyIndicator
         anchors.centerIn: parent
         running: controller.SearchModel.Loading ? true : false
-       }
+    }
 }

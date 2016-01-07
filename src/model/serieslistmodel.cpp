@@ -74,8 +74,6 @@ void SeriesListModel::populateSeriesList() {
 
     if(mySeries.size() != 0) {
 
-        qDebug("getSeries works.");
-
         int size = mySeries.size();
         for(int i = 0; i < size; ++i) {
 
@@ -500,19 +498,19 @@ void SeriesListModel::setMode(QString newmode) {
 
 void SeriesListModel::deleteSeries(int seriesID) {
 
-    mydbmanager->setUpDB();
-    myLoading = true;
+    setLoading(true);
     if(mydbmanager->deleteSeries(seriesID)) {
         populateBannerList();
         emit updateModels();
     }
-    myLoading = false;
+    setLoading(false);
 }
 
 void SeriesListModel::updateSeries(QString seriesID) {
 
-    myReader->getFullSeriesRecord(seriesID,"update");
     setLoading(true);
+    myReader->getFullSeriesRecord(seriesID, "update");
+
 }
 
 

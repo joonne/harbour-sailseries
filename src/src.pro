@@ -8,9 +8,6 @@ LIBS +=-lz
 # In the bright future this config line will do a lot of stuff to you
 CONFIG += sailfishapp
 
-DEFINES += APP_VERSION=\\\"$$VERSION\\\"
-DEFINES += APP_BUILDNUM=\\\"$$RELEASE\\\"
-
 SOURCES += main.cpp \
     xmlreader.cpp \
     model/seriesdata.cpp \
@@ -27,6 +24,9 @@ SOURCES += main.cpp \
     model/seasondata.cpp \
     model/seasonlistmodel.cpp
 
+DEFINES += APP_VERSION=\\\"$$VERSION\\\"
+DEFINES += APP_BUILDNUM=\\\"$$RELEASE\\\"
+
 OTHER_FILES = \
 # You DO NOT want .yaml be listed here as Qt Creator's editor is completely not ready for multi package .yaml's
 #
@@ -39,22 +39,17 @@ OTHER_FILES = \
     qml/pages/StartPage.qml \
     qml/pages/SeriesInfoPage.qml \
     qml/pages/SearchPage.qml \
-    qml/pages/TVguidePage.qml \
-    qml/pages/Channel.qml \
     qml/pages/MySeriesPage.qml \
     qml/pages/CoverPage.qml \
     qml/pages/SeriesViewPage.qml \
     qml/pages/Series.qml \
     qml/cover/CoverPage.qml \
-    qml/pages/Seasons.qml \
     qml/pages/AboutPage.qml \
-    qml/pages/parser.js \
     qml/components/MoreIndicator.qml \
     qml/components/TextExpander.qml \
     qml/pages/EpisodeOverviewPage.qml \
     qml/pages/EpisodesPage.qml \
-    qml/pages/ProgramOverviewPage.qml \
-    qml/pages/SeasonsNew.qml
+    qml/pages/ProgramOverviewPage.qml
 
 INCLUDEPATH += $$PWD
 
@@ -74,3 +69,6 @@ HEADERS += \
     qzipwriter_p.h \
     model/seasondata.h \
     model/seasonlistmodel.h
+
+DISTFILES += \
+    qml/pages/Seasons.qml

@@ -7,9 +7,16 @@ Page {
     property string seriesID
     property int seasonNumber
 
-    Component.onCompleted: initialize(seriesID, seasonNumber)
+    Component.onCompleted: {
+        initialize(seriesID, seasonNumber)
+    }
 
-    Component.onDestruction: controller.SeasonListModel.populateSeasonList(seriesID)
+    Component.onDestruction: {
+        pageStack.find(function(page) {
+            return page.pageName === "SeriesViewPage"
+        }).updateModel();
+    }
+
 
     function initialize(seriesID, seasonNumber) {
         controller.EpisodeListModel.populateEpisodeList(seriesID, seasonNumber)
@@ -28,6 +35,9 @@ Page {
                 onClicked: {
                     controller.EpisodeListModel.markSeasonWatched(seriesID, seasonNumber)
                     controller.SeasonListModel.populateSeasonList(seriesID)
+                    pageStack.find(function(page) {
+                        return page.pageName === "SeriesViewPage"
+                    }).updateModel();
                     pageStack.pop()
                 }
             }
@@ -69,7 +79,7 @@ Page {
                                      episodeName: EpisodeName,
                                      guestStars: GuestStars,
                                      writer: Writer,
-                                     firstAired: FirstAired})
+                                     firstAired: FirstAired })
 
                 }
             }
@@ -94,7 +104,6 @@ Page {
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.secondaryColor
                     }
-
                 }
 
                 Label {
@@ -106,11 +115,6 @@ Page {
                     color: Theme.primaryColor
                 }
             }
-
-            // icon-m-certificates
-            // icon-m-favorite
-            // icon-m-favorite-selected
-            // icon-l-check
 
             property string star: "image://theme/icon-l-star"
             property string favorite: "image://theme/icon-l-favorite"
@@ -139,14 +143,14 @@ Page {
                         Watched === 0 ? Watched = 1 : Watched = 0
                         controller.EpisodeListModel.toggleWatched(ID)
                         controller.SeasonListModel.populateSeasonList(seriesID)
-
+                        pageStack.find(function(page) {
+                            return page.pageName === "SeriesViewPage"
+                        }).updateModel();
                     }
                     anchors.fill: parent
                 }
-
             }
         }
-
 
         VerticalScrollDecorator {
             id: decorator

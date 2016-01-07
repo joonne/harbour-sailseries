@@ -585,6 +585,8 @@ bool DatabaseManager::deleteSeries(int seriesID) {
 
     bool ret1,ret2 = false;
 
+    this->startTransaction();
+
     QSqlQuery query(db);
     ret1 = query.exec(QString("DELETE FROM Series WHERE id = %1").arg(seriesID));
     //qDebug() << query.lastError();
@@ -593,7 +595,7 @@ bool DatabaseManager::deleteSeries(int seriesID) {
         //qDebug() << query.lastError();
     }
 
-    db.commit();
+    this->commit();
 
     return ret2;
 }
@@ -602,13 +604,15 @@ bool DatabaseManager::deleteAllSeries() {
 
     bool ret1,ret2 = false;
 
+    this->startTransaction();
+
     QSqlQuery query(db);
     ret1 = query.exec(QString("DELETE FROM Series"));
     if(ret1) {
         ret2 = query.exec(QString("DELETE FROM Episode"));
     }
 
-    db.commit();
+    this->commit();
 
     return ret2;
 }

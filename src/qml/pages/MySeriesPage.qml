@@ -17,7 +17,7 @@ Page {
         if(status === "Ended") {
             return qsTr("This show has ended");
         } else if(daysTo === "today") {
-            return episodeName + " " + qsTr("airs today");
+            return episodeName + " " + qsTr("airs tonight");
         } else if(daysTo === "tomorrow") {
             return episodeName + " " + qsTr("airs tomorrow");
         } else if(episodeName.length !== 0) {
@@ -127,11 +127,5 @@ Page {
             anchors.centerIn: listView
 
         }
-
-//        BusyIndicator {
-//               anchors.centerIn: parent
-//               running: controller.SeriesListModel.Loading ? true : false
-//           }
     }
-
 }

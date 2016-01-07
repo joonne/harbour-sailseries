@@ -17,6 +17,8 @@ XMLReader::XMLReader(QObject *parent) :
     fullRecord = false;
     update = false; // STUPID, FIX THIS SOMEHOW
 
+    getLanguages();
+
 }
 
 XMLReader::~XMLReader() {
@@ -25,6 +27,21 @@ XMLReader::~XMLReader() {
     myNetWorkAccessManager = 0;
     qDebug() << "destructing xmlreader";
 
+}
+
+QString XMLReader::getLocale() {
+
+    QString systemLocale = QLocale::system().name();
+    QString locale = "en";
+
+    int size = myLanguages.size();
+    for(int i = 0; i < size; ++i) {
+        QMap<QString,QString> temp = myLanguages.at(i);
+        if(temp["abbreviation"] == systemLocale) {
+            locale = temp["abbreviation"];
+        }
+    }
+    return locale;
 }
 
 void XMLReader::getLanguages() {
@@ -38,6 +55,8 @@ void XMLReader::getLanguages() {
 void XMLReader::searchSeries(QString text) {
 
     fullRecord = false;
+    QString locale = getLocale();
+    //QString url = QString(MIRRORPATH) + "/api/GetSeries.php?seriesname=" + text + "&language=" + locale;
     QString url = QString(MIRRORPATH) + "/api/GetSeries.php?seriesname=" + text;
     qDebug() << "Requesting" << url;
     QUrl finalUrl(url);
@@ -53,8 +72,11 @@ void XMLReader::getFullSeriesRecord(QString seriesid, QString method) {
         qDebug() << "method = update";
     }
 
-    //QString url = myMirrorPath + "/api/" + myApiKey + "/series/" + seriesid + "/all/ru.xml";
+    QString locale = getLocale();
+
+    // QString url = QString(MIRRORPATH) + "/api/" + QString(APIKEY) + "/series/" + seriesid + "/all/fi.xml";
     QString url = QString(MIRRORPATH) + "/api/" + QString(APIKEY) + "/series/" + seriesid + "/all/en.zip";
+    // QString url = QString(MIRRORPATH) + "/api/" + QString(APIKEY) + "/series/" + seriesid + "/all/" + locale + ".zip";
     qDebug() << "Requesting" << url;
     QUrl finalUrl(url);
     startRequest(finalUrl);

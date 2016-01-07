@@ -13,7 +13,7 @@ Name:       harbour-sailseries
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    SailSeries for Sailfish
-Version:    0.3
+Version:    0.4
 Release:    1
 Group:      Qt/Qt
 License:    GPLv2
@@ -39,7 +39,9 @@ BuildRequires:  desktop-file-utils
 # >> build pre
 # << build pre
 
-%qtc_qmake5 
+%qtc_qmake5  \
+    VERSION=%{version} \
+    RELEASE=%{release}
 
 %qtc_make %{?_smp_mflags}
 

@@ -37,16 +37,7 @@ Page {
                     pageStack.push(Qt.resolvedUrl("MySeriesPage.qml"))
                 }
             }
-
-            // Upcoming feature or separate app?
-//            MenuItem {
-//                text: qsTr("TV Guide")
-//                font.pixelSize: Theme.fontSizeSmall
-//                onClicked: pageStack.push(Qt.resolvedUrl("TVguidePage.qml"))
-//            }
-
         }
-
 
         SilicaListView {
             id: listView
@@ -56,7 +47,7 @@ Page {
             model: controller.TodayModel.TodayModel
 
             header: TextField {
-                text: qsTr("Today")
+                text: qsTr("On Tonight")
                 readOnly: true
                 width: listView.width
                 color: Theme.highlightColor
@@ -113,7 +104,7 @@ Page {
 
             ViewPlaceholder {
                 enabled: listView.count === 0
-                text: qsTr("Nothing airs today")
+                text: qsTr("Nothing airs tonight")
                 anchors.centerIn: listView
 
             }

@@ -28,9 +28,10 @@ Column {
                 id: contentLabel
                 label: qsTr("Overview")
                 width: parent.width
-                text: textContent
+                text:  textContent
                 readOnly: true
                 color: Theme.secondaryColor
+                onClicked: textContainer.expanded = !textContainer.expanded
             }
         }
     }
@@ -39,13 +40,7 @@ Column {
         id: expanderToggle
         height: 20
         width: parent.width
-        visible: textContainer.actualSize > textContainer.collapsedSize
-        opacity: 50
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: textContainer.expanded = !textContainer.expanded
-        }
+        visible: textContainer.actualSize > textContainer.collapsedSize && textContainer.expanded === false
 
         MoreIndicator {
             id: moreIndicator

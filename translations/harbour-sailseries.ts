@@ -14,52 +14,52 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="15"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="19"/>
         <source>About SailSeries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="44"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="49"/>
         <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="61"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="66"/>
         <source>Created by Jonne Pihlanen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="62"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="67"/>
         <source>This software is licenced under GPLv2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="63"/>
-        <source>SailSeries fetches all information from a free API at TheTVDB.</source>
+        <location filename="../src/qml/pages/AboutPage.qml" line="68"/>
+        <source>SailSeries fetches all information from TheTVDB.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="68"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="73"/>
         <source>TheTVDB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="82"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="87"/>
         <source>Source code in GitHub</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="96"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="101"/>
         <source>Help with translations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="110"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="115"/>
         <source>Send email to developer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="127"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="132"/>
         <source>Contributors</source>
         <translation type="unfinished"></translation>
     </message>
@@ -67,18 +67,18 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="9"/>
-        <source>Nothing airs today</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="22"/>
         <source>This show has ended</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/cover/CoverPage.qml" line="9"/>
+        <source>Nothing airs tonight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="24"/>
-        <source>airs today</source>
+        <source>airs tonight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -108,8 +108,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="89"/>
-        <source>Today</source>
+        <location filename="../src/qml/cover/CoverPage.qml" line="90"/>
+        <source>On Tonight</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -134,27 +134,27 @@
 <context>
     <name>EpisodesPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="27"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="34"/>
         <source>I have seen these all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="39"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="49"/>
         <source>Episodes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="86"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="96"/>
         <source>Season</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="93"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="103"/>
         <source>Episode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="158"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="162"/>
         <source>No episodes.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -191,7 +191,7 @@
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="20"/>
-        <source>airs today</source>
+        <source>airs tonight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -254,26 +254,23 @@
 <context>
     <name>Seasons</name>
     <message>
-        <location filename="../src/qml/pages/Seasons.qml" line="28"/>
+        <location filename="../src/qml/pages/Seasons.qml" line="35"/>
         <source>Seasons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/Seasons.qml" line="38"/>
+        <location filename="../src/qml/pages/Seasons.qml" line="87"/>
         <source>Season</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>SeasonsNew</name>
     <message>
-        <location filename="../src/qml/pages/SeasonsNew.qml" line="31"/>
-        <source>Seasons</source>
+        <location filename="../src/qml/pages/Seasons.qml" line="100"/>
+        <source>Watched</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsNew.qml" line="80"/>
-        <source>Season</source>
+        <location filename="../src/qml/pages/Seasons.qml" line="142"/>
+        <source>episodes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -290,18 +287,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/Series.qml" line="43"/>
+        <location filename="../src/qml/pages/Series.qml" line="49"/>
         <source>Status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/Series.qml" line="52"/>
+        <location filename="../src/qml/pages/Series.qml" line="58"/>
         <source>Rating</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/Series.qml" line="63"/>
-        <source>Overview</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -318,7 +310,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="56"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="55"/>
         <source>Network</source>
         <translation type="unfinished"></translation>
     </message>
@@ -326,17 +318,17 @@
 <context>
     <name>SeriesViewPage</name>
     <message>
-        <location filename="../src/qml/pages/SeriesViewPage.qml" line="16"/>
+        <location filename="../src/qml/pages/SeriesViewPage.qml" line="21"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesViewPage.qml" line="18"/>
+        <location filename="../src/qml/pages/SeriesViewPage.qml" line="23"/>
         <source>Removing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesViewPage.qml" line="24"/>
+        <location filename="../src/qml/pages/SeriesViewPage.qml" line="32"/>
         <source>Update</source>
         <translation type="unfinished"></translation>
     </message>
@@ -359,23 +351,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="59"/>
-        <source>Today</source>
+        <location filename="../src/qml/pages/StartPage.qml" line="50"/>
+        <source>On Tonight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="84"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="107"/>
+        <source>Nothing airs tonight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="75"/>
         <source>Season</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="84"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="75"/>
         <source>Episode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="116"/>
-        <source>Nothing airs today</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

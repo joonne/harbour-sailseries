@@ -6,7 +6,7 @@ CoverBackground {
 
     Label {
         id: placeholder
-        text: qsTr("Nothing airs today")
+        text: qsTr("Nothing airs tonight")
         font.pixelSize: Theme.fontSizeTiny
         anchors.centerIn: cover
         visible: listView.count === 0 && controller.SeriesListModel.Mode === "default"
@@ -21,7 +21,7 @@ CoverBackground {
         if(status === "Ended") {
             return qsTr("This show has ended");
         } else if(daysTo === "today") {
-            return episodeName + " " + qsTr("airs today");
+            return episodeName + " " + qsTr("airs tonight");
         } else if(daysTo === "tommorrow") {
             return episodeName + " " + qsTr("airs tomorrow");
         } else if(episodeName.length !== 0) {
@@ -59,18 +59,19 @@ CoverBackground {
         opacity: 0.6
     }
 
-    Label {
-        id: nextEpisode
-        text: "experimental"
-        width: cover.width
-        anchors.left: parent.left
-        anchors.leftMargin: 2 * Theme.paddingMedium
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 2 * Theme.paddingMedium
-        font.pixelSize: Theme.fontSizeTiny
-        color: Theme.primaryColor
-        visible: false
-    }
+//    Label {
+//        id: seriesName
+//        text: "Arrow"
+//        width: cover.width
+//        truncationMode: TruncationMode.Fade
+//        anchors.left: parent.left
+//        anchors.leftMargin: 2 * Theme.paddingMedium
+//        anchors.bottom: parent.bottom
+//        anchors.bottomMargin: 2 * Theme.paddingMedium
+//        font.pixelSize: Theme.fontSizeTiny
+//        color: Theme.highlightDimmerColor
+//        visible: controller.SeriesListModel.Mode === "mySeries"
+//    }
 
     //--------------------------------
     // This is the "default" coverPage
@@ -86,7 +87,7 @@ CoverBackground {
 
     Label {
         id: defaultheader
-        text: qsTr("Today")
+        text: qsTr("On Tonight")
         color: Theme.primaryColor
         font.pixelSize: Theme.fontSizeMedium
         anchors.top: cover.top
@@ -101,7 +102,7 @@ CoverBackground {
         id: listView
         height: 500
         anchors.top: defaultheader.bottom
-        anchors.topMargin: Theme.paddingLarge
+        anchors.topMargin: Theme.paddingSmall
         model: controller.TodayModel.TodayModel
 
         delegate: ListItem {
@@ -118,6 +119,8 @@ CoverBackground {
                     text: SeriesName.length === 0 ? text = "SeriesName" : text = SeriesName
                     font.pixelSize: Theme.fontSizeExtraSmall
                     color: Theme.primaryColor
+                    truncationMode: TruncationMode.Fade
+                    width: cover.width
                 }
 
                 Label {
@@ -125,6 +128,8 @@ CoverBackground {
                     text: NextEpisodeName
                     font.pixelSize: Theme.fontSizeTiny
                     color: Theme.secondaryColor
+                    truncationMode: TruncationMode.Fade
+                    width: cover.width
                 }
             }
         }

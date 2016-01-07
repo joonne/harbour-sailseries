@@ -61,6 +61,8 @@ private:
     bool fullRecord;
     bool update;
 
+    QString getLocale();
+
 };
 
 #endif // XMLREADER_H
