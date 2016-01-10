@@ -351,22 +351,22 @@
         <translation>Omat sarjat</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="50"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="43"/>
         <source>On Tonight</source>
         <translation>Tänään</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="107"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="103"/>
         <source>Nothing airs tonight</source>
         <translation>Mitään ei lähetetä tänään</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="75"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="71"/>
         <source>Season</source>
         <translation>Kausi</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="75"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="71"/>
         <source>Episode</source>
         <translation>Jakso</translation>
     </message>

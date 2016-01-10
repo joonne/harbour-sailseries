@@ -351,22 +351,22 @@
         <translation>Mes séries</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="50"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="43"/>
         <source>On Tonight</source>
         <translation>Au programme ce soir</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="107"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="103"/>
         <source>Nothing airs tonight</source>
         <translation>Rien n&apos;est diffusé ce soir</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="75"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="71"/>
         <source>Season</source>
         <translation>Saison</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="75"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="71"/>
         <source>Episode</source>
         <translation>Episode</translation>
     </message>

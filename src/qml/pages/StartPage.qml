@@ -39,21 +39,17 @@ Page {
             }
         }
 
+        SectionHeader {
+            text: qsTr("On Tonight")
+            visible: listView.count !== 0
+        }
+
         SilicaListView {
             id: listView
             height: startpage.height - header.height - 4*Theme.paddingLarge
             width: startpage.width
             anchors.top: header.bottom
             model: controller.TodayModel.TodayModel
-
-            header: TextField {
-                text: qsTr("On Tonight")
-                readOnly: true
-                width: listView.width
-                color: Theme.highlightColor
-                font.pixelSize: Theme.fontSizeLarge
-                visible: listView.count !== 0
-            }
 
             delegate: ListItem {
                 id: item
