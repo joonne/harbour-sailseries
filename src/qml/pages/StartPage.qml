@@ -40,15 +40,19 @@ Page {
         }
 
         SectionHeader {
+            id: sectionheader
             text: qsTr("On Tonight")
             visible: listView.count !== 0
+            anchors {
+                top: header.bottom
+            }
         }
 
         SilicaListView {
             id: listView
             height: startpage.height - header.height - 4*Theme.paddingLarge
             width: startpage.width
-            anchors.top: header.bottom
+            anchors.top: sectionheader.bottom
             model: controller.TodayModel.TodayModel
 
             delegate: ListItem {

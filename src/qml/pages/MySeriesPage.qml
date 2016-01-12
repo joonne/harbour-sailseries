@@ -4,10 +4,6 @@ import Sailfish.Silica 1.0
 Page {
     id: mySeriesPage
 
-    Component.onCompleted: {
-        controller.SeriesListModel.populateBannerList()
-     }
-
     Component.onDestruction: {
         controller.SeriesListModel.Mode = "default"
     }
@@ -122,10 +118,16 @@ Page {
         }
 
         ViewPlaceholder {
-            enabled: listView.count === 0
+            visible: listView.count === 0
             text: qsTr("Search for series first.")
             anchors.centerIn: listView
+        }
 
+        BusyIndicator {
+            size: BusyIndicatorSize.Large
+            anchors.centerIn: parent
+            running: controller.SeriesListModel.Loading ? true : false
+            visible: false
         }
     }
 }

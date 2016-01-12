@@ -67,7 +67,7 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="22"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="23"/>
         <source>This show has ended</source>
         <translation>Tämä sarja on päättynyt</translation>
     </message>
@@ -77,38 +77,38 @@
         <translation>Mitään ei lähetetä tänään</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="24"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="25"/>
         <source>airs tonight</source>
         <translation>lähetetään tänään</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="26"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="27"/>
         <source>airs tomorrow</source>
         <translation>lähetetään huomenna</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="28"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="29"/>
         <source>airs in</source>
         <translation>lähetetään</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="28"/>
-        <location filename="../src/qml/cover/CoverPage.qml" line="30"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="29"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="31"/>
         <source>days</source>
         <translation>päivän kuluttua</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="30"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="31"/>
         <source>Next episode airs in</source>
         <translation>Seuraava jakso lähetetään</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="32"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="33"/>
         <source>No information about next episode</source>
         <translation>Ei tietoa seuraavasta jaksosta</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="90"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="103"/>
         <source>On Tonight</source>
         <translation>Tänään</translation>
     </message>
@@ -185,47 +185,47 @@
 <context>
     <name>MySeriesPage</name>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="18"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="14"/>
         <source>This show has ended</source>
         <translation>Tämä sarja on päättynyt</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="20"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="16"/>
         <source>airs tonight</source>
         <translation>lähetetään tänään</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="22"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="18"/>
         <source>airs tomorrow</source>
         <translation>lähetetään huomenna</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="24"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="20"/>
         <source>airs in</source>
         <translation>lähetetään</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="24"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="20"/>
         <source>days</source>
         <translation>päivän kuluttua</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="26"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="22"/>
         <source>Next episode airs in</source>
         <translation>Seuraava jakso lähetetään</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="28"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="24"/>
         <source>No information about next episode</source>
         <translation>Ei tietoa seuraavasta jaksosta</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="39"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="35"/>
         <source>My Series</source>
         <translation>Omat sarjat</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="126"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="122"/>
         <source>Search for series first.</source>
         <translation>Etsi ensin sarjoja.</translation>
     </message>
@@ -351,22 +351,22 @@
         <translation>Omat sarjat</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="43"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="44"/>
         <source>On Tonight</source>
         <translation>Tänään</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="103"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="107"/>
         <source>Nothing airs tonight</source>
         <translation>Mitään ei lähetetä tänään</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="71"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="75"/>
         <source>Season</source>
         <translation>Kausi</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="71"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="75"/>
         <source>Episode</source>
         <translation>Jakso</translation>
     </message>

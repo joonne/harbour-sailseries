@@ -48,4 +48,6 @@ SeasonListModel* DataModel::getSeasonListModel() { return mySeasonListModel; }
 
 void DataModel::readyToUpdateModels() {
     myTodayListModel->populateTodayModel();
+    mySeriesListModel->populateBannerList();
+    mySeriesListModel->populateSeriesList();
 }

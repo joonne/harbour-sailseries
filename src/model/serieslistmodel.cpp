@@ -17,6 +17,9 @@ SeriesListModel::SeriesListModel(QObject *parent, QQmlContext* context, Database
             this,
             SLOT(updateFetchFinished()));
 
+    populateBannerList();
+    populateSeriesList();
+
     myLoading = false;
 
 }

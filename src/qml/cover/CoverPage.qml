@@ -8,6 +8,7 @@ CoverBackground {
         id: placeholder
         text: qsTr("Nothing airs tonight")
         font.pixelSize: Theme.fontSizeTiny
+        color: Theme.secondaryColor
         anchors.centerIn: cover
         visible: listView.count === 0 && controller.SeriesListModel.Mode === "default"
     }
@@ -56,7 +57,7 @@ CoverBackground {
         width: parent.width
         height: parent.height
         visible: controller.SeriesListModel.Mode === "mySeries"
-        opacity: 0.6
+        opacity: 1.0
     }
 
 //    Label {
@@ -85,15 +86,25 @@ CoverBackground {
         return ret;
     }
 
-    Label {
+//    Label {
+//        id: defaultheader
+//        text: qsTr("On Tonight")
+//        color: Theme.primaryColor
+//        font.pixelSize: Theme.fontSizeMedium
+//        anchors.top: cover.top
+//        anchors.topMargin: Theme.paddingLarge
+//        anchors.left: cover.left
+//        anchors.leftMargin: Theme.paddingMedium
+//        visible: listView.count !== 0 && defaultVisibility()
+//    }
+
+    SectionHeader {
         id: defaultheader
         text: qsTr("On Tonight")
-        color: Theme.primaryColor
-        font.pixelSize: Theme.fontSizeMedium
-        anchors.top: cover.top
-        anchors.topMargin: Theme.paddingLarge
-        anchors.left: cover.left
-        anchors.leftMargin: Theme.paddingMedium
+        anchors {
+            top: cover.top
+            topMargin: Theme.paddingLarge
+        }
         visible: listView.count !== 0 && defaultVisibility()
     }
 
@@ -117,8 +128,8 @@ CoverBackground {
                 Label {
                     id: seriesName
                     text: SeriesName.length === 0 ? text = "SeriesName" : text = SeriesName
-                    font.pixelSize: Theme.fontSizeExtraSmall
-                    color: Theme.primaryColor
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.secondaryColor
                     truncationMode: TruncationMode.Fade
                     width: cover.width
                 }
@@ -126,6 +137,15 @@ CoverBackground {
                 Label {
                     id: episodeName
                     text: NextEpisodeName
+                    font.pixelSize: Theme.fontSizeTiny
+                    color: Theme.secondaryColor
+                    truncationMode: TruncationMode.Fade
+                    width: cover.width
+                }
+
+                Label {
+                    id: network
+                    text: AirsTime + " @ " + Network
                     font.pixelSize: Theme.fontSizeTiny
                     color: Theme.secondaryColor
                     truncationMode: TruncationMode.Fade
