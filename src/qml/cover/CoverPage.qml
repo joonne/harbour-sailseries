@@ -86,18 +86,6 @@ CoverBackground {
         return ret;
     }
 
-//    Label {
-//        id: defaultheader
-//        text: qsTr("On Tonight")
-//        color: Theme.primaryColor
-//        font.pixelSize: Theme.fontSizeMedium
-//        anchors.top: cover.top
-//        anchors.topMargin: Theme.paddingLarge
-//        anchors.left: cover.left
-//        anchors.leftMargin: Theme.paddingMedium
-//        visible: listView.count !== 0 && defaultVisibility()
-//    }
-
     SectionHeader {
         id: defaultheader
         text: qsTr("On Tonight")
@@ -128,7 +116,7 @@ CoverBackground {
                 Label {
                     id: seriesName
                     text: SeriesName.length === 0 ? text = "SeriesName" : text = SeriesName
-                    font.pixelSize: Theme.fontSizeSmall
+                    font.pixelSize: Theme.fontSizeExtraSmall
                     color: Theme.secondaryColor
                     truncationMode: TruncationMode.Fade
                     width: cover.width
@@ -140,7 +128,7 @@ CoverBackground {
                     font.pixelSize: Theme.fontSizeTiny
                     color: Theme.secondaryColor
                     truncationMode: TruncationMode.Fade
-                    width: cover.width
+                    width: cover.width - Theme.paddingMedium
                 }
 
                 Label {

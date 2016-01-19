@@ -108,7 +108,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="103"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="91"/>
         <source>On Tonight</source>
         <translation type="unfinished"></translation>
     </message>

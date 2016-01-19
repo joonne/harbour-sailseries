@@ -34,6 +34,11 @@ Column {
                 onClicked: textContainer.expanded = !textContainer.expanded
             }
         }
+
+        OpacityRampEffect {
+                sourceItem: innerColumn
+                direction: OpacityRamp.TopToBottom
+            }
     }
 
     Item {
