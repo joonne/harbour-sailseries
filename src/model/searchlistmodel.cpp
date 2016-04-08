@@ -87,28 +87,10 @@ void SearchListModel::populateSearchModel() {
 
 
     if(mySeries.size() != 0) {
-
-        for(int i = 0; i < mySeries.size(); ++i) {
-
-            // This is the basic data
+        int length = mySeries.size();
+        for(int i = 0; i < length; ++i) {
             QMap<QString,QString> temp = mySeries.at(i);
-            QString seriesid = temp["seriesid"];
-            QString language = temp["Langugage"];
-            QString seriesName = temp["SeriesName"];
-            QString aliasNames = temp["AliasNames"];
-            QString banner = temp["banner"];
-            QString overview = temp["Overview"];
-            QString firstAired = temp["FirstAired"];
-            QString imdb_id = temp["IMDB_ID"];
-            QString zap2it_id = temp["zap2it_id"];
-            QString network = temp["Network"];
-
-            SeriesData* series = new SeriesData(this, seriesid, language,
-                                               seriesName, aliasNames,
-                                               banner, overview, firstAired,
-                                               imdb_id, zap2it_id, network);
-
-
+            SeriesData* series = new SeriesData(this, temp);
             mySearchListModel.append(series);
 
         }

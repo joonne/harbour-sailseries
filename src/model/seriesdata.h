@@ -41,29 +41,29 @@ class SeriesData : public QObject
     Q_PROPERTY(QString TotalCount READ getTotalCount)
 
 public:
-    explicit SeriesData(QObject *parent = 0);
+    explicit SeriesData(QObject *parent = 0, QMap<QString, QString> params);
 
-    SeriesData(QObject* parent, QString id, QString language, QString seriesName,
-               QString aliasNames, QString banner, QString overview, QString firstAired, QString IMDB_ID,
-               QString zap2it_ID, QString network);
+//    SeriesData(QObject* parent, QString id, QString language, QString seriesName,
+//               QString aliasNames, QString banner, QString overview, QString firstAired, QString IMDB_ID,
+//               QString zap2it_ID, QString network);
 
-    SeriesData(QObject* parent, QString id, QString actors, QString airsDayOfWeek,
-               QString airsTime, QString contentRating,
-               QString firstAired, QString genre, QString IMDB_ID,
-               QString language, QString network, QString overview,
-               double rating, int ratingCount, int runtime, QString seriesName,
-               QString status, QString added, int addedby, QString banner,
-               QString fanart, QString lastUpdated, QString poster, QString zap2itid, int watched);
+//    SeriesData(QObject* parent, QString id, QString actors, QString airsDayOfWeek,
+//               QString airsTime, QString contentRating,
+//               QString firstAired, QString genre, QString IMDB_ID,
+//               QString language, QString network, QString overview,
+//               double rating, int ratingCount, int runtime, QString seriesName,
+//               QString status, QString added, int addedby, QString banner,
+//               QString fanart, QString lastUpdated, QString poster, QString zap2itid, int watched);
 
-    // BannerList
-    SeriesData(QObject* parent, QString banner, QString poster, QString seriesName, QString status, QString id,
-               QString overview, QString imdbID, QString rating, QString nextEpisodeName,
-               QString nextEpisodeNumber, QString nextEpisodeSeasonNumber, QString daysToNextEpisode,
-               QString watchedCount, QString totalCount);
+//    // BannerList
+//    SeriesData(QObject* parent, QString banner, QString poster, QString seriesName, QString status, QString id,
+//               QString overview, QString imdbID, QString rating, QString nextEpisodeName,
+//               QString nextEpisodeNumber, QString nextEpisodeSeasonNumber, QString daysToNextEpisode,
+//               QString watchedCount, QString totalCount);
 
-    // TodayList
-    SeriesData(QObject* parent, QString seriesName, QString network, QString airsTime, QString nextEpisodeName,
-               QString nextEpisodeNumber, QString nextEpisodeSeasonNumber);
+//    // TodayList
+//    SeriesData(QObject* parent, QString seriesName, QString network, QString airsTime, QString nextEpisodeName,
+//               QString nextEpisodeNumber, QString nextEpisodeSeasonNumber);
 
     QString getID();
     QString getActors();

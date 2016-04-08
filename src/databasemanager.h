@@ -67,7 +67,7 @@ public:
     bool deleteSeries(int seriesID);
     bool deleteAllSeries();
 
-    QList<QList<QString> > getSeries();
+    QList<QMap<QString, QString> > getSeries();
     QList<QList<QString> > getStartPageSeries();
     QList<QList<QString> > getEpisodes(int seriesID, int seasonNumber);
     QMap<QString, QString> getNextEpisodeDetails(int seriesID);

@@ -77,41 +77,15 @@ void SeriesListModel::populateSeriesList() {
 
     if(mySeries.size() != 0) {
 
-        int size = mySeries.size();
-        for(int i = 0; i < size; ++i) {
-
-            qDebug() << mySeries.size();
-
-            // This is the basic data
+        int length = mySeries.size();
+        for(int i = 0; i < length; ++i) {
             QMap<QString,QString> temp = mySeries.at(i);
-            QString seriesid = temp["seriesid"];
-            QString language = temp["Langugage"];
-            QString seriesName = temp["SeriesName"];
-            QString aliasNames = temp["AliasNames"];
-            QString banner = temp["banner"];
-            QString overview = temp["Overview"];
-            QString firstAired = temp["FirstAired"];
-            QString imdb_id = temp["IMDB_ID"];
-            QString zap2it_id = temp["zap2it_id"];
-            QString network = temp["Network"];
-
-            SeriesData* serie = new SeriesData(this, seriesid, language,
-                                               seriesName, aliasNames,
-                                               banner, overview, firstAired,
-                                               imdb_id, zap2it_id, network);
-
-
+            SeriesData* serie = new SeriesData(this, temp);
             mySeriesListModel.append(serie);
-
         }
-
 
         // must remember to call signal to let QML side know about populated items..
         emit seriesListChanged();
-
-        // mark flag
-        isPopulated = true;
-
     }
 }
 
@@ -121,8 +95,8 @@ void SeriesListModel::populateBannerList() {
     myPosters.clear();
 
     QList<QList<QString> > allSeries = mydbmanager->getSeries();
-    int size = allSeries.size();
-    for(int i = 0; i < size; ++i) {
+    int length = allSeries.size();
+    for(int i = 0; i < length; ++i) {
         QList<QString> temp = allSeries.at(i);
         QString banner = temp.at(0);
         QString poster = temp.at(1);

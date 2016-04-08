@@ -59,6 +59,15 @@ Page {
                 id: item
                 contentHeight: column.height * 1.1
                 contentWidth: listView.width
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("EpisodeOverviewPage.qml"),
+                                   { episodeBanner: "",
+                                       episodeOverview: "",
+                                       episodeName: NextEpisodeName,
+                                       guestStars: "",
+                                       writer: "",
+                                       firstAired: "" })
+                }
 
                 Column {
                     id: column
@@ -96,10 +105,6 @@ Page {
 
             VerticalScrollDecorator {
                 id: decorator
-            }
-
-            TouchBlocker {
-                anchors.fill: listView
             }
 
             ViewPlaceholder {

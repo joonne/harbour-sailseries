@@ -1,8 +1,33 @@
 #include "seriesdata.h"
 
-SeriesData::SeriesData(QObject *parent) :
+SeriesData::SeriesData(QObject *parent, QMap<QString, QString> params) :
     QObject(parent)
 {
+    myID = params["id"] || "";
+    myActors = params["actors"] || "";
+    myAirsDayOfWeek = params["airsDayOfWeek"] || "";
+    myAirsTime = params["airsTime"];
+    myContentRating = params["contentRating"];
+    myFirstAired = params["firstAired"];
+    myGenre = params["genre"];
+    myIMDB_ID = IMDB_ID;
+    myLanguage = language;
+    myNetwork = network;
+    myOverview = overview;
+    myRating = rating;
+    myRatingCount = ratingCount;
+    myRuntime = runtime;
+    mySeriesName = seriesName;
+    //myAliasNames = aliasNames;
+    myStatus = status;
+    myAdded = added;
+    myAddedBy = addedby;
+    myBanner = banner;
+    myFanart = fanart;
+    myLastUpdated = lastUpdated;
+    myPoster = poster;
+    myZap2it_ID = zap2itid;
+    myWatched = watched;
 }
 
 SeriesData::SeriesData(QObject *parent, QString id, QString language, QString seriesName,
