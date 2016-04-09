@@ -50,52 +50,24 @@ void EpisodeListModel::populateEpisodeList(QString seriesID, int seasonNumber) {
     myEpisodeListModel.clear();
     emit episodeListChanged();
 
-    QList<QList<QString> > episodes = mydbmanager->getEpisodes(seriesID.toInt(), seasonNumber);
+    QList<QMap<QString, QString> > episodes = mydbmanager->getEpisodes(seriesID.toInt(), seasonNumber);
 
     if(episodes.size() != 0) {
 
         int size = episodes.size();
         for(int i = 0; i < size; ++i) {
 
-            QList<QString> temp = episodes.at(i);
-            // qDebug() << temp;
-
-            QString episodeName = temp.at(0);
-            int episodeNumber = temp.at(1).toInt();
-            QString overview = temp.at(2);
-            int seasonNumber = temp.at(3).toInt();
-            int absoluteNumber = temp.at(4).toInt();
-            QString filename = temp.at(5);
-            int watched = temp.at(6).toInt();
-            int id = temp.at(7).toInt();
-            QString guestStars = temp.at(8);
-            QString writer = temp.at(9);
-            QString firstAired = temp.at(10);
+            QMap<QString, QString> temp = episodes.at(i);
 
             // we don't want the special episodes, they have season number 0.
             if(seasonNumber != 0 ) {
-
-                EpisodeData* episode = new EpisodeData(this,
-                                                       episodeName,
-                                                       episodeNumber,
-                                                       overview,
-                                                       seasonNumber,
-                                                       absoluteNumber,
-                                                       filename,
-                                                       watched,
-                                                       id,
-                                                       guestStars,
-                                                       writer,
-                                                       firstAired);
-
+                EpisodeData* episode = new EpisodeData(this, temp);
                 myEpisodeListModel.append(episode);
             }
-
         }
 
         // must remember to call signal to let QML side know about populated items
         emit episodeListChanged();
-
     }
 }
 

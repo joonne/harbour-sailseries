@@ -44,22 +44,9 @@ public:
     bool createEpisodeTable();
     bool createBannerTable();
 
-    bool insertSeries(int id, QString actors, QString airsDayOfWeek,
-                      QString airsTime, QString contentRating,
-                      QString firstAired, QString genre, QString imdb_id,
-                      QString language, QString network, QString overview,
-                      double rating, int ratingCount, int runtime, QString seriesName,
-                      QString status, QString added, int addedby, QString banner,
-                      QString fanart, QString lastUpdated, QString poster, QString zap2itid, int watched);
-    bool insertEpisode(int id, QString director, int epimgflag, QString episodeName,
-                       int episodeNumber, QString firstAired, QString guestStars, QString imdb_id,
-                       QString language, QString overview, int productionCode, double rating,
-                       int ratingCount, int seasonNumber, QString writer, int absoluteNumber,
-                       int airsAfterSeason, int airsBeforeEpisode, int airsBeforeSeason , QString filename,
-                       QString lastUpdated, int seasonID, int seriesID, QString thumbAdded,
-                       int thumbHeight, int thumbWidth);
-    bool insertBanner(int id, int seriesID, QString bannerPath, QString bannerType,
-                      QString bannerType2, QString language, int season);
+    bool insertSeries(QMap<QString, QString> series);
+    bool insertEpisodes(QList<QMap<QString, QString> > episodes);
+    bool insertBanners(QList<QMap<QString, QString> > banners, int seriesId);
 
     bool updateSeries();
     bool updateEpisode();
@@ -68,10 +55,10 @@ public:
     bool deleteAllSeries();
 
     QList<QMap<QString, QString> > getSeries();
-    QList<QList<QString> > getStartPageSeries();
-    QList<QList<QString> > getEpisodes(int seriesID, int seasonNumber);
+    QList<QMap<QString, QString> > getStartPageSeries();
+    QList<QMap<QString, QString> > getEpisodes(int seriesID, int seasonNumber);
     QMap<QString, QString> getNextEpisodeDetails(int seriesID);
-    QList<QString> getTodaysEpisodes(int seriesID);
+    QList<QMap<QString, QString> > getTodaysEpisodes(int seriesID);
     QString getStatus(int seriesID);
     QString getSeasonBanner(int seriesID, int season);
 

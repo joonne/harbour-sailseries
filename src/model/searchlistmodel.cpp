@@ -1,5 +1,4 @@
 #include "searchlistmodel.h"
-#include "qcoreapplication.h"
 
 SearchListModel::SearchListModel(QObject *parent, DatabaseManager *dbmanager, XMLReader *xmlreader) :
     QObject(parent)
@@ -140,208 +139,17 @@ void SearchListModel::storeSeries() {
 
     mySeries = myReader->getSeries();
 
-    mydbmanager->startTransaction();
-
-    if(mySeries.length() != 0) {
-
-        QMap<QString,QString> temp = mySeries.at(0);
-
-        int seriesid = 0;
-        QString actors = "";
-        QString airsDayOfWeek = "";
-        QString airsTime = "";
-        QString contentRating = "";
-        QString firstAired = "";
-        QString genre = "";
-        QString imdb_id = "";
-        QString language = "";
-        QString network = "";
-        QString overview = "";
-        double rating = 0;
-        int ratingCount = 0;
-        int runtime = 0;
-        QString SeriesName = "";
-        QString status = "";
-        QString added = "";
-        int addedby = 0;
-        QString banner = "";
-        QString fanart = "";
-        QString lastUpdated = "";
-        QString poster = "";
-        QString zap2itid = "";
-
-        QMap<QString,QString>::iterator itr = temp.begin();
-        while(itr != temp.end()) {
-
-            if(itr.key() == "id") {
-                seriesid = itr.value().toInt();
-            } else if(itr.key() == "Actors") {
-                actors = itr.value();
-            } else if(itr.key() == "Airs_DayOfWeek") {
-                airsDayOfWeek = itr.value();
-            } else if(itr.key() == "Airs_Time") {
-                airsTime = itr.value();
-            } else if(itr.key() == "ContentRating") {
-                contentRating = itr.value();
-            } else if(itr.key() == "FirstAired") {
-                firstAired = itr.value();
-            } else if(itr.key() == "Genre") {
-                genre = itr.value();
-            } else if(itr.key() == "IMDB_ID") {
-                imdb_id = itr.value();
-            } else if(itr.key() == "Language") {
-                language = itr.value();
-            } else if(itr.key() == "Network") {
-                network = itr.value();
-            } else if(itr.key() == "Overview") {
-                overview = itr.value();
-            } else if(itr.key() == "Rating") {
-                rating = itr.value().toDouble();
-            } else if(itr.key() == "RatingCount") {
-                ratingCount = itr.value().toInt();
-            } else if(itr.key() == "Runtime") {
-                runtime = itr.value().toInt();
-            } else if(itr.key() == "SeriesName") {
-                SeriesName = itr.value();
-            } else if(itr.key() == "Status") {
-                status = itr.value();
-            } else if(itr.key() == "added") {
-                added = itr.value();
-            } else if(itr.key() == "addedBy") {
-                addedby = itr.value().toInt();
-            } else if(itr.key() == "banner") {
-                banner = itr.value();
-            } else if(itr.key() == "fanart") {
-                fanart = itr.value();
-            } else if(itr.key() == "lastupdated") {
-                lastUpdated = itr.value();
-            } else if(itr.key() == "poster") {
-                poster = itr.value();
-            } else if(itr.key() == "zap2it_id") {
-                zap2itid = itr.value();
-            }
-
-            ++itr;
-        }
-
-        mydbmanager->insertSeries(seriesid,actors,airsDayOfWeek,airsTime,
-                                  contentRating,firstAired,genre,
-                                  imdb_id,language,network,overview,
-                                  rating,ratingCount,runtime,SeriesName,
-                                  status,added,addedby,banner,fanart,lastUpdated,
-                                  poster,zap2itid,0);
+    if(!mySeries.isEmpty()) {
+        mydbmanager->insertSeries(mySeries.first());
     }
-
-    mydbmanager->commit();
 }
 
 void SearchListModel::storeEpisodes() {
 
     myEpisodes = myReader->getEpisodes();
 
-    mydbmanager->startTransaction();
+    mydbmanager->insertEpisodes(myEpisodes);
 
-    for(int i = 0; i < myEpisodes.size(); ++i) {
-
-        QMap<QString,QString> temp = myEpisodes.at(i);
-
-        int id = 0;
-        QString director = "";
-        int epimgflag = 0;
-        QString episodeName = "";
-        int episodeNumber = 0;
-        QString firstAired = "";
-        QString guestStars = "";
-        QString imdb_id = "";
-        QString language = "";
-        QString overview = "";
-        int productionCode = 0;
-        double rating = 0;
-        int ratingCount = 0;
-        int seasonNumber = 0;
-        QString writer = "";
-        int absoluteNumber = 0;
-        int airsAfterSeason = 0;
-        int airsBeforeEpisode = 0;
-        int airsBeforeSeason = 0;
-        QString filename = "";
-        QString lastUpdated = "";
-        int seasonID = 0;
-        int seriesID = 0;
-        QString thumbAdded = "";
-        int thumbHeight = 0;
-        int thumbWidth = 0;
-
-        QMap<QString,QString>::iterator itr = temp.begin();
-        while(itr != temp.end()) {
-
-            if(itr.key() == "id") {
-                id = itr.value().toInt();
-            } else if(itr.key() == "Director") {
-                director = itr.value();
-            } else if(itr.key() == "EpImgFlag") {
-                epimgflag = itr.value().toInt();
-            } else if(itr.key() == "EpisodeName") {
-                episodeName = itr.value();
-            } else if(itr.key() == "EpisodeNumber") {
-                episodeNumber = itr.value().toInt();
-            } else if(itr.key() == "FirstAired") {
-                firstAired = itr.value();
-            } else if(itr.key() == "GuestStars") {
-                guestStars = itr.value();
-            } else if(itr.key() == "Language") {
-                language = itr.value();
-            } else if(itr.key() == "Overview") {
-                overview = itr.value();
-            } else if(itr.key() == "IMDB_ID") {
-                imdb_id = itr.value();
-            } else if(itr.key() == "ProductionCode") {
-                productionCode = itr.value().toInt();
-            } else if(itr.key() == "Rating") {
-                rating = itr.value().toDouble();
-            } else if(itr.key() == "RatingCount") {
-                ratingCount = itr.value().toInt();
-            } else if(itr.key() == "SeasonNumber") {
-                seasonNumber = itr.value().toInt();
-            } else if(itr.key() == "Writer") {
-                writer = itr.value();
-            } else if(itr.key() == "absolute_number") {
-                absoluteNumber = itr.value().toInt();
-            } else if(itr.key() == "airsafter_season") {
-                airsAfterSeason = itr.value().toInt();
-            } else if(itr.key() == "airsbefore_episode") {
-                airsBeforeEpisode = itr.value().toInt();
-            } else if(itr.key() == "airsbefore_season") {
-                airsBeforeSeason = itr.value().toInt();
-            } else if(itr.key() == "filename") {
-                filename = itr.value();
-            } else if(itr.key() == "lastupdated") {
-                lastUpdated = itr.value();
-            } else if(itr.key() == "seasonid") {
-                seasonID = itr.value().toInt();
-            } else if(itr.key() == "seriesid") {
-                seriesID = itr.value().toInt();
-            } else if(itr.key() == "thumb_added") {
-                thumbAdded = itr.value();
-            } else if(itr.key() == "thumb_height") {
-                thumbHeight = itr.value().toInt();
-            } else if(itr.key() == "thumb_width") {
-                thumbWidth = itr.value().toInt();
-            }
-
-            ++itr;
-        }
-        mydbmanager->insertEpisode(id,director,epimgflag,episodeName,episodeNumber,firstAired,
-                                   guestStars,imdb_id,language,overview,productionCode,rating,
-                                   ratingCount,seasonNumber,writer,absoluteNumber,airsAfterSeason,
-                                   airsBeforeEpisode,airsBeforeSeason,filename,lastUpdated,seasonID,seriesID,
-                                   thumbAdded,thumbHeight,thumbWidth);
-
-        // process pending events to not freeze the app
-        qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
-    }
-
-    mydbmanager->commit();
     setAdded(true);
 }
 
@@ -349,46 +157,11 @@ void SearchListModel::storeBanners() {
 
     myBanners = myReader->getBanners();
 
-    mydbmanager->startTransaction();
+    // we are saving info for this series
+    int seriesId = myInfo->getID().toInt();
 
-    for(int i = 0; i < myBanners.size(); ++i) {
+    mydbmanager->insertBanners(myBanners, seriesId);
 
-        QMap<QString,QString> temp = myBanners.at(i);
-
-        int id = 0;
-        int seriesID = myInfo->getID().toInt(); // we are saving info for this series
-        QString bannerPath = "";
-        QString bannerType = "";
-        QString bannerType2 = "";
-        QString language = "";
-        int season = 0;
-
-        QMap<QString,QString>::iterator itr = temp.begin();
-        while(itr != temp.end()) {
-
-            if(itr.key() == "id") {
-                id = itr.value().toInt();
-            } else if(itr.key() == "BannerPath") {
-                bannerPath = itr.value();
-            } else if(itr.key() == "BannerType") {
-                bannerType = itr.value();
-            } else if(itr.key() == "BannerType2") {
-                bannerType2 = itr.value();
-            } else if(itr.key() == "Language") {
-                language = itr.value();
-            } else if(itr.key() == "Season") {
-                season = itr.value().toInt();
-            }
-            ++itr;
-        }
-
-        mydbmanager->insertBanner(id,seriesID,bannerPath,bannerType,bannerType2,language,season);
-
-        // process pending events to not freeze the app
-        qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
-    }
-
-    mydbmanager->commit();
 }
 
 QString SearchListModel::getID() { return myInfo->getID(); }

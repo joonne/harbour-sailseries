@@ -36,17 +36,7 @@ class EpisodeData : public QObject
     Q_PROPERTY(QString WatchedFlagImage READ getWatchedFlagImage WRITE setWatchedFlagImage NOTIFY watchedFlagImageChanged)
 
 public:
-    explicit EpisodeData(QObject *parent = 0);
-    EpisodeData(QObject* parent, int ID, QString director, int epimgflag, QString episodeName,
-                int episodeNumber, QString firstAired, QString guestStars, QString IMDB_ID,
-                QString language, QString overview, int productionCode, double rating,
-                int ratingCount, int SeasonNumber, QString writer, int absoluteNumber,
-                int airsAfterSeason, int airsBeforeSeason, QString filename, QString lastUpdated,
-                int seasonID, int seriesID, QString thumbAdded, int thumbHeight, int thumbWidth,
-                int watched);
-    EpisodeData(QObject *parent, QString episodeName, int episodeNumber, QString overview,
-                int seasonNumber, int absoluteNumber, QString filename, int watched, int id,
-                QString guestStars, QString writer, QString firstAired);
+    explicit EpisodeData(QObject *parent = 0, QMap<QString, QString> params = QMap<QString, QString>());
 
     int getID();
     QString getDirector();

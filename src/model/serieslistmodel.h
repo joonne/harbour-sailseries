@@ -26,7 +26,7 @@ class SeriesListModel : public QObject
     Q_PROPERTY(QString zap2it_ID READ getZap2it_ID)
     Q_PROPERTY(QString Network READ getNetwork)
     Q_PROPERTY(bool Loading READ getLoading WRITE setLoading NOTIFY loadingChanged)
-    Q_PROPERTY(QString Poster READ getPoster WRITE setPoster NOTIFY posterChanged)
+    Q_PROPERTY(QString Poster READ getPoster NOTIFY posterChanged)
     Q_PROPERTY(QString Mode READ getMode WRITE setMode NOTIFY modeChanged)
     Q_PROPERTY(QString NextEpisodeName READ getNextEpisodeName NOTIFY nextEpisodeNameChanged)
     Q_PROPERTY(QString NextEpisodeNumber READ getNextEpisodeNumber NOTIFY nextEpisodeNumberChanged)
@@ -43,7 +43,6 @@ public:
     void populateSeriesList();
     Q_INVOKABLE void populateBannerList();
     Q_INVOKABLE void selectSeries(int index);
-    Q_INVOKABLE void nextPoster();
 
     QQmlListProperty<SeriesData> getSeriesList();
     QString getID();
@@ -63,11 +62,10 @@ public:
     QString getStatus();
     QString getRating();
 
-    QString getPoster();
-    void setPoster(QString);
-
     bool getLoading();
     void setLoading(bool);
+
+    QString getPoster();
 
     QString getMode();
     void setMode(QString newmode);
@@ -101,7 +99,6 @@ private:
     QList<QMap<QString,QString> > myBanners;
     QQmlContext* myContext;
     QList<SeriesData*> mySeriesListModel;
-    bool isPopulated;
     SeriesData* myInfo;
 
     static int seriesListCount(QQmlListProperty<SeriesData> *prop);
@@ -111,13 +108,11 @@ private:
 
     bool myLoading;
 
-    QList<QString> myPosters;
     QString myPoster;
     QString myNextEpisodeName;
     QString myNextEpisodeNumber;
     QString myNextEpisodeSeasonNumber;
     QString myDaysToNextEpisode;
-    int posterIndex;
 
     QString mode;
 

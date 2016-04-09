@@ -53,23 +53,15 @@ void TodayListModel::populateTodayModel() {
     myTodayListModel.clear();
     emit todayModelChanged();
 
-    QList<QList<QString> > allSeries = mydbmanager->getStartPageSeries();
-    for(int i = 0; i < allSeries.size(); ++i ) {
-        QList<QString> temp = allSeries.at(i);
+    QList<QMap<QString, QString> > allSeries = mydbmanager->getStartPageSeries();
+    int length = allSeries.size();
+    for(int i = 0; i < length; ++i ) {
 
-        if(temp.at(3) == today and temp.at(4) == "Continuing" and temp.size() > 5) {
+        QMap<QString, QString> temp = allSeries.at(i);
 
-            QString seriesName = temp.at(0);
-            QString network = temp.at(1);
-            QString airstime = temp.at(2);
-            QString episodeName = temp.at(5);
-            QString episodeNumber = temp.at(6);
-            QString seasonNumber = temp.at(7);
-
-            SeriesData* serie = new SeriesData(this,seriesName,network,airstime,
-                                               episodeName,episodeNumber,seasonNumber);
-            myTodayListModel.append(serie);
-
+        if(temp["airsDayOfWeek"] == today and temp["status"] == "Continuing" and temp.contains("episodeName")) {
+            SeriesData* series = new SeriesData(this, temp);
+            myTodayListModel.append(series);
         }
     }
 

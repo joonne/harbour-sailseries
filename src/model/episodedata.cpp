@@ -1,75 +1,34 @@
 #include "episodedata.h"
 
-EpisodeData::EpisodeData(QObject *parent) :
+EpisodeData::EpisodeData(QObject *parent, QMap<QString, QString> params) :
     QObject(parent)
 {
-}
-
-EpisodeData::EpisodeData(QObject* parent, int ID, QString director, int epimgflag, QString episodeName,
-                                     int episodeNumber, QString firstAired, QString guestStars, QString IMDB_ID,
-                                     QString language, QString overview, int productionCode, double rating,
-                                     int ratingCount, int SeasonNumber, QString writer, int absoluteNumber,
-                                     int airsAfterSeason, int airsBeforeSeason, QString filename, QString lastUpdated,
-                                     int seasonID, int seriesID, QString thumbAdded, int thumbHeight, int thumbWidth,
-                                     int watched):
-    QObject(parent)
-{
-    myID = ID;
-    myDirector = director;
-    myEpimgflag = epimgflag;
-    myEpisodeName = episodeName;
-    myEpisodeNumber = episodeNumber;
-    myFirstAired = firstAired;
-    myGuestStars = guestStars;
-    myIMDB_ID = IMDB_ID;
-    myLanguage = language;
-    myOverview = overview;
-    myProductionCode = productionCode;
-    myRating = rating;
-    myRatingCount = ratingCount;
-    mySeasonNumber = SeasonNumber;
-    myWriter = writer;
-    myAbsoluteNumber = absoluteNumber;
-    myAirsAfterSeason = airsAfterSeason;
-    myAirsBeforeSeason = airsBeforeSeason;
-    myFilename = filename;
-    myLastUpdated = lastUpdated;
-    mySeasonID = seasonID;
-    mySeriesID = seriesID;
-    myThumbAdded = thumbAdded;
-    myThumbHeight  = thumbHeight;
-    myThumbWidth = thumbWidth;
-    myWatched = watched;
-    emit watchedChanged(); // testing
-
-}
-
-EpisodeData::EpisodeData(QObject *parent,
-                         QString episodeName,
-                         int episodeNumber,
-                         QString overview,
-                         int seasonNumber,
-                         int absoluteNumber,
-                         QString filename,
-                         int watched,
-                         int id,
-                         QString guestStars,
-                         QString writer,
-                         QString firstAired):
-    QObject(parent){
-
-    myEpisodeName = episodeName;
-    myEpisodeNumber = episodeNumber;
-    myOverview = overview;
-    mySeasonNumber = seasonNumber;
-    myAbsoluteNumber = absoluteNumber;
-    myFilename = filename;
-    myWatched = watched;
-    myID = id;
-    myGuestStars = guestStars;
-    myWriter = writer;
-    myFirstAired = firstAired;
-
+    myID = params["id"].toInt();
+    myDirector = params["director"];
+    myEpimgflag = 0;
+    myEpisodeName = params["episodeName"];
+    myEpisodeNumber = params["episodeNumber"].toInt();
+    myFirstAired = params["firstAired"];
+    myGuestStars = params["guestStars"];
+    myIMDB_ID = "";
+    myLanguage = "";
+    myOverview = params["overview"];
+    myProductionCode = 0;
+    myRating = 0;
+    myRatingCount = 0;
+    mySeasonNumber = params["seasonNumber"].toInt();
+    myWriter = params["writer"];
+    myAbsoluteNumber = params["absoluteNumber"].toInt();
+    myAirsAfterSeason = 0;
+    myAirsBeforeSeason = 0;
+    myFilename = params["filename"];
+    myLastUpdated = "";
+    mySeasonID = 0;
+    mySeriesID = 0;
+    myThumbAdded = "";
+    myThumbHeight  = 0;
+    myThumbWidth = 0;
+    myWatched = params["watched"].toInt();
 }
 
 int EpisodeData::getID() { return myID; }
