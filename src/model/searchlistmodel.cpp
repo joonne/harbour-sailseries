@@ -91,7 +91,6 @@ void SearchListModel::populateSearchModel() {
             QMap<QString,QString> temp = mySeries.at(i);
             SeriesData* series = new SeriesData(this, temp);
             mySearchListModel.append(series);
-
         }
 
         // must remember to call signal to let QML side know about populated items..

@@ -8,7 +8,9 @@ Page {
         controller.SeriesListModel.Mode = "default"
     }
 
-    function nextEpisodeDetails(episodeName,daysTo,status) {
+    function nextEpisodeDetails(episodeName, daysTo, status) {
+
+        console.log(episodeName, daysTo, status);
 
         if(status === "Ended") {
             return qsTr("This show has ended");
@@ -19,7 +21,7 @@ Page {
         } else if(episodeName.length !== 0) {
             return episodeName + " " + qsTr("airs in") + " " + daysTo + " " + qsTr("days");
         } else if(episodeName.length === 0 && daysTo !== "unknown") {
-            return qsTr("Next episode airs in") + " " + daysTo + " " + qstr("days");
+            return qsTr("Next episode airs in") + " " + daysTo + " " + qsTr("days");
         } else {
             return qsTr("No information about next episode");
         }
