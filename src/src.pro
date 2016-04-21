@@ -71,4 +71,5 @@ HEADERS += \
     model/seasonlistmodel.h
 
 DISTFILES += \
-    qml/pages/Seasons.qml
+    qml/pages/Seasons.qml \
+    qml/components/HorizontalSeparator.qml

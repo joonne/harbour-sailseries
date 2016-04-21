@@ -11,8 +11,10 @@ Page {
     SearchField {
         id: seriesSearch
         width: searchpage.width
-        anchors.top: searchpage.top
-        anchors.topMargin: 100
+        anchors {
+            top: searchpage.top
+            topMargin: (Theme.paddingLarge * 4)
+        }
         placeholderText: qsTr("Search for a series")
         EnterKey.onClicked: {
             controller.SearchModel.searchSeries(text)
@@ -23,7 +25,7 @@ Page {
     SilicaListView {
         id: listView
         anchors.top: seriesSearch.bottom
-        height: 800
+        height: (searchpage.height - seriesSearch.height - Theme.paddingLarge)
         width: searchpage.width
         model: controller.SearchModel.SearchModel
 

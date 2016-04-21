@@ -115,6 +115,7 @@ private:
     QString myNextEpisodeNumber;
     QString myNextEpisodeSeasonNumber;
     QString myDaysToNextEpisode;
+
     QString myWatchedCount;
     QString myTotalCount;
 

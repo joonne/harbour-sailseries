@@ -46,10 +46,6 @@ void TodayListModel::todayListClear(QQmlListProperty<SeriesData>* prop) {
 
 void TodayListModel::populateTodayModel() {
 
-    QDate date = QDateTime::currentDateTime().date();
-    QLocale locale  = QLocale(QLocale::English);
-    QString today = locale.toString(date, "dddd");
-
     myTodayListModel.clear();
     emit todayModelChanged();
 
@@ -58,11 +54,9 @@ void TodayListModel::populateTodayModel() {
     for(int i = 0; i < length; ++i ) {
 
         QMap<QString, QString> temp = allSeries.at(i);
-
-        if(temp["airsDayOfWeek"] == today and temp["status"] == "Continuing" and temp.contains("episodeName")) {
-            SeriesData* series = new SeriesData(this, temp);
-            myTodayListModel.append(series);
-        }
+        qDebug() << temp;
+        SeriesData* series = new SeriesData(this, temp);
+        myTodayListModel.append(series);
     }
 
     emit todayModelChanged();

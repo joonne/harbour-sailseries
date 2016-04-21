@@ -537,12 +537,18 @@ QList<QMap<QString, QString> > DatabaseManager::getSeries() {
 
 QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries() {
 
+    QDate date = QDateTime::currentDateTime().date();
+    QLocale locale  = QLocale(QLocale::English);
+    QString today = locale.toString(date, "dddd");
+
+    QString status = "Continuing";
+
     QList<QMap<QString, QString> > series;
 
     if(db.isOpen()) {
 
         QSqlQuery query(db);
-        query.exec(QString("SELECT seriesName,network,airsTime,airsDayOfWeek,status,id FROM Series ORDER BY seriesName;"));
+        query.exec(QString("SELECT seriesName, network, airsTime, airsDayOfWeek, status, id FROM Series WHERE airsDayOfWeek = '%1' and status = '%2' ORDER BY seriesName;").arg(today).arg(status));
 
         if(query.isSelect()) {
 
@@ -558,9 +564,6 @@ QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries() {
 
                 QString airsTime = query.value(2).toString();
                 QTime time = QTime::fromString(airsTime,"h:m A");
-                //                QDateTime time = QDateTime::fromString(airsTime,"h:m A");
-                //                time.setTimeSpec(Qt::TimeZone);
-                //                QDateTime local = time.toLocalTime();
                 airsTime = time.toString("h:mm");
 
                 temp["airsTime"] = airsTime;
@@ -799,7 +802,7 @@ QList<QMap<QString, QString> > DatabaseManager::getTodaysEpisodes(int seriesID) 
     QString today = date.toString(Qt::ISODate);
 
     QSqlQuery query(db);
-    query.exec(QString("SELECT episodeName,episodeNumber,seasonNumber,firstAired FROM Episode WHERE seriesID = %1 AND firstAired = %2 AND seasonNumber != 0 ORDER BY absoluteNumber;").arg(seriesID).arg(today));
+    query.exec(QString("SELECT episodeName, episodeNumber, seasonNumber, firstAired, filename, overview, guestStars, writer FROM Episode WHERE seriesID = %1 AND firstAired = '%2' AND seasonNumber != 0 ORDER BY absoluteNumber;").arg(seriesID).arg(today));
 
     if(query.isSelect()) {
 
@@ -818,6 +821,19 @@ QList<QMap<QString, QString> > DatabaseManager::getTodaysEpisodes(int seriesID) 
 
             QString firstAired = query.value(3).toString();
             temp["firstAired"] = firstAired;
+
+            QString banner = query.value(4).toString();
+            temp["banner"] = banner;
+
+            QString overview = query.value(5).toString();
+            overview.replace("''","'");
+            temp["overview"] = overview;
+
+            QString guestStars = query.value(6).toString();
+            temp["guestStars"] = guestStars;
+
+            QString writer = query.value(7).toString();
+            temp["writer"] = writer;
 
             details.append(temp);
         }

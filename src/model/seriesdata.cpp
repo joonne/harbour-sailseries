@@ -13,7 +13,7 @@ SeriesData::SeriesData(QObject *parent, QMap<QString, QString> params) :
     myIMDB_ID = params.contains("imdbId") ? params["imdbId"] : params["IMDB_ID"];
     myLanguage = params["language"];
     myNetwork = params["network"];
-    myNetwork = params["Network"];
+    myNetwork = params.contains("network") ? params["network"] : params["Network"];
     myOverview = params.contains("overview") ? params["overview"] : params["Overview"];
     myRating = params["rating"];
     myRatingCount = params["ratingCount"].toInt();
@@ -29,6 +29,10 @@ SeriesData::SeriesData(QObject *parent, QMap<QString, QString> params) :
     myPoster = params["poster"];
     myZap2it_ID = params["zap2itid"];
     myWatched = params["watched"].toInt();
+    myNextEpisodeName = params["episodeName"];
+    myNextEpisodeNumber = params["episodeNumber"];
+    myNextEpisodeSeasonNumber = params["seasonNumber"];
+    myDaysToNextEpisode = params["daysToNext"];
 }
 
 QString SeriesData::getID() { return myID; }

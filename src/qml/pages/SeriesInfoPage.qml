@@ -44,6 +44,8 @@ Page {
 
             }
 
+            HorizontalSeparator { }
+
             TextExpander {
                 id: expander
                 width: infopage.width

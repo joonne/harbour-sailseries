@@ -17,7 +17,7 @@ Column {
         }
 
         property int actualSize: innerColumn.height
-        property int collapsedSize: 160
+        property int collapsedSize: (Theme.paddingLarge * 10)
         property bool expanded: false
 
         Column {
@@ -37,13 +37,14 @@ Column {
 
         OpacityRampEffect {
                 sourceItem: innerColumn
+                enabled: !textContainer.expanded
                 direction: OpacityRamp.TopToBottom
             }
     }
 
     Item {
         id: expanderToggle
-        height: 20
+        height: Theme.paddingLarge
         width: parent.width
         visible: textContainer.actualSize > textContainer.collapsedSize && textContainer.expanded === false
 

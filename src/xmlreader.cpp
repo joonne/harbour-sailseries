@@ -17,7 +17,7 @@ XMLReader::XMLReader(QObject *parent) :
     fullRecord = false;
     update = false; // STUPID, FIX THIS SOMEHOW
 
-    getLanguages();
+//    getLanguages();
 
 }
 
