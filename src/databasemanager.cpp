@@ -537,9 +537,9 @@ QList<QMap<QString, QString> > DatabaseManager::getSeries() {
 
 QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries() {
 
-    QDate date = QDateTime::currentDateTime().date();
-    QLocale locale  = QLocale(QLocale::English);
-    QString today = locale.toString(date, "dddd");
+    auto date = QDateTime::currentDateTime().date();
+    auto locale  = QLocale(QLocale::English);
+    auto today = locale.toString(date, "dddd");
 
     QString status = "Continuing";
 
@@ -556,29 +556,29 @@ QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries() {
 
                 QMap<QString, QString> temp;
 
-                QString seriesName = query.value(0).toString();
+                auto seriesName = query.value(0).toString();
                 temp["seriesName"] = seriesName;
 
-                QString network = query.value(1).toString();
+                auto network = query.value(1).toString();
                 temp["network"] = network;
 
-                QString airsTime = query.value(2).toString();
-                QTime time = QTime::fromString(airsTime,"h:m A");
+                auto airsTime = query.value(2).toString();
+                auto time = QTime::fromString(airsTime,"h:m A");
                 airsTime = time.toString("h:mm");
 
                 temp["airsTime"] = airsTime;
 
-                QString airsDayOfWeek = query.value(3).toString();
+                auto airsDayOfWeek = query.value(3).toString();
                 temp["airsDayOfWeek"] = airsDayOfWeek;
 
-                QString status = query.value(4).toString();
+                auto status = query.value(4).toString();
                 temp["status"] = status;
 
                 int id = query.value(5).toInt();
-                QList<QMap<QString, QString> > todaysEpisodes = this->getTodaysEpisodes(id);
+                auto todaysEpisodes = this->getTodaysEpisodes(id);
                 int length = todaysEpisodes.size();
                 for(int i = 0; i < length; ++i) {
-                    QMap<QString, QString> episode = todaysEpisodes.at(i);
+                    auto episode = todaysEpisodes.at(i);
                     temp.unite(episode);
                 }
 
@@ -670,7 +670,7 @@ bool DatabaseManager::deleteSeries(int seriesID) {
     if(ret1) {
         ret2 = query.exec(QString("DELETE FROM Episode WHERE seriesID = %1").arg(seriesID));
         if(ret1 && ret2) {
-            ret3 = query.exec(QString("DELETE FROM Banner WHERE seriesID=%1").arg(seriesID));
+            ret3 = query.exec(QString("DELETE FROM Banner WHERE seriesID = %1").arg(seriesID));
         }
     }
 

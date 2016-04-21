@@ -7,6 +7,7 @@ QT += network sql
 LIBS +=-lz
 # In the bright future this config line will do a lot of stuff to you
 CONFIG += sailfishapp
+CONFIG += c++11
 
 SOURCES += main.cpp \
     xmlreader.cpp \
