@@ -34,8 +34,6 @@ DataModel::~DataModel() {
 
 }
 
-ProgramListModel* DataModel::getProgramListModel() { return myProgramListModel; }
-
 SeriesListModel* DataModel::getSeriesListModel() { return mySeriesListModel; }
 
 SearchListModel *DataModel::getSearchModel() { return mySearchListModel; }

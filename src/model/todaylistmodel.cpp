@@ -49,21 +49,14 @@ void TodayListModel::populateTodayModel() {
     myTodayListModel.clear();
     emit todayModelChanged();
 
-    // today's date in ISO format
-    auto date = QDateTime::currentDateTime().date();
-    auto today = date.toString(Qt::ISODate);
-
     auto allSeries = mydbmanager->getStartPageSeries();
     auto length = allSeries.size();
     for(auto i = 0; i < length; ++i ) {
 
         auto temp = allSeries.at(i);
 
-        // TODO: write this inside sql query also
-        if(temp["firstAired"] == today) {
-            auto series = new SeriesData(this, temp);
-            myTodayListModel.append(series);
-        }
+        auto series = new SeriesData(this, temp);
+        myTodayListModel.append(series);
     }
 
     emit todayModelChanged();

@@ -2,7 +2,6 @@
 #define DATAMODEL_H
 
 #include <QObject>
-#include "programlistmodel.h"
 #include "serieslistmodel.h"
 #include "../xmlreader.h"
 #include "../databasemanager.h"
@@ -14,18 +13,16 @@
 class DataModel : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(ProgramListModel* ProgramListModel READ getProgramListModel NOTIFY programListModelChanged)
     Q_PROPERTY(SeriesListModel* SeriesListModel READ getSeriesListModel NOTIFY seriesListModelChanged)
     Q_PROPERTY(SearchListModel* SearchModel READ getSearchModel NOTIFY searchModelChanged)
     Q_PROPERTY(TodayListModel* TodayModel READ getTodayModel NOTIFY todayModelChanged)
     Q_PROPERTY(EpisodeListModel* EpisodeListModel READ getEpisodeListModel NOTIFY episodeListModelChanged)
-    Q_PROPERTY(SeasonListModel * SeasonListModel READ getSeasonListModel NOTIFY seasonListModelChanged)
+    Q_PROPERTY(SeasonListModel* SeasonListModel READ getSeasonListModel NOTIFY seasonListModelChanged)
 
 public:
     explicit DataModel(QObject *parent = 0);
     ~DataModel();
 
-    ProgramListModel* getProgramListModel();
     SeriesListModel *getSeriesListModel();
     SearchListModel* getSearchModel();
     TodayListModel *getTodayModel();
@@ -44,7 +41,6 @@ public slots:
     void readyToUpdateModels();
 
 private:
-    ProgramListModel* myProgramListModel;
     SeriesListModel* mySeriesListModel;
     SearchListModel* mySearchListModel;
     TodayListModel* myTodayListModel;
@@ -52,7 +48,6 @@ private:
     SeasonListModel* mySeasonListModel;
     XMLReader* myReader;
     DatabaseManager* mydbmanager;
-
 };
 
 #endif // DATAMODEL_H

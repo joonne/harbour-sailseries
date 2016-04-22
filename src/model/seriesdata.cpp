@@ -3,6 +3,7 @@
 SeriesData::SeriesData(QObject *parent, QMap<QString, QString> params) :
     QObject(parent)
 {
+
     myID = params["id"];
     myActors = params["actors"];
     myAirsDayOfWeek = params["airsDayOfWeek"];
@@ -29,10 +30,15 @@ SeriesData::SeriesData(QObject *parent, QMap<QString, QString> params) :
     myPoster = params["poster"];
     myZap2it_ID = params["zap2itid"];
     myWatched = params["watched"].toInt();
-    myNextEpisodeName = params["episodeName"];
-    myNextEpisodeNumber = params["episodeNumber"];
-    myNextEpisodeSeasonNumber = params["seasonNumber"];
+    myNextEpisodeName = params["nextEpisodeName"];
+    myNextEpisodeNumber = params["nextEpisodeNumber"];
+    myNextEpisodeSeasonNumber = params["nextEpisodeSeasonNumber"];
     myDaysToNextEpisode = params["daysToNext"];
+    myNextEpisodeFirstAired = params["nextEpisodeFirstAired"];
+    myNextEpisodeBanner = params["nextEpisodeBanner"];
+    myNextEpisodeOverview = params["nextEpisodeOverview"];
+    myNextEpisodeGuestStars = params["nextEpisodeGuestStars"];
+    myNextEpisodeWriter = params["nextEpisodeWriter"];
 }
 
 QString SeriesData::getID() { return myID; }
@@ -104,3 +110,13 @@ QString SeriesData::getDaysToNextEpisode() { return myDaysToNextEpisode; }
 QString SeriesData::getWatchedCount() { return myWatchedCount; }
 
 QString SeriesData::getTotalCount() { return myTotalCount; }
+
+QString SeriesData::getNextEpisodeFirstAired() { return myNextEpisodeFirstAired; }
+
+QString SeriesData::getNextEpisodeBanner() { return myNextEpisodeBanner; }
+
+QString SeriesData::getNextEpisodeOverview() { return myNextEpisodeOverview; }
+
+QString SeriesData::getNextEpisodeGuestStars() { return myNextEpisodeGuestStars; }
+
+QString SeriesData::getNextEpisodeWriter() { return myNextEpisodeWriter; }

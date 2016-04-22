@@ -383,17 +383,17 @@ joonne</source>
         <translation>Tänään</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="112"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="113"/>
         <source>Nothing airs tonight</source>
         <translation>Mitään ei lähetetä tänään</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="84"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="85"/>
         <source>Season</source>
         <translation>Kausi</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="84"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="85"/>
         <source>Episode</source>
         <translation>Jakso</translation>
     </message>

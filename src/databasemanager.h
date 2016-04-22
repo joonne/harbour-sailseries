@@ -11,7 +11,6 @@
 #include <QStandardPaths>
 #include <QVariant>
 #include <QDebug>
-#include <QPixmap>
 #include <QBuffer>
 #include <QStringRef>
 #include <QDate>
@@ -58,7 +57,6 @@ public:
     QList<QMap<QString, QString> > getStartPageSeries();
     QList<QMap<QString, QString> > getEpisodes(int seriesID, int seasonNumber);
     QMap<QString, QString> getNextEpisodeDetails(int seriesID);
-    QList<QMap<QString, QString> > getTodaysEpisodes(int seriesID);
     QString getStatus(int seriesID);
     QString getSeasonBanner(int seriesID, int season);
 

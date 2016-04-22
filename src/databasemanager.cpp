@@ -540,15 +540,16 @@ QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries() {
     auto date = QDateTime::currentDateTime().date();
     auto locale  = QLocale(QLocale::English);
     auto today = locale.toString(date, "dddd");
+    auto firstAired = date.toString(Qt::ISODate);
 
-    QString status = "Continuing";
+    auto status = "Continuing";
 
     QList<QMap<QString, QString> > series;
 
     if(db.isOpen()) {
 
         QSqlQuery query(db);
-        query.exec(QString("SELECT seriesName, network, airsTime, airsDayOfWeek, status, id FROM Series WHERE airsDayOfWeek = '%1' and status = '%2' ORDER BY seriesName;").arg(today).arg(status));
+        query.exec(QString("SELECT Series.seriesName, Series.network, Series.airsTime, Series.airsDayOfWeek, Series.status, Series.id, Episode.episodeName, Episode.episodeNumber, Episode.seasonNumber, Episode.firstAired, Episode.filename, Episode.overview, Episode.guestStars, Episode.writer FROM Series, Episode WHERE Series.airsDayOfWeek = '%1' and Series.status = '%2' and Episode.firstAired = '%3' and Series.id = Episode.seriesID ORDER BY Series.seriesName;").arg(today).arg(status).arg(firstAired));
 
         if(query.isSelect()) {
 
@@ -574,13 +575,33 @@ QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries() {
                 auto status = query.value(4).toString();
                 temp["status"] = status;
 
-                auto id = query.value(5).toInt();
-                auto todaysEpisodes = this->getTodaysEpisodes(id);
-                auto length = todaysEpisodes.size();
-                for(auto i = 0; i < length; ++i) {
-                    auto episode = todaysEpisodes.at(i);
-                    temp.unite(episode);
-                }
+                auto id = query.value(5).toString();
+                temp["id"] = id;
+
+                auto episodeName = query.value(6).toString();
+                temp["nextEpisodeName"] = episodeName;
+
+                auto episodeNumber = query.value(7).toString();
+                temp["nextEpisodeNumber"] = episodeNumber;
+
+                auto seasonNumber = query.value(8).toString();
+                temp["nextEpisodeSeasonNumber"] = seasonNumber;
+
+                auto firstAired = query.value(9).toString();
+                temp["nextEpisodeFirstAired"] = firstAired;
+
+                auto banner = query.value(10).toString();
+                temp["nextEpisodeBanner"] = banner;
+
+                auto overview = query.value(11).toString();
+                overview.replace("''","'");
+                temp["nextEpisodeOverview"] = overview;
+
+                auto guestStars = query.value(12).toString();
+                temp["nextEpisodeGuestStars"] = guestStars;
+
+                auto writer = query.value(13).toString();
+                temp["nextEpisodeWriter"] = writer;
 
                 series.append(temp);
             }
@@ -791,55 +812,6 @@ void DatabaseManager::markSeasonWatched(int seriesID, int season) {
     query.exec(QString("UPDATE Episode SET watched=1 WHERE seriesID = %1 AND seasonNumber = %2").arg(seriesID).arg(season));
     qDebug() << query.lastError();
 
-}
-
-QList<QMap<QString, QString> > DatabaseManager::getTodaysEpisodes(int seriesID) {
-
-    QList<QMap<QString, QString> > details;
-
-    // today's date in ISO format
-    QDate date = QDateTime::currentDateTime().date();
-    QString today = date.toString(Qt::ISODate);
-
-    QSqlQuery query(db);
-    query.exec(QString("SELECT episodeName, episodeNumber, seasonNumber, firstAired, filename, overview, guestStars, writer FROM Episode WHERE seriesID = %1 AND firstAired = '%2' AND seasonNumber != 0 ORDER BY absoluteNumber;").arg(seriesID).arg(today));
-
-    if(query.isSelect()) {
-
-        while(query.next()) {
-
-            QMap<QString, QString> temp;
-
-            QString episodeName = query.value(0).toString();
-            temp["episodeName"] = episodeName;
-
-            QString episodeNumber = query.value(1).toString();
-            temp["episodeNumber"] = episodeNumber;
-
-            QString seasonNumber = query.value(2).toString();
-            temp["seasonNumber"] = seasonNumber;
-
-            QString firstAired = query.value(3).toString();
-            temp["firstAired"] = firstAired;
-
-            QString banner = query.value(4).toString();
-            temp["banner"] = banner;
-
-            QString overview = query.value(5).toString();
-            overview.replace("''","'");
-            temp["overview"] = overview;
-
-            QString guestStars = query.value(6).toString();
-            temp["guestStars"] = guestStars;
-
-            QString writer = query.value(7).toString();
-            temp["writer"] = writer;
-
-            details.append(temp);
-        }
-    }
-
-    return details;
 }
 
 // Get the details of next episode

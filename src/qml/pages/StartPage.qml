@@ -61,12 +61,13 @@ Page {
                 contentWidth: listView.width
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("EpisodeOverviewPage.qml"),
-                                   { episodeBanner: "",
-                                       episodeOverview: "",
+                                   { episodeBanner: NextEpisodeBanner,
+                                       episodeOverview: NextEpisodeOverview,
                                        episodeName: NextEpisodeName,
-                                       guestStars: "",
-                                       writer: "",
-                                       firstAired: "" })
+                                       guestStars: NextEpisodeGuestStars,
+                                       writer: NextEpisodeWriter,
+                                       firstAired: NextEpisodeFirstAired })
+                    console.log(NextEpisodeBanner)
                 }
 
                 Column {

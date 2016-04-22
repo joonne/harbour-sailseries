@@ -39,6 +39,11 @@ class SeriesData : public QObject
     Q_PROPERTY(QString DaysToNextEpisode READ getDaysToNextEpisode)
     Q_PROPERTY(QString WatchedCount READ getWatchedCount)
     Q_PROPERTY(QString TotalCount READ getTotalCount)
+    Q_PROPERTY(QString NextEpisodeFirstAired READ getNextEpisodeFirstAired())
+    Q_PROPERTY(QString NextEpisodeBanner READ getNextEpisodeBanner)
+    Q_PROPERTY(QString NextEpisodeOverview READ getNextEpisodeOverview)
+    Q_PROPERTY(QString NextEpisodeGuestStars READ getNextEpisodeGuestStars)
+    Q_PROPERTY(QString NextEpisodeWriter READ getNextEpisodeWriter)
 
 public:
     explicit SeriesData(QObject *parent = 0, QMap<QString, QString> params = QMap<QString, QString>());
@@ -76,6 +81,11 @@ public:
     QString getDaysToNextEpisode();
     QString getWatchedCount();
     QString getTotalCount();
+    QString getNextEpisodeFirstAired();
+    QString getNextEpisodeBanner();
+    QString getNextEpisodeOverview();
+    QString getNextEpisodeGuestStars();
+    QString getNextEpisodeWriter();
 
 signals:
 
@@ -118,6 +128,12 @@ private:
 
     QString myWatchedCount;
     QString myTotalCount;
+
+    QString myNextEpisodeFirstAired;
+    QString myNextEpisodeBanner;
+    QString myNextEpisodeOverview;
+    QString myNextEpisodeGuestStars;
+    QString myNextEpisodeWriter;
 
 };
 

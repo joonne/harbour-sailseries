@@ -58,8 +58,6 @@ HEADERS += \
     model/serieslistmodel.h \
     databasemanager.h \
     model/episodedata.h \
-    model/programdata.h \
-    model/programlistmodel.h \
     model/datamodel.h \
     model/episodelistmodel.h \
     model/searchlistmodel.h \

@@ -383,17 +383,17 @@ joonne</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="112"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="113"/>
         <source>Nothing airs tonight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="84"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="85"/>
         <source>Season</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="84"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="85"/>
         <source>Episode</source>
         <translation type="unfinished"></translation>
     </message>
