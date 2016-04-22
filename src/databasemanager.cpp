@@ -574,10 +574,10 @@ QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries() {
                 auto status = query.value(4).toString();
                 temp["status"] = status;
 
-                int id = query.value(5).toInt();
+                auto id = query.value(5).toInt();
                 auto todaysEpisodes = this->getTodaysEpisodes(id);
-                int length = todaysEpisodes.size();
-                for(int i = 0; i < length; ++i) {
+                auto length = todaysEpisodes.size();
+                for(auto i = 0; i < length; ++i) {
                     auto episode = todaysEpisodes.at(i);
                     temp.unite(episode);
                 }

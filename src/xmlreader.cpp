@@ -157,7 +157,7 @@ void XMLReader::replyFinished(QNetworkReply *reply) {
     reply->deleteLater();
 }
 
-// These are ugly looking but they are very fast
+// These are ugly looking but they seem to be fast
 // ---------------------------------------------------
 
 void XMLReader::parseXML(QXmlStreamReader& xml) {

@@ -15,8 +15,6 @@ SOURCES += main.cpp \
     model/serieslistmodel.cpp \
     databasemanager.cpp \
     model/episodedata.cpp \
-    model/programdata.cpp \
-    model/programlistmodel.cpp \
     model/datamodel.cpp \
     model/episodelistmodel.cpp \
     model/searchlistmodel.cpp \

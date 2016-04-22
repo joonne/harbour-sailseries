@@ -11,7 +11,7 @@ TodayListModel::TodayListModel(QObject *parent, DatabaseManager *dbmanager, XMLR
 
 TodayListModel::~TodayListModel() {
 
-    foreach(SeriesData* series, myTodayListModel) {
+    foreach(auto series, myTodayListModel) {
         delete series;
         series = 0;
     }
@@ -49,14 +49,21 @@ void TodayListModel::populateTodayModel() {
     myTodayListModel.clear();
     emit todayModelChanged();
 
-    QList<QMap<QString, QString> > allSeries = mydbmanager->getStartPageSeries();
-    int length = allSeries.size();
-    for(int i = 0; i < length; ++i ) {
+    // today's date in ISO format
+    auto date = QDateTime::currentDateTime().date();
+    auto today = date.toString(Qt::ISODate);
 
-        QMap<QString, QString> temp = allSeries.at(i);
-        qDebug() << temp;
-        SeriesData* series = new SeriesData(this, temp);
-        myTodayListModel.append(series);
+    auto allSeries = mydbmanager->getStartPageSeries();
+    auto length = allSeries.size();
+    for(auto i = 0; i < length; ++i ) {
+
+        auto temp = allSeries.at(i);
+
+        // TODO: write this inside sql query also
+        if(temp["firstAired"] == today) {
+            auto series = new SeriesData(this, temp);
+            myTodayListModel.append(series);
+        }
     }
 
     emit todayModelChanged();
