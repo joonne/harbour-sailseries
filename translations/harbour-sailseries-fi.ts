@@ -93,50 +93,54 @@ joonne</source>
 <context>
     <name>CoverPage</name>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="23"/>
-        <source>This show has ended</source>
-        <translation>Tämä sarja on päättynyt</translation>
-    </message>
-    <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="9"/>
-        <source>Nothing airs tonight</source>
-        <translation>Mitään ei lähetetä tänään</translation>
+        <source>Nothing airs this week</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="25"/>
-        <source>airs tonight</source>
-        <translation>lähetetään tänään</translation>
+        <location filename="../src/qml/cover/CoverPage.qml" line="48"/>
+        <source>Monday</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="27"/>
-        <source>airs tomorrow</source>
-        <translation>lähetetään huomenna</translation>
+        <location filename="../src/qml/cover/CoverPage.qml" line="50"/>
+        <source>Tuesday</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="29"/>
-        <source>airs in</source>
-        <translation>lähetetään</translation>
+        <location filename="../src/qml/cover/CoverPage.qml" line="52"/>
+        <source>Wednesday</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="29"/>
-        <location filename="../src/qml/cover/CoverPage.qml" line="31"/>
-        <source>days</source>
-        <translation>päivän kuluttua</translation>
+        <location filename="../src/qml/cover/CoverPage.qml" line="54"/>
+        <source>Thursday</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="31"/>
-        <source>Next episode airs in</source>
-        <translation>Seuraava jakso lähetetään</translation>
+        <location filename="../src/qml/cover/CoverPage.qml" line="56"/>
+        <source>Friday</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="33"/>
-        <source>No information about next episode</source>
-        <translation>Ei tietoa seuraavasta jaksosta</translation>
+        <location filename="../src/qml/cover/CoverPage.qml" line="58"/>
+        <source>Saturday</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="91"/>
-        <source>On Tonight</source>
-        <translation>Tänään</translation>
+        <location filename="../src/qml/cover/CoverPage.qml" line="60"/>
+        <source>Sunday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/cover/CoverPage.qml" line="94"/>
+        <source>Season</source>
+        <translation type="unfinished">Kausi</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/cover/CoverPage.qml" line="94"/>
+        <source>Episode</source>
+        <translation type="unfinished">Jakso</translation>
     </message>
 </context>
 <context>
@@ -363,39 +367,74 @@ joonne</source>
 <context>
     <name>StartPage</name>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="18"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="39"/>
         <source>About</source>
         <translation>Tietoa</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="26"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="47"/>
         <source>Search for a series</source>
         <translation>Etsi sarjaa</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="34"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="55"/>
         <source>My series</source>
         <translation>Omat sarjat</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="44"/>
-        <source>On Tonight</source>
-        <translation>Tänään</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="113"/>
-        <source>Nothing airs tonight</source>
-        <translation>Mitään ei lähetetä tänään</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="85"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="115"/>
         <source>Season</source>
         <translation>Kausi</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="85"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="10"/>
+        <source>Monday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="12"/>
+        <source>Tuesday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="14"/>
+        <source>Wednesday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="16"/>
+        <source>Thursday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="18"/>
+        <source>Friday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="20"/>
+        <source>Saturday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="22"/>
+        <source>Sunday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="65"/>
+        <source>Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="115"/>
         <source>Episode</source>
         <translation>Jakso</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="143"/>
+        <source>Nothing airs this week</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

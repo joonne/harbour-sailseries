@@ -43,7 +43,7 @@ Page {
                 x: Theme.paddingLarge
                 Label {
                     id: seriesName
-                    text: SeriesName.length === 0 ? text = "Name of the series" : text = SeriesName
+                    text: SeriesName
                     color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
                 }
                 Label {

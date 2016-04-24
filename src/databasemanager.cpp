@@ -541,7 +541,8 @@ QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries() {
     auto locale  = QLocale(QLocale::English);
     auto today = locale.toString(date, "dddd");
     auto firstAired = date.toString(Qt::ISODate);
-
+    auto firstAiredStart = date.addDays(1 - date.dayOfWeek()).toString(Qt::ISODate);
+    auto firstAiredEnd = date.addDays(7 - date.dayOfWeek()).toString(Qt::ISODate);
     auto status = "Continuing";
 
     QList<QMap<QString, QString> > series;
@@ -549,7 +550,7 @@ QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries() {
     if(db.isOpen()) {
 
         QSqlQuery query(db);
-        query.exec(QString("SELECT Series.seriesName, Series.network, Series.airsTime, Series.airsDayOfWeek, Series.status, Series.id, Episode.episodeName, Episode.episodeNumber, Episode.seasonNumber, Episode.firstAired, Episode.filename, Episode.overview, Episode.guestStars, Episode.writer FROM Series, Episode WHERE Series.airsDayOfWeek = '%1' and Series.status = '%2' and Episode.firstAired = '%3' and Series.id = Episode.seriesID ORDER BY Series.seriesName;").arg(today).arg(status).arg(firstAired));
+        query.exec(QString("SELECT Series.seriesName, Series.network, Series.airsTime, Series.airsDayOfWeek, Series.status, Series.id, Episode.episodeName, Episode.episodeNumber, Episode.seasonNumber, Episode.firstAired, Episode.filename, Episode.overview, Episode.guestStars, Episode.writer FROM Series, Episode WHERE Series.status = '%1' AND Episode.firstAired BETWEEN '%2' AND '%3' AND Series.id = Episode.seriesID AND Episode.seasonNumber != 0 ORDER BY Episode.firstAired;").arg(status).arg(firstAiredStart).arg(firstAiredEnd));
 
         if(query.isSelect()) {
 
@@ -604,6 +605,7 @@ QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries() {
                 temp["nextEpisodeWriter"] = writer;
 
                 series.append(temp);
+
             }
         }
     }

@@ -13,7 +13,6 @@ SeriesData::SeriesData(QObject *parent, QMap<QString, QString> params) :
     myGenre = params["genre"];
     myIMDB_ID = params.contains("imdbId") ? params["imdbId"] : params["IMDB_ID"];
     myLanguage = params["language"];
-    myNetwork = params["network"];
     myNetwork = params.contains("network") ? params["network"] : params["Network"];
     myOverview = params.contains("overview") ? params["overview"] : params["Overview"];
     myRating = params["rating"];

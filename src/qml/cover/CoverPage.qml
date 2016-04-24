@@ -6,7 +6,7 @@ CoverBackground {
 
     Label {
         id: placeholder
-        text: qsTr("Nothing airs tonight")
+        text: qsTr("Nothing airs this week")
         font.pixelSize: Theme.fontSizeTiny
         color: Theme.secondaryColor
         anchors.centerIn: cover
@@ -16,33 +16,6 @@ CoverBackground {
     //---------------------------------
     // This is the "MySeries" coverPage
     //---------------------------------
-
-    function nextEpisodeDetails(episodeName,daysTo,status) {
-
-        if(status === "Ended") {
-            return qsTr("This show has ended");
-        } else if(daysTo === "today") {
-            return episodeName + " " + qsTr("airs tonight");
-        } else if(daysTo === "tommorrow") {
-            return episodeName + " " + qsTr("airs tomorrow");
-        } else if(episodeName.length !== 0) {
-            return episodeName + " " + qsTr("airs in") + " " + daysTo + " " + qsTr("days");
-        } else if(episodeName.length === 0 && daysTo !== "unknown") {
-            return qsTr("Next episode airs in") + " " + daysTo + " " + qsTr("days");
-        } else {
-            return qsTr("No information about next episode");
-        }
-    }
-
-    function setDetails() {
-
-        if(controller.SeriesListModel.Mode === "mySeries" &&
-                controller.SeriesListModel.NextEpisodeName !== null &&
-                controller.SeriesListModel.DaysToNextEpisode !== null &&
-                controller.SeriesListModel.Status !== null) {
-            return nextEpisodeDetails(controller.SeriesListModel.NextEpisodeName,controller.SeriesListModel.DaysToNextEpisode,controller.SeriesListModel.Status)
-        }
-    }
 
     function setPosterVisible() {
         if(controller.SeriesListModel.Mode === "mySeries" && controller.SeriesListModel.Poster !== null) {
@@ -60,48 +33,42 @@ CoverBackground {
         opacity: 1.0
     }
 
-//    Label {
-//        id: seriesName
-//        text: "Arrow"
-//        width: cover.width
-//        truncationMode: TruncationMode.Fade
-//        anchors.left: parent.left
-//        anchors.leftMargin: 2 * Theme.paddingMedium
-//        anchors.bottom: parent.bottom
-//        anchors.bottomMargin: 2 * Theme.paddingMedium
-//        font.pixelSize: Theme.fontSizeTiny
-//        color: Theme.highlightDimmerColor
-//        visible: controller.SeriesListModel.Mode === "mySeries"
-//    }
-
     //--------------------------------
     // This is the "default" coverPage
     //--------------------------------
 
     function defaultVisibility() {
-        var ret = false;
-        if(controller.SeriesListModel.Mode === "default") {
-            ret = true;
-        }
-        return ret;
+        return controller.SeriesListModel.Mode === "default"
     }
 
-    SectionHeader {
-        id: defaultheader
-        text: qsTr("On Tonight")
-        anchors {
-            top: cover.top
-            topMargin: Theme.paddingLarge
+    function getWeekday(weekday) {
+        console.log(weekday)
+        switch(weekday) {
+        case "Monday":
+            return qsTr("Monday");
+        case "Tuesday":
+            return qsTr("Tuesday");
+        case "Wednesday":
+            return qsTr("Wednesday");
+        case "Thursday":
+            return qsTr("Thursday");
+        case "Friday":
+            return qsTr("Friday");
+        case "Saturday":
+            return qsTr("Saturday");
+        case "Sunday":
+            return qsTr("Sunday");
+        default:
+            return "-";
         }
-        visible: listView.count !== 0 && defaultVisibility()
     }
 
     SilicaListView {
         visible: defaultVisibility()
         id: listView
-        height: 500
-        anchors.top: defaultheader.bottom
-        anchors.topMargin: Theme.paddingSmall
+        height: cover.height
+        anchors.top: cover.top
+        anchors.topMargin: Theme.paddingLarge
         model: controller.TodayModel.TodayModel
 
         delegate: ListItem {
@@ -115,29 +82,40 @@ CoverBackground {
 
                 Label {
                     id: seriesName
-                    text: SeriesName.length === 0 ? text = "SeriesName" : text = SeriesName
+                    text: SeriesName
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
+                    truncationMode: TruncationMode.Fade
+                    width: cover.width - Theme.paddingLarge
+                }
+
+                Label {
+                    id: episodeNumber
+                    text: qsTr("Season") + " " + NextEpisodeSeasonNumber + " " + qsTr("Episode") + " " + NextEpisodeNumber
                     font.pixelSize: Theme.fontSizeExtraSmall
                     color: Theme.secondaryColor
                     truncationMode: TruncationMode.Fade
-                    width: cover.width
+                    width: cover.width - Theme.paddingLarge
+                    visible: listView.count <= 3
                 }
 
                 Label {
                     id: episodeName
                     text: NextEpisodeName
-                    font.pixelSize: Theme.fontSizeTiny
+                    font.pixelSize: Theme.fontSizeExtraSmall
                     color: Theme.secondaryColor
                     truncationMode: TruncationMode.Fade
-                    width: cover.width - Theme.paddingMedium
+                    width: cover.width - Theme.paddingLarge
+                    visible: listView.count <= 3
                 }
 
                 Label {
                     id: network
-                    text: AirsTime + " @ " + Network
-                    font.pixelSize: Theme.fontSizeTiny
+                    text: getWeekday(AirsDayOfWeek) + " " + AirsTime + " @ " + Network
+                    font.pixelSize: Theme.fontSizeExtraSmall
                     color: Theme.secondaryColor
                     truncationMode: TruncationMode.Fade
-                    width: cover.width
+                    width: cover.width - Theme.paddingLarge
                 }
             }
         }

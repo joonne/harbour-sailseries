@@ -4,6 +4,27 @@ import Sailfish.Silica 1.0
 Page {
     id: startpage
 
+    function getWeekday(weekday) {
+        switch(weekday) {
+        case "Monday":
+            return qsTr("Monday");
+        case "Tuesday":
+            return qsTr("Tuesday");
+        case "Wednesday":
+            return qsTr("Wednesday");
+        case "Thursday":
+            return qsTr("Thursday");
+        case "Friday":
+            return qsTr("Friday");
+        case "Saturday":
+            return qsTr("Saturday");
+        case "Sunday":
+            return qsTr("Sunday");
+        default:
+            return "-";
+        }
+    }
+
     SilicaFlickable {
         anchors.fill: parent
 
@@ -41,7 +62,7 @@ Page {
 
         SectionHeader {
             id: sectionheader
-            text: qsTr("On Tonight")
+            text: qsTr("Calendar")
             visible: listView.count !== 0
             anchors {
                 top: header.bottom
@@ -50,10 +71,20 @@ Page {
 
         SilicaListView {
             id: listView
-            height: startpage.height - header.height - 4*Theme.paddingLarge
+            height: startpage.height - header.height - sectionheader.height
             width: startpage.width
-            anchors.top: sectionheader.bottom
+            anchors {
+                top: sectionheader.bottom
+            }
             model: controller.TodayModel.TodayModel
+
+            section {
+                property: "AirsDayOfWeek"
+                criteria: ViewSection.FullString
+                delegate: SectionHeader {
+                    text: getWeekday(section)
+                }
+            }
 
             delegate: ListItem {
                 id: item
@@ -67,7 +98,6 @@ Page {
                                        guestStars: NextEpisodeGuestStars,
                                        writer: NextEpisodeWriter,
                                        firstAired: NextEpisodeFirstAired })
-                    console.log(NextEpisodeBanner)
                 }
 
                 Column {
@@ -110,7 +140,7 @@ Page {
 
             ViewPlaceholder {
                 enabled: listView.count === 0
-                text: qsTr("Nothing airs tonight")
+                text: qsTr("Nothing airs this week")
                 anchors.centerIn: listView
 
             }
