@@ -1,8 +1,6 @@
 #include "serieslistmodel.h"
 
-SeriesListModel::SeriesListModel(QObject *parent, QQmlContext* context, DatabaseManager* dbmanager, XMLReader *reader) :
-    QObject(parent),
-    myContext(context){
+SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager, XMLReader *reader) : QObject(parent) {
 
     myReader = reader;
     mydbmanager = dbmanager;
@@ -15,7 +13,7 @@ SeriesListModel::SeriesListModel(QObject *parent, QQmlContext* context, Database
             SLOT(updateFetchFinished()));
 
     populateBannerList();
-    populateSeriesList();
+//    populateSeriesList();
 
     myLoading = false;
 
@@ -70,25 +68,10 @@ void SeriesListModel::seriesListClear(QQmlListProperty<SeriesData>* prop)
 // -------------------------------------------------------------------
 // POPULATING DATA
 
-void SeriesListModel::populateSeriesList() {
-
-    if(mySeries.size() != 0) {
-
-        int length = mySeries.size();
-        for(int i = 0; i < length; ++i) {
-            QMap<QString,QString> temp = mySeries.at(i);
-            SeriesData* serie = new SeriesData(this, temp);
-            mySeriesListModel.append(serie);
-        }
-
-        // must remember to call signal to let QML side know about populated items..
-        emit seriesListChanged();
-    }
-}
-
 void SeriesListModel::populateBannerList() {
 
     mySeriesListModel.clear();
+    emit seriesListChanged();
 
     QList<QMap<QString, QString> > allSeries = mydbmanager->getSeries();
     int length = allSeries.size();
@@ -182,6 +165,8 @@ QString SeriesListModel::getStatus() { return myInfo->getStatus(); }
 
 QString SeriesListModel::getRating() { return myInfo->getRating(); }
 
+QString SeriesListModel::getGenre() { return myInfo->getGenre(); }
+
 bool SeriesListModel::getLoading() { return myLoading; }
 
 void SeriesListModel::setLoading(bool) {
@@ -194,13 +179,9 @@ void SeriesListModel::setLoading(bool) {
     emit loadingChanged();
 }
 
-QString SeriesListModel::getPoster() {
-    return myPoster;
-}
+QString SeriesListModel::getPoster() { return myPoster; }
 
-QString SeriesListModel::getMode() {
-    return mode;
-}
+QString SeriesListModel::getMode() { return mode; }
 
 void SeriesListModel::setMode(QString newmode) {
 

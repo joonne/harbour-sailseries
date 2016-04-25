@@ -52,9 +52,7 @@ void TodayListModel::populateTodayModel() {
     auto allSeries = mydbmanager->getStartPageSeries();
     auto length = allSeries.size();
     for(auto i = 0; i < length; ++i ) {
-
         auto temp = allSeries.at(i);
-
         auto series = new SeriesData(this, temp);
         myTodayListModel.append(series);
     }

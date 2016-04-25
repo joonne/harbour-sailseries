@@ -78,7 +78,7 @@ CoverBackground {
 
             Column {
                 id: column
-                x: Theme.paddingMedium
+                x: Theme.paddingLarge
 
                 Label {
                     id: seriesName
@@ -91,12 +91,12 @@ CoverBackground {
 
                 Label {
                     id: episodeNumber
-                    text: qsTr("Season") + " " + NextEpisodeSeasonNumber + " " + qsTr("Episode") + " " + NextEpisodeNumber
+                    text: qsTr("Season %1 Episode %2").arg(NextEpisodeSeasonNumber).arg(NextEpisodeNumber);
                     font.pixelSize: Theme.fontSizeExtraSmall
                     color: Theme.secondaryColor
                     truncationMode: TruncationMode.Fade
                     width: cover.width - Theme.paddingLarge
-                    visible: listView.count <= 3
+                    visible: listView.count < 3
                 }
 
                 Label {
@@ -106,7 +106,7 @@ CoverBackground {
                     color: Theme.secondaryColor
                     truncationMode: TruncationMode.Fade
                     width: cover.width - Theme.paddingLarge
-                    visible: listView.count <= 3
+                    visible: listView.count < 3
                 }
 
                 Label {

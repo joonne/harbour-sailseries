@@ -16,6 +16,18 @@ Item {
         }
     }
 
+    function process(string) {
+
+        if(string.charAt(0) === "|" && string.charAt(string.length - 1) === "|") {
+            var newstring = string.split("|").join(", ")
+            return newstring.substr(2,(newstring.length - 4))
+        } else if(string.charAt(0) === "|") {
+            return string.split("|").join(", ").substr(2)
+        } else {
+            return string.split("|").join(", ")
+        }
+    }
+
     SilicaListView {
         id: listView
         anchors.fill: parent
@@ -62,6 +74,15 @@ Item {
                         readOnly: true
                     }
 
+                }
+
+                TextField {
+                    id: genre
+                    label: qsTr("Genre")
+                    width: seriesViewPage.width
+                    text: process(controller.SeriesListModel.Genre)
+                    color: Theme.secondaryColor
+                    readOnly: true
                 }
 
                 TextExpander {

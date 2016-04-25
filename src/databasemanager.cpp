@@ -485,7 +485,7 @@ QList<QMap<QString, QString> > DatabaseManager::getSeries() {
 
         this->startTransaction();
         QSqlQuery query(db);
-        query.exec(QString("SELECT banner,poster,seriesName,status,id,overview,imdbID,rating FROM Series ORDER BY seriesName;"));
+        query.exec(QString("SELECT banner, poster, seriesName, status, id, overview, imdbID, rating, genre FROM Series ORDER BY seriesName;"));
         this->commit();
 
         if(query.isSelect()) {
@@ -519,6 +519,9 @@ QList<QMap<QString, QString> > DatabaseManager::getSeries() {
                 QString rating = query.value(7).toString();
                 temp["rating"] = rating;
 
+                QString genre = query.value(8).toString();
+                temp["genre"] = genre;
+
                 int watched = watchedCount(id);
                 QString watchedCount = QString::number(watched);
                 temp["watchedCount"] = watchedCount;
@@ -539,10 +542,8 @@ QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries() {
 
     auto date = QDateTime::currentDateTime().date();
     auto locale  = QLocale(QLocale::English);
-    auto today = locale.toString(date, "dddd");
-    auto firstAired = date.toString(Qt::ISODate);
-    auto firstAiredStart = date.addDays(1 - date.dayOfWeek()).toString(Qt::ISODate);
-    auto firstAiredEnd = date.addDays(7 - date.dayOfWeek()).toString(Qt::ISODate);
+    auto firstAiredStart = date.addDays(1 - date.dayOfWeek()).toString(Qt::ISODate); // Monday == 1
+    auto firstAiredEnd = date.addDays(7 - date.dayOfWeek()).toString(Qt::ISODate); // Sunday == 7
     auto status = "Continuing";
 
     QList<QMap<QString, QString> > series;
@@ -590,6 +591,10 @@ QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries() {
 
                 auto firstAired = query.value(9).toString();
                 temp["nextEpisodeFirstAired"] = firstAired;
+
+                // Sometimes the series info airsDayOfWeek is wrong so lets take it from the episode directly then
+                auto airsDayOfWeekFromEpisode = locale.toString(QDate::fromString(firstAired, Qt::ISODate), "dddd");
+                temp["airsDayOfWeek"] = airsDayOfWeek == airsDayOfWeekFromEpisode ? airsDayOfWeek : airsDayOfWeekFromEpisode;
 
                 auto banner = query.value(10).toString();
                 temp["nextEpisodeBanner"] = banner;
@@ -668,18 +673,9 @@ QList<QMap<QString, QString> > DatabaseManager::getEpisodes(int seriesID, int se
 void DatabaseManager::toggleWatched(QString episodeID) {
 
     QSqlQuery query(db);
-    query.exec(QString("SELECT watched FROM Episode WHERE id = %1").arg(episodeID.toInt()));
-    if(query.isSelect()) {
-        while(query.next()) {
-            if(query.value(0).toInt() == 0) {
-                query.exec(QString("UPDATE Episode SET watched = 1 WHERE id = %1").arg(episodeID.toInt()));
-                qDebug() << query.lastError();
-            } else {
-                query.exec(QString("UPDATE Episode SET watched = 0 WHERE id = %1").arg(episodeID.toInt()));
-                qDebug() << query.lastError();
-            }
-        }
-    }
+    query.exec(QString("UPDATE Episode SET watched = CASE WHEN watched = 0 THEN 1 ELSE 0 END WHERE id = %1").arg(episodeID.toInt()));
+    qDebug() << query.lastError();
+
 }
 
 bool DatabaseManager::deleteSeries(int seriesID) {
@@ -722,7 +718,7 @@ bool DatabaseManager::deleteAllSeries() {
     return ret1 && ret2 && ret3;
 }
 
-bool DatabaseManager::isAlreadyAdded(int seriesID,QString name) {
+bool DatabaseManager::isAlreadyAdded(int seriesID, QString name) {
 
     bool ret1,ret2 = false;
 
@@ -812,18 +808,17 @@ void DatabaseManager::markSeasonWatched(int seriesID, int season) {
 
     QSqlQuery query(db);
     query.exec(QString("UPDATE Episode SET watched=1 WHERE seriesID = %1 AND seasonNumber = %2").arg(seriesID).arg(season));
-    qDebug() << query.lastError();
-
 }
 
-// Get the details of next episode
 QMap<QString,QString> DatabaseManager::getNextEpisodeDetails(int seriesID) {
+
+    auto today = QDateTime::currentDateTime().date().toString(Qt::ISODate);
 
     QList<QMap<QString, QString> > details;
 
     this->startTransaction();
     QSqlQuery query(db);
-    query.exec(QString("SELECT episodeName,episodeNumber,seasonNumber,firstAired FROM Episode WHERE seriesID = %1 AND seasonNumber != 0 ORDER BY absoluteNumber;").arg(seriesID));
+    query.exec(QString("SELECT episodeName, episodeNumber, seasonNumber, firstAired FROM Episode WHERE seriesID = %1 AND seasonNumber != 0 AND firstAired >= '%2' ORDER BY episodeNumber LIMIT 1;").arg(seriesID).arg(today));
     this->commit();
 
     if(query.isSelect()) {
@@ -833,51 +828,41 @@ QMap<QString,QString> DatabaseManager::getNextEpisodeDetails(int seriesID) {
             QMap<QString, QString> temp;
 
             QString episodeName = query.value(0).toString();
-            temp["episodeName"] = episodeName;
+            temp["nextEpisodeName"] = episodeName;
 
             QString episodeNumber = query.value(1).toString();
-            temp["episodeNumber"] = episodeNumber;
+            temp["nextEpisodeNumber"] = episodeNumber;
 
             QString seasonNumber = query.value(2).toString();
-            temp["seasonNumber"] = seasonNumber;
+            temp["nextEpisodeSeasonNumber"] = seasonNumber;
 
             QString firstAired = query.value(3).toString();
-            temp["firstAired"] = firstAired;
+            temp["nextEpisodeFirstAired"] = firstAired;
 
             details.append(temp);
         }
     }
 
-    // find next firstAirday that is today or the next after today,
-    // store "today" or "tomorrow" or just number or unknown
+    QMap<QString, QString> nextEpisodeDetails;
 
-    QMap<QString,QString> nextEpisodeDetails;
+    if(!details.isEmpty()) {
 
-    QDate date = QDateTime::currentDateTime().date();
-    QString today = date.toString(Qt::ISODate);
-    int daysTo = 10000;
+        nextEpisodeDetails = details.first();
 
-    int size = details.size();
-    for(int i = 0; i < size; ++i) {
+        QString firstAired = nextEpisodeDetails["nextEpisodeFirstAired"];
+        int daysToNextEpisode = QDate::fromString(today,"yyyy-MM-dd").daysTo(QDate::fromString(firstAired,"yyyy-MM-dd"));
 
-        QMap<QString, QString> temp = details.at(i);
-        QString firstAired = temp["firstAired"];
-        int daysToNext = QDate::fromString(today,"yyyy-MM-dd").daysTo(QDate::fromString(firstAired,"yyyy-MM-dd"));
-
-        if(daysToNext >= 0 && daysToNext < daysTo && firstAired.size() != 0) {
-            daysTo = daysToNext;
-            nextEpisodeDetails = temp;
+        switch (daysToNextEpisode) {
+        case 0:
+            nextEpisodeDetails["daysToNext"] = "today";
+            break;
+        case 1:
+            nextEpisodeDetails["daysToNext"] = "tomorrow";
+            break;
+        default:
+            nextEpisodeDetails["daysToNext"] = QString::number(daysToNextEpisode);
+            break;
         }
-    }
-
-    if(daysTo == 0) {
-        nextEpisodeDetails["daysToNext"] = "today";
-    } else if(daysTo == 1) {
-        nextEpisodeDetails["daysToNext"] = "tomorrow";
-    } else if(daysTo == 10000){
-        nextEpisodeDetails["daysToNext"] = "unknown";
-    } else {
-        nextEpisodeDetails["daysToNext"] = QString::number(daysTo);
     }
 
     return nextEpisodeDetails;

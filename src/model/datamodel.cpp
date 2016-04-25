@@ -7,7 +7,7 @@ DataModel::DataModel(QObject *parent) :
 {
     mydbmanager->setUpDB();
 
-    mySeriesListModel = new SeriesListModel(this, 0, mydbmanager, myReader);
+    mySeriesListModel = new SeriesListModel(this, mydbmanager, myReader);
     mySearchListModel = new SearchListModel(this, mydbmanager, myReader);
     myTodayListModel = new TodayListModel(this, mydbmanager, myReader);
     myEpisodeListModel = new EpisodeListModel(this, mydbmanager);
@@ -47,5 +47,4 @@ SeasonListModel* DataModel::getSeasonListModel() { return mySeasonListModel; }
 void DataModel::readyToUpdateModels() {
     myTodayListModel->populateTodayModel();
     mySeriesListModel->populateBannerList();
-    mySeriesListModel->populateSeriesList();
 }

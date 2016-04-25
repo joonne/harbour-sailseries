@@ -10,18 +10,18 @@ Page {
 
     function nextEpisodeDetails(episodeName, daysTo, status) {
 
-        console.log(episodeName, daysTo, status);
+        console.log("episodeName: ", episodeName, "daysTo: ", daysTo, "status: ", status);
 
         if(status === "Ended") {
             return qsTr("This show has ended");
         } else if(daysTo === "today") {
-            return episodeName + " " + qsTr("airs tonight");
+            return qsTr("%1 airs tonight").arg(episodeName);
         } else if(daysTo === "tomorrow") {
-            return episodeName + " " + qsTr("airs tomorrow");
+            return qsTr("%1 airs tomorrow").arg(episodeName);
         } else if(episodeName.length !== 0) {
-            return episodeName + " " + qsTr("airs in") + " " + daysTo + " " + qsTr("days");
-        } else if(episodeName.length === 0 && daysTo !== "unknown") {
-            return qsTr("Next episode airs in") + " " + daysTo + " " + qsTr("days");
+            return qsTr("%1 airs in %2 days").arg(episodeName).arg(daysTo);
+        } else if(episodeName.length === 0 && daysTo.length !== 0) {
+            return qsTr("Next episode airs in %1 days").arg(daysTo);
         } else {
             return qsTr("No information about next episode");
         }
@@ -42,21 +42,6 @@ Page {
             contentHeight: background.height + Theme.paddingMedium
             contentWidth: listView.width
 
-//            menu: ContextMenu {
-//                id: contextMenu
-//                anchors.top: ListView.view.currentItem.bottom
-//                MenuItem {
-//                    text: qsTr("Update")
-//                    onClicked: controller.SeriesListModel.updateSeries(ID)
-//                }
-//                MenuItem {
-//                    text: qsTr("Remove")
-//                    onClicked: remorse.execute(listItem,
-//                                               qsTr("Removing") + " " + controller.SeriesListModel.SeriesName,
-//                                               function() { controller.SeriesListModel.deleteSeries(ID) })
-//                }
-//            }
-
             Rectangle {
                 id: container
                 anchors.fill: background
@@ -76,7 +61,6 @@ Page {
                     controller.SeriesListModel.selectSeries(index)
                     pageStack.push(Qt.resolvedUrl("SeriesViewPage.qml"),{seriesID: ID})
                 }
-//                onPressAndHold: contextMenu.show(ListView.view.currentItem)
             }
 
             Column {
@@ -104,15 +88,13 @@ Page {
 
                 Label {
                     id: nextEpisode
-                    text: nextEpisodeDetails(NextEpisodeName,DaysToNextEpisode,Status)
+                    text: nextEpisodeDetails(NextEpisodeName, DaysToNextEpisode, Status)
                     anchors.left: parent.left
                     anchors.leftMargin: 2 * Theme.paddingMedium
                     font.pixelSize: Theme.fontSizeTiny
                     color: Theme.primaryColor
                 }
             }
-
-//            RemorseItem { id: remorse }
         }
 
         VerticalScrollDecorator {

@@ -9,11 +9,6 @@
         <translation type="unfinished">A propos</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="42"/>
-        <source>Version</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="52"/>
         <source>General</source>
         <translation type="unfinished"></translation>
@@ -26,12 +21,6 @@
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="64"/>
         <source>Creator</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="73"/>
-        <source>Jonne Pihlanen
-joonne</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -62,6 +51,16 @@ joonne</source>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="141"/>
         <source>Source Code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/AboutPage.qml" line="42"/>
+        <source>Version %1.%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/AboutPage.qml" line="73"/>
+        <source>Jonne Pihlanen, &apos;joonne&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -134,13 +133,8 @@ joonne</source>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="94"/>
-        <source>Season</source>
-        <translation type="unfinished">Saison</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="94"/>
-        <source>Episode</source>
-        <translation type="unfinished">Episode</translation>
+        <source>Season %1 Episode %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -221,29 +215,23 @@ joonne</source>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="18"/>
-        <source>airs tonight</source>
-        <translation>diffusé ce soir</translation>
+        <source>%1 airs tonight</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="20"/>
-        <source>airs tomorrow</source>
-        <translation>diffusé demain</translation>
+        <source>%1 airs tomorrow</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="22"/>
-        <source>airs in</source>
-        <translation>diffusé dans</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="22"/>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="24"/>
-        <source>days</source>
-        <translation>jours</translation>
+        <source>%1 airs in %2 days</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="24"/>
-        <source>Next episode airs in</source>
-        <translation>Prochain épisode diffusé dans</translation>
+        <source>Next episode airs in %1 days</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="26"/>
@@ -256,7 +244,7 @@ joonne</source>
         <translation>Mes Séries</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="124"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="106"/>
         <source>Search for series first.</source>
         <translation>Commencez par chercher des séries.</translation>
     </message>
@@ -318,14 +306,19 @@ joonne</source>
         <translation>Terminée</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/Series.qml" line="49"/>
+        <location filename="../src/qml/pages/Series.qml" line="61"/>
         <source>Status</source>
         <translation>Statut</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/Series.qml" line="58"/>
+        <location filename="../src/qml/pages/Series.qml" line="70"/>
         <source>Rating</source>
         <translation>Note</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/Series.qml" line="81"/>
+        <source>Genre</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -372,21 +365,6 @@ joonne</source>
         <translation>A propos</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="47"/>
-        <source>Search for a series</source>
-        <translation>Rechercher une série</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="55"/>
-        <source>My series</source>
-        <translation>Mes séries</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="115"/>
-        <source>Season</source>
-        <translation>Saison</translation>
-    </message>
-    <message>
         <location filename="../src/qml/pages/StartPage.qml" line="10"/>
         <source>Monday</source>
         <translation type="unfinished"></translation>
@@ -422,14 +400,24 @@ joonne</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="47"/>
+        <source>Search for a Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="55"/>
+        <source>My Series</source>
+        <translation type="unfinished">Mes Séries</translation>
+    </message>
+    <message>
         <location filename="../src/qml/pages/StartPage.qml" line="65"/>
-        <source>Calendar</source>
+        <source>This Week</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="115"/>
-        <source>Episode</source>
-        <translation>Episode</translation>
+        <source>Season %1 Episode %2</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="143"/>

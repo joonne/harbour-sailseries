@@ -44,7 +44,7 @@ Page {
             }
 
             MenuItem {
-                text: qsTr("Search for a series")
+                text: qsTr("Search for a Series")
                 font.pixelSize: Theme.fontSizeSmall
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("SearchPage.qml"))
@@ -52,7 +52,7 @@ Page {
             }
 
             MenuItem {
-                text: qsTr("My series")
+                text: qsTr("My Series")
                 font.pixelSize: Theme.fontSizeSmall
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("MySeriesPage.qml"))
@@ -62,7 +62,7 @@ Page {
 
         SectionHeader {
             id: sectionheader
-            text: qsTr("Calendar")
+            text: qsTr("This Week")
             visible: listView.count !== 0
             anchors {
                 top: header.bottom
@@ -106,13 +106,13 @@ Page {
 
                     Label {
                         id: seriesName
-                        text: SeriesName.length === 0 ? text = "SeriesName" : text = SeriesName
+                        text: SeriesName
                         color: Theme.primaryColor
                     }
 
                     Label {
                         id: episodeNumber
-                        text: qsTr("Season") + " " + NextEpisodeSeasonNumber + " " + qsTr("Episode") + " " + NextEpisodeNumber
+                        text: qsTr("Season %1 Episode %2").arg(NextEpisodeSeasonNumber).arg(NextEpisodeNumber);
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.secondaryColor
                     }

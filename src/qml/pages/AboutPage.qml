@@ -39,7 +39,7 @@ Page {
 
             Label {
                 id: version
-                text: qsTr("Version") + " " + _APP_VERSION + "." + _APP_BUILD_NUMBER
+                text: qsTr("Version %1.%2").arg(APP_VERSION).arg(_APP_BUILD_NUMBER)
                 anchors.left: parent.left
                 anchors.leftMargin: (aboutpage.width - version.width) / 2
                 color: Theme.primaryColor
@@ -70,7 +70,7 @@ Page {
                 readOnly: true
                 color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeSmall
-                text: qsTr("Jonne Pihlanen\njoonne")
+                text: qsTr("Jonne Pihlanen, 'joonne'")
                 anchors {
                     left: parent.left
                     leftMargin: (aboutpage.width - creator.width) / 2

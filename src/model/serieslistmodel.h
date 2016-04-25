@@ -32,15 +32,15 @@ class SeriesListModel : public QObject
     Q_PROPERTY(QString NextEpisodeNumber READ getNextEpisodeNumber NOTIFY nextEpisodeNumberChanged)
     Q_PROPERTY(QString NextEpisodeSeasonNumber READ getNextEpisodeSeasonNumber NOTIFY nextEpisodeSeasonNumberChanged)
     Q_PROPERTY(QString DaysToNextEpisode READ getDaysToNextEpisode NOTIFY daysToNextEpisodeChanged)
-    Q_PROPERTY(QString Status READ getStatus)
-    Q_PROPERTY(QString Rating READ getRating)
+    Q_PROPERTY(QString Status READ getStatus NOTIFY statusChanged)
+    Q_PROPERTY(QString Rating READ getRating NOTIFY ratingChanged)
+    Q_PROPERTY(QString Genre READ getGenre NOTIFY genreChanged)
 
 
 public:
-    explicit SeriesListModel(QObject *parent = 0, QQmlContext* context = 0, DatabaseManager *dbmanager = 0, XMLReader* reader = 0);
+    explicit SeriesListModel(QObject *parent = 0, DatabaseManager *dbmanager = 0, XMLReader* reader = 0);
     ~SeriesListModel();
 
-    void populateSeriesList();
     Q_INVOKABLE void populateBannerList();
     Q_INVOKABLE void selectSeries(int index);
 
@@ -61,6 +61,7 @@ public:
     QString getDaysToNextEpisode();
     QString getStatus();
     QString getRating();
+    QString getGenre();
 
     bool getLoading();
     void setLoading(bool);
@@ -87,6 +88,9 @@ signals:
     void nextEpisodeNumberChanged();
     void nextEpisodeSeasonNumberChanged();
     void daysToNextEpisodeChanged();
+    void statusChanged();
+    void ratingChanged();
+    void genreChanged();
 
 public slots:
     void updateFetchFinished();
