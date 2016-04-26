@@ -97,42 +97,42 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="48"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="47"/>
         <source>Monday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="50"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="49"/>
         <source>Tuesday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="52"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="51"/>
         <source>Wednesday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="54"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="53"/>
         <source>Thursday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="56"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="55"/>
         <source>Friday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="58"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="57"/>
         <source>Saturday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="60"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="59"/>
         <source>Sunday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="94"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="96"/>
         <source>Season %1 Episode %2</source>
         <translation type="unfinished"></translation>
     </message>

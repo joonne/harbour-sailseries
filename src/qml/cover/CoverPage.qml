@@ -42,7 +42,6 @@ CoverBackground {
     }
 
     function getWeekday(weekday) {
-        console.log(weekday)
         switch(weekday) {
         case "Monday":
             return qsTr("Monday");
@@ -64,16 +63,19 @@ CoverBackground {
     }
 
     SilicaListView {
-        visible: defaultVisibility()
         id: listView
+        visible: defaultVisibility()
         height: cover.height
-        anchors.top: cover.top
-        anchors.topMargin: Theme.paddingLarge
+        anchors {
+            top: cover.top
+            topMargin: Theme.paddingLarge
+        }
+        spacing: Theme.paddingMedium
         model: controller.TodayModel.TodayModel
 
         delegate: ListItem {
             id: item
-            contentHeight: column.height * 1.1
+            contentHeight: column.height
             contentWidth: listView.width
 
             Column {

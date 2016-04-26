@@ -82,6 +82,7 @@ Item {
                     width: seriesViewPage.width
                     text: process(controller.SeriesListModel.Genre)
                     color: Theme.secondaryColor
+                    truncationMode: TruncationMode.Fade
                     readOnly: true
                 }
 
