@@ -6,87 +6,87 @@
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="20"/>
         <source>About</source>
-        <translation type="unfinished">Tietoa</translation>
+        <translation>Tietoa</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="52"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Yleistä</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="60"/>
         <source>SailSeries is a tv-series tracking application for SailfisOS. It aims to be a good looking and simple app that can help you to stay on track while following your favourite series.</source>
-        <translation type="unfinished"></translation>
+        <translation>SailSeries on tv-ohjelmien seuraamiseen tarkoitettu sovellus. Sen tarkoituksena on olla hyvännäköinen ja yksinkertainen sovellus, joka auttaa sinua pysymään kartalla seuratessasi useita sarjoja samanaikaisesti.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="64"/>
         <source>Creator</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekijä</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="108"/>
         <source>Licence</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisenssi</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="116"/>
         <source>This software is licenced under GPLv2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tämä ohjelmisto on lisensoitu GPLv2:n mukaisesti.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="120"/>
         <source>Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Sisältö</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="128"/>
         <source>SailSeries utilises the public API at TheTVDB.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sailseries käyttää TheTVDB:n tarjoamaa julkista rajapintaa.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="149"/>
         <source>The source code is available at GitHub. Contributions, ideas and bug reports are welcome.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lähdekoodi on saatavilla GitHub palvelussa. Auttaminen, ideat sekä virheraportit ovat tervetulleita.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="141"/>
         <source>Source Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Lähdekoodi</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="42"/>
         <source>Version %1.%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Versio %1.%2</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="73"/>
         <source>Jonne Pihlanen, &apos;joonne&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Jonne Pihlanen, &apos;joonne&apos;</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="154"/>
         <source>Project in GitHub</source>
-        <translation type="unfinished"></translation>
+        <translation>Projekti GitHubissa</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="162"/>
         <source>Translations</source>
-        <translation type="unfinished"></translation>
+        <translation>Käännökset</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="170"/>
         <source>SailSeries uses the Transifex translation platform to host the translations.</source>
-        <translation type="unfinished"></translation>
+        <translation>SailSeries käyttää Transifex käännöspalvelua käännösten hallintaan.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="175"/>
         <source>Help with translations</source>
-        <translation type="unfinished"></translation>
+        <translation>Auta käännösten kanssa</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="91"/>
         <source>Contributors</source>
-        <translation type="unfinished"></translation>
+        <translation>Avustajat</translation>
     </message>
 </context>
 <context>
@@ -94,47 +94,47 @@
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="9"/>
         <source>Nothing airs this week</source>
-        <translation type="unfinished"></translation>
+        <translation>Mitään ei lähetetä tällä viikolla</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="47"/>
         <source>Monday</source>
-        <translation type="unfinished"></translation>
+        <translation>Maanantai</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="49"/>
         <source>Tuesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiistai</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="51"/>
         <source>Wednesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Keskiviikko</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="53"/>
         <source>Thursday</source>
-        <translation type="unfinished"></translation>
+        <translation>Torstai</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="55"/>
         <source>Friday</source>
-        <translation type="unfinished"></translation>
+        <translation>Perjantai</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="57"/>
         <source>Saturday</source>
-        <translation type="unfinished"></translation>
+        <translation>Lauantai</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="59"/>
         <source>Sunday</source>
-        <translation type="unfinished"></translation>
+        <translation>Sunnuntai</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="96"/>
         <source>Season %1 Episode %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Kausi %1 Jakso %2</translation>
     </message>
 </context>
 <context>
@@ -216,22 +216,22 @@
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="18"/>
         <source>%1 airs tonight</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 lähetetään tänään</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="20"/>
         <source>%1 airs tomorrow</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 lähetetään huomenna</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="22"/>
         <source>%1 airs in %2 days</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 lähetetään %2 päivän kuluttua</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="24"/>
         <source>Next episode airs in %1 days</source>
-        <translation type="unfinished"></translation>
+        <translation>Seuraava jakso lähetetään %1 päivän kuluttua</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="26"/>
@@ -318,7 +318,7 @@
     <message>
         <location filename="../src/qml/pages/Series.qml" line="81"/>
         <source>Genre</source>
-        <translation type="unfinished"></translation>
+        <translation>Tyylilaji</translation>
     </message>
 </context>
 <context>
@@ -367,62 +367,62 @@
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="10"/>
         <source>Monday</source>
-        <translation type="unfinished"></translation>
+        <translation>Maanantai</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="12"/>
         <source>Tuesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiistai</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="14"/>
         <source>Wednesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Keskiviikko</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="16"/>
         <source>Thursday</source>
-        <translation type="unfinished"></translation>
+        <translation>Torstai</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="18"/>
         <source>Friday</source>
-        <translation type="unfinished"></translation>
+        <translation>Perjantai</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="20"/>
         <source>Saturday</source>
-        <translation type="unfinished"></translation>
+        <translation>Lauantai</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="22"/>
         <source>Sunday</source>
-        <translation type="unfinished"></translation>
+        <translation>Sunnuntai</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="47"/>
         <source>Search for a Series</source>
-        <translation type="unfinished"></translation>
+        <translation>Etsi sarjaa</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="55"/>
         <source>My Series</source>
-        <translation type="unfinished">Omat sarjat</translation>
+        <translation>Omat sarjat</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="65"/>
         <source>This Week</source>
-        <translation type="unfinished"></translation>
+        <translation>Tällä viikolla</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="115"/>
         <source>Season %1 Episode %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Kausi %1 Jakso %2</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="143"/>
         <source>Nothing airs this week</source>
-        <translation type="unfinished"></translation>
+        <translation>Mitään ei lähetetä tällä viikolla</translation>
     </message>
 </context>
 <context>
