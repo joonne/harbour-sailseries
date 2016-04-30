@@ -1,30 +1,32 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="es_ES" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="es_ES">
 <context>
     <name>AboutPage</name>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="20"/>
         <source>About</source>
-        <translation type="unfinished"/>
+        <translation>Información</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="52"/>
         <source>General</source>
-        <translation type="unfinished"/>
+        <translation>General</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="60"/>
         <source>SailSeries is a tv-series tracking application for SailfisOS. It aims to be a good looking and simple app that can help you to stay on track while following your favourite series.</source>
-        <translation type="unfinished"/>
+        <translation>SailSeries es una aplicación de seguimiento de series de televisión para SailfishOS. Una aplicación sencilla y fácil de manejar que te puede ayudar para realizar un seguimiento de tus series favoritas y tenerlas controladas en todo momento.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="64"/>
         <source>Creator</source>
-        <translation type="unfinished"/>
+        <translation>Autor</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="108"/>
         <source>Licence</source>
-        <translation type="unfinished"/>
+        <translation>Licencia</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="116"/>
@@ -34,47 +36,47 @@
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="120"/>
         <source>Content</source>
-        <translation type="unfinished"/>
+        <translation>Contenido</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="128"/>
         <source>SailSeries utilises the public API at TheTVDB.</source>
-        <translation type="unfinished"/>
+        <translation>SailSeries utiliza la API pública TheTVDB.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="149"/>
         <source>The source code is available at GitHub. Contributions, ideas and bug reports are welcome.</source>
-        <translation type="unfinished"/>
+        <translation>El código fuente está disponible en GitHub. Contribuciones, ideas e información de bugs son bienvenidos.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="141"/>
         <source>Source Code</source>
-        <translation type="unfinished"/>
+        <translation>Código fuente</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="42"/>
         <source>Version %1.%2</source>
-        <translation type="unfinished"/>
+        <translation>Versión %1.%2</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="73"/>
         <source>Jonne Pihlanen, &apos;joonne&apos;</source>
-        <translation type="unfinished"/>
+        <translation>Jonne Pihlanen, &apos;joonne&apos;</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="154"/>
         <source>Project in GitHub</source>
-        <translation type="unfinished"/>
+        <translation>Código fuente en GitHub</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="162"/>
         <source>Translations</source>
-        <translation type="unfinished"/>
+        <translation>Traducciones</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="170"/>
         <source>SailSeries uses the Transifex translation platform to host the translations.</source>
-        <translation type="unfinished"/>
+        <translation>SailSeries utiliza la plataforma Transifex como lugar para sus traducciones.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="175"/>
@@ -92,47 +94,47 @@
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="9"/>
         <source>Nothing airs this week</source>
-        <translation type="unfinished"/>
+        <translation>No hay emisiones esta semana</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="47"/>
         <source>Monday</source>
-        <translation type="unfinished"/>
+        <translation>Lunes</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="49"/>
         <source>Tuesday</source>
-        <translation type="unfinished"/>
+        <translation>Martes</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="51"/>
         <source>Wednesday</source>
-        <translation type="unfinished"/>
+        <translation>Miercoles</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="53"/>
         <source>Thursday</source>
-        <translation type="unfinished"/>
+        <translation>Jueves</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="55"/>
         <source>Friday</source>
-        <translation type="unfinished"/>
+        <translation>Viernes</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="57"/>
         <source>Saturday</source>
-        <translation type="unfinished"/>
+        <translation>Sábado</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="59"/>
         <source>Sunday</source>
-        <translation type="unfinished"/>
+        <translation>Domingo</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="96"/>
         <source>Season %1 Episode %2</source>
-        <translation type="unfinished"/>
+        <translation>Temporada %1 Episodio %2</translation>
     </message>
 </context>
 <context>
@@ -140,17 +142,17 @@
     <message>
         <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="71"/>
         <source>Original air date</source>
-        <translation type="unfinished"/>
+        <translation>Fecha de estreno</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="87"/>
         <source>Writer</source>
-        <translation type="unfinished"/>
+        <translation>Autor</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="96"/>
         <source>Guest Stars</source>
-        <translation type="unfinished"/>
+        <translation>Estrellas invitadas</translation>
     </message>
 </context>
 <context>
@@ -158,7 +160,7 @@
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="34"/>
         <source>I have seen these all</source>
-        <translation type="unfinished"/>
+        <translation>He visto todo esto</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="49"/>
@@ -176,7 +178,7 @@
         <translation>Episodio</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="162"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="164"/>
         <source>No episodes.</source>
         <translation>Sin episodios.</translation>
     </message>
@@ -207,44 +209,44 @@
 <context>
     <name>MySeriesPage</name>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="16"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="14"/>
         <source>This show has ended</source>
-        <translation type="unfinished"/>
+        <translation>Esta serie terminó</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="16"/>
+        <source>%1 airs tonight</source>
+        <translation>%1 emisiones esta noche</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="18"/>
-        <source>%1 airs tonight</source>
-        <translation type="unfinished"/>
+        <source>%1 airs tomorrow</source>
+        <translation>%1 emisiones mañana</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="20"/>
-        <source>%1 airs tomorrow</source>
-        <translation type="unfinished"/>
+        <source>%1 airs in %2 days</source>
+        <translation>%1 emisiones en %2 días</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="22"/>
-        <source>%1 airs in %2 days</source>
-        <translation type="unfinished"/>
+        <source>Next episode airs in %1 days</source>
+        <translation>Siguiente episodio se emite en %1 días</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="24"/>
-        <source>Next episode airs in %1 days</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="26"/>
         <source>No information about next episode</source>
-        <translation type="unfinished"/>
+        <translation>No hay información de próximos episodios</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="37"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="35"/>
         <source>My Series</source>
         <translation>Mis Series</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="106"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="104"/>
         <source>Search for series first.</source>
-        <translation type="unfinished"/>
+        <translation>Busqueda de series</translation>
     </message>
 </context>
 <context>
@@ -252,7 +254,7 @@
     <message>
         <location filename="../src/qml/pages/ProgramOverviewPage.qml" line="42"/>
         <source>Time</source>
-        <translation type="unfinished"/>
+        <translation>Hora</translation>
     </message>
 </context>
 <context>
@@ -265,7 +267,7 @@
     <message>
         <location filename="../src/qml/pages/SearchPage.qml" line="64"/>
         <source>Here will be stuff when you search for something</source>
-        <translation type="unfinished"/>
+        <translation>Aquí se rellena cuando buscas algo</translation>
     </message>
 </context>
 <context>
@@ -283,7 +285,7 @@
     <message>
         <location filename="../src/qml/pages/Seasons.qml" line="100"/>
         <source>Watched</source>
-        <translation type="unfinished"/>
+        <translation>Visto</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/Seasons.qml" line="142"/>
@@ -316,7 +318,7 @@
     <message>
         <location filename="../src/qml/pages/Series.qml" line="81"/>
         <source>Genre</source>
-        <translation type="unfinished"/>
+        <translation>Genero</translation>
     </message>
 </context>
 <context>
@@ -329,7 +331,7 @@
     <message>
         <location filename="../src/qml/pages/SeriesInfoPage.qml" line="24"/>
         <source>Already added</source>
-        <translation type="unfinished"/>
+        <translation>Añadir siempre</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesInfoPage.qml" line="57"/>
@@ -358,69 +360,69 @@
 <context>
     <name>StartPage</name>
     <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="10"/>
+        <source>Monday</source>
+        <translation>Lunes</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="12"/>
+        <source>Tuesday</source>
+        <translation>Martes</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="14"/>
+        <source>Wednesday</source>
+        <translation>Miercoles</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="16"/>
+        <source>Thursday</source>
+        <translation>Jueves</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="18"/>
+        <source>Friday</source>
+        <translation>Viernes</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="20"/>
+        <source>Saturday</source>
+        <translation>Sábado</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="22"/>
+        <source>Sunday</source>
+        <translation>Domingo</translation>
+    </message>
+    <message>
         <location filename="../src/qml/pages/StartPage.qml" line="39"/>
         <source>About</source>
         <translation>Información</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="10"/>
-        <source>Monday</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="12"/>
-        <source>Tuesday</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="14"/>
-        <source>Wednesday</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="16"/>
-        <source>Thursday</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="18"/>
-        <source>Friday</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="20"/>
-        <source>Saturday</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="22"/>
-        <source>Sunday</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../src/qml/pages/StartPage.qml" line="47"/>
         <source>Search for a Series</source>
-        <translation type="unfinished"/>
+        <translation>Busqueda de series</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="55"/>
         <source>My Series</source>
-        <translation type="unfinished"/>
+        <translation>Mis Series</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="65"/>
         <source>This Week</source>
-        <translation type="unfinished"/>
+        <translation>Esta Semana</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="115"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="117"/>
         <source>Season %1 Episode %2</source>
-        <translation type="unfinished"/>
+        <translation>Temporada %1 Episodio %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="143"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="145"/>
         <source>Nothing airs this week</source>
-        <translation type="unfinished"/>
+        <translation>No hay emisiones esta semana</translation>
     </message>
 </context>
 <context>
@@ -428,7 +430,7 @@
     <message>
         <location filename="../src/qml/components/TextExpander.qml" line="29"/>
         <source>Overview</source>
-        <translation type="unfinished"/>
+        <translation>Resumen</translation>
     </message>
 </context>
 </TS>

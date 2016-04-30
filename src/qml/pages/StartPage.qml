@@ -66,6 +66,7 @@ Page {
             visible: listView.count !== 0
             anchors {
                 top: header.bottom
+                topMargin: -(Theme.paddingLarge + Theme.paddingMedium)
             }
         }
 
@@ -73,6 +74,7 @@ Page {
             id: listView
             height: startpage.height - header.height - sectionheader.height
             width: startpage.width
+            clip: true
             anchors {
                 top: sectionheader.bottom
             }

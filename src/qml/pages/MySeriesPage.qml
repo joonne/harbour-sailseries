@@ -10,8 +10,6 @@ Page {
 
     function nextEpisodeDetails(episodeName, daysTo, status) {
 
-        console.log("episodeName: ", episodeName, "daysTo: ", daysTo, "status: ", status);
-
         if(status === "Ended") {
             return qsTr("This show has ended");
         } else if(daysTo === "today") {

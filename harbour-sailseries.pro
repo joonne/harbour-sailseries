@@ -7,4 +7,5 @@ CONFIG += ordered
 
 CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/harbour-sailseries-fi.ts \
-                translations/harbour-sailseries-fr.ts
+                translations/harbour-sailseries-fr.ts \
+                translations/harbour-sailseries-es.ts

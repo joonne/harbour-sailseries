@@ -39,7 +39,7 @@ Page {
 
             Label {
                 id: version
-                text: qsTr("Version %1.%2").arg(APP_VERSION).arg(_APP_BUILD_NUMBER)
+                text: qsTr("Version %1.%2").arg(_APP_VERSION).arg(_APP_BUILD_NUMBER)
                 anchors.left: parent.left
                 anchors.leftMargin: (aboutpage.width - version.width) / 2
                 color: Theme.primaryColor

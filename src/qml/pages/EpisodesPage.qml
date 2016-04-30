@@ -113,6 +113,8 @@ Page {
                     anchors.leftMargin: 2 * Theme.paddingMedium
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.primaryColor
+                    truncationMode: TruncationMode.Fade
+                    width: (episodespage.width - watched.width - 2 * Theme.paddingLarge)
                 }
             }
 

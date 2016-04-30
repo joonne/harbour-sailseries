@@ -123,27 +123,3 @@ CoverBackground {
         }
     }
 }
-
-
-
-
-
-// UPCOMING IDEAS
-
-//            function search() {
-
-//                appWindow.activate()
-
-//                var page = pageStack.currentPage
-//                if(page.contains("SearchPage")) {
-//                    //appWindow.activate()
-//                } else if(page.contains("MySeries") || page.contains("SeriesViewPage")) {
-//                    pageStack.pop()
-//                    pageStack.completeAnimation()
-//                    pageStack.push(Qt.resolvedUrl("SearchPage.qml"))
-//                } else if(page.contains("StartPage")) {
-//                    pageStack.push(Qt.resolvedUrl("SearchPage.qml"))
-//                }
-
-//                console.log(page)
-//            }

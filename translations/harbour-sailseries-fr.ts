@@ -16,7 +16,7 @@
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="60"/>
         <source>SailSeries is a tv-series tracking application for SailfisOS. It aims to be a good looking and simple app that can help you to stay on track while following your favourite series.</source>
-        <translation>SailSeries est une application de suivi des séries TV pour SailfishOS. Elle a pour but d&apos;être une appli belle et simple qui vous aide à rester en jour sur vos séries favorites.  </translation>
+        <translation>SailSeries est une application de suivi des séries TV pour SailfishOS. Elle a pour but d&apos;être une appli belle et simple qui vous aide à rester à jour sur vos séries favorites.  </translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="64"/>
@@ -178,7 +178,7 @@
         <translation>Episode</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="162"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="164"/>
         <source>No episodes.</source>
         <translation>Pas d&apos;épisode.</translation>
     </message>
@@ -209,42 +209,42 @@
 <context>
     <name>MySeriesPage</name>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="16"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="14"/>
         <source>This show has ended</source>
         <translation>Cette série est terminée</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="18"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="16"/>
         <source>%1 airs tonight</source>
         <translation>%1 diffusé ce soir</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="20"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="18"/>
         <source>%1 airs tomorrow</source>
         <translation>%1 diffusé demain</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="22"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="20"/>
         <source>%1 airs in %2 days</source>
         <translation>%1 diffusé dans %2 jours</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="24"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="22"/>
         <source>Next episode airs in %1 days</source>
         <translation>Prochain épisode diffusé dans %1 jours</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="26"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="24"/>
         <source>No information about next episode</source>
         <translation>Pas d&apos;information sur le prochain épisode</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="37"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="35"/>
         <source>My Series</source>
         <translation>Mes Séries</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="106"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="104"/>
         <source>Search for series first.</source>
         <translation>Commencez par chercher des séries.</translation>
     </message>
@@ -360,11 +360,6 @@
 <context>
     <name>StartPage</name>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="39"/>
-        <source>About</source>
-        <translation>A propos</translation>
-    </message>
-    <message>
         <location filename="../src/qml/pages/StartPage.qml" line="10"/>
         <source>Monday</source>
         <translation>Lundi</translation>
@@ -400,6 +395,11 @@
         <translation>Dimanche</translation>
     </message>
     <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="39"/>
+        <source>About</source>
+        <translation>A propos</translation>
+    </message>
+    <message>
         <location filename="../src/qml/pages/StartPage.qml" line="47"/>
         <source>Search for a Series</source>
         <translation>Rechercher une série</translation>
@@ -415,12 +415,12 @@
         <translation>Cette semaine</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="115"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="117"/>
         <source>Season %1 Episode %2</source>
         <translation>Saison %1 Episode %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="143"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="145"/>
         <source>Nothing airs this week</source>
         <translation>Rien n&apos;est diffusé cette semaine</translation>
     </message>
