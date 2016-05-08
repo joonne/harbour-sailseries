@@ -314,27 +314,42 @@
 <context>
     <name>SeriesPage</name>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="25"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="30"/>
         <source>Continuing</source>
         <translation type="unfinished">Fortsätter</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="27"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="32"/>
         <source>Ended</source>
         <translation type="unfinished">Avslutad</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="70"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="54"/>
+        <source>Remove</source>
+        <translation type="unfinished">Ta bort</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="56"/>
+        <source>Removing</source>
+        <translation type="unfinished">Tar bort</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="65"/>
+        <source>Update</source>
+        <translation type="unfinished">Uppdatera</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="94"/>
         <source>Status</source>
         <translation type="unfinished">Status</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="79"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="103"/>
         <source>Rating</source>
         <translation type="unfinished">Betyg</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="90"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="114"/>
         <source>Genre</source>
         <translation type="unfinished">Genre</translation>
     </message>

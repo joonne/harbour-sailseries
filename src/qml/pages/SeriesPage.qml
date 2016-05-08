@@ -12,24 +12,28 @@ Page {
         timer.start()
     }
 
+    Component.onDestruction:{
+        controller.SeriesListModel.Mode = "default"
+    }
+
     Timer {
         id: timer
-        interval: 1000
+        interval: 500
         onTriggered: {
             pageStack.pushAttached(Qt.resolvedUrl("SeasonsPage.qml"))
         }
     }
 
     function setStatus(status) {
-        if(status === "Continuing") {
+        switch(status) {
+        case "Continuing":
             return qsTr("Continuing")
-        } else if(status === "Ended") {
+        case "Ended":
             return qsTr("Ended")
         }
     }
 
     function process(string) {
-
         if(string.charAt(0) === "|" && string.charAt(string.length - 1) === "|") {
             var newstring = string.split("|").join(", ")
             return newstring.substr(2,(newstring.length - 4))
@@ -44,6 +48,26 @@ Page {
         id: listView
         anchors.fill: parent
         contentHeight: column.height
+
+        PullDownMenu {
+            MenuItem {
+                text: qsTr("Remove")
+                onClicked: {
+                    remorse.execute(qsTr("Removing"),
+                                           function() {
+                                               controller.SeriesListModel.deleteSeries(seriesID);
+                                               pageStack.pop()
+                                           });
+                }
+            }
+
+            MenuItem {
+                text:qsTr("Update")
+                onClicked: {
+                    controller.SeriesListModel.updateSeries(seriesID);
+                }
+            }
+        }
 
         Column {
             id: column
@@ -109,4 +133,6 @@ Page {
             }
         }
     }
+
+    RemorsePopup { id: remorse }
 }

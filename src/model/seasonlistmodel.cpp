@@ -47,15 +47,12 @@ void SeasonListModel::populateSeasonList(QString seriesID) {
     mySeasonListModel.clear();
 
     int seasonsCount = mydbmanager->seasonCount(seriesID.toInt());
-    QString banner = "";
-    int watchedCount = 0;
-    int totalCount = 0;
 
     for(int i = 1; i <= seasonsCount; ++i) {
 
-        banner = mydbmanager->getSeasonBanner(seriesID.toInt(),i);
-        watchedCount = mydbmanager->watchedCountBySeason(seriesID.toInt(),i);
-        totalCount = mydbmanager->totalCountBySeason(seriesID.toInt(),i);
+        QString banner = mydbmanager->getSeasonBanner(seriesID.toInt(),i);
+        int watchedCount = mydbmanager->watchedCountBySeason(seriesID.toInt(),i);
+        int totalCount = mydbmanager->totalCountBySeason(seriesID.toInt(),i);
 
         SeasonData* season = new SeasonData(this, i, banner, watchedCount, totalCount);
         mySeasonListModel.append(season);
