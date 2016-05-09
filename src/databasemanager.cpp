@@ -422,7 +422,7 @@ bool DatabaseManager::insertEpisodes(QList<QMap<QString, QString> > episodes) {
                              .arg(thumbWidth)
                              .arg(watched));
 
-            qDebug() << query.lastError().text();
+//            qDebug() << query.lastError().text();
         }
         // process pending events to not freeze the app
         qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
@@ -464,7 +464,7 @@ bool DatabaseManager::insertBanners(QList<QMap<QString, QString> > banners, int 
                              .arg(language)
                              .arg(season));
 
-            qDebug() << query.lastError();
+//            qDebug() << query.lastError();
 
         }
 

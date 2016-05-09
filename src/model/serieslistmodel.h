@@ -75,8 +75,8 @@ public:
     void storeEpisodes();
     void storeBanners();
     Q_INVOKABLE void deleteSeries(int seriesID);
-    Q_INVOKABLE void updateSeries(QString seriesID);
-
+    Q_INVOKABLE void updateSeries(QString seriesId = "");
+    Q_INVOKABLE void updateAllSeries();
 
 signals:
     void seriesListChanged();
@@ -104,6 +104,7 @@ private:
     QQmlContext* myContext;
     QList<SeriesData*> mySeriesListModel;
     SeriesData* myInfo;
+    QList<QString> mySeriesIds;
 
     static int seriesListCount(QQmlListProperty<SeriesData> *prop);
     static SeriesData* seriesListAt(QQmlListProperty<SeriesData> *prop, int index);

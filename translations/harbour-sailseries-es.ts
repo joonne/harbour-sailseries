@@ -209,42 +209,47 @@
 <context>
     <name>MySeriesPage</name>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="14"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="16"/>
         <source>This show has ended</source>
         <translation>Esta serie terminó</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="16"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="18"/>
         <source>%1 airs tonight</source>
         <translation>%1 emisiones esta noche</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="18"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="20"/>
         <source>%1 airs tomorrow</source>
         <translation>%1 emisiones mañana</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="20"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="22"/>
         <source>%1 airs in %2 days</source>
         <translation>%1 emisiones en %2 días</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="22"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="24"/>
         <source>Next episode airs in %1 days</source>
         <translation>Siguiente episodio se emite en %1 días</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="24"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="26"/>
         <source>No information about next episode</source>
         <translation>No hay información de próximos episodios</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="35"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="36"/>
+        <source>Update All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="50"/>
         <source>My Series</source>
         <translation>Mis Series</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="104"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="119"/>
         <source>Search for series first.</source>
         <translation>Busqueda de series</translation>
     </message>

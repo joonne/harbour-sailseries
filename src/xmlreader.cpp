@@ -66,13 +66,12 @@ void XMLReader::searchSeries(QString text) {
 void XMLReader::getFullSeriesRecord(QString seriesid, QString method) {
 
     if(method == "full") {
-        fullRecord = true;
+        setFullRecordFlag(true);
     } else if(method == "update") {
-        update = true;
-        qDebug() << "method = update";
+        setUpdateFlag(true);
     }
 
-    QString locale = getLocale();
+//    QString locale = getLocale();
 
     // QString url = QString(MIRRORPATH) + "/api/" + QString(APIKEY) + "/series/" + seriesid + "/all/fi.xml";
     QString url = QString(MIRRORPATH) + "/api/" + QString(APIKEY) + "/series/" + seriesid + "/all/en.zip";
@@ -101,6 +100,9 @@ void XMLReader::startRequest(QUrl url) {
 
 void XMLReader::replyFinished(QNetworkReply *reply) {
 
+    qDebug() << "finished";
+    qDebug() << getUpdateFlag();
+
     QByteArray b = reply->readAll();
     QBuffer* buf = new QBuffer(&b);
 
@@ -124,11 +126,16 @@ void XMLReader::replyFinished(QNetworkReply *reply) {
         QXmlStreamReader xml_banners(zip->fileData("banners.xml"));
         parseXML(xml_banners);
 
-        if(mySeries.size() != 0 and !fullRecord and !update) {
+        qDebug() << "here";
+
+        if(mySeries.size() != 0 and !getFullRecordFlag() and !getUpdateFlag()) {
+            qDebug() << "emit readyToPopulateSeries";
             emit readyToPopulateSeries();
-        } else if(fullRecord) {
+        } else if(getFullRecordFlag()) {
+            qDebug() << "emit readyToStoreSeries";
             emit readyToStoreSeries();
-        } else if(update) {
+        } else if(getUpdateFlag()) {
+            qDebug() << "emit readyToUpdateSeries";
             emit readyToUpdateSeries();
         }
 
@@ -141,17 +148,17 @@ void XMLReader::replyFinished(QNetworkReply *reply) {
         QXmlStreamReader xml(buf->buffer());
         parseXML(xml);
 
-        if(mySeries.size() != 0 and !fullRecord and !update) {
+        if(mySeries.size() != 0 and !getFullRecordFlag() and !getUpdateFlag()) {
             emit readyToPopulateSeries();
-        } else if(fullRecord) {
+        } else if(getFullRecordFlag()) {
             emit readyToStoreSeries();
-        } else if(update) {
+        } else if(getUpdateFlag()) {
             emit readyToUpdateSeries();
         }
 
         // lets init the values.
-        fullRecord = false;
-        update = false;
+        setFullRecordFlag(false);
+        setUpdateFlag(false);
     }
 
     reply->deleteLater();
@@ -161,6 +168,8 @@ void XMLReader::replyFinished(QNetworkReply *reply) {
 // ---------------------------------------------------
 
 void XMLReader::parseXML(QXmlStreamReader& xml) {
+
+    qDebug() << "parse XML";
 
     QList<QMap<QString,QString> > series;
     QList<QMap<QString,QString> > languages;
@@ -625,4 +634,20 @@ void XMLReader::addElementDataToMap(QXmlStreamReader& xml,
     }
     /* Now we can add it to the map.*/
     map.insert(elementName, xml.text().toString());
+}
+
+bool XMLReader::getUpdateFlag() {
+    return update;
+}
+
+void XMLReader::setUpdateFlag(bool state) {
+    update = state;
+}
+
+bool XMLReader::getFullRecordFlag() {
+    return fullRecord;
+}
+
+void XMLReader::setFullRecordFlag(bool state) {
+    fullRecord = state;
 }

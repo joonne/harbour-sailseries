@@ -13,7 +13,6 @@ SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager, XM
             SLOT(updateFetchFinished()));
 
     populateBannerList();
-//    populateSeriesList();
 
     myLoading = false;
 
@@ -31,9 +30,19 @@ SeriesListModel::~SeriesListModel() {
 
 void SeriesListModel::updateFetchFinished() {
 
+    qDebug() << "store series";
     storeSeries();
+    qDebug() << "store episodes";
     storeEpisodes();
+    qDebug() << "store banners";
     storeBanners();
+
+    if(!mySeriesIds.isEmpty()) {
+        qDebug() << "update series " << mySeriesIds.size() << " left ";
+        updateSeries();
+        return;
+    }
+
     setLoading(false);
     populateBannerList();
 }
@@ -127,10 +136,10 @@ void SeriesListModel::storeBanners() {
 
     myBanners = myReader->getBanners();
 
-    // we are saving info for this series
-    int seriesId = myInfo->getID().toInt();
-
-    mydbmanager->insertBanners(myBanners, seriesId);
+    if(!mySeries.isEmpty()) {
+        int seriesId = mySeries.first()["id"].toInt();
+        mydbmanager->insertBanners(myBanners, seriesId);
+    }
 }
 
 QString SeriesListModel::getID() { return myInfo->getID(); }
@@ -202,13 +211,30 @@ void SeriesListModel::deleteSeries(int seriesID) {
     setLoading(false);
 }
 
-void SeriesListModel::updateSeries(QString seriesID) {
+void SeriesListModel::updateSeries(QString seriesId) {
+
+    if(!mySeriesIds.isEmpty() && seriesId.isEmpty()) {
+        seriesId = mySeriesIds.takeFirst();
+    }
 
     setLoading(true);
-    myReader->getFullSeriesRecord(seriesID, "update");
+    myReader->getFullSeriesRecord(seriesId, "update");
 
 }
 
+void SeriesListModel::updateAllSeries() {
 
+    mySeriesIds.clear();
+    mySeries.clear();
+    myEpisodes.clear();
+    myBanners.clear();
+
+    auto allSeries = mydbmanager->getSeries();
+    foreach (auto series, allSeries) {
+        mySeriesIds.append(series["id"]);
+    }
+
+    updateSeries();
+}
 
 
