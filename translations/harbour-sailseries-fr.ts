@@ -4,87 +4,87 @@
 <context>
     <name>AboutPage</name>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="20"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="22"/>
         <source>About</source>
         <translation>A propos</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="52"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="54"/>
         <source>General</source>
         <translation>Général</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="60"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="62"/>
         <source>SailSeries is a tv-series tracking application for SailfisOS. It aims to be a good looking and simple app that can help you to stay on track while following your favourite series.</source>
         <translation>SailSeries est une application de suivi des séries TV pour SailfishOS. Elle a pour but d&apos;être une appli belle et simple qui vous aide à rester à jour sur vos séries favorites.  </translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="64"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="66"/>
         <source>Creator</source>
         <translation>Créateur</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="108"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="110"/>
         <source>Licence</source>
         <translation>Licence</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="116"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="118"/>
         <source>This software is licenced under GPLv2.</source>
         <translation>Ce logiciel est sous licence GPLv2.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="120"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="122"/>
         <source>Content</source>
         <translation>Contenu</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="128"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="130"/>
         <source>SailSeries utilises the public API at TheTVDB.</source>
         <translation>SailSeries utilise l&apos;API publique de The TVDB.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="149"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="151"/>
         <source>The source code is available at GitHub. Contributions, ideas and bug reports are welcome.</source>
         <translation>Le code source est disponible sur GitHub. Contributions, idées et rapport de bugs sont les bienvenus.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="141"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="143"/>
         <source>Source Code</source>
         <translation>Code Source</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="42"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="44"/>
         <source>Version %1.%2</source>
         <translation>Version %1.%2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="73"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="75"/>
         <source>Jonne Pihlanen, &apos;joonne&apos;</source>
         <translation>Jonne Pihlanen, &apos;joonne&apos;</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="154"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="156"/>
         <source>Project in GitHub</source>
         <translation>Projet sur GitHub</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="162"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="164"/>
         <source>Translations</source>
         <translation>Traductions</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="170"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="172"/>
         <source>SailSeries uses the Transifex translation platform to host the translations.</source>
         <translation>SailSeries utilise la platform de traduction Transifex pour héberger les traductions.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="175"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="177"/>
         <source>Help with translations</source>
         <translation>Aider à traduire</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="91"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="93"/>
         <source>Contributors</source>
         <translation>Contributeurs</translation>
     </message>

@@ -55,9 +55,10 @@ void XMLReader::getLanguages() {
 void XMLReader::searchSeries(QString text) {
 
     fullRecord = false;
-    QString locale = getLocale();
-    //QString url = QString(MIRRORPATH) + "/api/GetSeries.php?seriesname=" + text + "&language=" + locale;
-    QString url = QString(MIRRORPATH) + "/api/GetSeries.php?seriesname=" + text;
+//    QString locale = getLocale();
+//    TODO: searching with locale works, but getting full record does not.
+//    QString url = QString(MIRRORPATH) + "/api/GetSeries.php?seriesname=" + text + "&language=" + locale;
+    QString url = QString("%1/api/GetSeries.php?seriesname=%2").arg(QString(MIRRORPATH)).arg(text);
     qDebug() << "Requesting" << url;
     QUrl finalUrl(url);
     startRequest(finalUrl);
@@ -73,9 +74,8 @@ void XMLReader::getFullSeriesRecord(QString seriesid, QString method) {
 
 //    QString locale = getLocale();
 
-    // QString url = QString(MIRRORPATH) + "/api/" + QString(APIKEY) + "/series/" + seriesid + "/all/fi.xml";
-    QString url = QString(MIRRORPATH) + "/api/" + QString(APIKEY) + "/series/" + seriesid + "/all/en.zip";
-    // QString url = QString(MIRRORPATH) + "/api/" + QString(APIKEY) + "/series/" + seriesid + "/all/" + locale + ".zip";
+    QString url = QString("%1/api/%2/series/%3/all/en.zip").arg(QString(MIRRORPATH)).arg(QString(APIKEY)).arg(seriesid);
+    // QString url = QString("%1/api/%2/series/%3/all/%4.zip").arg(QString(MIRRORPATH)).arg(QString(APIKEY)).arg(seriesid).arg(locale);
     qDebug() << "Requesting" << url;
     QUrl finalUrl(url);
     startRequest(finalUrl);
@@ -91,6 +91,7 @@ void XMLReader::startRequest(QUrl url) {
 
     QNetworkRequest request(url);
     myNetWorkAccessManager->get(request);
+    qDebug() << getUpdateFlag();
 
 }
 
@@ -140,8 +141,8 @@ void XMLReader::replyFinished(QNetworkReply *reply) {
         }
 
         // lets init the values.
-        fullRecord = false;
-        update = false;
+        setFullRecordFlag(false);
+        setUpdateFlag(false);
 
     } else {
 

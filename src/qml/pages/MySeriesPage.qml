@@ -124,7 +124,7 @@ Page {
                 size: BusyIndicatorSize.Large
                 anchors.centerIn: parent
                 running: controller.SeriesListModel.Loading ? true : false
-                visible: false
+//                visible: false
             }
         }
     }
