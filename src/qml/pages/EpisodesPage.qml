@@ -11,11 +11,11 @@ Page {
         initialize(seriesID, seasonNumber)
     }
 
-    Component.onDestruction: {
-        pageStack.find(function(page) {
-            return page.pageName === "SeriesViewPage"
-        }).updateModel();
-    }
+//    Component.onDestruction: {
+//        pageStack.find(function(page) {
+//            return page.pageName === "SeriesViewPage"
+//        }).updateModel();
+//    }
 
 
     function initialize(seriesID, seasonNumber) {
@@ -35,9 +35,9 @@ Page {
                 onClicked: {
                     controller.EpisodeListModel.markSeasonWatched(seriesID, seasonNumber)
                     controller.SeasonListModel.populateSeasonList(seriesID)
-                    pageStack.find(function(page) {
-                        return page.pageName === "SeriesViewPage"
-                    }).updateModel();
+//                    pageStack.find(function(page) {
+//                        return page.pageName === "SeriesViewPage"
+//                    }).updateModel();
                     pageStack.pop()
                 }
             }

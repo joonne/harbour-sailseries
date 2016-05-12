@@ -40,8 +40,6 @@ OTHER_FILES = \
     qml/pages/SearchPage.qml \
     qml/pages/MySeriesPage.qml \
     qml/pages/CoverPage.qml \
-    qml/pages/SeriesViewPage.qml \
-    qml/pages/Series.qml \
     qml/cover/CoverPage.qml \
     qml/pages/AboutPage.qml \
     qml/components/MoreIndicator.qml \
@@ -68,5 +66,6 @@ HEADERS += \
     model/seasonlistmodel.h
 
 DISTFILES += \
-    qml/pages/Seasons.qml \
-    qml/components/HorizontalSeparator.qml
+    qml/components/HorizontalSeparator.qml \
+    qml/pages/SeasonsPage.qml \
+    qml/pages/SeriesPage.qml

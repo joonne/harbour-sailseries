@@ -276,53 +276,25 @@
     </message>
 </context>
 <context>
-    <name>Seasons</name>
+    <name>SeasonsPage</name>
     <message>
-        <location filename="../src/qml/pages/Seasons.qml" line="35"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="22"/>
         <source>Seasons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/Seasons.qml" line="87"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="74"/>
         <source>Season</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/Seasons.qml" line="100"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="87"/>
         <source>Watched</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/Seasons.qml" line="142"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="129"/>
         <source>episodes</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Series</name>
-    <message>
-        <location filename="../src/qml/pages/Series.qml" line="13"/>
-        <source>Continuing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/Series.qml" line="15"/>
-        <source>Ended</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/Series.qml" line="61"/>
-        <source>Status</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/Series.qml" line="70"/>
-        <source>Rating</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/Series.qml" line="81"/>
-        <source>Genre</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -341,6 +313,49 @@
     <message>
         <location filename="../src/qml/pages/SeriesInfoPage.qml" line="57"/>
         <source>Network</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SeriesPage</name>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="30"/>
+        <source>Continuing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="32"/>
+        <source>Ended</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="54"/>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="56"/>
+        <source>Removing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="65"/>
+        <source>Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="94"/>
+        <source>Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="103"/>
+        <source>Rating</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="114"/>
+        <source>Genre</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

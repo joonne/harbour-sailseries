@@ -662,6 +662,12 @@ QList<QMap<QString, QString> > DatabaseManager::getEpisodes(int seriesID, int se
             QString firstAired = query.value(10).toString();
             temp["firstAired"] = firstAired;
 
+//            // TODO: workaround for dummy episodes that show in the episodes as duplicates,
+//            // need to also check this in episodeCount function if this is to be done correctly.
+//            if(temp["firstAired"].isEmpty()) {
+//                continue;
+//            }
+
             episodes.append(temp);
         }
     }

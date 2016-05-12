@@ -276,54 +276,26 @@
     </message>
 </context>
 <context>
-    <name>Seasons</name>
+    <name>SeasonsPage</name>
     <message>
-        <location filename="../src/qml/pages/Seasons.qml" line="35"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="22"/>
         <source>Seasons</source>
-        <translation>Kaudet</translation>
+        <translation type="unfinished">Kaudet</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/Seasons.qml" line="87"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="74"/>
         <source>Season</source>
-        <translation>Kausi</translation>
+        <translation type="unfinished">Kausi</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/Seasons.qml" line="100"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="87"/>
         <source>Watched</source>
-        <translation>Nähty</translation>
+        <translation type="unfinished">Nähty</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/Seasons.qml" line="142"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="129"/>
         <source>episodes</source>
-        <translation>jaksoa</translation>
-    </message>
-</context>
-<context>
-    <name>Series</name>
-    <message>
-        <location filename="../src/qml/pages/Series.qml" line="13"/>
-        <source>Continuing</source>
-        <translation>Jatkuu</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/Series.qml" line="15"/>
-        <source>Ended</source>
-        <translation>Päättynyt</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/Series.qml" line="61"/>
-        <source>Status</source>
-        <translation>Tila</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/Series.qml" line="70"/>
-        <source>Rating</source>
-        <translation>Luokitus</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/Series.qml" line="81"/>
-        <source>Genre</source>
-        <translation>Tyylilaji</translation>
+        <translation type="unfinished">jaksoa</translation>
     </message>
 </context>
 <context>
@@ -342,6 +314,49 @@
         <location filename="../src/qml/pages/SeriesInfoPage.qml" line="57"/>
         <source>Network</source>
         <translation>Kanava</translation>
+    </message>
+</context>
+<context>
+    <name>SeriesPage</name>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="30"/>
+        <source>Continuing</source>
+        <translation type="unfinished">Jatkuu</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="32"/>
+        <source>Ended</source>
+        <translation type="unfinished">Päättynyt</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="54"/>
+        <source>Remove</source>
+        <translation type="unfinished">Poista</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="56"/>
+        <source>Removing</source>
+        <translation type="unfinished">Poistetaan</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="65"/>
+        <source>Update</source>
+        <translation type="unfinished">Päivitä</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="94"/>
+        <source>Status</source>
+        <translation type="unfinished">Tila</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="103"/>
+        <source>Rating</source>
+        <translation type="unfinished">Luokitus</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="114"/>
+        <source>Genre</source>
+        <translation type="unfinished">Tyylilaji</translation>
     </message>
 </context>
 <context>

@@ -44,26 +44,15 @@ void SeasonListModel::seasonListClear(QQmlListProperty<SeasonData>* prop)
 
 void SeasonListModel::populateSeasonList(QString seriesID) {
 
-    qDebug() << "populating seasonlist " + seriesID;
-
     mySeasonListModel.clear();
-    emit seasonListChanged();
 
     int seasonsCount = mydbmanager->seasonCount(seriesID.toInt());
-    qDebug() << "seasonsCount: " + seasonsCount;
-    QString banner = "";
-    int watchedCount = 0;
-    int totalCount = 0;
-
 
     for(int i = 1; i <= seasonsCount; ++i) {
 
-        banner = mydbmanager->getSeasonBanner(seriesID.toInt(),i);
-        qDebug() << "banner: " + banner;
-        watchedCount = mydbmanager->watchedCountBySeason(seriesID.toInt(),i);
-        qDebug() << "watchedCount: " + watchedCount;
-        totalCount = mydbmanager->totalCountBySeason(seriesID.toInt(),i);
-        qDebug() << "totalCount: " + totalCount;
+        QString banner = mydbmanager->getSeasonBanner(seriesID.toInt(),i);
+        int watchedCount = mydbmanager->watchedCountBySeason(seriesID.toInt(),i);
+        int totalCount = mydbmanager->totalCountBySeason(seriesID.toInt(),i);
 
         SeasonData* season = new SeasonData(this, i, banner, watchedCount, totalCount);
         mySeasonListModel.append(season);

@@ -276,54 +276,26 @@
     </message>
 </context>
 <context>
-    <name>Seasons</name>
+    <name>SeasonsPage</name>
     <message>
-        <location filename="../src/qml/pages/Seasons.qml" line="35"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="22"/>
         <source>Seasons</source>
-        <translation>Säsonger</translation>
+        <translation type="unfinished">Säsonger</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/Seasons.qml" line="87"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="74"/>
         <source>Season</source>
-        <translation>Säsong</translation>
+        <translation type="unfinished">Säsong</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/Seasons.qml" line="100"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="87"/>
         <source>Watched</source>
-        <translation>Sedd</translation>
+        <translation type="unfinished">Sedd</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/Seasons.qml" line="142"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="129"/>
         <source>episodes</source>
-        <translation>episoder</translation>
-    </message>
-</context>
-<context>
-    <name>Series</name>
-    <message>
-        <location filename="../src/qml/pages/Series.qml" line="13"/>
-        <source>Continuing</source>
-        <translation>Fortsätter</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/Series.qml" line="15"/>
-        <source>Ended</source>
-        <translation>Avslutad</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/Series.qml" line="61"/>
-        <source>Status</source>
-        <translation>Status</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/Series.qml" line="70"/>
-        <source>Rating</source>
-        <translation>Betyg</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/Series.qml" line="81"/>
-        <source>Genre</source>
-        <translation>Genre</translation>
+        <translation type="unfinished">episoder</translation>
     </message>
 </context>
 <context>
@@ -342,6 +314,49 @@
         <location filename="../src/qml/pages/SeriesInfoPage.qml" line="57"/>
         <source>Network</source>
         <translation>Nätverk</translation>
+    </message>
+</context>
+<context>
+    <name>SeriesPage</name>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="30"/>
+        <source>Continuing</source>
+        <translation type="unfinished">Fortsätter</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="32"/>
+        <source>Ended</source>
+        <translation type="unfinished">Avslutad</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="54"/>
+        <source>Remove</source>
+        <translation type="unfinished">Ta bort</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="56"/>
+        <source>Removing</source>
+        <translation type="unfinished">Tar bort</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="65"/>
+        <source>Update</source>
+        <translation type="unfinished">Uppdatera</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="94"/>
+        <source>Status</source>
+        <translation type="unfinished">Status</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="103"/>
+        <source>Rating</source>
+        <translation type="unfinished">Betyg</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="114"/>
+        <source>Genre</source>
+        <translation type="unfinished">Genre</translation>
     </message>
 </context>
 <context>

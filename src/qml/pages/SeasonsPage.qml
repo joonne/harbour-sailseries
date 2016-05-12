@@ -1,10 +1,8 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-Item {
-    id: seasonsItem
-    height: seriesView.height;
-    width: seriesView.width;
+Page {
+    id: seasonspage
 
     function setModel() {
         listView.model = controller.SeasonListModel.SeasonList
@@ -12,23 +10,12 @@ Item {
 
     Component.onCompleted: {
         controller.SeasonListModel.populateSeasonList(controller.SeriesListModel.ID)
-        timer.start()
-    }
-
-    // initialization is too fast without this
-    Timer {
-        id: timer
-        interval: 600
-        onTriggered: {
-            listView.model = controller.SeasonListModel.SeasonList
-            listView.visible = true
-        }
     }
 
     SilicaListView {
         id: listView
         anchors.fill: parent
-        visible: false
+        model: controller.SeasonListModel.SeasonList
 
         header: PageHeader {
             id: header

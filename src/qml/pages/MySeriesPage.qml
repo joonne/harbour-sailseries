@@ -72,7 +72,7 @@ Page {
                     onClicked: {
                         controller.SeriesListModel.Mode = "mySeries"
                         controller.SeriesListModel.selectSeries(index)
-                        pageStack.push(Qt.resolvedUrl("SeriesViewPage.qml"),{seriesID: ID})
+                        pageStack.push(Qt.resolvedUrl("SeriesPage.qml"), {seriesID: ID})
                     }
                 }
 
