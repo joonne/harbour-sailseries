@@ -4,87 +4,87 @@
 <context>
     <name>AboutPage</name>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="22"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="23"/>
         <source>About</source>
         <translation>Om</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="54"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="55"/>
         <source>General</source>
         <translation>Allmänt</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="62"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="63"/>
         <source>SailSeries is a tv-series tracking application for SailfisOS. It aims to be a good looking and simple app that can help you to stay on track while following your favourite series.</source>
         <translation>SailSeries är en TV-serieapp för SailfisOS. Det siktar på att bli en enkel och smakfull app som hjälper dig att hålla koll på de TV-serier du följer.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="66"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="67"/>
         <source>Creator</source>
         <translation>Skapare</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="110"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="111"/>
         <source>Licence</source>
         <translation>Licens</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="118"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="119"/>
         <source>This software is licenced under GPLv2.</source>
         <translation>Denna mjukvara är licensierad under GPLv2.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="122"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="123"/>
         <source>Content</source>
         <translation>Innehåll</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="130"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="131"/>
         <source>SailSeries utilises the public API at TheTVDB.</source>
         <translation>SailSeries utnyttjar den offentliga API:n för TVDB.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="151"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="152"/>
         <source>The source code is available at GitHub. Contributions, ideas and bug reports are welcome.</source>
         <translation>Källkoden finns tillgänglig på GitHub. Bidrag, idéer och felrapporter är välkommna.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="143"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="144"/>
         <source>Source Code</source>
         <translation>Källkod</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="44"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="45"/>
         <source>Version %1.%2</source>
         <translation>Version %1.%2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="75"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="76"/>
         <source>Jonne Pihlanen, &apos;joonne&apos;</source>
         <translation>Jonne Pihlanen, &apos;joonne&apos;</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="156"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="157"/>
         <source>Project in GitHub</source>
         <translation>Projekt på GitHub</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="164"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="165"/>
         <source>Translations</source>
         <translation>Översättningar</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="172"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="173"/>
         <source>SailSeries uses the Transifex translation platform to host the translations.</source>
         <translation>SailSeries använder Transifex översättningsplattform för översättningar.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="177"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="178"/>
         <source>Help with translations</source>
         <translation>Hjälp till med översättning</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="93"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="94"/>
         <source>Contributors</source>
         <translation>Bidragsgivare</translation>
     </message>
@@ -319,62 +319,44 @@
 <context>
     <name>SeriesPage</name>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="30"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="32"/>
         <source>Continuing</source>
         <translation type="unfinished">Fortsätter</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="32"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="34"/>
         <source>Ended</source>
         <translation type="unfinished">Avslutad</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="54"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="56"/>
         <source>Remove</source>
         <translation type="unfinished">Ta bort</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="56"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="58"/>
         <source>Removing</source>
         <translation type="unfinished">Tar bort</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="65"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="67"/>
         <source>Update</source>
         <translation type="unfinished">Uppdatera</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="94"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="96"/>
         <source>Status</source>
         <translation type="unfinished">Status</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="103"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="105"/>
         <source>Rating</source>
         <translation type="unfinished">Betyg</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="114"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="116"/>
         <source>Genre</source>
         <translation type="unfinished">Genre</translation>
-    </message>
-</context>
-<context>
-    <name>SeriesViewPage</name>
-    <message>
-        <location filename="../src/qml/pages/SeriesViewPage.qml" line="21"/>
-        <source>Remove</source>
-        <translation>Ta bort</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SeriesViewPage.qml" line="23"/>
-        <source>Removing</source>
-        <translation>Tar bort</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SeriesViewPage.qml" line="32"/>
-        <source>Update</source>
-        <translation>Uppdatera</translation>
     </message>
 </context>
 <context>
