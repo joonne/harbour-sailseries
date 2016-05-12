@@ -335,6 +335,8 @@ bool DatabaseManager::insertSeries(QMap<QString, QString> series) {
 
 bool DatabaseManager::insertEpisodes(QList<QMap<QString, QString> > episodes) {
 
+    qDebug() << "insertEpisodes() ";
+
     bool ret = false;
 
     startTransaction();
@@ -384,7 +386,6 @@ bool DatabaseManager::insertEpisodes(QList<QMap<QString, QString> > episodes) {
             // in order to keep the flag state
             QSqlQuery query(db);
             query.exec(QString("SELECT watched FROM Episode WHERE id = %1").arg(id));
-            // qDebug() << query.lastError();
 
             if(query.isSelect()) {
 
@@ -421,8 +422,6 @@ bool DatabaseManager::insertEpisodes(QList<QMap<QString, QString> > episodes) {
                              .arg(thumbHeight)
                              .arg(thumbWidth)
                              .arg(watched));
-
-            qDebug() << query.lastError().text();
         }
         // process pending events to not freeze the app
         qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
@@ -435,6 +434,8 @@ bool DatabaseManager::insertEpisodes(QList<QMap<QString, QString> > episodes) {
 }
 
 bool DatabaseManager::insertBanners(QList<QMap<QString, QString> > banners, int seriesId) {
+
+    qDebug() << "insertBanners() ";
 
     bool ret = false;
 
@@ -463,9 +464,6 @@ bool DatabaseManager::insertBanners(QList<QMap<QString, QString> > banners, int 
                              .arg(bannerType2)
                              .arg(language)
                              .arg(season));
-
-            qDebug() << query.lastError();
-
         }
 
         // process pending events to not freeze the app
@@ -674,8 +672,6 @@ void DatabaseManager::toggleWatched(QString episodeID) {
 
     QSqlQuery query(db);
     query.exec(QString("UPDATE Episode SET watched = CASE WHEN watched = 0 THEN 1 ELSE 0 END WHERE id = %1").arg(episodeID.toInt()));
-    qDebug() << query.lastError();
-
 }
 
 bool DatabaseManager::deleteSeries(int seriesID) {

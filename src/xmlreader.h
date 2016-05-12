@@ -40,6 +40,11 @@ public:
     QList<QMap<QString,QString> > getEpisodes();
     QList<QMap<QString,QString> > getBanners();
 
+    bool getUpdateFlag();
+    void setUpdateFlag(bool state);
+    bool getFullRecordFlag();
+    void setFullRecordFlag(bool state);
+
 signals:
     void readyToPopulateSeries();
     void readyToPopulateChannels();
@@ -50,7 +55,6 @@ public slots:
     void replyFinished(QNetworkReply* reply);
 
 private:
-
     QNetworkAccessManager* myNetWorkAccessManager;
     QList<QMap<QString,QString> > myLanguages;
     QList<QMap<QString,QString> > mySeries;

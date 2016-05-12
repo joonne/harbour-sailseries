@@ -13,7 +13,6 @@ SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager, XM
             SLOT(updateFetchFinished()));
 
     populateBannerList();
-//    populateSeriesList();
 
     myLoading = false;
 
@@ -34,6 +33,12 @@ void SeriesListModel::updateFetchFinished() {
     storeSeries();
     storeEpisodes();
     storeBanners();
+
+    if(!mySeriesIds.isEmpty()) {
+        updateSeries();
+        return;
+    }
+
     setLoading(false);
     populateBannerList();
 }
@@ -127,10 +132,10 @@ void SeriesListModel::storeBanners() {
 
     myBanners = myReader->getBanners();
 
-    // we are saving info for this series
-    int seriesId = myInfo->getID().toInt();
-
-    mydbmanager->insertBanners(myBanners, seriesId);
+    if(!mySeries.isEmpty()) {
+        int seriesId = mySeries.first()["id"].toInt();
+        mydbmanager->insertBanners(myBanners, seriesId);
+    }
 }
 
 QString SeriesListModel::getID() { return myInfo->getID(); }
@@ -169,14 +174,12 @@ QString SeriesListModel::getGenre() { return myInfo->getGenre(); }
 
 bool SeriesListModel::getLoading() { return myLoading; }
 
-void SeriesListModel::setLoading(bool) {
+void SeriesListModel::setLoading(bool state) {
 
-    if(myLoading) {
-        myLoading = false;
-    } else {
-        myLoading = true;
+    if(myLoading != state) {
+        myLoading = state;
+        emit loadingChanged();
     }
-    emit loadingChanged();
 }
 
 QString SeriesListModel::getPoster() { return myPoster; }
@@ -185,10 +188,9 @@ QString SeriesListModel::getMode() { return mode; }
 
 void SeriesListModel::setMode(QString newmode) {
 
-    if(mode !=  newmode) {
+    if(mode != newmode) {
         mode = newmode;
         emit modeChanged();
-        qDebug() << "mode changed!";
     }
 }
 
@@ -202,13 +204,30 @@ void SeriesListModel::deleteSeries(int seriesID) {
     setLoading(false);
 }
 
-void SeriesListModel::updateSeries(QString seriesID) {
+void SeriesListModel::updateSeries(QString seriesId) {
+
+    if(!mySeriesIds.isEmpty() && seriesId.isEmpty()) {
+        seriesId = mySeriesIds.takeFirst();
+    }
 
     setLoading(true);
-    myReader->getFullSeriesRecord(seriesID, "update");
+    myReader->getFullSeriesRecord(seriesId, "update");
 
 }
 
+void SeriesListModel::updateAllSeries() {
 
+    mySeriesIds.clear();
+    mySeries.clear();
+    myEpisodes.clear();
+    myBanners.clear();
+
+    auto allSeries = mydbmanager->getSeries();
+    foreach (auto series, allSeries) {
+        mySeriesIds.append(series["id"]);
+    }
+
+    updateSeries();
+}
 
 

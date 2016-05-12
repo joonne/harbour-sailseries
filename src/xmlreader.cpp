@@ -5,7 +5,9 @@
 
 XMLReader::XMLReader(QObject *parent) :
     QObject(parent),
-    myNetWorkAccessManager(0)
+    myNetWorkAccessManager(0),
+    update(false),
+    fullRecord(false)
 {
     myNetWorkAccessManager = new QNetworkAccessManager(this);
 
@@ -13,9 +15,6 @@ XMLReader::XMLReader(QObject *parent) :
             SIGNAL(finished(QNetworkReply*)),
             this,
             SLOT(replyFinished(QNetworkReply*)));
-
-    fullRecord = false;
-    update = false; // STUPID, FIX THIS SOMEHOW
 
 //    getLanguages();
 
@@ -55,9 +54,10 @@ void XMLReader::getLanguages() {
 void XMLReader::searchSeries(QString text) {
 
     fullRecord = false;
-    QString locale = getLocale();
-    //QString url = QString(MIRRORPATH) + "/api/GetSeries.php?seriesname=" + text + "&language=" + locale;
-    QString url = QString(MIRRORPATH) + "/api/GetSeries.php?seriesname=" + text;
+//    QString locale = getLocale();
+//    TODO: searching with locale works, but getting full record does not.
+//    QString url = QString(MIRRORPATH) + "/api/GetSeries.php?seriesname=" + text + "&language=" + locale;
+    QString url = QString("%1/api/GetSeries.php?seriesname=%2").arg(QString(MIRRORPATH)).arg(text);
     qDebug() << "Requesting" << url;
     QUrl finalUrl(url);
     startRequest(finalUrl);
@@ -66,17 +66,15 @@ void XMLReader::searchSeries(QString text) {
 void XMLReader::getFullSeriesRecord(QString seriesid, QString method) {
 
     if(method == "full") {
-        fullRecord = true;
+        setFullRecordFlag(true);
     } else if(method == "update") {
-        update = true;
-        qDebug() << "method = update";
+        setUpdateFlag(true);
     }
 
-    QString locale = getLocale();
+//    QString locale = getLocale();
 
-    // QString url = QString(MIRRORPATH) + "/api/" + QString(APIKEY) + "/series/" + seriesid + "/all/fi.xml";
-    QString url = QString(MIRRORPATH) + "/api/" + QString(APIKEY) + "/series/" + seriesid + "/all/en.zip";
-    // QString url = QString(MIRRORPATH) + "/api/" + QString(APIKEY) + "/series/" + seriesid + "/all/" + locale + ".zip";
+    QString url = QString("%1/api/%2/series/%3/all/en.zip").arg(QString(MIRRORPATH)).arg(QString(APIKEY)).arg(seriesid);
+    // QString url = QString("%1/api/%2/series/%3/all/%4.zip").arg(QString(MIRRORPATH)).arg(QString(APIKEY)).arg(seriesid).arg(locale);
     qDebug() << "Requesting" << url;
     QUrl finalUrl(url);
     startRequest(finalUrl);
@@ -92,7 +90,6 @@ void XMLReader::startRequest(QUrl url) {
 
     QNetworkRequest request(url);
     myNetWorkAccessManager->get(request);
-
 }
 
 // ---------------------------------------------------
@@ -124,34 +121,47 @@ void XMLReader::replyFinished(QNetworkReply *reply) {
         QXmlStreamReader xml_banners(zip->fileData("banners.xml"));
         parseXML(xml_banners);
 
-        if(mySeries.size() != 0 and !fullRecord and !update) {
-            emit readyToPopulateSeries();
-        } else if(fullRecord) {
-            emit readyToStoreSeries();
-        } else if(update) {
-            emit readyToUpdateSeries();
-        }
+        if(mySeries.size() != 0 and !getFullRecordFlag() and !getUpdateFlag()) {
 
-        // lets init the values.
-        fullRecord = false;
-        update = false;
+            setFullRecordFlag(false);
+            setUpdateFlag(false);
+
+            emit readyToPopulateSeries();
+
+        } else if(getFullRecordFlag()) {
+
+            setFullRecordFlag(false);
+            setUpdateFlag(false);
+
+            emit readyToStoreSeries();
+
+        } else if(getUpdateFlag()) {
+
+            setFullRecordFlag(false);
+            setUpdateFlag(false);
+
+            emit readyToUpdateSeries();
+
+        }
 
     } else {
 
         QXmlStreamReader xml(buf->buffer());
         parseXML(xml);
 
-        if(mySeries.size() != 0 and !fullRecord and !update) {
+        if(mySeries.size() != 0 and !getFullRecordFlag() and !getUpdateFlag()) {
+            setFullRecordFlag(false);
+            setUpdateFlag(false);
             emit readyToPopulateSeries();
-        } else if(fullRecord) {
+        } else if(getFullRecordFlag()) {
+            setFullRecordFlag(false);
+            setUpdateFlag(false);
             emit readyToStoreSeries();
-        } else if(update) {
+        } else if(getUpdateFlag()) {
+            setFullRecordFlag(false);
+            setUpdateFlag(false);
             emit readyToUpdateSeries();
         }
-
-        // lets init the values.
-        fullRecord = false;
-        update = false;
     }
 
     reply->deleteLater();
@@ -625,4 +635,20 @@ void XMLReader::addElementDataToMap(QXmlStreamReader& xml,
     }
     /* Now we can add it to the map.*/
     map.insert(elementName, xml.text().toString());
+}
+
+bool XMLReader::getUpdateFlag() {
+    return update;
+}
+
+void XMLReader::setUpdateFlag(bool state) {
+    update = state;
+}
+
+bool XMLReader::getFullRecordFlag() {
+    return fullRecord;
+}
+
+void XMLReader::setFullRecordFlag(bool state) {
+    fullRecord = state;
 }

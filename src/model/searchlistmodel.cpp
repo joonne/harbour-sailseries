@@ -213,14 +213,7 @@ void SearchListModel::clearList() {
 }
 
 void SearchListModel::checkIfAdded(QString id, QString name) {
-
-    if(mydbmanager->isAlreadyAdded(id.toInt(), name)) {
-        setAdded(true);
-        qDebug() << "already added";
-    } else {
-        setAdded(false);
-        qDebug() << "not added";
-    }
+    setAdded(mydbmanager->isAlreadyAdded(id.toInt(), name));
 }
 
 
