@@ -30,15 +30,11 @@ SeriesListModel::~SeriesListModel() {
 
 void SeriesListModel::updateFetchFinished() {
 
-    qDebug() << "store series";
     storeSeries();
-    qDebug() << "store episodes";
     storeEpisodes();
-    qDebug() << "store banners";
     storeBanners();
 
     if(!mySeriesIds.isEmpty()) {
-        qDebug() << "update series " << mySeriesIds.size() << " left ";
         updateSeries();
         return;
     }
@@ -178,14 +174,12 @@ QString SeriesListModel::getGenre() { return myInfo->getGenre(); }
 
 bool SeriesListModel::getLoading() { return myLoading; }
 
-void SeriesListModel::setLoading(bool) {
+void SeriesListModel::setLoading(bool state) {
 
-    if(myLoading) {
-        myLoading = false;
-    } else {
-        myLoading = true;
+    if(myLoading != state) {
+        myLoading = state;
+        emit loadingChanged();
     }
-    emit loadingChanged();
 }
 
 QString SeriesListModel::getPoster() { return myPoster; }
@@ -194,10 +188,9 @@ QString SeriesListModel::getMode() { return mode; }
 
 void SeriesListModel::setMode(QString newmode) {
 
-    if(mode !=  newmode) {
+    if(mode != newmode) {
         mode = newmode;
         emit modeChanged();
-        qDebug() << "mode changed!";
     }
 }
 

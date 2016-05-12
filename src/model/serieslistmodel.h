@@ -64,7 +64,7 @@ public:
     QString getGenre();
 
     bool getLoading();
-    void setLoading(bool);
+    void setLoading(bool state);
 
     QString getPoster();
 

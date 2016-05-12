@@ -249,7 +249,7 @@
         <translation>Omat sarjat</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="119"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="121"/>
         <source>Search for series first.</source>
         <translation>Etsi ensin sarjoja.</translation>
     </message>

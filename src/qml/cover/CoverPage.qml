@@ -75,7 +75,7 @@ CoverBackground {
 
         delegate: ListItem {
             id: item
-            contentHeight: column.height
+            contentHeight: listView.count > 4 ? (Theme.coverSizeLarge.height / 5) : column.height
             contentWidth: listView.width
 
             Column {

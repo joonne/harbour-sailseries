@@ -55,7 +55,6 @@ public slots:
     void replyFinished(QNetworkReply* reply);
 
 private:
-
     QNetworkAccessManager* myNetWorkAccessManager;
     QList<QMap<QString,QString> > myLanguages;
     QList<QMap<QString,QString> > mySeries;

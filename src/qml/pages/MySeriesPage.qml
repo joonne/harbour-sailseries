@@ -104,6 +104,8 @@ Page {
                         text: nextEpisodeDetails(NextEpisodeName, DaysToNextEpisode, Status)
                         anchors.left: parent.left
                         anchors.leftMargin: 2 * Theme.paddingMedium
+                        truncationMode: TruncationMode.Fade
+                        width: column.width - Theme.paddingLarge
                         font.pixelSize: Theme.fontSizeTiny
                         color: Theme.primaryColor
                     }
@@ -123,8 +125,7 @@ Page {
             BusyIndicator {
                 size: BusyIndicatorSize.Large
                 anchors.centerIn: parent
-                running: controller.SeriesListModel.Loading ? true : false
-//                visible: false
+                running: controller.SeriesListModel.Loading
             }
         }
     }

@@ -5,7 +5,9 @@
 
 XMLReader::XMLReader(QObject *parent) :
     QObject(parent),
-    myNetWorkAccessManager(0)
+    myNetWorkAccessManager(0),
+    update(false),
+    fullRecord(false)
 {
     myNetWorkAccessManager = new QNetworkAccessManager(this);
 
@@ -13,9 +15,6 @@ XMLReader::XMLReader(QObject *parent) :
             SIGNAL(finished(QNetworkReply*)),
             this,
             SLOT(replyFinished(QNetworkReply*)));
-
-    fullRecord = false;
-    update = false; // STUPID, FIX THIS SOMEHOW
 
 //    getLanguages();
 
@@ -91,8 +90,6 @@ void XMLReader::startRequest(QUrl url) {
 
     QNetworkRequest request(url);
     myNetWorkAccessManager->get(request);
-    qDebug() << getUpdateFlag();
-
 }
 
 // ---------------------------------------------------
@@ -100,9 +97,6 @@ void XMLReader::startRequest(QUrl url) {
 // ---------------------------------------------------
 
 void XMLReader::replyFinished(QNetworkReply *reply) {
-
-    qDebug() << "finished";
-    qDebug() << getUpdateFlag();
 
     QByteArray b = reply->readAll();
     QBuffer* buf = new QBuffer(&b);
@@ -127,22 +121,28 @@ void XMLReader::replyFinished(QNetworkReply *reply) {
         QXmlStreamReader xml_banners(zip->fileData("banners.xml"));
         parseXML(xml_banners);
 
-        qDebug() << "here";
-
         if(mySeries.size() != 0 and !getFullRecordFlag() and !getUpdateFlag()) {
-            qDebug() << "emit readyToPopulateSeries";
-            emit readyToPopulateSeries();
-        } else if(getFullRecordFlag()) {
-            qDebug() << "emit readyToStoreSeries";
-            emit readyToStoreSeries();
-        } else if(getUpdateFlag()) {
-            qDebug() << "emit readyToUpdateSeries";
-            emit readyToUpdateSeries();
-        }
 
-        // lets init the values.
-        setFullRecordFlag(false);
-        setUpdateFlag(false);
+            setFullRecordFlag(false);
+            setUpdateFlag(false);
+
+            emit readyToPopulateSeries();
+
+        } else if(getFullRecordFlag()) {
+
+            setFullRecordFlag(false);
+            setUpdateFlag(false);
+
+            emit readyToStoreSeries();
+
+        } else if(getUpdateFlag()) {
+
+            setFullRecordFlag(false);
+            setUpdateFlag(false);
+
+            emit readyToUpdateSeries();
+
+        }
 
     } else {
 
@@ -150,16 +150,18 @@ void XMLReader::replyFinished(QNetworkReply *reply) {
         parseXML(xml);
 
         if(mySeries.size() != 0 and !getFullRecordFlag() and !getUpdateFlag()) {
+            setFullRecordFlag(false);
+            setUpdateFlag(false);
             emit readyToPopulateSeries();
         } else if(getFullRecordFlag()) {
+            setFullRecordFlag(false);
+            setUpdateFlag(false);
             emit readyToStoreSeries();
         } else if(getUpdateFlag()) {
+            setFullRecordFlag(false);
+            setUpdateFlag(false);
             emit readyToUpdateSeries();
         }
-
-        // lets init the values.
-        setFullRecordFlag(false);
-        setUpdateFlag(false);
     }
 
     reply->deleteLater();
@@ -169,8 +171,6 @@ void XMLReader::replyFinished(QNetworkReply *reply) {
 // ---------------------------------------------------
 
 void XMLReader::parseXML(QXmlStreamReader& xml) {
-
-    qDebug() << "parse XML";
 
     QList<QMap<QString,QString> > series;
     QList<QMap<QString,QString> > languages;
