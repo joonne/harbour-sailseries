@@ -241,7 +241,7 @@
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="36"/>
         <source>Update All</source>
-        <translation type="unfinished"></translation>
+        <translation>Uppdatera alla</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="50"/>
@@ -280,22 +280,22 @@
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="22"/>
         <source>Seasons</source>
-        <translation type="unfinished">Säsonger</translation>
+        <translation>Säsonger</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="74"/>
         <source>Season</source>
-        <translation type="unfinished">Säsong</translation>
+        <translation>Säsonger</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="87"/>
         <source>Watched</source>
-        <translation type="unfinished">Sedd</translation>
+        <translation>Sedd</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="129"/>
         <source>episodes</source>
-        <translation type="unfinished">episoder</translation>
+        <translation>episoder</translation>
     </message>
 </context>
 <context>
@@ -321,42 +321,42 @@
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="32"/>
         <source>Continuing</source>
-        <translation type="unfinished">Fortsätter</translation>
+        <translation>Fortsätter</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="34"/>
         <source>Ended</source>
-        <translation type="unfinished">Avslutad</translation>
+        <translation>Avslutad</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="56"/>
         <source>Remove</source>
-        <translation type="unfinished">Ta bort</translation>
+        <translation>Ta bort</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="58"/>
         <source>Removing</source>
-        <translation type="unfinished">Tar bort</translation>
+        <translation>Tar bort</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="67"/>
         <source>Update</source>
-        <translation type="unfinished">Uppdatera</translation>
+        <translation>Uppdatera</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="96"/>
         <source>Status</source>
-        <translation type="unfinished">Status</translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="105"/>
         <source>Rating</source>
-        <translation type="unfinished">Betyg</translation>
+        <translation>Betyg</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="116"/>
         <source>Genre</source>
-        <translation type="unfinished">Genre</translation>
+        <translation>Genre</translation>
     </message>
 </context>
 <context>

@@ -241,7 +241,7 @@
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="36"/>
         <source>Update All</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar todo</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="50"/>
@@ -280,22 +280,22 @@
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="22"/>
         <source>Seasons</source>
-        <translation type="unfinished">Temporadas</translation>
+        <translation>Temporadas</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="74"/>
         <source>Season</source>
-        <translation type="unfinished">Temporada</translation>
+        <translation>Temporada</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="87"/>
         <source>Watched</source>
-        <translation type="unfinished">Visto</translation>
+        <translation>Visto</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="129"/>
         <source>episodes</source>
-        <translation type="unfinished">episodios</translation>
+        <translation>episodios</translation>
     </message>
 </context>
 <context>
@@ -321,42 +321,42 @@
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="32"/>
         <source>Continuing</source>
-        <translation type="unfinished">Continuando</translation>
+        <translation>Continuando</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="34"/>
         <source>Ended</source>
-        <translation type="unfinished">Finalizado</translation>
+        <translation>Finalizado</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="56"/>
         <source>Remove</source>
-        <translation type="unfinished">Eliminar</translation>
+        <translation>Eliminar</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="58"/>
         <source>Removing</source>
-        <translation type="unfinished">Eliminando</translation>
+        <translation>Eliminando</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="67"/>
         <source>Update</source>
-        <translation type="unfinished">Actualizar</translation>
+        <translation>Actualizar</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="96"/>
         <source>Status</source>
-        <translation type="unfinished">Estado</translation>
+        <translation>Estado</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="105"/>
         <source>Rating</source>
-        <translation type="unfinished">Valoración</translation>
+        <translation>Valoración</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="116"/>
         <source>Genre</source>
-        <translation type="unfinished">Genero</translation>
+        <translation>Genero</translation>
     </message>
 </context>
 <context>

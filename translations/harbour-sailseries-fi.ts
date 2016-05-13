@@ -241,7 +241,7 @@
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="36"/>
         <source>Update All</source>
-        <translation type="unfinished"></translation>
+        <translation>Päivitä kaikki</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="50"/>
@@ -280,22 +280,22 @@
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="22"/>
         <source>Seasons</source>
-        <translation type="unfinished">Kaudet</translation>
+        <translation>Kaudet</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="74"/>
         <source>Season</source>
-        <translation type="unfinished">Kausi</translation>
+        <translation>Kausi</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="87"/>
         <source>Watched</source>
-        <translation type="unfinished">Nähty</translation>
+        <translation>Nähty</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="129"/>
         <source>episodes</source>
-        <translation type="unfinished">jaksoa</translation>
+        <translation>jaksot</translation>
     </message>
 </context>
 <context>
@@ -321,42 +321,42 @@
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="32"/>
         <source>Continuing</source>
-        <translation type="unfinished">Jatkuu</translation>
+        <translation>Jatkuu</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="34"/>
         <source>Ended</source>
-        <translation type="unfinished">Päättynyt</translation>
+        <translation>Päättynyt</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="56"/>
         <source>Remove</source>
-        <translation type="unfinished">Poista</translation>
+        <translation>Poista</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="58"/>
         <source>Removing</source>
-        <translation type="unfinished">Poistetaan</translation>
+        <translation>Poistetaan</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="67"/>
         <source>Update</source>
-        <translation type="unfinished">Päivitä</translation>
+        <translation>Päivitä</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="96"/>
         <source>Status</source>
-        <translation type="unfinished">Tila</translation>
+        <translation>Tila</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="105"/>
         <source>Rating</source>
-        <translation type="unfinished">Luokitus</translation>
+        <translation>Luokitus</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="116"/>
         <source>Genre</source>
-        <translation type="unfinished">Tyylilaji</translation>
+        <translation>Tyylilaji</translation>
     </message>
 </context>
 <context>
