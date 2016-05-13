@@ -1,8 +1,44 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import org.nemomobile.notifications 1.0
 
 Page {
     id: startpage
+
+//    Notification {
+//        id: notification
+//        category: "x-nemo.example"
+//        summary: "Game Of Thrones"
+//        body: "Book of the Stranger\n21:00"
+//        previewSummary: "Game Of Thrones"
+//        previewBody: "21:00"
+//        timestamp: "2016-05-13 21:20:00"
+//        onClicked: activate()
+//        remoteActions: [ {
+//                "name": "default",
+//                "displayName": "Do something",
+//                "icon": "icon-s-do-it",
+//                "service": "org.nemomobile.example",
+//                "path": "/example",
+//                "iface": "org.nemomobile.example",
+//                "method": "doSomething",
+//                "arguments": [ "argument", 1 ]
+//            } ]
+//    }
+
+//    function activate() {
+//        appWindow.activate()
+//    }
+
+//    Component.onCompleted: timer.start()
+
+//    Timer {
+//        id: timer
+
+//        interval: 10000
+//        repeat: true
+//        onTriggered: notification.publish()
+//    }
 
     function getWeekday(weekday) {
         switch(weekday) {

@@ -68,4 +68,5 @@ HEADERS += \
 DISTFILES += \
     qml/components/HorizontalSeparator.qml \
     qml/pages/SeasonsPage.qml \
-    qml/pages/SeriesPage.qml
+    qml/pages/SeriesPage.qml \
+    qml/pages/NotificationHandler.qml
