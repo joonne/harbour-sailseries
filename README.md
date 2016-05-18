@@ -1,9 +1,11 @@
 **SailSeries** - A simple app to view details of your favorite tv-series and track your progress.
 
 **FEATURES**:
+
 Search, add, view, mark episodes as watched, mark seasons as watched, update all series, week view, active cover.
 
 **TRANSLATIONS**:
+
 english, finnish, french, swedish and spanish
 
 **NOTE**:
