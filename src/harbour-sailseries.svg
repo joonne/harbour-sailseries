@@ -20,7 +20,10 @@
    xml:space="preserve"
    id="svg4033"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="harbour-sailseries.svg"><metadata
+   sodipodi:docname="harbour-sailseries.svg"
+   inkscape:export-filename="/home/joonne/Asiakirjat/GitHub/harbour-sailseries/src/harbour-sailseries.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90"><metadata
      id="metadata4056"><rdf:RDF><cc:Work
          rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
@@ -59,7 +62,7 @@
      inkscape:window-x="65"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
-     inkscape:current-layer="Layer_1"
+     inkscape:current-layer="svg4033"
      inkscape:snap-intersection-paths="true" /><g
      id="Layer_2"
      display="none" /><g
@@ -76,12 +79,6 @@
          offset="1"
          style="stop-color:#A1D2D4"
          id="stop4040" /></radialGradient><rect
-       style="fill:#ffffff"
-       id="rect4081"
-       width="67.779663"
-       height="35.711864"
-       x="77.372635"
-       y="120.40977" /><rect
        style="fill:#917c6f;fill-opacity:1"
        id="rect3506"
        width="85.900002"
