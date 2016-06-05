@@ -5,8 +5,8 @@ Page {
     id: mySeriesPage
 
     Component.onDestruction: {
-        if(controller) {
-            controller.SeriesListModel.Mode = "default"
+        if(engine) {
+            engine.SeriesListModel.Mode = "default"
         }
     }
 
@@ -35,7 +35,7 @@ Page {
             MenuItem {
                 text: qsTr("Update All")
                 onClicked: {
-                    controller.SeriesListModel.updateAllSeries()
+                    engine.SeriesListModel.updateAllSeries()
                 }
             }
         }
@@ -43,7 +43,7 @@ Page {
         SilicaListView {
             id: listView
             anchors.fill: parent
-            model: controller.SeriesListModel.SeriesList
+            model: engine.SeriesListModel.SeriesList
 
             header: PageHeader {
                 id: header
@@ -70,8 +70,8 @@ Page {
                     anchors.right: parent.right
                     anchors.rightMargin: Theme.paddingMedium
                     onClicked: {
-                        controller.SeriesListModel.Mode = "mySeries"
-                        controller.SeriesListModel.selectSeries(index)
+                        engine.SeriesListModel.Mode = "mySeries"
+                        engine.SeriesListModel.selectSeries(index)
                         pageStack.push(Qt.resolvedUrl("SeriesPage.qml"), {seriesID: ID})
                     }
                 }
@@ -125,7 +125,7 @@ Page {
             BusyIndicator {
                 size: BusyIndicatorSize.Large
                 anchors.centerIn: parent
-                running: controller.SeriesListModel.Loading
+                running: engine.SeriesListModel.Loading
             }
         }
     }

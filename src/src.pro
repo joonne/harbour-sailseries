@@ -15,13 +15,13 @@ SOURCES += main.cpp \
     model/serieslistmodel.cpp \
     databasemanager.cpp \
     model/episodedata.cpp \
-    model/datamodel.cpp \
     model/episodelistmodel.cpp \
     model/searchlistmodel.cpp \
     model/todaylistmodel.cpp \
     qzip.cpp \
     model/seasondata.cpp \
-    model/seasonlistmodel.cpp
+    model/seasonlistmodel.cpp \
+    engine.cpp
 
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 DEFINES += APP_BUILDNUM=\\\"$$RELEASE\\\"
@@ -56,14 +56,14 @@ HEADERS += \
     model/serieslistmodel.h \
     databasemanager.h \
     model/episodedata.h \
-    model/datamodel.h \
     model/episodelistmodel.h \
     model/searchlistmodel.h \
     model/todaylistmodel.h \
     qzipreader_p.h \
     qzipwriter_p.h \
     model/seasondata.h \
-    model/seasonlistmodel.h
+    model/seasonlistmodel.h \
+    engine.h
 
 DISTFILES += \
     qml/components/HorizontalSeparator.qml \

@@ -55,15 +55,15 @@ public slots:
     void replyFinished(QNetworkReply* reply);
 
 private:
-    QNetworkAccessManager* myNetWorkAccessManager;
-    QList<QMap<QString,QString> > myLanguages;
-    QList<QMap<QString,QString> > mySeries;
-    QList<QMap<QString,QString> > myEpisodes;
-    QList<QMap<QString,QString> > myBanners;
+    QNetworkAccessManager* m_nam;
+    QList<QMap<QString,QString> > m_languages;
+    QList<QMap<QString,QString> > m_series;
+    QList<QMap<QString,QString> > m_episodes;
+    QList<QMap<QString,QString> > m_banners;
     QString currentServerTime;
 
-    bool fullRecord;
-    bool update;
+    bool m_fullRecord;
+    bool m_update;
 
     QString getLocale();
 

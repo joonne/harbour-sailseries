@@ -13,8 +13,8 @@ Page {
     }
 
     Component.onDestruction:{
-        if(controller) {
-            controller.SeriesListModel.Mode = "default"
+        if(engine) {
+            engine.SeriesListModel.Mode = "default"
         }
     }
 
@@ -57,7 +57,7 @@ Page {
                 onClicked: {
                     remorse.execute(qsTr("Removing"),
                                            function() {
-                                               controller.SeriesListModel.deleteSeries(seriesID);
+                                               engine.SeriesListModel.deleteSeries(seriesID);
                                                pageStack.pop()
                                            });
                 }
@@ -66,7 +66,7 @@ Page {
             MenuItem {
                 text:qsTr("Update")
                 onClicked: {
-                    controller.SeriesListModel.updateSeries(seriesID);
+                    engine.SeriesListModel.updateSeries(seriesID);
                 }
             }
         }
@@ -78,12 +78,12 @@ Page {
 
             PageHeader {
                 id: header
-                title: controller.SeriesListModel.SeriesName
+                title: engine.SeriesListModel.SeriesName
             }
 
             Image {
                 id: banner
-                source: "http://thetvdb.com/banners/" + controller.SeriesListModel.Banner
+                source: "http://thetvdb.com/banners/" + engine.SeriesListModel.Banner
                 sourceSize.width: seriespage.width - Theme.paddingMedium * 2
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.paddingMedium
@@ -95,7 +95,7 @@ Page {
                     id: status
                     label: qsTr("Status")
                     width: seriespage.width / 2
-                    text: setStatus(controller.SeriesListModel.Status)
+                    text: setStatus(engine.SeriesListModel.Status)
                     color: Theme.secondaryColor
                     readOnly: true
                 }
@@ -104,7 +104,7 @@ Page {
                     id: rating
                     label: qsTr("Rating")
                     width: seriespage.width / 2
-                    text: controller.SeriesListModel.Rating
+                    text: engine.SeriesListModel.Rating
                     color: Theme.secondaryColor
                     readOnly: true
                 }
@@ -115,7 +115,7 @@ Page {
                 id: genre
                 label: qsTr("Genre")
                 width: seriespage.width
-                text: process(controller.SeriesListModel.Genre)
+                text: process(engine.SeriesListModel.Genre)
                 color: Theme.secondaryColor
                 readOnly: true
             }
@@ -123,13 +123,13 @@ Page {
             TextExpander {
                 id: expander
                 width: seriespage.width
-                textContent: controller.SeriesListModel.Overview
+                textContent: engine.SeriesListModel.Overview
             }
 
             Button {
                 id: imdb
                 text: "IMDB"
-                onClicked: Qt.openUrlExternally("http://www.imdb.com/title/" + controller.SeriesListModel.IMDB_ID)
+                onClicked: Qt.openUrlExternally("http://www.imdb.com/title/" + engine.SeriesListModel.IMDB_ID)
                 anchors.left: parent.left
                 anchors.leftMargin: (seriespage.width - imdb.width) / 2
             }
@@ -139,7 +139,7 @@ Page {
     BusyIndicator {
         size: BusyIndicatorSize.Large
         anchors.centerIn: parent
-        running: controller.SeriesListModel.Loading
+        running: engine.SeriesListModel.Loading
     }
 
     RemorsePopup { id: remorse }

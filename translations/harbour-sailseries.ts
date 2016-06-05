@@ -362,67 +362,67 @@
 <context>
     <name>StartPage</name>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="46"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="17"/>
         <source>Monday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="48"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="19"/>
         <source>Tuesday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="50"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="21"/>
         <source>Wednesday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="52"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="23"/>
         <source>Thursday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="54"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="25"/>
         <source>Friday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="56"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="27"/>
         <source>Saturday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="58"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="29"/>
         <source>Sunday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="75"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="46"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="83"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="54"/>
         <source>Search for a Series</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="91"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="62"/>
         <source>My Series</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="101"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="72"/>
         <source>This Week</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="153"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="124"/>
         <source>Season %1 Episode %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="181"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="154"/>
         <source>Nothing airs this week</source>
         <translation type="unfinished"></translation>
     </message>

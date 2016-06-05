@@ -12,15 +12,15 @@ Page {
 
         PullDownMenu {
             MenuItem {
-                visible: controller.SearchModel.Added ? enabled = false : enabled = true
+                visible: engine.SearchModel.Added ? enabled = false : enabled = true
                 text: qsTr("Add to my series")
                 onClicked: {
-                    controller.SearchModel.getFullSeriesRecord(controller.SearchModel.ID)
+                    engine.SearchModel.getFullSeriesRecord(engine.SearchModel.ID)
                 }
             }
 
             MenuItem {
-                visible: controller.SearchModel.Added ? enabled = true : enabled = false
+                visible: engine.SearchModel.Added ? enabled = true : enabled = false
                 text: qsTr("Already added")
                 // TODO: maybe app could go to MySeriesPage ?
             }
@@ -32,12 +32,12 @@ Page {
 
             PageHeader {
                 id: header
-                title: controller.SearchModel.SeriesName
+                title: engine.SearchModel.SeriesName
             }
 
             Image {
                 id: banner
-                source: "http://thetvdb.com/banners/" + controller.SearchModel.Banner
+                source: "http://thetvdb.com/banners/" + engine.SearchModel.Banner
                 sourceSize.width: infopage.width - Theme.paddingMedium * 2
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.paddingMedium
@@ -49,13 +49,13 @@ Page {
             TextExpander {
                 id: expander
                 width: infopage.width
-                textContent: controller.SearchModel.Overview
+                textContent: engine.SearchModel.Overview
             }
 
             TextField {
                 id: network
                 label: qsTr("Network")
-                text: controller.SearchModel.Network
+                text: engine.SearchModel.Network
                 color: Theme.secondaryColor
                 readOnly: true
                 width: infopage.width
@@ -64,7 +64,7 @@ Page {
             Button {
                 id: imdb
                 text: "IMDB"
-                onClicked: Qt.openUrlExternally("http://www.imdb.com/title/" + controller.SearchModel.IMDB_ID)
+                onClicked: Qt.openUrlExternally("http://www.imdb.com/title/" + engine.SearchModel.IMDB_ID)
                 anchors.left: parent.left
                 anchors.leftMargin: (infopage.width - imdb.width) / 2
             }
@@ -74,6 +74,6 @@ Page {
     BusyIndicator {
         id: busyIndicator
         anchors.centerIn: parent
-        running: controller.SearchModel.Loading ? true : false
+        running: engine.SearchModel.Loading ? true : false
     }
 }

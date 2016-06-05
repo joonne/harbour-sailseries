@@ -5,17 +5,17 @@ Page {
     id: seasonspage
 
     function setModel() {
-        listView.model = controller.SeasonListModel.SeasonList
+        listView.model = engine.SeasonListModel.SeasonList
     }
 
     Component.onCompleted: {
-        controller.SeasonListModel.populateSeasonList(controller.SeriesListModel.ID)
+        engine.SeasonListModel.populateSeasonList(engine.SeriesListModel.ID)
     }
 
     SilicaListView {
         id: listView
         anchors.fill: parent
-        model: controller.SeasonListModel.SeasonList
+        model: engine.SeasonListModel.SeasonList
 
         header: PageHeader {
             id: header
@@ -43,7 +43,7 @@ Page {
                 anchors.right: parent.right
                 anchors.rightMargin: Theme.paddingMedium
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("EpisodesPage.qml"), {seriesID: controller.SeriesListModel.ID, seasonNumber: index + 1});
+                    pageStack.push(Qt.resolvedUrl("EpisodesPage.qml"), {seriesID: engine.SeriesListModel.ID, seasonNumber: index + 1});
                 }
             }
 

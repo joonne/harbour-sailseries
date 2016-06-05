@@ -19,13 +19,13 @@ Page {
 
 
     function initialize(seriesID, seasonNumber) {
-        controller.EpisodeListModel.populateEpisodeList(seriesID, seasonNumber)
-        listView.model = controller.EpisodeListModel.episodeList
+        engine.EpisodeListModel.populateEpisodeList(seriesID, seasonNumber)
+        listView.model = engine.EpisodeListModel.episodeList
     }
 
     SilicaListView {
         id: listView
-        model: controller.EpisodeListModel.episodeList
+        model: engine.EpisodeListModel.episodeList
 
         PullDownMenu {
             id: pulldownmenu
@@ -33,8 +33,8 @@ Page {
             MenuItem {
                 text: qsTr("I have seen these all")
                 onClicked: {
-                    controller.EpisodeListModel.markSeasonWatched(seriesID, seasonNumber)
-                    controller.SeasonListModel.populateSeasonList(seriesID)
+                    engine.EpisodeListModel.markSeasonWatched(seriesID, seasonNumber)
+                    engine.SeasonListModel.populateSeasonList(seriesID)
 //                    pageStack.find(function(page) {
 //                        return page.pageName === "SeriesViewPage"
 //                    }).updateModel();
@@ -143,8 +143,8 @@ Page {
                     id: clickarea
                     onClicked: {
                         Watched === 0 ? Watched = 1 : Watched = 0
-                        controller.EpisodeListModel.toggleWatched(ID)
-                        controller.SeasonListModel.populateSeasonList(seriesID)
+                        engine.EpisodeListModel.toggleWatched(ID)
+                        engine.SeasonListModel.populateSeasonList(seriesID)
                         pageStack.find(function(page) {
                             return page.pageName === "SeriesViewPage"
                         }).updateModel();

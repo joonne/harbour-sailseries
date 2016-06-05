@@ -1,26 +1,35 @@
 import QtQuick 2.0
 import org.nemomobile.notifications 1.0
 
-Timer {
-    id: timer
+Item {
 
     Notification {
         id: notification
         category: "x-nemo.example"
-        summary: "Game Of Thrones"
-        body: "21:00"
-        onClicked: console.log("Clicked")
+        onClicked: activate()
+        remoteActions: [ {
+                "name": "default",
+                "displayName": "Do something",
+                "icon": "icon-s-do-it",
+                "service": "org.nemomobile.example",
+                "path": "/example",
+                "iface": "org.nemomobile.example",
+                "method": "doSomething",
+                "arguments": [ "argument", 1 ]
+            } ]
     }
 
-    interval: 10000
-    repeat: true
-    onTriggered: notification.publish()
+    function activate() {
+        appWindow.activate()
+    }
 
-    function toggle(state) {
-        if(state === true) {
-            start();
-        } else {
-            stop()
-        }
+    function publish(summary, body, previewSummary, previewBody) {
+        notification.summary = summary
+        notification.body = body
+        notification.previewSummary = previewSummary
+        notification.previewBody = previewBody
+        notification.replacesId =
+        notification.timestamp = new Date("yyyy-MM-dd hh:mm:ss")
+        notification.publish()
     }
 }

@@ -9,6 +9,18 @@ ApplicationWindow {
 
     initialPage: StartPage { }
     cover: CoverPage { }
+
+    NotificationHandler {
+        id: notificationhandler
+    }
+
+    Timer {
+        id: timer
+        interval: 100000
+        repeat: true
+        onTriggered: engine.updateModels()
+        Component.onCompleted: start()
+    }
 }
 
 

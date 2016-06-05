@@ -5,7 +5,7 @@ Page {
     id: searchpage
 
     Component.onDestruction: {
-        controller.SearchModel.clearList()
+        engine.SearchModel.clearList()
     }
 
     SearchField {
@@ -17,7 +17,7 @@ Page {
         }
         placeholderText: qsTr("Search for a series")
         EnterKey.onClicked: {
-            controller.SearchModel.searchSeries(text)
+            engine.SearchModel.searchSeries(text)
             focus = false
         }
     }
@@ -27,15 +27,15 @@ Page {
         anchors.top: seriesSearch.bottom
         height: (searchpage.height - seriesSearch.height - Theme.paddingLarge)
         width: searchpage.width
-        model: controller.SearchModel.SearchModel
+        model: engine.SearchModel.SearchModel
 
         delegate: ListItem {
             id: listItem
             contentHeight: Theme.itemSizeSmall
             contentWidth: listView.width
             onClicked: {
-                controller.SearchModel.selectSeries(index)
-                controller.SearchModel.checkIfAdded(ID,SeriesName)
+                engine.SearchModel.selectSeries(index)
+                engine.SearchModel.checkIfAdded(ID,SeriesName)
                 pageStack.push(Qt.resolvedUrl("SeriesInfoPage.qml"))
             }
 
