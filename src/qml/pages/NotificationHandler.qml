@@ -3,6 +3,8 @@ import org.nemomobile.notifications 1.0
 
 Item {
 
+    property variant notifications: []
+
     Notification {
         id: notification
         category: "x-nemo.example"
@@ -23,13 +25,31 @@ Item {
         appWindow.activate()
     }
 
+    function findNotificationId(seriesName) {
+        var id = 0;
+        notifications.forEach(function(item) {
+            if(item.seriesName === seriesName) {
+                id = item.id;
+            }
+        });
+        return id;
+    }
+
     function publish(summary, body, previewSummary, previewBody) {
+        var replacesId = findNotificationId(summary);
+
         notification.summary = summary
         notification.body = body
         notification.previewSummary = previewSummary
         notification.previewBody = previewBody
-        notification.replacesId = 0
+        notification.replacesId = replacesId
         notification.timestamp = new Date("yyyy-MM-dd hh:mm:ss")
         notification.publish()
+
+        if(replacesId === 0) {
+            var temp = notifications;
+            temp.push({id: notification.replacesId, seriesName: summary});
+            notifications = temp;
+        }
     }
 }
