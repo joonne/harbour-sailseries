@@ -6,7 +6,11 @@ Page {
 
     function checkNotification(weekday, seriesName, episodeName, airsTime) {
         if(weekday === new Date().toLocaleString(Qt.locale("en_EN"), "dddd")) {
-            notificationhandler.publish(seriesName, episodeName + '\n' + airsTime, seriesName, episodeName)
+            var summary = seriesName;
+            var body = episodeName ? episodeName + '\n' + airsTime : airsTime;
+            var previewSummary = seriesName;
+            var previewBody = episodeName;
+            notificationhandler.publish(summary, body, previewSummary, previewBody);
         }
     }
 

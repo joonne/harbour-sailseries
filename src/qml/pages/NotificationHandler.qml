@@ -28,7 +28,7 @@ Item {
         notification.body = body
         notification.previewSummary = previewSummary
         notification.previewBody = previewBody
-        notification.replacesId =
+        notification.replacesId = 0
         notification.timestamp = new Date("yyyy-MM-dd hh:mm:ss")
         notification.publish()
     }

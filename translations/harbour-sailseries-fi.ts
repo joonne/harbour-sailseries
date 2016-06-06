@@ -362,67 +362,67 @@
 <context>
     <name>StartPage</name>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="17"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="21"/>
         <source>Monday</source>
         <translation>Maanantai</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="19"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="23"/>
         <source>Tuesday</source>
         <translation>Tiistai</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="21"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="25"/>
         <source>Wednesday</source>
         <translation>Keskiviikko</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="23"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="27"/>
         <source>Thursday</source>
         <translation>Torstai</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="25"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="29"/>
         <source>Friday</source>
         <translation>Perjantai</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="27"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="31"/>
         <source>Saturday</source>
         <translation>Lauantai</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="29"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="33"/>
         <source>Sunday</source>
         <translation>Sunnuntai</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="46"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="50"/>
         <source>About</source>
         <translation>Tietoa</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="54"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="58"/>
         <source>Search for a Series</source>
         <translation>Etsi sarjaa</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="62"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="66"/>
         <source>My Series</source>
         <translation>Omat sarjat</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="72"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="76"/>
         <source>This Week</source>
         <translation>Tällä viikolla</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="124"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="128"/>
         <source>Season %1 Episode %2</source>
         <translation>Kausi %1 Jakso %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="154"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="158"/>
         <source>Nothing airs this week</source>
         <translation>Mitään ei lähetetä tällä viikolla</translation>
     </message>

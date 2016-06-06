@@ -108,7 +108,7 @@ CoverBackground {
                     color: Theme.secondaryColor
                     truncationMode: TruncationMode.Fade
                     width: cover.width - Theme.paddingLarge
-                    visible: listView.count < 3
+                    visible: listView.count < 3 && text.length > 0
                 }
 
                 Label {

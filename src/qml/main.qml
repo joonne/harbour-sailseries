@@ -15,7 +15,7 @@ ApplicationWindow {
     }
 
     Timer {
-        id: timer
+        id: updateTimer
         interval: 100000
         repeat: true
         onTriggered: engine.updateModels()
