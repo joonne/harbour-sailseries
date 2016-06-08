@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import org.nemomobile.notifications 1.0
 
 Item {
@@ -8,17 +8,17 @@ Item {
     Notification {
         id: notification
         category: "x-nemo.example"
-        onClicked: activate()
-        remoteActions: [ {
-                "name": "default",
-                "displayName": "Do something",
-                "icon": "icon-s-do-it",
-                "service": "org.nemomobile.example",
-                "path": "/example",
-                "iface": "org.nemomobile.example",
-                "method": "doSomething",
-                "arguments": [ "argument", 1 ]
-            } ]
+        onClicked: removeNotification(summary)
+//        remoteActions: [ {
+//                "name": "default",
+//                "displayName": "Do something",
+//                "icon": "icon-s-do-it",
+//                "service": "org.nemomobile.example",
+//                "path": "/example",
+//                "iface": "org.nemomobile.example",
+//                "method": "doSomething",
+//                "arguments": [ "argument", 1 ]
+//            } ]
     }
 
     function activate() {
@@ -33,6 +33,15 @@ Item {
             }
         });
         return id;
+    }
+
+    function removeNotification(seriesName) {
+        console.log("remove notification of ", seriesName);
+        console.log("notifications", notifications);
+        notifications = notifications.filter(function(item) {
+            return item.seriesName !== seriesName;
+        });
+        console.log("notifications", notifications);
     }
 
     function publish(summary, body, previewSummary, previewBody) {

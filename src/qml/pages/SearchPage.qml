@@ -44,13 +44,17 @@ Page {
                 Label {
                     id: seriesName
                     text: SeriesName
-                    color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
+                    truncationMode: TruncationMode.Fade
+                    width: parent.width - Theme.paddingLarge
+                    color: Theme.primaryColor
                 }
                 Label {
                     id: network
                     text: Network
                     font.pixelSize: Theme.fontSizeSmall
-                    color: listItem.highlighted ? Theme.highlightColor : Theme.secondaryColor
+                    truncationMode: TruncationMode.Fade
+                    width: parent.width - Theme.paddingLarge
+                    color: Theme.secondaryColor
                 }
             }
         }

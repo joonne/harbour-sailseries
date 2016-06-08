@@ -270,7 +270,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SearchPage.qml" line="64"/>
+        <location filename="../src/qml/pages/SearchPage.qml" line="68"/>
         <source>Here will be stuff when you search for something</source>
         <translation type="unfinished"></translation>
     </message>
