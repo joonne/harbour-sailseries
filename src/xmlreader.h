@@ -60,7 +60,7 @@ private:
     QList<QMap<QString,QString> > m_series;
     QList<QMap<QString,QString> > m_episodes;
     QList<QMap<QString,QString> > m_banners;
-    QString currentServerTime;
+    QString m_currentServerTime;
 
     bool m_fullRecord;
     bool m_update;

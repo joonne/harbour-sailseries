@@ -95,45 +95,45 @@ public slots:
 
 private:
 
-    QString myID;
-    QString myActors;
-    QString myAirsDayOfWeek;
-    QString myAirsTime;
-    QString myContentRating;
-    QString myFirstAired;
-    QString myGenre;
-    QString myIMDB_ID;
-    QString myLanguage;
-    QString myNetwork;
-    QString myOverview;
-    QString myRating;
-    int myRatingCount;
-    int myRuntime;
-    QString mySeriesName;
-    QString myAliasNames;
-    QString myStatus;
-    QString myAdded;
-    int myAddedBy;
-    QString myBanner;
-    QString myFanart;
-    QString myLastUpdated;
-    QString myPoster;
-    QString myZap2it_ID;
-    int myWatched;
+    QString m_id;
+    QString m_actors;
+    QString m_airsDayOfWeek;
+    QString m_airsTime;
+    QString m_contentRating;
+    QString m_firstAired;
+    QString m_genre;
+    QString m_imdbId;
+    QString m_language;
+    QString m_network;
+    QString m_overview;
+    QString m_rating;
+    int m_ratingCount;
+    int m_runtime;
+    QString m_seriesName;
+    QString m_aliasNames;
+    QString m_status;
+    QString m_added;
+    int m_addedBy;
+    QString m_banner;
+    QString m_fanart;
+    QString m_lastUpdated;
+    QString m_poster;
+    QString m_zap2itId;
+    int m_watched;
 
-    QString myNextEpisodeName;
-    QString myNextEpisodeNumber;
-    QString myNextEpisodeSeasonNumber;
-    QString myDaysToNextEpisode;
+    QString m_nextEpisodeName;
+    QString m_nextEpisodeNumber;
+    QString m_nextEpisodeSeasonNumber;
+    QString m_daysToNextEpisode;
 
-    QString myWatchedCount;
-    QString myTotalCount;
+    QString m_watchedCount;
+    QString m_totalCount;
 
-    QString myNextEpisodeFirstAired;
-    QString myNextEpisodeBanner;
-    QString myNextEpisodeOverview;
-    QString myNextEpisodeGuestStars;
-    QString myNextEpisodeWriter;
+    QString m_nextEpisodeFirstAired;
+    QString m_nextEpisodeBanner;
+    QString m_nextEpisodeOverview;
+    QString m_nextEpisodeGuestStars;
+    QString m_nextEpisodeWriter;
 
 };
 

@@ -2,7 +2,6 @@
 #define SERIESLISTMODEL_H
 
 #include <QObject>
-#include <QQmlContext>
 #include <QDebug>
 #include <QQmlListProperty>
 
@@ -96,28 +95,27 @@ public slots:
     void updateFetchFinished();
 
 private:
-    XMLReader* myReader;
-    DatabaseManager* mydbmanager;
-    QList<QMap<QString,QString> > mySeries;
-    QList<QMap<QString,QString> > myEpisodes;
-    QList<QMap<QString,QString> > myBanners;
-    QQmlContext* myContext;
-    QList<SeriesData*> mySeriesListModel;
-    SeriesData* myInfo;
-    QList<QString> mySeriesIds;
+    XMLReader* m_reader;
+    DatabaseManager* m_dbmanager;
+    QList<QMap<QString,QString> > m_series;
+    QList<QMap<QString,QString> > m_episodes;
+    QList<QMap<QString,QString> > m_banners;
+    QList<SeriesData*> m_seriesListModel;
+    SeriesData* m_info;
+    QList<QString> m_seriesIds;
 
     static int seriesListCount(QQmlListProperty<SeriesData> *prop);
     static SeriesData* seriesListAt(QQmlListProperty<SeriesData> *prop, int index);
     static void seriesListAppend(QQmlListProperty<SeriesData>* prop, SeriesData* val);
     static void seriesListClear(QQmlListProperty<SeriesData>* prop);
 
-    bool myLoading;
+    bool m_loading;
 
-    QString myPoster;
-    QString myNextEpisodeName;
-    QString myNextEpisodeNumber;
-    QString myNextEpisodeSeasonNumber;
-    QString myDaysToNextEpisode;
+    QString m_poster;
+    QString m_nextEpisodeName;
+    QString m_nextEpisodeNumber;
+    QString m_nextEpisodeSeasonNumber;
+    QString m_daysToNextEpisode;
 
     QString mode;
 

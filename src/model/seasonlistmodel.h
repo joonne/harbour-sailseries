@@ -24,8 +24,8 @@ signals:
     void seasonListChanged();
 
 private:
-    QList<SeasonData*> mySeasonListModel;
-    DatabaseManager* mydbmanager;
+    QList<SeasonData*> m_seasonListModel;
+    DatabaseManager* m_dbmanager;
 
     static int seasonListCount(QQmlListProperty<SeasonData> *prop);
     static SeasonData* seasonListAt(QQmlListProperty<SeasonData> *prop, int index);

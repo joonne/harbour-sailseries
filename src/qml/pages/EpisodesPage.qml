@@ -11,12 +11,6 @@ Page {
         initialize(seriesID, seasonNumber)
     }
 
-//    Component.onDestruction: {
-//        pageStack.find(function(page) {
-//            return page.pageName === "SeriesViewPage"
-//        }).updateModel();
-//    }
-
 
     function initialize(seriesID, seasonNumber) {
         engine.EpisodeListModel.populateEpisodeList(seriesID, seasonNumber)
@@ -35,9 +29,6 @@ Page {
                 onClicked: {
                     engine.EpisodeListModel.markSeasonWatched(seriesID, seasonNumber)
                     engine.SeasonListModel.populateSeasonList(seriesID)
-//                    pageStack.find(function(page) {
-//                        return page.pageName === "SeriesViewPage"
-//                    }).updateModel();
                     pageStack.pop()
                 }
             }
@@ -118,8 +109,8 @@ Page {
                 }
             }
 
-            property string star: "image://theme/icon-l-star"
-            property string favorite: "image://theme/icon-l-favorite"
+            property string star: "image://theme/icon-m-favorite"
+            property string favorite: "image://theme/icon-m-favorite-selected"
 
             function setSource() {
 

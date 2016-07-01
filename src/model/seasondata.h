@@ -26,10 +26,10 @@ signals:
     void totalCountChanged();
 
 private:
-    int mySeasonNumber;
-    QString mySeasonBanner;
-    int myWatchedCount;
-    int myTotalCount;
+    int m_seasonNumber;
+    QString m_seasonBanner;
+    int m_watchedCount;
+    int m_totalCount;
 
 };
 

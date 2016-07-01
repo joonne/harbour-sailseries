@@ -2,7 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Page {
-    id: mySeriesPage
+    id: m_seriesPage
 
     Component.onDestruction: {
         if(engine) {
@@ -70,7 +70,7 @@ Page {
                     anchors.right: parent.right
                     anchors.rightMargin: Theme.paddingMedium
                     onClicked: {
-                        engine.SeriesListModel.Mode = "mySeries"
+                        engine.SeriesListModel.Mode = "m_series"
                         engine.SeriesListModel.selectSeries(index)
                         pageStack.push(Qt.resolvedUrl("SeriesPage.qml"), {seriesID: ID})
                     }

@@ -68,24 +68,24 @@ public slots:
     void getFullSeriesRecordFinished();
 
 private:
-    XMLReader* myReader;
-    DatabaseManager* mydbmanager;
-    QList<QMap<QString,QString> > mySeries;
-    QList<QMap<QString,QString> > myEpisodes;
-    QList<QMap<QString,QString> > myBanners;
-    QList<SeriesData*> mySearchListModel;
-    SeriesData* myInfo;
+    XMLReader* m_reader;
+    DatabaseManager* m_dbmanager;
+    QList<QMap<QString,QString> > m_series;
+    QList<QMap<QString,QString> > m_episodes;
+    QList<QMap<QString,QString> > m_banners;
+    QList<SeriesData*> m_searchListModel;
+    SeriesData* m_info;
 
     static int searchListCount(QQmlListProperty<SeriesData> *prop);
     static SeriesData* searchListAt(QQmlListProperty<SeriesData> *prop, int index);
     static void searchListAppend(QQmlListProperty<SeriesData>* prop, SeriesData* val);
     static void searchListClear(QQmlListProperty<SeriesData>* prop);
 
-    bool myLoading;
-    bool myAdded;
+    bool m_loading;
+    bool m_added;
 
-    QList<QString> myPosters;
-    int posterIndex;
+    QList<QString> m_posters;
+    int m_posterIndex;
 
     QString mode;
 

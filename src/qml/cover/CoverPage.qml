@@ -14,11 +14,11 @@ CoverBackground {
     }
 
     //---------------------------------
-    // This is the "MySeries" coverPage
+    // This is the "m_series" coverPage
     //---------------------------------
 
     function setPosterVisible() {
-        if(engine.SeriesListModel.Mode === "mySeries" && engine.SeriesListModel.Poster !== null) {
+        if(engine.SeriesListModel.Mode === "m_series" && engine.SeriesListModel.Poster !== null) {
             return "http://thetvdb.com/banners/" + engine.SeriesListModel.Poster
         }
     }
@@ -29,7 +29,7 @@ CoverBackground {
         anchors.top: parent.top
         width: parent.width
         height: parent.height
-        visible: engine.SeriesListModel.Mode === "mySeries"
+        visible: engine.SeriesListModel.Mode === "m_series"
         opacity: 1.0
     }
 

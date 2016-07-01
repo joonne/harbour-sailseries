@@ -22,7 +22,7 @@ Page {
             MenuItem {
                 visible: engine.SearchModel.Added ? enabled = true : enabled = false
                 text: qsTr("Already added")
-                // TODO: maybe app could go to MySeriesPage ?
+                // TODO: maybe app could go to m_seriesPage ?
             }
         }
 
