@@ -16,7 +16,7 @@ ApplicationWindow {
 
     Timer {
         id: updateTimer
-        interval: 60000
+        interval: 3600000
         repeat: true
         onTriggered: engine.updateModels()
         Component.onCompleted: start()

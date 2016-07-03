@@ -66,7 +66,7 @@ Page {
                 text: qsTr("My Series")
                 font.pixelSize: Theme.fontSizeSmall
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("m_seriesPage.qml"))
+                    pageStack.push(Qt.resolvedUrl("MySeriesPage.qml"))
                 }
             }
         }

@@ -158,27 +158,27 @@
 <context>
     <name>EpisodesPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="28"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="29"/>
         <source>I have seen these all</source>
         <translation>Olen nähnyt nämä kaikki</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="40"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="41"/>
         <source>Episodes</source>
         <translation>Jaksot</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="87"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="88"/>
         <source>Season</source>
         <translation>Kausi</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="94"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="95"/>
         <source>Episode</source>
         <translation>Jakso</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="155"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="156"/>
         <source>No episodes.</source>
         <translation>Ei jaksoja.</translation>
     </message>

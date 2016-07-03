@@ -23,6 +23,7 @@ Page {
 
         PullDownMenu {
             id: pulldownmenu
+            enabled: listView.count > 0
 
             MenuItem {
                 text: qsTr("I have seen these all")

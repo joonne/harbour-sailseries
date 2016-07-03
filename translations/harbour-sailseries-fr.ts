@@ -158,27 +158,27 @@
 <context>
     <name>EpisodesPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="28"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="29"/>
         <source>I have seen these all</source>
         <translation>J&apos;ai vu tous ces épisodes</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="40"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="41"/>
         <source>Episodes</source>
         <translation>Episodes</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="87"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="88"/>
         <source>Season</source>
         <translation>Saison</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="94"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="95"/>
         <source>Episode</source>
         <translation>Episode</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="155"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="156"/>
         <source>No episodes.</source>
         <translation>Pas d&apos;épisode.</translation>
     </message>

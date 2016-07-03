@@ -38,7 +38,7 @@ OTHER_FILES = \
     qml/pages/StartPage.qml \
     qml/pages/SeriesInfoPage.qml \
     qml/pages/SearchPage.qml \
-    qml/pages/m_seriesPage.qml \
+    qml/pages/MySeriesPage.qml \
     qml/pages/CoverPage.qml \
     qml/cover/CoverPage.qml \
     qml/pages/AboutPage.qml \
@@ -69,5 +69,4 @@ DISTFILES += \
     qml/components/HorizontalSeparator.qml \
     qml/pages/SeasonsPage.qml \
     qml/pages/SeriesPage.qml \
-    qml/pages/NotificationHandler.qml \
-    qml/pages/NotificationInstance.qml
+    qml/pages/NotificationHandler.qml

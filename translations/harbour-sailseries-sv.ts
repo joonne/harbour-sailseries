@@ -158,27 +158,27 @@
 <context>
     <name>EpisodesPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="28"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="29"/>
         <source>I have seen these all</source>
         <translation>Jag har sett allt detta</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="40"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="41"/>
         <source>Episodes</source>
         <translation>Episoder</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="87"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="88"/>
         <source>Season</source>
         <translation>Säsong</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="94"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="95"/>
         <source>Episode</source>
         <translation>Episod</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="155"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="156"/>
         <source>No episodes.</source>
         <translation>Inga episoder.</translation>
     </message>
