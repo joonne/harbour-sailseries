@@ -60,6 +60,13 @@ Page {
                         banner.width = 0;
                     }
                 }
+
+                onStatusChanged: {
+                    var fallback = "qrc:///images/season-banner-fallback.jpg";
+                    if (status === Image.Error || status === Image.Null) {
+                        source = fallback;
+                    }
+                }
             }
 
             Row {

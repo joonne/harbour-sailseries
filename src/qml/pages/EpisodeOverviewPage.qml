@@ -55,6 +55,13 @@ Page {
                 source: setSource()
                 anchors.left: parent.left
                 anchors.leftMargin: (episodeoverviewpage.width - banner.width) / 2
+
+                onStatusChanged: {
+                    var fallback = "qrc:///images/episode-image-fallback.jpg";
+                    if (status === Image.Error || status === Image.Null) {
+                        source = fallback;
+                    }
+                }
             }
 
             Item {

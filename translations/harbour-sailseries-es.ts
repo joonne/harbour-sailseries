@@ -97,42 +97,42 @@
         <translation>No hay emisiones esta semana</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="47"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="57"/>
         <source>Monday</source>
         <translation>Lunes</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="49"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="59"/>
         <source>Tuesday</source>
         <translation>Martes</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="51"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="61"/>
         <source>Wednesday</source>
         <translation>Miercoles</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="53"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="63"/>
         <source>Thursday</source>
         <translation>Jueves</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="55"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="65"/>
         <source>Friday</source>
         <translation>Viernes</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="57"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="67"/>
         <source>Saturday</source>
         <translation>Sábado</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="59"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="69"/>
         <source>Sunday</source>
         <translation>Domingo</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="96"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="106"/>
         <source>Season %1 Episode %2</source>
         <translation>Temporada %1 Episodio %2</translation>
     </message>
@@ -140,17 +140,17 @@
 <context>
     <name>EpisodeOverviewPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="71"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="78"/>
         <source>Original air date</source>
         <translation>Fecha de estreno</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="87"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="94"/>
         <source>Writer</source>
         <translation>Autor</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="96"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="103"/>
         <source>Guest Stars</source>
         <translation>Estrellas invitadas</translation>
     </message>
@@ -249,7 +249,7 @@
         <translation>Mis Series</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="121"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="128"/>
         <source>Search for series first.</source>
         <translation>Busqueda de series</translation>
     </message>
@@ -283,17 +283,17 @@
         <translation>Temporadas</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="74"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="81"/>
         <source>Season</source>
         <translation>Temporada</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="87"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="94"/>
         <source>Watched</source>
         <translation>Visto</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="129"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="136"/>
         <source>episodes</source>
         <translation>episodios</translation>
     </message>
@@ -311,7 +311,7 @@
         <translation>Añadir siempre</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="57"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="64"/>
         <source>Network</source>
         <translation>Red</translation>
     </message>

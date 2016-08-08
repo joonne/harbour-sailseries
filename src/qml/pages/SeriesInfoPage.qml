@@ -42,6 +42,13 @@ Page {
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.paddingMedium
 
+                onStatusChanged: {
+                    var fallback = "qrc:///images/series-banner-fallback.jpg";
+                    if (status === Image.Error || status === Image.Null) {
+                        source = fallback;
+                    }
+                }
+
             }
 
             HorizontalSeparator { }

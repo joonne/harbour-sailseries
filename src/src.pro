@@ -46,7 +46,8 @@ OTHER_FILES = \
     qml/components/TextExpander.qml \
     qml/pages/EpisodeOverviewPage.qml \
     qml/pages/EpisodesPage.qml \
-    qml/pages/ProgramOverviewPage.qml
+    qml/pages/ProgramOverviewPage.qml \
+    poster-fallback.jpg
 
 INCLUDEPATH += $$PWD
 
@@ -70,3 +71,6 @@ DISTFILES += \
     qml/pages/SeasonsPage.qml \
     qml/pages/SeriesPage.qml \
     qml/pages/NotificationHandler.qml
+
+RESOURCES += \
+    harbour-sailseries.qrc
