@@ -50,7 +50,6 @@ void Engine::readyToUpdateModels() {
 }
 
 void Engine::updateModels() {
-    qDebug() << "update";
     m_todayListModel->populateTodayModel();
     m_seriesListModel->populateBannerList();
 }
