@@ -18,7 +18,6 @@ CoverBackground {
     //---------------------------------
 
     function setPosterVisible() {
-        console.log('asdasd');
         if(engine.SeriesListModel.Mode === "m_series" && engine.SeriesListModel.Poster !== null) {
             return "http://thetvdb.com/banners/" + engine.SeriesListModel.Poster;
         }
@@ -26,21 +25,12 @@ CoverBackground {
 
     Image {
         id: poster
-//        source: setPosterVisible()
-        source: "http://thetvdb.com/banners/" + engine.SeriesListModel.Poster
+        source: setPosterVisible()
         anchors.top: parent.top
         width: parent.width
         height: parent.height
         visible: engine.SeriesListModel.Mode === "m_series"
         opacity: 1.0
-
-        onStatusChanged: {
-            console.log('status', status);
-            var fallback = "qrc:///images/poster-fallback.jpg";
-            if (status === Image.Error || status === Image.Null) {
-                source = fallback;
-            }
-        }
     }
 
     //--------------------------------

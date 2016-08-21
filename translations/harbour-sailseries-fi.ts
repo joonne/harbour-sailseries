@@ -94,45 +94,45 @@
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="9"/>
         <source>Nothing airs this week</source>
-        <translation>Mitään ei lähetetä tällä viikolla</translation>
+        <translation type="unfinished">Mitään ei lähetetä tällä viikolla</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="57"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="47"/>
         <source>Monday</source>
         <translation>Maanantai</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="59"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="49"/>
         <source>Tuesday</source>
         <translation>Tiistai</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="61"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="51"/>
         <source>Wednesday</source>
         <translation>Keskiviikko</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="63"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="53"/>
         <source>Thursday</source>
         <translation>Torstai</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="65"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="55"/>
         <source>Friday</source>
         <translation>Perjantai</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="67"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="57"/>
         <source>Saturday</source>
         <translation>Lauantai</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="69"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="59"/>
         <source>Sunday</source>
         <translation>Sunnuntai</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="106"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="96"/>
         <source>Season %1 Episode %2</source>
         <translation>Kausi %1 Jakso %2</translation>
     </message>
@@ -140,17 +140,17 @@
 <context>
     <name>EpisodeOverviewPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="78"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="74"/>
         <source>Original air date</source>
         <translation>Ensiesitys</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="94"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="109"/>
         <source>Writer</source>
         <translation>Käsikirjoittaja</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="103"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="118"/>
         <source>Guest Stars</source>
         <translation>Vierailevat tähdet</translation>
     </message>
@@ -417,12 +417,12 @@
         <translation>Tällä viikolla</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="128"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="131"/>
         <source>Season %1 Episode %2</source>
         <translation>Kausi %1 Jakso %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="158"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="161"/>
         <source>Nothing airs this week</source>
         <translation>Mitään ei lähetetä tällä viikolla</translation>
     </message>

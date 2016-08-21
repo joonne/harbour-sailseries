@@ -33,6 +33,7 @@ class SeriesData : public QObject
     Q_PROPERTY(QString zap2it_ID READ getZap2it_ID)
     Q_PROPERTY(int Watched READ getWatched WRITE setWatched NOTIFY watchedChanged)
 
+    Q_PROPERTY(QString NextEpisodeId READ getNextEpisodeId)
     Q_PROPERTY(QString NextEpisodeName READ getNextEpisodeName)
     Q_PROPERTY(QString NextEpisodeNumber READ getNextEpisodeNumber)
     Q_PROPERTY(QString NextEpisodeSeasonNumber READ getNextEpisodeSeasonNumber)
@@ -75,6 +76,7 @@ public:
     int getWatched();
     void setWatched(int watched);
 
+    QString getNextEpisodeId();
     QString getNextEpisodeName();
     QString getNextEpisodeNumber();
     QString getNextEpisodeSeasonNumber();
@@ -129,6 +131,7 @@ private:
     QString m_watchedCount;
     QString m_totalCount;
 
+    QString m_nextEpisodeId;
     QString m_nextEpisodeFirstAired;
     QString m_nextEpisodeBanner;
     QString m_nextEpisodeOverview;

@@ -110,7 +110,10 @@ Page {
                                        episodeName: NextEpisodeName,
                                        guestStars: NextEpisodeGuestStars,
                                        writer: NextEpisodeWriter,
-                                       firstAired: NextEpisodeFirstAired })
+                                       firstAired: NextEpisodeFirstAired,
+                                       watched: Watched,
+                                       episodeId: NextEpisodeId,
+                                       seriesId: ID})
                 }
 
                 Column {
