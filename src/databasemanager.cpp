@@ -549,7 +549,7 @@ QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries() {
     if(m_db.isOpen()) {
 
         QSqlQuery query(m_db);
-        query.exec(QString("SELECT Series.seriesName, Series.network, Series.airsTime, Series.airsDayOfWeek, Series.status, Series.id, Episode.id, Episode.episodeName, Episode.episodeNumber, Episode.seasonNumber, Episode.firstAired, Episode.filename, Episode.overview, Episode.guestStars, Episode.writer FROM Series, Episode WHERE Series.status = '%1' AND Episode.firstAired BETWEEN '%2' AND '%3' AND Series.id = Episode.seriesID AND Episode.seasonNumber != 0 AND Episode.absoluteNumber != 0 ORDER BY Episode.firstAired;").arg(status).arg(firstAiredStart).arg(firstAiredEnd));
+        query.exec(QString("SELECT Series.seriesName, Series.network, Series.airsTime, Series.airsDayOfWeek, Series.status, Series.id, Episode.id, Episode.episodeName, Episode.episodeNumber, Episode.seasonNumber, Episode.firstAired, Episode.filename, Episode.overview, Episode.guestStars, Episode.writer, Episode.watched FROM Series, Episode WHERE Series.status = '%1' AND Episode.firstAired BETWEEN '%2' AND '%3' AND Series.id = Episode.seriesID AND Episode.seasonNumber != 0 AND Episode.absoluteNumber != 0 ORDER BY Episode.firstAired;").arg(status).arg(firstAiredStart).arg(firstAiredEnd));
 
         if(query.isSelect()) {
 
@@ -609,6 +609,9 @@ QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries() {
 
                 auto writer = query.value(14).toString();
                 temp["nextEpisodeWriter"] = writer;
+
+                auto watched = query.value(15).toString();
+                temp["nextEpisodeWatched"] = watched;
 
                 series.append(temp);
             }

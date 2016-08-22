@@ -19,6 +19,10 @@ ApplicationWindow {
         interval: 3600000
         repeat: true
         onTriggered: engine.updateModels()
-        Component.onCompleted: start()
+        Component.onCompleted: {
+            if (settings.getContentUpdatePreference()) {
+                start()
+            }
+        }
     }
 }

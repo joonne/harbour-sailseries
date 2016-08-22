@@ -3,7 +3,8 @@
 Engine::Engine(QObject *parent) :
     QObject(parent),
     m_reader(new XMLReader),
-    m_dbmanager(new DatabaseManager)
+    m_dbmanager(new DatabaseManager),
+    m_loading(false)
 {
     m_dbmanager->setUpDB();
 
@@ -22,7 +23,6 @@ Engine::Engine(QObject *parent) :
             SIGNAL(updateModels()),
             this,
             SLOT(readyToUpdateModels()));
-
 }
 
 Engine::~Engine() {
@@ -44,12 +44,20 @@ EpisodeListModel* Engine::getEpisodeListModel() { return m_episodeListModel; }
 
 SeasonListModel* Engine::getSeasonListModel() { return m_seasonListModel; }
 
+bool Engine::getLoading() { return m_loading; }
+
 void Engine::readyToUpdateModels() {
     m_todayListModel->populateTodayModel();
     m_seriesListModel->populateBannerList();
 }
 
 void Engine::updateModels() {
+    toggleLoading(true);
     m_todayListModel->populateTodayModel();
     m_seriesListModel->populateBannerList();
+    toggleLoading(false);
+}
+
+void Engine::toggleLoading(bool state) {
+    m_loading = state;
 }

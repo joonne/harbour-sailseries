@@ -48,15 +48,20 @@ Page {
 
             MenuItem {
                 text: qsTr("About")
-                font.pixelSize: Theme.fontSizeSmall
+//                font.pixelSize: Theme.fontSizeSmall
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
                 }
             }
 
             MenuItem {
+                text: qsTr("Settings")
+                onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
+            }
+
+            MenuItem {
                 text: qsTr("Search for a Series")
-                font.pixelSize: Theme.fontSizeSmall
+//                font.pixelSize: Theme.fontSizeSmall
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("SearchPage.qml"))
                 }
@@ -64,7 +69,7 @@ Page {
 
             MenuItem {
                 text: qsTr("My Series")
-                font.pixelSize: Theme.fontSizeSmall
+//                font.pixelSize: Theme.fontSizeSmall
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("MySeriesPage.qml"))
                 }
@@ -111,9 +116,9 @@ Page {
                                        guestStars: NextEpisodeGuestStars,
                                        writer: NextEpisodeWriter,
                                        firstAired: NextEpisodeFirstAired,
-                                       watched: Watched,
+                                       watched: NextEpisodeWatched,
                                        episodeId: NextEpisodeId,
-                                       seriesId: ID})
+                                       seriesId: ID });
                 }
 
                 Column {
@@ -149,7 +154,10 @@ Page {
                     }
                 }
 
-                Component.onCompleted: checkNotification(AirsDayOfWeek, SeriesName, NextEpisodeName, AirsTime)
+                Component.onCompleted: {
+                    if (settings.getNotificationPreference())
+                        checkNotification(AirsDayOfWeek, SeriesName, NextEpisodeName, AirsTime)
+                }
             }
 
             VerticalScrollDecorator {
@@ -160,6 +168,12 @@ Page {
                 enabled: listView.count === 0
                 text: qsTr("Nothing airs this week")
                 anchors.centerIn: listView
+            }
+
+            BusyIndicator {
+                size: BusyIndicatorSize.Large
+                anchors.centerIn: parent
+                running: engine.Loading
             }
         }
     }

@@ -89,14 +89,3 @@ void EpisodeData::setWatched(int watched) {
         emit watchedChanged();
     }
 }
-
-QString EpisodeData::getWatchedFlagImage() {
-    return m_watchedFlagImage;
-}
-
-void EpisodeData::setWatchedFlagImage(QString imagepath) {
-    if(m_watchedFlagImage != imagepath) {
-        m_watchedFlagImage = imagepath;
-        emit watchedFlagImageChanged();
-    }
-}

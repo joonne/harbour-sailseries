@@ -45,6 +45,7 @@ class SeriesData : public QObject
     Q_PROPERTY(QString NextEpisodeOverview READ getNextEpisodeOverview)
     Q_PROPERTY(QString NextEpisodeGuestStars READ getNextEpisodeGuestStars)
     Q_PROPERTY(QString NextEpisodeWriter READ getNextEpisodeWriter)
+    Q_PROPERTY(int NextEpisodeWatched READ getNextEpisodeWatched WRITE setNextEpisodeWatched NOTIFY nextEpisodeWatchedChanged)
 
 public:
     explicit SeriesData(QObject *parent = 0, QMap<QString, QString> params = QMap<QString, QString>());
@@ -88,10 +89,13 @@ public:
     QString getNextEpisodeOverview();
     QString getNextEpisodeGuestStars();
     QString getNextEpisodeWriter();
+    int getNextEpisodeWatched();
+    void setNextEpisodeWatched(int watched);
 
 signals:
 
     void watchedChanged();
+    void nextEpisodeWatchedChanged();
 
 public slots:
 
@@ -137,6 +141,7 @@ private:
     QString m_nextEpisodeOverview;
     QString m_nextEpisodeGuestStars;
     QString m_nextEpisodeWriter;
+    int m_nextEpisodeWatched;
 
 };
 

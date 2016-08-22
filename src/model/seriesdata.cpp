@@ -39,6 +39,7 @@ SeriesData::SeriesData(QObject *parent, QMap<QString, QString> params) :
     m_nextEpisodeOverview = params["nextEpisodeOverview"];
     m_nextEpisodeGuestStars = params["nextEpisodeGuestStars"];
     m_nextEpisodeWriter = params["nextEpisodeWriter"];
+    m_nextEpisodeWatched = params["nextEpisodeWatched"].toInt();
 }
 
 QString SeriesData::getID() { return m_id; }
@@ -122,3 +123,12 @@ QString SeriesData::getNextEpisodeOverview() { return m_nextEpisodeOverview; }
 QString SeriesData::getNextEpisodeGuestStars() { return m_nextEpisodeGuestStars; }
 
 QString SeriesData::getNextEpisodeWriter() { return m_nextEpisodeWriter; }
+
+int SeriesData::getNextEpisodeWatched() { return m_nextEpisodeWatched; }
+
+void SeriesData::setNextEpisodeWatched(int watched) {
+    if(m_nextEpisodeWatched != watched) {
+        m_nextEpisodeWatched = watched;
+        emit nextEpisodeWatchedChanged();
+    }
+}

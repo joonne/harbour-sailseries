@@ -71,7 +71,10 @@ Page {
                                      episodeName: EpisodeName,
                                      guestStars: GuestStars,
                                      writer: Writer,
-                                     firstAired: FirstAired })
+                                     firstAired: FirstAired,
+                                     watched: Watched,
+                                     episodeId: ID,
+                                     seriesId: SeriesID })
 
                 }
             }
@@ -137,9 +140,7 @@ Page {
                         Watched === 0 ? Watched = 1 : Watched = 0
                         engine.EpisodeListModel.toggleWatched(ID)
                         engine.SeasonListModel.populateSeasonList(seriesID)
-                        pageStack.find(function(page) {
-                            return page.pageName === "SeriesViewPage"
-                        }).updateModel();
+                        engine.TodayModel.populateTodayModel();
                     }
                     anchors.fill: parent
                 }

@@ -11,8 +11,10 @@
 #include <QQmlComponent>
 #include <QTranslator>
 #include <QDebug>
+#include <QSettings>
 
 #include "engine.h"
+#include "settings.h"
 #include "model/seriesdata.h"
 #include "model/serieslistmodel.h"
 #include "model/episodedata.h"
@@ -51,6 +53,9 @@ int main(int argc, char *argv[])
     QScopedPointer<Engine> engine(new Engine);
     QQmlContext* context = view->rootContext();
     context->setContextProperty("engine", engine.data());
+
+    Settings settings;
+    view->rootContext()->setContextProperty("settings", &settings);
 
     // Here's how you will add QML components whenever you start using them
     // Check https://github.com/amarchen/Wikipedia for a more full example

@@ -18,6 +18,7 @@ class Engine : public QObject
     Q_PROPERTY(TodayListModel* TodayModel READ getTodayModel NOTIFY todayModelChanged)
     Q_PROPERTY(EpisodeListModel* EpisodeListModel READ getEpisodeListModel NOTIFY episodeListModelChanged)
     Q_PROPERTY(SeasonListModel* SeasonListModel READ getSeasonListModel NOTIFY seasonListModelChanged)
+    Q_PROPERTY(bool Loading READ getLoading NOTIFY loadingChanged)
 
 public:
     explicit Engine(QObject *parent = 0);
@@ -29,6 +30,7 @@ public:
     EpisodeListModel* getEpisodeListModel();
     SeasonListModel* getSeasonListModel();
     Q_INVOKABLE void updateModels();
+    bool getLoading();
 
 signals:
     void seriesListModelChanged();
@@ -37,6 +39,7 @@ signals:
     void todayModelChanged();
     void episodeListModelChanged();
     void seasonListModelChanged();
+    void loadingChanged();
 
 public slots:
     void readyToUpdateModels();
@@ -49,6 +52,8 @@ private:
     SeasonListModel* m_seasonListModel;
     XMLReader* m_reader;
     DatabaseManager* m_dbmanager;
+    bool m_loading;
+    void toggleLoading(bool state);
 };
 
 #endif // ENGINE_H

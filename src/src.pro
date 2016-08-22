@@ -21,7 +21,8 @@ SOURCES += main.cpp \
     qzip.cpp \
     model/seasondata.cpp \
     model/seasonlistmodel.cpp \
-    engine.cpp
+    engine.cpp \
+    settings.cpp
 
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 DEFINES += APP_BUILDNUM=\\\"$$RELEASE\\\"
@@ -64,13 +65,15 @@ HEADERS += \
     qzipwriter_p.h \
     model/seasondata.h \
     model/seasonlistmodel.h \
-    engine.h
+    engine.h \
+    settings.h
 
 DISTFILES += \
     qml/components/HorizontalSeparator.qml \
     qml/pages/SeasonsPage.qml \
     qml/pages/SeriesPage.qml \
-    qml/pages/NotificationHandler.qml
+    qml/pages/NotificationHandler.qml \
+    qml/pages/SettingsPage.qml
 
 RESOURCES += \
     harbour-sailseries.qrc
