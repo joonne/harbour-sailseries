@@ -48,7 +48,6 @@ Page {
 
             MenuItem {
                 text: qsTr("About")
-//                font.pixelSize: Theme.fontSizeSmall
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
                 }
@@ -61,7 +60,6 @@ Page {
 
             MenuItem {
                 text: qsTr("Search for a Series")
-//                font.pixelSize: Theme.fontSizeSmall
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("SearchPage.qml"))
                 }
@@ -69,7 +67,6 @@ Page {
 
             MenuItem {
                 text: qsTr("My Series")
-//                font.pixelSize: Theme.fontSizeSmall
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("MySeriesPage.qml"))
                 }

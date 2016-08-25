@@ -19,7 +19,8 @@ Page {
             SectionHeader { text: qsTr("Notifications") }
 
             TextSwitch {
-                text: qsTr("Allow SailSeries to publish notifications (experimental)")
+                text: qsTr("Publish notifications (experimental)")
+                description: qsTr("SailSeries publishes notifications on app startup and when updating/adding series if an episode airs today.")
                 checked: settings.getNotificationPreference()
                 onCheckedChanged: {
                     checked ? settings.setNotificationPreference(true) : settings.setNotificationPreference(false);
@@ -29,7 +30,8 @@ Page {
             SectionHeader { text: qsTr("Content updates") }
 
             TextSwitch {
-                text: qsTr("Allow periodic updates of content")
+                text: qsTr("Periodic updates of content")
+                description: qsTr("SailSeries refreshes all content every one hour. Requires app to be open at background.")
                 checked: settings.getContentUpdatePreference();
                 onCheckedChanged: {
                     checked ? settings.setContentUpdatePreference(true) : settings.setContentUpdatePreference(false);

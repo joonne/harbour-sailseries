@@ -373,17 +373,27 @@
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="22"/>
-        <source>Allow SailSeries to publish notifications (experimental)</source>
+        <source>Publish notifications (experimental)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="29"/>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="23"/>
+        <source>SailSeries publishes notifications on app startup and when updating/adding series if an episode airs today.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="33"/>
+        <source>Periodic updates of content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="34"/>
+        <source>SailSeries refreshes all content every one hour. Requires app to be open at background.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="30"/>
         <source>Content updates</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="32"/>
-        <source>Allow periodic updates of content</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -430,32 +440,32 @@
         <translation>Om</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="58"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="57"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="63"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="62"/>
         <source>Search for a Series</source>
         <translation>Sök efter en serie</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="71"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="69"/>
         <source>My Series</source>
         <translation>Mina serier</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="81"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="78"/>
         <source>This Week</source>
         <translation>Denna vecka</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="136"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="133"/>
         <source>Season %1 Episode %2</source>
         <translation>Säsong %1 Episod %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="169"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="166"/>
         <source>Nothing airs this week</source>
         <translation>Inget sänds denna vecka</translation>
     </message>
