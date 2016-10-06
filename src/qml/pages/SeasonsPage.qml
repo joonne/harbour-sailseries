@@ -43,7 +43,10 @@ Page {
                 anchors.right: parent.right
                 anchors.rightMargin: Theme.paddingMedium
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("EpisodesPage.qml"), {seriesID: engine.SeriesListModel.ID, seasonNumber: index + 1});
+                    pageStack.push(Qt.resolvedUrl("EpisodesPage.qml"), {
+                                       seriesID: engine.SeriesListModel.ID,
+                                       seasonNumber: index + 1
+                                   });
                 }
             }
 

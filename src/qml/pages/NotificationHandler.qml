@@ -9,17 +9,7 @@ Item {
     Notification {
         id: notification
         category: "x-nemo.example"
-        onClicked: removeNotifications()
-        //        remoteActions: [ {
-        //                "name": "default",
-        //                "displayName": "Do something",
-        //                "icon": "icon-s-do-it",
-        //                "service": "org.nemomobile.example",
-        //                "path": "/example",
-        //                "iface": "org.nemomobile.example",
-        //                "method": "doSomething",
-        //                "arguments": [ "argument", 1 ]
-        //            } ]
+        onClicked: activate()
     }
 
     function activate() {
@@ -36,7 +26,7 @@ Item {
         return id;
     }
 
-    function removeNotifications() {
+    function clearNotifications() {
         notifications = [];
     }
 

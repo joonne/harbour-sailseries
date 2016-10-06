@@ -30,8 +30,8 @@ Page {
             SectionHeader { text: qsTr("Content updates") }
 
             TextSwitch {
-                text: qsTr("Periodic updates of content")
-                description: qsTr("SailSeries refreshes all content every one hour. Requires app to be open at background.")
+                text: qsTr("Periodic updates of content (experimental)")
+                description: qsTr("SailSeries refreshes all content every one hour. Requires app to be open at background. Might cause a small hickup when content is being updated.")
                 checked: settings.getContentUpdatePreference();
                 onCheckedChanged: {
                     checked ? settings.setContentUpdatePreference(true) : settings.setContentUpdatePreference(false);

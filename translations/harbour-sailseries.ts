@@ -265,12 +265,12 @@
 <context>
     <name>SearchPage</name>
     <message>
-        <location filename="../src/qml/pages/SearchPage.qml" line="18"/>
+        <location filename="../src/qml/pages/SearchPage.qml" line="26"/>
         <source>Search for a series</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SearchPage.qml" line="68"/>
+        <location filename="../src/qml/pages/SearchPage.qml" line="84"/>
         <source>Here will be stuff when you search for something</source>
         <translation type="unfinished"></translation>
     </message>
@@ -283,17 +283,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="81"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="84"/>
         <source>Season</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="94"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="97"/>
         <source>Watched</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="136"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="139"/>
         <source>episodes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -382,18 +382,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="30"/>
+        <source>Content updates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="33"/>
-        <source>Periodic updates of content</source>
+        <source>Periodic updates of content (experimental)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="34"/>
-        <source>SailSeries refreshes all content every one hour. Requires app to be open at background.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="30"/>
-        <source>Content updates</source>
+        <source>SailSeries refreshes all content every one hour. Requires app to be open at background. Might cause a small hickup when content is being updated.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
