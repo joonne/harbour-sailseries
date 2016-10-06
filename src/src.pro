@@ -47,8 +47,7 @@ OTHER_FILES = \
     qml/components/TextExpander.qml \
     qml/pages/EpisodeOverviewPage.qml \
     qml/pages/EpisodesPage.qml \
-    qml/pages/ProgramOverviewPage.qml \
-    poster-fallback.jpg
+    qml/pages/ProgramOverviewPage.qml
 
 INCLUDEPATH += $$PWD
 

@@ -16,6 +16,18 @@ SailSeries stores all data except images into local database, so it is possible 
 
 **Changelog:**
 
+1.1.1
+
+- Notifications (experimental)
+
+- Periodic content updates (experimental)
+
+- Settings page
+
+- Live/auto search of series on series page
+
+- little polishes and fixes
+
 1.0.1 (submitted to QA on 14.5.2016)
 
 - All series can be updated now from My Series page

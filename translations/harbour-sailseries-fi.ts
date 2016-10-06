@@ -94,7 +94,7 @@
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="9"/>
         <source>Nothing airs this week</source>
-        <translation type="unfinished">Mitään ei lähetetä tällä viikolla</translation>
+        <translation>Mitään ei lähetetä tällä viikolla</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="47"/>
@@ -364,37 +364,37 @@
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="16"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="19"/>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Ilmoitukset</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="22"/>
         <source>Publish notifications (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Julkaise ilmoituksia (kokeellinen)</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="23"/>
         <source>SailSeries publishes notifications on app startup and when updating/adding series if an episode airs today.</source>
-        <translation type="unfinished"></translation>
+        <translation>SailSeries julkaisee ilmoituksia sovelluksen käynnistyksen, sarjan päivityksen sekä sarjan lisäämisen yhteydessä.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="30"/>
         <source>Content updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Sisällön päivitykset</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="33"/>
         <source>Periodic updates of content (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajastetut sisällön päivitykset (kokeellinen)</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="34"/>
         <source>SailSeries refreshes all content every one hour. Requires app to be open at background. Might cause a small hickup when content is being updated.</source>
-        <translation type="unfinished"></translation>
+        <translation>SailSeries päivittää sisällön kerran tunnissa. Sovelluksen tulee tällöin olla auki taustalla. Saattaa aiheuttaa hidastelua päivityksen aikana.</translation>
     </message>
 </context>
 <context>
@@ -442,7 +442,7 @@
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="57"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="62"/>
