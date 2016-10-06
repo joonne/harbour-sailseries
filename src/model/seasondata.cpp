@@ -3,26 +3,26 @@
 SeasonData::SeasonData(QObject *parent, int seasonNumber, QString seasonBanner, int watchedCount, int totalCount) :
     QObject(parent)
 {
-    mySeasonNumber = seasonNumber;
-    mySeasonBanner = seasonBanner;
-    myWatchedCount = watchedCount;
-    myTotalCount = totalCount;
+    m_seasonNumber = seasonNumber;
+    m_seasonBanner = seasonBanner;
+    m_watchedCount = watchedCount;
+    m_totalCount = totalCount;
 }
 
 SeasonData::~SeasonData() {}
 
 int SeasonData::getSeasonNumber() {
-    return mySeasonNumber;
+    return m_seasonNumber;
 }
 
 QString SeasonData::getSeasonBanner() {
-    return mySeasonBanner;
+    return m_seasonBanner;
 }
 
 int SeasonData::getWatchedCount() {
-    return myWatchedCount;
+    return m_watchedCount;
 }
 
 int SeasonData::getTotalCount() {
-    return myTotalCount;
+    return m_totalCount;
 }

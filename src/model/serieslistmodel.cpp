@@ -2,25 +2,25 @@
 
 SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager, XMLReader *reader) : QObject(parent) {
 
-    myReader = reader;
-    mydbmanager = dbmanager;
+    m_reader = reader;
+    m_dbmanager = dbmanager;
 
     mode = "default";
 
-    connect(myReader,
+    connect(m_reader,
             SIGNAL(readyToUpdateSeries()),
             this,
             SLOT(updateFetchFinished()));
 
     populateBannerList();
 
-    myLoading = false;
+    m_loading = false;
 
 }
 
 SeriesListModel::~SeriesListModel() {
 
-    foreach(SeriesData* series, mySeriesListModel) {
+    foreach(SeriesData* series, m_seriesListModel) {
         delete series;
         series = 0;
     }
@@ -34,7 +34,7 @@ void SeriesListModel::updateFetchFinished() {
     storeEpisodes();
     storeBanners();
 
-    if(!mySeriesIds.isEmpty()) {
+    if(!m_seriesIds.isEmpty()) {
         updateSeries();
         return;
     }
@@ -45,29 +45,29 @@ void SeriesListModel::updateFetchFinished() {
 
 QQmlListProperty<SeriesData> SeriesListModel::getSeriesList() {
 
-    return QQmlListProperty<SeriesData>(this,&mySeriesListModel,&SeriesListModel::seriesListCount,&SeriesListModel::seriesListAt);
+    return QQmlListProperty<SeriesData>(this,&m_seriesListModel,&SeriesListModel::seriesListCount,&SeriesListModel::seriesListAt);
 
 }
 
 void SeriesListModel::seriesListAppend(QQmlListProperty<SeriesData>* prop, SeriesData* val)
 {
     SeriesListModel* seriesModel = qobject_cast<SeriesListModel*>(prop->object);
-    seriesModel->mySeriesListModel.append(val);
+    seriesModel->m_seriesListModel.append(val);
 }
 
 SeriesData* SeriesListModel::seriesListAt(QQmlListProperty<SeriesData>* prop, int index)
 {
-    return (qobject_cast<SeriesListModel*>(prop->object))->mySeriesListModel.at(index);
+    return (qobject_cast<SeriesListModel*>(prop->object))->m_seriesListModel.at(index);
 }
 
 int SeriesListModel::seriesListCount(QQmlListProperty<SeriesData>* prop)
 {
-    return qobject_cast<SeriesListModel*>(prop->object)->mySeriesListModel.size();
+    return qobject_cast<SeriesListModel*>(prop->object)->m_seriesListModel.size();
 }
 
 void SeriesListModel::seriesListClear(QQmlListProperty<SeriesData>* prop)
 {
-    qobject_cast<SeriesListModel*>(prop->object)->mySeriesListModel.clear();
+    qobject_cast<SeriesListModel*>(prop->object)->m_seriesListModel.clear();
 }
 
 // -------------------------------------------------------------------
@@ -75,114 +75,114 @@ void SeriesListModel::seriesListClear(QQmlListProperty<SeriesData>* prop)
 
 void SeriesListModel::populateBannerList() {
 
-    mySeriesListModel.clear();
+    m_seriesListModel.clear();
     emit seriesListChanged();
 
-    QList<QMap<QString, QString> > allSeries = mydbmanager->getSeries();
+    QList<QMap<QString, QString> > allSeries = m_dbmanager->getSeries();
     int length = allSeries.size();
     for(int i = 0; i < length; ++i) {
         QMap<QString, QString> temp = allSeries.at(i);
         QString id = temp["id"];
-        QMap<QString,QString> nextEpisodeDetails = mydbmanager->getNextEpisodeDetails(id.toInt());
+        QMap<QString,QString> nextEpisodeDetails = m_dbmanager->getNextEpisodeDetails(id.toInt());
         temp.unite(nextEpisodeDetails);
         SeriesData* series = new SeriesData(this, temp);
-        mySeriesListModel.append(series);
+        m_seriesListModel.append(series);
     }
     emit seriesListChanged();
 }
 
 void SeriesListModel::selectSeries(int index) {
 
-    myInfo = mySeriesListModel.at(index);
+    m_info = m_seriesListModel.at(index);
 
-    myPoster = myInfo->getPoster();
+    m_poster = m_info->getPoster();
     emit posterChanged();
 
-    myNextEpisodeName = myInfo->getNextEpisodeName();
+    m_nextEpisodeName = m_info->getNextEpisodeName();
     emit nextEpisodeNameChanged();
 
-    myNextEpisodeNumber = myInfo->getNextEpisodeNumber();
+    m_nextEpisodeNumber = m_info->getNextEpisodeNumber();
     emit nextEpisodeNumberChanged();
 
-    myNextEpisodeSeasonNumber = myInfo->getNextEpisodeSeasonNumber();
+    m_nextEpisodeSeasonNumber = m_info->getNextEpisodeSeasonNumber();
     emit nextEpisodeSeasonNumberChanged();
 
-    myDaysToNextEpisode = myInfo->getDaysToNextEpisode();
+    m_daysToNextEpisode = m_info->getDaysToNextEpisode();
     emit daysToNextEpisodeChanged();
 
 }
 
 void SeriesListModel::storeSeries() {
 
-    mySeries = myReader->getSeries();
+    m_series = m_reader->getSeries();
 
-    if(!mySeries.isEmpty()) {
-        mydbmanager->insertSeries(mySeries.first());
+    if(!m_series.isEmpty()) {
+        m_dbmanager->insertSeries(m_series.first());
     }
 }
 
 void SeriesListModel::storeEpisodes() {
 
-    myEpisodes = myReader->getEpisodes();
-    mydbmanager->insertEpisodes(myEpisodes);
+    m_episodes = m_reader->getEpisodes();
+    m_dbmanager->insertEpisodes(m_episodes);
 
 }
 
 void SeriesListModel::storeBanners() {
 
-    myBanners = myReader->getBanners();
+    m_banners = m_reader->getBanners();
 
-    if(!mySeries.isEmpty()) {
-        int seriesId = mySeries.first()["id"].toInt();
-        mydbmanager->insertBanners(myBanners, seriesId);
+    if(!m_series.isEmpty()) {
+        int seriesId = m_series.first()["id"].toInt();
+        m_dbmanager->insertBanners(m_banners, seriesId);
     }
 }
 
-QString SeriesListModel::getID() { return myInfo->getID(); }
+QString SeriesListModel::getID() { return m_info->getID(); }
 
-QString SeriesListModel::getLanguage() { return myInfo->getLanguage(); }
+QString SeriesListModel::getLanguage() { return m_info->getLanguage(); }
 
-QString SeriesListModel::getSeriesName() { return myInfo->getSeriesName(); }
+QString SeriesListModel::getSeriesName() { return m_info->getSeriesName(); }
 
-QString SeriesListModel::getAliasNames() { return myInfo->getAliasNames(); }
+QString SeriesListModel::getAliasNames() { return m_info->getAliasNames(); }
 
-QString SeriesListModel::getBanner() { return myInfo->getBanner(); }
+QString SeriesListModel::getBanner() { return m_info->getBanner(); }
 
-QString SeriesListModel::getOverview() { return myInfo->getOverview(); }
+QString SeriesListModel::getOverview() { return m_info->getOverview(); }
 
-QString SeriesListModel::getFirstAired() { return myInfo->getFirstAired(); }
+QString SeriesListModel::getFirstAired() { return m_info->getFirstAired(); }
 
-QString SeriesListModel::getIMDB_ID() { return myInfo->getIMDB_ID(); }
+QString SeriesListModel::getIMDB_ID() { return m_info->getIMDB_ID(); }
 
-QString SeriesListModel::getZap2it_ID() { return myInfo->getZap2it_ID(); }
+QString SeriesListModel::getZap2it_ID() { return m_info->getZap2it_ID(); }
 
-QString SeriesListModel::getNetwork() { return myInfo->getNetwork(); }
+QString SeriesListModel::getNetwork() { return m_info->getNetwork(); }
 
-QString SeriesListModel::getNextEpisodeName() { return myNextEpisodeName; }
+QString SeriesListModel::getNextEpisodeName() { return m_nextEpisodeName; }
 
-QString SeriesListModel::getNextEpisodeNumber() { return myNextEpisodeNumber; }
+QString SeriesListModel::getNextEpisodeNumber() { return m_nextEpisodeNumber; }
 
-QString SeriesListModel::getNextEpisodeSeasonNumber() { return myNextEpisodeSeasonNumber; }
+QString SeriesListModel::getNextEpisodeSeasonNumber() { return m_nextEpisodeSeasonNumber; }
 
-QString SeriesListModel::getDaysToNextEpisode() { return myDaysToNextEpisode; }
+QString SeriesListModel::getDaysToNextEpisode() { return m_daysToNextEpisode; }
 
-QString SeriesListModel::getStatus() { return myInfo->getStatus(); }
+QString SeriesListModel::getStatus() { return m_info->getStatus(); }
 
-QString SeriesListModel::getRating() { return myInfo->getRating(); }
+QString SeriesListModel::getRating() { return m_info->getRating(); }
 
-QString SeriesListModel::getGenre() { return myInfo->getGenre(); }
+QString SeriesListModel::getGenre() { return m_info->getGenre(); }
 
-bool SeriesListModel::getLoading() { return myLoading; }
+bool SeriesListModel::getLoading() { return m_loading; }
 
 void SeriesListModel::setLoading(bool state) {
 
-    if(myLoading != state) {
-        myLoading = state;
+    if(m_loading != state) {
+        m_loading = state;
         emit loadingChanged();
     }
 }
 
-QString SeriesListModel::getPoster() { return myPoster; }
+QString SeriesListModel::getPoster() { return m_poster; }
 
 QString SeriesListModel::getMode() { return mode; }
 
@@ -197,7 +197,7 @@ void SeriesListModel::setMode(QString newmode) {
 void SeriesListModel::deleteSeries(int seriesID) {
 
     setLoading(true);
-    if(mydbmanager->deleteSeries(seriesID)) {
+    if(m_dbmanager->deleteSeries(seriesID)) {
         populateBannerList();
         emit updateModels();
     }
@@ -206,25 +206,25 @@ void SeriesListModel::deleteSeries(int seriesID) {
 
 void SeriesListModel::updateSeries(QString seriesId) {
 
-    if(!mySeriesIds.isEmpty() && seriesId.isEmpty()) {
-        seriesId = mySeriesIds.takeFirst();
+    if(!m_seriesIds.isEmpty() && seriesId.isEmpty()) {
+        seriesId = m_seriesIds.takeFirst();
     }
 
     setLoading(true);
-    myReader->getFullSeriesRecord(seriesId, "update");
+    m_reader->getFullSeriesRecord(seriesId, "update");
 
 }
 
 void SeriesListModel::updateAllSeries() {
 
-    mySeriesIds.clear();
-    mySeries.clear();
-    myEpisodes.clear();
-    myBanners.clear();
+    m_seriesIds.clear();
+    m_series.clear();
+    m_episodes.clear();
+    m_banners.clear();
 
-    auto allSeries = mydbmanager->getSeries();
+    auto allSeries = m_dbmanager->getSeries();
     foreach (auto series, allSeries) {
-        mySeriesIds.append(series["id"]);
+        m_seriesIds.append(series["id"]);
     }
 
     updateSeries();

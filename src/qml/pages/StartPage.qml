@@ -4,7 +4,18 @@ import Sailfish.Silica 1.0
 Page {
     id: startpage
 
+    function checkNotification(weekday, seriesName, episodeName, airsTime) {
+        if(weekday === new Date().toLocaleString(Qt.locale("en_EN"), "dddd")) {
+            var summary = seriesName;
+            var body = episodeName ? episodeName + '\n' + airsTime : airsTime;
+            var previewSummary = seriesName;
+            var previewBody = episodeName;
+            notificationhandler.publish(summary, body, previewSummary, previewBody);
+        }
+    }
+
     function getWeekday(weekday) {
+
         switch(weekday) {
         case "Monday":
             return qsTr("Monday");
@@ -37,15 +48,18 @@ Page {
 
             MenuItem {
                 text: qsTr("About")
-                font.pixelSize: Theme.fontSizeSmall
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
                 }
             }
 
             MenuItem {
+                text: qsTr("Settings")
+                onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
+            }
+
+            MenuItem {
                 text: qsTr("Search for a Series")
-                font.pixelSize: Theme.fontSizeSmall
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("SearchPage.qml"))
                 }
@@ -53,7 +67,6 @@ Page {
 
             MenuItem {
                 text: qsTr("My Series")
-                font.pixelSize: Theme.fontSizeSmall
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("MySeriesPage.qml"))
                 }
@@ -78,7 +91,7 @@ Page {
             anchors {
                 top: sectionheader.bottom
             }
-            model: controller.TodayModel.TodayModel
+            model: engine.TodayModel.TodayModel
 
             section {
                 property: "AirsDayOfWeek"
@@ -99,7 +112,10 @@ Page {
                                        episodeName: NextEpisodeName,
                                        guestStars: NextEpisodeGuestStars,
                                        writer: NextEpisodeWriter,
-                                       firstAired: NextEpisodeFirstAired })
+                                       firstAired: NextEpisodeFirstAired,
+                                       watched: NextEpisodeWatched,
+                                       episodeId: NextEpisodeId,
+                                       seriesId: ID });
                 }
 
                 Column {
@@ -134,6 +150,11 @@ Page {
                         color: Theme.secondaryColor
                     }
                 }
+
+                Component.onCompleted: {
+                    if (settings.getNotificationPreference())
+                        checkNotification(AirsDayOfWeek, SeriesName, NextEpisodeName, AirsTime)
+                }
             }
 
             VerticalScrollDecorator {
@@ -144,7 +165,12 @@ Page {
                 enabled: listView.count === 0
                 text: qsTr("Nothing airs this week")
                 anchors.centerIn: listView
+            }
 
+            BusyIndicator {
+                size: BusyIndicatorSize.Large
+                anchors.centerIn: parent
+                running: engine.Loading
             }
         }
     }

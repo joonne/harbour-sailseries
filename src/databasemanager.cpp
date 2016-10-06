@@ -18,13 +18,13 @@ void DatabaseManager::setUpDB() {
     if(openDB()) {
 
         // check whether db is empty, if it is, create db
-        if(db.tables().size() == 0) {
+        if(m_db.tables().size() == 0) {
 
             createDB();
 
         } else {
 
-            QSqlQuery query(db);
+            QSqlQuery query(m_db);
             query.exec("SELECT name,version FROM information;");
             if(query.isSelect()) {
                 while(query.next()) {
@@ -56,30 +56,30 @@ bool DatabaseManager::openDB() {
     }
 
     // Find SQLite driver
-    db = QSqlDatabase::addDatabase("QSQLITE","databasemanager");
-    db.setDatabaseName(dbpath);
+    m_db = QSqlDatabase::addDatabase("QSQLITE","databasemanager");
+    m_db.setDatabaseName(dbpath);
 
     // Open databasee
-    return db.open();
+    return m_db.open();
 }
 
 QSqlError DatabaseManager::lastError() {
 
     // If opening database has failed user can ask
     // error description by QSqlError::text()
-    return db.lastError();
+    return m_db.lastError();
 }
 
 void DatabaseManager::close() {
 
-    db.close();
+    m_db.close();
 
 }
 
 bool DatabaseManager::deleteDB() {
 
     // Close database
-    db.close();
+    m_db.close();
 
     // Remove created database binary file
     QString dbname = "sailSeries.db.sqlite";
@@ -88,11 +88,11 @@ bool DatabaseManager::deleteDB() {
 }
 
 bool DatabaseManager::startTransaction() {
-    return db.transaction();
+    return m_db.transaction();
 }
 
 bool DatabaseManager::commit() {
-    return db.commit();
+    return m_db.commit();
 }
 
 bool DatabaseManager::initializeInfoTable() {
@@ -101,7 +101,7 @@ bool DatabaseManager::initializeInfoTable() {
 
     if(ret) {
 
-        QSqlQuery query(db);
+        QSqlQuery query(m_db);
         return query.exec(QString("INSERT INTO information VALUES(%1,'%2')")
                           .arg(1.0).arg("SailSeries"));
     }
@@ -112,9 +112,9 @@ bool DatabaseManager::createInfoTable() {
 
     bool ret = false;
 
-    if(db.isOpen()) {
+    if(m_db.isOpen()) {
 
-        QSqlQuery query(db);
+        QSqlQuery query(m_db);
         ret = query.exec("CREATE TABLE information"
                          "(version real primary key, "
                          "name varchar(50))");
@@ -125,9 +125,9 @@ bool DatabaseManager::createInfoTable() {
 bool DatabaseManager::updateInfoTable(double version) {
 
     bool ret = false;
-    if(db.isOpen()) {
+    if(m_db.isOpen()) {
 
-        QSqlQuery query(db);
+        QSqlQuery query(m_db);
         ret = query.exec(QString("UPDATE information SET version = %1;").arg(version));
     }
     return ret;
@@ -137,7 +137,7 @@ bool DatabaseManager::createDB() {
 
     qDebug() << "creating database!";
 
-    if(db.isOpen()) {
+    if(m_db.isOpen()) {
 
         if(initializeInfoTable()) {
             qDebug() << "information table created";
@@ -157,9 +157,9 @@ bool DatabaseManager::createDB() {
 bool DatabaseManager::createSeriesTable() {
 
     bool ret = false;
-    if (db.isOpen()) {
+    if (m_db.isOpen()) {
 
-        QSqlQuery query(db);
+        QSqlQuery query(m_db);
         ret = query.exec(QString("CREATE TABLE Series"
                                  "(id INTEGER PRIMARY KEY, "
                                  "actors VARCHAR(1000), "
@@ -194,9 +194,9 @@ bool DatabaseManager::createSeriesTable() {
 bool DatabaseManager::createEpisodeTable() {
 
     bool ret = false;
-    if (db.isOpen()) {
+    if (m_db.isOpen()) {
 
-        QSqlQuery query(db);
+        QSqlQuery query(m_db);
         ret = query.exec(QString("CREATE TABLE Episode"
                                  "(id INTEGER PRIMARY KEY, "
                                  "director VARCHAR(1000), "
@@ -235,9 +235,9 @@ bool DatabaseManager::createEpisodeTable() {
 bool DatabaseManager::createBannerTable() {
 
     bool ret = false;
-    if (db.isOpen()) {
+    if (m_db.isOpen()) {
 
-        QSqlQuery query(db);
+        QSqlQuery query(m_db);
         ret = query.exec(QString("CREATE TABLE Banner"
                                  "(id INTEGER PRIMARY KEY, "
                                  "seriesID INTEGER, "
@@ -290,9 +290,9 @@ bool DatabaseManager::insertSeries(QMap<QString, QString> series) {
 
     qDebug() << "insertSeries() " << seriesName;
 
-    if(db.isOpen()) {
+    if(m_db.isOpen()) {
 
-        QSqlQuery query(db);
+        QSqlQuery query(m_db);
         ret = query.exec(QString("INSERT OR REPLACE INTO Series(id,actors,airsDayOfWeek,airsTime,contentRating,firstAired,genre,imdbID,language,network,overview,rating,ratingCount,runtime,seriesName,status,added,addedBy,banner,fanart,lastupdated,poster,zap2itID,watched) VALUES(%1,'%2','%3','%4','%5','%6','%7','%8','%9','%10','%11',%12,%13,%14,'%15','%16','%17',%18,'%19','%20','%21','%22','%23',%24)")
                          .arg(seriesId)
                          .arg(actors)
@@ -380,11 +380,11 @@ bool DatabaseManager::insertEpisodes(QList<QMap<QString, QString> > episodes) {
         guestStars.replace("'","''");
         episodeName.replace("'","''");
 
-        if(db.isOpen()) {
+        if(m_db.isOpen()) {
 
             // lets get and check the watched flag first, might be slow but this must be done
             // in order to keep the flag state
-            QSqlQuery query(db);
+            QSqlQuery query(m_db);
             query.exec(QString("SELECT watched FROM Episode WHERE id = %1").arg(id));
 
             if(query.isSelect()) {
@@ -453,9 +453,9 @@ bool DatabaseManager::insertBanners(QList<QMap<QString, QString> > banners, int 
         QString language = banner["Language"];
         int season = banner["Season"].toInt();
 
-        if(db.isOpen()) {
+        if(m_db.isOpen()) {
 
-            QSqlQuery query(db);
+            QSqlQuery query(m_db);
             ret = query.exec(QString("INSERT OR REPLACE INTO Banner VALUES(%1,%2,'%3','%4','%5','%6',%7)")
                              .arg(id)
                              .arg(seriesId)
@@ -479,10 +479,10 @@ QList<QMap<QString, QString> > DatabaseManager::getSeries() {
 
     QList<QMap<QString, QString> > allSeries;
 
-    if(db.isOpen()) {
+    if(m_db.isOpen()) {
 
         this->startTransaction();
-        QSqlQuery query(db);
+        QSqlQuery query(m_db);
         query.exec(QString("SELECT banner, poster, seriesName, status, id, overview, imdbID, rating, genre FROM Series ORDER BY seriesName;"));
         this->commit();
 
@@ -546,10 +546,10 @@ QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries() {
 
     QList<QMap<QString, QString> > series;
 
-    if(db.isOpen()) {
+    if(m_db.isOpen()) {
 
-        QSqlQuery query(db);
-        query.exec(QString("SELECT Series.seriesName, Series.network, Series.airsTime, Series.airsDayOfWeek, Series.status, Series.id, Episode.episodeName, Episode.episodeNumber, Episode.seasonNumber, Episode.firstAired, Episode.filename, Episode.overview, Episode.guestStars, Episode.writer FROM Series, Episode WHERE Series.status = '%1' AND Episode.firstAired BETWEEN '%2' AND '%3' AND Series.id = Episode.seriesID AND Episode.seasonNumber != 0 ORDER BY Episode.firstAired;").arg(status).arg(firstAiredStart).arg(firstAiredEnd));
+        QSqlQuery query(m_db);
+        query.exec(QString("SELECT Series.seriesName, Series.network, Series.airsTime, Series.airsDayOfWeek, Series.status, Series.id, Episode.id, Episode.episodeName, Episode.episodeNumber, Episode.seasonNumber, Episode.firstAired, Episode.filename, Episode.overview, Episode.guestStars, Episode.writer, Episode.watched FROM Series, Episode WHERE Series.status = '%1' AND Episode.firstAired BETWEEN '%2' AND '%3' AND Series.id = Episode.seriesID AND Episode.seasonNumber != 0 AND Episode.absoluteNumber != 0 ORDER BY Episode.firstAired;").arg(status).arg(firstAiredStart).arg(firstAiredEnd));
 
         if(query.isSelect()) {
 
@@ -578,37 +578,42 @@ QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries() {
                 auto id = query.value(5).toString();
                 temp["id"] = id;
 
-                auto episodeName = query.value(6).toString();
+                auto episodeId = query.value(6).toString();
+                temp["nextEpisodeId"] = episodeId;
+
+                auto episodeName = query.value(7).toString();
                 temp["nextEpisodeName"] = episodeName;
 
-                auto episodeNumber = query.value(7).toString();
+                auto episodeNumber = query.value(8).toString();
                 temp["nextEpisodeNumber"] = episodeNumber;
 
-                auto seasonNumber = query.value(8).toString();
+                auto seasonNumber = query.value(9).toString();
                 temp["nextEpisodeSeasonNumber"] = seasonNumber;
 
-                auto firstAired = query.value(9).toString();
+                auto firstAired = query.value(10).toString();
                 temp["nextEpisodeFirstAired"] = firstAired;
 
                 // Sometimes the series info airsDayOfWeek is wrong so lets take it from the episode directly then
                 auto airsDayOfWeekFromEpisode = locale.toString(QDate::fromString(firstAired, Qt::ISODate), "dddd");
                 temp["airsDayOfWeek"] = airsDayOfWeek == airsDayOfWeekFromEpisode ? airsDayOfWeek : airsDayOfWeekFromEpisode;
 
-                auto banner = query.value(10).toString();
+                auto banner = query.value(11).toString();
                 temp["nextEpisodeBanner"] = banner;
 
-                auto overview = query.value(11).toString();
+                auto overview = query.value(12).toString();
                 overview.replace("''","'");
                 temp["nextEpisodeOverview"] = overview;
 
-                auto guestStars = query.value(12).toString();
+                auto guestStars = query.value(13).toString();
                 temp["nextEpisodeGuestStars"] = guestStars;
 
-                auto writer = query.value(13).toString();
+                auto writer = query.value(14).toString();
                 temp["nextEpisodeWriter"] = writer;
 
-                series.append(temp);
+                auto watched = query.value(15).toString();
+                temp["nextEpisodeWatched"] = watched;
 
+                series.append(temp);
             }
         }
     }
@@ -619,8 +624,8 @@ QList<QMap<QString, QString> > DatabaseManager::getEpisodes(int seriesID, int se
 
     QList<QMap<QString, QString> > episodes;
 
-    QSqlQuery query(db);
-    query.exec(QString("SELECT episodeName,episodeNumber,overview,seasonNumber,absoluteNumber,filename,watched,id,guestStars,writer,firstAired FROM Episode WHERE seriesID = %1 AND seasonNumber = %2 ORDER BY episodeNumber").arg(seriesID).arg(seasonNumber));
+    QSqlQuery query(m_db);
+    query.exec(QString("SELECT episodeName,episodeNumber,overview,seasonNumber,absoluteNumber,filename,watched,id,guestStars,writer,firstAired FROM Episode WHERE seriesID = %1 AND seasonNumber = %2 AND absoluteNumber != 0 ORDER BY episodeNumber").arg(seriesID).arg(seasonNumber));
 
     if(query.isSelect()) {
 
@@ -676,7 +681,7 @@ QList<QMap<QString, QString> > DatabaseManager::getEpisodes(int seriesID, int se
 
 void DatabaseManager::toggleWatched(QString episodeID) {
 
-    QSqlQuery query(db);
+    QSqlQuery query(m_db);
     query.exec(QString("UPDATE Episode SET watched = CASE WHEN watched = 0 THEN 1 ELSE 0 END WHERE id = %1").arg(episodeID.toInt()));
 }
 
@@ -686,7 +691,7 @@ bool DatabaseManager::deleteSeries(int seriesID) {
 
     this->startTransaction();
 
-    QSqlQuery query(db);
+    QSqlQuery query(m_db);
     ret1 = query.exec(QString("DELETE FROM Series WHERE id = %1").arg(seriesID));
     if(ret1) {
         ret2 = query.exec(QString("DELETE FROM Episode WHERE seriesID = %1").arg(seriesID));
@@ -706,7 +711,7 @@ bool DatabaseManager::deleteAllSeries() {
 
     this->startTransaction();
 
-    QSqlQuery query(db);
+    QSqlQuery query(m_db);
     ret1 = query.exec(QString("DELETE FROM Series"));
     if(ret1) {
         ret2 = query.exec(QString("DELETE FROM Episode"));
@@ -724,7 +729,7 @@ bool DatabaseManager::isAlreadyAdded(int seriesID, QString name) {
 
     bool ret1,ret2 = false;
 
-    QSqlQuery query(db);
+    QSqlQuery query(m_db);
     ret1 = query.exec(QString("SELECT seriesName FROM Series WHERE id=%1").arg(seriesID));
     if(ret1) {
         if(query.isSelect()) {
@@ -741,8 +746,8 @@ bool DatabaseManager::isAlreadyAdded(int seriesID, QString name) {
 int DatabaseManager::watchedCount(int seriesID) {
 
     int watchedCount = 0;
-    QSqlQuery query(db);
-    query.exec(QString("SELECT COUNT(episodeName) FROM Episode WHERE seriesID = %1 AND watched = 1 AND seasonNumber != 0").arg(seriesID));
+    QSqlQuery query(m_db);
+    query.exec(QString("SELECT COUNT(episodeName) FROM Episode WHERE seriesID = %1 AND watched = 1 AND seasonNumber != 0 AND absoluteNumber != 0").arg(seriesID));
     if(query.isSelect()) {
         while(query.next()) {
             watchedCount = query.value(0).toInt();
@@ -754,8 +759,8 @@ int DatabaseManager::watchedCount(int seriesID) {
 int DatabaseManager::watchedCountBySeason(int seriesID, int seasonNumber) {
 
     int watchedCount = 0;
-    QSqlQuery query(db);
-    query.exec(QString("SELECT COUNT(episodeName) FROM Episode WHERE seriesID = %1 AND watched = 1 AND seasonNumber = %2").arg(seriesID).arg(seasonNumber));
+    QSqlQuery query(m_db);
+    query.exec(QString("SELECT COUNT(episodeName) FROM Episode WHERE seriesID = %1 AND watched = 1 AND seasonNumber = %2 AND absoluteNumber != 0").arg(seriesID).arg(seasonNumber));
     if(query.isSelect()) {
         while(query.next()) {
             watchedCount = query.value(0).toInt();
@@ -768,8 +773,8 @@ int DatabaseManager::watchedCountBySeason(int seriesID, int seasonNumber) {
 int DatabaseManager::totalCount(int seriesID) {
 
     int totalCount = 0;
-    QSqlQuery query(db);
-    query.exec(QString("SELECT COUNT(episodeName) FROM Episode WHERE seriesID = %1 AND seasonNumber != 0").arg(seriesID));
+    QSqlQuery query(m_db);
+    query.exec(QString("SELECT COUNT(episodeName) FROM Episode WHERE seriesID = %1 AND seasonNumber != 0 AND absoluteNumber != 0").arg(seriesID));
     if(query.isSelect()) {
         while(query.next()) {
             totalCount = query.value(0).toInt();
@@ -782,8 +787,8 @@ int DatabaseManager::totalCount(int seriesID) {
 int DatabaseManager::totalCountBySeason(int seriesID, int seasonNumber) {
 
     int totalCount = 0;
-    QSqlQuery query(db);
-    query.exec(QString("SELECT COUNT(episodeName) FROM Episode WHERE seriesID = %1 AND seasonNumber = %2").arg(seriesID).arg(seasonNumber));
+    QSqlQuery query(m_db);
+    query.exec(QString("SELECT COUNT(episodeName) FROM Episode WHERE seriesID = %1 AND seasonNumber = %2 AND absoluteNumber != 0").arg(seriesID).arg(seasonNumber));
     if(query.isSelect()) {
         while(query.next()) {
             totalCount = query.value(0).toInt();
@@ -796,7 +801,7 @@ int DatabaseManager::totalCountBySeason(int seriesID, int seasonNumber) {
 int DatabaseManager::seasonCount(int seriesID) {
 
     int seasonCount = 0;
-    QSqlQuery query(db);
+    QSqlQuery query(m_db);
     query.exec(QString("SELECT MAX(seasonNumber) FROM Episode WHERE seriesID = %1").arg(seriesID));
     if(query.isSelect()) {
         while(query.next()) {
@@ -808,7 +813,7 @@ int DatabaseManager::seasonCount(int seriesID) {
 
 void DatabaseManager::markSeasonWatched(int seriesID, int season) {
 
-    QSqlQuery query(db);
+    QSqlQuery query(m_db);
     query.exec(QString("UPDATE Episode SET watched=1 WHERE seriesID = %1 AND seasonNumber = %2").arg(seriesID).arg(season));
 }
 
@@ -819,7 +824,7 @@ QMap<QString,QString> DatabaseManager::getNextEpisodeDetails(int seriesID) {
     QList<QMap<QString, QString> > details;
 
     this->startTransaction();
-    QSqlQuery query(db);
+    QSqlQuery query(m_db);
     query.exec(QString("SELECT episodeName, episodeNumber, seasonNumber, firstAired FROM Episode WHERE seriesID = %1 AND seasonNumber != 0 AND firstAired >= '%2' ORDER BY episodeNumber LIMIT 1;").arg(seriesID).arg(today));
     this->commit();
 
@@ -872,7 +877,7 @@ QMap<QString,QString> DatabaseManager::getNextEpisodeDetails(int seriesID) {
 
 QString DatabaseManager::getStatus(int seriesID) {
 
-    QSqlQuery query(db);
+    QSqlQuery query(m_db);
     QString status;
     query.exec(QString("SELECT status FROM Series WHERE id=%1;").arg(seriesID));
     if(query.isSelect()) {
@@ -885,7 +890,7 @@ QString DatabaseManager::getStatus(int seriesID) {
 
 QString DatabaseManager::getSeasonBanner(int seriesID, int season) {
 
-    QSqlQuery query(db);
+    QSqlQuery query(m_db);
     QString banner = "";
     QString bannerType = "season";
     query.exec(QString("SELECT bannerPath FROM Banner WHERE seriesID=%1 AND bannerType='%2' AND season=%3;").arg(seriesID).arg(bannerType).arg(season));

@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>poster-fallback.jpg</file>
+        <file>series-banner-fallback.jpg</file>
+        <file>season-banner-fallback.jpg</file>
+        <file>episode-image-fallback.jpg</file>
+    </qresource>
+</RCC>

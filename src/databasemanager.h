@@ -75,9 +75,7 @@ signals:
 public slots:
 
 private:
-    QSqlDatabase db;
-
-
+    QSqlDatabase m_db;
 };
 
 #endif // DATABASEMANAGER_H

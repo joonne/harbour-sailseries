@@ -4,118 +4,131 @@ SeriesData::SeriesData(QObject *parent, QMap<QString, QString> params) :
     QObject(parent)
 {
 
-    myID = params["id"];
-    myActors = params["actors"];
-    myAirsDayOfWeek = params["airsDayOfWeek"];
-    myAirsTime = params["airsTime"];
-    myContentRating = params["contentRating"];
-    myFirstAired = params["firstAired"];
-    myGenre = params["genre"];
-    myIMDB_ID = params.contains("imdbId") ? params["imdbId"] : params["IMDB_ID"];
-    myLanguage = params["language"];
-    myNetwork = params.contains("network") ? params["network"] : params["Network"];
-    myOverview = params.contains("overview") ? params["overview"] : params["Overview"];
-    myRating = params["rating"];
-    myRatingCount = params["ratingCount"].toInt();
-    myRuntime = params["runtime"].toInt();
-    mySeriesName = params.contains("seriesName") ? params["seriesName"] : params["SeriesName"];
-    myAliasNames = params["aliasNames"];
-    myStatus = params["status"];
-    myAdded = params["added"];
-    myAddedBy = params["addedBy"].toInt();
-    myBanner = params["banner"];
-    myFanart = params["fanart"];
-    myLastUpdated = params["lastUpdated"];
-    myPoster = params["poster"];
-    myZap2it_ID = params["zap2itid"];
-    myWatched = params["watched"].toInt();
-    myNextEpisodeName = params["nextEpisodeName"];
-    myNextEpisodeNumber = params["nextEpisodeNumber"];
-    myNextEpisodeSeasonNumber = params["nextEpisodeSeasonNumber"];
-    myDaysToNextEpisode = params["daysToNext"];
-    myNextEpisodeFirstAired = params["nextEpisodeFirstAired"];
-    myNextEpisodeBanner = params["nextEpisodeBanner"];
-    myNextEpisodeOverview = params["nextEpisodeOverview"];
-    myNextEpisodeGuestStars = params["nextEpisodeGuestStars"];
-    myNextEpisodeWriter = params["nextEpisodeWriter"];
+    m_id = params["id"];
+    m_actors = params["actors"];
+    m_airsDayOfWeek = params["airsDayOfWeek"];
+    m_airsTime = params["airsTime"];
+    m_contentRating = params["contentRating"];
+    m_firstAired = params["firstAired"];
+    m_genre = params["genre"];
+    m_imdbId = params.contains("imdbId") ? params["imdbId"] : params["IMDB_ID"];
+    m_language = params["language"];
+    m_network = params.contains("network") ? params["network"] : params["Network"];
+    m_overview = params.contains("overview") ? params["overview"] : params["Overview"];
+    m_rating = params["rating"];
+    m_ratingCount = params["ratingCount"].toInt();
+    m_runtime = params["runtime"].toInt();
+    m_seriesName = params.contains("seriesName") ? params["seriesName"] : params["SeriesName"];
+    m_aliasNames = params["aliasNames"];
+    m_status = params["status"];
+    m_added = params["added"];
+    m_addedBy = params["addedBy"].toInt();
+    m_banner = params["banner"];
+    m_fanart = params["fanart"];
+    m_lastUpdated = params["lastUpdated"];
+    m_poster = params["poster"];
+    m_zap2itId = params["zap2itid"];
+    m_watched = params["watched"].toInt();
+    m_nextEpisodeId = params["nextEpisodeId"];
+    m_nextEpisodeName = params["nextEpisodeName"];
+    m_nextEpisodeNumber = params["nextEpisodeNumber"];
+    m_nextEpisodeSeasonNumber = params["nextEpisodeSeasonNumber"];
+    m_daysToNextEpisode = params["daysToNext"];
+    m_nextEpisodeFirstAired = params["nextEpisodeFirstAired"];
+    m_nextEpisodeBanner = params["nextEpisodeBanner"];
+    m_nextEpisodeOverview = params["nextEpisodeOverview"];
+    m_nextEpisodeGuestStars = params["nextEpisodeGuestStars"];
+    m_nextEpisodeWriter = params["nextEpisodeWriter"];
+    m_nextEpisodeWatched = params["nextEpisodeWatched"].toInt();
 }
 
-QString SeriesData::getID() { return myID; }
+QString SeriesData::getID() { return m_id; }
 
-QString SeriesData::getActors() { return myActors; }
+QString SeriesData::getActors() { return m_actors; }
 
-QString SeriesData::getAirsDayOfWeek() { return myAirsDayOfWeek; }
+QString SeriesData::getAirsDayOfWeek() { return m_airsDayOfWeek; }
 
-QString SeriesData::getAirsTime() { return myAirsTime; }
+QString SeriesData::getAirsTime() { return m_airsTime; }
 
-QString SeriesData::getContentRating() { return myContentRating; }
+QString SeriesData::getContentRating() { return m_contentRating; }
 
-QString SeriesData::getGenre() { return myGenre; }
+QString SeriesData::getGenre() { return m_genre; }
 
-QString SeriesData::getRating() { return myRating; }
+QString SeriesData::getRating() { return m_rating; }
 
-int SeriesData::getRatingCount() { return myRatingCount; }
+int SeriesData::getRatingCount() { return m_ratingCount; }
 
-int SeriesData::getRuntime() { return myRuntime; }
+int SeriesData::getRuntime() { return m_runtime; }
 
-QString SeriesData::getStatus() { return myStatus; }
+QString SeriesData::getStatus() { return m_status; }
 
-QString SeriesData::getAdded() { return myAdded; }
+QString SeriesData::getAdded() { return m_added; }
 
-int SeriesData::getAddedBy() { return myAddedBy; }
+int SeriesData::getAddedBy() { return m_addedBy; }
 
-QString SeriesData::getFanart() { return myFanart; }
+QString SeriesData::getFanart() { return m_fanart; }
 
-QString SeriesData::getLastUpdated() { return myLastUpdated; }
+QString SeriesData::getLastUpdated() { return m_lastUpdated; }
 
-QString SeriesData::getPoster() { return myPoster; }
+QString SeriesData::getPoster() { return m_poster; }
 
-int SeriesData::getWatched() { return myWatched; }
+int SeriesData::getWatched() { return m_watched; }
 
-QString SeriesData::getLanguage() { return myLanguage; }
+QString SeriesData::getLanguage() { return m_language; }
 
-QString SeriesData::getSeriesName() { return mySeriesName; }
+QString SeriesData::getSeriesName() { return m_seriesName; }
 
-QString SeriesData::getAliasNames() { return myAliasNames; }
+QString SeriesData::getAliasNames() { return m_aliasNames; }
 
-QString SeriesData::getBanner() { return myBanner; }
+QString SeriesData::getBanner() { return m_banner; }
 
-QString SeriesData::getOverview() { return myOverview; }
+QString SeriesData::getOverview() { return m_overview; }
 
-QString SeriesData::getFirstAired() { return myFirstAired; }
+QString SeriesData::getFirstAired() { return m_firstAired; }
 
-QString SeriesData::getIMDB_ID() { return myIMDB_ID; }
+QString SeriesData::getIMDB_ID() { return m_imdbId; }
 
-QString SeriesData::getZap2it_ID() { return myZap2it_ID; }
+QString SeriesData::getZap2it_ID() { return m_zap2itId; }
 
-QString SeriesData::getNetwork() { return myNetwork; }
+QString SeriesData::getNetwork() { return m_network; }
 
 void SeriesData::setWatched(int watched) {
 
-    if(myWatched != watched) {
-        myWatched = watched;
+    if(m_watched != watched) {
+        m_watched = watched;
         emit watchedChanged();
     }
 }
 
-QString SeriesData::getNextEpisodeName() { return myNextEpisodeName; }
+QString SeriesData::getNextEpisodeId() { return m_nextEpisodeId; }
 
-QString SeriesData::getNextEpisodeNumber() { return myNextEpisodeNumber; }
+QString SeriesData::getNextEpisodeName() { return m_nextEpisodeName; }
 
-QString SeriesData::getNextEpisodeSeasonNumber() { return myNextEpisodeSeasonNumber; }
+QString SeriesData::getNextEpisodeNumber() { return m_nextEpisodeNumber; }
 
-QString SeriesData::getDaysToNextEpisode() { return myDaysToNextEpisode; }
+QString SeriesData::getNextEpisodeSeasonNumber() { return m_nextEpisodeSeasonNumber; }
 
-QString SeriesData::getWatchedCount() { return myWatchedCount; }
+QString SeriesData::getDaysToNextEpisode() { return m_daysToNextEpisode; }
 
-QString SeriesData::getTotalCount() { return myTotalCount; }
+QString SeriesData::getWatchedCount() { return m_watchedCount; }
 
-QString SeriesData::getNextEpisodeFirstAired() { return myNextEpisodeFirstAired; }
+QString SeriesData::getTotalCount() { return m_totalCount; }
 
-QString SeriesData::getNextEpisodeBanner() { return myNextEpisodeBanner; }
+QString SeriesData::getNextEpisodeFirstAired() { return m_nextEpisodeFirstAired; }
 
-QString SeriesData::getNextEpisodeOverview() { return myNextEpisodeOverview; }
+QString SeriesData::getNextEpisodeBanner() { return m_nextEpisodeBanner; }
 
-QString SeriesData::getNextEpisodeGuestStars() { return myNextEpisodeGuestStars; }
+QString SeriesData::getNextEpisodeOverview() { return m_nextEpisodeOverview; }
 
-QString SeriesData::getNextEpisodeWriter() { return myNextEpisodeWriter; }
+QString SeriesData::getNextEpisodeGuestStars() { return m_nextEpisodeGuestStars; }
+
+QString SeriesData::getNextEpisodeWriter() { return m_nextEpisodeWriter; }
+
+int SeriesData::getNextEpisodeWatched() { return m_nextEpisodeWatched; }
+
+void SeriesData::setNextEpisodeWatched(int watched) {
+    if(m_nextEpisodeWatched != watched) {
+        m_nextEpisodeWatched = watched;
+        emit nextEpisodeWatchedChanged();
+    }
+}

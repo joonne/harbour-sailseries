@@ -6,18 +6,8 @@ import "../components"
 Page {
     id: episodeoverviewpage
 
-    // prevents http-request if source is not available
-    function setSource() {
-        if(episodeBanner.length === 0) {
-            return null;
-        } else {
-            return "http://thetvdb.com/banners/" + episodeBanner;
-        }
-    }
-
     // processes tubes "|" out of the given string
     function process(string) {
-
         if(string.charAt(0) === "|" && string.charAt(string.length - 1) === "|") {
             var newstring = string.split("|").join(", ")
             return newstring.substr(2,(newstring.length - 4))
@@ -35,6 +25,13 @@ Page {
     property string guestStars
     property string writer
     property string firstAired
+    property int watched
+    property string episodeId
+    property string seriesId
+
+    Component.onCompleted: {
+        console.log(watched, episodeId, seriesId)
+    }
 
     SilicaFlickable {
         anchors.fill: parent
@@ -52,9 +49,16 @@ Page {
 
             Image {
                 id: banner
-                source: setSource()
+                source: "http://thetvdb.com/banners/" + episodeBanner
                 anchors.left: parent.left
                 anchors.leftMargin: (episodeoverviewpage.width - banner.width) / 2
+
+                onStatusChanged: {
+                    var fallback = "qrc:///images/episode-image-fallback.jpg";
+                    if (status === Image.Error || status === Image.Null) {
+                        source = fallback;
+                    }
+                }
             }
 
             Item {
@@ -63,15 +67,38 @@ Page {
                 width: episodeoverviewpage.width
             }
 
-            TextField {
-                id: firstAiredField
-                text: firstAired
-                readOnly: true
-                color: Theme.secondaryColor
-                label: qsTr("Original air date")
-                font.pixelSize: Theme.fontSizeSmall
-                width: episodeoverviewpage.width
+            Row {
+                width: parent.width
 
+                TextField {
+                    id: firstAiredField
+                    text: firstAired
+                    readOnly: true
+                    color: Theme.secondaryColor
+                    label: qsTr("Original air date")
+                    font.pixelSize: Theme.fontSizeSmall
+                    width: parent.width - watched_image.width - Theme.paddingLarge
+
+                }
+
+                Image {
+                    id: watched_image
+                    source: watched === 0 ? "image://theme/icon-m-favorite" : "image://theme/icon-m-favorite-selected"
+
+                    MouseArea {
+                        id: clickarea
+                        anchors.fill: parent
+                        onClicked: {
+                            watched === 1 ? watched = 0 : watched = 1
+                            console.log("episodeId", episodeId);
+                            console.log("seriesId", seriesId);
+                            console.log("watched", watched);
+                            engine.EpisodeListModel.toggleWatched(episodeId)
+                            engine.SeasonListModel.populateSeasonList(seriesId)
+                            engine.TodayModel.populateTodayModel();
+                        }
+                    }
+                }
             }
 
             TextExpander {

@@ -1,16 +1,16 @@
-#ifndef DATAMODEL_H
-#define DATAMODEL_H
+#ifndef ENGINE_H
+#define ENGINE_H
 
 #include <QObject>
-#include "serieslistmodel.h"
-#include "../xmlreader.h"
-#include "../databasemanager.h"
-#include "episodelistmodel.h"
-#include "searchlistmodel.h"
-#include "todaylistmodel.h"
-#include "seasonlistmodel.h"
+#include "xmlreader.h"
+#include "databasemanager.h"
+#include "./model/serieslistmodel.h"
+#include "./model/episodelistmodel.h"
+#include "./model/searchlistmodel.h"
+#include "./model/todaylistmodel.h"
+#include "./model/seasonlistmodel.h"
 
-class DataModel : public QObject
+class Engine : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(SeriesListModel* SeriesListModel READ getSeriesListModel NOTIFY seriesListModelChanged)
@@ -18,16 +18,19 @@ class DataModel : public QObject
     Q_PROPERTY(TodayListModel* TodayModel READ getTodayModel NOTIFY todayModelChanged)
     Q_PROPERTY(EpisodeListModel* EpisodeListModel READ getEpisodeListModel NOTIFY episodeListModelChanged)
     Q_PROPERTY(SeasonListModel* SeasonListModel READ getSeasonListModel NOTIFY seasonListModelChanged)
+    Q_PROPERTY(bool Loading READ getLoading NOTIFY loadingChanged)
 
 public:
-    explicit DataModel(QObject *parent = 0);
-    ~DataModel();
+    explicit Engine(QObject *parent = 0);
+    ~Engine();
 
     SeriesListModel *getSeriesListModel();
     SearchListModel* getSearchModel();
     TodayListModel *getTodayModel();
     EpisodeListModel* getEpisodeListModel();
     SeasonListModel* getSeasonListModel();
+    Q_INVOKABLE void updateModels();
+    bool getLoading();
 
 signals:
     void seriesListModelChanged();
@@ -36,18 +39,21 @@ signals:
     void todayModelChanged();
     void episodeListModelChanged();
     void seasonListModelChanged();
+    void loadingChanged();
 
 public slots:
     void readyToUpdateModels();
 
 private:
-    SeriesListModel* mySeriesListModel;
-    SearchListModel* mySearchListModel;
-    TodayListModel* myTodayListModel;
-    EpisodeListModel* myEpisodeListModel;
-    SeasonListModel* mySeasonListModel;
-    XMLReader* myReader;
-    DatabaseManager* mydbmanager;
+    SeriesListModel* m_seriesListModel;
+    SearchListModel* m_searchListModel;
+    TodayListModel* m_todayListModel;
+    EpisodeListModel* m_episodeListModel;
+    SeasonListModel* m_seasonListModel;
+    XMLReader* m_reader;
+    DatabaseManager* m_dbmanager;
+    bool m_loading;
+    void toggleLoading(bool state);
 };
 
-#endif // DATAMODEL_H
+#endif // ENGINE_H

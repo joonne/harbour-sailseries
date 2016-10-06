@@ -11,33 +11,25 @@ Page {
         initialize(seriesID, seasonNumber)
     }
 
-//    Component.onDestruction: {
-//        pageStack.find(function(page) {
-//            return page.pageName === "SeriesViewPage"
-//        }).updateModel();
-//    }
-
 
     function initialize(seriesID, seasonNumber) {
-        controller.EpisodeListModel.populateEpisodeList(seriesID, seasonNumber)
-        listView.model = controller.EpisodeListModel.episodeList
+        engine.EpisodeListModel.populateEpisodeList(seriesID, seasonNumber)
+        listView.model = engine.EpisodeListModel.episodeList
     }
 
     SilicaListView {
         id: listView
-        model: controller.EpisodeListModel.episodeList
+        model: engine.EpisodeListModel.episodeList
 
         PullDownMenu {
             id: pulldownmenu
+            enabled: listView.count > 0
 
             MenuItem {
                 text: qsTr("I have seen these all")
                 onClicked: {
-                    controller.EpisodeListModel.markSeasonWatched(seriesID, seasonNumber)
-                    controller.SeasonListModel.populateSeasonList(seriesID)
-//                    pageStack.find(function(page) {
-//                        return page.pageName === "SeriesViewPage"
-//                    }).updateModel();
+                    engine.EpisodeListModel.markSeasonWatched(seriesID, seasonNumber)
+                    engine.SeasonListModel.populateSeasonList(seriesID)
                     pageStack.pop()
                 }
             }
@@ -79,7 +71,10 @@ Page {
                                      episodeName: EpisodeName,
                                      guestStars: GuestStars,
                                      writer: Writer,
-                                     firstAired: FirstAired })
+                                     firstAired: FirstAired,
+                                     watched: Watched,
+                                     episodeId: ID,
+                                     seriesId: SeriesID })
 
                 }
             }
@@ -118,8 +113,8 @@ Page {
                 }
             }
 
-            property string star: "image://theme/icon-l-star"
-            property string favorite: "image://theme/icon-l-favorite"
+            property string star: "image://theme/icon-m-favorite"
+            property string favorite: "image://theme/icon-m-favorite-selected"
 
             function setSource() {
 
@@ -143,11 +138,9 @@ Page {
                     id: clickarea
                     onClicked: {
                         Watched === 0 ? Watched = 1 : Watched = 0
-                        controller.EpisodeListModel.toggleWatched(ID)
-                        controller.SeasonListModel.populateSeasonList(seriesID)
-                        pageStack.find(function(page) {
-                            return page.pageName === "SeriesViewPage"
-                        }).updateModel();
+                        engine.EpisodeListModel.toggleWatched(ID)
+                        engine.SeasonListModel.populateSeasonList(seriesID)
+                        engine.TodayModel.populateTodayModel();
                     }
                     anchors.fill: parent
                 }

@@ -1,8 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-//import org.nemomobile.notifications 1.0
-
 import '../components'
 
 Page {
@@ -181,20 +179,6 @@ Page {
                 anchors.leftMargin: (aboutpage.width - sourcecode.width) / 2
                 width: email.width
             }
-
-//            Button {
-//                Notification {
-//                    id: notification
-//                    category: "x-nemo.example"
-//                    summary: "Notification summary"
-//                    body: "Notification body"
-//                    onClicked: console.log("Clicked")
-//                }
-//                anchors.left: parent.left
-//                anchors.leftMargin: (aboutpage.width - sourcecode.width) / 2
-//                text: "Application notification" + (notification.replacesId ? " ID:" + notification.replacesId : "")
-//                onClicked: notification.publish()
-//            }
 
             HorizontalSeparator { }
         }

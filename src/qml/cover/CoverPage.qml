@@ -10,16 +10,16 @@ CoverBackground {
         font.pixelSize: Theme.fontSizeTiny
         color: Theme.secondaryColor
         anchors.centerIn: cover
-        visible: listView.count === 0 && controller.SeriesListModel.Mode === "default"
+        visible: listView.count === 0 && engine.SeriesListModel.Mode === "default"
     }
 
     //---------------------------------
-    // This is the "MySeries" coverPage
+    // This is the "m_series" coverPage
     //---------------------------------
 
     function setPosterVisible() {
-        if(controller.SeriesListModel.Mode === "mySeries" && controller.SeriesListModel.Poster !== null) {
-            return "http://thetvdb.com/banners/" + controller.SeriesListModel.Poster
+        if(engine.SeriesListModel.Mode === "m_series" && engine.SeriesListModel.Poster !== null) {
+            return "http://thetvdb.com/banners/" + engine.SeriesListModel.Poster;
         }
     }
 
@@ -29,7 +29,7 @@ CoverBackground {
         anchors.top: parent.top
         width: parent.width
         height: parent.height
-        visible: controller.SeriesListModel.Mode === "mySeries"
+        visible: engine.SeriesListModel.Mode === "m_series"
         opacity: 1.0
     }
 
@@ -38,7 +38,7 @@ CoverBackground {
     //--------------------------------
 
     function defaultVisibility() {
-        return controller.SeriesListModel.Mode === "default"
+        return engine.SeriesListModel.Mode === "default"
     }
 
     function getWeekday(weekday) {
@@ -71,7 +71,7 @@ CoverBackground {
             topMargin: Theme.paddingLarge
         }
         spacing: Theme.paddingMedium
-        model: controller.TodayModel.TodayModel
+        model: engine.TodayModel.TodayModel
 
         delegate: ListItem {
             id: item
@@ -108,7 +108,7 @@ CoverBackground {
                     color: Theme.secondaryColor
                     truncationMode: TruncationMode.Fade
                     width: cover.width - Theme.paddingLarge
-                    visible: listView.count < 3
+                    visible: listView.count < 3 && text.length > 0
                 }
 
                 Label {

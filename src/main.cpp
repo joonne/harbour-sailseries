@@ -11,10 +11,12 @@
 #include <QQmlComponent>
 #include <QTranslator>
 #include <QDebug>
+#include <QSettings>
 
+#include "engine.h"
+#include "settings.h"
 #include "model/seriesdata.h"
 #include "model/serieslistmodel.h"
-#include "model/datamodel.h"
 #include "model/episodedata.h"
 #include "model/episodelistmodel.h"
 #include "model/searchlistmodel.h"
@@ -28,15 +30,15 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("harbour-sailseries");
     QCoreApplication::setOrganizationName("harbour-sailseries");
 
-    qmlRegisterType<SeriesData>("harbour.sailseries.datamodel", 1, 0, "SeriesData");
-    qmlRegisterType<SeriesListModel>("harbour.sailseries.datamodel", 1, 0, "SeriesListModel");
-    qmlRegisterType<SearchListModel>("harbour.sailseries.datamodel", 1, 0, "SearchListModel");
-    qmlRegisterType<TodayListModel>("harbour.sailseries.datamodel", 1, 0, "TodayListModel");
-    qmlRegisterType<DataModel>("harbour.sailseries.datamodel", 1, 0, "DataModel");
-    qmlRegisterType<EpisodeData>("harbour.sailseries.datamodel", 1, 0, "EpisodeData");
-    qmlRegisterType<EpisodeListModel>("harbour.sailseries.datamodel", 1, 0, "EpisodeListModel");
-    qmlRegisterType<SeasonData>("harbour.sailseries.datamodel", 1, 0, "SeasonData");
-    qmlRegisterType<SeasonListModel>("harbour.sailseries.datamodel", 1, 0, "SeasonListModel");
+    qmlRegisterType<SeriesData>("harbour.sailseries.model", 1, 0, "SeriesData");
+    qmlRegisterType<SeriesListModel>("harbour.sailseries.model", 1, 0, "SeriesListModel");
+    qmlRegisterType<SearchListModel>("harbour.sailseries.model", 1, 0, "SearchListModel");
+    qmlRegisterType<TodayListModel>("harbour.sailseries.model", 1, 0, "TodayListModel");
+    qmlRegisterType<Engine>("harbour.sailseries.model", 1, 0, "engine");
+    qmlRegisterType<EpisodeData>("harbour.sailseries.model", 1, 0, "EpisodeData");
+    qmlRegisterType<EpisodeListModel>("harbour.sailseries.model", 1, 0, "EpisodeListModel");
+    qmlRegisterType<SeasonData>("harbour.sailseries.model", 1, 0, "SeasonData");
+    qmlRegisterType<SeasonListModel>("harbour.sailseries.model", 1, 0, "SeasonListModel");
 
     // For this example, wizard-generates single line code would be good enough,
     // but very soon it won't be enough for you anyway, so use this more detailed example from start
@@ -48,9 +50,12 @@ int main(int argc, char *argv[])
     view->rootContext()->setContextProperty("appBuildNum", APP_BUILDNUM);
 
     // This is the public QML datacontroller
-    QScopedPointer<DataModel> datamodel(new DataModel);
+    QScopedPointer<Engine> engine(new Engine);
     QQmlContext* context = view->rootContext();
-    context->setContextProperty("controller",datamodel.data());
+    context->setContextProperty("engine", engine.data());
+
+    Settings settings;
+    view->rootContext()->setContextProperty("settings", &settings);
 
     // Here's how you will add QML components whenever you start using them
     // Check https://github.com/amarchen/Wikipedia for a more full example

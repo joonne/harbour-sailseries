@@ -3,12 +3,12 @@
 SeasonListModel::SeasonListModel(QObject *parent,  DatabaseManager* dbmanager) :
     QObject(parent)
 {
-    mydbmanager = dbmanager;
+    m_dbmanager = dbmanager;
 }
 
 SeasonListModel::~SeasonListModel() {
 
-    foreach (SeasonData* season, mySeasonListModel) {
+    foreach (SeasonData* season, m_seasonListModel) {
         delete season;
         season = 0;
     }
@@ -16,7 +16,7 @@ SeasonListModel::~SeasonListModel() {
 }
 
 QQmlListProperty<SeasonData> SeasonListModel::getSeasonList() {
-    return QQmlListProperty<SeasonData>(this, &mySeasonListModel, &SeasonListModel::seasonListCount, &SeasonListModel::seasonListAt);
+    return QQmlListProperty<SeasonData>(this, &m_seasonListModel, &SeasonListModel::seasonListCount, &SeasonListModel::seasonListAt);
 }
 
 // list handling methods
@@ -24,38 +24,38 @@ QQmlListProperty<SeasonData> SeasonListModel::getSeasonList() {
 void SeasonListModel::seasonListAppend(QQmlListProperty<SeasonData>* prop, SeasonData* val)
 {
     SeasonListModel* seasonModel = qobject_cast<SeasonListModel*>(prop->object);
-    seasonModel->mySeasonListModel.append(val);
+    seasonModel->m_seasonListModel.append(val);
 }
 
 SeasonData* SeasonListModel::seasonListAt(QQmlListProperty<SeasonData>* prop, int index)
 {
-    return (qobject_cast<SeasonListModel*>(prop->object))->mySeasonListModel.at(index);
+    return (qobject_cast<SeasonListModel*>(prop->object))->m_seasonListModel.at(index);
 }
 
 int SeasonListModel::seasonListCount(QQmlListProperty<SeasonData>* prop)
 {
-    return qobject_cast<SeasonListModel*>(prop->object)->mySeasonListModel.size();
+    return qobject_cast<SeasonListModel*>(prop->object)->m_seasonListModel.size();
 }
 
 void SeasonListModel::seasonListClear(QQmlListProperty<SeasonData>* prop)
 {
-    qobject_cast<SeasonListModel*>(prop->object)->mySeasonListModel.clear();
+    qobject_cast<SeasonListModel*>(prop->object)->m_seasonListModel.clear();
 }
 
 void SeasonListModel::populateSeasonList(QString seriesID) {
 
-    mySeasonListModel.clear();
+    m_seasonListModel.clear();
 
-    int seasonsCount = mydbmanager->seasonCount(seriesID.toInt());
+    int seasonsCount = m_dbmanager->seasonCount(seriesID.toInt());
 
     for(int i = 1; i <= seasonsCount; ++i) {
 
-        QString banner = mydbmanager->getSeasonBanner(seriesID.toInt(),i);
-        int watchedCount = mydbmanager->watchedCountBySeason(seriesID.toInt(),i);
-        int totalCount = mydbmanager->totalCountBySeason(seriesID.toInt(),i);
+        QString banner = m_dbmanager->getSeasonBanner(seriesID.toInt(),i);
+        int watchedCount = m_dbmanager->watchedCountBySeason(seriesID.toInt(),i);
+        int totalCount = m_dbmanager->totalCountBySeason(seriesID.toInt(),i);
 
         SeasonData* season = new SeasonData(this, i, banner, watchedCount, totalCount);
-        mySeasonListModel.append(season);
+        m_seasonListModel.append(season);
 
     }
     emit seasonListChanged();

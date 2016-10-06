@@ -4,87 +4,87 @@
 <context>
     <name>AboutPage</name>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="23"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="21"/>
         <source>About</source>
         <translation>Información</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="55"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="53"/>
         <source>General</source>
         <translation>General</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="63"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="61"/>
         <source>SailSeries is a tv-series tracking application for SailfisOS. It aims to be a good looking and simple app that can help you to stay on track while following your favourite series.</source>
         <translation>SailSeries es una aplicación de seguimiento de series de televisión para SailfishOS. Una aplicación sencilla y fácil de manejar que te puede ayudar para realizar un seguimiento de tus series favoritas y tenerlas controladas en todo momento.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="67"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="65"/>
         <source>Creator</source>
         <translation>Autor</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="111"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="109"/>
         <source>Licence</source>
         <translation>Licencia</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="119"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="117"/>
         <source>This software is licenced under GPLv2.</source>
         <translation>Este software esta bajo licencia GPLv2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="123"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="121"/>
         <source>Content</source>
         <translation>Contenido</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="131"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="129"/>
         <source>SailSeries utilises the public API at TheTVDB.</source>
         <translation>SailSeries utiliza la API pública TheTVDB.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="152"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="150"/>
         <source>The source code is available at GitHub. Contributions, ideas and bug reports are welcome.</source>
         <translation>El código fuente está disponible en GitHub. Contribuciones, ideas e información de bugs son bienvenidos.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="144"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="142"/>
         <source>Source Code</source>
         <translation>Código fuente</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="45"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="43"/>
         <source>Version %1.%2</source>
         <translation>Versión %1.%2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="76"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="74"/>
         <source>Jonne Pihlanen, &apos;joonne&apos;</source>
         <translation>Jonne Pihlanen, &apos;joonne&apos;</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="157"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="155"/>
         <source>Project in GitHub</source>
         <translation>Código fuente en GitHub</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="165"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="163"/>
         <source>Translations</source>
         <translation>Traducciones</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="173"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="171"/>
         <source>SailSeries uses the Transifex translation platform to host the translations.</source>
         <translation>SailSeries utiliza la plataforma Transifex como lugar para sus traducciones.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="178"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="176"/>
         <source>Help with translations</source>
         <translation>Ayuda con las traducciones</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="94"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="92"/>
         <source>Contributors</source>
         <translation>Contribuidores</translation>
     </message>
@@ -94,7 +94,7 @@
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="9"/>
         <source>Nothing airs this week</source>
-        <translation>No hay emisiones esta semana</translation>
+        <translation type="unfinished">No hay emisiones esta semana</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="47"/>
@@ -140,17 +140,17 @@
 <context>
     <name>EpisodeOverviewPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="71"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="78"/>
         <source>Original air date</source>
         <translation>Fecha de estreno</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="87"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="114"/>
         <source>Writer</source>
         <translation>Autor</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="96"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="123"/>
         <source>Guest Stars</source>
         <translation>Estrellas invitadas</translation>
     </message>
@@ -158,27 +158,27 @@
 <context>
     <name>EpisodesPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="34"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="29"/>
         <source>I have seen these all</source>
         <translation>He visto todo esto</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="49"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="41"/>
         <source>Episodes</source>
         <translation>Episodios</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="96"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="91"/>
         <source>Season</source>
         <translation>Temporada</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="103"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="98"/>
         <source>Episode</source>
         <translation>Episodio</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="164"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="157"/>
         <source>No episodes.</source>
         <translation>Sin episodios.</translation>
     </message>
@@ -249,7 +249,7 @@
         <translation>Mis Series</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="121"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="128"/>
         <source>Search for series first.</source>
         <translation>Busqueda de series</translation>
     </message>
@@ -265,12 +265,12 @@
 <context>
     <name>SearchPage</name>
     <message>
-        <location filename="../src/qml/pages/SearchPage.qml" line="18"/>
+        <location filename="../src/qml/pages/SearchPage.qml" line="26"/>
         <source>Search for a series</source>
         <translation>Buscar unas series</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SearchPage.qml" line="64"/>
+        <location filename="../src/qml/pages/SearchPage.qml" line="84"/>
         <source>Here will be stuff when you search for something</source>
         <translation>Aquí se rellena cuando buscas algo</translation>
     </message>
@@ -283,17 +283,17 @@
         <translation>Temporadas</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="74"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="84"/>
         <source>Season</source>
         <translation>Temporada</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="87"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="97"/>
         <source>Watched</source>
         <translation>Visto</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="129"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="139"/>
         <source>episodes</source>
         <translation>episodios</translation>
     </message>
@@ -311,7 +311,7 @@
         <translation>Añadir siempre</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="57"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="64"/>
         <source>Network</source>
         <translation>Red</translation>
     </message>
@@ -360,69 +360,112 @@
     </message>
 </context>
 <context>
+    <name>SettingsPage</name>
+    <message>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="16"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="19"/>
+        <source>Notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="22"/>
+        <source>Publish notifications (experimental)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="23"/>
+        <source>SailSeries publishes notifications on app startup and when updating/adding series if an episode airs today.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="30"/>
+        <source>Content updates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="33"/>
+        <source>Periodic updates of content (experimental)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="34"/>
+        <source>SailSeries refreshes all content every one hour. Requires app to be open at background. Might cause a small hickup when content is being updated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>StartPage</name>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="10"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="21"/>
         <source>Monday</source>
         <translation>Lunes</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="12"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="23"/>
         <source>Tuesday</source>
         <translation>Martes</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="14"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="25"/>
         <source>Wednesday</source>
         <translation>Miercoles</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="16"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="27"/>
         <source>Thursday</source>
         <translation>Jueves</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="18"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="29"/>
         <source>Friday</source>
         <translation>Viernes</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="20"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="31"/>
         <source>Saturday</source>
         <translation>Sábado</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="22"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="33"/>
         <source>Sunday</source>
         <translation>Domingo</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="39"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="50"/>
         <source>About</source>
         <translation>Información</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="47"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="57"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="62"/>
         <source>Search for a Series</source>
         <translation>Busqueda de series</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="55"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="69"/>
         <source>My Series</source>
         <translation>Mis Series</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="65"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="78"/>
         <source>This Week</source>
         <translation>Esta Semana</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="117"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="133"/>
         <source>Season %1 Episode %2</source>
         <translation>Temporada %1 Episodio %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="145"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="166"/>
         <source>Nothing airs this week</source>
         <translation>No hay emisiones esta semana</translation>
     </message>

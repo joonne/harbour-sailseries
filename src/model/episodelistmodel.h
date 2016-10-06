@@ -30,8 +30,8 @@ signals:
 public slots:
 
 private:
-    QList<EpisodeData*> myEpisodeListModel;
-    DatabaseManager* mydbmanager;
+    QList<EpisodeData*> m_episodeListModel;
+    DatabaseManager* m_dbmanager;
 
     static int episodeListCount(QQmlListProperty<EpisodeData> *prop);
     static EpisodeData* episodeListAt(QQmlListProperty<EpisodeData> *prop, int index);

@@ -15,13 +15,14 @@ SOURCES += main.cpp \
     model/serieslistmodel.cpp \
     databasemanager.cpp \
     model/episodedata.cpp \
-    model/datamodel.cpp \
     model/episodelistmodel.cpp \
     model/searchlistmodel.cpp \
     model/todaylistmodel.cpp \
     qzip.cpp \
     model/seasondata.cpp \
-    model/seasonlistmodel.cpp
+    model/seasonlistmodel.cpp \
+    engine.cpp \
+    settings.cpp
 
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 DEFINES += APP_BUILDNUM=\\\"$$RELEASE\\\"
@@ -46,7 +47,8 @@ OTHER_FILES = \
     qml/components/TextExpander.qml \
     qml/pages/EpisodeOverviewPage.qml \
     qml/pages/EpisodesPage.qml \
-    qml/pages/ProgramOverviewPage.qml
+    qml/pages/ProgramOverviewPage.qml \
+    poster-fallback.jpg
 
 INCLUDEPATH += $$PWD
 
@@ -56,16 +58,22 @@ HEADERS += \
     model/serieslistmodel.h \
     databasemanager.h \
     model/episodedata.h \
-    model/datamodel.h \
     model/episodelistmodel.h \
     model/searchlistmodel.h \
     model/todaylistmodel.h \
     qzipreader_p.h \
     qzipwriter_p.h \
     model/seasondata.h \
-    model/seasonlistmodel.h
+    model/seasonlistmodel.h \
+    engine.h \
+    settings.h
 
 DISTFILES += \
     qml/components/HorizontalSeparator.qml \
     qml/pages/SeasonsPage.qml \
-    qml/pages/SeriesPage.qml
+    qml/pages/SeriesPage.qml \
+    qml/pages/NotificationHandler.qml \
+    qml/pages/SettingsPage.qml
+
+RESOURCES += \
+    harbour-sailseries.qrc

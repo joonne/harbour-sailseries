@@ -33,7 +33,6 @@ class EpisodeData : public QObject
     Q_PROPERTY(int ThumbHeight READ getThumbHeight NOTIFY thumbHeightChanged)
     Q_PROPERTY(int ThumbWidth READ getThumbWidth NOTIFY thumbWidthChanged)
     Q_PROPERTY(int Watched READ getWatched WRITE setWatched NOTIFY watchedChanged)
-    Q_PROPERTY(QString WatchedFlagImage READ getWatchedFlagImage WRITE setWatchedFlagImage NOTIFY watchedFlagImageChanged)
 
 public:
     explicit EpisodeData(QObject *parent = 0, QMap<QString, QString> params = QMap<QString, QString>());
@@ -65,8 +64,6 @@ public:
     int getThumbWidth();
     int getWatched();
     void setWatched(int watched);
-    QString getWatchedFlagImage();
-    void setWatchedFlagImage(QString imagepath);
 
 signals:
     void IDChanged();
@@ -95,39 +92,38 @@ signals:
     void thumbHeightChanged();
     void thumbWidthChanged();
     void watchedChanged();
-    void watchedFlagImageChanged();
 
 public slots:
 
 private:
 
-    int myID;
-    QString myDirector;
-    int myEpimgflag;
-    QString myEpisodeName;
-    int myEpisodeNumber;
-    QString myFirstAired;
-    QString myGuestStars;
-    QString myIMDB_ID;
-    QString myLanguage;
-    QString myOverview;
-    int myProductionCode;
-    double myRating;
-    int myRatingCount;
-    int mySeasonNumber;
-    QString myWriter;
-    int myAbsoluteNumber;
-    int myAirsAfterSeason;
-    int myAirsBeforeSeason;
-    QString myFilename;
-    QString myLastUpdated;
-    int mySeasonID;
-    int mySeriesID;
-    QString myThumbAdded;
-    int myThumbHeight;
-    int myThumbWidth;
-    int myWatched;
-    QString myWatchedFlagImage;
+    int m_id;
+    QString m_director;
+    int m_epimgflag;
+    QString m_episodeName;
+    int m_episodeNumber;
+    QString m_firstAired;
+    QString m_guestStars;
+    QString m_imdbId;
+    QString m_language;
+    QString m_overview;
+    int m_productionCode;
+    double m_rating;
+    int m_ratingCount;
+    int m_seasonNumber;
+    QString m_writer;
+    int m_absoluteNumber;
+    int m_airsAfterSeason;
+    int m_airsBeforeSeason;
+    QString m_filename;
+    QString m_lastUpdated;
+    int m_seasonId;
+    int m_seriesId;
+    QString m_thumbAdded;
+    int m_thumbHeight;
+    int m_thumbWidth;
+    int m_watched;
+    QString m_watchedFlagImage;
 };
 
 #endif // EPISODEDATA_H

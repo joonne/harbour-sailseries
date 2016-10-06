@@ -29,11 +29,11 @@ signals:
 public slots:
 
 private:
-    DatabaseManager* mydbmanager;
-    XMLReader* myReader;
-    QList<QMap<QString,QString> > mySeries;
-    QList<QMap<QString,QString> > myEpisodes;
-    QList<SeriesData*> myTodayListModel;
+    DatabaseManager* m_dbmanager;
+    XMLReader* m_reader;
+    QList<QMap<QString,QString> > m_series;
+    QList<QMap<QString,QString> > m_episodes;
+    QList<SeriesData*> m_todayListModel;
 
     static int todayListCount(QQmlListProperty<SeriesData> *prop);
     static SeriesData* todayListAt(QQmlListProperty<SeriesData> *prop, int index);

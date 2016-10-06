@@ -3,12 +3,12 @@
 EpisodeListModel::EpisodeListModel(QObject *parent, DatabaseManager *dbmanager) :
     QObject(parent)
 {
-    mydbmanager = dbmanager;
+    m_dbmanager = dbmanager;
 }
 
 EpisodeListModel::~EpisodeListModel() {
 
-    foreach(EpisodeData* episode, myEpisodeListModel) {
+    foreach(EpisodeData* episode, m_episodeListModel) {
         delete episode;
         episode = 0;
     }
@@ -18,7 +18,7 @@ EpisodeListModel::~EpisodeListModel() {
 
 QQmlListProperty<EpisodeData> EpisodeListModel::getEpisodeList() {
 
-    return QQmlListProperty<EpisodeData>(this,&myEpisodeListModel,&EpisodeListModel::episodeListCount,&EpisodeListModel::episodeListAt);
+    return QQmlListProperty<EpisodeData>(this,&m_episodeListModel,&EpisodeListModel::episodeListCount,&EpisodeListModel::episodeListAt);
 
 }
 
@@ -27,30 +27,30 @@ QQmlListProperty<EpisodeData> EpisodeListModel::getEpisodeList() {
 void EpisodeListModel::episodeListAppend(QQmlListProperty<EpisodeData>* prop, EpisodeData* val)
 {
     EpisodeListModel* episodeModel = qobject_cast<EpisodeListModel*>(prop->object);
-    episodeModel->myEpisodeListModel.append(val);
+    episodeModel->m_episodeListModel.append(val);
 }
 
 EpisodeData* EpisodeListModel::episodeListAt(QQmlListProperty<EpisodeData>* prop, int index)
 {
-    return (qobject_cast<EpisodeListModel*>(prop->object))->myEpisodeListModel.at(index);
+    return (qobject_cast<EpisodeListModel*>(prop->object))->m_episodeListModel.at(index);
 }
 
 int EpisodeListModel::episodeListCount(QQmlListProperty<EpisodeData>* prop)
 {
-    return qobject_cast<EpisodeListModel*>(prop->object)->myEpisodeListModel.size();
+    return qobject_cast<EpisodeListModel*>(prop->object)->m_episodeListModel.size();
 }
 
 void EpisodeListModel::episodeListClear(QQmlListProperty<EpisodeData>* prop)
 {
-    qobject_cast<EpisodeListModel*>(prop->object)->myEpisodeListModel.clear();
+    qobject_cast<EpisodeListModel*>(prop->object)->m_episodeListModel.clear();
 }
 
 void EpisodeListModel::populateEpisodeList(QString seriesID, int seasonNumber) {
 
-    myEpisodeListModel.clear();
+    m_episodeListModel.clear();
     emit episodeListChanged();
 
-    QList<QMap<QString, QString> > episodes = mydbmanager->getEpisodes(seriesID.toInt(), seasonNumber);
+    QList<QMap<QString, QString> > episodes = m_dbmanager->getEpisodes(seriesID.toInt(), seasonNumber);
 
     if(episodes.size() != 0) {
 
@@ -62,7 +62,7 @@ void EpisodeListModel::populateEpisodeList(QString seriesID, int seasonNumber) {
             // we don't want the special episodes, they have season number 0.
             if(seasonNumber != 0 ) {
                 EpisodeData* episode = new EpisodeData(this, temp);
-                myEpisodeListModel.append(episode);
+                m_episodeListModel.append(episode);
             }
         }
 
@@ -73,17 +73,17 @@ void EpisodeListModel::populateEpisodeList(QString seriesID, int seasonNumber) {
 
 void EpisodeListModel::toggleWatched(QString episodeID) {
 
-    mydbmanager->toggleWatched(episodeID);
+    m_dbmanager->toggleWatched(episodeID);
 }
 
 void EpisodeListModel::markSeasonWatched(QString seriesID, int season) {
 
-    mydbmanager->markSeasonWatched(seriesID.toInt(), season);
+    m_dbmanager->markSeasonWatched(seriesID.toInt(), season);
     populateEpisodeList(seriesID, season);
     emit episodeListChanged();
 }
 
 int EpisodeListModel::getSeasonCount(QString seriesID) {
 
-    return mydbmanager->seasonCount(seriesID.toInt());
+    return m_dbmanager->seasonCount(seriesID.toInt());
 }

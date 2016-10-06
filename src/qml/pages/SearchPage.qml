@@ -5,7 +5,15 @@ Page {
     id: searchpage
 
     Component.onDestruction: {
-        controller.SearchModel.clearList()
+        engine.SearchModel.clearList()
+    }
+
+    Timer {
+        id: textDebounce
+        interval: 1000
+        onTriggered: {
+            engine.SearchModel.searchSeries(seriesSearch.text)
+        }
     }
 
     SearchField {
@@ -17,8 +25,16 @@ Page {
         }
         placeholderText: qsTr("Search for a series")
         EnterKey.onClicked: {
-            controller.SearchModel.searchSeries(text)
+            engine.SearchModel.searchSeries(text)
             focus = false
+        }
+
+        onTextChanged: {
+            if (text.length > 0) {
+                textDebounce.start()
+            } else {
+                engine.SearchModel.clearList()
+            }
         }
     }
 
@@ -27,15 +43,15 @@ Page {
         anchors.top: seriesSearch.bottom
         height: (searchpage.height - seriesSearch.height - Theme.paddingLarge)
         width: searchpage.width
-        model: controller.SearchModel.SearchModel
+        model: engine.SearchModel.SearchModel
 
         delegate: ListItem {
             id: listItem
             contentHeight: Theme.itemSizeSmall
             contentWidth: listView.width
             onClicked: {
-                controller.SearchModel.selectSeries(index)
-                controller.SearchModel.checkIfAdded(ID,SeriesName)
+                engine.SearchModel.selectSeries(index)
+                engine.SearchModel.checkIfAdded(ID,SeriesName)
                 pageStack.push(Qt.resolvedUrl("SeriesInfoPage.qml"))
             }
 
@@ -44,13 +60,17 @@ Page {
                 Label {
                     id: seriesName
                     text: SeriesName
-                    color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
+                    truncationMode: TruncationMode.Fade
+                    width: parent.width - Theme.paddingLarge
+                    color: Theme.primaryColor
                 }
                 Label {
                     id: network
                     text: Network
                     font.pixelSize: Theme.fontSizeSmall
-                    color: listItem.highlighted ? Theme.highlightColor : Theme.secondaryColor
+                    truncationMode: TruncationMode.Fade
+                    width: parent.width - Theme.paddingLarge
+                    color: Theme.secondaryColor
                 }
             }
         }
