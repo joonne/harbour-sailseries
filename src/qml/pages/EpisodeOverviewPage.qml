@@ -29,10 +29,6 @@ Page {
     property string episodeId
     property string seriesId
 
-    Component.onCompleted: {
-        console.log(watched, episodeId, seriesId)
-    }
-
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: column.height
