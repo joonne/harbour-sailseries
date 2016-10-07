@@ -549,7 +549,7 @@ QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries() {
     if(m_db.isOpen()) {
 
         QSqlQuery query(m_db);
-        query.exec(QString("SELECT Series.seriesName, Series.network, Series.airsTime, Series.airsDayOfWeek, Series.status, Series.id, Episode.id, Episode.episodeName, Episode.episodeNumber, Episode.seasonNumber, Episode.firstAired, Episode.filename, Episode.overview, Episode.guestStars, Episode.writer, Episode.watched FROM Series, Episode WHERE Series.status = '%1' AND Episode.firstAired BETWEEN '%2' AND '%3' AND Series.id = Episode.seriesID AND Episode.seasonNumber != 0 AND Episode.absoluteNumber != 0 ORDER BY Episode.firstAired;").arg(status).arg(firstAiredStart).arg(firstAiredEnd));
+        query.exec(QString("SELECT Series.seriesName, Series.network, Series.airsTime, Series.airsDayOfWeek, Series.status, Series.id, Episode.id, Episode.episodeName, Episode.episodeNumber, Episode.seasonNumber, Episode.firstAired, Episode.filename, Episode.overview, Episode.guestStars, Episode.writer, Episode.watched FROM Series, Episode WHERE Series.status = '%1' AND Episode.firstAired BETWEEN '%2' AND '%3' AND Series.id = Episode.seriesID AND Episode.seasonNumber != 0 ORDER BY Episode.firstAired;").arg(status).arg(firstAiredStart).arg(firstAiredEnd));
 
         if(query.isSelect()) {
 
@@ -625,7 +625,7 @@ QList<QMap<QString, QString> > DatabaseManager::getEpisodes(int seriesID, int se
     QList<QMap<QString, QString> > episodes;
 
     QSqlQuery query(m_db);
-    query.exec(QString("SELECT episodeName,episodeNumber,overview,seasonNumber,absoluteNumber,filename,watched,id,guestStars,writer,firstAired FROM Episode WHERE seriesID = %1 AND seasonNumber = %2 AND absoluteNumber != 0 ORDER BY episodeNumber").arg(seriesID).arg(seasonNumber));
+    query.exec(QString("SELECT episodeName,episodeNumber,overview,seasonNumber,absoluteNumber,filename,watched,id,guestStars,writer,firstAired FROM Episode WHERE seriesID = %1 AND seasonNumber = %2 ORDER BY episodeNumber").arg(seriesID).arg(seasonNumber));
 
     if(query.isSelect()) {
 
@@ -666,12 +666,6 @@ QList<QMap<QString, QString> > DatabaseManager::getEpisodes(int seriesID, int se
 
             QString firstAired = query.value(10).toString();
             temp["firstAired"] = firstAired;
-
-//            // TODO: workaround for dummy episodes that show in the episodes as duplicates,
-//            // need to also check this in episodeCount function if this is to be done correctly.
-//            if(temp["firstAired"].isEmpty()) {
-//                continue;
-//            }
 
             episodes.append(temp);
         }
@@ -747,7 +741,7 @@ int DatabaseManager::watchedCount(int seriesID) {
 
     int watchedCount = 0;
     QSqlQuery query(m_db);
-    query.exec(QString("SELECT COUNT(episodeName) FROM Episode WHERE seriesID = %1 AND watched = 1 AND seasonNumber != 0 AND absoluteNumber != 0").arg(seriesID));
+    query.exec(QString("SELECT COUNT(episodeName) FROM Episode WHERE seriesID = %1 AND watched = 1 AND seasonNumber != 0").arg(seriesID));
     if(query.isSelect()) {
         while(query.next()) {
             watchedCount = query.value(0).toInt();
@@ -760,7 +754,7 @@ int DatabaseManager::watchedCountBySeason(int seriesID, int seasonNumber) {
 
     int watchedCount = 0;
     QSqlQuery query(m_db);
-    query.exec(QString("SELECT COUNT(episodeName) FROM Episode WHERE seriesID = %1 AND watched = 1 AND seasonNumber = %2 AND absoluteNumber != 0").arg(seriesID).arg(seasonNumber));
+    query.exec(QString("SELECT COUNT(episodeName) FROM Episode WHERE seriesID = %1 AND watched = 1 AND seasonNumber = %2").arg(seriesID).arg(seasonNumber));
     if(query.isSelect()) {
         while(query.next()) {
             watchedCount = query.value(0).toInt();
@@ -774,7 +768,7 @@ int DatabaseManager::totalCount(int seriesID) {
 
     int totalCount = 0;
     QSqlQuery query(m_db);
-    query.exec(QString("SELECT COUNT(episodeName) FROM Episode WHERE seriesID = %1 AND seasonNumber != 0 AND absoluteNumber != 0").arg(seriesID));
+    query.exec(QString("SELECT COUNT(episodeName) FROM Episode WHERE seriesID = %1 AND seasonNumber != 0").arg(seriesID));
     if(query.isSelect()) {
         while(query.next()) {
             totalCount = query.value(0).toInt();
@@ -788,7 +782,7 @@ int DatabaseManager::totalCountBySeason(int seriesID, int seasonNumber) {
 
     int totalCount = 0;
     QSqlQuery query(m_db);
-    query.exec(QString("SELECT COUNT(episodeName) FROM Episode WHERE seriesID = %1 AND seasonNumber = %2 AND absoluteNumber != 0").arg(seriesID).arg(seasonNumber));
+    query.exec(QString("SELECT COUNT(episodeName) FROM Episode WHERE seriesID = %1 AND seasonNumber = %2").arg(seriesID).arg(seasonNumber));
     if(query.isSelect()) {
         while(query.next()) {
             totalCount = query.value(0).toInt();
