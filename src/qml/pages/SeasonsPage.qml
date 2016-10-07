@@ -59,7 +59,7 @@ Page {
                 anchors.top: parent.top
                 anchors.topMargin: (background.height - banner.height) / 2
                 onWidthChanged: {
-                    if(banner.width > listItem.width) {
+                    if (banner.width > listItem.width) {
                         banner.width = 0;
                     }
                 }

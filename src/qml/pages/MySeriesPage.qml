@@ -5,22 +5,22 @@ Page {
     id: myseriespage
 
     Component.onDestruction: {
-        if(engine) {
+        if (engine) {
             engine.SeriesListModel.Mode = "default"
         }
     }
 
     function nextEpisodeDetails(episodeName, daysTo, status) {
 
-        if(status === "Ended") {
+        if (status === "Ended") {
             return qsTr("This show has ended");
-        } else if(daysTo === "today") {
+        } else if (daysTo === "today") {
             return qsTr("%1 airs tonight").arg(episodeName);
-        } else if(daysTo === "tomorrow") {
+        } else if (daysTo === "tomorrow") {
             return qsTr("%1 airs tomorrow").arg(episodeName);
-        } else if(episodeName.length !== 0) {
+        } else if (episodeName.length !== 0) {
             return qsTr("%1 airs in %2 days").arg(episodeName).arg(daysTo);
-        } else if(episodeName.length === 0 && daysTo.length !== 0) {
+        } else if (episodeName.length === 0 && daysTo.length !== 0) {
             return qsTr("Next episode airs in %1 days").arg(daysTo);
         } else {
             return qsTr("No information about next episode");

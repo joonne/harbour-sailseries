@@ -18,7 +18,7 @@ CoverBackground {
     //---------------------------------
 
     function setPosterVisible() {
-        if(engine.SeriesListModel.Mode === "m_series" && engine.SeriesListModel.Poster !== null) {
+        if (engine.SeriesListModel.Mode === "m_series" && engine.SeriesListModel.Poster !== null) {
             return "http://thetvdb.com/banners/" + engine.SeriesListModel.Poster;
         }
     }

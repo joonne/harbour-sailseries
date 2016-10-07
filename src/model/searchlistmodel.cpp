@@ -85,7 +85,7 @@ void SearchListModel::getFullSeriesRecordFinished() {
 void SearchListModel::populateSearchModel() {
 
 
-    if(m_series.size() != 0) {
+    if (m_series.size() != 0) {
         int length = m_series.size();
         for(int i = 0; i < length; ++i) {
             QMap<QString,QString> temp = m_series.at(i);
@@ -138,7 +138,7 @@ void SearchListModel::storeSeries() {
 
     m_series = m_reader->getSeries();
 
-    if(!m_series.isEmpty()) {
+    if (!m_series.isEmpty()) {
         m_dbmanager->insertSeries(m_series.first());
     }
 }
@@ -187,7 +187,7 @@ bool SearchListModel::getLoading() { return m_loading; }
 
 void SearchListModel::setLoading(bool) {
 
-    if(m_loading) {
+    if (m_loading) {
         m_loading = false;
     } else {
         m_loading = true;
@@ -199,7 +199,7 @@ bool SearchListModel::getAdded() { return m_added; }
 
 void SearchListModel::setAdded(bool cond) {
 
-    if(m_added != cond) {
+    if (m_added != cond) {
         m_added = cond;
         emit addedChanged();
     }

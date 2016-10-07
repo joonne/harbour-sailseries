@@ -19,7 +19,7 @@ Item {
     function findNotificationId(seriesName) {
         var id = 0;
         notifications.forEach(function(item) {
-            if(item.seriesName === seriesName) {
+            if (item.seriesName === seriesName) {
                 id = item.id;
             }
         });
@@ -40,7 +40,7 @@ Item {
 
         var replacesId = findNotificationId(summary);
 
-        if(replacesId === 0) {
+        if (replacesId === 0) {
 
             notification.summary = summary
             notification.body = body

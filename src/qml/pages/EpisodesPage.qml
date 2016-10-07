@@ -118,7 +118,7 @@ Page {
 
             function setSource() {
 
-                if(Watched === 0) {
+                if (Watched === 0) {
                     return star;
                 } else {
                     return favorite;

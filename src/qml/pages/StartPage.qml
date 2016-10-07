@@ -5,7 +5,7 @@ Page {
     id: startpage
 
     function checkNotification(weekday, seriesName, episodeName, airsTime) {
-        if(weekday === new Date().toLocaleString(Qt.locale("en_EN"), "dddd")) {
+        if (weekday === new Date().toLocaleString(Qt.locale("en_EN"), "dddd")) {
             var summary = seriesName;
             var body = episodeName ? episodeName + '\n' + airsTime : airsTime;
             var previewSummary = seriesName;

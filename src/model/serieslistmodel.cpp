@@ -34,7 +34,7 @@ void SeriesListModel::updateFetchFinished() {
     storeEpisodes();
     storeBanners();
 
-    if(!m_seriesIds.isEmpty()) {
+    if (!m_seriesIds.isEmpty()) {
         updateSeries();
         return;
     }
@@ -116,7 +116,7 @@ void SeriesListModel::storeSeries() {
 
     m_series = m_reader->getSeries();
 
-    if(!m_series.isEmpty()) {
+    if (!m_series.isEmpty()) {
         m_dbmanager->insertSeries(m_series.first());
     }
 }
@@ -132,7 +132,7 @@ void SeriesListModel::storeBanners() {
 
     m_banners = m_reader->getBanners();
 
-    if(!m_series.isEmpty()) {
+    if (!m_series.isEmpty()) {
         int seriesId = m_series.first()["id"].toInt();
         m_dbmanager->insertBanners(m_banners, seriesId);
     }
@@ -176,7 +176,7 @@ bool SeriesListModel::getLoading() { return m_loading; }
 
 void SeriesListModel::setLoading(bool state) {
 
-    if(m_loading != state) {
+    if (m_loading != state) {
         m_loading = state;
         emit loadingChanged();
     }
@@ -188,7 +188,7 @@ QString SeriesListModel::getMode() { return mode; }
 
 void SeriesListModel::setMode(QString newmode) {
 
-    if(mode != newmode) {
+    if (mode != newmode) {
         mode = newmode;
         emit modeChanged();
     }
@@ -197,7 +197,7 @@ void SeriesListModel::setMode(QString newmode) {
 void SeriesListModel::deleteSeries(int seriesID) {
 
     setLoading(true);
-    if(m_dbmanager->deleteSeries(seriesID)) {
+    if (m_dbmanager->deleteSeries(seriesID)) {
         populateBannerList();
         emit updateModels();
     }
@@ -206,7 +206,7 @@ void SeriesListModel::deleteSeries(int seriesID) {
 
 void SeriesListModel::updateSeries(QString seriesId) {
 
-    if(!m_seriesIds.isEmpty() && seriesId.isEmpty()) {
+    if (!m_seriesIds.isEmpty() && seriesId.isEmpty()) {
         seriesId = m_seriesIds.takeFirst();
     }
 

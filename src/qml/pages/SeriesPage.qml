@@ -13,7 +13,7 @@ Page {
     }
 
     Component.onDestruction:{
-        if(engine) {
+        if (engine) {
             engine.SeriesListModel.Mode = "default"
         }
     }
@@ -36,10 +36,10 @@ Page {
     }
 
     function process(string) {
-        if(string.charAt(0) === "|" && string.charAt(string.length - 1) === "|") {
+        if (string.charAt(0) === "|" && string.charAt(string.length - 1) === "|") {
             var newstring = string.split("|").join(", ")
             return newstring.substr(2,(newstring.length - 4))
-        } else if(string.charAt(0) === "|") {
+        } else if (string.charAt(0) === "|") {
             return string.split("|").join(", ").substr(2)
         } else {
             return string.split("|").join(", ")

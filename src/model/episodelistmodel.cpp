@@ -52,7 +52,7 @@ void EpisodeListModel::populateEpisodeList(QString seriesID, int seasonNumber) {
 
     QList<QMap<QString, QString> > episodes = m_dbmanager->getEpisodes(seriesID.toInt(), seasonNumber);
 
-    if(episodes.size() != 0) {
+    if (episodes.size() != 0) {
 
         int size = episodes.size();
         for(int i = 0; i < size; ++i) {
@@ -60,7 +60,7 @@ void EpisodeListModel::populateEpisodeList(QString seriesID, int seasonNumber) {
             QMap<QString, QString> temp = episodes.at(i);
 
             // we don't want the special episodes, they have season number 0.
-            if(seasonNumber != 0 ) {
+            if (seasonNumber != 0 ) {
                 EpisodeData* episode = new EpisodeData(this, temp);
                 m_episodeListModel.append(episode);
             }
