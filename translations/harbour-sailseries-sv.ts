@@ -270,7 +270,7 @@
         <translation>Sök efter en serie</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SearchPage.qml" line="84"/>
+        <location filename="../src/qml/pages/SearchPage.qml" line="85"/>
         <source>Here will be stuff when you search for something</source>
         <translation>Här visas saker när du söker efter något</translation>
     </message>
