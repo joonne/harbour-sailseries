@@ -49,7 +49,7 @@ public:
     QString getZap2it_ID();
     QString getNetwork();
     bool getLoading();
-    void setLoading(bool);
+    void setLoading(bool state);
     bool getAdded();
     void setAdded(bool cond);
 

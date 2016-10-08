@@ -185,13 +185,8 @@ QString SearchListModel::getNetwork() { return m_info->getNetwork(); }
 
 bool SearchListModel::getLoading() { return m_loading; }
 
-void SearchListModel::setLoading(bool) {
-
-    if (m_loading) {
-        m_loading = false;
-    } else {
-        m_loading = true;
-    }
+void SearchListModel::setLoading(bool state) {
+    m_loading = state;
     emit loadingChanged();
 }
 

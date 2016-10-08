@@ -12,7 +12,12 @@ Page {
 
         PullDownMenu {
             MenuItem {
-                visible: engine.SearchModel.Added ? enabled = false : enabled = true
+                text: "IMDB"
+                onClicked: Qt.openUrlExternally("http://www.imdb.com/title/" + engine.SearchModel.IMDB_ID)
+            }
+
+            MenuItem {
+                visible: engine.SearchModel.Added === false
                 text: qsTr("Add to my series")
                 onClicked: {
                     engine.SearchModel.getFullSeriesRecord(engine.SearchModel.ID)
@@ -20,9 +25,9 @@ Page {
             }
 
             MenuItem {
-                visible: engine.SearchModel.Added ? enabled = true : enabled = false
+                enabled: engine.SearchModel.Added === false
+                visible: engine.SearchModel.Added === true
                 text: qsTr("Already added")
-                // TODO: maybe app could go to m_seriesPage ?
             }
         }
 
@@ -67,20 +72,13 @@ Page {
                 readOnly: true
                 width: infopage.width
             }
-
-            Button {
-                id: imdb
-                text: "IMDB"
-                onClicked: Qt.openUrlExternally("http://www.imdb.com/title/" + engine.SearchModel.IMDB_ID)
-                anchors.left: parent.left
-                anchors.leftMargin: (infopage.width - imdb.width) / 2
-            }
         }
     }
 
     BusyIndicator {
         id: busyIndicator
         anchors.centerIn: parent
+        size: BusyIndicatorSize.Large
         running: engine.SearchModel.Loading ? true : false
     }
 }

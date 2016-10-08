@@ -301,17 +301,17 @@
 <context>
     <name>SeriesInfoPage</name>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="16"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="21"/>
         <source>Add to my series</source>
         <translation>Añadir a mis series</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="24"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="30"/>
         <source>Already added</source>
         <translation>Añadir siempre</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="64"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="69"/>
         <source>Network</source>
         <translation>Red</translation>
     </message>
@@ -329,32 +329,32 @@
         <translation>Finalizado</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="56"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="57"/>
         <source>Remove</source>
         <translation>Eliminar</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="58"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="59"/>
         <source>Removing</source>
         <translation>Eliminando</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="67"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="68"/>
         <source>Update</source>
         <translation>Actualizar</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="96"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="97"/>
         <source>Status</source>
         <translation>Estado</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="105"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="106"/>
         <source>Rating</source>
         <translation>Valoración</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="116"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="117"/>
         <source>Genre</source>
         <translation>Genero</translation>
     </message>
