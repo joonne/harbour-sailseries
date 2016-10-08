@@ -35,6 +35,7 @@ Page {
         }
     }
 
+    // processes tubes "|" out of the given string
     function process(string) {
         if (string.charAt(0) === "|" && string.charAt(string.length - 1) === "|") {
             var newstring = string.split("|").join(", ")

@@ -43,6 +43,7 @@ Page {
         anchors.top: seriesSearch.bottom
         height: (searchpage.height - seriesSearch.height - Theme.paddingLarge)
         width: searchpage.width
+        clip: true
         model: engine.SearchModel.SearchModel
 
         delegate: ListItem {
@@ -60,16 +61,16 @@ Page {
                 Label {
                     id: seriesName
                     text: SeriesName
+                    width: listItem.width - (2 * Theme.paddingLarge)
                     truncationMode: TruncationMode.Fade
-                    width: parent.width - Theme.paddingLarge
                     color: Theme.primaryColor
                 }
                 Label {
                     id: network
                     text: Network
                     font.pixelSize: Theme.fontSizeSmall
-                    truncationMode: TruncationMode.Fade
                     width: parent.width - Theme.paddingLarge
+                    truncationMode: TruncationMode.Fade
                     color: Theme.secondaryColor
                 }
             }
