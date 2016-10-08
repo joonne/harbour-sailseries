@@ -1,8 +1,3 @@
-# Final packages
-RPMS/*
-final-rpm-for-harbour-submission/*
-tests/*
-
 # Binaries are created in the project folder (Sailfish SDK doesn't support shadow building yet)
 harbour-sailseries
 src/harbour-sailseries
