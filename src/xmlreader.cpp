@@ -15,9 +15,6 @@ XMLReader::XMLReader(QObject *parent) :
             SIGNAL(finished(QNetworkReply*)),
             this,
             SLOT(replyFinished(QNetworkReply*)));
-
-//    getLanguages();
-
 }
 
 XMLReader::~XMLReader() {
@@ -98,14 +95,13 @@ void XMLReader::startRequest(QUrl url) {
 
 void XMLReader::replyFinished(QNetworkReply *reply) {
 
-    QByteArray b = reply->readAll();
-    QBuffer* buf = new QBuffer(&b);
+    qDebug() << reply->url() << reply->errorString();
 
-    // If server is down, do something.
-    if (buf->buffer().contains("522: Connection timed out")) {
+    // Error -> inform user by appending error message to listview
+    if (reply->error() != QNetworkReply::NoError) {
 
         QMap<QString,QString> temp;
-        temp.insert("SeriesName","Server timeout, try again later.");
+        temp.insert("SeriesName", "Error, try again later.");
         m_series.clear();
         m_series.append(temp);
         emit readyToPopulateSeries();
@@ -113,6 +109,9 @@ void XMLReader::replyFinished(QNetworkReply *reply) {
         reply->deleteLater();
         return;
     }
+
+    QByteArray b = reply->readAll();
+    QBuffer* buf = new QBuffer(&b);
 
     if (reply->url().toString().endsWith(".zip")) {
         QZipReader *zip = new QZipReader(buf);
@@ -149,7 +148,7 @@ void XMLReader::replyFinished(QNetworkReply *reply) {
         QXmlStreamReader xml(buf->buffer());
         parseXML(xml);
 
-        if (m_series.size() != 0 and !getFullRecordFlag() and !getUpdateFlag()) {
+        if (m_series.size() != 0 && !getFullRecordFlag() && !getUpdateFlag()) {
             setFullRecordFlag(false);
             setUpdateFlag(false);
             emit readyToPopulateSeries();
