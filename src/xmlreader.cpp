@@ -16,6 +16,7 @@ XMLReader::XMLReader(QObject *parent) :
             this,
             SLOT(replyFinished(QNetworkReply*)));
 
+    getAuthenticationToken();
     getJwt();
 }
 
@@ -37,6 +38,17 @@ void XMLReader::getJwt()
     m_nam->post(request, jsonString);
 }
 
+void XMLReader::getAuthenticationToken() {
+
+    // TODO: better way for this?
+    QByteArray jsonString = "{\"apikey\":\"88D0BD893851FA78\"}";
+    QUrl url(QString("%1/login").arg(QString(API_BASE_URL)));
+
+    QNetworkRequest request(url);
+    QNetworkReply *reply = m_nam->post(request, jsonString);
+    connect(reply, SIGNAL(finished()), this, SLOT(authReplyFinished()));
+}
+
 QString XMLReader::getLocale()
 {
     auto systemLocale = QLocale::system().name();
@@ -52,7 +64,7 @@ QString XMLReader::getLocale()
 
 void XMLReader::getLanguages()
 {
-    QString url = QString(MIRRORPATH) + "/api/" + QString(APIKEY) + "/languages.xml";
+    QString url = QString("%1/api/%2/languages.xml").arg(QString(MIRRORPATH)).arg(QString(APIKEY));
     qDebug() << "Requesting" << url;
     QUrl finalUrl(url);
     get(finalUrl);
@@ -103,10 +115,17 @@ void XMLReader::get(QUrl url)
 // slots
 // ---------------------------------------------------
 
+void XMLReader::authReplyFinished() {
+    // QByteArray b = reply->readAll();
+    // qDebug() << "reply" << b;
+
+    qDebug() << "here!!!";
+}
+
 void XMLReader::replyFinished(QNetworkReply *reply)
 {
     qDebug() << reply->url() << reply->errorString();
-
+        
     // Error -> inform user by appending error message to listview
     if (reply->error() != QNetworkReply::NoError) {
 

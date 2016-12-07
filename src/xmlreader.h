@@ -41,6 +41,8 @@ public:
     void searchSeries(QString text);
     void getFullSeriesRecord(QString seriesid, QString method);
 
+    void getAuthenticationToken();
+    
     QList<QVariantMap> getSeries();
     QList<QMap<QString,QString> > getEpisodes();
     QList<QMap<QString,QString> > getBanners();
@@ -58,6 +60,7 @@ signals:
 
 public slots:
     void replyFinished(QNetworkReply* reply);
+    void authReplyFinished();
 
 private:
     QNetworkAccessManager* m_nam;
