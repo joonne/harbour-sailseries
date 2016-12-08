@@ -14,6 +14,9 @@
 #include <QByteArray>
 #include <QBuffer>
 #include "qzipreader_p.h"
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonDocument>
 
 #include <QJsonDocument>
 #include <QJsonArray>
@@ -60,7 +63,7 @@ signals:
 
 public slots:
     void replyFinished(QNetworkReply* reply);
-    void authReplyFinished();
+    void replyFinishedNew(QNetworkReply* reply);
 
 private:
     QNetworkAccessManager* m_nam;
@@ -69,6 +72,7 @@ private:
     QList<QMap<QString,QString> > m_episodes;
     QList<QMap<QString,QString> > m_banners;
     QString m_currentServerTime;
+    QString m_jwt;
 
     bool m_fullRecord;
     bool m_update;

@@ -11,10 +11,15 @@ XMLReader::XMLReader(QObject *parent) :
 {
     m_nam = new QNetworkAccessManager(this);
 
+//    connect(m_nam,
+//            SIGNAL(finished(QNetworkReply*)),
+//            this,
+//            SLOT(replyFinished(QNetworkReply*)));
+
     connect(m_nam,
             SIGNAL(finished(QNetworkReply*)),
             this,
-            SLOT(replyFinished(QNetworkReply*)));
+            SLOT(replyFinishedNew(QNetworkReply*)));
 
     getAuthenticationToken();
     getJwt();
@@ -40,13 +45,12 @@ void XMLReader::getJwt()
 
 void XMLReader::getAuthenticationToken() {
 
-    // TODO: better way for this?
-    QByteArray jsonString = "{\"apikey\":\"88D0BD893851FA78\"}";
+    QByteArray body = "{\"apikey\":\"88D0BD893851FA78\"}";
     QUrl url(QString("%1/login").arg(QString(API_BASE_URL)));
 
     QNetworkRequest request(url);
-    QNetworkReply *reply = m_nam->post(request, jsonString);
-    connect(reply, SIGNAL(finished()), this, SLOT(authReplyFinished()));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, QVariant(QString("application/json")));
+    m_nam->post(request, body);
 }
 
 QString XMLReader::getLocale()
@@ -87,10 +91,7 @@ void XMLReader::getFullSeriesRecord(QString seriesid, QString method)
         setUpdateFlag(true);
     }
 
-//    QString locale = getLocale();
-
     QString url = QString("%1/api/%2/series/%3/all/en.zip").arg(QString(MIRRORPATH)).arg(QString(APIKEY)).arg(seriesid);
-    // QString url = QString("%1/api/%2/series/%3/all/%4.zip").arg(QString(MIRRORPATH)).arg(QString(APIKEY)).arg(seriesid).arg(locale);
     qDebug() << "Requesting" << url;
     QUrl finalUrl(url);
     get(finalUrl);
@@ -115,11 +116,31 @@ void XMLReader::get(QUrl url)
 // slots
 // ---------------------------------------------------
 
-void XMLReader::authReplyFinished() {
-    // QByteArray b = reply->readAll();
-    // qDebug() << "reply" << b;
+void XMLReader::replyFinishedNew(QNetworkReply *reply) {
 
-    qDebug() << "here!!!";
+    QString response = (QString) reply->readAll();
+    qDebug() << response;
+
+    QJsonObject obj;
+    QJsonDocument doc = QJsonDocument::fromJson(response.toUtf8());
+
+    // check validity of the document
+    if (!doc.isNull()) {
+        if (doc.isObject()) {
+            obj = doc.object();
+        } else {
+            qDebug() << "Document is not an object" << endl;
+        }
+    } else {
+        qDebug() << "Invalid JSON...\n" << response << endl;
+    }
+
+    QString result = obj.value("token").toString();
+    m_jwt = result;
+
+    qDebug() << "result" << result;
+
+    reply->deleteLater();
 }
 
 void XMLReader::replyFinished(QNetworkReply *reply)
