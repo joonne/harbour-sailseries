@@ -33,6 +33,7 @@ public:
 
     void parseXML(QXmlStreamReader &xml);
     QMap<QString,QString> parseSeries(QXmlStreamReader& xml);
+    QList<QMap<QString,QString> > parseSeriesNew(QJsonObject obj);
     QMap<QString,QString> parseLanguages(QXmlStreamReader& xml);
     QMap<QString,QString> parseEpisode(QXmlStreamReader& xml);
     QMap<QString,QString> parseBanner(QXmlStreamReader& xml);
@@ -42,6 +43,7 @@ public:
 
     void getLanguages();
     void searchSeries(QString text);
+    void searchSeriesNew(QString text);
     void getFullSeriesRecord(QString seriesid, QString method);
 
     void getAuthenticationToken();

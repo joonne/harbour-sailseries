@@ -135,10 +135,18 @@ void XMLReader::replyFinishedNew(QNetworkReply *reply) {
         qDebug() << "Invalid JSON...\n" << response << endl;
     }
 
-    QString result = obj.value("token").toString();
-    m_jwt = result;
+    qDebug() << "keys" << obj.keys();
 
-    qDebug() << "result" << result;
+    if (obj.contains("token")) {
+        QString result = obj.value("token").toString();
+        qDebug() << "token" << result;
+        m_jwt = result;
+    } else {
+
+        m_series.clear();
+        m_series = parseSeriesNew(obj);
+        emit readyToPopulateSeries();
+    }
 
     reply->deleteLater();
 }
@@ -287,6 +295,21 @@ void XMLReader::parseXML(QXmlStreamReader& xml)
     if (banners.size() != 0) {
         m_banners = banners;
     }
+}
+
+QList<QMap<QString, QString> > XMLReader::parseSeriesNew(QJsonObject obj) {
+    QList<QMap<QString, QString> > allSeries;
+
+    QJsonArray foundSeries = obj.value("data").toArray();
+    foreach (QJsonValue item, foundSeries) {
+        QStringList keys = item.toObject().keys();
+        QMap<QString, QString> series;
+        foreach (QString key, keys) {
+            series.insert(key, item.toObject().value(key).toString());
+        }
+        allSeries.append(series);
+    }
+    return allSeries;
 }
 
 // Base series record parsing.
