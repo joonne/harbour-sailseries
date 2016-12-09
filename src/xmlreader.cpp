@@ -99,6 +99,23 @@ void XMLReader::getFullSeriesRecord(QString seriesid, QString method)
 
 QList<QVariantMap> XMLReader::getSeries() { return m_series; }
 
+void XMLReader::getFullSeriesRecordNew(QString seriesid, QString method)
+{
+    if (method == "full") {
+        setFullRecordFlag(true);
+    } else if (method == "update") {
+        setUpdateFlag(true);
+    }
+
+    QUrl url(QString("%1/series/%2").arg(QString(API_BASE_URL)).arg(seriesid));
+    qDebug() << "Requesting" << url;
+    QNetworkRequest request(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, QVariant(QString("application/json")));
+    request.setRawHeader(QByteArray("Authorization"), QString("Bearer " + m_jwt).toUtf8());
+    request.setRawHeader(QByteArray("Accept-Language"), QByteArray("en"));
+    m_nam->get(request);
+}
+
 QList<QMap<QString,QString> > XMLReader::getEpisodes() { return m_episodes; }
 
 QList<QMap<QString,QString> > XMLReader::getBanners() { return m_banners; }
@@ -145,7 +162,31 @@ void XMLReader::replyFinishedNew(QNetworkReply *reply) {
 
         m_series.clear();
         m_series = parseSeriesNew(obj);
-        emit readyToPopulateSeries();
+
+        if (m_series.size() != 0 and !getFullRecordFlag() and !getUpdateFlag()) {
+
+            setFullRecordFlag(false);
+            setUpdateFlag(false);
+
+            emit readyToPopulateSeries();
+
+        } else if (getFullRecordFlag()) {
+
+            setFullRecordFlag(false);
+            setUpdateFlag(false);
+
+            qDebug() << "readyToStoreSeries()";
+//            emit readyToStoreSeries();
+
+        } else if (getUpdateFlag()) {
+
+            setFullRecordFlag(false);
+            setUpdateFlag(false);
+
+//            emit readyToUpdateSeries();
+            qDebug() << "readyToUpdateSeries()";
+
+        }
     }
 
     reply->deleteLater();

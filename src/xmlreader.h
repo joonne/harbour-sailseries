@@ -45,6 +45,7 @@ public:
     void searchSeries(QString text);
     void searchSeriesNew(QString text);
     void getFullSeriesRecord(QString seriesid, QString method);
+    void getFullSeriesRecordNew(QString seriesid, QString method);
 
     void getAuthenticationToken();
     
