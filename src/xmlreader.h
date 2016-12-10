@@ -31,7 +31,7 @@ public:
     explicit XMLReader(QObject *parent = 0);
     ~XMLReader();
 
-    void parseXML(QXmlStreamReader &xml);
+//    void parseXML(QXmlStreamReader &xml);
     QMap<QString,QString> parseSeries(QXmlStreamReader& xml);
     QList<QVariantMap> parseSeriesNew(QJsonObject obj);
     QMap<QString,QString> parseLanguages(QXmlStreamReader& xml);
@@ -48,10 +48,10 @@ public:
     void getFullSeriesRecordNew(QString seriesid, QString method);
 
     void getAuthenticationToken();
-    
+
     QList<QVariantMap> getSeries();
-    QList<QMap<QString,QString> > getEpisodes();
-    QList<QMap<QString,QString> > getBanners();
+    QList<QVariantMap> getEpisodes();
+    QList<QVariantMap> getBanners();
 
     bool getUpdateFlag();
     void setUpdateFlag(bool state);
@@ -72,8 +72,8 @@ private:
     QNetworkAccessManager* m_nam;
     QList<QMap<QString,QString> > m_languages;
     QList<QVariantMap> m_series;
-    QList<QMap<QString,QString> > m_episodes;
-    QList<QMap<QString,QString> > m_banners;
+    QList<QVariantMap> m_episodes;
+    QList<QVariantMap> m_banners;
     QString m_currentServerTime;
     QString m_jwt;
 

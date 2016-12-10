@@ -339,8 +339,8 @@ bool DatabaseManager::insertSeries(QVariantMap series)
     return ret;
 }
 
-bool DatabaseManager::insertEpisodes(QList<QMap<QString, QString> > episodes)
-{
+bool DatabaseManager::insertEpisodes(QList<QVariantMap> episodes) {
+
     qDebug() << "insertEpisodes() ";
     
     bool ret = false;
@@ -350,29 +350,29 @@ bool DatabaseManager::insertEpisodes(QList<QMap<QString, QString> > episodes)
     for (auto episode : episodes) {
         
         int id = episode["id"].toInt();
-        QString director = episode["Director"];
+        QString director = episode["Director"].toString();
         int epimgflag = episode["EpImgFlag"].toInt();
-        QString episodeName = episode["EpisodeName"];
+        QString episodeName = episode["EpisodeName"].toString();
         int episodeNumber = episode["EpisodeNumber"].toInt();
-        QString firstAired = episode["FirstAired"];
-        QString guestStars = episode["GuestStars"];
-        QString imdb_id = episode["IMDB_ID"];
-        QString language = episode["Language"];
-        QString overview = episode["Overview"];
+        QString firstAired = episode["FirstAired"].toString();
+        QString guestStars = episode["GuestStars"].toString();
+        QString imdb_id = episode["IMDB_ID"].toString();
+        QString language = episode["Language"].toString();
+        QString overview = episode["Overview"].toString();
         int productionCode = episode["ProductionCode"].toInt();
         double rating = episode["Rating"].toDouble();
         int ratingCount = episode["RatingCount"].toInt();
         int seasonNumber = episode["SeasonNumber"].toInt();
-        QString writer = episode["Writer"];
+        QString writer = episode["Writer"].toString();
         int absoluteNumber = episode["absolute_number"].toInt();
         int airsAfterSeason = episode["airsafter_season"].toInt();
         int airsBeforeEpisode = episode["airsbefore_episode"].toInt();
         int airsBeforeSeason = episode["airsbefore_season"].toInt();
-        QString filename = episode["filename"];
-        QString lastUpdated = episode["lastupdated"];
+        QString filename = episode["filename"].toString();
+        QString lastUpdated = episode["lastupdated"].toString();
         int seasonId = episode["seasonid"].toInt();
         int seriesId = episode["seriesid"].toInt();
-        QString thumbAdded = episode["thumb_added"];
+        QString thumbAdded = episode["thumb_added"].toString();
         int thumbHeight = episode["thumb_height"].toInt();
         int thumbWidth = episode["thumb_width"].toInt();
         int watched = 0;
@@ -440,7 +440,7 @@ bool DatabaseManager::insertEpisodes(QList<QMap<QString, QString> > episodes)
     return ret;
 }
 
-bool DatabaseManager::insertBanners(QList<QMap<QString, QString> > banners, int seriesId)
+bool DatabaseManager::insertBanners(QList<QVariantMap> banners, int seriesId)
 {
     qDebug() << "insertBanners() ";
     
@@ -640,10 +640,10 @@ QList<QVariantMap> DatabaseManager::getStartPageSeries()
     return series;
 }
 
-QList<QMap<QString, QString> > DatabaseManager::getEpisodes(int seriesID, int seasonNumber)
-{
-    QList<QMap<QString, QString> > episodes;
-    
+QList<QVariantMap> DatabaseManager::getEpisodes(int seriesID, int seasonNumber) {
+
+    QList<QVariantMap> episodes;
+
     QSqlQuery query(m_db);
     query.exec(QString("SELECT episodeName, episodeNumber, overview, seasonNumber, absoluteNumber, filename, watched, id, guestStars, writer, firstAired "
                        "FROM Episode "
@@ -653,44 +653,44 @@ QList<QMap<QString, QString> > DatabaseManager::getEpisodes(int seriesID, int se
     if (query.isSelect()) {
         
         while (query.next()) {
-            
-            QMap<QString, QString> temp;
-            
-            auto episodeName = query.value(0).toString();
-            temp["episodeName"] = episodeName;
-            
-            auto episodeNumber = query.value(1).toString();
-            temp["episodeNumber"] = episodeNumber;
-            
-            auto overview = query.value(2).toString();
-            overview.replace("''", "'");
-            temp["overview"] = overview;
-            
-            auto seasonNumber = query.value(3).toString();
-            temp["seasonNumber"] = seasonNumber;
-            
-            auto absoluteNumber = query.value(4).toString();
-            temp["absoluteNumber"] = absoluteNumber;
-            
-            auto filename = query.value(5).toString();
-            temp["filename"] = filename;
-            
-            auto watched = query.value(6).toString();
-            temp["watched"] = watched;
-            
-            auto id = query.value(7).toString();
-            temp["id"] = id;
-            
-            auto guestStars = query.value(8).toString();
-            temp["guestStars"] = guestStars;
-            
-            auto writer = query.value(9).toString();
-            temp["writer"] = writer;
-            
-            auto firstAired = query.value(10).toString();
-            temp["firstAired"] = firstAired;
-            
-            episodes.append(temp);
+
+            QVariantMap episode;
+
+            QString episodeName = query.value(0).toString();
+            episode["episodeName"] = episodeName;
+
+            QString episodeNumber = query.value(1).toString();
+            episode["episodeNumber"] = episodeNumber;
+
+            QString overview = query.value(2).toString();
+            overview.replace("''","'");
+            episode["overview"] = overview;
+
+            QString seasonNumber = query.value(3).toString();
+            episode["seasonNumber"] = seasonNumber;
+
+            QString absoluteNumber = query.value(4).toString();
+            episode["absoluteNumber"] = absoluteNumber;
+
+            QString filename = query.value(5).toString();
+            episode["filename"] = filename;
+
+            QString watched = query.value(6).toString();
+            episode["watched"] = watched;
+
+            QString id = query.value(7).toString();
+            episode["id"] = id;
+
+            QString guestStars = query.value(8).toString();
+            episode["guestStars"] = guestStars;
+
+            QString writer = query.value(9).toString();
+            episode["writer"] = writer;
+
+            QString firstAired = query.value(10).toString();
+            episode["firstAired"] = firstAired;
+
+            episodes.append(episode);
         }
     }
     return episodes;

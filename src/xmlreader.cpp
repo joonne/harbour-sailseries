@@ -116,9 +116,11 @@ void XMLReader::getFullSeriesRecordNew(QString seriesid, QString method)
     m_nam->get(request);
 }
 
-QList<QMap<QString,QString> > XMLReader::getEpisodes() { return m_episodes; }
+QList<QVariantMap> XMLReader::getSeries() { return m_series; }
 
-QList<QMap<QString,QString> > XMLReader::getBanners() { return m_banners; }
+QList<QVariantMap> XMLReader::getEpisodes() { return m_episodes; }
+
+QList<QVariantMap> XMLReader::getBanners() { return m_banners; }
 
 void XMLReader::get(QUrl url)
 {
@@ -176,14 +178,14 @@ void XMLReader::replyFinishedNew(QNetworkReply *reply) {
             setUpdateFlag(false);
 
             qDebug() << "readyToStoreSeries()";
-//            emit readyToStoreSeries();
+            emit readyToStoreSeries();
 
         } else if (getUpdateFlag()) {
 
             setFullRecordFlag(false);
             setUpdateFlag(false);
 
-//            emit readyToUpdateSeries();
+            emit readyToUpdateSeries();
             qDebug() << "readyToUpdateSeries()";
 
         }
@@ -327,16 +329,16 @@ void XMLReader::parseXML(QXmlStreamReader& xml)
 
     if (series.size() != 0) {
 //        m_series = series;
-    }
+//    }
 
-    if (episodes.size() != 0){
-        m_episodes = episodes;
-    }
+//    if (episodes.size() != 0){
+//        m_episodes = episodes;
+//    }
 
-    if (banners.size() != 0) {
-        m_banners = banners;
-    }
-}
+//    if (banners.size() != 0) {
+//        m_banners = banners;
+//    }
+//}
 
 QList<QVariantMap> XMLReader::parseSeriesNew(QJsonObject obj) {
     QList<QVariantMap> allSeries;

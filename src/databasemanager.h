@@ -46,8 +46,8 @@ public:
     bool deleteDuplicateEpisodes();
 
     bool insertSeries(QVariantMap series);
-    bool insertEpisodes(QList<QMap<QString, QString> > episodes);
-    bool insertBanners(QList<QMap<QString, QString> > banners, int seriesId);
+    bool insertEpisodes(QList<QVariantMap> episodes);
+    bool insertBanners(QList<QVariantMap> banners, int seriesId);
 
     bool updateSeries();
     bool updateEpisode();
@@ -57,8 +57,9 @@ public:
 
     QList<QVariantMap> getSeries();
     QList<QVariantMap> getStartPageSeries();
-    QList<QMap<QString, QString> > getEpisodes(int seriesID, int seasonNumber);
+    QList<QVariantMap> getEpisodes(int seriesID, int seasonNumber);
     QVariantMap getNextEpisodeDetails(int seriesID);
+
     QString getStatus(int seriesID);
     QString getSeasonBanner(int seriesID, int season);
 

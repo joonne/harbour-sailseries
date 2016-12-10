@@ -94,8 +94,8 @@ private:
     XMLReader* m_reader;
     DatabaseManager* m_dbmanager;
     QList<QVariantMap> m_series;
-    QList<QMap<QString,QString> > m_episodes;
-    QList<QMap<QString,QString> > m_banners;
+    QList<QVariantMap> m_episodes;
+    QList<QVariantMap> m_banners;
     QList<SeriesData*> m_seriesListModel;
     SeriesData* m_info;
     QList<QString> m_seriesIds;

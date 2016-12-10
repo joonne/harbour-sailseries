@@ -1,27 +1,27 @@
 #include "episodedata.h"
 
-EpisodeData::EpisodeData(QObject *parent, QMap<QString, QString> params) :
+EpisodeData::EpisodeData(QObject *parent, QVariantMap params) :
     QObject(parent)
 {
     m_id = params["id"].toInt();
-    m_director = params["director"];
+    m_director = params["director"].toString();
     m_epimgflag = 0;
-    m_episodeName = params["episodeName"];
+    m_episodeName = params["episodeName"].toString();
     m_episodeNumber = params["episodeNumber"].toInt();
-    m_firstAired = params["firstAired"];
-    m_guestStars = params["guestStars"];
+    m_firstAired = params["firstAired"].toString();
+    m_guestStars = params["guestStars"].toString();
     m_imdbId = "";
     m_language = "";
-    m_overview = params["overview"];
+    m_overview = params["overview"].toString();
     m_productionCode = 0;
     m_rating = 0;
     m_ratingCount = 0;
     m_seasonNumber = params["seasonNumber"].toInt();
-    m_writer = params["writer"];
+    m_writer = params["writer"].toString();
     m_absoluteNumber = params["absoluteNumber"].toInt();
     m_airsAfterSeason = 0;
     m_airsBeforeSeason = 0;
-    m_filename = params["filename"];
+    m_filename = params["filename"].toString();
     m_lastUpdated = "";
     m_seasonId = 0;
     m_seriesId = 0;
