@@ -202,8 +202,8 @@ void XMLReader::replyFinished(QNetworkReply *reply)
         QVariantMap temp;
         temp.insert("SeriesName", "Error, try again later.");
         m_series.clear();
-        m_series.append(temp);
-        emit readyToPopulateSeries();
+//        m_series.append(temp);
+//        emit readyToPopulateSeries();
 
         reply->deleteLater();
         return;
@@ -338,15 +338,22 @@ void XMLReader::parseXML(QXmlStreamReader& xml)
     }
 }
 
-QList<QMap<QString, QString> > XMLReader::parseSeriesNew(QJsonObject obj) {
-    QList<QMap<QString, QString> > allSeries;
+QList<QVariantMap> XMLReader::parseSeriesNew(QJsonObject obj) {
+    QList<QVariantMap> allSeries;
 
-    QJsonArray foundSeries = obj.value("data").toArray();
+    QJsonArray foundSeries;
+
+    if (obj.value("data").isArray()) {
+        foundSeries = obj.value("data").toArray();
+    } else if (obj.value("data").isObject()) {
+        foundSeries.append(obj.value("data"));
+    }
+
     foreach (QJsonValue item, foundSeries) {
         QStringList keys = item.toObject().keys();
-        QMap<QString, QString> series;
+        QVariantMap series;
         foreach (QString key, keys) {
-            series.insert(key, item.toObject().value(key).toString());
+            series.insert(key, item.toObject().value(key).toVariant());
         }
         allSeries.append(series);
     }

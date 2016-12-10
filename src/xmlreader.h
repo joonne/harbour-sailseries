@@ -33,7 +33,7 @@ public:
 
     void parseXML(QXmlStreamReader &xml);
     QMap<QString,QString> parseSeries(QXmlStreamReader& xml);
-    QList<QMap<QString,QString> > parseSeriesNew(QJsonObject obj);
+    QList<QVariantMap> parseSeriesNew(QJsonObject obj);
     QMap<QString,QString> parseLanguages(QXmlStreamReader& xml);
     QMap<QString,QString> parseEpisode(QXmlStreamReader& xml);
     QMap<QString,QString> parseBanner(QXmlStreamReader& xml);
