@@ -91,15 +91,13 @@ void XMLReader::getFullSeriesRecord(QString seriesid, QString method)
         setUpdateFlag(true);
     }
 
-    QString url = QString("%1/api/%2/series/%3/all/en.zip").arg(QString(MIRRORPATH)).arg(QString(APIKEY)).arg(seriesid);
+    QString url = QString("%1/api/%2/series/%3/all/en.zip").arg(QString(MIRRORPATH)).arg(QString(APIKEY)).arg(seriesId);
     qDebug() << "Requesting" << url;
     QUrl finalUrl(url);
     get(finalUrl);
 }
 
-QList<QVariantMap> XMLReader::getSeries() { return m_series; }
-
-void XMLReader::getFullSeriesRecordNew(QString seriesid, QString method)
+void XMLReader::getFullSeriesRecordNew(QString seriesId, QString method)
 {
     if (method == "full") {
         setFullRecordFlag(true);
@@ -107,7 +105,7 @@ void XMLReader::getFullSeriesRecordNew(QString seriesid, QString method)
         setUpdateFlag(true);
     }
 
-    QUrl url(QString("%1/series/%2").arg(QString(API_BASE_URL)).arg(seriesid));
+    QUrl url(QString("%1/series/%2").arg(QString(API_BASE_URL)).arg(seriesId));
     qDebug() << "Requesting" << url;
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, QVariant(QString("application/json")));
@@ -162,6 +160,14 @@ void XMLReader::replyFinishedNew(QNetworkReply *reply) {
         m_jwt = result;
     } else {
 
+        if (reply->url().toString().contains("/images")) {
+            qDebug() << "images";
+        } else if (reply->url().toString().contains("/search/series")) {
+            qDebug() << "search";
+        } else if (reply->url().path().startsWith("/series")) {
+            qDebug() << "series";
+        }
+
         m_series.clear();
         m_series = parseSeriesNew(obj);
 
@@ -193,11 +199,28 @@ void XMLReader::replyFinishedNew(QNetworkReply *reply) {
 
     reply->deleteLater();
 }
+        
+void XMLReader::getSeriesFinished(QString seriesId, QString method) {
+
+    if (method == "full") {
+        setFullRecordFlag(true);
+    } else if (method == "update") {
+        setUpdateFlag(true);
+    }
+
+    QUrl url(QString("%1/series/%2/images").arg(QString(API_BASE_URL)).arg(seriesId));
+    qDebug() << "Requesting" << url;
+    QNetworkRequest request(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, QVariant(QString("application/json")));
+    request.setRawHeader(QByteArray("Authorization"), QString("Bearer " + m_jwt).toUtf8());
+    request.setRawHeader(QByteArray("Accept-Language"), QByteArray("en"));
+    m_nam->get(request);
+}
 
 void XMLReader::replyFinished(QNetworkReply *reply)
 {
     qDebug() << reply->url() << reply->errorString();
-        
+    
     // Error -> inform user by appending error message to listview
     if (reply->error() != QNetworkReply::NoError) {
 
@@ -732,6 +755,17 @@ QMap<QString, QString> XMLReader::parseBanner(QXmlStreamReader &xml)
         xml.readNext();
     }
     return banner;
+}
+
+QVariantMap XMLReader::parseImages(QJsonObject obj) {
+
+    auto data = obj.value("data").toObject();
+    auto keys = data.keys();
+    QVariantMap images;
+    foreach (QString key, keys) {
+        images.insert(key, data.value(key).toVariant());
+    }
+    return images;
 }
 
 void XMLReader::addElementDataToMap(QXmlStreamReader& xml, QMap<QString, QString>& map) const

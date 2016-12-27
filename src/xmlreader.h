@@ -37,15 +37,16 @@ public:
     QMap<QString,QString> parseLanguages(QXmlStreamReader& xml);
     QMap<QString,QString> parseEpisode(QXmlStreamReader& xml);
     QMap<QString,QString> parseBanner(QXmlStreamReader& xml);
+    QVariantMap parseImages(QJsonObject obj);
     void addElementDataToMap(QXmlStreamReader& xml,
                                  QMap<QString, QString>& map) const;
     void get(QUrl url);
 
     void getLanguages();
-    void searchSeries(QString text);
-    void searchSeriesNew(QString text);
-    void getFullSeriesRecord(QString seriesid, QString method);
-    void getFullSeriesRecordNew(QString seriesid, QString method);
+    void searchSeries(QString seriesName);
+    void searchSeriesNew(QString seriesName);
+    void getFullSeriesRecord(QString seriesId, QString method);
+    void getFullSeriesRecordNew(QString seriesId, QString method);
 
     void getAuthenticationToken();
 
@@ -59,6 +60,7 @@ public:
     void setFullRecordFlag(bool state);
 
 signals:
+    void readyToGetBanners();
     void readyToPopulateSeries();
     void readyToPopulateChannels();
     void readyToStoreSeries();
@@ -67,6 +69,7 @@ signals:
 public slots:
     void replyFinished(QNetworkReply* reply);
     void replyFinishedNew(QNetworkReply* reply);
+    void getSeriesFinished(QString seriesId, QString method);
 
 private:
     QNetworkAccessManager* m_nam;
