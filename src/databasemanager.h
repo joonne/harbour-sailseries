@@ -63,7 +63,7 @@ public:
     void toggleWatched(QString episodeID);
     void markSeasonWatched(int seriesID, int season);
 
-    bool isAlreadyAdded(int seriesID, QString name);
+    bool isAlreadyAdded(int seriesId, QString name);
     int watchedCount(int seriesID);
     int watchedCountBySeason(int seriesID, int seasonNumber);
     int totalCount(int seriesID);

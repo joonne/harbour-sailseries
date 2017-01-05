@@ -24,6 +24,7 @@ public:
     Q_INVOKABLE void toggleWatched(QString episodeId);
     Q_INVOKABLE void markSeasonWatched(QString seriesID, int season);
     Q_INVOKABLE int getSeasonCount(QString seriesID);
+    Q_INVOKABLE void toggleWatchedInModel(int episodeId, int watched);
 signals:
     void episodeListChanged();
 

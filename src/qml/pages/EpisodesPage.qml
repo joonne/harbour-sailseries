@@ -116,15 +116,6 @@ Page {
             property string star: "image://theme/icon-m-favorite"
             property string favorite: "image://theme/icon-m-favorite-selected"
 
-            function setSource() {
-
-                if (Watched === 0) {
-                    return star;
-                } else {
-                    return favorite;
-                }
-            }
-
             Image {
                 id: watched
                 source: Watched === 0 ? star : favorite

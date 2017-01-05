@@ -4,6 +4,7 @@ import Sailfish.Silica 1.0
 import "../components"
 
 Page {
+
     id: episodeoverviewpage
 
     // processes tubes "|" out of the given string
@@ -90,6 +91,7 @@ Page {
                             console.log("seriesId", seriesId);
                             console.log("watched", watched);
                             engine.EpisodeListModel.toggleWatched(episodeId);
+                            engine.EpisodeListModel.toggleWatchedInModel(episodeId, watched);
                             engine.SeasonListModel.populateSeasonList(seriesId);
                             engine.TodayModel.populateTodayModel();
                         }

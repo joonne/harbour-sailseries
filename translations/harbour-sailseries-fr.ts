@@ -140,17 +140,17 @@
 <context>
     <name>EpisodeOverviewPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="74"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="75"/>
         <source>Original air date</source>
         <translation>Date de première diffusion</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="110"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="112"/>
         <source>Writer</source>
         <translation>Scénariste</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="119"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="121"/>
         <source>Guest Stars</source>
         <translation>Guest Stars</translation>
     </message>
@@ -178,7 +178,7 @@
         <translation>Episode</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="157"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="148"/>
         <source>No episodes.</source>
         <translation>Pas d&apos;épisode.</translation>
     </message>

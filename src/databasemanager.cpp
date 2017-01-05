@@ -897,7 +897,7 @@ QString DatabaseManager::getSeasonBanner(int seriesID, int season) {
     QSqlQuery query(m_db);
     QString banner = "";
     QString bannerType = "season";
-    query.exec(QString("SELECT bannerPath FROM Banner WHERE seriesID=%1 AND bannerType='%2' AND season=%3;").arg(seriesID).arg(bannerType).arg(season));
+    query.exec(QString("SELECT bannerPath FROM Banner WHERE seriesID = %1 AND bannerType = '%2' AND season = %3;").arg(seriesID).arg(bannerType).arg(season));
     if (query.isSelect()) {
         while (query.next()) {
             banner = query.value(0).toString();
