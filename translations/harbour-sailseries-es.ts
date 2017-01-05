@@ -14,11 +14,6 @@
         <translation>General</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="61"/>
-        <source>SailSeries is a tv-series tracking application for SailfisOS. It aims to be a good looking and simple app that can help you to stay on track while following your favourite series.</source>
-        <translation>SailSeries es una aplicación de seguimiento de series de televisión para SailfishOS. Una aplicación sencilla y fácil de manejar que te puede ayudar para realizar un seguimiento de tus series favoritas y tenerlas controladas en todo momento.</translation>
-    </message>
-    <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="65"/>
         <source>Creator</source>
         <translation>Autor</translation>
@@ -57,6 +52,11 @@
         <location filename="../src/qml/pages/AboutPage.qml" line="43"/>
         <source>Version %1.%2</source>
         <translation>Versión %1.%2</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/AboutPage.qml" line="61"/>
+        <source>SailSeries is a tv-series tracking application for SailfishOS. It aims to be a good looking and simple app that can help you to stay on track while following your favourite series.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="74"/>

@@ -58,7 +58,7 @@ Page {
                 readOnly: true
                 color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeSmall
-                text: qsTr("SailSeries is a tv-series tracking application for SailfisOS. It aims to be a good looking and simple app that can help you to stay on track while following your favourite series.")
+                text: qsTr("SailSeries is a tv-series tracking application for SailfishOS. It aims to be a good looking and simple app that can help you to stay on track while following your favourite series.")
             }
 
             SectionHeader {

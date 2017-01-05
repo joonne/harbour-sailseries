@@ -21,7 +21,7 @@ public:
     QQmlListProperty<EpisodeData> getEpisodeList();
 
     Q_INVOKABLE void populateEpisodeList(QString seriesID, int seasonNumber);
-    Q_INVOKABLE void toggleWatched(QString episodeID);
+    Q_INVOKABLE void toggleWatched(QString episodeId);
     Q_INVOKABLE void markSeasonWatched(QString seriesID, int season);
     Q_INVOKABLE int getSeasonCount(QString seriesID);
 signals:

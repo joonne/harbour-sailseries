@@ -85,12 +85,12 @@ Page {
                         id: clickarea
                         anchors.fill: parent
                         onClicked: {
-                            watched === 1 ? watched = 0 : watched = 1
+                            watched === 1 ? watched = 0 : watched = 1;
                             console.log("episodeId", episodeId);
                             console.log("seriesId", seriesId);
                             console.log("watched", watched);
-                            engine.EpisodeListModel.toggleWatched(episodeId)
-                            engine.SeasonListModel.populateSeasonList(seriesId)
+                            engine.EpisodeListModel.toggleWatched(episodeId);
+                            engine.SeasonListModel.populateSeasonList(seriesId);
                             engine.TodayModel.populateTodayModel();
                         }
                     }

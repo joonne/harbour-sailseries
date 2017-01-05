@@ -31,7 +31,7 @@ QString XMLReader::getLocale() {
     QString locale = "en";
 
     int size = m_languages.size();
-    for(int i = 0; i < size; ++i) {
+    for (int i = 0; i < size; ++i) {
         QMap<QString,QString> temp = m_languages.at(i);
         if (temp["abbreviation"] == systemLocale) {
             locale = temp["abbreviation"];

@@ -74,7 +74,7 @@ Page {
                                      firstAired: FirstAired,
                                      watched: Watched,
                                      episodeId: ID,
-                                     seriesId: SeriesID })
+                                     seriesId: seriesID })
 
                 }
             }

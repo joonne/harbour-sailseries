@@ -71,9 +71,9 @@ void EpisodeListModel::populateEpisodeList(QString seriesID, int seasonNumber) {
     }
 }
 
-void EpisodeListModel::toggleWatched(QString episodeID) {
+void EpisodeListModel::toggleWatched(QString episodeId) {
 
-    m_dbmanager->toggleWatched(episodeID);
+    m_dbmanager->toggleWatched(episodeId);
 }
 
 void EpisodeListModel::markSeasonWatched(QString seriesID, int season) {
