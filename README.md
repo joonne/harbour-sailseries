@@ -16,15 +16,15 @@ SailSeries stores all data except images into local database, so it is possible 
 
 **Changelog:**
 
-1.1.1
+1.1.2
+
+- Settings page:
 
 - Notifications (experimental)
 
 - Periodic content updates (experimental)
 
-- Settings page
-
-- Live/auto search of series on series page
+- Live/auto search of series
 
 - little polishes and fixes
 
