@@ -56,7 +56,7 @@
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="61"/>
         <source>SailSeries is a tv-series tracking application for SailfishOS. It aims to be a good looking and simple app that can help you to stay on track while following your favourite series.</source>
-        <translation type="unfinished"></translation>
+        <translation>SailSeries es una aplicación de seguimiento de series de televisión para SailfishOS. Una aplicación sencilla y fácil de manejar que te puede ayudar para realizar un seguimiento de tus series favoritas y tenerlas controladas en todo momento.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="74"/>
@@ -94,7 +94,7 @@
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="9"/>
         <source>Nothing airs this week</source>
-        <translation type="unfinished">No hay emisiones esta semana</translation>
+        <translation>No hay emisiones esta semana</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="47"/>
@@ -364,37 +364,37 @@
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="16"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustes</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="19"/>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Notificaciones</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="22"/>
         <source>Publish notifications (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Publicar notificaciones (experimentales)</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="23"/>
         <source>SailSeries publishes notifications on app startup and when updating/adding series if an episode airs today.</source>
-        <translation type="unfinished"></translation>
+        <translation>SailSeries publica notificaciones sobre el inicio de la aplicación y al actualizar / agregar series si un episodio se transmite hoy.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="30"/>
         <source>Content updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizaciones de contenido</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="33"/>
         <source>Periodic updates of content (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizaciones periódicas del contenido (experimental)</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="34"/>
         <source>SailSeries refreshes all content every one hour. Requires app to be open at background. Might cause a small hickup when content is being updated.</source>
-        <translation type="unfinished"></translation>
+        <translation>SailSeries actualiza todo el contenido cada hora. Requiere que la aplicación esté abierta en segundo plano. Podría causar un pequeño hickup cuando el contenido se está actualizando.</translation>
     </message>
 </context>
 <context>
@@ -442,7 +442,7 @@
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="57"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustes</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="62"/>

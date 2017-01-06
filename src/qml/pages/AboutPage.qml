@@ -94,7 +94,7 @@ Page {
 
             Repeater {
 
-                model: ["bonapart", "lunatix"]
+                model: ["bonapart", "lunatix", "pakoR", "Mariusmssj", "vicosoft", "eson"]
 
                 TextField {
                     width: aboutpage.width
