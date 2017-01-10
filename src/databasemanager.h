@@ -70,6 +70,15 @@ public:
     int totalCountBySeason(int seriesID, int seasonNumber);
     int seasonCount(int seriesID);
 
+    int getWatchedEpisodesDuration();
+    int getWatchedEpisodesCount();
+    int getFollowedSeriesCount();
+    int getSeriesCount();
+    int getSeasonCount();
+    int getFinishedSeriesCount();
+    int getEpisodesCount();
+    QString getLastRefresh();
+
 signals:
 
 public slots:

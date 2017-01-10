@@ -180,6 +180,19 @@ Page {
                 width: email.width
             }
 
+            SectionHeader {
+                text: qsTr("Statistics")
+            }
+
+            Button {
+                id: statistics
+                text: qsTr("Show statistics")
+                onClicked: pageStack.push(Qt.resolvedUrl("StatisticsPage.qml"))
+                anchors.left: parent.left
+                anchors.leftMargin: (aboutpage.width - sourcecode.width) / 2
+                width: email.width
+            }
+
             HorizontalSeparator { }
         }
 

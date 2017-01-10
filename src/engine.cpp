@@ -61,3 +61,7 @@ void Engine::updateModels() {
 void Engine::toggleLoading(bool state) {
     m_loading = state;
 }
+
+int Engine::getWatchedEpisodesDuration() {
+    return m_dbmanager->getWatchedEpisodesDuration();
+}

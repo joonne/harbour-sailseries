@@ -897,11 +897,29 @@ QString DatabaseManager::getSeasonBanner(int seriesID, int season) {
     QSqlQuery query(m_db);
     QString banner = "";
     QString bannerType = "season";
-    query.exec(QString("SELECT bannerPath FROM Banner WHERE seriesID = %1 AND bannerType = '%2' AND season = %3;").arg(seriesID).arg(bannerType).arg(season));
+    query.exec(QString("SELECT bannerPath "
+                       "FROM Banner "
+                       "WHERE seriesID = %1 AND bannerType = '%2' AND season = %3;").arg(seriesID).arg(bannerType).arg(season));
     if (query.isSelect()) {
         while (query.next()) {
             banner = query.value(0).toString();
         }
     }
     return banner;
+}
+
+int DatabaseManager::getWatchedEpisodesDuration() {
+
+    int duration = 0;
+
+    QSqlQuery query(m_db);
+    query.exec("SELECT SUM(runtime) "
+               "FROM series "
+               "LEFT JOIN episode ON episode.seriesID = series.id AND episode.watched = 1;");
+    if (query.isSelect()) {
+        while (query.next()) {
+            duration = query.value(0).toInt();
+        }
+    }
+    return duration;
 }

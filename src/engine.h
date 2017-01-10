@@ -32,6 +32,8 @@ public:
     Q_INVOKABLE void updateModels();
     bool getLoading();
 
+    Q_INVOKABLE int getWatchedEpisodesDuration();
+
 signals:
     void seriesListModelChanged();
     void programListModelChanged();

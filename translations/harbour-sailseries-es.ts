@@ -44,6 +44,16 @@
         <translation>El código fuente está disponible en GitHub. Contribuciones, ideas e información de bugs son bienvenidos.</translation>
     </message>
     <message>
+        <location filename="../src/qml/pages/AboutPage.qml" line="184"/>
+        <source>Statistics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/AboutPage.qml" line="189"/>
+        <source>Show statistics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="142"/>
         <source>Source Code</source>
         <translation>Código fuente</translation>
@@ -468,6 +478,29 @@
         <location filename="../src/qml/pages/StartPage.qml" line="166"/>
         <source>Nothing airs this week</source>
         <translation>No hay emisiones esta semana</translation>
+    </message>
+</context>
+<context>
+    <name>StatisticsPage</name>
+    <message>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="21"/>
+        <source>Statistics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="25"/>
+        <source>Time spent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="33"/>
+        <source>%1 minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="34"/>
+        <source>Time spent watching</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
