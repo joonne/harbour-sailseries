@@ -79,6 +79,9 @@ public:
     int getEpisodesCount();
     QString getLastRefresh();
 
+    void getMostWatchedDirectors();
+    void getMostWatchedActors();
+
 signals:
 
 public slots:

@@ -923,3 +923,78 @@ int DatabaseManager::getWatchedEpisodesDuration() {
     }
     return duration;
 }
+
+void DatabaseManager::getMostWatchedDirectors() {
+
+    QStringList result;
+
+    QSqlQuery query(m_db);
+    query.exec("SELECT director FROM episode WHERE watched = 1;");
+    if (query.isSelect()) {
+        while (query.next()) {
+            result.append(query.value(0).toString());
+        }
+    }
+
+    QStringList directors;
+
+    foreach (auto line, result) {
+        if (line.contains("|")) {
+            QStringList parsed = line.split("|");
+            parsed.removeAll("");
+            foreach (auto director, parsed) {
+                directors.append(director);
+            }
+        } else {
+            directors.append(line);
+        }
+    }
+    qDebug() << directors;
+
+    QMap<QString, int> occurences;
+    foreach (auto item, directors) {
+        if (occurences.contains(item)) {
+            occurences[item] += 1;
+        } else {
+            occurences[item] = 1;
+        }
+    }
+
+    qDebug() << occurences;
+}
+
+void DatabaseManager::getMostWatchedActors() {
+
+    QStringList result;
+
+    QSqlQuery query(m_db);
+    query.exec("SELECT actors FROM series");
+    if (query.isSelect()) {
+        while (query.next()) {
+            result.append(query.value(0).toString());
+        }
+    }
+
+    qDebug() << result;
+
+    QStringList actors;
+
+    foreach (auto line, result) {
+        QStringList parsed = line.split("|");
+        parsed.removeAll("");
+        foreach (auto actor, parsed) {
+            actors.append(actor);
+        }
+    }
+
+    QMap<QString, int> occurences;
+    foreach (auto item, actors) {
+        if (occurences.contains(item)) {
+            occurences[item] += 1;
+        } else {
+            occurences[item] = 1;
+        }
+    }
+
+    qDebug() << occurences;
+}

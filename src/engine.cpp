@@ -23,6 +23,8 @@ Engine::Engine(QObject *parent) :
             SIGNAL(updateModels()),
             this,
             SLOT(readyToUpdateModels()));
+
+    m_dbmanager->getMostWatchedDirectors();
 }
 
 Engine::~Engine() {
