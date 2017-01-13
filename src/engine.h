@@ -4,6 +4,7 @@
 #include <QObject>
 #include "xmlreader.h"
 #include "databasemanager.h"
+#include "statistics.h"
 #include "./model/serieslistmodel.h"
 #include "./model/episodelistmodel.h"
 #include "./model/searchlistmodel.h"
@@ -19,6 +20,7 @@ class Engine : public QObject
     Q_PROPERTY(EpisodeListModel* EpisodeListModel READ getEpisodeListModel NOTIFY episodeListModelChanged)
     Q_PROPERTY(SeasonListModel* SeasonListModel READ getSeasonListModel NOTIFY seasonListModelChanged)
     Q_PROPERTY(bool Loading READ getLoading NOTIFY loadingChanged)
+    Q_PROPERTY(Statistics* Statistics READ getStatistics)
 
 public:
     explicit Engine(QObject *parent = 0);
@@ -32,7 +34,7 @@ public:
     Q_INVOKABLE void updateModels();
     bool getLoading();
 
-    Q_INVOKABLE int getWatchedEpisodesDuration();
+    Statistics* getStatistics();
 
 signals:
     void seriesListModelChanged();
@@ -54,6 +56,7 @@ private:
     SeasonListModel* m_seasonListModel;
     XMLReader* m_reader;
     DatabaseManager* m_dbmanager;
+    Statistics* m_statistics;
     bool m_loading;
     void toggleLoading(bool state);
 };

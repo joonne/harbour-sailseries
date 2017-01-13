@@ -13,6 +13,7 @@ Engine::Engine(QObject *parent) :
     m_todayListModel = new TodayListModel(this, m_dbmanager, m_reader);
     m_episodeListModel = new EpisodeListModel(this, m_dbmanager);
     m_seasonListModel = new SeasonListModel(this, m_dbmanager);
+    m_
 
     connect(m_searchListModel,
             SIGNAL(updateModels()),
@@ -64,6 +65,6 @@ void Engine::toggleLoading(bool state) {
     m_loading = state;
 }
 
-int Engine::getWatchedEpisodesDuration() {
-    return m_dbmanager->getWatchedEpisodesDuration();
+Statistics* Engine::getStatistics() {
+    return m_statistics;
 }
