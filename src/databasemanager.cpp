@@ -916,12 +916,82 @@ int DatabaseManager::getWatchedEpisodesDuration() {
     query.exec("SELECT SUM(runtime) "
                "FROM series "
                "LEFT JOIN episode ON episode.seriesID = series.id AND episode.watched = 1;");
+
     if (query.isSelect()) {
         while (query.next()) {
             duration = query.value(0).toInt();
         }
     }
     return duration;
+}
+
+int DatabaseManager::getWatchedEpisodesCount() {
+
+    int count = 0;
+
+    QSqlQuery query(m_db);
+    query.exec("SELECT COUNT(*) "
+               "FROM episode "
+               "WHERE episode.watched = 1;");
+
+    if (query.isSelect()) {
+        while (query.next()) {
+            count = query.value(0).toInt();
+        }
+    }
+    return count;
+}
+
+int DatabaseManager::getAllEpisodesCount() {
+
+    int count = 0;
+
+    QSqlQuery query(m_db);
+    query.exec("SELECT COUNT(*) "
+               "FROM episode "
+               "WHERE episode.seasonNumber != 0;");
+
+    if (query.isSelect()) {
+        while (query.next()) {
+            count = query.value(0).toInt();
+        }
+    }
+    return count;
+}
+
+int DatabaseManager::getAllSeriesCount() {
+
+    int count = 0;
+
+    QSqlQuery query(m_db);
+    query.exec("SELECT COUNT(*) FROM series;");
+
+    if (query.isSelect()) {
+        while (query.next()) {
+            count = query.value(0).toInt();
+        }
+    }
+    return count;
+}
+
+int DatabaseManager::getFinishedSeriesCount() { }
+
+int DatabaseManager::getWatchedSeasonsCount() { }
+
+int DatabaseManager::getAllSeasonsCount() {
+
+    int count = 0;
+
+    QSqlQuery query(m_db);
+    query.exec("SELECT SUM(seasonCount) "
+               "FROM (SELECT MAX(seasonNumber) as seasonCount FROM episode GROUP BY seriesID);");
+
+    if (query.isSelect()) {
+        while (query.next()) {
+            count = query.value(0).toInt();
+        }
+    }
+    return count;
 }
 
 void DatabaseManager::getMostWatchedDirectors() {

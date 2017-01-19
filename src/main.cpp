@@ -15,6 +15,7 @@
 
 #include "engine.h"
 #include "settings.h"
+#include "statistics.h"
 #include "model/seriesdata.h"
 #include "model/serieslistmodel.h"
 #include "model/episodedata.h"
@@ -39,6 +40,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<EpisodeListModel>("harbour.sailseries.model", 1, 0, "EpisodeListModel");
     qmlRegisterType<SeasonData>("harbour.sailseries.model", 1, 0, "SeasonData");
     qmlRegisterType<SeasonListModel>("harbour.sailseries.model", 1, 0, "SeasonListModel");
+    qmlRegisterType<Statistics>("harbour.sailseries.model", 1, 0, "Statistics");
 
     // For this example, wizard-generates single line code would be good enough,
     // but very soon it won't be enough for you anyway, so use this more detailed example from start

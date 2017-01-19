@@ -13,7 +13,7 @@ Engine::Engine(QObject *parent) :
     m_todayListModel = new TodayListModel(this, m_dbmanager, m_reader);
     m_episodeListModel = new EpisodeListModel(this, m_dbmanager);
     m_seasonListModel = new SeasonListModel(this, m_dbmanager);
-    m_
+    m_statistics = new Statistics(this, m_dbmanager);
 
     connect(m_searchListModel,
             SIGNAL(updateModels()),
@@ -24,8 +24,6 @@ Engine::Engine(QObject *parent) :
             SIGNAL(updateModels()),
             this,
             SLOT(readyToUpdateModels()));
-
-    m_dbmanager->getMostWatchedDirectors();
 }
 
 Engine::~Engine() {
@@ -58,6 +56,7 @@ void Engine::updateModels() {
     toggleLoading(true);
     m_todayListModel->populateTodayModel();
     m_seriesListModel->populateBannerList();
+    m_statistics->updateStatistics();
     toggleLoading(false);
 }
 

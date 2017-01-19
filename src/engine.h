@@ -31,10 +31,10 @@ public:
     TodayListModel *getTodayModel();
     EpisodeListModel* getEpisodeListModel();
     SeasonListModel* getSeasonListModel();
+    Statistics* getStatistics();
+
     Q_INVOKABLE void updateModels();
     bool getLoading();
-
-    Statistics* getStatistics();
 
 signals:
     void seriesListModelChanged();

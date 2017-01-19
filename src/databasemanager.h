@@ -72,11 +72,11 @@ public:
 
     int getWatchedEpisodesDuration();
     int getWatchedEpisodesCount();
-    int getFollowedSeriesCount();
-    int getSeriesCount();
-    int getSeasonCount();
+    int getAllEpisodesCount();
+    int getAllSeriesCount();
     int getFinishedSeriesCount();
-    int getEpisodesCount();
+    int getWatchedSeasonsCount();
+    int getAllSeasonsCount();
     QString getLastRefresh();
 
     void getMostWatchedDirectors();

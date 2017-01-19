@@ -1,13 +1,8 @@
 #include "settings.h"
 
-Settings::Settings(QObject *parent) : QObject(parent)
-{
+Settings::Settings(QObject *parent) : QObject(parent) { }
 
-}
-
-Settings::~Settings() {
-
-}
+Settings::~Settings() { }
 
 void Settings::setNotificationPreference(bool value) {
     QSettings settings("harbour-sailseries", "harbour-sailseries");
