@@ -71,7 +71,7 @@ public:
     int seasonCount(int seriesID);
 
     int getWatchedEpisodesDuration();
-    int getAverageWatchedEpisodesDuration();
+    double getAverageWatchedEpisodesDuration();
     int getWatchedEpisodesCount();
     int getAllEpisodesCount();
     int getAllSeriesCount();

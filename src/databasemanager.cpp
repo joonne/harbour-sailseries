@@ -925,9 +925,9 @@ int DatabaseManager::getWatchedEpisodesDuration() {
     return duration;
 }
 
-int DatabaseManager::getAverageWatchedEpisodesDuration() {
+double DatabaseManager::getAverageWatchedEpisodesDuration() {
 
-    int duration = 0;
+    double duration = 0;
 
     QSqlQuery query(m_db);
     query.exec("SELECT AVG(runtime) "
@@ -936,7 +936,7 @@ int DatabaseManager::getAverageWatchedEpisodesDuration() {
 
     if (query.isSelect()) {
         while (query.next()) {
-            duration = query.value(0).toInt();
+            duration = query.value(0).toDouble();
         }
     }
     return duration;
@@ -1004,7 +1004,9 @@ int DatabaseManager::getWatchedSeasonsCount() {
                "HAVING episodes = watched;");
 
     if (query.isSelect()) {
-        count = query.numRowsAffected();
+        while (query.next()) {
+            count += 1;
+        }
     }
     return count;
 }

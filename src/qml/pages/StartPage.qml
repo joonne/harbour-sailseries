@@ -48,9 +48,12 @@ Page {
 
             MenuItem {
                 text: qsTr("About")
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
-                }
+                onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
+            }
+
+            MenuItem {
+                text: qsTr("Statistics")
+                onClicked: pageStack.push(Qt.resolvedUrl("StatisticsPage.qml"))
             }
 
             MenuItem {
@@ -60,16 +63,12 @@ Page {
 
             MenuItem {
                 text: qsTr("Search for a Series")
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("SearchPage.qml"))
-                }
+                onClicked: pageStack.push(Qt.resolvedUrl("SearchPage.qml"))
             }
 
             MenuItem {
                 text: qsTr("My Series")
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("MySeriesPage.qml"))
-                }
+                onClicked: pageStack.push(Qt.resolvedUrl("MySeriesPage.qml"))
             }
         }
 
