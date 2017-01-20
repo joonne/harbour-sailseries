@@ -991,6 +991,23 @@ int DatabaseManager::getAllSeriesCount() {
     return count;
 }
 
+int DatabaseManager::getEndedSeriesCount() {
+
+    int count = 0;
+
+    QSqlQuery query(m_db);
+    query.exec("SELECT COUNT(*) "
+               "FROM series "
+               "WHERE series.status = 'Ended';");
+
+    if (query.isSelect()) {
+        while (query.next()) {
+            count = query.value(0).toInt();
+        }
+    }
+    return count;
+}
+
 int DatabaseManager::getWatchedSeriesCount() { }
 
 int DatabaseManager::getWatchedSeasonsCount() {

@@ -75,7 +75,8 @@ DISTFILES += \
     qml/pages/SeriesPage.qml \
     qml/pages/NotificationHandler.qml \
     qml/pages/SettingsPage.qml \
-    qml/pages/StatisticsPage.qml
+    qml/pages/StatisticsPage.qml \
+    qml/components/ProgressCircle.qml
 
 RESOURCES += \
     harbour-sailseries.qrc

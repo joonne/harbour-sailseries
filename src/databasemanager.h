@@ -75,6 +75,7 @@ public:
     int getWatchedEpisodesCount();
     int getAllEpisodesCount();
     int getAllSeriesCount();
+    int getEndedSeriesCount();
     int getWatchedSeriesCount();
     int getWatchedSeasonsCount();
     int getAllSeasonsCount();
