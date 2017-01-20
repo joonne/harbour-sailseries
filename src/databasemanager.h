@@ -71,10 +71,11 @@ public:
     int seasonCount(int seriesID);
 
     int getWatchedEpisodesDuration();
+    int getAverageWatchedEpisodesDuration();
     int getWatchedEpisodesCount();
     int getAllEpisodesCount();
     int getAllSeriesCount();
-    int getFinishedSeriesCount();
+    int getWatchedSeriesCount();
     int getWatchedSeasonsCount();
     int getAllSeasonsCount();
     QString getLastRefresh();

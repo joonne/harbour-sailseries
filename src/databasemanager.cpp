@@ -925,6 +925,23 @@ int DatabaseManager::getWatchedEpisodesDuration() {
     return duration;
 }
 
+int DatabaseManager::getAverageWatchedEpisodesDuration() {
+
+    int duration = 0;
+
+    QSqlQuery query(m_db);
+    query.exec("SELECT AVG(runtime) "
+               "FROM series "
+               "LEFT JOIN episode ON episode.seriesID = series.id AND episode.watched = 1;");
+
+    if (query.isSelect()) {
+        while (query.next()) {
+            duration = query.value(0).toInt();
+        }
+    }
+    return duration;
+}
+
 int DatabaseManager::getWatchedEpisodesCount() {
 
     int count = 0;
@@ -974,9 +991,23 @@ int DatabaseManager::getAllSeriesCount() {
     return count;
 }
 
-int DatabaseManager::getFinishedSeriesCount() { }
+int DatabaseManager::getWatchedSeriesCount() { }
 
-int DatabaseManager::getWatchedSeasonsCount() { }
+int DatabaseManager::getWatchedSeasonsCount() {
+
+    int count = 0;
+
+    QSqlQuery query(m_db);
+    query.exec("SELECT * "
+               "FROM (SELECT MAX(episodeNumber) AS episodes, SUM(watched) AS watched, seasonID FROM episode GROUP BY seasonID) "
+               "GROUP BY seasonID "
+               "HAVING episodes = watched;");
+
+    if (query.isSelect()) {
+        count = query.numRowsAffected();
+    }
+    return count;
+}
 
 int DatabaseManager::getAllSeasonsCount() {
 
@@ -984,7 +1015,7 @@ int DatabaseManager::getAllSeasonsCount() {
 
     QSqlQuery query(m_db);
     query.exec("SELECT SUM(seasonCount) "
-               "FROM (SELECT MAX(seasonNumber) as seasonCount FROM episode GROUP BY seriesID);");
+               "FROM (SELECT MAX(seasonNumber) AS seasonCount FROM episode GROUP BY seriesID);");
 
     if (query.isSelect()) {
         while (query.next()) {

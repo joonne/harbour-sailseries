@@ -1,11 +1,7 @@
 #include "engine.h"
 
-Engine::Engine(QObject *parent) :
-    QObject(parent),
-    m_reader(new XMLReader),
-    m_dbmanager(new DatabaseManager),
-    m_loading(false)
-{
+Engine::Engine(QObject *parent) : QObject(parent), m_reader(new XMLReader), m_dbmanager(new DatabaseManager), m_loading(false) {
+
     m_dbmanager->setUpDB();
 
     m_seriesListModel = new SeriesListModel(this, m_dbmanager, m_reader);
@@ -48,11 +44,13 @@ SeasonListModel* Engine::getSeasonListModel() { return m_seasonListModel; }
 bool Engine::getLoading() { return m_loading; }
 
 void Engine::readyToUpdateModels() {
+
     m_todayListModel->populateTodayModel();
     m_seriesListModel->populateBannerList();
 }
 
 void Engine::updateModels() {
+
     toggleLoading(true);
     m_todayListModel->populateTodayModel();
     m_seriesListModel->populateBannerList();
@@ -61,9 +59,11 @@ void Engine::updateModels() {
 }
 
 void Engine::toggleLoading(bool state) {
+
     m_loading = state;
 }
 
 Statistics* Engine::getStatistics() {
+
     return m_statistics;
 }
