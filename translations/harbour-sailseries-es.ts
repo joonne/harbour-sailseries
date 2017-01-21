@@ -168,17 +168,17 @@
         <translation>Episodios</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="91"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="92"/>
         <source>Season</source>
         <translation>Temporada</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="98"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="99"/>
         <source>Episode</source>
         <translation>Episodio</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="148"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="149"/>
         <source>No episodes.</source>
         <translation>Sin episodios.</translation>
     </message>
@@ -491,33 +491,48 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="142"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="141"/>
         <source>Time</source>
         <translation type="unfinished">Hora</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="151"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="149"/>
         <source>Days spent watching</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="160"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="157"/>
         <source>Hours spent watching</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="169"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="165"/>
         <source>Minutes spent watching</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="177"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="172"/>
         <source>%1 minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="178"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="173"/>
         <source>Average episode duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="177"/>
+        <source>People</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="185"/>
+        <source>Most seen director</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="193"/>
+        <source>Most seen actor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -526,27 +541,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="45"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="44"/>
         <source>Watched episodes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="54"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="52"/>
         <source>All episodes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="138"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="137"/>
         <source>All series</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="96"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="95"/>
         <source>Watched seasons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="105"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="103"/>
         <source>All seasons</source>
         <translation type="unfinished"></translation>
     </message>

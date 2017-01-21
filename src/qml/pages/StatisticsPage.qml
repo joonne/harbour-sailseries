@@ -39,7 +39,6 @@ Page {
                     TextField {
                         width: parent.width
                         readOnly: true
-                        color: Theme.primaryColor
                         font.pixelSize: Theme.fontSizeSmall
                         text: engine.Statistics.WatchedEpisodesCount
                         label: qsTr("Watched episodes")
@@ -48,7 +47,6 @@ Page {
                     TextField {
                         width: parent.width
                         readOnly: true
-                        color: Theme.primaryColor
                         font.pixelSize: Theme.fontSizeSmall
                         text: engine.Statistics.AllEpisodesCount
                         label: qsTr("All episodes")
@@ -58,8 +56,6 @@ Page {
                 Column {
 
                     width: parent.width / 2
-
-                    HorizontalSeparator { }
 
                     HorizontalSeparator { }
 
@@ -79,6 +75,10 @@ Page {
                 }
             }
 
+            HorizontalSeparator { }
+
+            HorizontalSeparator { }
+
             Row {
 
                 width: parent.width
@@ -90,7 +90,6 @@ Page {
                     TextField {
                         width: parent.width
                         readOnly: true
-                        color: Theme.primaryColor
                         font.pixelSize: Theme.fontSizeSmall
                         text: engine.Statistics.WatchedSeasonsCount
                         label: qsTr("Watched seasons")
@@ -99,7 +98,6 @@ Page {
                     TextField {
                         width: parent.width
                         readOnly: true
-                        color: Theme.primaryColor
                         font.pixelSize: Theme.fontSizeSmall
                         text: engine.Statistics.AllSeasonsCount
                         label: qsTr("All seasons")
@@ -109,8 +107,6 @@ Page {
                 Column {
 
                     width: parent.width / 2
-
-                    HorizontalSeparator { }
 
                     HorizontalSeparator { }
 
@@ -129,10 +125,13 @@ Page {
                 }
             }
 
+            HorizontalSeparator { }
+
+            HorizontalSeparator { }
+
             TextField {
                 width: parent.width
                 readOnly: true
-                color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeSmall
                 text: engine.Statistics.AllSeriesCount
                 label: qsTr("All series")
@@ -145,7 +144,6 @@ Page {
             TextField {
                 width: statisticspage.width
                 readOnly: true
-                color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeSmall
                 text: (engine.Statistics.WatchedEpisodesDuration / (24 * 60)).toFixed(2)
                 label: qsTr("Days spent watching")
@@ -154,7 +152,6 @@ Page {
             TextField {
                 width: statisticspage.width
                 readOnly: true
-                color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeSmall
                 text: (engine.Statistics.WatchedEpisodesDuration / 60).toFixed(2)
                 label: qsTr("Hours spent watching")
@@ -163,7 +160,6 @@ Page {
             TextField {
                 width: statisticspage.width
                 readOnly: true
-                color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeSmall
                 text: engine.Statistics.WatchedEpisodesDuration
                 label: qsTr("Minutes spent watching")
@@ -172,10 +168,29 @@ Page {
             TextField {
                 width: statisticspage.width
                 readOnly: true
-                color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeSmall
                 text: qsTr("%1 minutes").arg((engine.Statistics.AverageWatchedEpisodesDuration).toFixed(2))
                 label: qsTr("Average episode duration")
+            }
+
+            SectionHeader {
+                text: qsTr("People")
+            }
+
+            TextField {
+                width: statisticspage.width
+                readOnly: true
+                font.pixelSize: Theme.fontSizeSmall
+                text: "Tom Kapinos"
+                label: qsTr("Most seen director")
+            }
+
+            TextField {
+                width: statisticspage.width
+                readOnly: true
+                font.pixelSize: Theme.fontSizeSmall
+                text: "Mandy Patinkin"
+                label: qsTr("Most seen actor")
             }
         }
 

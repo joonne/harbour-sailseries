@@ -45,6 +45,7 @@ Page {
         anchors.fill: parent
 
         delegate: ListItem {
+
             id: item
 
             contentHeight: background.height + Theme.paddingMedium
@@ -131,7 +132,7 @@ Page {
                         Watched === 0 ? Watched = 1 : Watched = 0
                         engine.EpisodeListModel.toggleWatched(ID)
                         engine.SeasonListModel.populateSeasonList(seriesID)
-                        engine.TodayModel.populateTodayModel();
+                        engine.TodayModel.populateTodayModel()
                     }
                     anchors.fill: parent
                 }
