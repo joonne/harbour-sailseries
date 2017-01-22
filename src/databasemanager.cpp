@@ -255,6 +255,21 @@ bool DatabaseManager::createBannerTable() {
     return ret;
 }
 
+bool DatabaseManager::deleteDuplicateEpisodes() {
+
+    bool ret = false;
+    if (m_db.isOpen()) {
+
+        QSqlQuery query(m_db);
+        ret = query.exec("DELETE FROM episode "
+                         "WHERE (firstAired = '' OR firstAired IS NULL) AND (episodeName IS NULL OR episodeName = '');");
+
+        qDebug() << query.lastError();
+        qDebug() << query.lastQuery();
+    }
+    return ret;
+}
+
 bool DatabaseManager::insertSeries(QMap<QString, QString> series) {
     
     bool ret = false;

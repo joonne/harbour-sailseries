@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
+import "../components"
+
 Page {
     id: settingsPage
 
@@ -37,6 +39,23 @@ Page {
                     checked ? settings.setContentUpdatePreference(true) : settings.setContentUpdatePreference(false);
                 }
             }
+
+            SectionHeader { text: qsTr("Maintenance") }
+
+            HorizontalSeparator { }
+
+            HorizontalSeparator { }
+
+            Button {
+                text: qsTr("Remove duplicate episodes")
+                anchors {
+                    left: parent.left
+                    leftMargin: (parent.width - width) / 2
+                }
+                onClicked: remorse.execute("Removing duplicates", function() { engine.deleteDuplicateEpisodes() } )
+            }
+
+            RemorsePopup { id: remorse }
         }
     }
 }

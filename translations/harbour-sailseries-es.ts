@@ -370,39 +370,49 @@
 <context>
     <name>SettingsPage</name>
     <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="16"/>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="18"/>
         <source>Settings</source>
         <translation>Ajustes</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="19"/>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="21"/>
         <source>Notifications</source>
         <translation>Notificaciones</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="22"/>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="24"/>
         <source>Publish notifications (experimental)</source>
         <translation>Publicar notificaciones (experimentales)</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="23"/>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="25"/>
         <source>SailSeries publishes notifications on app startup and when updating/adding series if an episode airs today.</source>
         <translation>SailSeries publica notificaciones sobre el inicio de la aplicación y al actualizar / agregar series si un episodio se transmite hoy.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="30"/>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="32"/>
         <source>Content updates</source>
         <translation>Actualizaciones de contenido</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="33"/>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="35"/>
         <source>Periodic updates of content (experimental)</source>
         <translation>Actualizaciones periódicas del contenido (experimental)</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="34"/>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="36"/>
         <source>SailSeries refreshes all content every one hour. Requires app to be open at background. Might cause a small hickup when content is being updated.</source>
         <translation>SailSeries actualiza todo el contenido cada hora. Requiere que la aplicación esté abierta en segundo plano. Podría causar un pequeño hickup cuando el contenido se está actualizando.</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="43"/>
+        <source>Maintenance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="50"/>
+        <source>Remove duplicate episodes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -43,6 +43,8 @@ public:
     bool createEpisodeTable();
     bool createBannerTable();
 
+    bool deleteDuplicateEpisodes();
+
     bool insertSeries(QMap<QString, QString> series);
     bool insertEpisodes(QList<QMap<QString, QString> > episodes);
     bool insertBanners(QList<QMap<QString, QString> > banners, int seriesId);

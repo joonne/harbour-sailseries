@@ -41,6 +41,8 @@ EpisodeListModel* Engine::getEpisodeListModel() { return m_episodeListModel; }
 
 SeasonListModel* Engine::getSeasonListModel() { return m_seasonListModel; }
 
+Statistics* Engine::getStatistics() { return m_statistics; }
+
 bool Engine::getLoading() { return m_loading; }
 
 void Engine::readyToUpdateModels() {
@@ -63,7 +65,7 @@ void Engine::toggleLoading(bool state) {
     m_loading = state;
 }
 
-Statistics* Engine::getStatistics() {
+bool Engine::deleteDuplicateEpisodes() {
 
-    return m_statistics;
+    return m_dbmanager->deleteDuplicateEpisodes();
 }
