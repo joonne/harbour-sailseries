@@ -1126,7 +1126,6 @@ void DatabaseManager::getMostWatchedDirectors() {
 
 void DatabaseManager::getMostWatchedActors() {
 
-//    QStringList result;
     QList<QMultiMap<QString, QString> > actors;
 
     QSqlQuery query(m_db);
@@ -1134,7 +1133,6 @@ void DatabaseManager::getMostWatchedActors() {
 
     if (query.isSelect()) {
         while (query.next()) {
-//            result.append(query.value(0).toString());
 
             auto line = query.value(0).toString();
             auto seriesName = query.value(1).toString();
@@ -1149,27 +1147,6 @@ void DatabaseManager::getMostWatchedActors() {
         }
     }
 
-//    qDebug() << actors;
-
-//    QStringList actors;
-
-//    foreach (auto line, result) {
-//        QStringList parsed = line.split("|");
-//        parsed.removeAll("");
-//        foreach (auto actor, parsed) {
-//            actors.append(actor);
-//        }
-//    }
-
-//    QMap<QString, int> occurences;
-//    foreach (auto item, actors) {
-//        if (occurences.contains(item)) {
-//            occurences[item] += 1;
-//        } else {
-//            occurences[item] = 1;
-//        }
-//    }
-
     QMap<QString, QStringList> occurences;
     foreach (auto item, actors) {
         occurences[item.firstKey()].append(item.first());
@@ -1177,9 +1154,32 @@ void DatabaseManager::getMostWatchedActors() {
 
     qDebug() << occurences;
 
-    foreach (auto item, occurences) {
-       if (item.length() > 1) {
-           qDebug() << item;
-       }
+//    QMap<QString, QStringList>::iterator itr = occurences.begin();
+//    while (itr != occurences.end()) {
+//        if (itr.value().length() > 1) {
+//           qDebug() << itr.key() << itr.value();
+//        }
+//        ++itr;
+//    }
+
+    QMap<QString, QStringList>::iterator itr = occurences.begin();
+    QList<QMap<QString, QStringList> > result;
+    while (itr != occurences.end()) {
+        for (auto i = 0; i < result.length(); ++i) {
+           if (itr.value().length() > result.at(i).first().length()) {
+               QMap<QString, QStringList> temp;
+               temp[itr.key()] = itr.value();
+               result.replace(i, temp);
+           }
+
+           if (result.length() == 6) {
+               result.removeLast();
+           }
+        }
+
+        ++itr;
     }
+
+    qDebug() << result;
+
 }
