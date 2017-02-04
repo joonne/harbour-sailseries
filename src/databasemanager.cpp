@@ -1154,27 +1154,29 @@ void DatabaseManager::getMostWatchedActors() {
 
     qDebug() << occurences;
 
-//    QMap<QString, QStringList>::iterator itr = occurences.begin();
-//    while (itr != occurences.end()) {
-//        if (itr.value().length() > 1) {
-//           qDebug() << itr.key() << itr.value();
-//        }
-//        ++itr;
-//    }
-
     QMap<QString, QStringList>::iterator itr = occurences.begin();
     QList<QMap<QString, QStringList> > result;
     while (itr != occurences.end()) {
         for (auto i = 0; i < result.length(); ++i) {
-           if (itr.value().length() > result.at(i).first().length()) {
-               QMap<QString, QStringList> temp;
-               temp[itr.key()] = itr.value();
-               result.replace(i, temp);
-           }
 
-           if (result.length() == 6) {
-               result.removeLast();
-           }
+            QMap<QString, QStringList> temp;
+
+            if (result.empty()) {
+                qDebug() << "adding first one!";
+                temp[itr.key()] = itr.value();
+                result.prepend(temp);
+            }
+
+            if (itr.value().length() > result.at(i).first().length()) {
+                qDebug() << "found more series for actor" << itr.key();
+                temp[itr.key()] = itr.value();
+                result.replace(i, temp);
+            }
+
+            if (result.length() == 6) {
+                qDebug() << "trimming list";
+                result.removeLast();
+            }
         }
 
         ++itr;
