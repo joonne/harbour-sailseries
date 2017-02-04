@@ -8,13 +8,13 @@
 class Statistics : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(int WatchedEpisodesDuration READ getWatchedEpisodesDuration CONSTANT)
-    Q_PROPERTY(int WatchedEpisodesCount READ getWatchedEpisodesCount CONSTANT)
-    Q_PROPERTY(int AllEpisodesCount READ getAllEpisodesCount CONSTANT)
-    Q_PROPERTY(int AllSeriesCount READ getAllSeriesCount CONSTANT)
-    Q_PROPERTY(int AllSeasonsCount READ getAllSeasonsCount CONSTANT)
-    Q_PROPERTY(int WatchedSeasonsCount READ getWatchedSeasonsCount CONSTANT)
-    Q_PROPERTY(double AverageWatchedEpisodesDuration READ getAverageWatchedEpisodesDuration)
+    Q_PROPERTY(int WatchedEpisodesDuration READ getWatchedEpisodesDuration NOTIFY watchedEpisodesDurationChanged)
+    Q_PROPERTY(int WatchedEpisodesCount READ getWatchedEpisodesCount NOTIFY watchedEpisodesCountChanged)
+    Q_PROPERTY(int AllEpisodesCount READ getAllEpisodesCount NOTIFY allEpisodesCountChanged)
+    Q_PROPERTY(int AllSeriesCount READ getAllSeriesCount NOTIFY allSeriesCountChanged)
+    Q_PROPERTY(int AllSeasonsCount READ getAllSeasonsCount NOTIFY allSeasonsCountChanged)
+    Q_PROPERTY(int WatchedSeasonsCount READ getWatchedSeasonsCount NOTIFY watchedSeasonsCountChanged)
+    Q_PROPERTY(double AverageWatchedEpisodesDuration READ getAverageWatchedEpisodesDuration NOTIFY averageWatchedEpisodesDurationChanged)
 public:
     explicit Statistics(QObject *parent = 0, DatabaseManager *dbmanager = 0);
 
@@ -29,8 +29,13 @@ public:
     double getAverageWatchedEpisodesDuration();
 
 signals:
-
-public slots:
+    void watchedEpisodesDurationChanged();
+    void watchedEpisodesCountChanged();
+    void allEpisodesCountChanged();
+    void allSeriesCountChanged();
+    void allSeasonsCountChanged();
+    void watchedSeasonsCountChanged();
+    void averageWatchedEpisodesDurationChanged();
 
 private:
     DatabaseManager* m_dbmanager;

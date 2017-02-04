@@ -11,12 +11,25 @@ Statistics::Statistics(QObject *parent, DatabaseManager *dbmanager) : QObject(pa
 void Statistics::updateStatistics() {
 
     m_watchedEpisodesDuration = m_dbmanager->getWatchedEpisodesDuration();
+    emit watchedEpisodesDurationChanged();
+
     m_watchedEpisodesCount = m_dbmanager->getWatchedEpisodesCount();
+    emit watchedEpisodesCountChanged();
+
     m_allEpisodesCount = m_dbmanager->getAllEpisodesCount();
+    emit allEpisodesCountChanged();
+
     m_allSeriesCount = m_dbmanager->getAllSeriesCount();
+    emit allSeriesCountChanged();
+
     m_allSeasonsCount = m_dbmanager->getAllSeasonsCount();
+    emit allSeasonsCountChanged();
+
     m_watchedSeasonsCount = m_dbmanager->getWatchedSeasonsCount();
+    emit watchedSeasonsCountChanged();
+
     m_averageWatchedEpisodesDuration = m_dbmanager->getAverageWatchedEpisodesDuration();
+    emit averageWatchedEpisodesDurationChanged();
 }
 
 int Statistics::getWatchedEpisodesDuration() { return m_watchedEpisodesDuration; }
