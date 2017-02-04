@@ -5,6 +5,7 @@ Statistics::Statistics(QObject *parent, DatabaseManager *dbmanager) : QObject(pa
     updateStatistics();
 
     m_dbmanager->getMostWatchedActors();
+    m_dbmanager->getMostWatchedDirectors();
 
 }
 

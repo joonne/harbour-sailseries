@@ -1085,6 +1085,7 @@ int DatabaseManager::getAllSeasonsCount() {
     return count;
 }
 
+// SELECT director, seriesName FROM series LEFT JOIN episode ON episode.seriesID = series.id AND episode.watched = 1;
 void DatabaseManager::getMostWatchedDirectors() {
 
     QStringList result;
@@ -1152,36 +1153,15 @@ void DatabaseManager::getMostWatchedActors() {
         occurences[item.firstKey()].append(item.first());
     }
 
-    qDebug() << occurences;
-
-    QMap<QString, QStringList>::iterator itr = occurences.begin();
-    QList<QMap<QString, QStringList> > result;
+    QMultiMap<int, QMap<QString, QStringList> > result;
+    auto itr = occurences.begin();
     while (itr != occurences.end()) {
-        for (auto i = 0; i < result.length(); ++i) {
-
-            QMap<QString, QStringList> temp;
-
-            if (result.empty()) {
-                qDebug() << "adding first one!";
-                temp[itr.key()] = itr.value();
-                result.prepend(temp);
-            }
-
-            if (itr.value().length() > result.at(i).first().length()) {
-                qDebug() << "found more series for actor" << itr.key();
-                temp[itr.key()] = itr.value();
-                result.replace(i, temp);
-            }
-
-            if (result.length() == 6) {
-                qDebug() << "trimming list";
-                result.removeLast();
-            }
-        }
-
+        auto size = itr.value().size();
+        QMap<QString, QStringList> temp;
+        temp.insert(itr.key(), itr.value());
+        result.insert(size, temp);
         ++itr;
     }
 
     qDebug() << result;
-
 }
