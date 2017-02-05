@@ -83,8 +83,8 @@ public:
     int getAllSeasonsCount();
     QString getLastRefresh();
 
-    void getMostWatchedDirectors();
-    void getMostWatchedActors();
+    QMap<QString, QStringList> getMostWatchedDirectors();
+    QMultiMap<int, QMap<QString, QStringList> > getMostWatchedActors();
 
 signals:
 

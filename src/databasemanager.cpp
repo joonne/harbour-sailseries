@@ -1085,47 +1085,47 @@ int DatabaseManager::getAllSeasonsCount() {
     return count;
 }
 
-// SELECT director, seriesName FROM series LEFT JOIN episode ON episode.seriesID = series.id AND episode.watched = 1;
-void DatabaseManager::getMostWatchedDirectors() {
+QMap<QString, QStringList> DatabaseManager::getMostWatchedDirectors() {
 
-    QStringList result;
+    QList<QMap<QString, QString> > directors;
 
     QSqlQuery query(m_db);
-    query.exec("SELECT director FROM episode WHERE watched = 1;");
+    query.exec("SELECT director, seriesName "
+               "FROM series "
+               "LEFT JOIN episode "
+               "ON episode.seriesID = series.id AND episode.watched = 1;");
+
     if (query.isSelect()) {
         while (query.next()) {
-            result.append(query.value(0).toString());
-        }
-    }
+            QString directorString = query.value(0).toString();
+            QString seriesName = query.value(1).toString();
 
-    QStringList directors;
-
-    foreach (auto line, result) {
-        if (line.contains("|")) {
-            QStringList parsed = line.split("|");
-            parsed.removeAll("");
-            foreach (auto director, parsed) {
-                directors.append(director);
+            if (directorString.contains("|")) {
+                QStringList parsed = directorString.split("|");
+                parsed.removeAll("");
+                foreach (auto director, parsed) {
+                    QMap<QString, QString> temp;
+                    temp.insert(director, seriesName);
+                    directors.append(temp);
+                }
+            } else {
+                QMap<QString, QString> temp;
+                temp.insert(directorString, seriesName);
+                directors.append(temp);
             }
-        } else {
-            directors.append(line);
         }
     }
-    qDebug() << directors;
 
-    QMap<QString, int> occurences;
+    QMap<QString, QStringList> result;
     foreach (auto item, directors) {
-        if (occurences.contains(item)) {
-            occurences[item] += 1;
-        } else {
-            occurences[item] = 1;
-        }
+        result[item.firstKey()].append(item.first());
     }
 
-    qDebug() << occurences;
+    qDebug() << result;
+    return result;
 }
 
-void DatabaseManager::getMostWatchedActors() {
+QMultiMap<int, QMap<QString, QStringList> > DatabaseManager::getMostWatchedActors() {
 
     QList<QMultiMap<QString, QString> > actors;
 
@@ -1164,4 +1164,5 @@ void DatabaseManager::getMostWatchedActors() {
     }
 
     qDebug() << result;
+    return result;
 }
