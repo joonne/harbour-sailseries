@@ -129,12 +129,50 @@ Page {
 
             HorizontalSeparator { }
 
-            TextField {
+            Row {
+
                 width: parent.width
-                readOnly: true
-                font.pixelSize: Theme.fontSizeSmall
-                text: engine.Statistics.AllSeriesCount
-                label: qsTr("All series")
+
+                Column {
+
+                    width: parent.width / 2
+
+                    TextField {
+                        width: parent.width
+                        readOnly: true
+                        font.pixelSize: Theme.fontSizeSmall
+                        text: engine.Statistics.WatchedSeriesCount
+                        label: qsTr("Watched series")
+                    }
+
+                    TextField {
+                        width: parent.width
+                        readOnly: true
+                        font.pixelSize: Theme.fontSizeSmall
+                        text: engine.Statistics.AllSeriesCount
+                        label: qsTr("All series")
+                    }
+                }
+
+                Column {
+
+                    width: parent.width / 2
+
+                    HorizontalSeparator { }
+
+                    HorizontalSeparator { }
+
+                    ProgressCircle {
+
+                        id: seriesProgress
+                        value: engine.Statistics.WatchedSeriesCount / engine.Statistics.AllSeriesCount
+
+                        anchors {
+                            left: parent.left
+                            leftMargin: (parent.width - seriesProgress.width) / 2
+                        }
+                    }
+                }
             }
 
             SectionHeader {

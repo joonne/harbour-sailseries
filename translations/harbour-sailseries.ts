@@ -501,47 +501,52 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="141"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="145"/>
+        <source>Watched series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="179"/>
         <source>Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="149"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="187"/>
         <source>Days spent watching</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="157"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="195"/>
         <source>Hours spent watching</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="165"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="203"/>
         <source>Minutes spent watching</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="172"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="210"/>
         <source>%1 minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="173"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="211"/>
         <source>Average episode duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="177"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="215"/>
         <source>People</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="185"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="223"/>
         <source>Most seen director</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="193"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="231"/>
         <source>Most seen actor</source>
         <translation type="unfinished"></translation>
     </message>
@@ -561,7 +566,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="137"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="153"/>
         <source>All series</source>
         <translation type="unfinished"></translation>
     </message>

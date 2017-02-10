@@ -1049,7 +1049,34 @@ int DatabaseManager::getEndedSeriesCount() {
     return count;
 }
 
-int DatabaseManager::getWatchedSeriesCount() { }
+int DatabaseManager::getWatchedSeriesCount() {
+
+    int inProgressSeriesCount = 0;
+    int allSeriesCount = 0;
+    QSqlQuery query(m_db);
+
+    query.exec("SELECT COUNT (DISTINCT seriesID) "
+               "FROM "
+               "(SELECT episode.id, episode.seriesID "
+               "FROM episode, series "
+               "WHERE episode.seriesID = series.id AND episode.watched = 0 and episode.seasonNumber != 0);");
+
+    if (query.isSelect()) {
+        while (query.next()) {
+            inProgressSeriesCount = query.value(0).toInt();
+        }
+    }
+
+    query.exec("SELECT COUNT(id) FROM series;");
+
+    if (query.isSelect()) {
+        while (query.next()) {
+            allSeriesCount = query.value(0).toInt();
+        }
+    }
+
+    return allSeriesCount - inProgressSeriesCount;
+}
 
 int DatabaseManager::getWatchedSeasonsCount() {
 
@@ -1085,7 +1112,7 @@ int DatabaseManager::getAllSeasonsCount() {
     return count;
 }
 
-QMap<QString, QStringList> DatabaseManager::getMostWatchedDirectors() {
+QMultiMap<int, QMap<QString, QStringList> > DatabaseManager::getMostWatchedDirectors() {
 
     QList<QMap<QString, QString> > directors;
 
@@ -1116,9 +1143,19 @@ QMap<QString, QStringList> DatabaseManager::getMostWatchedDirectors() {
         }
     }
 
-    QMap<QString, QStringList> result;
+    QMap<QString, QStringList> occurences;
     foreach (auto item, directors) {
-        result[item.firstKey()].append(item.first());
+        occurences[item.firstKey()].append(item.first());
+    }
+
+    QMultiMap<int, QMap<QString, QStringList> > result;
+    auto itr = occurences.begin();
+    while (itr != occurences.end()) {
+        auto size = itr.value().size();
+        QMap<QString, QStringList> temp;
+        temp.insert(itr.key(), itr.value());
+        result.insert(size, temp);
+        ++itr;
     }
 
     qDebug() << result;
