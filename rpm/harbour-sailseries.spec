@@ -29,6 +29,17 @@ BuildRequires:  desktop-file-utils
 %description
 
 
+%package test
+Summary:    Tests for SailSeries
+Group:      Qt/Qt
+Requires:   %{name} = %{version}-%{release}
+Requires:   qt5-qtdeclarative-import-qttest
+BuildRequires:  pkgconfig(Qt5QuickTest)
+BuildRequires:  pkgconfig(Qt5Test)
+
+%description test
+Tests package for SailSeries
+
 %prep
 %setup -q -n %{name}-%{version}
 
@@ -71,3 +82,11 @@ desktop-file-install --delete-original       \
 %attr(0755,-,-) %{_bindir}/%{name}
 # >> files
 # << files
+
+%files test
+%defattr(-,root,root,-)
+%{_bindir}/tst-harbour-sailseries
+%{_datadir}/tst-harbour-sailseries/*.qml
+%{_datadir}/tst-harbour-sailseries/*.sh
+# >> files test
+# << files test

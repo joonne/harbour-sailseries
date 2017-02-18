@@ -31,19 +31,20 @@ Files:
 - '%attr(0755,-,-) %{_bindir}/%{name}'
 PkgBR: []
 
-#SubPackages:
-#    - Name: test
-#      Summary: Tests for the Helloworld Pro for Sailfish
-#      Group: Qt/Qt
-#      Description: |-
-#        Tests package for the Helloworld Pro for Sailfish
-#      AutoDepend: true
-#      PkgConfigBR:
-#      - Qt5QuickTest
-#      Requires:
-#      - qt5-qtdeclarative-import-qttest
-#      Files:
-#        - '%{_bindir}/tst-harbour-sailseries'
-#        - '%{_datadir}/tst-harbour-sailseries/*.qml'
-#        # Script for starting tests on emulator and device
-#        - '%{_datadir}/tst-harbour-sailseries/*.sh'
+SubPackages:
+   - Name: test
+     Summary: Tests for SailSeries
+     Group: Qt/Qt
+     Description: |-
+       Tests package for SailSeries
+     AutoDepend: true
+     PkgConfigBR:
+     - Qt5QuickTest
+     - Qt5Test
+     Requires:
+     - qt5-qtdeclarative-import-qttest
+     Files:
+       - '%{_bindir}/tst-harbour-sailseries'
+       - '%{_datadir}/tst-harbour-sailseries/*.qml'
+       # Script for starting tests on emulator and device
+       - '%{_datadir}/tst-harbour-sailseries/*.sh'
