@@ -536,21 +536,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="215"/>
-        <source>People</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="223"/>
-        <source>Most seen director</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="231"/>
-        <source>Most seen actor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="29"/>
         <source>Numbers</source>
         <translation type="unfinished"></translation>

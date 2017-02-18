@@ -211,6 +211,7 @@ Page {
                 label: qsTr("Average episode duration")
             }
 
+            /*
             SectionHeader {
                 text: qsTr("People")
             }
@@ -230,6 +231,7 @@ Page {
                 text: "Mandy Patinkin"
                 label: qsTr("Most seen actor")
             }
+            */
         }
 
         VerticalScrollDecorator { }

@@ -569,6 +569,7 @@ QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries() {
     auto firstAiredStart = date.addDays(1 - date.dayOfWeek()).toString(Qt::ISODate); // Monday == 1
     auto firstAiredEnd = date.addDays(7 - date.dayOfWeek()).toString(Qt::ISODate); // Sunday == 7
     auto status = "Continuing";
+    const auto kTwelveHoursInSecs = 12 * 60 * 60;
     
     QList<QMap<QString, QString> > series;
     
@@ -593,10 +594,16 @@ QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries() {
                 temp["network"] = network;
                 
                 auto airsTime = query.value(2).toString();
-                auto time = QTime::fromString(airsTime,"h:m A");
-                airsTime = time.toString("h:mm");
+                QTime time;
+
+                if (airsTime.contains("PM")) {
+                    airsTime.resize(airsTime.indexOf("PM") - 1);
+                    time = QTime::fromString(airsTime, "h:m").addSecs(kTwelveHoursInSecs);
+                } else {
+                    time = QTime::fromString(airsTime, "h:m");
+                }
                 
-                temp["airsTime"] = airsTime;
+                temp["airsTime"] = time.toString("h:mm");
                 
                 auto airsDayOfWeek = query.value(3).toString();
                 temp["airsDayOfWeek"] = airsDayOfWeek;

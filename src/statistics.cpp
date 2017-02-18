@@ -31,22 +31,6 @@ void Statistics::updateStatistics() {
 
     m_averageWatchedEpisodesDuration = m_dbmanager->getAverageWatchedEpisodesDuration();
     emit averageWatchedEpisodesDurationChanged();
-
-    qDebug() << m_dbmanager->getMostWatchedActors();
-//    auto actor = mostWacthedActors.end().value().firstKey();
-//    auto actedSeries = mostWacthedActors.end().value().first().join(",");
-//    m_mostWatchedActor = new Actor(actor, actedSeries);
-
-//    auto mostWatchedDirectors = m_dbmanager->getMostWatchedDirectors();
-//    qDebug() << mostWatchedDirectors;
-
-//    auto director = mostWatchedDirectors.end().value();
-//    qDebug() << "director" << director;
-
-//    auto directedSeries = mostWatchedDirectors.end().value();
-//    qDebug() << "directedSeries" << directedSeries;
-//    directedSeries.removeDuplicates();
-//    m_mostWacthedDirector = new Director(this, director, directedSeries.join(","));
 }
 
 int Statistics::getWatchedEpisodesDuration() { return m_watchedEpisodesDuration; }

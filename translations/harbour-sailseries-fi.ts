@@ -267,7 +267,7 @@
     <message>
         <location filename="../src/qml/components/ProgressCircle.qml" line="23"/>
         <source>%1 %</source>
-        <translation type="unfinished"></translation>
+        <translation> % 1 %</translation>
     </message>
 </context>
 <context>
@@ -407,12 +407,12 @@
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="43"/>
         <source>Maintenance</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunnossapito</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="50"/>
         <source>Remove duplicate episodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Poista päällekkäiset jaksot</translation>
     </message>
 </context>
 <context>
@@ -460,7 +460,7 @@
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="55"/>
         <source>Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilastot</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="60"/>
@@ -498,87 +498,72 @@
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="25"/>
         <source>Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilastot</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="145"/>
         <source>Watched series</source>
-        <translation type="unfinished"></translation>
+        <translation>Katsotut sarjat</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="179"/>
         <source>Time</source>
-        <translation type="unfinished">Aika</translation>
+        <translation>Aika</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="187"/>
         <source>Days spent watching</source>
-        <translation type="unfinished"></translation>
+        <translation>Päivää vierähtänyt katsellessa</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="195"/>
         <source>Hours spent watching</source>
-        <translation type="unfinished"></translation>
+        <translation>Tunteja kulunut katsellessa</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="203"/>
         <source>Minutes spent watching</source>
-        <translation type="unfinished"></translation>
+        <translation>Minuutteja kulunut katsellessa</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="210"/>
         <source>%1 minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 minuuttia</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="211"/>
         <source>Average episode duration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="215"/>
-        <source>People</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="223"/>
-        <source>Most seen director</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="231"/>
-        <source>Most seen actor</source>
-        <translation type="unfinished"></translation>
+        <translation>Keskimääräinen jakson kesto</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="29"/>
         <source>Numbers</source>
-        <translation type="unfinished"></translation>
+        <translation>Numerot</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="44"/>
         <source>Watched episodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Katsotut jaksot</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="52"/>
         <source>All episodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaikki jaksot</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="153"/>
         <source>All series</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaikki sarjat</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="95"/>
         <source>Watched seasons</source>
-        <translation type="unfinished"></translation>
+        <translation>Katsotut kaudet</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="103"/>
         <source>All seasons</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaikki kaudet</translation>
     </message>
 </context>
 <context>

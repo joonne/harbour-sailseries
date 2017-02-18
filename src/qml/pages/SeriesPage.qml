@@ -57,10 +57,10 @@ Page {
                 text: qsTr("Remove")
                 onClicked: {
                     remorse.execute(qsTr("Removing"),
-                                           function() {
-                                               engine.SeriesListModel.deleteSeries(seriesID);
-                                               pageStack.pop()
-                                           });
+                                    function() {
+                                        engine.SeriesListModel.deleteSeries(seriesID);
+                                        pageStack.pop()
+                                    });
                 }
             }
 
@@ -105,7 +105,7 @@ Page {
                     id: rating
                     label: qsTr("Rating")
                     width: seriespage.width / 2
-                    text: engine.SeriesListModel.Rating
+                    text: parseFloat(engine.SeriesListModel.Rating).toFixed(1)
                     color: Theme.secondaryColor
                     readOnly: true
                 }
