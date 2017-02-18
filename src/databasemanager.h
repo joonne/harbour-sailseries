@@ -43,6 +43,8 @@ public:
     bool createEpisodeTable();
     bool createBannerTable();
 
+    bool deleteDuplicateEpisodes();
+
     bool insertSeries(QMap<QString, QString> series);
     bool insertEpisodes(QList<QMap<QString, QString> > episodes);
     bool insertBanners(QList<QMap<QString, QString> > banners, int seriesId);
@@ -69,6 +71,20 @@ public:
     int totalCount(int seriesID);
     int totalCountBySeason(int seriesID, int seasonNumber);
     int seasonCount(int seriesID);
+
+    int getWatchedEpisodesDuration();
+    double getAverageWatchedEpisodesDuration();
+    int getWatchedEpisodesCount();
+    int getAllEpisodesCount();
+    int getAllSeriesCount();
+    int getEndedSeriesCount();
+    int getWatchedSeriesCount();
+    int getWatchedSeasonsCount();
+    int getAllSeasonsCount();
+    QString getLastRefresh();
+
+    QMultiMap<int, QMap<QString, QStringList> > getMostWatchedDirectors();
+    QMultiMap<int, QMap<QString, QStringList> > getMostWatchedActors();
 
 signals:
 

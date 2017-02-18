@@ -1,11 +1,7 @@
 #include "engine.h"
 
-Engine::Engine(QObject *parent) :
-    QObject(parent),
-    m_reader(new XMLReader),
-    m_dbmanager(new DatabaseManager),
-    m_loading(false)
-{
+Engine::Engine(QObject *parent) : QObject(parent), m_reader(new XMLReader), m_dbmanager(new DatabaseManager), m_loading(false) {
+
     m_dbmanager->setUpDB();
 
     m_seriesListModel = new SeriesListModel(this, m_dbmanager, m_reader);
@@ -13,6 +9,7 @@ Engine::Engine(QObject *parent) :
     m_todayListModel = new TodayListModel(this, m_dbmanager, m_reader);
     m_episodeListModel = new EpisodeListModel(this, m_dbmanager);
     m_seasonListModel = new SeasonListModel(this, m_dbmanager);
+    m_statistics = new Statistics(this, m_dbmanager);
 
     connect(m_searchListModel,
             SIGNAL(updateModels()),
@@ -44,20 +41,31 @@ EpisodeListModel* Engine::getEpisodeListModel() { return m_episodeListModel; }
 
 SeasonListModel* Engine::getSeasonListModel() { return m_seasonListModel; }
 
+Statistics* Engine::getStatistics() { return m_statistics; }
+
 bool Engine::getLoading() { return m_loading; }
 
 void Engine::readyToUpdateModels() {
+
     m_todayListModel->populateTodayModel();
     m_seriesListModel->populateBannerList();
 }
 
 void Engine::updateModels() {
+
     toggleLoading(true);
     m_todayListModel->populateTodayModel();
     m_seriesListModel->populateBannerList();
+    m_statistics->updateStatistics();
     toggleLoading(false);
 }
 
 void Engine::toggleLoading(bool state) {
+
     m_loading = state;
+}
+
+bool Engine::deleteDuplicateEpisodes() {
+
+    return m_dbmanager->deleteDuplicateEpisodes();
 }

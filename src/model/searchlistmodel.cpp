@@ -43,24 +43,24 @@ QQmlListProperty<SeriesData> SearchListModel::getSearchModel() {
 
 // List handling methods
 
-void SearchListModel::searchListAppend(QQmlListProperty<SeriesData>* prop, SeriesData* val)
-{
+void SearchListModel::searchListAppend(QQmlListProperty<SeriesData>* prop, SeriesData* val) {
+
     SearchListModel* searchModel = qobject_cast<SearchListModel*>(prop->object);
     searchModel->m_searchListModel.append(val);
 }
 
-SeriesData* SearchListModel::searchListAt(QQmlListProperty<SeriesData>* prop, int index)
-{
+SeriesData* SearchListModel::searchListAt(QQmlListProperty<SeriesData>* prop, int index) {
+
     return (qobject_cast<SearchListModel*>(prop->object))->m_searchListModel.at(index);
 }
 
-int SearchListModel::searchListCount(QQmlListProperty<SeriesData>* prop)
-{
+int SearchListModel::searchListCount(QQmlListProperty<SeriesData>* prop) {
+
     return qobject_cast<SearchListModel*>(prop->object)->m_searchListModel.size();
 }
 
-void SearchListModel::searchListClear(QQmlListProperty<SeriesData>* prop)
-{
+void SearchListModel::searchListClear(QQmlListProperty<SeriesData>* prop) {
+
     qobject_cast<SearchListModel*>(prop->object)->m_searchListModel.clear();
 }
 
@@ -198,7 +198,6 @@ void SearchListModel::setAdded(bool cond) {
         m_added = cond;
         emit addedChanged();
     }
-
 }
 
 void SearchListModel::clearList() {
