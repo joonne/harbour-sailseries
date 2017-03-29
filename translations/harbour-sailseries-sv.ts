@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sv">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="sv" version="2.1">
 <context>
     <name>AboutPage</name>
     <message>
@@ -160,7 +158,7 @@
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="29"/>
         <source>I have seen these all</source>
-        <translation>Jag har sett allt detta</translation>
+        <translation>Jag har sett alla dessa</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="41"/>
@@ -267,7 +265,7 @@
     <message>
         <location filename="../src/qml/components/ProgressCircle.qml" line="23"/>
         <source>%1 %</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %</translation>
     </message>
 </context>
 <context>
@@ -407,12 +405,12 @@
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="43"/>
         <source>Maintenance</source>
-        <translation type="unfinished"></translation>
+        <translation>Underhåll</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="50"/>
         <source>Remove duplicate episodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta bort dubblettepisoder</translation>
     </message>
 </context>
 <context>
@@ -460,7 +458,7 @@
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="55"/>
         <source>Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Statistik</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="60"/>
@@ -498,72 +496,72 @@
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="25"/>
         <source>Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Statistik</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="145"/>
         <source>Watched series</source>
-        <translation type="unfinished"></translation>
+        <translation>Sedda serier</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="179"/>
         <source>Time</source>
-        <translation type="unfinished">Tid</translation>
+        <translation>Tid</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="187"/>
         <source>Days spent watching</source>
-        <translation type="unfinished"></translation>
+        <translation>Tittade dagar</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="195"/>
         <source>Hours spent watching</source>
-        <translation type="unfinished"></translation>
+        <translation>Tittade timmar</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="203"/>
         <source>Minutes spent watching</source>
-        <translation type="unfinished"></translation>
+        <translation>Tittade minuter</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="210"/>
         <source>%1 minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 minuter</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="211"/>
         <source>Average episode duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Genomsnittlig varaktighet per episod</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="29"/>
         <source>Numbers</source>
-        <translation type="unfinished"></translation>
+        <translation>Antal</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="44"/>
         <source>Watched episodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sedda episoder</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="52"/>
         <source>All episodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Alla episoder</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="153"/>
         <source>All series</source>
-        <translation type="unfinished"></translation>
+        <translation>Alla serier</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="95"/>
         <source>Watched seasons</source>
-        <translation type="unfinished"></translation>
+        <translation>Sedda säsonger</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="103"/>
         <source>All seasons</source>
-        <translation type="unfinished"></translation>
+        <translation>Alla säsonger</translation>
     </message>
 </context>
 <context>
