@@ -267,7 +267,7 @@
     <message>
         <location filename="../src/qml/components/ProgressCircle.qml" line="23"/>
         <source>%1 %</source>
-        <translation> % 1 %</translation>
+        <translation> %1 %</translation>
     </message>
 </context>
 <context>

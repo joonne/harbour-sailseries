@@ -16,6 +16,14 @@ SailSeries stores all data except images into local database, so it is possible 
 
 **Changelog:**
 
+1.2.0
+
+- Statistics page: displays statistics about series, seasons and episodes
+
+- Added new button to settings page that tries to clean local db for duplicates
+
+- little polishes and fixes
+
 1.1.2
 
 - Settings page:
