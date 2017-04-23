@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<TS version="2.1" language="de">
 <context>
     <name>AboutPage</name>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="21"/>
         <source>About</source>
-        <translation>A propos</translation>
+        <translation>Über</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="53"/>
         <source>General</source>
-        <translation>Général</translation>
+        <translation>Allgemeines</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="65"/>
         <source>Creator</source>
-        <translation>Créateur</translation>
+        <translation>Urheber</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="109"/>
         <source>Licence</source>
-        <translation>Licence</translation>
+        <translation>Lizenz</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="117"/>
         <source>This software is licenced under GPLv2.</source>
-        <translation>Ce logiciel est sous licence GPLv2.</translation>
+        <translation>Diese Software ist unter GPLv2 lizenziert.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="121"/>
         <source>Content</source>
-        <translation>Contenu</translation>
+        <translation>Inhalt</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="129"/>
         <source>SailSeries utilises the public API at TheTVDB.</source>
-        <translation>SailSeries utilise l&apos;API publique de The TVDB.</translation>
+        <translation>SailSeries nutzt die öffentliche API von TheTVDB.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="150"/>
         <source>The source code is available at GitHub. Contributions, ideas and bug reports are welcome.</source>
-        <translation>Le code source est disponible sur GitHub. Contributions, idées et rapport de bugs sont les bienvenus.</translation>
+        <translation>Der Quelltext ist auf GitHub verfügbar. Beiträge, Ideen und Fehlerberichte sind willkommen.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="142"/>
         <source>Source Code</source>
-        <translation>Code Source</translation>
+        <translation>Quelltext</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="43"/>
@@ -56,37 +56,37 @@
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="61"/>
         <source>SailSeries is a tv-series tracking application for SailfishOS. It aims to be a good looking and simple app that can help you to stay on track while following your favourite series.</source>
-        <translation>SailSeries est une application Sailfish OS pour suivre les séries TV. Son but est d&apos;être une appli esthétique et simple pour vous aider à rester à jour sur vos séries favorites.  </translation>
+        <translation>SailSeries ist eine SailfishOS-Anwendung zum Tracken von TV-Serien. Sie zielt darauf ab gutaussehend und einfach zu sein, um dich über deine Lieblingsserien bestmöglich auf dem Laufenden zu halten.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="74"/>
         <source>Jonne Pihlanen, &apos;joonne&apos;</source>
-        <translation>Jonne Pihlanen, &apos;joonne&apos;</translation>
+        <translation>Jonne &apos;joonne&apos; Pihlanen</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="155"/>
         <source>Project in GitHub</source>
-        <translation>Projet sur GitHub</translation>
+        <translation>Projekt auf GitHub</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="163"/>
         <source>Translations</source>
-        <translation>Traductions</translation>
+        <translation>Übersetzungen</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="171"/>
         <source>SailSeries uses the Transifex translation platform to host the translations.</source>
-        <translation>SailSeries utilise la platform de traduction Transifex pour héberger les traductions.</translation>
+        <translation>SailSeries nutzt Transifex als Plattform für die Übersetzungen.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="176"/>
         <source>Help with translations</source>
-        <translation>Aider à traduire</translation>
+        <translation>Hilf bei der Übersetzung</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="92"/>
         <source>Contributors</source>
-        <translation>Contributeurs</translation>
+        <translation>Mitwirkende</translation>
     </message>
 </context>
 <context>
@@ -94,47 +94,47 @@
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="9"/>
         <source>Nothing airs this week</source>
-        <translation>Rien n&apos;est diffusé cette semaine</translation>
+        <translation>Keine Veröffentlichung diese Woche</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="47"/>
         <source>Monday</source>
-        <translation>Lundi</translation>
+        <translation>Montag</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="49"/>
         <source>Tuesday</source>
-        <translation>Mardi</translation>
+        <translation>Dienstag</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="51"/>
         <source>Wednesday</source>
-        <translation>Mercredi</translation>
+        <translation>Mittwoch</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="53"/>
         <source>Thursday</source>
-        <translation>Jeudi</translation>
+        <translation>Donnerstag</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="55"/>
         <source>Friday</source>
-        <translation>Vendredi</translation>
+        <translation>Freitag</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="57"/>
         <source>Saturday</source>
-        <translation>Samedi</translation>
+        <translation>Samstag</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="59"/>
         <source>Sunday</source>
-        <translation>Dimanche</translation>
+        <translation>Sonntag</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="96"/>
         <source>Season %1 Episode %2</source>
-        <translation>Saison %1 Episode %2</translation>
+        <translation>Staffel %1 Folge %2</translation>
     </message>
 </context>
 <context>
@@ -142,17 +142,17 @@
     <message>
         <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="75"/>
         <source>Original air date</source>
-        <translation>Date de première diffusion</translation>
+        <translation>Ursprüngliches Veröffentlichungsdatum</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="109"/>
         <source>Writer</source>
-        <translation>Scénariste</translation>
+        <translation>Autor</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="118"/>
         <source>Guest Stars</source>
-        <translation>Guest Stars</translation>
+        <translation>Gaststars</translation>
     </message>
 </context>
 <context>
@@ -160,27 +160,27 @@
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="29"/>
         <source>I have seen these all</source>
-        <translation>J&apos;ai vu tous ces épisodes</translation>
+        <translation>Ich habe diese alle gesehen</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="41"/>
         <source>Episodes</source>
-        <translation>Episodes</translation>
+        <translation>Folgen</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="92"/>
         <source>Season</source>
-        <translation>Saison</translation>
+        <translation>Staffel</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="99"/>
         <source>Episode</source>
-        <translation>Episode</translation>
+        <translation>Folge</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="149"/>
         <source>No episodes.</source>
-        <translation>Pas d&apos;épisode.</translation>
+        <translation>Keine Folgen</translation>
     </message>
 </context>
 <context>
@@ -188,22 +188,22 @@
     <message>
         <location filename="../src/qml/pages/Episodes_orig.qml" line="34"/>
         <source>Episodes</source>
-        <translation>Episodes</translation>
+        <translation>Folgen</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/Episodes_orig.qml" line="83"/>
         <source>Season</source>
-        <translation>Saison</translation>
+        <translation>Staffel</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/Episodes_orig.qml" line="90"/>
         <source>Episode</source>
-        <translation>Episode</translation>
+        <translation>Folge</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/Episodes_orig.qml" line="158"/>
         <source>No episodes.</source>
-        <translation>Pas d&apos;épisode.</translation>
+        <translation>Keine Folgen</translation>
     </message>
 </context>
 <context>
@@ -211,47 +211,47 @@
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="16"/>
         <source>This show has ended</source>
-        <translation>Cette série est terminée</translation>
+        <translation>Diese Show ist beendet</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="18"/>
         <source>%1 airs tonight</source>
-        <translation>%1 diffusé ce soir</translation>
+        <translation>%1 Veröffentlichungen heute</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="20"/>
         <source>%1 airs tomorrow</source>
-        <translation>%1 diffusé demain</translation>
+        <translation>%1 Veröffentlichungen morgen</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="22"/>
         <source>%1 airs in %2 days</source>
-        <translation>%1 diffusé dans %2 jours</translation>
+        <translation>%1 Veröffentlichungen in %2 Tagen</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="24"/>
         <source>Next episode airs in %1 days</source>
-        <translation>Prochain épisode diffusé dans %1 jours</translation>
+        <translation>Nächste Folge wird in %1 Tagen veröffentlicht</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="26"/>
         <source>No information about next episode</source>
-        <translation>Pas d&apos;information sur le prochain épisode</translation>
+        <translation>Keine Informationen über die nächste Folge</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="36"/>
         <source>Update All</source>
-        <translation>Tout mettre à jour</translation>
+        <translation>Alle aktualisieren</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="50"/>
         <source>My Series</source>
-        <translation>Mes Séries</translation>
+        <translation>Meine Serien</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="128"/>
         <source>Search for series first.</source>
-        <translation>Commencez par chercher des séries.</translation>
+        <translation>Suche zuerst nach einer Serie.</translation>
     </message>
 </context>
 <context>
@@ -259,7 +259,7 @@
     <message>
         <location filename="../src/qml/pages/ProgramOverviewPage.qml" line="42"/>
         <source>Time</source>
-        <translation>Horaire</translation>
+        <translation>Zeit</translation>
     </message>
 </context>
 <context>
@@ -275,12 +275,12 @@
     <message>
         <location filename="../src/qml/pages/SearchPage.qml" line="26"/>
         <source>Search for a series</source>
-        <translation>Rechercher une série</translation>
+        <translation>Suche eine Serie</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SearchPage.qml" line="85"/>
         <source>Here will be stuff when you search for something</source>
-        <translation>Les résultats de votre recherche se trouveront ici</translation>
+        <translation>Hier werden die Suchergebnisse erscheinen</translation>
     </message>
 </context>
 <context>
@@ -288,22 +288,22 @@
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="22"/>
         <source>Seasons</source>
-        <translation>Saisons</translation>
+        <translation>Staffeln</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="84"/>
         <source>Season</source>
-        <translation>Saison</translation>
+        <translation>Staffel</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="97"/>
         <source>Watched</source>
-        <translation>Vus</translation>
+        <translation>Gesehen</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="139"/>
         <source>episodes</source>
-        <translation>épisodes</translation>
+        <translation>Folgen</translation>
     </message>
 </context>
 <context>
@@ -311,17 +311,17 @@
     <message>
         <location filename="../src/qml/pages/SeriesInfoPage.qml" line="21"/>
         <source>Add to my series</source>
-        <translation>Ajouter à mes séries</translation>
+        <translation>Zu meinen Serien hinzufügen</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesInfoPage.qml" line="30"/>
         <source>Already added</source>
-        <translation>Déjà ajoutée</translation>
+        <translation>Bereits hinzugefügt</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesInfoPage.qml" line="69"/>
         <source>Network</source>
-        <translation>Réseau</translation>
+        <translation>Sender</translation>
     </message>
 </context>
 <context>
@@ -329,37 +329,37 @@
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="32"/>
         <source>Continuing</source>
-        <translation>En cours</translation>
+        <translation>Fortgeführt</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="34"/>
         <source>Ended</source>
-        <translation>Terminée</translation>
+        <translation>Beendet</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="57"/>
         <source>Remove</source>
-        <translation>Retirer</translation>
+        <translation>Entfernen</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="59"/>
         <source>Removing</source>
-        <translation>Retrait en cours</translation>
+        <translation>Entferne</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="68"/>
         <source>Update</source>
-        <translation>Mettre à jour</translation>
+        <translation>Aktualisieren</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="97"/>
         <source>Status</source>
-        <translation>Statut</translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="106"/>
         <source>Rating</source>
-        <translation>Note</translation>
+        <translation>Bewertung</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="117"/>
@@ -372,47 +372,47 @@
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="18"/>
         <source>Settings</source>
-        <translation>Paramètres</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="21"/>
         <source>Notifications</source>
-        <translation>Notifications</translation>
+        <translation>Benachrichtigungen</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="24"/>
         <source>Publish notifications (experimental)</source>
-        <translation>Publier des notifications (expérimental)</translation>
+        <translation>Veröffentlichungsbenachrichtigungen (experimentell)</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="25"/>
         <source>SailSeries publishes notifications on app startup and when updating/adding series if an episode airs today.</source>
-        <translation>SailSeries publie des notifications au démarrage de l&apos;appli lors de mise à jour/d&apos;ajout de séries, si un épisode est diffusé le jour même.</translation>
+        <translation>SailSeries schickt Benachrichtigungen beim Start der Anwendung und beim Aktualisieren und Hinzufügen von Serien wenn eine Folge heute veröffentlicht wird.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="32"/>
         <source>Content updates</source>
-        <translation>Mises à jour du contenu</translation>
+        <translation>Inhaltsaktualisierungen</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="35"/>
         <source>Periodic updates of content (experimental)</source>
-        <translation>Mises à jour périodiques du contenu (expérimental)</translation>
+        <translation>Regelmäßige Inhaltsaktualisierungen (experimentell)</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="36"/>
         <source>SailSeries refreshes all content every one hour. Requires app to be open at background. Might cause a small hickup when content is being updated.</source>
-        <translation>SailSeries rafraîchit tout le contenu toutes les heures. Nécessite que l&apos;appli soit ouverte en tâche de fond. Peut causer un petit lag lorsque de la mise à jour du contenu.</translation>
+        <translation>SailSeries aktualisiert den gesamten Inhalt jede Stunde. Die Anwendung muss im Hintergrund geöffnet sein. Es kann zu kleinen Aussetzern kommen, wenn der Inhalt aktualisiert wird.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="43"/>
         <source>Maintenance</source>
-        <translation>Maintenance</translation>
+        <translation>Wartung</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="50"/>
         <source>Remove duplicate episodes</source>
-        <translation>Supprimer les épisodes doublons</translation>
+        <translation>Entferne doppelte Folgen</translation>
     </message>
 </context>
 <context>
@@ -420,77 +420,77 @@
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="21"/>
         <source>Monday</source>
-        <translation>Lundi</translation>
+        <translation>Montag</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="23"/>
         <source>Tuesday</source>
-        <translation>Mardi</translation>
+        <translation>Dienstag</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="25"/>
         <source>Wednesday</source>
-        <translation>Mercredi</translation>
+        <translation>Mittwoch</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="27"/>
         <source>Thursday</source>
-        <translation>Jeudi</translation>
+        <translation>Donnerstag</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="29"/>
         <source>Friday</source>
-        <translation>Vendredi</translation>
+        <translation>Freitag</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="31"/>
         <source>Saturday</source>
-        <translation>Samedi</translation>
+        <translation>Samstag</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="33"/>
         <source>Sunday</source>
-        <translation>Dimanche</translation>
+        <translation>Sonntag</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="50"/>
         <source>About</source>
-        <translation>A propos</translation>
+        <translation>Über</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="55"/>
         <source>Statistics</source>
-        <translation>Statistiques</translation>
+        <translation>Statistiken</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="60"/>
         <source>Settings</source>
-        <translation>Paramètres</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="65"/>
         <source>Search for a Series</source>
-        <translation>Rechercher une série</translation>
+        <translation>Suche eine Serie</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="70"/>
         <source>My Series</source>
-        <translation>Mes Séries</translation>
+        <translation>Meine Serien</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="77"/>
         <source>This Week</source>
-        <translation>Cette semaine</translation>
+        <translation>Diese Woche</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="132"/>
         <source>Season %1 Episode %2</source>
-        <translation>Saison %1 Episode %2</translation>
+        <translation>Staffel %1 Folge %2</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="165"/>
         <source>Nothing airs this week</source>
-        <translation>Rien n&apos;est diffusé cette semaine</translation>
+        <translation>Keine Veröffentlichung diese Woche</translation>
     </message>
 </context>
 <context>
@@ -498,72 +498,72 @@
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="25"/>
         <source>Statistics</source>
-        <translation>Statistiques</translation>
+        <translation>Statistiken</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="145"/>
         <source>Watched series</source>
-        <translation>Séries visionnées</translation>
+        <translation>Gesehene Serien</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="179"/>
         <source>Time</source>
-        <translation>Horaire</translation>
+        <translation>Zeit</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="187"/>
         <source>Days spent watching</source>
-        <translation>Journées passées à visionner</translation>
+        <translation>Tage mit sehen verbracht</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="195"/>
         <source>Hours spent watching</source>
-        <translation>Heures passées à visionner</translation>
+        <translation>Stunden mit sehen verbracht</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="203"/>
         <source>Minutes spent watching</source>
-        <translation>Minutes passées à visionner</translation>
+        <translation>Minuten mit sehen verbracht</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="210"/>
         <source>%1 minutes</source>
-        <translation>%1 minutes</translation>
+        <translation>%1 Minuten</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="211"/>
         <source>Average episode duration</source>
-        <translation>Durée moyenne par épisode</translation>
+        <translation>Durchschnittliche Folgendauer</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="29"/>
         <source>Numbers</source>
-        <translation>Chiffres</translation>
+        <translation>Nummern</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="44"/>
         <source>Watched episodes</source>
-        <translation>Episodes visionnés</translation>
+        <translation>Gesehene Folgen</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="52"/>
         <source>All episodes</source>
-        <translation>Tous les épisodes</translation>
+        <translation>Alle Folgen</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="153"/>
         <source>All series</source>
-        <translation>Toutes les séries</translation>
+        <translation>Alle Serien</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="95"/>
         <source>Watched seasons</source>
-        <translation>Saisons visionnées</translation>
+        <translation>Gesehene Staffeln</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="103"/>
         <source>All seasons</source>
-        <translation>Toutes les saisons</translation>
+        <translation>Alle Staffeln</translation>
     </message>
 </context>
 <context>
@@ -571,7 +571,7 @@
     <message>
         <location filename="../src/qml/components/TextExpander.qml" line="29"/>
         <source>Overview</source>
-        <translation>Présentation</translation>
+        <translation>Überblick</translation>
     </message>
 </context>
 </TS>

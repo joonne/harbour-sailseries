@@ -14,7 +14,7 @@ Name:       harbour-sailseries
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    SailSeries for Sailfish
 Version:    1.2
-Release:    0
+Release:    1
 Group:      Qt/Qt
 License:    GPLv2
 Source0:    %{name}-%{version}.tar.bz2
