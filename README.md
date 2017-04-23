@@ -16,6 +16,10 @@ SailSeries stores all data except images into local database, so it is possible 
 
 **Changelog:**
 
+1.2.1
+
+- Added deutch translations
+
 1.2.0
 
 - Statistics page: displays statistics about series, seasons and episodes
