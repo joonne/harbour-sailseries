@@ -20,58 +20,51 @@ SearchListModel::SearchListModel(QObject *parent, DatabaseManager *dbmanager, XM
     m_added = false;
 }
 
-SearchListModel::~SearchListModel() {
-
+SearchListModel::~SearchListModel()
+{
     foreach(SeriesData* series, m_searchListModel) {
         delete series;
         series = 0;
     }
-
     qDebug() << "destructing SearchListModel";
-
 }
 
-/**
- * @brief returns listmodel
- * @return listmodel for the search page
- */
-QQmlListProperty<SeriesData> SearchListModel::getSearchModel() {
-
-    return QQmlListProperty<SeriesData>(this,&m_searchListModel,&SearchListModel::searchListCount,&SearchListModel::searchListAt);
-
+QQmlListProperty<SeriesData> SearchListModel::getSearchModel()
+{
+    return QQmlListProperty<SeriesData>(this, &m_searchListModel, &SearchListModel::searchListCount, &SearchListModel::searchListAt);
 }
 
 // List handling methods
 
-void SearchListModel::searchListAppend(QQmlListProperty<SeriesData>* prop, SeriesData* val) {
-
+void SearchListModel::searchListAppend(QQmlListProperty<SeriesData>* prop, SeriesData* val)
+{
     SearchListModel* searchModel = qobject_cast<SearchListModel*>(prop->object);
     searchModel->m_searchListModel.append(val);
 }
 
-SeriesData* SearchListModel::searchListAt(QQmlListProperty<SeriesData>* prop, int index) {
-
+SeriesData* SearchListModel::searchListAt(QQmlListProperty<SeriesData>* prop, int index)
+{
     return (qobject_cast<SearchListModel*>(prop->object))->m_searchListModel.at(index);
 }
 
-int SearchListModel::searchListCount(QQmlListProperty<SeriesData>* prop) {
-
+int SearchListModel::searchListCount(QQmlListProperty<SeriesData>* prop)
+{
     return qobject_cast<SearchListModel*>(prop->object)->m_searchListModel.size();
 }
 
-void SearchListModel::searchListClear(QQmlListProperty<SeriesData>* prop) {
-
+void SearchListModel::searchListClear(QQmlListProperty<SeriesData>* prop)
+{
     qobject_cast<SearchListModel*>(prop->object)->m_searchListModel.clear();
 }
 
-void SearchListModel::xmlParseFinished() {
-
+void SearchListModel::xmlParseFinished()
+{
     m_series = m_reader->getSeries();
     populateSearchModel();
 }
 
-void SearchListModel::getFullSeriesRecordFinished() {
-
+void SearchListModel::getFullSeriesRecordFinished()
+{
     storeSeries();
     storeEpisodes();
     storeBanners();
@@ -79,32 +72,20 @@ void SearchListModel::getFullSeriesRecordFinished() {
     emit updateModels();
 }
 
-// -------------------------------------------------------------------
-// POPULATING DATA
-
-void SearchListModel::populateSearchModel() {
-
-
-    if (m_series.size() != 0) {
-        int length = m_series.size();
-        for(int i = 0; i < length; ++i) {
-            QMap<QString,QString> temp = m_series.at(i);
-            SeriesData* series = new SeriesData(this, temp);
-            m_searchListModel.append(series);
+void SearchListModel::populateSearchModel()
+{
+    if (!m_series.empty()) {
+        for (auto series : m_series) {
+            SeriesData* seriesData = new SeriesData(this, series);
+            m_searchListModel.append(seriesData);
         }
-
-        // must remember to call signal to let QML side know about populated items..
         emit searchModelChanged();
         setLoading(false);
     }
 }
 
-/**
- * @brief search for series
- * @param text - series name to be searched
- */
-void SearchListModel::searchSeries(QString text) {
-
+void SearchListModel::searchSeries(QString text)
+{
     setLoading(true);
     m_searchListModel.clear();
     m_series.clear();
@@ -112,55 +93,38 @@ void SearchListModel::searchSeries(QString text) {
     m_reader->searchSeries(text);
 }
 
-/**
- * @brief selects series to be shown in the seriesinfopage
- * @param index - index of the listmodel
- */
-void SearchListModel::selectSeries(int index) {
-
+void SearchListModel::selectSeries(int index)
+{
     m_info = m_searchListModel.at(index);
-
 }
 
-/**
- * @brief get full series record from thetvdb
- * @param id - id of the series to retrieve
- */
-void SearchListModel::getFullSeriesRecord(QString id) {
-    m_reader->getFullSeriesRecord(id,"full");
+void SearchListModel::getFullSeriesRecord(QString id)
+{
+    m_reader->getFullSeriesRecord(id, "full");
     setLoading(true);
 }
 
-/**
- * @brief store series to db
- */
-void SearchListModel::storeSeries() {
-
+void SearchListModel::storeSeries()
+{
     m_series = m_reader->getSeries();
-
     if (!m_series.isEmpty()) {
         m_dbmanager->insertSeries(m_series.first());
     }
 }
 
-void SearchListModel::storeEpisodes() {
-
+void SearchListModel::storeEpisodes()
+{
     m_episodes = m_reader->getEpisodes();
-
     m_dbmanager->insertEpisodes(m_episodes);
-
     setAdded(true);
 }
 
-void SearchListModel::storeBanners() {
-
+void SearchListModel::storeBanners()
+{
     m_banners = m_reader->getBanners();
-
     // we are saving info for this series
     int seriesId = m_info->getID().toInt();
-
     m_dbmanager->insertBanners(m_banners, seriesId);
-
 }
 
 QString SearchListModel::getID() { return m_info->getID(); }
@@ -185,29 +149,29 @@ QString SearchListModel::getNetwork() { return m_info->getNetwork(); }
 
 bool SearchListModel::getLoading() { return m_loading; }
 
-void SearchListModel::setLoading(bool state) {
+void SearchListModel::setLoading(bool state)
+{
     m_loading = state;
     emit loadingChanged();
 }
 
 bool SearchListModel::getAdded() { return m_added; }
 
-void SearchListModel::setAdded(bool cond) {
-
+void SearchListModel::setAdded(bool cond)
+{
     if (m_added != cond) {
         m_added = cond;
         emit addedChanged();
     }
 }
 
-void SearchListModel::clearList() {
-
+void SearchListModel::clearList()
+{
     m_searchListModel.clear();
     emit searchModelChanged();
 }
 
-void SearchListModel::checkIfAdded(QString id, QString name) {
+void SearchListModel::checkIfAdded(QString id, QString name)
+{
     setAdded(m_dbmanager->isAlreadyAdded(id.toInt(), name));
 }
-
-

@@ -1,7 +1,7 @@
 #include "engine.h"
 
-Engine::Engine(QObject *parent) : QObject(parent), m_reader(new XMLReader), m_dbmanager(new DatabaseManager), m_loading(false) {
-
+Engine::Engine(QObject *parent) : QObject(parent), m_reader(new XMLReader), m_dbmanager(new DatabaseManager), m_loading(false)
+{
     m_dbmanager->setUpDB();
 
     m_seriesListModel = new SeriesListModel(this, m_dbmanager, m_reader);
@@ -22,13 +22,12 @@ Engine::Engine(QObject *parent) : QObject(parent), m_reader(new XMLReader), m_db
             SLOT(readyToUpdateModels()));
 }
 
-Engine::~Engine() {
-
+Engine::~Engine()
+{
     delete m_reader;
     delete m_dbmanager;
 
     qDebug() << "destructing Engine";
-
 }
 
 SeriesListModel* Engine::getSeriesListModel() { return m_seriesListModel; }
@@ -45,14 +44,14 @@ Statistics* Engine::getStatistics() { return m_statistics; }
 
 bool Engine::getLoading() { return m_loading; }
 
-void Engine::readyToUpdateModels() {
-
+void Engine::readyToUpdateModels()
+{
     m_todayListModel->populateTodayModel();
     m_seriesListModel->populateBannerList();
 }
 
-void Engine::updateModels() {
-
+void Engine::updateModels()
+{
     toggleLoading(true);
     m_todayListModel->populateTodayModel();
     m_seriesListModel->populateBannerList();
@@ -60,12 +59,6 @@ void Engine::updateModels() {
     toggleLoading(false);
 }
 
-void Engine::toggleLoading(bool state) {
+void Engine::toggleLoading(bool state) { m_loading = state; }
 
-    m_loading = state;
-}
-
-bool Engine::deleteDuplicateEpisodes() {
-
-    return m_dbmanager->deleteDuplicateEpisodes();
-}
+bool Engine::deleteDuplicateEpisodes() { return m_dbmanager->deleteDuplicateEpisodes(); }

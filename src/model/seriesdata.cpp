@@ -92,8 +92,8 @@ QString SeriesData::getZap2it_ID() { return m_zap2itId; }
 
 QString SeriesData::getNetwork() { return m_network; }
 
-void SeriesData::setWatched(int watched) {
-
+void SeriesData::setWatched(int watched)
+{
     if (m_watched != watched) {
         m_watched = watched;
         emit watchedChanged();
@@ -126,7 +126,8 @@ QString SeriesData::getNextEpisodeWriter() { return m_nextEpisodeWriter; }
 
 int SeriesData::getNextEpisodeWatched() { return m_nextEpisodeWatched; }
 
-void SeriesData::setNextEpisodeWatched(int watched) {
+void SeriesData::setNextEpisodeWatched(int watched)
+{
     if (m_nextEpisodeWatched != watched) {
         m_nextEpisodeWatched = watched;
         emit nextEpisodeWatchedChanged();

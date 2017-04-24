@@ -74,7 +74,7 @@ public:
     void storeBanners();
     Q_INVOKABLE void deleteSeries(int seriesID);
     Q_INVOKABLE void updateSeries(QString seriesId = "");
-    Q_INVOKABLE void updateAllSeries();
+    Q_INVOKABLE void updateAllSeries(bool updateEndedSeries = true);
 
 signals:
     void seriesListChanged();

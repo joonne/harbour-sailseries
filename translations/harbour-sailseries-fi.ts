@@ -401,16 +401,26 @@
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="36"/>
-        <source>SailSeries refreshes all content every one hour. Requires app to be open at background. Might cause a small hickup when content is being updated.</source>
-        <translation>SailSeries päivittää sisällön kerran tunnissa. Sovelluksen tulee tällöin olla auki taustalla. Saattaa aiheuttaa hidastelua päivityksen aikana.</translation>
+        <source>SailSeries refreshes local content every one hour. Requires app to be open at background. Might cause a small hickup when content is being updated.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="43"/>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="45"/>
+        <source>SailSeries will update also the content of ended series when this is applied.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="44"/>
+        <source>Update content of ended series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="52"/>
         <source>Maintenance</source>
         <translation>Kunnossapito</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="50"/>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="59"/>
         <source>Remove duplicate episodes</source>
         <translation>Poista päällekkäiset jaksot</translation>
     </message>

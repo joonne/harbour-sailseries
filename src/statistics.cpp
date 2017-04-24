@@ -1,13 +1,13 @@
 #include "statistics.h"
 
-Statistics::Statistics(QObject *parent, DatabaseManager *dbmanager) : QObject(parent), m_dbmanager(dbmanager) {
-
+Statistics::Statistics(QObject *parent, DatabaseManager *dbmanager) :
+    QObject(parent), m_dbmanager(dbmanager)
+{
     updateStatistics();
-
 }
 
-void Statistics::updateStatistics() {
-
+void Statistics::updateStatistics()
+{
     m_watchedEpisodesDuration = m_dbmanager->getWatchedEpisodesDuration();
     emit watchedEpisodesDurationChanged();
 

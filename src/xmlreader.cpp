@@ -6,8 +6,8 @@
 XMLReader::XMLReader(QObject *parent) :
     QObject(parent),
     m_nam(0),
-    m_update(false),
-    m_fullRecord(false)
+    m_fullRecord(false),
+    m_update(false)
 {
     m_nam = new QNetworkAccessManager(this);
 
@@ -17,39 +17,36 @@ XMLReader::XMLReader(QObject *parent) :
             SLOT(replyFinished(QNetworkReply*)));
 }
 
-XMLReader::~XMLReader() {
-
+XMLReader::~XMLReader()
+{
     delete m_nam;
     m_nam = 0;
     qDebug() << "destructing xmlreader";
-
 }
 
-QString XMLReader::getLocale() {
-
-    QString systemLocale = QLocale::system().name();
+QString XMLReader::getLocale()
+{
+    auto systemLocale = QLocale::system().name();
     QString locale = "en";
 
-    int size = m_languages.size();
-    for (int i = 0; i < size; ++i) {
-        QMap<QString,QString> temp = m_languages.at(i);
-        if (temp["abbreviation"] == systemLocale) {
-            locale = temp["abbreviation"];
+    for (auto language : m_languages) {
+        if (language["abbreviation"] == systemLocale) {
+            locale = language["abbreviation"];
         }
     }
     return locale;
 }
 
-void XMLReader::getLanguages() {
-
+void XMLReader::getLanguages()
+{
     QString url = QString(MIRRORPATH) + "/api/" + QString(APIKEY) + "/languages.xml";
     qDebug() << "Requesting" << url;
     QUrl finalUrl(url);
     startRequest(finalUrl);
 }
 
-void XMLReader::searchSeries(QString text) {
-
+void XMLReader::searchSeries(QString text)
+{
     m_fullRecord = false;
 //    QString locale = getLocale();
 //    TODO: searching with locale works, but getting full record does not.
@@ -60,8 +57,8 @@ void XMLReader::searchSeries(QString text) {
     startRequest(finalUrl);
 }
 
-void XMLReader::getFullSeriesRecord(QString seriesid, QString method) {
-
+void XMLReader::getFullSeriesRecord(QString seriesid, QString method)
+{
     if (method == "full") {
         setFullRecordFlag(true);
     } else if (method == "update") {
@@ -83,8 +80,8 @@ QList<QMap<QString,QString> > XMLReader::getEpisodes() { return m_episodes; }
 
 QList<QMap<QString,QString> > XMLReader::getBanners() { return m_banners; }
 
-void XMLReader::startRequest(QUrl url) {
-
+void XMLReader::startRequest(QUrl url)
+{
     QNetworkRequest request(url);
     m_nam->get(request);
 }
@@ -93,8 +90,8 @@ void XMLReader::startRequest(QUrl url) {
 // slots
 // ---------------------------------------------------
 
-void XMLReader::replyFinished(QNetworkReply *reply) {
-
+void XMLReader::replyFinished(QNetworkReply *reply)
+{
     qDebug() << reply->url() << reply->errorString();
 
     // Error -> inform user by appending error message to listview
@@ -110,37 +107,28 @@ void XMLReader::replyFinished(QNetworkReply *reply) {
         return;
     }
 
-    QByteArray b = reply->readAll();
-    QBuffer* buf = new QBuffer(&b);
+    auto b = reply->readAll();
+    auto buf = new QBuffer(&b);
 
     if (reply->url().toString().endsWith(".zip")) {
-        QZipReader *zip = new QZipReader(buf);
+        auto zip = new QZipReader(buf);
         QXmlStreamReader xml(zip->fileData("en.xml"));
         parseXML(xml);
         QXmlStreamReader xml_banners(zip->fileData("banners.xml"));
         parseXML(xml_banners);
 
         if (m_series.size() != 0 and !getFullRecordFlag() and !getUpdateFlag()) {
-
             setFullRecordFlag(false);
             setUpdateFlag(false);
-
             emit readyToPopulateSeries();
-
         } else if (getFullRecordFlag()) {
-
             setFullRecordFlag(false);
             setUpdateFlag(false);
-
             emit readyToStoreSeries();
-
         } else if (getUpdateFlag()) {
-
             setFullRecordFlag(false);
             setUpdateFlag(false);
-
             emit readyToUpdateSeries();
-
         }
 
     } else {
@@ -166,11 +154,8 @@ void XMLReader::replyFinished(QNetworkReply *reply) {
     reply->deleteLater();
 }
 
-// These are ugly looking but they seem to be fast
-// ---------------------------------------------------
-
-void XMLReader::parseXML(QXmlStreamReader& xml) {
-
+void XMLReader::parseXML(QXmlStreamReader& xml)
+{
     QList<QMap<QString,QString> > series;
     QList<QMap<QString,QString> > languages;
     QList<QMap<QString,QString> > episodes;
@@ -244,8 +229,8 @@ void XMLReader::parseXML(QXmlStreamReader& xml) {
 }
 
 // Base series record parsing.
-QMap<QString, QString> XMLReader::parseSeries(QXmlStreamReader &xml) {
-
+QMap<QString, QString> XMLReader::parseSeries(QXmlStreamReader &xml)
+{
     QMap<QString, QString> series;
     /* Let's check that we're really getting a series. */
     if (xml.tokenType() != QXmlStreamReader::StartElement &&
@@ -381,8 +366,8 @@ QMap<QString, QString> XMLReader::parseSeries(QXmlStreamReader &xml) {
     return series;
 }
 
-QMap<QString,QString> XMLReader::parseLanguages(QXmlStreamReader &xml) {
-
+QMap<QString,QString> XMLReader::parseLanguages(QXmlStreamReader &xml)
+{
     QMap<QString, QString> languages;
     /* Let's check that we're really getting a language. */
     if (xml.tokenType() != QXmlStreamReader::StartElement &&
@@ -421,8 +406,8 @@ QMap<QString,QString> XMLReader::parseLanguages(QXmlStreamReader &xml) {
 }
 
 // Full episode record parsing.
-QMap<QString, QString> XMLReader::parseEpisode(QXmlStreamReader &xml) {
-
+QMap<QString, QString> XMLReader::parseEpisode(QXmlStreamReader &xml)
+{
     QMap<QString, QString> episode;
     /* Let's check that we're really getting a series. */
     if (xml.tokenType() != QXmlStreamReader::StartElement &&
@@ -559,8 +544,8 @@ QMap<QString, QString> XMLReader::parseEpisode(QXmlStreamReader &xml) {
     return episode;
 }
 
-QMap<QString, QString> XMLReader::parseBanner(QXmlStreamReader &xml) {
-
+QMap<QString, QString> XMLReader::parseBanner(QXmlStreamReader &xml)
+{
     QMap<QString, QString> banner;
     /* Let's check that we're really getting a series. */
     if (xml.tokenType() != QXmlStreamReader::StartElement &&
@@ -615,8 +600,8 @@ QMap<QString, QString> XMLReader::parseBanner(QXmlStreamReader &xml) {
     return banner;
 }
 
-void XMLReader::addElementDataToMap(QXmlStreamReader& xml,
-                                    QMap<QString, QString>& map) const {
+void XMLReader::addElementDataToMap(QXmlStreamReader& xml, QMap<QString, QString>& map) const
+{
     /* We need a start element, like <foo> */
     if (xml.tokenType() != QXmlStreamReader::StartElement) {
         return;
@@ -636,18 +621,10 @@ void XMLReader::addElementDataToMap(QXmlStreamReader& xml,
     map.insert(elementName, xml.text().toString());
 }
 
-bool XMLReader::getUpdateFlag() {
-    return m_update;
-}
+bool XMLReader::getUpdateFlag() { return m_update; }
 
-void XMLReader::setUpdateFlag(bool state) {
-    m_update = state;
-}
+void XMLReader::setUpdateFlag(bool state) { m_update = state; }
 
-bool XMLReader::getFullRecordFlag() {
-    return m_fullRecord;
-}
+bool XMLReader::getFullRecordFlag() { return m_fullRecord; }
 
-void XMLReader::setFullRecordFlag(bool state) {
-    m_fullRecord = state;
-}
+void XMLReader::setFullRecordFlag(bool state) { m_fullRecord = state; }

@@ -17,6 +17,9 @@ public:
     Q_INVOKABLE void setContentUpdatePreference(bool value);
     Q_INVOKABLE bool getContentUpdatePreference();
 
+    Q_INVOKABLE void setUpdateEndedSeriesPreference(bool value);
+    Q_INVOKABLE bool getUpdateEndedSeriesPreference();
+
 signals:
 
 public slots:

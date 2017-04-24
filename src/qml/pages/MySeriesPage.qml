@@ -35,7 +35,7 @@ Page {
             MenuItem {
                 text: qsTr("Update All")
                 onClicked: {
-                    engine.SeriesListModel.updateAllSeries()
+                    engine.SeriesListModel.updateAllSeries(settings.getUpdateEndedSeriesPreference())
                 }
             }
         }

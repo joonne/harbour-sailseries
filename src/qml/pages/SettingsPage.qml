@@ -33,10 +33,19 @@ Page {
 
             TextSwitch {
                 text: qsTr("Periodic updates of content (experimental)")
-                description: qsTr("SailSeries refreshes all content every one hour. Requires app to be open at background. Might cause a small hickup when content is being updated.")
+                description: qsTr("SailSeries refreshes local content every one hour. Requires app to be open at background. Might cause a small hickup when content is being updated.")
                 checked: settings.getContentUpdatePreference();
                 onCheckedChanged: {
                     checked ? settings.setContentUpdatePreference(true) : settings.setContentUpdatePreference(false);
+                }
+            }
+
+            TextSwitch {
+                text: qsTr("Update content of ended series")
+                description: qsTr("SailSeries will update also the content of ended series when this is applied.")
+                checked: settings.getUpdateEndedSeriesPreference();
+                onCheckedChanged: {
+                    checked ? settings.setUpdateEndedSeriesPreference(true) : settings.setUpdateEndedSeriesPreference(false);
                 }
             }
 

@@ -6,16 +6,17 @@ SeasonListModel::SeasonListModel(QObject *parent,  DatabaseManager* dbmanager) :
     m_dbmanager = dbmanager;
 }
 
-SeasonListModel::~SeasonListModel() {
-
-    foreach (SeasonData* season, m_seasonListModel) {
+SeasonListModel::~SeasonListModel()
+{
+    foreach (auto season, m_seasonListModel) {
         delete season;
         season = 0;
     }
     qDebug() << "destructing SeasonListModel";
 }
 
-QQmlListProperty<SeasonData> SeasonListModel::getSeasonList() {
+QQmlListProperty<SeasonData> SeasonListModel::getSeasonList()
+{
     return QQmlListProperty<SeasonData>(this, &m_seasonListModel, &SeasonListModel::seasonListCount, &SeasonListModel::seasonListAt);
 }
 
@@ -23,8 +24,8 @@ QQmlListProperty<SeasonData> SeasonListModel::getSeasonList() {
 
 void SeasonListModel::seasonListAppend(QQmlListProperty<SeasonData>* prop, SeasonData* val)
 {
-    SeasonListModel* seasonModel = qobject_cast<SeasonListModel*>(prop->object);
-    seasonModel->m_seasonListModel.append(val);
+    SeasonListModel* seasonListModel = qobject_cast<SeasonListModel*>(prop->object);
+    seasonListModel->m_seasonListModel.append(val);
 }
 
 SeasonData* SeasonListModel::seasonListAt(QQmlListProperty<SeasonData>* prop, int index)
@@ -42,20 +43,20 @@ void SeasonListModel::seasonListClear(QQmlListProperty<SeasonData>* prop)
     qobject_cast<SeasonListModel*>(prop->object)->m_seasonListModel.clear();
 }
 
-void SeasonListModel::populateSeasonList(QString seriesID) {
-
+void SeasonListModel::populateSeasonList(QString seriesID)
+{
     m_seasonListModel.clear();
 
     int seasonsCount = m_dbmanager->seasonCount(seriesID.toInt());
 
-    for(int i = 1; i <= seasonsCount; ++i) {
+    for (int i = 1; i <= seasonsCount; ++i) {
 
         QString banner = m_dbmanager->getSeasonBanner(seriesID.toInt(),i);
         int watchedCount = m_dbmanager->watchedCountBySeason(seriesID.toInt(),i);
         int totalCount = m_dbmanager->totalCountBySeason(seriesID.toInt(),i);
 
-        SeasonData* season = new SeasonData(this, i, banner, watchedCount, totalCount);
-        m_seasonListModel.append(season);
+        SeasonData* seasonData = new SeasonData(this, i, banner, watchedCount, totalCount);
+        m_seasonListModel.append(seasonData);
 
     }
     emit seasonListChanged();
