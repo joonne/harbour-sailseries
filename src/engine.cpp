@@ -66,14 +66,14 @@ bool Engine::getLoading() { return m_loading; }
 void Engine::readyToUpdateModels()
 {
     emit m_todayListModel->getStartPageSeries();
-    m_seriesListModel->populateBannerList();
+    emit m_seriesListModel->getSeries();
 }
 
 void Engine::updateModels()
 {
     toggleLoading(true);
     emit m_todayListModel->getStartPageSeries();
-    m_seriesListModel->populateBannerList();
+    emit m_seriesListModel->getSeries();
     m_statistics->updateStatistics();
     toggleLoading(false);
 }

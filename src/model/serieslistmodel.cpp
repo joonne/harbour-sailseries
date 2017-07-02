@@ -13,7 +13,10 @@ SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager, Ap
             this,
             SLOT(updateFetchFinished(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)));
 
-    populateBannerList();
+    connect(this, SIGNAL(getSeries()), m_dbmanager, SLOT(getSeries()));
+    connect(m_dbmanager, SIGNAL(populateBannerList(MapList)), this, SLOT(populateBannerList(MapList)));
+
+    emit getSeries();
 
     m_loading = false;
 }
@@ -38,7 +41,7 @@ void SeriesListModel::updateFetchFinished(QList<QVariantMap> series, QList<QVari
     }
 
     setLoading(false);
-    populateBannerList();
+    emit getSeries();
 }
 
 QQmlListProperty<SeriesData> SeriesListModel::getSeriesList()
@@ -67,12 +70,11 @@ void SeriesListModel::seriesListClear(QQmlListProperty<SeriesData>* prop)
     qobject_cast<SeriesListModel*>(prop->object)->m_seriesListModel.clear();
 }
 
-void SeriesListModel::populateBannerList()
+void SeriesListModel::populateBannerList(QList<QMap<QString, QString> > allSeries)
 {
     m_seriesListModel.clear();
     emit seriesListChanged();
 
-    auto allSeries = m_dbmanager->getSeries();
     for (auto series : allSeries) {
         auto id = series["id"];
         auto nextEpisodeDetails = m_dbmanager->getNextEpisodeDetails(id.toInt());
@@ -187,8 +189,8 @@ void SeriesListModel::setMode(QString newmode)
 void SeriesListModel::deleteSeries(int seriesId)
 {
     setLoading(true);
-    if (m_dbmanager->deleteSeries(seriesId)) {
-        populateBannerList();
+    if (m_dbmanager->deleteSeries(seriesID)) {
+        emit getSeries();
         emit updateModels();
     }
     setLoading(false);
@@ -222,8 +224,6 @@ void SeriesListModel::updateAllSeries(bool updateEndedSeries)
              m_seriesIds.append(series["id"].toString());
         }
     }
-
-    qDebug() << "m_seriesIds" << m_seriesIds;
 
     updateSeries();
 }

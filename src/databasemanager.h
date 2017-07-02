@@ -86,9 +86,11 @@ public:
 
 signals:
     void populateTodayModel(QList<QMap<QString, QString> > allSeries);
+    void populateBannerList(QList<QMap<QString, QString> > allSeries);
 
 public slots:
     void getStartPageSeries();
+    void getSeries();
 
 private:
     QSqlDatabase m_db;
