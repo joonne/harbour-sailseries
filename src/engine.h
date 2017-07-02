@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "api.h"
+#include <QThread>
 #include "databasemanager.h"
 #include "statistics.h"
 #include "./model/serieslistmodel.h"
@@ -48,6 +49,7 @@ signals:
     void seasonListModelChanged();
     void loadingChanged();
     void updateEpisodeDetails(QVariantMap episode);
+    void setUpDb();
 
 public slots:
     void readyToUpdateModels();

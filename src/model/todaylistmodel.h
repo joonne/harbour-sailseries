@@ -19,14 +19,14 @@ public:
     explicit TodayListModel(QObject *parent = 0, DatabaseManager* dbmanager = 0, Api* api = 0);
     ~TodayListModel();
 
-    Q_INVOKABLE void populateTodayModel();
-
     QQmlListProperty<SeriesData> getTodayModel();
 
 signals:
     void todayModelChanged();
+    void getStartPageSeries();
 
 public slots:
+    void populateTodayModel(QList<QMap<QString, QString> > allSeries);
 
 private:
     DatabaseManager* m_dbmanager;
@@ -39,7 +39,6 @@ private:
     static SeriesData* todayListAt(QQmlListProperty<SeriesData> *prop, int index);
     static void todayListAppend(QQmlListProperty<SeriesData>* prop, SeriesData* val);
     static void todayListClear(QQmlListProperty<SeriesData>* prop);
-
 };
 
 #endif // TODAYLISTMODEL_H

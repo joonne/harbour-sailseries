@@ -1,8 +1,21 @@
 #include "engine.h"
 
-Engine::Engine(QObject *parent) : QObject(parent), m_api(new Api), m_dbmanager(new DatabaseManager), m_loading(false)
+Engine::Engine(QObject *parent) : QObject(parent), m_loading(false)
 {
-    m_dbmanager->setUpDB();
+    typedef QList<QMap<QString, QString> > MapList;
+    qRegisterMetaType<MapList>("MapList");
+
+    QThread* api_thread = new QThread;
+    m_reader = new XMLReader();
+    m_reader->moveToThread(api_thread);
+    connect(api_thread, SIGNAL(finished()), api_thread, SLOT(deleteLater()));
+    api_thread->start();
+
+    QThread* db_thread = new QThread;
+    m_dbmanager = new DatabaseManager();
+    m_dbmanager->moveToThread(db_thread);
+    connect(db_thread, SIGNAL(finished()), db_thread, SLOT(deleteLater()));
+    db_thread->start();
 
     m_seriesListModel = new SeriesListModel(this, m_dbmanager, m_api);
     m_searchListModel = new SearchListModel(this, m_dbmanager, m_api);
@@ -52,14 +65,14 @@ bool Engine::getLoading() { return m_loading; }
 
 void Engine::readyToUpdateModels()
 {
-    m_todayListModel->populateTodayModel();
+    emit m_todayListModel->getStartPageSeries();
     m_seriesListModel->populateBannerList();
 }
 
 void Engine::updateModels()
 {
     toggleLoading(true);
-    m_todayListModel->populateTodayModel();
+    emit m_todayListModel->getStartPageSeries();
     m_seriesListModel->populateBannerList();
     m_statistics->updateStatistics();
     toggleLoading(false);

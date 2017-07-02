@@ -24,13 +24,12 @@ public:
     explicit DatabaseManager(QObject *parent = 0);
     ~DatabaseManager();
 
-    void setUpDB();
-
     bool openDB();
     bool deleteDB();
     QSqlError lastError();
     void close();
     bool createDB();
+    void setUpDB();
 
     bool startTransaction();
     bool commit();
@@ -59,7 +58,6 @@ public:
     QList<QVariantMap> getStartPageSeries();
     QList<QVariantMap> getEpisodes(int seriesID, int seasonNumber);
     QVariantMap getNextEpisodeDetails(int seriesID);
-
     QString getStatus(int seriesID);
     QString getSeasonBanner(int seriesID, int season);
 
@@ -87,8 +85,10 @@ public:
     QMultiMap<int, QMap<QString, QStringList> > getMostWatchedActors();
 
 signals:
+    void populateTodayModel(QList<QMap<QString, QString> > allSeries);
 
 public slots:
+    void getStartPageSeries();
 
 private:
     QSqlDatabase m_db;

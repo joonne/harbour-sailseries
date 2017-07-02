@@ -87,7 +87,8 @@ Page {
                             engine.EpisodeListModel.toggleWatched(episodeId)
                             engine.EpisodeListModel.toggleWatchedInModel(episodeId, watched)
                             engine.SeasonListModel.populateSeasonList(seriesId)
-                            engine.TodayModel.populateTodayModel()
+                            // TODO: check how/where to call this
+                            // engine.TodayModel.populateTodayModel()
                         }
                     }
                 }
