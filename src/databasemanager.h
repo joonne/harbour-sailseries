@@ -87,11 +87,13 @@ signals:
     void populateTodayModel(QList<QMap<QString, QString> > allSeries);
     void populateBannerList(QList<QMap<QString, QString> > allSeries);
     void seriesDeleted(bool success);
+    void seriesStored();
 
 public slots:
     void getStartPageSeries();
     void getSeries();
     void deleteSeries(int seriesId);
+    void storeSeries(QMap<QString, QList<QMap<QString, QString> > > seriesData);
 
 private:
     QSqlDatabase m_db;

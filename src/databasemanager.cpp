@@ -4,7 +4,7 @@
 DatabaseManager::DatabaseManager(QObject *parent) :
     QObject(parent)
 {
-    this->setUpDB();
+    setUpDB();
 }
 
 DatabaseManager::~DatabaseManager()
@@ -443,6 +443,22 @@ bool DatabaseManager::insertBanners(QList<QVariantMap> banners, int seriesId)
     commit();
     
     return ret;
+}
+
+void DatabaseManager::storeSeries(QMap<QString, QList<QMap<QString, QString> > > seriesData)
+{
+    auto series = seriesData["series"];
+    auto episodes = seriesData["episodes"];
+    auto banners = seriesData["banners"];
+
+    if (!series.isEmpty()) {
+        insertSeries(series.first());
+        insertEpisodes(episodes);
+        int seriesId = series.first()["id"].toInt();
+        insertBanners(banners, seriesId);
+    }
+
+    emit seriesStored();
 }
 
 void DatabaseManager::getSeries()
