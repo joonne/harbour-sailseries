@@ -51,7 +51,6 @@ public:
     bool updateSeries();
     bool updateEpisode();
 
-    bool deleteSeries(int seriesID);
     bool deleteAllSeries();
 
     QList<QVariantMap> getSeries();
@@ -87,10 +86,12 @@ public:
 signals:
     void populateTodayModel(QList<QMap<QString, QString> > allSeries);
     void populateBannerList(QList<QMap<QString, QString> > allSeries);
+    void seriesDeleted(bool success);
 
 public slots:
     void getStartPageSeries();
     void getSeries();
+    void deleteSeries(int seriesId);
 
 private:
     QSqlDatabase m_db;

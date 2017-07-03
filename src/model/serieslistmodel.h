@@ -68,9 +68,9 @@ public:
     QString getMode();
     void setMode(QString newmode);
 
-    void storeSeries(QList<QVariantMap> series);
-    void storeEpisodes(QList<QVariantMap> episodes);
-    void storeBanners(QList<QVariantMap> banners);
+    void storeSeries();
+    void storeEpisodes();
+    void storeBanners();
     Q_INVOKABLE void deleteSeries(int seriesId);
     Q_INVOKABLE void updateSeries(QString seriesId = "");
     Q_INVOKABLE void updateAllSeries(bool updateEndedSeries = true);
@@ -85,11 +85,14 @@ signals:
     void nextEpisodeNumberChanged();
     void nextEpisodeSeasonNumberChanged();
     void daysToNextEpisodeChanged();
+
     void getSeries();
+    void deleteSeriesRequested(int SeriesId);
 
 public slots:
     void updateFetchFinished(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners);
     void populateBannerList(QList<QMap<QString, QString> > allSeries);
+    void seriesDeleted(bool success);
 
 private:
     Api* m_api;

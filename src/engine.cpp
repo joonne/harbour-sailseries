@@ -5,11 +5,14 @@ Engine::Engine(QObject *parent) : QObject(parent), m_loading(false)
     typedef QList<QMap<QString, QString> > MapList;
     qRegisterMetaType<MapList>("MapList");
 
-    QThread* api_thread = new QThread;
+    typedef QMap<QString, MapList > MapOfMapLists;
+    qRegisterMetaType<MapOfMapLists>("MapOfMapLists");
+
+//    QThread* api_thread = new QThread;
     m_reader = new XMLReader();
-    m_reader->moveToThread(api_thread);
-    connect(api_thread, SIGNAL(finished()), api_thread, SLOT(deleteLater()));
-    api_thread->start();
+//    m_reader->moveToThread(api_thread);
+//    connect(api_thread, SIGNAL(finished()), api_thread, SLOT(deleteLater()));
+//    api_thread->start();
 
     QThread* db_thread = new QThread;
     m_dbmanager = new DatabaseManager();

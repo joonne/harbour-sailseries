@@ -672,7 +672,7 @@ void DatabaseManager::toggleWatched(QString episodeID)
                        "WHERE id = %1").arg(episodeID.toInt()));
 }
 
-bool DatabaseManager::deleteSeries(int seriesID)
+void DatabaseManager::deleteSeries(int seriesId)
 {
     auto ret1 = false;
     auto ret2 = false;
@@ -681,17 +681,17 @@ bool DatabaseManager::deleteSeries(int seriesID)
     this->startTransaction();
     
     QSqlQuery query(m_db);
-    ret1 = query.exec(QString("DELETE FROM Series WHERE id = %1").arg(seriesID));
+    ret1 = query.exec(QString("DELETE FROM Series WHERE id = %1").arg(seriesId));
     if (ret1) {
-        ret2 = query.exec(QString("DELETE FROM Episode WHERE seriesID = %1").arg(seriesID));
+        ret2 = query.exec(QString("DELETE FROM Episode WHERE seriesID = %1").arg(seriesId));
         if (ret1 && ret2) {
-            ret3 = query.exec(QString("DELETE FROM Banner WHERE seriesID = %1").arg(seriesID));
+            ret3 = query.exec(QString("DELETE FROM Banner WHERE seriesID = %1").arg(seriesId));
         }
     }
-    
+
     this->commit();
-    
-    return ret1 && ret2 && ret3;
+
+    emit seriesDeleted(ret1 && ret2 && ret3);
 }
 
 bool DatabaseManager::deleteAllSeries()

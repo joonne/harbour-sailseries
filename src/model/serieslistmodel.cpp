@@ -13,8 +13,30 @@ SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager, Ap
             this,
             SLOT(updateFetchFinished(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)));
 
-    connect(this, SIGNAL(getSeries()), m_dbmanager, SLOT(getSeries()));
-    connect(m_dbmanager, SIGNAL(populateBannerList(MapList)), this, SLOT(populateBannerList(MapList)));
+    // connect(m_reader,
+    //         SIGNAL(readyToUpdateSeries(MapOfMapLists)),
+    //         this,
+    //         SLOT(updateFetchFinished(MapOfMapLists)));
+
+    connect(this,
+            SIGNAL(getSeries()),
+            m_dbmanager,
+            SLOT(getSeries()));
+
+    connect(m_dbmanager,
+            SIGNAL(populateBannerList(MapList)),
+            this,
+            SLOT(populateBannerList(MapList)));
+
+    connect(this,
+            SIGNAL(deleteSeriesRequested(int)),
+            m_dbmanager,
+            SLOT(deleteSeries(int)));
+
+    connect(m_dbmanager,
+            SIGNAL(seriesDeleted(bool)),
+            this,
+            SLOT(seriesDeleted(bool)));
 
     emit getSeries();
 
@@ -36,8 +58,7 @@ void SeriesListModel::updateFetchFinished(QList<QVariantMap> series, QList<QVari
     storeBanners(banners);
 
     if (!m_seriesIds.isEmpty()) {
-        updateSeries();
-        return;
+        return updateSeries();
     }
 
     setLoading(false);
@@ -189,9 +210,16 @@ void SeriesListModel::setMode(QString newmode)
 void SeriesListModel::deleteSeries(int seriesId)
 {
     setLoading(true);
-    if (m_dbmanager->deleteSeries(seriesID)) {
+    emit deleteSeriesRequested(seriesId);
+}
+
+void SeriesListModel::seriesDeleted(bool success)
+{
+    if (success) {
         emit getSeries();
-        emit updateModels();
+        // emit updateModels(); // TODO: check
+    } else {
+        qDebug() << "series deletion failed";
     }
     setLoading(false);
 }
@@ -204,7 +232,6 @@ void SeriesListModel::updateSeries(QString seriesId)
 
     setLoading(true);
     m_api->getAll(seriesId, "update");
-
 }
 
 void SeriesListModel::updateAllSeries(bool updateEndedSeries)
