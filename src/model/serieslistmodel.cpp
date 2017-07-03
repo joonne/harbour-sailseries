@@ -256,6 +256,7 @@ void SeriesListModel::updateAllSeries(bool updateEndedSeries)
     m_episodes.clear();
     m_banners.clear();
 
+<<<<<<< HEAD
     auto allSeries = m_dbmanager->getSeries();
     for (auto series : allSeries) {
         if (!updateEndedSeries) {
@@ -267,5 +268,8 @@ void SeriesListModel::updateAllSeries(bool updateEndedSeries)
         }
     }
 
+=======
+    m_seriesIds = m_dbmanager->getSeriesIds(updateEndedSeries);
+>>>>>>> updateAll threaded
     updateSeries();
 }

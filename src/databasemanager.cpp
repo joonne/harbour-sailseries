@@ -461,6 +461,40 @@ void DatabaseManager::storeSeries(QMap<QString, QList<QMap<QString, QString> > >
     emit seriesStored();
 }
 
+QStringList DatabaseManager::getSeriesIds(bool updateEndedSeries)
+{
+    QStringList seriesIds;
+    QString queryString;
+
+    if (updateEndedSeries) {
+        queryString = QString("SELECT id "
+                              "FROM Series "
+                              "ORDER BY seriesName;");
+    } else {
+         queryString = QString("SELECT id "
+                               "FROM Series "
+                               "WHERE status != 'Ended'"
+                               "ORDER BY seriesName;");
+    }
+
+    if (m_db.isOpen()) {
+
+        this->startTransaction();
+
+        QSqlQuery query(m_db);
+        query.exec(queryString);
+        this->commit();
+
+        if (query.isSelect()) {
+            while (query.next()) {
+                seriesIds.append(query.value(0).toString());
+            }
+        }
+    }
+
+    return seriesIds;
+}
+
 void DatabaseManager::getSeries()
 {
     QList<QVariantMap> allSeries;
