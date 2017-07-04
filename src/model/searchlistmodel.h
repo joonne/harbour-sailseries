@@ -73,9 +73,14 @@ signals:
     void addedChanged();
     void updateModels();
 
+    void storeSeriesRequested(QMap<QString, QList<QMap<QString, QString> > > seriesData);
+
 public slots:
     void searchFinished(QList<QVariantMap> series);
     void getAllFinished(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners);
+    void getFullSeriesRecordFinished(QMap<QString, QList<QMap<QString, QString> > > seriesData);
+    void populateSearchModel(QMap<QString, QList<QMap<QString, QString> > > allSeries);
+    void seriesStored();
 
 private:
     Api* m_api;
