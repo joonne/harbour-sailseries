@@ -1,6 +1,10 @@
 #include "engine.h"
 
-Engine::Engine(QObject *parent) : QObject(parent), m_loading(false)
+Engine::Engine(QObject *parent) :
+    QObject(parent),
+    m_reader(new XMLReader),
+    m_dbmanager(new DatabaseManager),
+    m_loading(false)
 {
     typedef QList<QMap<QString, QString> > MapList;
     qRegisterMetaType<MapList>("MapList");
@@ -8,14 +12,7 @@ Engine::Engine(QObject *parent) : QObject(parent), m_loading(false)
     typedef QMap<QString, MapList > MapOfMapLists;
     qRegisterMetaType<MapOfMapLists>("MapOfMapLists");
 
-//    QThread* api_thread = new QThread;
-    m_reader = new XMLReader();
-//    m_reader->moveToThread(api_thread);
-//    connect(api_thread, SIGNAL(finished()), api_thread, SLOT(deleteLater()));
-//    api_thread->start();
-
     QThread* db_thread = new QThread;
-    m_dbmanager = new DatabaseManager();
     m_dbmanager->moveToThread(db_thread);
     connect(db_thread, SIGNAL(finished()), db_thread, SLOT(deleteLater()));
     db_thread->start();
@@ -74,11 +71,9 @@ void Engine::readyToUpdateModels()
 
 void Engine::updateModels()
 {
-    toggleLoading(true);
     emit m_todayListModel->getStartPageSeries();
     emit m_seriesListModel->getSeries();
     emit m_statistics->requestStatistics();
-    toggleLoading(false);
 }
 
 void Engine::readyToUpdateEpisodeDetails(QVariantMap episode)

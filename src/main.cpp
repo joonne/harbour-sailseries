@@ -59,8 +59,6 @@ int main(int argc, char *argv[])
     Settings settings;
     view->rootContext()->setContextProperty("settings", &settings);
 
-    // Here's how you will add QML components whenever you start using them
-    // Check https://github.com/amarchen/Wikipedia for a more full example
     view->engine()->addImportPath(SailfishApp::pathTo("qml/components").toString());
     view->setSource(SailfishApp::pathTo("qml/main.qml"));
 
