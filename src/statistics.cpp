@@ -3,33 +3,48 @@
 Statistics::Statistics(QObject *parent, DatabaseManager *dbmanager) :
     QObject(parent), m_dbmanager(dbmanager)
 {
-    updateStatistics();
+    connect(this,
+            SIGNAL(statisticsRequested()),
+            m_dbmanager,
+            SLOT(getStatistics()));
+
+    connect(m_dbmanager,
+            SIGNAL(updateStatistics(QVariantMap)),
+            this,
+            SLOT(updateStatistics(QVariantMap)));
+
+    emit statisticsRequested();
 }
 
-void Statistics::updateStatistics()
+void Statistics::requestStatistics()
 {
-    m_watchedEpisodesDuration = m_dbmanager->getWatchedEpisodesDuration();
+    emit statisticsRequested();
+}
+
+void Statistics::updateStatistics(QVariantMap statistics)
+{
+    m_watchedEpisodesDuration = statistics["watchedEpisodesDuration"].toInt();
     emit watchedEpisodesDurationChanged();
 
-    m_watchedEpisodesCount = m_dbmanager->getWatchedEpisodesCount();
+    m_watchedEpisodesCount = statistics["watchedEpisodesCount"].toInt();
     emit watchedEpisodesCountChanged();
 
-    m_allEpisodesCount = m_dbmanager->getAllEpisodesCount();
+    m_allEpisodesCount = statistics["allEpisodesCount"].toInt();
     emit allEpisodesCountChanged();
 
-    m_allSeriesCount = m_dbmanager->getAllSeriesCount();
+    m_allSeriesCount = statistics["allSeriesCount"].toInt();
     emit allSeriesCountChanged();
 
-    m_watchedSeriesCount = m_dbmanager->getWatchedSeriesCount();
+    m_watchedSeriesCount = statistics["watchedSeriesCount"].toInt();
     emit watchedSeriesCountChanged();
 
-    m_allSeasonsCount = m_dbmanager->getAllSeasonsCount();
+    m_allSeasonsCount = statistics["allSeasonsCount"].toInt();
     emit allSeasonsCountChanged();
 
-    m_watchedSeasonsCount = m_dbmanager->getWatchedSeasonsCount();
+    m_watchedSeasonsCount = statistics["watchedSeasonsCount"].toInt();
     emit watchedSeasonsCountChanged();
 
-    m_averageWatchedEpisodesDuration = m_dbmanager->getAverageWatchedEpisodesDuration();
+    m_averageWatchedEpisodesDuration = statistics["averageWatchedEpisodesDuration"].toDouble();
     emit averageWatchedEpisodesDurationChanged();
 }
 

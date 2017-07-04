@@ -8,7 +8,7 @@ Page {
     id: statisticspage
 
     Component.onCompleted: {
-        engine.Statistics.updateStatistics()
+        engine.Statistics.requestStatistics()
     }
 
     SilicaFlickable {

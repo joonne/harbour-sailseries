@@ -77,7 +77,7 @@ void Engine::updateModels()
     toggleLoading(true);
     emit m_todayListModel->getStartPageSeries();
     emit m_seriesListModel->getSeries();
-    m_statistics->updateStatistics();
+    emit m_statistics->requestStatistics();
     toggleLoading(false);
 }
 

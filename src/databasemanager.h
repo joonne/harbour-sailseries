@@ -89,12 +89,14 @@ signals:
     void populateBannerList(QList<QMap<QString, QString> > allSeries);
     void seriesDeleted(bool success);
     void seriesStored();
+    void updateStatistics(QVariantMap);
 
 public slots:
     void getStartPageSeries();
     void getSeries();
     void deleteSeries(int seriesId);
     void storeSeries(QMap<QString, QList<QMap<QString, QString> > > seriesData);
+    void getStatistics();
 
 private:
     QSqlDatabase m_db;

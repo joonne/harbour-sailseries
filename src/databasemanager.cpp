@@ -1105,6 +1105,21 @@ int DatabaseManager::getWatchedSeriesCount()
     return allSeriesCount - inProgressSeriesCount;
 }
 
+void DatabaseManager::getStatistics()
+{
+    QVariantMap statistics;
+    statistics["watchedEpisodesDuration"] = getWatchedEpisodesDuration();
+    statistics["watchedEpisodesCount"] = getWatchedEpisodesCount();
+    statistics["allEpisodesCount"] = getAllEpisodesCount();
+    statistics["allSeriesCount"] = getAllSeriesCount();
+    statistics["watchedSeriesCount"] = getWatchedSeriesCount();
+    statistics["allSeasonsCount"] = getAllSeasonsCount();
+    statistics["watchedSeasonsCount"] = getWatchedSeasonsCount();
+    statistics["averageWatchedEpisodesDuration"] = getAverageWatchedEpisodesDuration();
+
+    emit updateStatistics(statistics);
+}
+
 int DatabaseManager::getWatchedSeasonsCount()
 {
     auto count = 0;
