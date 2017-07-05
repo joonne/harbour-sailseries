@@ -4,6 +4,16 @@ SeasonListModel::SeasonListModel(QObject *parent,  DatabaseManager* dbmanager) :
     QObject(parent)
 {
     m_dbmanager = dbmanager;
+
+    connect(this,
+            SIGNAL(getSeasonsRequested(int)),
+            m_dbmanager,
+            SLOT(getSeasons(int)));
+
+    connect(m_dbmanager,
+            SIGNAL(populateSeasonList(VariantList)),
+            this,
+            SLOT(populateSeasonList(VariantList)));
 }
 
 SeasonListModel::~SeasonListModel()
@@ -18,8 +28,6 @@ QQmlListProperty<SeasonData> SeasonListModel::getSeasonList()
 {
     return QQmlListProperty<SeasonData>(this, &m_seasonListModel, &SeasonListModel::seasonListCount, &SeasonListModel::seasonListAt);
 }
-
-// list handling methods
 
 void SeasonListModel::seasonListAppend(QQmlListProperty<SeasonData>* prop, SeasonData* val)
 {
@@ -42,21 +50,24 @@ void SeasonListModel::seasonListClear(QQmlListProperty<SeasonData>* prop)
     qobject_cast<SeasonListModel*>(prop->object)->m_seasonListModel.clear();
 }
 
-void SeasonListModel::populateSeasonList(QString seriesID)
+void SeasonListModel::getSeasons(QString seriesId)
+{
+    emit getSeasonsRequested(seriesId.toInt());
+}
+
+void SeasonListModel::populateSeasonList(QList<QVariantMap> seasons)
 {
     m_seasonListModel.clear();
 
-    int seasonsCount = m_dbmanager->seasonCount(seriesID.toInt());
+    auto length = seasons.size();
+    for (auto i = 0; i < length; ++i) {
+        auto season = seasons.at(i);
+        QString banner = season["banner"].toString();
+        int watchedCount = season["watchedCount"].toInt();
+        int totalCount = season["totalCount"].toInt();
 
-    for (int i = 1; i <= seasonsCount; ++i) {
-
-        QString banner = m_dbmanager->getSeasonBanner(seriesID.toInt(),i);
-        int watchedCount = m_dbmanager->watchedCountBySeason(seriesID.toInt(),i);
-        int totalCount = m_dbmanager->totalCountBySeason(seriesID.toInt(),i);
-
-        SeasonData* seasonData = new SeasonData(this, i, banner, watchedCount, totalCount);
+        SeasonData* seasonData = new SeasonData(this, i + 1, banner, watchedCount, totalCount);
         m_seasonListModel.append(seasonData);
-
     }
     emit seasonListChanged();
 }

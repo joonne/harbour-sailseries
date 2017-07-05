@@ -268,22 +268,22 @@
 <context>
     <name>SeasonsPage</name>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="22"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="18"/>
         <source>Seasons</source>
         <translation>Kaudet</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="84"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="80"/>
         <source>Season</source>
         <translation>Kausi</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="97"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="93"/>
         <source>Watched</source>
         <translation>Nähty</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="139"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="135"/>
         <source>episodes</source>
         <translation>jaksot</translation>
     </message>

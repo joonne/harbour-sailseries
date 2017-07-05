@@ -4,12 +4,8 @@ import Sailfish.Silica 1.0
 Page {
     id: seasonspage
 
-//    function setModel() {
-//        listView.model = engine.SeasonListModel.SeasonList
-//    }
-
     Component.onCompleted: {
-        engine.SeasonListModel.populateSeasonList(engine.SeriesListModel.ID)
+        engine.SeasonListModel.getSeasons(engine.SeriesListModel.ID)
     }
 
     SilicaListView {

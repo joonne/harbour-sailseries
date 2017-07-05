@@ -6,7 +6,11 @@ TodayListModel::TodayListModel(QObject *parent, DatabaseManager *dbmanager, Api 
     m_dbmanager = dbmanager;
     m_api = api;
 
-    connect(this, SIGNAL(getStartPageSeries()), m_dbmanager, SLOT(getStartPageSeries()));
+    connect(this,
+            SIGNAL(getStartPageSeries()),
+            m_dbmanager,
+            SLOT(getStartPageSeries()));
+
     connect(m_dbmanager,
             SIGNAL(populateTodayModel(MapList)),
             this,

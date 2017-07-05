@@ -1,5 +1,4 @@
 #include "databasemanager.h"
-#include "qcoreapplication.h"
 
 DatabaseManager::DatabaseManager(QObject *parent) :
     QObject(parent)
@@ -394,9 +393,6 @@ bool DatabaseManager::insertEpisodes(QList<QVariantMap> episodes, int seriesId)
             query.bindValue(":watched", watched);
             ret = query.exec();
         }
-
-        // process pending events to not freeze the app
-        qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
     }
     
     commit();
@@ -435,9 +431,6 @@ bool DatabaseManager::insertBanners(QList<QVariantMap> banners, int seriesId)
             query.bindValue(":season", season);
             ret = query.exec();
         }
-        
-        // process pending events to not freeze the app
-        qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
     }
     
     commit();
@@ -657,10 +650,25 @@ void DatabaseManager::getStartPageSeries()
     emit populateTodayModel(series);
 }
 
-QList<QVariantMap> DatabaseManager::getEpisodes(int seriesID, int seasonNumber) {
+void DatabaseManager::getSeasons(int seriesId)
+{
+    QList<QVariantMap> seasons;
 
+    int seasonsCount = seasonCount(seriesId);
+    for (int i = 1; i <= seasonsCount; ++i) {
+        QVariantMap season;
+        season["banner"] = getSeasonBanner(seriesId, i);
+        season["watchedCount"] = watchedCountBySeason(seriesId, i);
+        season["totalCount"] = totalCountBySeason(seriesId, i);
+        seasons.append(season);
+    }
+    emit populateSeasonList(seasons);
+}
+
+QList<QVariantMap> DatabaseManager::getEpisodes(int seriesID, int seasonNumber)
+{
     QList<QVariantMap> episodes;
-
+    
     QSqlQuery query(m_db);
     query.exec(QString("SELECT episodeName, episodeNumber, overview, seasonNumber, absoluteNumber, filename, watched, id, guestStars, writer, firstAired "
                        "FROM Episode "

@@ -6,6 +6,9 @@ Engine::Engine(QObject *parent) :
     m_dbmanager(new DatabaseManager),
     m_loading(false)
 {
+    typedef QList<QVariantMap> VariantList;
+    qRegisterMetaType<VariantList>("VariantList");
+
     typedef QList<QMap<QString, QString> > MapList;
     qRegisterMetaType<MapList>("MapList");
 

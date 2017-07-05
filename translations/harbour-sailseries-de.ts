@@ -268,22 +268,22 @@
 <context>
     <name>SeasonsPage</name>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="22"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="18"/>
         <source>Seasons</source>
         <translation>Staffeln</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="84"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="80"/>
         <source>Season</source>
         <translation>Staffel</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="97"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="93"/>
         <source>Watched</source>
         <translation>Gesehen</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="139"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="135"/>
         <source>episodes</source>
         <translation>Folgen</translation>
     </message>

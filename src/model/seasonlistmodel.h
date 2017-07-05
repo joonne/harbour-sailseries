@@ -18,10 +18,14 @@ public:
 
     QQmlListProperty<SeasonData> getSeasonList();
 
-    Q_INVOKABLE void populateSeasonList(QString seriesID);
+    Q_INVOKABLE void getSeasons(QString seriesId);
 
 signals:
     void seasonListChanged();
+    void getSeasonsRequested(int seriesId);
+
+public slots:
+    void populateSeasonList(QList<QVariantMap> seasons);
 
 private:
     QList<SeasonData*> m_seasonListModel;

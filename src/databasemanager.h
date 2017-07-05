@@ -90,6 +90,7 @@ signals:
     void seriesDeleted(bool success);
     void seriesStored();
     void updateStatistics(QVariantMap);
+    void populateSeasonList(QList<QVariantMap> seasons);
 
 public slots:
     void getStartPageSeries();
@@ -97,6 +98,7 @@ public slots:
     void deleteSeries(int seriesId);
     void storeSeries(QMap<QString, QList<QMap<QString, QString> > > seriesData);
     void getStatistics();
+    void getSeasons(int seriesId);
 
 private:
     QSqlDatabase m_db;
