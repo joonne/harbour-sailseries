@@ -11,10 +11,8 @@ Page {
         initialize(seriesID, seasonNumber)
     }
 
-
     function initialize(seriesID, seasonNumber) {
-        engine.EpisodeListModel.populateEpisodeList(seriesID, seasonNumber)
-        listView.model = engine.EpisodeListModel.episodeList
+        engine.EpisodeListModel.getEpisodes(seriesID, seasonNumber)
     }
 
     SilicaListView {
@@ -29,8 +27,8 @@ Page {
                 text: qsTr("I have seen these all")
                 onClicked: {
                     engine.EpisodeListModel.markSeasonWatched(seriesID, seasonNumber)
-                    engine.SeasonListModel.populateSeasonList(seriesID)
-                    pageStack.pop()
+                    engine.SeasonListModel.getSeasons(seriesID)
+                    // pageStack.pop() // keep or not?
                 }
             }
         }
@@ -129,8 +127,9 @@ Page {
                     onClicked: {
                         Watched === 0 ? Watched = 1 : Watched = 0
                         engine.EpisodeListModel.toggleWatched(ID)
-                        engine.SeasonListModel.populateSeasonList(seriesID)
-                        engine.TodayModel.populateTodayModel()
+                        engine.EpisodeListModel.getEpisodes(seriesID, seasonNumber)
+                        engine.SeasonListModel.getSeasons(seriesID)
+//                        engine.TodayModel.populateTodayModel()
                     }
                     anchors.fill: parent
                 }

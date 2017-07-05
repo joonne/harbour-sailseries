@@ -91,14 +91,16 @@ signals:
     void seriesStored();
     void updateStatistics(QVariantMap);
     void populateSeasonList(QList<QVariantMap> seasons);
+    void populateEpisodeList(QList<QMap<QString, QString> > episodes);
 
 public slots:
     void getStartPageSeries();
     void getSeries();
+    void getSeasons(int seriesId);
+    void getEpisodes(int seriesId, int seasonNumber);
     void deleteSeries(int seriesId);
     void storeSeries(QMap<QString, QList<QMap<QString, QString> > > seriesData);
     void getStatistics();
-    void getSeasons(int seriesId);
 
 private:
     QSqlDatabase m_db;

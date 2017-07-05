@@ -665,7 +665,7 @@ void DatabaseManager::getSeasons(int seriesId)
     emit populateSeasonList(seasons);
 }
 
-QList<QVariantMap> DatabaseManager::getEpisodes(int seriesID, int seasonNumber)
+void DatabaseManager::getEpisodes(int seriesId, int seasonNumber)
 {
     QList<QVariantMap> episodes;
     
@@ -673,7 +673,7 @@ QList<QVariantMap> DatabaseManager::getEpisodes(int seriesID, int seasonNumber)
     query.exec(QString("SELECT episodeName, episodeNumber, overview, seasonNumber, absoluteNumber, filename, watched, id, guestStars, writer, firstAired "
                        "FROM Episode "
                        "WHERE seriesID = %1 AND seasonNumber = %2 "
-                       "ORDER BY episodeNumber").arg(seriesID).arg(seasonNumber));
+                       "ORDER BY episodeNumber").arg(seriesId).arg(seasonNumber));
     
     if (query.isSelect()) {
         
@@ -719,7 +719,7 @@ QList<QVariantMap> DatabaseManager::getEpisodes(int seriesID, int seasonNumber)
             episodes.append(episode);
         }
     }
-    return episodes;
+    emit populateEpisodeList(episodes);
 }
 
 void DatabaseManager::toggleWatched(QString episodeID)
