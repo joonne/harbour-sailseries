@@ -21,13 +21,14 @@ public:
     QQmlListProperty<EpisodeData> getEpisodeList();
 
     Q_INVOKABLE void getEpisodes(QString seriesId, int seasonNumber);
-    Q_INVOKABLE void toggleWatched(QString episodeId);
+    Q_INVOKABLE void toggleWatched(QString episodeId, QString seriesId, int seasonNumber);
     Q_INVOKABLE void markSeasonWatched(QString seriesId, int season);
     Q_INVOKABLE int getSeasonCount(QString seriesId);
-    Q_INVOKABLE void toggleWatchedInModel(int episodeId, int watched);
+
 signals:
     void episodeListChanged();
     void getEpisodesRequested(int seriesId, int seasonNumber);
+    void toggleWatchedRequested(QString episodeId, QString seriesId, int seasonNumber);
 
 public slots:
     void populateEpisodeList(QList<QMap<QString, QString> > episodes);

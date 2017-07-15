@@ -655,7 +655,7 @@ void DatabaseManager::getSeasons(int seriesId)
     QList<QVariantMap> seasons;
 
     int seasonsCount = seasonCount(seriesId);
-    for (int i = 1; i <= seasonsCount; ++i) {
+    for (int i = 0; i <= seasonsCount; ++i) {
         QVariantMap season;
         season["banner"] = getSeasonBanner(seriesId, i);
         season["watchedCount"] = watchedCountBySeason(seriesId, i);
@@ -722,12 +722,14 @@ void DatabaseManager::getEpisodes(int seriesId, int seasonNumber)
     emit populateEpisodeList(episodes);
 }
 
-void DatabaseManager::toggleWatched(QString episodeID)
+void DatabaseManager::toggleWatched(QString episodeId, QString seriesId, int seasonNumber)
 {
+
     QSqlQuery query(m_db);
     query.exec(QString("UPDATE Episode "
                        "SET watched = CASE WHEN watched = 0 THEN 1 ELSE 0 END "
-                       "WHERE id = %1").arg(episodeID.toInt()));
+                       "WHERE id = %1").arg(episodeId.toInt()));
+    getEpisodes(seriesId.toInt(), seasonNumber);
 }
 
 void DatabaseManager::deleteSeries(int seriesId)

@@ -40,8 +40,8 @@ Page {
                 anchors.rightMargin: Theme.paddingMedium
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("EpisodesPage.qml"), {
-                                       seriesID: engine.SeriesListModel.ID,
-                                       seasonNumber: index + 1
+                                       seriesId: engine.SeriesListModel.ID,
+                                       seasonNumber: index
                                    });
                 }
             }
@@ -54,6 +54,7 @@ Page {
                 anchors.leftMargin: banner.width === 0 ? 0 : Theme.paddingMedium
                 anchors.top: parent.top
                 anchors.topMargin: (background.height - banner.height) / 2
+
                 onWidthChanged: {
                     if (banner.width > listItem.width) {
                         banner.width = 0;
@@ -77,7 +78,7 @@ Page {
 
                 Label {
                     id: seasonNumber
-                    text: qsTr("Season") + " " + (index + 1)
+                    text: index === 0 ? qsTr("Specials") : qsTr("Season %1").arg(index)
                     font.pixelSize: Theme.fontSizeLarge
                 }
             }

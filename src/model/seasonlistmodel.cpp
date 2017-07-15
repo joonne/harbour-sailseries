@@ -66,7 +66,7 @@ void SeasonListModel::populateSeasonList(QList<QVariantMap> seasons)
         int watchedCount = season["watchedCount"].toInt();
         int totalCount = season["totalCount"].toInt();
 
-        SeasonData* seasonData = new SeasonData(this, i + 1, banner, watchedCount, totalCount);
+        SeasonData* seasonData = new SeasonData(this, i, banner, watchedCount, totalCount);
         m_seasonListModel.append(seasonData);
     }
     emit seasonListChanged();

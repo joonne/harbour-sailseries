@@ -12,6 +12,11 @@ EpisodeListModel::EpisodeListModel(QObject *parent, DatabaseManager *dbmanager) 
             SIGNAL(populateEpisodeList(MapList)),
             this,
             SLOT(populateEpisodeList(MapList)));
+
+    connect(this,
+            SIGNAL(toggleWatchedRequested(QString, QString, int)),
+            m_dbmanager,
+            SLOT(toggleWatched(QString, QString, int)));
 }
 
 EpisodeListModel::~EpisodeListModel()
@@ -50,8 +55,6 @@ void EpisodeListModel::episodeListClear(QQmlListProperty<EpisodeData>* prop)
 
 void EpisodeListModel::getEpisodes(QString seriesId, int seasonNumber)
 {
-    m_episodeListModel.clear();
-    emit episodeListChanged();
     emit getEpisodesRequested(seriesId.toInt(), seasonNumber);
 }
 
@@ -60,34 +63,19 @@ void EpisodeListModel::populateEpisodeList(QList<QMap<QString, QString> > episod
     m_episodeListModel.clear();
     emit episodeListChanged();
 
-    qDebug() << episodes;
-
     if (episodes.size() != 0) {
         for (auto episode : episodes) {
-//            // we don't want the special episodes, they have season number 0.
-//            if (episode["seasonNumber"].toInt() != 0 ) {
-                auto episodeData = new EpisodeData(this, episode);
-                m_episodeListModel.append(episodeData);
-//            }
+            auto episodeData = new EpisodeData(this, episode);
+            m_episodeListModel.append(episodeData);
         }
 
         emit episodeListChanged();
     }
 }
 
-// TODO: combine these
-void EpisodeListModel::toggleWatched(QString episodeId)
+void EpisodeListModel::toggleWatched(QString episodeId, QString seriesId, int seasonNumber)
 {
-    m_dbmanager->toggleWatched(episodeId);
-}
-
-void EpisodeListModel::toggleWatchedInModel(int episodeId, int watched)
-{
-    for (auto episode : m_episodeListModel) {
-       if (episode->getID() == episodeId) {
-           episode->setWatched(watched);
-        }
-    }
+    emit toggleWatchedRequested(episodeId, seriesId, seasonNumber);
 }
 
 void EpisodeListModel::markSeasonWatched(QString seriesId, int season)

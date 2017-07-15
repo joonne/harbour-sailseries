@@ -61,7 +61,6 @@ public:
     QString getSeasonBanner(int seriesID, int season);
     QStringList getSeriesIds(bool updateEndedSeries);
 
-    void toggleWatched(QString episodeID);
     void markSeasonWatched(int seriesID, int season);
 
     bool isAlreadyAdded(int seriesId, QString name);
@@ -101,6 +100,7 @@ public slots:
     void deleteSeries(int seriesId);
     void storeSeries(QMap<QString, QList<QMap<QString, QString> > > seriesData);
     void getStatistics();
+    void toggleWatched(QString episodeId, QString seriesId, int seasonNumber);
 
 private:
     QSqlDatabase m_db;
