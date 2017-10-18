@@ -218,10 +218,10 @@ void SeriesListModel::updateAllSeries(bool updateEndedSeries)
     foreach (auto series, allSeries) {
         if (!updateEndedSeries) {
             if (series["status"] != "Ended") {
-               m_seriesIds.append(series["id"]);
+               m_seriesIds.append(series["id"].toString());
             }
         } else {
-             m_seriesIds.append(series["id"]);
+             m_seriesIds.append(series["id"].toString());
         }
     }
 

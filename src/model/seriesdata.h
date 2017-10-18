@@ -48,7 +48,7 @@ class SeriesData : public QObject
     Q_PROPERTY(int NextEpisodeWatched READ getNextEpisodeWatched WRITE setNextEpisodeWatched NOTIFY nextEpisodeWatchedChanged)
 
 public:
-    explicit SeriesData(QObject *parent = 0, QMap<QString, QString> params = QMap<QString, QString>());
+    explicit SeriesData(QObject *parent = 0, QVariantMap params = QVariantMap());
 
     QString getID();
     QString getActors();

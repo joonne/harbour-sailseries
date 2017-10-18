@@ -15,6 +15,11 @@
 #include <QBuffer>
 #include "qzipreader_p.h"
 
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QJsonValue>
+
 class XMLReader : public QObject
 {
     Q_OBJECT
@@ -30,13 +35,13 @@ public:
     QMap<QString,QString> parseBanner(QXmlStreamReader& xml);
     void addElementDataToMap(QXmlStreamReader& xml,
                                  QMap<QString, QString>& map) const;
-    void startRequest(QUrl url);
+    void get(QUrl url);
 
     void getLanguages();
     void searchSeries(QString text);
     void getFullSeriesRecord(QString seriesid, QString method);
 
-    QList<QMap<QString,QString> > getSeries();
+    QList<QVariantMap> getSeries();
     QList<QMap<QString,QString> > getEpisodes();
     QList<QMap<QString,QString> > getBanners();
 
@@ -57,7 +62,7 @@ public slots:
 private:
     QNetworkAccessManager* m_nam;
     QList<QMap<QString,QString> > m_languages;
-    QList<QMap<QString,QString> > m_series;
+    QList<QVariantMap> m_series;
     QList<QMap<QString,QString> > m_episodes;
     QList<QMap<QString,QString> > m_banners;
     QString m_currentServerTime;
@@ -65,8 +70,10 @@ private:
     bool m_fullRecord;
     bool m_update;
 
-    QString getLocale();
+    QString getLocale();    
+    void getJwt();
 
+    QString m_jwt;
 };
 
 #endif // XMLREADER_H

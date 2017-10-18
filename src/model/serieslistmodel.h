@@ -93,7 +93,7 @@ public slots:
 private:
     XMLReader* m_reader;
     DatabaseManager* m_dbmanager;
-    QList<QMap<QString,QString> > m_series;
+    QList<QVariantMap> m_series;
     QList<QMap<QString,QString> > m_episodes;
     QList<QMap<QString,QString> > m_banners;
     QList<SeriesData*> m_seriesListModel;

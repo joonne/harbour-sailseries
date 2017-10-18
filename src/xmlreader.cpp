@@ -1,7 +1,7 @@
 #include "xmlreader.h"
 
 #define APIKEY "88D0BD893851FA78"
-#define MIRRORPATH "http://thetvdb.com"
+#define MIRRORPATH "https://api.thetvdb.com"
 
 XMLReader::XMLReader(QObject *parent) :
     QObject(parent),
@@ -15,13 +15,26 @@ XMLReader::XMLReader(QObject *parent) :
             SIGNAL(finished(QNetworkReply*)),
             this,
             SLOT(replyFinished(QNetworkReply*)));
+
+    getJwt();
 }
 
 XMLReader::~XMLReader()
 {
     delete m_nam;
     m_nam = 0;
-    qDebug() << "destructing xmlreader";
+}
+
+void XMLReader::getJwt()
+{
+    QUrl url(QString("%1/login").arg(QString(MIRRORPATH)));
+    QNetworkRequest request(url);
+
+    request.setRawHeader("Content-Type", "application/json");
+
+    QByteArray jsonString = "{\"apikey\": \"88D0BD893851FA78\"}";
+
+    m_nam->post(request, jsonString);
 }
 
 QString XMLReader::getLocale()
@@ -42,19 +55,16 @@ void XMLReader::getLanguages()
     QString url = QString(MIRRORPATH) + "/api/" + QString(APIKEY) + "/languages.xml";
     qDebug() << "Requesting" << url;
     QUrl finalUrl(url);
-    startRequest(finalUrl);
+    get(finalUrl);
 }
 
 void XMLReader::searchSeries(QString text)
 {
     m_fullRecord = false;
-//    QString locale = getLocale();
-//    TODO: searching with locale works, but getting full record does not.
-//    QString url = QString(MIRRORPATH) + "/api/GetSeries.php?seriesname=" + text + "&language=" + locale;
-    QString url = QString("%1/api/GetSeries.php?seriesname=%2").arg(QString(MIRRORPATH)).arg(text);
+    QString url = QString("%1/search/series?name=%2").arg(QString(MIRRORPATH)).arg(text);
     qDebug() << "Requesting" << url;
     QUrl finalUrl(url);
-    startRequest(finalUrl);
+    get(finalUrl);
 }
 
 void XMLReader::getFullSeriesRecord(QString seriesid, QString method)
@@ -71,18 +81,21 @@ void XMLReader::getFullSeriesRecord(QString seriesid, QString method)
     // QString url = QString("%1/api/%2/series/%3/all/%4.zip").arg(QString(MIRRORPATH)).arg(QString(APIKEY)).arg(seriesid).arg(locale);
     qDebug() << "Requesting" << url;
     QUrl finalUrl(url);
-    startRequest(finalUrl);
+    get(finalUrl);
 }
 
-QList<QMap<QString,QString> > XMLReader::getSeries() { return m_series; }
+QList<QVariantMap> XMLReader::getSeries() { return m_series; }
 
 QList<QMap<QString,QString> > XMLReader::getEpisodes() { return m_episodes; }
 
 QList<QMap<QString,QString> > XMLReader::getBanners() { return m_banners; }
 
-void XMLReader::startRequest(QUrl url)
+void XMLReader::get(QUrl url)
 {
     QNetworkRequest request(url);
+
+    request.setRawHeader("Authorization", (QString("Bearer %1").arg(m_jwt)).toLocal8Bit());
+
     m_nam->get(request);
 }
 
@@ -97,7 +110,7 @@ void XMLReader::replyFinished(QNetworkReply *reply)
     // Error -> inform user by appending error message to listview
     if (reply->error() != QNetworkReply::NoError) {
 
-        QMap<QString,QString> temp;
+        QVariantMap temp;
         temp.insert("SeriesName", "Error, try again later.");
         m_series.clear();
         m_series.append(temp);
@@ -107,48 +120,56 @@ void XMLReader::replyFinished(QNetworkReply *reply)
         return;
     }
 
-    auto b = reply->readAll();
-    auto buf = new QBuffer(&b);
+    auto document = QJsonDocument::fromJson(reply->readAll());
 
-    if (reply->url().toString().endsWith(".zip")) {
-        auto zip = new QZipReader(buf);
-        QXmlStreamReader xml(zip->fileData("en.xml"));
-        parseXML(xml);
-        QXmlStreamReader xml_banners(zip->fileData("banners.xml"));
-        parseXML(xml_banners);
+    if (document.object().contains("token")) {
+        m_jwt = document.object().value("token").toString();
+        qDebug() << m_jwt;
+    }
 
-        if (m_series.size() != 0 and !getFullRecordFlag() and !getUpdateFlag()) {
-            setFullRecordFlag(false);
-            setUpdateFlag(false);
-            emit readyToPopulateSeries();
-        } else if (getFullRecordFlag()) {
-            setFullRecordFlag(false);
-            setUpdateFlag(false);
-            emit readyToStoreSeries();
-        } else if (getUpdateFlag()) {
-            setFullRecordFlag(false);
-            setUpdateFlag(false);
-            emit readyToUpdateSeries();
+    // parse json into the QMaps
+
+    if (document.object().contains("data")) {
+
+        auto jsonArray = document.object().value("data").toArray();
+
+        QList<QVariantMap> allSeries;
+
+        for (auto jsonValue : jsonArray) {
+
+            QVariantMap series;
+
+            auto obj = jsonValue.toObject();
+            auto keys = obj.keys();
+
+            for (auto key : keys) {
+                qDebug() << key;
+
+                series.insert(key, obj.value(key).toVariant());
+            }
+
+            allSeries.append(series);
         }
 
-    } else {
-
-        QXmlStreamReader xml(buf->buffer());
-        parseXML(xml);
-
-        if (m_series.size() != 0 && !getFullRecordFlag() && !getUpdateFlag()) {
-            setFullRecordFlag(false);
-            setUpdateFlag(false);
-            emit readyToPopulateSeries();
-        } else if (getFullRecordFlag()) {
-            setFullRecordFlag(false);
-            setUpdateFlag(false);
-            emit readyToStoreSeries();
-        } else if (getUpdateFlag()) {
-            setFullRecordFlag(false);
-            setUpdateFlag(false);
-            emit readyToUpdateSeries();
+        if (allSeries.size() != 0) {
+            m_series = allSeries;
         }
+
+        qDebug() << allSeries;
+    }
+
+    if (m_series.size() != 0 and !getFullRecordFlag() and !getUpdateFlag()) {
+        setFullRecordFlag(false);
+        setUpdateFlag(false);
+        emit readyToPopulateSeries();
+    } else if (getFullRecordFlag()) {
+        setFullRecordFlag(false);
+        setUpdateFlag(false);
+        emit readyToStoreSeries();
+    } else if (getUpdateFlag()) {
+        setFullRecordFlag(false);
+        setUpdateFlag(false);
+        emit readyToUpdateSeries();
     }
 
     reply->deleteLater();
@@ -216,7 +237,7 @@ void XMLReader::parseXML(QXmlStreamReader& xml)
     }
 
     if (series.size() != 0) {
-        m_series = series;
+//        m_series = series;
     }
 
     if (episodes.size() != 0){

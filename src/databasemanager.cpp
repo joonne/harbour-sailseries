@@ -261,7 +261,7 @@ bool DatabaseManager::deleteDuplicateEpisodes()
     return ret;
 }
 
-bool DatabaseManager::insertSeries(QMap<QString, QString> series)
+bool DatabaseManager::insertSeries(QVariantMap series)
 {
     bool ret = false;
     int watched = 0;
@@ -269,28 +269,28 @@ bool DatabaseManager::insertSeries(QMap<QString, QString> series)
     startTransaction();
     
     int seriesId = series["id"].toInt();
-    QString actors = series["Actors"];
-    QString airsDayOfWeek = series["Airs_DayOfWeek"];
-    QString airsTime = series["Airs_Time"];
-    QString contentRating = series["ContentRating"];
-    QString firstAired = series["FirstAired"];
-    QString genre = series["Genre"];
-    QString imdb_id = series["IMDB_ID"];
-    QString language = series["Language"];
-    QString network = series["Network"];
-    QString overview = series["Overview"];
-    double rating = series["Rating"].toDouble();
-    int ratingCount = series["RatingCount"].toInt();
-    int runtime = series["Runtime"].toInt();
-    QString seriesName = series["SeriesName"];
-    QString status = series["Status"];
-    QString added = series["added"];
+    QString actors = series["actors"].toString();
+    QString airsDayOfWeek = series["airsDayOfWeek"].toString();
+    QString airsTime = series["airsTime"].toString();
+    QString contentRating = series["contentRating"].toString();
+    QString firstAired = series["firstAired"].toString();
+    QString genre = series["genre"].toStringList().join(",");
+    QString imdb_id = series["imdbId"].toString();
+    QString language = series["language"].toString();
+    QString network = series["network"].toString();
+    QString overview = series["overview"].toString();
+    double rating = series["siteRating"].toDouble();
+    int ratingCount = series["siteRatingCount"].toInt();
+    int runtime = series["runtime"].toInt();
+    QString seriesName = series["seriesName"].toString();
+    QString status = series["status"].toString();
+    QString added = series["added"].toString();
     int addedby = series["addedBy"].toInt();
-    QString banner = series["banner"];
-    QString fanart = series["fanart"];
-    QString lastUpdated = series["lastupdated"];
-    QString poster = series["poster"];
-    QString zap2itid = series["zap2it_id"];
+    QString banner = series["banner"].toString();
+    QString fanart = series["fanart"].toString();
+    QString lastUpdated = series["lastUpdated"].toString();
+    QString poster = series["poster"].toString();
+    QString zap2itid = series["zap2itId"].toString();
     
     overview.replace("'", "''");
     actors.replace("'", "''");
@@ -481,9 +481,9 @@ bool DatabaseManager::insertBanners(QList<QMap<QString, QString> > banners, int 
     return ret;
 }
 
-QList<QMap<QString, QString> > DatabaseManager::getSeries()
+QList<QVariantMap> DatabaseManager::getSeries()
 {
-    QList<QMap<QString, QString> > allSeries;
+    QList<QVariantMap> allSeries;
     
     if (m_db.isOpen()) {
         
@@ -499,7 +499,7 @@ QList<QMap<QString, QString> > DatabaseManager::getSeries()
 
             while (query.next()) {
                 
-                QMap<QString, QString> temp;
+                QVariantMap temp;
                 
                 auto banner = query.value(0).toString();
                 temp["banner"] = banner;
@@ -545,7 +545,7 @@ QList<QMap<QString, QString> > DatabaseManager::getSeries()
     return allSeries;
 }
 
-QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries()
+QList<QVariantMap> DatabaseManager::getStartPageSeries()
 {
     auto date = QDateTime::currentDateTime().date();
     auto locale  = QLocale(QLocale::English);
@@ -554,7 +554,7 @@ QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries()
     auto status = "Continuing";
     const auto kTwelveHoursInSecs = 12 * 60 * 60;
     
-    QList<QMap<QString, QString> > series;
+    QList<QVariantMap> series;
     
     if (m_db.isOpen()) {
         
@@ -568,7 +568,7 @@ QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries()
             
             while (query.next()) {
                 
-                QMap<QString, QString> temp;
+                QVariantMap temp;
                 
                 auto seriesName = query.value(0).toString();
                 temp["seriesName"] = seriesName;
@@ -636,6 +636,7 @@ QList<QMap<QString, QString> > DatabaseManager::getStartPageSeries()
             }
         }
     }
+
     return series;
 }
 
@@ -852,11 +853,11 @@ void DatabaseManager::markSeasonWatched(int seriesID, int season)
                        "WHERE seriesID = %1 AND seasonNumber = %2;").arg(seriesID).arg(season));
 }
 
-QMap<QString,QString> DatabaseManager::getNextEpisodeDetails(int seriesID)
+QVariantMap DatabaseManager::getNextEpisodeDetails(int seriesID)
 {
     auto today = QDateTime::currentDateTime().date().toString(Qt::ISODate);
     
-    QList<QMap<QString, QString> > details;
+    QList<QVariantMap> details;
     
     this->startTransaction();
 
@@ -871,7 +872,7 @@ QMap<QString,QString> DatabaseManager::getNextEpisodeDetails(int seriesID)
         
         while (query.next()) {
             
-            QMap<QString, QString> temp;
+            QVariantMap temp;
             
             auto episodeName = query.value(0).toString();
             temp["nextEpisodeName"] = episodeName;
@@ -889,13 +890,13 @@ QMap<QString,QString> DatabaseManager::getNextEpisodeDetails(int seriesID)
         }
     }
     
-    QMap<QString, QString> nextEpisodeDetails;
+    QVariantMap nextEpisodeDetails;
     
     if (!details.isEmpty()) {
         
         nextEpisodeDetails = details.first();
         
-        auto firstAired = nextEpisodeDetails["nextEpisodeFirstAired"];
+        auto firstAired = nextEpisodeDetails["nextEpisodeFirstAired"].toString();
         auto daysToNextEpisode = QDate::fromString(today, "yyyy-MM-dd").daysTo(QDate::fromString(firstAired, "yyyy-MM-dd"));
         
         switch (daysToNextEpisode) {
