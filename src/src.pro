@@ -18,7 +18,6 @@ SOURCES += main.cpp \
     model/episodelistmodel.cpp \
     model/searchlistmodel.cpp \
     model/todaylistmodel.cpp \
-    qzip.cpp \
     model/seasondata.cpp \
     model/seasonlistmodel.cpp \
     engine.cpp \
@@ -61,8 +60,6 @@ HEADERS += \
     model/episodelistmodel.h \
     model/searchlistmodel.h \
     model/todaylistmodel.h \
-    qzipreader_p.h \
-    qzipwriter_p.h \
     model/seasondata.h \
     model/seasonlistmodel.h \
     engine.h \

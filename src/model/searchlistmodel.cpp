@@ -90,7 +90,7 @@ void SearchListModel::searchSeries(QString text)
     m_searchListModel.clear();
     m_series.clear();
     emit searchModelChanged();
-    m_reader->searchSeriesNew(text);
+    m_reader->searchSeries(text);
 }
 
 void SearchListModel::selectSeries(int index)

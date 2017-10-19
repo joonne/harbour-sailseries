@@ -2,7 +2,6 @@
 #define XMLREADER_H
 
 #include <QObject>
-#include <QXmlStreamReader>
 #include <QFile>
 #include <QDebug>
 #include <QNetworkAccessManager>
@@ -13,7 +12,6 @@
 #include <QStringRef>
 #include <QByteArray>
 #include <QBuffer>
-#include "qzipreader_p.h"
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -31,20 +29,13 @@ public:
     explicit XMLReader(QObject *parent = 0);
     ~XMLReader();
 
-//    void parseXML(QXmlStreamReader &xml);
-    QMap<QString,QString> parseSeries(QXmlStreamReader& xml);
     QList<QVariantMap> parseSeriesNew(QJsonObject obj);
-    QMap<QString,QString> parseLanguages(QXmlStreamReader& xml);
-    QMap<QString,QString> parseEpisode(QXmlStreamReader& xml);
-    QMap<QString,QString> parseBanner(QXmlStreamReader& xml);
     QVariantMap parseImages(QJsonObject obj);
-    void addElementDataToMap(QXmlStreamReader& xml,
-                                 QMap<QString, QString>& map) const;
+
     void get(QUrl url);
 
     void getLanguages();
     void searchSeries(QString seriesName);
-    void searchSeriesNew(QString seriesName);
     void getFullSeriesRecord(QString seriesId, QString method);
     void getFullSeriesRecordNew(QString seriesId, QString method);
 
@@ -78,7 +69,6 @@ private:
     QList<QVariantMap> m_episodes;
     QList<QVariantMap> m_banners;
     QString m_currentServerTime;
-    QString m_jwt;
 
     bool m_fullRecord;
     bool m_update;
