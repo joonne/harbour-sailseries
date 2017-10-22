@@ -1,10 +1,10 @@
 #include "todaylistmodel.h"
 
-TodayListModel::TodayListModel(QObject *parent, DatabaseManager *dbmanager, XMLReader *reader) :
+TodayListModel::TodayListModel(QObject *parent, DatabaseManager *dbmanager, Api *api) :
     QObject(parent)
 {
     m_dbmanager = dbmanager;
-    m_reader = reader;
+    m_api = api;
 
     populateTodayModel();
 }

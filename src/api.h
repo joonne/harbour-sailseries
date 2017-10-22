@@ -1,45 +1,38 @@
-#ifndef XMLREADER_H
-#define XMLREADER_H
+#ifndef API_H
+#define API_H
 
 #include <QObject>
-#include <QFile>
 #include <QDebug>
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
-#include <QTemporaryFile>
 #include <QList>
-#include <QStringRef>
 #include <QByteArray>
-#include <QBuffer>
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QJsonDocument>
-
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QJsonValue>
 
-class XMLReader : public QObject
+class Api : public QObject
 {
     Q_OBJECT
 public:
 
-    explicit XMLReader(QObject *parent = 0);
-    ~XMLReader();
+    explicit Api(QObject *parent = 0);
+    ~Api();
 
-    QList<QVariantMap> parseSeriesNew(QJsonObject obj);
+    QList<QVariantMap> parseSeries(QJsonObject obj);
     QVariantMap parseImages(QJsonObject obj);
+    QVariantMap parseActors(QJsonObject obj);
 
-    void get(QUrl url);
-
-    void getLanguages();
-    void searchSeries(QString seriesName);
-    void getFullSeriesRecord(QString seriesId, QString method);
-    void getFullSeriesRecordNew(QString seriesId, QString method);
+    QNetworkReply* get(QUrl url);
 
     void getAuthenticationToken();
+    void getLanguages();
+    void searchSeries(QString seriesName);
+    void getSeriesFromApi(QString seriesId, QString method);
+    void getImages(QString seriesId);
+    void getActors(QString seriesId);
 
     QList<QVariantMap> getSeries();
     QList<QVariantMap> getEpisodes();
@@ -58,9 +51,7 @@ signals:
     void readyToUpdateSeries();
 
 public slots:
-    void replyFinished(QNetworkReply* reply);
-    void replyFinishedNew(QNetworkReply* reply);
-    void getSeriesFinished(QString seriesId, QString method);
+    void replyFinishedError(QNetworkReply* reply);
 
 private:
     QNetworkAccessManager* m_nam;
@@ -69,14 +60,11 @@ private:
     QList<QVariantMap> m_episodes;
     QList<QVariantMap> m_banners;
     QString m_currentServerTime;
-
     bool m_fullRecord;
     bool m_update;
-
-    QString getLocale();    
-    void getJwt();
-
     QString m_jwt;
+
+    QString getLocale();
 };
 
-#endif // XMLREADER_H
+#endif // API_H

@@ -2,7 +2,7 @@
 #define ENGINE_H
 
 #include <QObject>
-#include "xmlreader.h"
+#include "api.h"
 #include "databasemanager.h"
 #include "statistics.h"
 #include "./model/serieslistmodel.h"
@@ -56,7 +56,7 @@ private:
     TodayListModel* m_todayListModel;
     EpisodeListModel* m_episodeListModel;
     SeasonListModel* m_seasonListModel;
-    XMLReader* m_reader;
+    Api* m_api;
     DatabaseManager* m_dbmanager;
     Statistics* m_statistics;
     bool m_loading;

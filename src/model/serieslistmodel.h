@@ -7,7 +7,7 @@
 
 #include "seriesdata.h"
 #include "episodedata.h"
-#include "../xmlreader.h"
+#include "../api.h"
 #include "../databasemanager.h"
 
 class SeriesListModel : public QObject
@@ -36,7 +36,7 @@ class SeriesListModel : public QObject
     Q_PROPERTY(QString Genre READ getGenre CONSTANT)
 
 public:
-    explicit SeriesListModel(QObject *parent = 0, DatabaseManager *dbmanager = 0, XMLReader* reader = 0);
+    explicit SeriesListModel(QObject *parent = 0, DatabaseManager *dbmanager = 0, Api* api = 0);
     ~SeriesListModel();
 
     Q_INVOKABLE void populateBannerList();
@@ -91,7 +91,7 @@ public slots:
     void updateFetchFinished();
 
 private:
-    XMLReader* m_reader;
+    Api* m_api;
     DatabaseManager* m_dbmanager;
     QList<QVariantMap> m_series;
     QList<QVariantMap> m_episodes;

@@ -7,7 +7,7 @@
 
 #include "seriesdata.h"
 #include "../databasemanager.h"
-#include "../xmlreader.h"
+#include "../api.h"
 
 class SearchListModel : public QObject
 {
@@ -26,7 +26,7 @@ class SearchListModel : public QObject
     Q_PROPERTY(bool Loading READ getLoading WRITE setLoading NOTIFY loadingChanged)
     Q_PROPERTY(bool Added READ getAdded WRITE setAdded NOTIFY addedChanged)
 public:
-    explicit SearchListModel(QObject *parent = 0, DatabaseManager* dbmanager = 0, XMLReader* xmlreader = 0 );
+    explicit SearchListModel(QObject *parent = 0, DatabaseManager* dbmanager = 0, Api* api = 0 );
     ~SearchListModel();
 
     void populateSearchModel();
@@ -78,7 +78,7 @@ public slots:
     void getFullSeriesRecordFinished();
 
 private:
-    XMLReader* m_reader;
+    Api* m_api;
     DatabaseManager* m_dbmanager;
     QList<QVariantMap> m_series;
     QList<QVariantMap> m_episodes;

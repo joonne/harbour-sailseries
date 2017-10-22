@@ -1,12 +1,12 @@
 #include "engine.h"
 
-Engine::Engine(QObject *parent) : QObject(parent), m_reader(new XMLReader), m_dbmanager(new DatabaseManager), m_loading(false)
+Engine::Engine(QObject *parent) : QObject(parent), m_api(new Api), m_dbmanager(new DatabaseManager), m_loading(false)
 {
     m_dbmanager->setUpDB();
 
-    m_seriesListModel = new SeriesListModel(this, m_dbmanager, m_reader);
-    m_searchListModel = new SearchListModel(this, m_dbmanager, m_reader);
-    m_todayListModel = new TodayListModel(this, m_dbmanager, m_reader);
+    m_seriesListModel = new SeriesListModel(this, m_dbmanager, m_api);
+    m_searchListModel = new SearchListModel(this, m_dbmanager, m_api);
+    m_todayListModel = new TodayListModel(this, m_dbmanager, m_api);
     m_episodeListModel = new EpisodeListModel(this, m_dbmanager);
     m_seasonListModel = new SeasonListModel(this, m_dbmanager);
     m_statistics = new Statistics(this, m_dbmanager);
@@ -24,7 +24,7 @@ Engine::Engine(QObject *parent) : QObject(parent), m_reader(new XMLReader), m_db
 
 Engine::~Engine()
 {
-    delete m_reader;
+    delete m_api;
     delete m_dbmanager;
 
     qDebug() << "destructing Engine";

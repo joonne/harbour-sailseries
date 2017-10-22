@@ -1,15 +1,15 @@
 #include "serieslistmodel.h"
 
-SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager, XMLReader *reader) :
+SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager, Api *api) :
     QObject(parent)
 {
 
-    m_reader = reader;
+    m_api = api;
     m_dbmanager = dbmanager;
 
     mode = "default";
 
-    connect(m_reader,
+    connect(m_api,
             SIGNAL(readyToUpdateSeries()),
             this,
             SLOT(updateFetchFinished()));
@@ -107,7 +107,7 @@ void SeriesListModel::selectSeries(int index)
 
 void SeriesListModel::storeSeries()
 {
-    m_series = m_reader->getSeries();
+    m_series = m_api->getSeries();
 
     if (!m_series.isEmpty()) {
         m_dbmanager->insertSeries(m_series.first());
@@ -116,13 +116,13 @@ void SeriesListModel::storeSeries()
 
 void SeriesListModel::storeEpisodes()
 {
-    m_episodes = m_reader->getEpisodes();
+    m_episodes = m_api->getEpisodes();
     m_dbmanager->insertEpisodes(m_episodes);
 }
 
 void SeriesListModel::storeBanners()
 {
-    m_banners = m_reader->getBanners();
+    m_banners = m_api->getBanners();
 
     if (!m_series.isEmpty()) {
         int seriesId = m_series.first()["id"].toInt();
@@ -203,7 +203,7 @@ void SeriesListModel::updateSeries(QString seriesId)
     }
 
     setLoading(true);
-    m_reader->getFullSeriesRecord(seriesId, "update");
+    m_api->getSeriesFromApi(seriesId, "update");
 
 }
 

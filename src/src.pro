@@ -10,7 +10,6 @@ CONFIG += sailfishapp
 CONFIG += c++11
 
 SOURCES += main.cpp \
-    xmlreader.cpp \
     model/seriesdata.cpp \
     model/serieslistmodel.cpp \
     databasemanager.cpp \
@@ -22,7 +21,8 @@ SOURCES += main.cpp \
     model/seasonlistmodel.cpp \
     engine.cpp \
     settings.cpp \
-    statistics.cpp
+    statistics.cpp \
+    api.cpp
 
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 DEFINES += APP_BUILDNUM=\\\"$$RELEASE\\\"
@@ -52,7 +52,6 @@ OTHER_FILES = \
 INCLUDEPATH += $$PWD
 
 HEADERS += \
-    xmlreader.h \
     model/seriesdata.h \
     model/serieslistmodel.h \
     databasemanager.h \
@@ -64,7 +63,8 @@ HEADERS += \
     model/seasonlistmodel.h \
     engine.h \
     settings.h \
-    statistics.h
+    statistics.h \
+    api.h
 
 DISTFILES += \
     qml/components/HorizontalSeparator.qml \

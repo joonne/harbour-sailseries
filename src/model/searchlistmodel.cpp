@@ -1,17 +1,17 @@
 #include "searchlistmodel.h"
 
-SearchListModel::SearchListModel(QObject *parent, DatabaseManager *dbmanager, XMLReader *xmlreader) :
+SearchListModel::SearchListModel(QObject *parent, DatabaseManager *dbmanager, Api *api) :
     QObject(parent)
 {
     m_dbmanager = dbmanager;
-    m_reader = xmlreader;
+    m_api = api;
 
-    connect(m_reader,
+    connect(m_api,
             SIGNAL(readyToPopulateSeries()),
             this,
             SLOT(xmlParseFinished()));
 
-    connect(m_reader,
+    connect(m_api,
             SIGNAL(readyToStoreSeries()),
             this,
             SLOT(getFullSeriesRecordFinished()));
@@ -59,7 +59,7 @@ void SearchListModel::searchListClear(QQmlListProperty<SeriesData>* prop)
 
 void SearchListModel::xmlParseFinished()
 {
-    m_series = m_reader->getSeries();
+    m_series = m_api->getSeries();
     populateSearchModel();
 }
 
@@ -90,7 +90,7 @@ void SearchListModel::searchSeries(QString text)
     m_searchListModel.clear();
     m_series.clear();
     emit searchModelChanged();
-    m_reader->searchSeries(text);
+    m_api->searchSeries(text);
 }
 
 void SearchListModel::selectSeries(int index)
@@ -100,13 +100,13 @@ void SearchListModel::selectSeries(int index)
 
 void SearchListModel::getFullSeriesRecord(QString id)
 {
-    m_reader->getFullSeriesRecord(id, "full");
+    m_api->getSeriesFromApi(id, "full");
     setLoading(true);
 }
 
 void SearchListModel::storeSeries()
 {
-    m_series = m_reader->getSeries();
+    m_series = m_api->getSeries();
     if (!m_series.isEmpty()) {
         m_dbmanager->insertSeries(m_series.first());
     }
@@ -114,14 +114,14 @@ void SearchListModel::storeSeries()
 
 void SearchListModel::storeEpisodes()
 {
-    m_episodes = m_reader->getEpisodes();
+    m_episodes = m_api->getEpisodes();
     m_dbmanager->insertEpisodes(m_episodes);
     setAdded(true);
 }
 
 void SearchListModel::storeBanners()
 {
-    m_banners = m_reader->getBanners();
+    m_banners = m_api->getBanners();
     // we are saving info for this series
     int seriesId = m_info->getID().toInt();
     m_dbmanager->insertBanners(m_banners, seriesId);
