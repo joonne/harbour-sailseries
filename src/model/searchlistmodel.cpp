@@ -59,7 +59,7 @@ void SearchListModel::searchListClear(QQmlListProperty<SeriesData>* prop)
 
 void SearchListModel::xmlParseFinished()
 {
-    m_series = m_api->getSeries();
+    m_series = m_api->series();
     populateSearchModel();
 }
 
@@ -100,13 +100,13 @@ void SearchListModel::selectSeries(int index)
 
 void SearchListModel::getFullSeriesRecord(QString id)
 {
-    m_api->getSeriesFromApi(id, "full");
+    m_api->getSeries(id, "full");
     setLoading(true);
 }
 
 void SearchListModel::storeSeries()
 {
-    m_series = m_api->getSeries();
+    m_series = m_api->series();
     if (!m_series.isEmpty()) {
         m_dbmanager->insertSeries(m_series.first());
     }
@@ -114,14 +114,14 @@ void SearchListModel::storeSeries()
 
 void SearchListModel::storeEpisodes()
 {
-    m_episodes = m_api->getEpisodes();
+    m_episodes = m_api->episodes();
     m_dbmanager->insertEpisodes(m_episodes);
     setAdded(true);
 }
 
 void SearchListModel::storeBanners()
 {
-    m_banners = m_api->getBanners();
+    m_banners = m_api->banners();
     // we are saving info for this series
     int seriesId = m_info->getID().toInt();
     m_dbmanager->insertBanners(m_banners, seriesId);

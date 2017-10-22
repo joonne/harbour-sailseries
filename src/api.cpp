@@ -52,15 +52,26 @@ QString Api::getLocale()
             locale = language["abbreviation"];
         }
     }
+
     return locale;
 }
 
 void Api::getLanguages()
 {
-    QString url = QString("%1/api/%2/languages.xml").arg(QString(MIRRORPATH)).arg(QString(APIKEY));
-    qDebug() << "Requesting" << url;
-    QUrl finalUrl(url);
-    get(finalUrl);
+    QUrl url(QString("%1/languages").arg(QString(MIRRORPATH)).arg(QString(APIKEY)));
+    auto reply = get(url);
+
+    connect(reply, &QNetworkReply::finished, [this, reply]()
+    {
+       auto document = QJsonDocument::fromJson(reply->readAll());
+
+       if (!document.isNull()) {
+           auto jsonArray = document.object().value("data").toArray();
+           qDebug() << jsonArray;
+       }
+
+       reply->deleteLater();
+    });
 }
 
 void Api::searchSeries(QString text)
@@ -69,7 +80,7 @@ void Api::searchSeries(QString text)
 
     QUrl url(QString("%1/search/series?name=%2").arg(QString(MIRRORPATH)).arg(text));
 
-    QNetworkReply* reply = get(url);
+    auto reply = get(url);
 
     connect(reply, &QNetworkReply::finished, [this, reply]()
     {
@@ -84,7 +95,7 @@ void Api::searchSeries(QString text)
     });
 }
 
-void Api::getSeriesFromApi(QString seriesId, QString method)
+void Api::getSeries(QString seriesId, QString method)
 {
     if (method == "full") {
         setFullRecordFlag(true);
@@ -95,53 +106,76 @@ void Api::getSeriesFromApi(QString seriesId, QString method)
     QUrl url(QString("%1/series/%2").arg(QString(MIRRORPATH)).arg(seriesId));
     QNetworkReply* reply = get(url);
 
-    connect(reply, &QNetworkReply::finished, [this, reply]()
+    connect(reply, &QNetworkReply::finished, [this, reply, seriesId]()
     {
        auto jsonDocument = QJsonDocument::fromJson(reply->readAll());
 
        if (!jsonDocument.isNull()) {
-           auto series = parseSeries(jsonDocument.object());
-
-           if (getFullRecordFlag()) {
-
-               setFullRecordFlag(false);
-               setUpdateFlag(false);
-
-               emit readyToStoreSeries();
-
-           } else if (getUpdateFlag()) {
-
-               setFullRecordFlag(false);
-               setUpdateFlag(false);
-
-               emit readyToUpdateSeries();;
-           }
+           m_series = parseSeries(jsonDocument.object());
+           getSeasonImages(seriesId);
        }
 
        reply->deleteLater();
     });
 }
 
-void Api::getImages(QString seriesId)
+//if (getFullRecordFlag()) {
+
+//   setFullRecordFlag(false);
+//   setUpdateFlag(false);
+
+//   emit readyToStoreSeries();
+
+//} else if (getUpdateFlag()) {
+
+//   setFullRecordFlag(false);
+//   setUpdateFlag(false);
+
+//   emit readyToUpdateSeries();;
+//}
+
+void Api::getSeasonImages(QString seriesId)
 {
-    QUrl url(QString("%1/series/%2/images").arg(QString(MIRRORPATH)).arg(seriesId));
+    QUrl url(QString("%1/series/%2/images/query?keyType=season").arg(QString(MIRRORPATH)).arg(seriesId));
     QNetworkReply* reply = get(url);
 
-    connect(reply, &QNetworkReply::finished, [this, reply]()
+    connect(reply, &QNetworkReply::finished, [this, reply, seriesId]()
     {
        auto jsonDocument = QJsonDocument::fromJson(reply->readAll());
 
        if (!jsonDocument.isNull()) {
            auto images = parseImages(jsonDocument.object());
-           qDebug() << images;
+           qDebug() << "season images" << images;
        }
+
+       getPosterImages(seriesId);
+       reply->deleteLater();
+    });
+}
+
+void Api::getPosterImages(QString seriesId)
+{
+    QUrl url(QString("%1/series/%2/images/query?keyType=poster").arg(QString(MIRRORPATH)).arg(seriesId));
+    QNetworkReply* reply = get(url);
+
+    connect(reply, &QNetworkReply::finished, [this, reply, seriesId]()
+    {
+       auto jsonDocument = QJsonDocument::fromJson(reply->readAll());
+
+       if (!jsonDocument.isNull()) {
+           auto images = parseImages(jsonDocument.object());
+           qDebug() << "posters" << images;
+       }
+
+       getEpisodes(seriesId, 1);
+       reply->deleteLater();
     });
 }
 
 void Api::getActors(QString seriesId)
 {
     QUrl url(QString("%1/series/%2/actors").arg(QString(MIRRORPATH)).arg(seriesId));
-    QNetworkReply* reply = get(url);
+    auto reply = get(url);
 
     connect(reply, &QNetworkReply::finished, [this, reply]()
     {
@@ -151,14 +185,38 @@ void Api::getActors(QString seriesId)
            auto actors = parseActors(jsonDocument.object());
            qDebug() << actors;
        }
+
+       reply->deleteLater();
     });
 }
 
-QList<QVariantMap> Api::getSeries() { return m_series; }
+void Api::getEpisodes(QString seriesId, int page = 1)
+{
+    QUrl url(QString("%1/series/%2/episodes?page=%3").arg(QString(MIRRORPATH)).arg(seriesId).arg(page));
+    auto reply = get(url);
 
-QList<QVariantMap> Api::getEpisodes() { return m_episodes; }
+    connect(reply, &QNetworkReply::finished, [this, reply, seriesId, page]()
+    {
+       auto jsonDocument = QJsonDocument::fromJson(reply->readAll());
 
-QList<QVariantMap> Api::getBanners() { return m_banners; }
+       if (!jsonDocument.isNull()) {
+           if (jsonDocument.object().value("data").toArray().isEmpty()) {
+               qDebug() << "all episodes for " << seriesId << "fetched";
+               return;
+           }
+
+//           m_episodes.join(parseEpisodes(jsonDocument.object()));
+           qDebug() << "get more episodes for " << seriesId;
+           getEpisodes(seriesId, page + 1);
+       }
+    });
+}
+
+QList<QVariantMap> Api::series() { return m_series; }
+
+QList<QVariantMap> Api::episodes() { return m_episodes; }
+
+QList<QVariantMap> Api::banners() { return m_banners; }
 
 QNetworkReply* Api::get(QUrl url)
 {
@@ -168,7 +226,7 @@ QNetworkReply* Api::get(QUrl url)
     request.setRawHeader(QByteArray("Authorization"), (QString("Bearer %1").arg(m_jwt)).toLocal8Bit());
     request.setRawHeader(QByteArray("Accept-Language"), QByteArray("en"));
 
-    qDebug() << "HEIAHEIA" << request.url();
+    qDebug() << "REQUESTING" << request.url().toString();
 
     return m_nam->get(request);
 }
@@ -205,12 +263,12 @@ QList<QVariantMap> Api::parseSeries(QJsonObject obj)
     }
 
     for (auto item : foundSeries) {
-
         QVariantMap series;
 
-        QStringList keys = item.toObject().keys();
+        auto jsonObject = item.toObject();
+        auto keys = jsonObject.keys();
         for (auto key : keys) {
-            series.insert(key, item.toObject().value(key).toVariant());
+            series.insert(key, jsonObject.value(key).toVariant());
         }
 
         allSeries.append(series);
@@ -219,27 +277,45 @@ QList<QVariantMap> Api::parseSeries(QJsonObject obj)
     return allSeries;
 }
 
-QVariantMap Api::parseImages(QJsonObject obj)
+QList<QVariantMap> Api::parseImages(QJsonObject obj)
 {
-    QVariantMap images;
+    QList<QVariantMap> images;
 
-    auto data = obj.value("data").toObject();
-    auto keys = data.keys();
-    for (auto key : keys) {
-        images.insert(key, data.value(key).toVariant());
+    auto jsonArray = obj.value("data").toArray();
+
+    for (auto item : jsonArray)
+    {
+        QVariantMap image;
+
+        auto jsonObject = item.toObject();
+        auto keys = jsonObject.keys();
+        for (auto key : keys) {
+            image.insert(key, jsonObject.value(key).toVariant());
+        }
+
+        images.append(image);
     }
 
     return images;
 }
 
-QVariantMap Api::parseActors(QJsonObject obj)
+QList<QVariantMap> Api::parseActors(QJsonObject obj)
 {
-    QVariantMap actors;
+    QList<QVariantMap> actors;
 
-    auto data = obj.value("data").toObject();
-    auto keys = data.keys();
-    for (auto key : keys) {
-        actors.insert(key, data.value(key).toVariant());
+    auto jsonArray = obj.value("data").toArray();
+
+    for (auto item: jsonArray)
+    {
+        QVariantMap actor;
+
+        auto jsonObject = item.toObject();
+        auto keys = jsonObject.keys();
+        for (auto key : keys) {
+            actor.insert(key, jsonObject.value(key).toVariant());
+        }
+
+        actors.append(actor);
     }
 
     return actors;

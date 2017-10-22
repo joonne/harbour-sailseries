@@ -107,7 +107,7 @@ void SeriesListModel::selectSeries(int index)
 
 void SeriesListModel::storeSeries()
 {
-    m_series = m_api->getSeries();
+    m_series = m_api->series();
 
     if (!m_series.isEmpty()) {
         m_dbmanager->insertSeries(m_series.first());
@@ -116,13 +116,13 @@ void SeriesListModel::storeSeries()
 
 void SeriesListModel::storeEpisodes()
 {
-    m_episodes = m_api->getEpisodes();
+    m_episodes = m_api->episodes();
     m_dbmanager->insertEpisodes(m_episodes);
 }
 
 void SeriesListModel::storeBanners()
 {
-    m_banners = m_api->getBanners();
+    m_banners = m_api->banners();
 
     if (!m_series.isEmpty()) {
         int seriesId = m_series.first()["id"].toInt();
@@ -203,7 +203,7 @@ void SeriesListModel::updateSeries(QString seriesId)
     }
 
     setLoading(true);
-    m_api->getSeriesFromApi(seriesId, "update");
+    m_api->getSeries(seriesId, "update");
 
 }
 

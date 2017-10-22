@@ -22,21 +22,23 @@ public:
     ~Api();
 
     QList<QVariantMap> parseSeries(QJsonObject obj);
-    QVariantMap parseImages(QJsonObject obj);
-    QVariantMap parseActors(QJsonObject obj);
+    QList<QVariantMap> parseImages(QJsonObject obj);
+    QList<QVariantMap> parseActors(QJsonObject obj);
 
     QNetworkReply* get(QUrl url);
 
     void getAuthenticationToken();
     void getLanguages();
     void searchSeries(QString seriesName);
-    void getSeriesFromApi(QString seriesId, QString method);
-    void getImages(QString seriesId);
+    void getSeries(QString seriesId, QString method);
+    void getSeasonImages(QString seriesId);
+    void getPosterImages(QString seriesId);
     void getActors(QString seriesId);
+    void getEpisodes(QString seriesId, int page);
 
-    QList<QVariantMap> getSeries();
-    QList<QVariantMap> getEpisodes();
-    QList<QVariantMap> getBanners();
+    QList<QVariantMap> series();
+    QList<QVariantMap> episodes();
+    QList<QVariantMap> banners();
 
     bool getUpdateFlag();
     void setUpdateFlag(bool state);
