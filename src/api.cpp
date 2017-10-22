@@ -95,7 +95,7 @@ void Api::searchSeries(QString text)
     });
 }
 
-void Api::getSeries(QString seriesId, QString method)
+void Api::getAll(QString seriesId, QString method)
 {
     if (method == "full") {
         setFullRecordFlag(true);
@@ -103,6 +103,15 @@ void Api::getSeries(QString seriesId, QString method)
         setUpdateFlag(true);
     }
 
+    getSeries(seriesId);
+    getEpisodes(seriesId, 1);
+    getSeasonImages(seriesId);
+    getPosterImages(seriesId);
+    getActors(seriesId);
+}
+
+void Api::getSeries(QString seriesId)
+{
     QUrl url(QString("%1/series/%2").arg(QString(MIRRORPATH)).arg(seriesId));
     QNetworkReply* reply = get(url);
 
@@ -112,27 +121,12 @@ void Api::getSeries(QString seriesId, QString method)
 
        if (!jsonDocument.isNull()) {
            m_series = parseSeries(jsonDocument.object());
-           getSeasonImages(seriesId);
+           qDebug() << "series " << m_series.size();
        }
 
        reply->deleteLater();
     });
 }
-
-//if (getFullRecordFlag()) {
-
-//   setFullRecordFlag(false);
-//   setUpdateFlag(false);
-
-//   emit readyToStoreSeries();
-
-//} else if (getUpdateFlag()) {
-
-//   setFullRecordFlag(false);
-//   setUpdateFlag(false);
-
-//   emit readyToUpdateSeries();;
-//}
 
 void Api::getSeasonImages(QString seriesId)
 {
@@ -144,11 +138,10 @@ void Api::getSeasonImages(QString seriesId)
        auto jsonDocument = QJsonDocument::fromJson(reply->readAll());
 
        if (!jsonDocument.isNull()) {
-           auto images = parseImages(jsonDocument.object());
-           qDebug() << "season images" << images;
+           m_seasonImages = parseImages(jsonDocument.object());
+           qDebug() << "season images " << m_seasonImages.size();
        }
 
-       getPosterImages(seriesId);
        reply->deleteLater();
     });
 }
@@ -163,11 +156,10 @@ void Api::getPosterImages(QString seriesId)
        auto jsonDocument = QJsonDocument::fromJson(reply->readAll());
 
        if (!jsonDocument.isNull()) {
-           auto images = parseImages(jsonDocument.object());
-           qDebug() << "posters" << images;
+           m_posters = parseImages(jsonDocument.object());
+           qDebug() << "posters " << m_posters.size();
        }
 
-       getEpisodes(seriesId, 1);
        reply->deleteLater();
     });
 }
@@ -182,8 +174,8 @@ void Api::getActors(QString seriesId)
        auto jsonDocument = QJsonDocument::fromJson(reply->readAll());
 
        if (!jsonDocument.isNull()) {
-           auto actors = parseActors(jsonDocument.object());
-           qDebug() << actors;
+           m_actors = parseActors(jsonDocument.object());
+           qDebug() << "actors " << m_actors.size();
        }
 
        reply->deleteLater();
@@ -205,11 +197,33 @@ void Api::getEpisodes(QString seriesId, int page = 1)
                return;
            }
 
-//           m_episodes.join(parseEpisodes(jsonDocument.object()));
+           m_episodes += parseEpisodes(jsonDocument.object());
+
            qDebug() << "get more episodes for " << seriesId;
            getEpisodes(seriesId, page + 1);
        }
     });
+}
+
+void Api::checkIfReady(QString seriesId)
+{
+    if (!m_series.isEmpty() && m_episodesReady && !m_posters.isEmpty() && !m_seasonImages.isEmpty() && !m_actors.isEmpty())
+    {
+        if (getFullRecordFlag()) {
+
+           setFullRecordFlag(false);
+           setUpdateFlag(false);
+
+           emit readyToStoreSeries();
+
+        } else if (getUpdateFlag()) {
+
+           setFullRecordFlag(false);
+           setUpdateFlag(false);
+
+           emit readyToUpdateSeries();
+        }
+    }
 }
 
 QList<QVariantMap> Api::series() { return m_series; }
@@ -248,6 +262,11 @@ void Api::replyFinishedError(QNetworkReply *reply)
     emit readyToPopulateSeries();
 
     reply->deleteLater();
+}
+
+QList<QVariantMap> Api::parseJson(QJsonObject obj)
+{
+
 }
 
 QList<QVariantMap> Api::parseSeries(QJsonObject obj)
@@ -319,6 +338,27 @@ QList<QVariantMap> Api::parseActors(QJsonObject obj)
     }
 
     return actors;
+}
+
+QList<QVariantMap> Api::parseEpisodes(QJsonObject obj)
+{
+    QList<QVariantMap> episodes;
+
+    auto jsonArray = obj.value("data").toArray();
+    for (auto item : jsonArray)
+    {
+        QVariantMap episode;
+
+        auto jsonObject = item.toObject();
+        auto keys = jsonObject.keys();
+        for (auto key : keys) {
+            episode.insert(key, jsonObject.value(key).toVariant());
+        }
+
+        episodes.append(episode);
+    }
+
+    return episodes;
 }
 
 bool Api::getUpdateFlag() { return m_update; }

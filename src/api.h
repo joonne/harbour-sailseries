@@ -24,17 +24,21 @@ public:
     QList<QVariantMap> parseSeries(QJsonObject obj);
     QList<QVariantMap> parseImages(QJsonObject obj);
     QList<QVariantMap> parseActors(QJsonObject obj);
+    QList<QVariantMap> parseEpisodes(QJsonObject obj);
 
     QNetworkReply* get(QUrl url);
 
     void getAuthenticationToken();
     void getLanguages();
     void searchSeries(QString seriesName);
-    void getSeries(QString seriesId, QString method);
+    void getSeries(QString seriesId);
     void getSeasonImages(QString seriesId);
     void getPosterImages(QString seriesId);
     void getActors(QString seriesId);
     void getEpisodes(QString seriesId, int page);
+    void getAll(QString seriesId, QString method);
+
+    void checkIfReady(QString seriesId);
 
     QList<QVariantMap> series();
     QList<QVariantMap> episodes();
@@ -61,6 +65,9 @@ private:
     QList<QVariantMap> m_series;
     QList<QVariantMap> m_episodes;
     QList<QVariantMap> m_banners;
+    QList<QVariantMap> m_seasonImages;
+    QList<QVariantMap> m_posters;
+    QList<QVariantMap> m_actors;
     QString m_currentServerTime;
     bool m_fullRecord;
     bool m_update;
