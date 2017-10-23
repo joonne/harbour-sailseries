@@ -34,11 +34,10 @@ public:
     void getSeries(QString seriesId);
     void getSeasonImages(QString seriesId);
     void getPosterImages(QString seriesId);
+    void getSeriesImages(QString seriesId);
     void getActors(QString seriesId);
     void getEpisodes(QString seriesId, int page);
     void getAll(QString seriesId, QString method);
-
-    void checkIfReady(QString seriesId);
 
     QList<QVariantMap> series();
     QList<QVariantMap> episodes();
@@ -55,9 +54,11 @@ signals:
     void readyToPopulateChannels();
     void readyToStoreSeries();
     void readyToUpdateSeries();
+    void readyToCheckIfReady(bool episodesFinished = false);
 
 public slots:
     void replyFinishedError(QNetworkReply* reply);
+    void checkIfReady(bool episodesFinished);
 
 private:
     QNetworkAccessManager* m_nam;
@@ -66,6 +67,7 @@ private:
     QList<QVariantMap> m_episodes;
     QList<QVariantMap> m_banners;
     QList<QVariantMap> m_seasonImages;
+    QList<QVariantMap> m_seriesImages;
     QList<QVariantMap> m_posters;
     QList<QVariantMap> m_actors;
     QString m_currentServerTime;

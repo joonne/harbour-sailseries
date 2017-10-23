@@ -203,7 +203,7 @@ void SeriesListModel::updateSeries(QString seriesId)
     }
 
     setLoading(true);
-    m_api->getSeries(seriesId, "update");
+    m_api->getAll(seriesId, "update");
 
 }
 

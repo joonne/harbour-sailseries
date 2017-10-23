@@ -11,6 +11,8 @@ Api::Api(QObject *parent) :
     m_jwt("")
 {
     getAuthenticationToken();
+
+    connect(this, SIGNAL(readyToCheckIfReady(bool)), this, SLOT(checkIfReady(bool)));
 }
 
 Api::~Api()
@@ -107,6 +109,7 @@ void Api::getAll(QString seriesId, QString method)
     getEpisodes(seriesId, 1);
     getSeasonImages(seriesId);
     getPosterImages(seriesId);
+    getSeriesImages(seriesId);
     getActors(seriesId);
 }
 
@@ -122,6 +125,7 @@ void Api::getSeries(QString seriesId)
        if (!jsonDocument.isNull()) {
            m_series = parseSeries(jsonDocument.object());
            qDebug() << "series " << m_series.size();
+           emit readyToCheckIfReady();
        }
 
        reply->deleteLater();
@@ -140,6 +144,7 @@ void Api::getSeasonImages(QString seriesId)
        if (!jsonDocument.isNull()) {
            m_seasonImages = parseImages(jsonDocument.object());
            qDebug() << "season images " << m_seasonImages.size();
+           emit readyToCheckIfReady();
        }
 
        reply->deleteLater();
@@ -158,6 +163,26 @@ void Api::getPosterImages(QString seriesId)
        if (!jsonDocument.isNull()) {
            m_posters = parseImages(jsonDocument.object());
            qDebug() << "posters " << m_posters.size();
+           emit readyToCheckIfReady();
+       }
+
+       reply->deleteLater();
+    });
+}
+
+void Api::getSeriesImages(QString seriesId)
+{
+    QUrl url(QString("%1/series/%2/images/query?keyType=series").arg(QString(MIRRORPATH)).arg(seriesId));
+    QNetworkReply* reply = get(url);
+
+    connect(reply, &QNetworkReply::finished, [this, reply, seriesId]()
+    {
+       auto jsonDocument = QJsonDocument::fromJson(reply->readAll());
+
+       if (!jsonDocument.isNull()) {
+           m_seriesImages = parseImages(jsonDocument.object());
+           qDebug() << "seriesImages " << m_seriesImages.size();
+           emit readyToCheckIfReady();
        }
 
        reply->deleteLater();
@@ -176,6 +201,7 @@ void Api::getActors(QString seriesId)
        if (!jsonDocument.isNull()) {
            m_actors = parseActors(jsonDocument.object());
            qDebug() << "actors " << m_actors.size();
+           emit readyToCheckIfReady();
        }
 
        reply->deleteLater();
@@ -193,7 +219,8 @@ void Api::getEpisodes(QString seriesId, int page = 1)
 
        if (!jsonDocument.isNull()) {
            if (jsonDocument.object().value("data").toArray().isEmpty()) {
-               qDebug() << "all episodes for " << seriesId << "fetched";
+               qDebug() << "all episodes (" << m_episodes.size() << ") for " << seriesId << "fetched";
+               emit readyToCheckIfReady(true);
                return;
            }
 
@@ -205,10 +232,25 @@ void Api::getEpisodes(QString seriesId, int page = 1)
     });
 }
 
-void Api::checkIfReady(QString seriesId)
+void Api::checkIfReady(bool episodesFinished = false)
 {
-    if (!m_series.isEmpty() && m_episodesReady && !m_posters.isEmpty() && !m_seasonImages.isEmpty() && !m_actors.isEmpty())
+    qDebug() << "checkIfReady";
+
+    if (episodesFinished && !m_series.isEmpty() && !m_episodes.empty() && !m_posters.isEmpty() && !m_seasonImages.isEmpty() && !m_actors.isEmpty() && !m_seriesImages.isEmpty())
     {
+        qDebug() << "combine stuff now";
+
+        // find the best rated images and use them
+        auto series = m_series.pop_front();
+        series.insert("poster", m_posters.takeAt(qrand() * m_posters.size() - 1));
+//        series.insert("fanart", m_fanarts.takeAt(qrand() * m_fanarts.size() - 1));
+//        series.insert("banner", m_banners.takeAt(qrand() * m_banners.size() - 1));
+        m_series.append(series);
+
+        qDebug() << m_series.takeFirst();
+
+        return;
+
         if (getFullRecordFlag()) {
 
            setFullRecordFlag(false);
@@ -262,11 +304,6 @@ void Api::replyFinishedError(QNetworkReply *reply)
     emit readyToPopulateSeries();
 
     reply->deleteLater();
-}
-
-QList<QVariantMap> Api::parseJson(QJsonObject obj)
-{
-
 }
 
 QList<QVariantMap> Api::parseSeries(QJsonObject obj)
