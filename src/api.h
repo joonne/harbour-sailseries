@@ -13,6 +13,9 @@
 #include <QJsonObject>
 #include <QJsonValue>
 
+#include <QtConcurrent/QtConcurrent>
+#include <QFuture>
+
 class Api : public QObject
 {
     Q_OBJECT

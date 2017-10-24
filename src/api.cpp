@@ -143,8 +143,52 @@ void Api::getSeasonImages(QString seriesId)
        auto jsonDocument = QJsonDocument::fromJson(reply->readAll());
 
        if (!jsonDocument.isNull()) {
-           m_seasonImages = parseImages(jsonDocument.object());
+           auto seasonImages = parseImages(jsonDocument.object());
+
+           /* seasonImages are stored locally into banners table */
+
+           /*
+           {
+               "id": 1068546,
+               "keyType": "season",
+               "subKey": "1",
+               "fileName": "seasons/281662-1-2.jpg",
+               "resolution": "",
+               "ratingsInfo": {
+                   "average": 8.9,
+                   "count": 14
+               },
+               "thumbnail": "_cache/seasons/281662-1-2.jpg"
+           }
+           */
+
+           /*
+           "(id INTEGER PRIMARY KEY, "
+           "seriesID INTEGER, "
+           "bannerPath VARCHAR(50), "
+           "bannerType VARCHAR(50), "
+           "bannerType2 VARCHAR(50), "
+           "language VARCHAR(2), "
+           "season INTEGER)"));
+           */
+
+           std::transform(seasonImages.begin(), seasonImages.end(), seasonImages.begin(), [seriesId](QVariantMap seasonImage)
+           {
+               QVariantMap image;
+               image.insert("id", seasonImage["id"]);
+               image.insert("seriesID", seriesId);
+               image.insert("bannerPath", seasonImage["fileName"]);
+               image.insert("bannerType", seasonImage["keyType"]);
+               image.insert("bannerType2", "");
+               image.insert("language", seasonImage["id"]);
+               image.insert("season", seasonImage["subKey"]);
+               return image;
+           });
+
+           m_seasonImages = seasonImages;
+
            qDebug() << "season images " << m_seasonImages.size();
+
            emit readyToCheckIfReady();
        }
 
@@ -255,11 +299,12 @@ void Api::getEpisodes(QString seriesId, int page = 1)
 void Api::checkIfReady(bool episodesFinished = false)
 {
     qDebug() << "checkIfReady";
+    qDebug() << "episodesFinished" << episodesFinished << "m_series" << !m_series.isEmpty() << "m_episodes" << !m_episodes.isEmpty() << "m_actors" << !m_actors.isEmpty() << "m_posterImages" << !m_posterImages.isEmpty() << "m_seasonImages" << !m_seasonImages.isEmpty() << "m_seriesImages" << !m_seriesImages.isEmpty() << "m_fanartImages" << !m_fanartImages.isEmpty();
 
     if (
             episodesFinished &&
             !m_series.isEmpty() &&
-            !m_episodes.empty() &&
+            !m_episodes.isEmpty() &&
             !m_actors.isEmpty() &&
             !m_posterImages.isEmpty() &&
             !m_seasonImages.isEmpty() &&
@@ -269,7 +314,7 @@ void Api::checkIfReady(bool episodesFinished = false)
     {
         qDebug() << "ready";
 
-        // find the best rated images and use them
+        /* find the best rated images and use them */
         auto series = m_series.takeFirst();
         series.insert("poster", findHighestRatedImage(m_posterImages));
         series.insert("fanart", findHighestRatedImage(m_fanartImages));
