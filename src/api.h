@@ -35,6 +35,7 @@ public:
     void getSeasonImages(QString seriesId);
     void getPosterImages(QString seriesId);
     void getSeriesImages(QString seriesId);
+    void getFanartImages(QString seriesId);
     void getActors(QString seriesId);
     void getEpisodes(QString seriesId, int page);
     void getAll(QString seriesId, QString method);
@@ -47,6 +48,8 @@ public:
     void setUpdateFlag(bool state);
     bool getFullRecordFlag();
     void setFullRecordFlag(bool state);
+
+    QString findHighestRatedImage(QList<QVariantMap> images);
 
 signals:
     void readyToGetBanners();
@@ -65,11 +68,11 @@ private:
     QList<QMap<QString,QString> > m_languages;
     QList<QVariantMap> m_series;
     QList<QVariantMap> m_episodes;
-    QList<QVariantMap> m_banners;
+    QList<QVariantMap> m_actors;
+    QList<QVariantMap> m_fanartImages;
     QList<QVariantMap> m_seasonImages;
     QList<QVariantMap> m_seriesImages;
-    QList<QVariantMap> m_posters;
-    QList<QVariantMap> m_actors;
+    QList<QVariantMap> m_posterImages;
     QString m_currentServerTime;
     bool m_fullRecord;
     bool m_update;
