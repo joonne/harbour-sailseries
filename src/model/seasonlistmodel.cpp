@@ -49,8 +49,6 @@ void SeasonListModel::populateSeasonList(QString seriesID)
 
     int seasonsCount = m_dbmanager->seasonCount(seriesID.toInt());
 
-    qDebug() << "seasonCount" << seasonsCount;
-
     for (int i = 1; i <= seasonsCount; ++i) {
 
         QString banner = m_dbmanager->getSeasonBanner(seriesID.toInt(),i);

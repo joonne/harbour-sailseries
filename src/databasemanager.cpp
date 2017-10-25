@@ -437,11 +437,11 @@ bool DatabaseManager::insertBanners(QList<QVariantMap> banners, int seriesId)
     for (auto banner : banners) {
 
         auto id = banner["id"].toInt();
-        auto bannerPath = banner["BannerPath"];
-        auto bannerType = banner["BannerType"];
-        auto bannerType2 = banner["BannerType2"];
-        auto language = banner["Language"];
-        auto season = banner["Season"].toInt();
+        auto bannerPath = banner["bannerPath"].toString();
+        auto bannerType = banner["bannerType"].toString();
+        auto bannerType2 = banner["bannerType2"].toString();
+        auto language = banner["language"].toString();
+        auto season = banner["season"].toInt();
         
         if (m_db.isOpen()) {
             

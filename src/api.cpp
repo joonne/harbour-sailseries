@@ -177,7 +177,7 @@ void Api::getSeasonImages(QString seriesId)
            {
                QVariantMap image;
                image.insert("id", seasonImage["id"]);
-               image.insert("seriesID", seriesId);
+               image.insert("seriesId", seriesId);
                image.insert("bannerPath", seasonImage["fileName"]);
                image.insert("bannerType", seasonImage["keyType"]);
                image.insert("bannerType2", "");
