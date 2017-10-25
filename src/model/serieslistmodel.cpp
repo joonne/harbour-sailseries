@@ -117,7 +117,11 @@ void SeriesListModel::storeSeries()
 void SeriesListModel::storeEpisodes()
 {
     m_episodes = m_api->episodes();
-    m_dbmanager->insertEpisodes(m_episodes);
+
+    if (!m_series.isEmpty()) {
+        int seriesId = m_series.first()["id"].toInt();
+        m_dbmanager->insertEpisodes(m_episodes, seriesId);
+    }
 }
 
 void SeriesListModel::storeBanners()

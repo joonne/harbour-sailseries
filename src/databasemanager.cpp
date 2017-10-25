@@ -339,7 +339,7 @@ bool DatabaseManager::insertSeries(QVariantMap series)
     return ret;
 }
 
-bool DatabaseManager::insertEpisodes(QList<QVariantMap> episodes) {
+bool DatabaseManager::insertEpisodes(QList<QVariantMap> episodes, int seriesId) {
 
     qDebug() << "insertEpisodes() ";
     
@@ -349,38 +349,39 @@ bool DatabaseManager::insertEpisodes(QList<QVariantMap> episodes) {
 
     for (auto episode : episodes) {
         
+        int absoluteNumber = episode["absoluteNumber"].toInt();
+        int episodeNumber = episode["airedEpisodeNumber"].toInt();
+        int seasonNumber = episode["airedSeason"].toInt();
+        int seasonId = episode["airedSeasonID"].toInt();
+        QString episodeName = episode["episodeName"].toString();
+        QString firstAired = episode["firstAired"].toString();
         int id = episode["id"].toInt();
-        QString director = episode["Director"].toString();
+        QString language = episode["language"].toMap()["overview"].toString();
+        QString lastUpdated = episode["lastUpdated"].toString();
+        QString overview = episode["overview"].toString();
+        int watched = 0;
+
+        // OLD API PROVIDED THESE
+        /*QString director = episode["director"].toString();
         int epimgflag = episode["EpImgFlag"].toInt();
-        QString episodeName = episode["EpisodeName"].toString();
-        int episodeNumber = episode["EpisodeNumber"].toInt();
-        QString firstAired = episode["FirstAired"].toString();
         QString guestStars = episode["GuestStars"].toString();
         QString imdb_id = episode["IMDB_ID"].toString();
-        QString language = episode["Language"].toString();
-        QString overview = episode["Overview"].toString();
         int productionCode = episode["ProductionCode"].toInt();
         double rating = episode["Rating"].toDouble();
         int ratingCount = episode["RatingCount"].toInt();
-        int seasonNumber = episode["SeasonNumber"].toInt();
         QString writer = episode["Writer"].toString();
-        int absoluteNumber = episode["absolute_number"].toInt();
         int airsAfterSeason = episode["airsafter_season"].toInt();
         int airsBeforeEpisode = episode["airsbefore_episode"].toInt();
         int airsBeforeSeason = episode["airsbefore_season"].toInt();
         QString filename = episode["filename"].toString();
-        QString lastUpdated = episode["lastupdated"].toString();
-        int seasonId = episode["seasonid"].toInt();
-        int seriesId = episode["seriesid"].toInt();
         QString thumbAdded = episode["thumb_added"].toString();
         int thumbHeight = episode["thumb_height"].toInt();
-        int thumbWidth = episode["thumb_width"].toInt();
-        int watched = 0;
-        
+        int thumbWidth = episode["thumb_width"].toInt();*/
+
         // important!
         overview.replace("'", "''");
-        director.replace("'", "''");
-        guestStars.replace("'", "''");
+//        director.replace("'", "''");
+//        guestStars.replace("'", "''");
         episodeName.replace("'", "''");
         
         if (m_db.isOpen()) {
@@ -399,34 +400,19 @@ bool DatabaseManager::insertEpisodes(QList<QVariantMap> episodes) {
                 }
             }
             
-            query.prepare("INSERT OR REPLACE INTO Episode (id, director, epimgflag, episodeName, episodeNumber, firstAired, guestStars, imdbID, language, overview, productionCode, rating, ratingCount, seasonNumber, writer, absoluteNumber, airsAfterSeason, airsBeforeEpisode, airsBeforeSeason, filename, lastupdated, seasonID, seriesID, thumbAdded, thumbHeight, thumbWidth, watched) "
-                          "VALUES (:id, :director, :epimgflag, :episodeName, :episodeNumber, :firstAired, :guestStars, :imdb_id, :language, :overview, :productionCode, :rating, :ratingCount, :seasonNumber, :writer, :absoluteNumber, :airsAfterSeason, :airsBeforeEpisode, :airsBeforeSeason, :filename, :lastUpdated, :seasonId, :seriesId, :thumbAdded, :thumbHeight, :thumbWidth, :watched)");
+            query.prepare("INSERT OR REPLACE INTO Episode (id, episodeName, episodeNumber, firstAired, language, overview, seasonNumber, absoluteNumber, lastupdated, seasonID, seriesID, watched) "
+                          "VALUES (:id, :episodeName, :episodeNumber, :firstAired, :language, :overview, :seasonNumber, :absoluteNumber, :lastUpdated, :seasonId, :seriesId, :watched)");
             query.bindValue(":id", id);
-            query.bindValue(":director", director);
-            query.bindValue(":epimgflag", epimgflag);
             query.bindValue(":episodeName", episodeName);
             query.bindValue(":episodeNumber", episodeNumber);
             query.bindValue(":firstAired", firstAired);
-            query.bindValue(":guestStars", guestStars);
-            query.bindValue(":imdb_id", imdb_id);
             query.bindValue(":language", language);
             query.bindValue(":overview", overview);
-            query.bindValue(":productionCode", productionCode);
-            query.bindValue(":rating", rating);
-            query.bindValue(":ratingCount", ratingCount);
             query.bindValue(":seasonNumber", seasonNumber);
-            query.bindValue(":writer", writer);
             query.bindValue(":absoluteNumber", absoluteNumber);
-            query.bindValue(":airsAfterSeason", airsAfterSeason);
-            query.bindValue(":airsBeforeEpisode", airsBeforeEpisode);
-            query.bindValue(":airsBeforeSeason", airsBeforeSeason);
-            query.bindValue(":filename", filename);
             query.bindValue(":lastUpdated", lastUpdated);
             query.bindValue(":seasonId", seasonId);
             query.bindValue(":seriesId", seriesId);
-            query.bindValue(":thumbAdded", thumbAdded);
-            query.bindValue(":thumbHeight", thumbHeight);
-            query.bindValue(":thumbWidth", thumbWidth);
             query.bindValue(":watched", watched);
             ret = query.exec();
         }

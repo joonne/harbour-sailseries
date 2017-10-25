@@ -8,11 +8,12 @@ Api::Api(QObject *parent) :
     m_nam(new QNetworkAccessManager),
     m_fullRecord(false),
     m_update(false),
-    m_jwt("")
+    m_jwt(""),
+    m_episodesFinished(false)
 {
     getAuthenticationToken();
 
-    connect(this, SIGNAL(readyToCheckIfReady(bool)), this, SLOT(checkIfReady(bool)));
+    connect(this, SIGNAL(readyToCheckIfReady()), this, SLOT(checkIfReady()));
 }
 
 Api::~Api()
@@ -284,7 +285,8 @@ void Api::getEpisodes(QString seriesId, int page = 1)
        if (!jsonDocument.isNull()) {
            if (jsonDocument.object().value("data").toArray().isEmpty()) {
                qDebug() << "all episodes (" << m_episodes.size() << ") for " << seriesId << "fetched";
-               emit readyToCheckIfReady(true);
+               m_episodesFinished = true;
+               emit readyToCheckIfReady();
                return;
            }
 
@@ -296,13 +298,13 @@ void Api::getEpisodes(QString seriesId, int page = 1)
     });
 }
 
-void Api::checkIfReady(bool episodesFinished = false)
+void Api::checkIfReady()
 {
     qDebug() << "checkIfReady";
-    qDebug() << "episodesFinished" << episodesFinished << "m_series" << !m_series.isEmpty() << "m_episodes" << !m_episodes.isEmpty() << "m_actors" << !m_actors.isEmpty() << "m_posterImages" << !m_posterImages.isEmpty() << "m_seasonImages" << !m_seasonImages.isEmpty() << "m_seriesImages" << !m_seriesImages.isEmpty() << "m_fanartImages" << !m_fanartImages.isEmpty();
+    qDebug() << "m_episodesFinished" << m_episodesFinished << "m_series" << !m_series.isEmpty() << "m_episodes" << !m_episodes.isEmpty() << "m_actors" << !m_actors.isEmpty() << "m_posterImages" << !m_posterImages.isEmpty() << "m_seasonImages" << !m_seasonImages.isEmpty() << "m_seriesImages" << !m_seriesImages.isEmpty() << "m_fanartImages" << !m_fanartImages.isEmpty();
 
     if (
-            episodesFinished &&
+            m_episodesFinished &&
             !m_series.isEmpty() &&
             !m_episodes.isEmpty() &&
             !m_actors.isEmpty() &&

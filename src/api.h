@@ -13,9 +13,6 @@
 #include <QJsonObject>
 #include <QJsonValue>
 
-#include <QtConcurrent/QtConcurrent>
-#include <QFuture>
-
 class Api : public QObject
 {
     Q_OBJECT
@@ -60,11 +57,11 @@ signals:
     void readyToPopulateChannels();
     void readyToStoreSeries();
     void readyToUpdateSeries();
-    void readyToCheckIfReady(bool episodesFinished = false);
+    void readyToCheckIfReady();
 
 public slots:
     void replyFinishedError(QNetworkReply* reply);
-    void checkIfReady(bool episodesFinished);
+    void checkIfReady();
 
 private:
     QNetworkAccessManager* m_nam;
@@ -76,9 +73,9 @@ private:
     QList<QVariantMap> m_seasonImages;
     QList<QVariantMap> m_seriesImages;
     QList<QVariantMap> m_posterImages;
-    QString m_currentServerTime;
     bool m_fullRecord;
     bool m_update;
+    bool m_episodesFinished;
     QString m_jwt;
 
     QString getLocale();

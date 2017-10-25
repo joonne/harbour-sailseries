@@ -46,7 +46,7 @@ public:
     bool deleteDuplicateEpisodes();
 
     bool insertSeries(QVariantMap series);
-    bool insertEpisodes(QList<QVariantMap> episodes);
+    bool insertEpisodes(QList<QVariantMap> episodes, int seriesId);
     bool insertBanners(QList<QVariantMap> banners, int seriesId);
 
     bool updateSeries();

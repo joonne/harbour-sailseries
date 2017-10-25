@@ -114,14 +114,14 @@ void SearchListModel::storeSeries()
 void SearchListModel::storeEpisodes()
 {
     m_episodes = m_api->episodes();
-    m_dbmanager->insertEpisodes(m_episodes);
+    int seriesId = m_info->getID().toInt();
+    m_dbmanager->insertEpisodes(m_episodes, seriesId);
     setAdded(true);
 }
 
 void SearchListModel::storeBanners()
 {
     m_banners = m_api->banners();
-    // we are saving info for this series
     int seriesId = m_info->getID().toInt();
     m_dbmanager->insertBanners(m_banners, seriesId);
 }
