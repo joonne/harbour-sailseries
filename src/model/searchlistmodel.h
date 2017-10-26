@@ -29,7 +29,7 @@ public:
     explicit SearchListModel(QObject *parent = 0, DatabaseManager* dbmanager = 0, Api* api = 0 );
     ~SearchListModel();
 
-    void populateSearchModel();
+    void populateSearchModel(QList<QVariantMap> foundSeries);
 
     Q_INVOKABLE void searchSeries(QString text);
     Q_INVOKABLE void selectSeries(int index);
@@ -53,9 +53,9 @@ public:
     bool getAdded();
     void setAdded(bool cond);
 
-    void storeSeries();
-    void storeEpisodes();
-    void storeBanners();
+    void storeSeries(QList<QVariantMap> series);
+    void storeEpisodes(QList<QVariantMap> episodes);
+    void storeBanners(QList<QVariantMap> banners);
 
 signals:
     void searchModelChanged();
@@ -74,8 +74,8 @@ signals:
     void updateModels();
 
 public slots:
-    void xmlParseFinished();
-    void getFullSeriesRecordFinished();
+    void searchFinished(QList<QVariantMap> series);
+    void getAllFinished(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners);
 
 private:
     Api* m_api;

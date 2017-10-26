@@ -90,8 +90,8 @@ void Api::searchSeries(QString text)
         auto document = QJsonDocument::fromJson(reply->readAll());
 
         if (!document.isNull()) {
-            m_series = parseSeries(document.object());
-            emit(readyToPopulateSeries());
+            auto series = parseSeries(document.object());
+            emit(readyToPopulateSeries(series));
         }
 
         reply->deleteLater();
@@ -145,33 +145,6 @@ void Api::getSeasonImages(QString seriesId)
 
        if (!jsonDocument.isNull()) {
            auto seasonImages = parseImages(jsonDocument.object());
-
-           /* seasonImages are stored locally into banners table */
-
-           /*
-           {
-               "id": 1068546,
-               "keyType": "season",
-               "subKey": "1",
-               "fileName": "seasons/281662-1-2.jpg",
-               "resolution": "",
-               "ratingsInfo": {
-                   "average": 8.9,
-                   "count": 14
-               },
-               "thumbnail": "_cache/seasons/281662-1-2.jpg"
-           }
-           */
-
-           /*
-           "(id INTEGER PRIMARY KEY, "
-           "seriesID INTEGER, "
-           "bannerPath VARCHAR(50), "
-           "bannerType VARCHAR(50), "
-           "bannerType2 VARCHAR(50), "
-           "language VARCHAR(2), "
-           "season INTEGER)"));
-           */
 
            std::transform(seasonImages.begin(), seasonImages.end(), seasonImages.begin(), [seriesId](QVariantMap seasonImage)
            {
@@ -283,7 +256,7 @@ void Api::getEpisodes(QString seriesId, int page = 1)
        auto jsonDocument = QJsonDocument::fromJson(reply->readAll());
 
        if (!jsonDocument.isNull()) {
-           if (jsonDocument.object().value("data").toArray().isEmpty()) {
+           if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 404) {
                qDebug() << "all episodes (" << m_episodes.size() << ") for " << seriesId << "fetched";
                m_episodesFinished = true;
                emit readyToCheckIfReady();
@@ -301,7 +274,6 @@ void Api::getEpisodes(QString seriesId, int page = 1)
 void Api::checkIfReady()
 {
     qDebug() << "checkIfReady";
-    qDebug() << "m_episodesFinished" << m_episodesFinished << "m_series" << !m_series.isEmpty() << "m_episodes" << !m_episodes.isEmpty() << "m_actors" << !m_actors.isEmpty() << "m_posterImages" << !m_posterImages.isEmpty() << "m_seasonImages" << !m_seasonImages.isEmpty() << "m_seriesImages" << !m_seriesImages.isEmpty() << "m_fanartImages" << !m_fanartImages.isEmpty();
 
     if (
             m_episodesFinished &&
@@ -323,23 +295,29 @@ void Api::checkIfReady()
         series.insert("banner", findHighestRatedImage(m_seriesImages));
         m_series.append(series);
 
-        qDebug() << "m_fullRecord" << m_fullRecord;
-        qDebug() << "m_update" << m_update;
-
         if (getFullRecordFlag()) {
 
            setFullRecordFlag(false);
            setUpdateFlag(false);
 
-           emit readyToStoreSeries();
+           emit readyToStoreSeries(m_series, m_episodes, m_seasonImages);
 
         } else if (getUpdateFlag()) {
 
            setFullRecordFlag(false);
            setUpdateFlag(false);
 
-           emit readyToUpdateSeries();
+           emit readyToUpdateSeries(m_series, m_episodes, m_seasonImages);
         }
+
+        m_series.clear();
+        m_episodes.clear();
+        m_episodesFinished = false;
+        m_seriesImages.clear();
+        m_seasonImages.clear();
+        m_posterImages.clear();
+        m_fanartImages.clear();
+        m_actors.clear();
     }
 }
 
@@ -394,10 +372,10 @@ void Api::replyFinishedError(QNetworkReply *reply)
     QVariantMap temp;
     temp.insert("SeriesName", "Error, try again later.");
 
-    m_series.clear();
-    m_series.append(temp);
+    QList<QVariantMap> series;
+    series.append(temp);
 
-    emit readyToPopulateSeries();
+    emit readyToPopulateSeries(series);
 
     reply->deleteLater();
 }

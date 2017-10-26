@@ -10,9 +10,9 @@ SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager, Ap
     mode = "default";
 
     connect(m_api,
-            SIGNAL(readyToUpdateSeries()),
+            SIGNAL(readyToUpdateSeries(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)),
             this,
-            SLOT(updateFetchFinished()));
+            SLOT(updateFetchFinished(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)));
 
     populateBannerList();
 
@@ -28,11 +28,11 @@ SeriesListModel::~SeriesListModel()
     qDebug() << "destructing SeriesListModel";
 }
 
-void SeriesListModel::updateFetchFinished()
+void SeriesListModel::updateFetchFinished(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners)
 {
-    storeSeries();
-    storeEpisodes();
-    storeBanners();
+    storeSeries(series);
+    storeEpisodes(episodes);
+    storeBanners(banners);
 
     if (!m_seriesIds.isEmpty()) {
         updateSeries();
@@ -105,32 +105,28 @@ void SeriesListModel::selectSeries(int index)
     emit daysToNextEpisodeChanged();
 }
 
-void SeriesListModel::storeSeries()
+void SeriesListModel::storeSeries(QList<QVariantMap> series)
 {
-    m_series = m_api->series();
+    m_series = series;
 
     if (!m_series.isEmpty()) {
         m_dbmanager->insertSeries(m_series.first());
     }
 }
 
-void SeriesListModel::storeEpisodes()
+void SeriesListModel::storeEpisodes(QList<QVariantMap> episodes)
 {
-    m_episodes = m_api->episodes();
-
     if (!m_series.isEmpty()) {
         int seriesId = m_series.first()["id"].toInt();
-        m_dbmanager->insertEpisodes(m_episodes, seriesId);
+        m_dbmanager->insertEpisodes(episodes, seriesId);
     }
 }
 
-void SeriesListModel::storeBanners()
+void SeriesListModel::storeBanners(QList<QVariantMap> banners)
 {
-    m_banners = m_api->banners();
-
     if (!m_series.isEmpty()) {
         int seriesId = m_series.first()["id"].toInt();
-        m_dbmanager->insertBanners(m_banners, seriesId);
+        m_dbmanager->insertBanners(banners, seriesId);
     }
 }
 
@@ -190,10 +186,10 @@ void SeriesListModel::setMode(QString newmode)
     }
 }
 
-void SeriesListModel::deleteSeries(int seriesID)
+void SeriesListModel::deleteSeries(int seriesId)
 {
     setLoading(true);
-    if (m_dbmanager->deleteSeries(seriesID)) {
+    if (m_dbmanager->deleteSeries(seriesId)) {
         populateBannerList();
         emit updateModels();
     }
@@ -219,7 +215,7 @@ void SeriesListModel::updateAllSeries(bool updateEndedSeries)
     m_banners.clear();
 
     auto allSeries = m_dbmanager->getSeries();
-    foreach (auto series, allSeries) {
+    for (auto series : allSeries) {
         if (!updateEndedSeries) {
             if (series["status"] != "Ended") {
                m_seriesIds.append(series["id"].toString());

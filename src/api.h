@@ -52,11 +52,9 @@ public:
     QString findHighestRatedImage(QList<QVariantMap> images);
 
 signals:
-    void readyToGetBanners();
-    void readyToPopulateSeries();
-    void readyToPopulateChannels();
-    void readyToStoreSeries();
-    void readyToUpdateSeries();
+    void readyToPopulateSeries(QList<QVariantMap>);
+    void readyToStoreSeries(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>);
+    void readyToUpdateSeries(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>);
     void readyToCheckIfReady();
 
 public slots:
@@ -75,8 +73,8 @@ private:
     QList<QVariantMap> m_posterImages;
     bool m_fullRecord;
     bool m_update;
-    bool m_episodesFinished;
     QString m_jwt;
+    bool m_episodesFinished;
 
     QString getLocale();
 };
