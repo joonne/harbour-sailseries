@@ -53,7 +53,7 @@ bool DatabaseManager::openDB()
     }
     
     // Find SQLite driver
-    m_db = QSqlDatabase::addDatabase("QSQLITE","databasemanager");
+    m_db = QSqlDatabase::addDatabase("QSQLITE", "databasemanager");
     m_db.setDatabaseName(dbpath);
     
     // Open databasee
@@ -275,7 +275,7 @@ bool DatabaseManager::insertSeries(QVariantMap series)
     QString contentRating = series["contentRating"].toString();
     QString firstAired = series["firstAired"].toString();
     QString genre = series["genre"].toStringList().join(",");
-    QString imdb_id = series["imdbId"].toString();
+    QString imdbId = series["imdbId"].toString();
     QString language = series["language"].toString();
     QString network = series["network"].toString();
     QString overview = series["overview"].toString();
@@ -285,12 +285,12 @@ bool DatabaseManager::insertSeries(QVariantMap series)
     QString seriesName = series["seriesName"].toString();
     QString status = series["status"].toString();
     QString added = series["added"].toString();
-    int addedby = series["addedBy"].toInt();
+    int addedBy = series["addedBy"].toInt();
     QString banner = series["banner"].toString();
     QString fanart = series["fanart"].toString();
     QString lastUpdated = series["lastUpdated"].toString();
     QString poster = series["poster"].toString();
-    QString zap2itid = series["zap2itId"].toString();
+    QString zap2itId = series["zap2itId"].toString();
     
     overview.replace("'", "''");
     actors.replace("'", "''");
@@ -301,31 +301,33 @@ bool DatabaseManager::insertSeries(QVariantMap series)
     if (m_db.isOpen()) {
         
         QSqlQuery query(m_db);
-        ret = query.exec(QString("INSERT OR REPLACE INTO Series(id,actors,airsDayOfWeek,airsTime,contentRating,firstAired,genre,imdbID,language,network,overview,rating,ratingCount,runtime,seriesName,status,added,addedBy,banner,fanart,lastupdated,poster,zap2itID,watched) VALUES(%1,'%2','%3','%4','%5','%6','%7','%8','%9','%10','%11',%12,%13,%14,'%15','%16','%17',%18,'%19','%20','%21','%22','%23',%24)")
-                         .arg(seriesId)
-                         .arg(actors)
-                         .arg(airsDayOfWeek)
-                         .arg(airsTime)
-                         .arg(contentRating)
-                         .arg(firstAired)
-                         .arg(genre)
-                         .arg(imdb_id)
-                         .arg(language)
-                         .arg(network)
-                         .arg(overview)
-                         .arg(rating)
-                         .arg(ratingCount)
-                         .arg(runtime)
-                         .arg(seriesName)
-                         .arg(status)
-                         .arg(added)
-                         .arg(addedby)
-                         .arg(banner)
-                         .arg(fanart)
-                         .arg(lastUpdated)
-                         .arg(poster)
-                         .arg(zap2itid)
-                         .arg(watched));
+        query.prepare(QString("INSERT OR REPLACE INTO Series(id, actors, airsDayOfWeek, airsTime, contentRating, firstAired, genre, imdbID, language, network, overview, rating, ratingCount, runtime, seriesName, status, added, addedBy, banner, fanart, lastupdated, poster, zap2itID, watched) "
+                              "VALUES(:seriesId, :actors, :airsDayOfWeek, :airsTime, :contentRating, :firstAired, :genre, :imdbId, :language, :network, :overview, :rating, :ratingCount, :runtime, :seriesName, :status, :added, :addedBy, :banner, :fanart, :lastUpdated, :poster, :zap2itId, :watched)"));
+        query.bindValue(":seriesId", seriesId);
+        query.bindValue(":actors", actors);
+        query.bindValue(":airsDayOfWeek", airsDayOfWeek);
+        query.bindValue(":airsTime", airsTime);
+        query.bindValue(":contentRating", contentRating);
+        query.bindValue(":firstAired", firstAired);
+        query.bindValue(":genre", genre);
+        query.bindValue(":imdbId", imdbId);
+        query.bindValue(":language", language);
+        query.bindValue(":network", network);
+        query.bindValue(":overview", overview);
+        query.bindValue(":rating", rating);
+        query.bindValue(":ratingCount", ratingCount);
+        query.bindValue(":runtime", runtime);
+        query.bindValue(":seriesName", seriesName);
+        query.bindValue(":status", status);
+        query.bindValue(":added", added);
+        query.bindValue(":addedBy", addedBy);
+        query.bindValue(":banner", banner);
+        query.bindValue(":fanart", fanart);
+        query.bindValue(":lastUpdated", lastUpdated);
+        query.bindValue(":poster", poster);
+        query.bindValue(":zap2itId", zap2itId);
+        query.bindValue(":watched", watched);
+        ret = query.exec();
         
         qDebug() << query.lastError();
         

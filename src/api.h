@@ -22,9 +22,7 @@ public:
     ~Api();
 
     QList<QVariantMap> parseSeries(QJsonObject obj);
-    QList<QVariantMap> parseImages(QJsonObject obj);
-    QList<QVariantMap> parseActors(QJsonObject obj);
-    QList<QVariantMap> parseEpisodes(QJsonObject obj);
+    QList<QVariantMap> parseJSON(QJsonObject obj);
 
     QNetworkReply* get(QUrl url);
 
@@ -64,6 +62,7 @@ public slots:
 private:
     QNetworkAccessManager* m_nam;
     QList<QMap<QString,QString> > m_languages;
+
     QList<QVariantMap> m_series;
     QList<QVariantMap> m_episodes;
     QList<QVariantMap> m_actors;
@@ -71,10 +70,18 @@ private:
     QList<QVariantMap> m_seasonImages;
     QList<QVariantMap> m_seriesImages;
     QList<QVariantMap> m_posterImages;
+
+    bool m_seriesFinished;
+    bool m_episodesFinished;
+    bool m_actorsFinished;
+    bool m_fanartImagesFinished;
+    bool m_seasonImagesFinished;
+    bool m_seriesImagesFinished;
+    bool m_posterImagesFinished;
+
     bool m_fullRecord;
     bool m_update;
     QString m_jwt;
-    bool m_episodesFinished;
 
     QString getLocale();
 };
