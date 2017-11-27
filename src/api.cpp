@@ -283,6 +283,23 @@ void Api::getEpisodes(QString seriesId, int page = 1)
     });
 }
 
+void Api::getEpisode(QString episodeId)
+{
+    QUrl url(QString("%1/episodes/%2").arg(QString(MIRRORPATH)).arg(episodeId));
+    auto reply = get(url);
+
+    connect(reply, &QNetworkReply::finished, [this, reply]()
+    {
+       auto jsonDocument = QJsonDocument::fromJson(reply->readAll());
+
+       if (!jsonDocument.isNull()) {
+
+           auto episode = parseEpisode(jsonDocument.object());
+           emit readyToPopulateEpisodeDetails(episode);
+       }
+    });
+}
+
 void Api::checkIfReady()
 {
     qDebug() << "checkIfReady";
@@ -426,6 +443,20 @@ QList<QVariantMap> Api::parseSeries(QJsonObject obj)
     }
 
     return allSeries;
+}
+
+QVariantMap Api::parseEpisode(QJsonObject obj)
+{
+    QJsonObject jsonObject = obj.value("data").toObject();
+
+    QVariantMap episode;
+
+    auto keys = jsonObject.keys();
+    for (auto key : keys) {
+        episode.insert(key, jsonObject.value(key).toVariant());
+    }
+
+    return episode;
 }
 
 QList<QVariantMap> Api::parseJSON(QJsonObject obj)

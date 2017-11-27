@@ -37,6 +37,7 @@ public:
     bool getLoading();
 
     Q_INVOKABLE bool deleteDuplicateEpisodes();
+    Q_INVOKABLE void requestEpisodeDetails(QString id);
 
 signals:
     void seriesListModelChanged();
@@ -46,9 +47,11 @@ signals:
     void episodeListModelChanged();
     void seasonListModelChanged();
     void loadingChanged();
+    void updateEpisodeDetails(QVariantMap episode);
 
 public slots:
     void readyToUpdateModels();
+    void readyToUpdateEpisodeDetails(QVariantMap episode);
 
 private:
     SeriesListModel* m_seriesListModel;

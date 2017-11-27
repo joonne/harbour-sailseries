@@ -30,6 +30,18 @@ Page {
     property string episodeId
     property string seriesId
 
+    Connections {
+        target: engine
+        onUpdateEpisodeDetails: {
+            episodeBanner = episode.filename
+            console.log(episode.writers)
+        }
+    }
+
+    Component.onCompleted: {
+        engine.requestEpisodeDetails(episodeId);
+    }
+
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: column.height

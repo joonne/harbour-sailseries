@@ -73,7 +73,11 @@ DISTFILES += \
     qml/pages/NotificationHandler.qml \
     qml/pages/SettingsPage.qml \
     qml/pages/StatisticsPage.qml \
-    qml/components/ProgressCircle.qml
+    qml/components/ProgressCircle.qml \
+    qml/js/http.js \
+    qml/js/promise.js \
+    qml/js/timeout.js \
+    qml/js/tvApi.js
 
 RESOURCES += \
     harbour-sailseries.qrc

@@ -140,17 +140,17 @@
 <context>
     <name>EpisodeOverviewPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="75"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="87"/>
         <source>Original air date</source>
         <translation>Ensiesitys</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="109"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="121"/>
         <source>Writer</source>
         <translation>Käsikirjoittaja</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="118"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="130"/>
         <source>Guest Stars</source>
         <translation>Vierailevat tähdet</translation>
     </message>

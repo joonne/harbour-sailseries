@@ -20,6 +20,11 @@ Engine::Engine(QObject *parent) : QObject(parent), m_api(new Api), m_dbmanager(n
             SIGNAL(updateModels()),
             this,
             SLOT(readyToUpdateModels()));
+
+    connect(m_api,
+            SIGNAL(readyToPopulateEpisodeDetails(QVariantMap)),
+            this,
+            SLOT(readyToUpdateEpisodeDetails(QVariantMap)));
 }
 
 Engine::~Engine()
@@ -59,6 +64,14 @@ void Engine::updateModels()
     toggleLoading(false);
 }
 
+void Engine::readyToUpdateEpisodeDetails(QVariantMap episode)
+{
+    qDebug() << episode;
+    emit updateEpisodeDetails(episode);
+}
+
 void Engine::toggleLoading(bool state) { m_loading = state; }
 
 bool Engine::deleteDuplicateEpisodes() { return m_dbmanager->deleteDuplicateEpisodes(); }
+
+void Engine::requestEpisodeDetails(QString id) { m_api->getEpisode(id); }

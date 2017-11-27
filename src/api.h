@@ -23,6 +23,7 @@ public:
 
     QList<QVariantMap> parseSeries(QJsonObject obj);
     QList<QVariantMap> parseJSON(QJsonObject obj);
+    QVariantMap parseEpisode(QJsonObject obj);
 
     QNetworkReply* get(QUrl url);
 
@@ -37,6 +38,7 @@ public:
     void getActors(QString seriesId);
     void getEpisodes(QString seriesId, int page);
     void getAll(QString seriesId, QString method);
+    void getEpisode(QString episodeId);
 
     QList<QVariantMap> series();
     QList<QVariantMap> episodes();
@@ -54,6 +56,7 @@ signals:
     void readyToStoreSeries(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>);
     void readyToUpdateSeries(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>);
     void readyToCheckIfReady();
+    void readyToPopulateEpisodeDetails(QVariantMap episode);
 
 public slots:
     void replyFinishedError(QNetworkReply* reply);
