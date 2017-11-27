@@ -140,17 +140,17 @@
 <context>
     <name>EpisodeOverviewPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="87"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="74"/>
         <source>Original air date</source>
         <translation>Date de première diffusion</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="121"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="107"/>
         <source>Writer</source>
         <translation>Scénariste</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="130"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="115"/>
         <source>Guest Stars</source>
         <translation>Guest Stars</translation>
     </message>

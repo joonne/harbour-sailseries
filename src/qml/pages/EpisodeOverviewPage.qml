@@ -7,24 +7,9 @@ Page {
 
     id: episodeoverviewpage
 
-    // processes tubes "|" out of the given string
-    function process(string) {
-        if (string.charAt(0) === "|" && string.charAt(string.length - 1) === "|") {
-            var newstring = string.split("|").join(", ")
-            return newstring.substr(2,(newstring.length - 4))
-        } else if (string.charAt(0) === "|") {
-            return string.split("|").join(", ").substr(2)
-        } else {
-            return string.split("|").join(", ")
-        }
-    }
-
     // these are pushed from previous page with the pageStack
-    property string episodeBanner
     property string episodeOverview
     property string episodeName
-    property string guestStars
-    property string writer
     property string firstAired
     property int watched
     property string episodeId
@@ -33,8 +18,10 @@ Page {
     Connections {
         target: engine
         onUpdateEpisodeDetails: {
-            episodeBanner = episode.filename
-            console.log(episode.writers)
+            banner.source = "http://thetvdb.com/banners/" + episode.filename
+            writerField.text = episode.writers.join(", ")
+            guestStarsField.text = episode.guestStars.join(", ")
+            console.log(JSON.stringify(episode))
         }
     }
 
@@ -58,7 +45,6 @@ Page {
 
             Image {
                 id: banner
-                source: "http://thetvdb.com/banners/" + episodeBanner
                 anchors.left: parent.left
                 anchors.leftMargin: (episodeoverviewpage.width - banner.width) / 2
 
@@ -117,7 +103,6 @@ Page {
             TextArea {
                 id: writerField
                 width: episodeoverviewpage.width
-                text: process(writer)
                 label: qsTr("Writer")
                 color: Theme.secondaryColor
                 readOnly: true
@@ -126,7 +111,6 @@ Page {
             TextArea {
                 id: guestStarsField
                 width: episodeoverviewpage.width
-                text: process(guestStars)
                 label: qsTr("Guest Stars")
                 color: Theme.secondaryColor
                 readOnly: true
