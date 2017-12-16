@@ -28,6 +28,19 @@ Api::~Api()
     m_nam = 0;
 }
 
+QNetworkReply* Api::get(QUrl url)
+{
+    QNetworkRequest request(url);
+
+    request.setRawHeader(QByteArray("Content-Type"), QByteArray("application/json"));
+    request.setRawHeader(QByteArray("Authorization"), (QString("Bearer %1").arg(m_jwt)).toLocal8Bit());
+    request.setRawHeader(QByteArray("Accept-Language"), QByteArray("en"));
+
+    qDebug() << "REQUESTING" << request.url().toString();
+
+    return m_nam->get(request);
+}
+
 void Api::getAuthenticationToken()
 {
     QUrl url(QString("%1/login").arg(QString(MIRRORPATH)));
@@ -35,9 +48,9 @@ void Api::getAuthenticationToken()
 
     request.setRawHeader("Content-Type", "application/json");
 
-    QByteArray jsonString = "{\"apikey\": \"88D0BD893851FA78\"}";
+    QByteArray body = "{\"apikey\": \"88D0BD893851FA78\"}";
 
-    QNetworkReply* reply = m_nam->post(request, jsonString);
+    QNetworkReply* reply = m_nam->post(request, body);
 
     connect(reply, &QNetworkReply::finished, [this, reply]()
     {
@@ -67,7 +80,7 @@ QString Api::getLocale()
 
 void Api::getLanguages()
 {
-    QUrl url(QString("%1/languages").arg(QString(MIRRORPATH)).arg(QString(APIKEY)));
+    QUrl url(QString("%1/languages").arg(QString(MIRRORPATH)));
     auto reply = get(url);
 
     connect(reply, &QNetworkReply::finished, [this, reply]()
@@ -133,7 +146,6 @@ void Api::getSeries(QString seriesId)
        if (!jsonDocument.isNull()) {
            m_series = parseSeries(jsonDocument.object());
            m_seriesFinished = true;
-           qDebug() << "series " << m_series.size();
            emit readyToCheckIfReady();
        }
 
@@ -163,13 +175,12 @@ void Api::getSeasonImages(QString seriesId)
                image.insert("bannerType2", "");
                image.insert("language", seasonImage["id"]);
                image.insert("season", seasonImage["subKey"]);
+
                return image;
            });
 
            m_seasonImages = seasonImages;
            m_seasonImagesFinished = true;
-
-           qDebug() << "season images " << m_seasonImages.size();
 
            emit readyToCheckIfReady();
        }
@@ -190,7 +201,6 @@ void Api::getPosterImages(QString seriesId)
        if (!jsonDocument.isNull()) {
            m_posterImages = parseJSON(jsonDocument.object());
            m_posterImagesFinished = true;
-           qDebug() << "posterImages " << m_posterImages.size();
            emit readyToCheckIfReady();
        }
 
@@ -210,7 +220,6 @@ void Api::getSeriesImages(QString seriesId)
        if (!jsonDocument.isNull()) {
            m_seriesImages = parseJSON(jsonDocument.object());
            m_seriesImagesFinished = true;
-           qDebug() << "seriesImages " << m_seriesImages.size();
            emit readyToCheckIfReady();
        }
 
@@ -230,7 +239,6 @@ void Api::getFanartImages(QString seriesId)
        if (!jsonDocument.isNull()) {
            m_fanartImages = parseJSON(jsonDocument.object());
            m_fanartImagesFinished = true;
-           qDebug() << "fanartImages " << m_fanartImages.size();
            emit readyToCheckIfReady();
        }
 
@@ -250,7 +258,6 @@ void Api::getActors(QString seriesId)
        if (!jsonDocument.isNull()) {
            m_actors = parseJSON(jsonDocument.object());
            m_actorsFinished = true;
-           qDebug() << "actors " << m_actors.size();
            emit readyToCheckIfReady();
        }
 
@@ -300,10 +307,54 @@ void Api::getEpisode(QString episodeId)
     });
 }
 
+QString Api::findHighestRatedImage(QList<QVariantMap> images)
+{
+    auto result = !images.isEmpty() ? images.first() : QVariantMap();
+
+    for (auto image: images)
+    {
+        if (
+                image.contains("ratingsInfo") &&
+                image["ratingsInfo"].toMap().contains("average") &&
+                result.contains("ratingsInfo") &&
+                result["ratingsInfo"].toMap().contains("average") &&
+                image["ratingsInfo"].toMap()["average"].toDouble() > result["ratingsInfo"].toMap()["average"].toDouble()
+           )
+        {
+            result = image;
+        }
+    }
+
+    return result["fileName"].toString();
+}
+
+QList<QVariantMap> Api::series() { return m_series; }
+
+QList<QVariantMap> Api::episodes() { return m_episodes; }
+
+QList<QVariantMap> Api::banners() { return m_seasonImages; }
+
+// ---------------------------------------------------
+// slots
+// ---------------------------------------------------
+
+void Api::replyFinishedError(QNetworkReply *reply)
+{
+    qDebug() << reply->url() << reply->errorString();
+    
+    QVariantMap temp;
+    temp.insert("SeriesName", "Error, try again later.");
+
+    QList<QVariantMap> series;
+    series.append(temp);
+
+    emit readyToPopulateSeries(series);
+
+    reply->deleteLater();
+}
+
 void Api::checkIfReady()
 {
-    qDebug() << "checkIfReady";
-
     if (
             m_seriesFinished &&
             m_episodesFinished &&
@@ -314,8 +365,6 @@ void Api::checkIfReady()
             m_fanartImagesFinished
         )
     {
-        qDebug() << "ready";
-
         /* find the best rated images and use them */
         auto series = m_series.takeFirst();
         series.insert("poster", findHighestRatedImage(m_posterImages));
@@ -353,65 +402,6 @@ void Api::checkIfReady()
         m_actors.clear();
         m_actorsFinished = false;
     }
-}
-
-QString Api::findHighestRatedImage(QList<QVariantMap> images)
-{
-    auto result = !images.isEmpty() ? images.first() : QVariantMap();
-
-    for (auto image: images)
-    {
-        if (
-                image.contains("ratingsInfo") &&
-                image["ratingsInfo"].toMap().contains("average") &&
-                result.contains("ratingsInfo") &&
-                result["ratingsInfo"].toMap().contains("average") &&
-                image["ratingsInfo"].toMap()["average"].toDouble() > result["ratingsInfo"].toMap()["average"].toDouble()
-           )
-        {
-            result = image;
-        }
-    }
-
-    return result["fileName"].toString();
-}
-
-QList<QVariantMap> Api::series() { return m_series; }
-
-QList<QVariantMap> Api::episodes() { return m_episodes; }
-
-QList<QVariantMap> Api::banners() { return m_seasonImages; }
-
-QNetworkReply* Api::get(QUrl url)
-{
-    QNetworkRequest request(url);
-
-    request.setRawHeader(QByteArray("Content-Type"), QByteArray("application/json"));
-    request.setRawHeader(QByteArray("Authorization"), (QString("Bearer %1").arg(m_jwt)).toLocal8Bit());
-    request.setRawHeader(QByteArray("Accept-Language"), QByteArray("en"));
-
-    qDebug() << "REQUESTING" << request.url().toString();
-
-    return m_nam->get(request);
-}
-
-// ---------------------------------------------------
-// slots
-// ---------------------------------------------------
-
-void Api::replyFinishedError(QNetworkReply *reply)
-{
-    qDebug() << reply->url() << reply->errorString();
-    
-    QVariantMap temp;
-    temp.insert("SeriesName", "Error, try again later.");
-
-    QList<QVariantMap> series;
-    series.append(temp);
-
-    emit readyToPopulateSeries(series);
-
-    reply->deleteLater();
 }
 
 // ---------------------------------------------------

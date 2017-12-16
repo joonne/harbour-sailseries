@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
+import "../components";
+
 Page {
     id: myseriespage
 
@@ -72,7 +74,7 @@ Page {
                     onClicked: {
                         engine.SeriesListModel.Mode = "m_series"
                         engine.SeriesListModel.selectSeries(index)
-                        pageStack.push(Qt.resolvedUrl("SeriesPage.qml"), {seriesID: ID})
+                        pageStack.push(Qt.resolvedUrl("SeriesPage.qml"), { seriesID: ID })
                     }
                 }
 
@@ -80,20 +82,10 @@ Page {
                     id: column
                     spacing: Theme.paddingSmall
 
-                    Image {
+                    SeriesBanner {
                         id: banner
-                        source: "http://thetvdb.com/banners/" + Banner
-                        sourceSize.width: container.width
-                        anchors.left: parent.left
-                        anchors.leftMargin: Theme.paddingMedium
-
-                        onStatusChanged: {
-                            var fallback = "qrc:///images/series-banner-fallback.jpg";
-                            if (status === Image.Error || status === Image.Null) {
-                                source = fallback;
-                            }
-                        }
-
+                        bannerPath: Banner
+                        sourceWidth: container.width
                     }
 
                     Label {

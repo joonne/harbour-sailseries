@@ -140,17 +140,17 @@
 <context>
     <name>EpisodeOverviewPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="74"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="73"/>
         <source>Original air date</source>
         <translation>Originali translicijos diena</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="107"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="106"/>
         <source>Writer</source>
         <translation>Rašytojas</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="115"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="114"/>
         <source>Guest Stars</source>
         <translation>Svečių Žvaigždės</translation>
     </message>
@@ -168,17 +168,17 @@
         <translation>Epizodai</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="92"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="90"/>
         <source>Season</source>
         <translation>Sezonas</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="99"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="97"/>
         <source>Episode</source>
         <translation>Epizodas</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="149"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="147"/>
         <source>No episodes.</source>
         <translation>Nera epizodu.</translation>
     </message>
@@ -209,47 +209,47 @@
 <context>
     <name>MySeriesPage</name>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="16"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="18"/>
         <source>This show has ended</source>
         <translation>Ši laida yra pasibaigusi</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="18"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="20"/>
         <source>%1 airs tonight</source>
         <translation>%1 transliuoja šį vakarą</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="20"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="22"/>
         <source>%1 airs tomorrow</source>
         <translation>%1 transliuos rytoj</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="22"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="24"/>
         <source>%1 airs in %2 days</source>
         <translation>%1 translious po %2 dienu</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="24"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="26"/>
         <source>Next episode airs in %1 days</source>
         <translation>Sekantis epizodas transliuos po %1 dienu</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="26"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="28"/>
         <source>No information about next episode</source>
         <translation>Nera imformacijos apie sekanti epizoda</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="36"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="38"/>
         <source>Update All</source>
         <translation>Atnaujinti Viska</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="50"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="52"/>
         <source>My Series</source>
         <translation>Mano Serijalai</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="128"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="120"/>
         <source>Search for series first.</source>
         <translation>Ieškoti serijas pirma.</translation>
     </message>
@@ -352,17 +352,17 @@
         <translation>Atnaujinti</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="97"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="95"/>
         <source>Status</source>
         <translation>Statusas</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="106"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="104"/>
         <source>Rating</source>
         <translation>Įvertinimas</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="117"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="115"/>
         <source>Genre</source>
         <translation>Žanras</translation>
     </message>

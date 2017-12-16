@@ -30,9 +30,10 @@ Engine::Engine(QObject *parent) : QObject(parent), m_api(new Api), m_dbmanager(n
 Engine::~Engine()
 {
     delete m_api;
-    delete m_dbmanager;
+    m_api = 0;
 
-    qDebug() << "destructing Engine";
+    delete m_dbmanager;
+    m_dbmanager = 0;
 }
 
 SeriesListModel* Engine::getSeriesListModel() { return m_seriesListModel; }
@@ -66,7 +67,6 @@ void Engine::updateModels()
 
 void Engine::readyToUpdateEpisodeDetails(QVariantMap episode)
 {
-    qDebug() << episode;
     emit updateEpisodeDetails(episode);
 }
 

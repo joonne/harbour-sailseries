@@ -82,12 +82,10 @@ Page {
                 title: engine.SeriesListModel.SeriesName
             }
 
-            Image {
+            SeriesBanner {
                 id: banner
-                source: "http://thetvdb.com/banners/" + engine.SeriesListModel.Banner
-                sourceSize.width: seriespage.width - Theme.paddingMedium * 2
-                anchors.left: parent.left
-                anchors.leftMargin: Theme.paddingMedium
+                bannerPath: engine.SeriesListModel.Banner
+                sourceWidth: seriespage.width - Theme.paddingMedium * 2
             }
 
             Row {

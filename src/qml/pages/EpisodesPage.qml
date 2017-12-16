@@ -66,16 +66,14 @@ Page {
                 anchors.right: parent.right
                 anchors.rightMargin: Theme.paddingMedium
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("EpisodeOverviewPage.qml"),
-                                   { episodeBanner: Filename,
-                                     episodeOverview: Overview,
-                                     episodeName: EpisodeName,
-                                     guestStars: GuestStars,
-                                     writer: Writer,
-                                     firstAired: FirstAired,
-                                     watched: Watched,
-                                     episodeId: ID,
-                                     seriesId: seriesID })
+                    pageStack.push(Qt.resolvedUrl("EpisodeOverviewPage.qml"), {
+                                       episodeOverview: Overview,
+                                       episodeName: EpisodeName,
+                                       firstAired: FirstAired,
+                                       watched: Watched,
+                                       episodeId: ID,
+                                       seriesId: seriesID
+                                   })
 
                 }
             }

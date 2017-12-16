@@ -21,11 +21,10 @@ SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager, Ap
 
 SeriesListModel::~SeriesListModel()
 {
-    foreach(auto series, m_seriesListModel) {
+    for (auto series : m_seriesListModel) {
         delete series;
         series = 0;
     }
-    qDebug() << "destructing SeriesListModel";
 }
 
 void SeriesListModel::updateFetchFinished(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners)

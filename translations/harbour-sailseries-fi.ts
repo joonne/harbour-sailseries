@@ -140,17 +140,17 @@
 <context>
     <name>EpisodeOverviewPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="74"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="73"/>
         <source>Original air date</source>
         <translation>Ensiesitys</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="107"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="106"/>
         <source>Writer</source>
         <translation>Käsikirjoittaja</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="115"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="114"/>
         <source>Guest Stars</source>
         <translation>Vierailevat tähdet</translation>
     </message>
@@ -168,17 +168,17 @@
         <translation>Jaksot</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="92"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="90"/>
         <source>Season</source>
         <translation>Kausi</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="99"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="97"/>
         <source>Episode</source>
         <translation>Jakso</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="149"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="147"/>
         <source>No episodes.</source>
         <translation>Ei jaksoja.</translation>
     </message>
@@ -209,47 +209,47 @@
 <context>
     <name>MySeriesPage</name>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="16"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="18"/>
         <source>This show has ended</source>
         <translation>Tämä sarja on päättynyt</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="18"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="20"/>
         <source>%1 airs tonight</source>
         <translation>%1 lähetetään tänään</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="20"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="22"/>
         <source>%1 airs tomorrow</source>
         <translation>%1 lähetetään huomenna</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="22"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="24"/>
         <source>%1 airs in %2 days</source>
         <translation>%1 lähetetään %2 päivän kuluttua</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="24"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="26"/>
         <source>Next episode airs in %1 days</source>
         <translation>Seuraava jakso lähetetään %1 päivän kuluttua</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="26"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="28"/>
         <source>No information about next episode</source>
         <translation>Ei tietoa seuraavasta jaksosta</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="36"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="38"/>
         <source>Update All</source>
         <translation>Päivitä kaikki</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="50"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="52"/>
         <source>My Series</source>
         <translation>Omat sarjat</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="128"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="120"/>
         <source>Search for series first.</source>
         <translation>Etsi ensin sarjoja.</translation>
     </message>
@@ -352,17 +352,17 @@
         <translation>Päivitä</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="97"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="95"/>
         <source>Status</source>
         <translation>Tila</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="106"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="104"/>
         <source>Rating</source>
         <translation>Luokitus</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="117"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="115"/>
         <source>Genre</source>
         <translation>Tyylilaji</translation>
     </message>

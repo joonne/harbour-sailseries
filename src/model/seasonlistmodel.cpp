@@ -8,11 +8,10 @@ SeasonListModel::SeasonListModel(QObject *parent,  DatabaseManager* dbmanager) :
 
 SeasonListModel::~SeasonListModel()
 {
-    foreach (auto season, m_seasonListModel) {
+    for (auto season : m_seasonListModel) {
         delete season;
         season = 0;
     }
-    qDebug() << "destructing SeasonListModel";
 }
 
 QQmlListProperty<SeasonData> SeasonListModel::getSeasonList()

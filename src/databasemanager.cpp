@@ -6,8 +6,7 @@ DatabaseManager::DatabaseManager(QObject *parent) :
 
 DatabaseManager::~DatabaseManager()
 {
-    qDebug() << "destructing dbmanager";
-    close();   
+    close();
 }
 
 void DatabaseManager::setUpDB()
@@ -363,27 +362,8 @@ bool DatabaseManager::insertEpisodes(QList<QVariantMap> episodes, int seriesId) 
         QString overview = episode["overview"].toString();
         int watched = 0;
 
-        // OLD API PROVIDED THESE
-        /*QString director = episode["director"].toString();
-        int epimgflag = episode["EpImgFlag"].toInt();
-        QString guestStars = episode["GuestStars"].toString();
-        QString imdb_id = episode["IMDB_ID"].toString();
-        int productionCode = episode["ProductionCode"].toInt();
-        double rating = episode["Rating"].toDouble();
-        int ratingCount = episode["RatingCount"].toInt();
-        QString writer = episode["Writer"].toString();
-        int airsAfterSeason = episode["airsafter_season"].toInt();
-        int airsBeforeEpisode = episode["airsbefore_episode"].toInt();
-        int airsBeforeSeason = episode["airsbefore_season"].toInt();
-        QString filename = episode["filename"].toString();
-        QString thumbAdded = episode["thumb_added"].toString();
-        int thumbHeight = episode["thumb_height"].toInt();
-        int thumbWidth = episode["thumb_width"].toInt();*/
-
         // important!
         overview.replace("'", "''");
-//        director.replace("'", "''");
-//        guestStars.replace("'", "''");
         episodeName.replace("'", "''");
         
         if (m_db.isOpen()) {
@@ -496,6 +476,7 @@ QList<QVariantMap> DatabaseManager::getSeries()
                 temp["poster"] = poster;
                 
                 auto seriesName = query.value(2).toString();
+                seriesName.replace("''", "'");
                 temp["seriesName"] = seriesName;
                 
                 auto status = query.value(3).toString();
@@ -530,6 +511,7 @@ QList<QVariantMap> DatabaseManager::getSeries()
             }
         }
     }
+
     return allSeries;
 }
 
@@ -645,6 +627,7 @@ QList<QVariantMap> DatabaseManager::getEpisodes(int seriesID, int seasonNumber) 
             QVariantMap episode;
 
             QString episodeName = query.value(0).toString();
+            episodeName.replace("''","'");
             episode["episodeName"] = episodeName;
 
             QString episodeNumber = query.value(1).toString();

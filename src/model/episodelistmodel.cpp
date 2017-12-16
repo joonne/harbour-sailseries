@@ -5,11 +5,10 @@ EpisodeListModel::EpisodeListModel(QObject *parent, DatabaseManager *dbmanager) 
 
 EpisodeListModel::~EpisodeListModel()
 {
-    foreach (auto episode, m_episodeListModel) {
+    for (auto episode : m_episodeListModel) {
         delete episode;
         episode = 0;
     }
-    qDebug() << "destructing EpisodeListModel";
 }
 
 QQmlListProperty<EpisodeData> EpisodeListModel::getEpisodeList()
