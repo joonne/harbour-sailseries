@@ -10,7 +10,6 @@ CONFIG += sailfishapp
 CONFIG += c++11
 
 SOURCES += main.cpp \
-    xmlreader.cpp \
     model/seriesdata.cpp \
     model/serieslistmodel.cpp \
     databasemanager.cpp \
@@ -18,12 +17,12 @@ SOURCES += main.cpp \
     model/episodelistmodel.cpp \
     model/searchlistmodel.cpp \
     model/todaylistmodel.cpp \
-    qzip.cpp \
     model/seasondata.cpp \
     model/seasonlistmodel.cpp \
     engine.cpp \
     settings.cpp \
-    statistics.cpp
+    statistics.cpp \
+    api.cpp
 
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 DEFINES += APP_BUILDNUM=\\\"$$RELEASE\\\"
@@ -53,7 +52,6 @@ OTHER_FILES = \
 INCLUDEPATH += $$PWD
 
 HEADERS += \
-    xmlreader.h \
     model/seriesdata.h \
     model/serieslistmodel.h \
     databasemanager.h \
@@ -61,13 +59,12 @@ HEADERS += \
     model/episodelistmodel.h \
     model/searchlistmodel.h \
     model/todaylistmodel.h \
-    qzipreader_p.h \
-    qzipwriter_p.h \
     model/seasondata.h \
     model/seasonlistmodel.h \
     engine.h \
     settings.h \
-    statistics.h
+    statistics.h \
+    api.h
 
 DISTFILES += \
     qml/components/HorizontalSeparator.qml \
@@ -76,7 +73,11 @@ DISTFILES += \
     qml/pages/NotificationHandler.qml \
     qml/pages/SettingsPage.qml \
     qml/pages/StatisticsPage.qml \
-    qml/components/ProgressCircle.qml
+    qml/components/ProgressCircle.qml \
+    qml/js/http.js \
+    qml/js/promise.js \
+    qml/js/timeout.js \
+    qml/js/tvApi.js
 
 RESOURCES += \
     harbour-sailseries.qrc

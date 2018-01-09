@@ -1,21 +1,20 @@
 #include "todaylistmodel.h"
 
-TodayListModel::TodayListModel(QObject *parent, DatabaseManager *dbmanager, XMLReader *reader) :
+TodayListModel::TodayListModel(QObject *parent, DatabaseManager *dbmanager, Api *api) :
     QObject(parent)
 {
     m_dbmanager = dbmanager;
-    m_reader = reader;
+    m_api = api;
 
     populateTodayModel();
 }
 
 TodayListModel::~TodayListModel()
 {
-    foreach(auto series, m_todayListModel) {
+    for (auto series : m_todayListModel) {
         delete series;
         series = 0;
     }
-    qDebug() << "destructing TodayListModel";
 }
 
 QQmlListProperty<SeriesData> TodayListModel::getTodayModel()

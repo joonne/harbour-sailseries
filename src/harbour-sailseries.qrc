@@ -5,4 +5,7 @@
         <file>season-banner-fallback.jpg</file>
         <file>episode-image-fallback.jpg</file>
     </qresource>
+    <qresource prefix="/">
+        <file>qml/components/SeriesBanner.qml</file>
+    </qresource>
 </RCC>

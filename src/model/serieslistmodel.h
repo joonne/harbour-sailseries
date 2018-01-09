@@ -7,7 +7,7 @@
 
 #include "seriesdata.h"
 #include "episodedata.h"
-#include "../xmlreader.h"
+#include "../api.h"
 #include "../databasemanager.h"
 
 class SeriesListModel : public QObject
@@ -36,7 +36,7 @@ class SeriesListModel : public QObject
     Q_PROPERTY(QString Genre READ getGenre CONSTANT)
 
 public:
-    explicit SeriesListModel(QObject *parent = 0, DatabaseManager *dbmanager = 0, XMLReader* reader = 0);
+    explicit SeriesListModel(QObject *parent = 0, DatabaseManager *dbmanager = 0, Api* api = 0);
     ~SeriesListModel();
 
     Q_INVOKABLE void populateBannerList();
@@ -69,10 +69,10 @@ public:
     QString getMode();
     void setMode(QString newmode);
 
-    void storeSeries();
-    void storeEpisodes();
-    void storeBanners();
-    Q_INVOKABLE void deleteSeries(int seriesID);
+    void storeSeries(QList<QVariantMap> series);
+    void storeEpisodes(QList<QVariantMap> episodes);
+    void storeBanners(QList<QVariantMap> banners);
+    Q_INVOKABLE void deleteSeries(int seriesId);
     Q_INVOKABLE void updateSeries(QString seriesId = "");
     Q_INVOKABLE void updateAllSeries(bool updateEndedSeries = true);
 
@@ -88,14 +88,14 @@ signals:
     void daysToNextEpisodeChanged();
 
 public slots:
-    void updateFetchFinished();
+    void updateFetchFinished(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners);
 
 private:
-    XMLReader* m_reader;
+    Api* m_api;
     DatabaseManager* m_dbmanager;
-    QList<QMap<QString,QString> > m_series;
-    QList<QMap<QString,QString> > m_episodes;
-    QList<QMap<QString,QString> > m_banners;
+    QList<QVariantMap> m_series;
+    QList<QVariantMap> m_episodes;
+    QList<QVariantMap> m_banners;
     QList<SeriesData*> m_seriesListModel;
     SeriesData* m_info;
     QList<QString> m_seriesIds;

@@ -1,44 +1,44 @@
 #include "seriesdata.h"
 
-SeriesData::SeriesData(QObject *parent, QMap<QString, QString> params) :
+SeriesData::SeriesData(QObject *parent, QVariantMap params) :
     QObject(parent)
 {
 
-    m_id = params["id"];
-    m_actors = params["actors"];
-    m_airsDayOfWeek = params["airsDayOfWeek"];
-    m_airsTime = params["airsTime"];
-    m_contentRating = params["contentRating"];
-    m_firstAired = params["firstAired"];
-    m_genre = params["genre"];
-    m_imdbId = params.contains("imdbId") ? params["imdbId"] : params["IMDB_ID"];
-    m_language = params["language"];
-    m_network = params.contains("network") ? params["network"] : params["Network"];
-    m_overview = params.contains("overview") ? params["overview"] : params["Overview"];
-    m_rating = params["rating"];
+    m_id = params["id"].toString();
+    m_actors = params["actors"].toString();
+    m_airsDayOfWeek = params["airsDayOfWeek"].toString();
+    m_airsTime = params["airsTime"].toString();
+    m_contentRating = params["contentRating"].toString();
+    m_firstAired = params["firstAired"].toString();
+    m_genre = params["genre"].toString();
+    m_imdbId = params.contains("imdbId") ? params["imdbId"].toString() : params["imdbID"].toString();
+    m_language = params["language"].toString();
+    m_network = params["network"].toString();
+    m_overview = params["overview"].toString();
+    m_rating = params["rating"].toString();
     m_ratingCount = params["ratingCount"].toInt();
     m_runtime = params["runtime"].toInt();
-    m_seriesName = params.contains("seriesName") ? params["seriesName"] : params["SeriesName"];
-    m_aliasNames = params["aliasNames"];
-    m_status = params["status"];
-    m_added = params["added"];
+    m_seriesName = params["seriesName"].toString();
+    m_aliasNames = params["aliasNames"].toString();
+    m_status = params["status"].toString();
+    m_added = params["added"].toString();
     m_addedBy = params["addedBy"].toInt();
-    m_banner = params["banner"];
-    m_fanart = params["fanart"];
-    m_lastUpdated = params["lastUpdated"];
-    m_poster = params["poster"];
-    m_zap2itId = params["zap2itid"];
+    m_banner = params["banner"].toString();
+    m_fanart = params["fanart"].toString();
+    m_lastUpdated = params["lastUpdated"].toString();
+    m_poster = params["poster"].toString();
+    m_zap2itId = params["zap2itid"].toString();
     m_watched = params["watched"].toInt();
-    m_nextEpisodeId = params["nextEpisodeId"];
-    m_nextEpisodeName = params["nextEpisodeName"];
-    m_nextEpisodeNumber = params["nextEpisodeNumber"];
-    m_nextEpisodeSeasonNumber = params["nextEpisodeSeasonNumber"];
-    m_daysToNextEpisode = params["daysToNext"];
-    m_nextEpisodeFirstAired = params["nextEpisodeFirstAired"];
-    m_nextEpisodeBanner = params["nextEpisodeBanner"];
-    m_nextEpisodeOverview = params["nextEpisodeOverview"];
-    m_nextEpisodeGuestStars = params["nextEpisodeGuestStars"];
-    m_nextEpisodeWriter = params["nextEpisodeWriter"];
+    m_nextEpisodeId = params["nextEpisodeId"].toString();
+    m_nextEpisodeName = params["nextEpisodeName"].toString();
+    m_nextEpisodeNumber = params["nextEpisodeNumber"].toString();
+    m_nextEpisodeSeasonNumber = params["nextEpisodeSeasonNumber"].toString();
+    m_daysToNextEpisode = params["daysToNext"].toString();
+    m_nextEpisodeFirstAired = params["nextEpisodeFirstAired"].toString();
+    m_nextEpisodeBanner = params["nextEpisodeBanner"].toString();
+    m_nextEpisodeOverview = params["nextEpisodeOverview"].toString();
+    m_nextEpisodeGuestStars = params["nextEpisodeGuestStars"].toString();
+    m_nextEpisodeWriter = params["nextEpisodeWriter"].toString();
     m_nextEpisodeWatched = params["nextEpisodeWatched"].toInt();
 }
 

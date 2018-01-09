@@ -5,7 +5,7 @@ Page {
     id: searchpage
 
     Component.onDestruction: {
-        engine.SearchModel.clearList()
+        engine && engine.SearchModel && engine.SearchModel.clearList()
     }
 
     Timer {

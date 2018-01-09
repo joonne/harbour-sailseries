@@ -1,20 +1,20 @@
 #include "searchlistmodel.h"
 
-SearchListModel::SearchListModel(QObject *parent, DatabaseManager *dbmanager, XMLReader *xmlreader) :
+SearchListModel::SearchListModel(QObject *parent, DatabaseManager *dbmanager, Api *api) :
     QObject(parent)
 {
     m_dbmanager = dbmanager;
-    m_reader = xmlreader;
+    m_api = api;
 
-    connect(m_reader,
-            SIGNAL(readyToPopulateSeries()),
+    connect(m_api,
+            SIGNAL(readyToPopulateSeries(QList<QVariantMap>)),
             this,
-            SLOT(xmlParseFinished()));
+            SLOT(searchFinished(QList<QVariantMap>)));
 
-    connect(m_reader,
-            SIGNAL(readyToStoreSeries()),
+    connect(m_api,
+            SIGNAL(readyToStoreSeries(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)),
             this,
-            SLOT(getFullSeriesRecordFinished()));
+            SLOT(getAllFinished(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)));
 
     m_loading = false;
     m_added = false;
@@ -22,11 +22,10 @@ SearchListModel::SearchListModel(QObject *parent, DatabaseManager *dbmanager, XM
 
 SearchListModel::~SearchListModel()
 {
-    foreach(SeriesData* series, m_searchListModel) {
+    for (auto series : m_searchListModel) {
         delete series;
         series = 0;
     }
-    qDebug() << "destructing SearchListModel";
 }
 
 QQmlListProperty<SeriesData> SearchListModel::getSearchModel()
@@ -57,25 +56,24 @@ void SearchListModel::searchListClear(QQmlListProperty<SeriesData>* prop)
     qobject_cast<SearchListModel*>(prop->object)->m_searchListModel.clear();
 }
 
-void SearchListModel::xmlParseFinished()
+void SearchListModel::searchFinished(QList<QVariantMap> series)
 {
-    m_series = m_reader->getSeries();
-    populateSearchModel();
+    populateSearchModel(series);
 }
 
-void SearchListModel::getFullSeriesRecordFinished()
+void SearchListModel::getAllFinished(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners)
 {
-    storeSeries();
-    storeEpisodes();
-    storeBanners();
+    storeSeries(series);
+    storeEpisodes(episodes);
+    storeBanners(banners);
     setLoading(false);
     emit updateModels();
 }
 
-void SearchListModel::populateSearchModel()
+void SearchListModel::populateSearchModel(QList<QVariantMap> foundSeries)
 {
-    if (!m_series.empty()) {
-        for (auto series : m_series) {
+    if (!foundSeries.empty()) {
+        for (auto series : foundSeries) {
             SeriesData* seriesData = new SeriesData(this, series);
             m_searchListModel.append(seriesData);
         }
@@ -90,7 +88,7 @@ void SearchListModel::searchSeries(QString text)
     m_searchListModel.clear();
     m_series.clear();
     emit searchModelChanged();
-    m_reader->searchSeries(text);
+    m_api->searchSeries(text);
 }
 
 void SearchListModel::selectSeries(int index)
@@ -100,31 +98,28 @@ void SearchListModel::selectSeries(int index)
 
 void SearchListModel::getFullSeriesRecord(QString id)
 {
-    m_reader->getFullSeriesRecord(id, "full");
+    m_api->getAll(id, "full");
     setLoading(true);
 }
 
-void SearchListModel::storeSeries()
+void SearchListModel::storeSeries(QList<QVariantMap> series)
 {
-    m_series = m_reader->getSeries();
-    if (!m_series.isEmpty()) {
-        m_dbmanager->insertSeries(m_series.first());
+    if (!series.isEmpty()) {
+        m_dbmanager->insertSeries(series.first());
     }
 }
 
-void SearchListModel::storeEpisodes()
+void SearchListModel::storeEpisodes(QList<QVariantMap> episodes)
 {
-    m_episodes = m_reader->getEpisodes();
-    m_dbmanager->insertEpisodes(m_episodes);
+    auto seriesId = m_info->getID().toInt();
+    m_dbmanager->insertEpisodes(episodes, seriesId);
     setAdded(true);
 }
 
-void SearchListModel::storeBanners()
+void SearchListModel::storeBanners(QList<QVariantMap> banners)
 {
-    m_banners = m_reader->getBanners();
-    // we are saving info for this series
-    int seriesId = m_info->getID().toInt();
-    m_dbmanager->insertBanners(m_banners, seriesId);
+    auto seriesId = m_info->getID().toInt();
+    m_dbmanager->insertBanners(banners, seriesId);
 }
 
 QString SearchListModel::getID() { return m_info->getID(); }

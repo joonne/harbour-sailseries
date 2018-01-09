@@ -2,7 +2,7 @@
 #define ENGINE_H
 
 #include <QObject>
-#include "xmlreader.h"
+#include "api.h"
 #include "databasemanager.h"
 #include "statistics.h"
 #include "./model/serieslistmodel.h"
@@ -37,6 +37,7 @@ public:
     bool getLoading();
 
     Q_INVOKABLE bool deleteDuplicateEpisodes();
+    Q_INVOKABLE void requestEpisodeDetails(QString id);
 
 signals:
     void seriesListModelChanged();
@@ -46,9 +47,11 @@ signals:
     void episodeListModelChanged();
     void seasonListModelChanged();
     void loadingChanged();
+    void updateEpisodeDetails(QVariantMap episode);
 
 public slots:
     void readyToUpdateModels();
+    void readyToUpdateEpisodeDetails(QVariantMap episode);
 
 private:
     SeriesListModel* m_seriesListModel;
@@ -56,7 +59,7 @@ private:
     TodayListModel* m_todayListModel;
     EpisodeListModel* m_episodeListModel;
     SeasonListModel* m_seasonListModel;
-    XMLReader* m_reader;
+    Api* m_api;
     DatabaseManager* m_dbmanager;
     Statistics* m_statistics;
     bool m_loading;

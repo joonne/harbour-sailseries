@@ -35,7 +35,7 @@ class EpisodeData : public QObject
     Q_PROPERTY(int Watched READ getWatched WRITE setWatched NOTIFY watchedChanged)
 
 public:
-    explicit EpisodeData(QObject *parent = 0, QMap<QString, QString> params = QMap<QString, QString>());
+    explicit EpisodeData(QObject *parent = 0, QVariantMap params = QVariantMap());
 
     int getID();
     QString getDirector();

@@ -8,7 +8,7 @@
 #include <QLocale>
 
 #include "databasemanager.h"
-#include "xmlreader.h"
+#include "api.h"
 #include "model/seriesdata.h"
 
 class TodayListModel : public QObject
@@ -16,7 +16,7 @@ class TodayListModel : public QObject
     Q_OBJECT
     Q_PROPERTY(QQmlListProperty<SeriesData> TodayModel READ getTodayModel NOTIFY todayModelChanged)
 public:
-    explicit TodayListModel(QObject *parent = 0, DatabaseManager* dbmanager = 0, XMLReader* reader = 0);
+    explicit TodayListModel(QObject *parent = 0, DatabaseManager* dbmanager = 0, Api* api = 0);
     ~TodayListModel();
 
     Q_INVOKABLE void populateTodayModel();
@@ -30,7 +30,7 @@ public slots:
 
 private:
     DatabaseManager* m_dbmanager;
-    XMLReader* m_reader;
+    Api* m_api;
     QList<QMap<QString,QString> > m_series;
     QList<QMap<QString,QString> > m_episodes;
     QList<SeriesData*> m_todayListModel;

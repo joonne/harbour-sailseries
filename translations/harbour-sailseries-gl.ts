@@ -24,19 +24,9 @@
         <translation>Licenza</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="117"/>
-        <source>This software is licenced under GPLv2.</source>
-        <translation>Este software esta baixo licenza GPLv2.</translation>
-    </message>
-    <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="121"/>
         <source>Content</source>
         <translation>Contido</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="129"/>
-        <source>SailSeries utilises the public API at TheTVDB.</source>
-        <translation>SailSeries emprega a API pública de TheTVDB.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="150"/>
@@ -62,6 +52,16 @@
         <location filename="../src/qml/pages/AboutPage.qml" line="74"/>
         <source>Jonne Pihlanen, &apos;joonne&apos;</source>
         <translation>Jonne Pihlanen, &apos;joonne&apos;</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/AboutPage.qml" line="117"/>
+        <source>This software is licenced under MIT.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/AboutPage.qml" line="129"/>
+        <source>SailSeries utilises TheTVDB API v2.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="155"/>
@@ -140,17 +140,17 @@
 <context>
     <name>EpisodeOverviewPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="75"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="72"/>
         <source>Original air date</source>
         <translation>Data de estrea</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="109"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="105"/>
         <source>Writer</source>
         <translation>Autor</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="118"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="113"/>
         <source>Guest Stars</source>
         <translation>Estrelas invitadas</translation>
     </message>
@@ -168,40 +168,17 @@
         <translation>Episodios</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="92"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="90"/>
         <source>Season</source>
         <translation>Tempada</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="99"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="97"/>
         <source>Episode</source>
         <translation>Episodio</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="149"/>
-        <source>No episodes.</source>
-        <translation>Sen episodios.</translation>
-    </message>
-</context>
-<context>
-    <name>Episodes_orig</name>
-    <message>
-        <location filename="../src/qml/pages/Episodes_orig.qml" line="34"/>
-        <source>Episodes</source>
-        <translation>Episodios</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/Episodes_orig.qml" line="83"/>
-        <source>Season</source>
-        <translation>Tempada</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/Episodes_orig.qml" line="90"/>
-        <source>Episode</source>
-        <translation>Episodio</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/Episodes_orig.qml" line="158"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="147"/>
         <source>No episodes.</source>
         <translation>Sen episodios.</translation>
     </message>
@@ -209,47 +186,47 @@
 <context>
     <name>MySeriesPage</name>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="16"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="18"/>
         <source>This show has ended</source>
         <translation>Esta serie rematou</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="18"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="20"/>
         <source>%1 airs tonight</source>
         <translation>%1 emisións esta noite</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="20"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="22"/>
         <source>%1 airs tomorrow</source>
         <translation>%1 emisións maña</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="22"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="24"/>
         <source>%1 airs in %2 days</source>
         <translation>%1 emisións en %2 dias</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="24"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="26"/>
         <source>Next episode airs in %1 days</source>
         <translation>O seguinte episodio emitese en %1 dias</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="26"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="28"/>
         <source>No information about next episode</source>
         <translation>Non hai información do seguinte episodio</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="36"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="38"/>
         <source>Update All</source>
         <translation>Actualizar todo</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="50"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="52"/>
         <source>My Series</source>
         <translation>As miñas series</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="128"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="120"/>
         <source>Search for series first.</source>
         <translation>Primeiro busque series.</translation>
     </message>
@@ -337,32 +314,32 @@
         <translation>Rematado</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="57"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="51"/>
         <source>Remove</source>
         <translation>Eliminar</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="59"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="53"/>
         <source>Removing</source>
         <translation>Eliminando</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="68"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="62"/>
         <source>Update</source>
         <translation>Actualizar</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="97"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="89"/>
         <source>Status</source>
         <translation>Estado</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="106"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="98"/>
         <source>Rating</source>
         <translation>Valoración</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="117"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="109"/>
         <source>Genre</source>
         <translation>Xénero</translation>
     </message>

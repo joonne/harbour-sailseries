@@ -45,9 +45,9 @@ public:
 
     bool deleteDuplicateEpisodes();
 
-    bool insertSeries(QMap<QString, QString> series);
-    bool insertEpisodes(QList<QMap<QString, QString> > episodes);
-    bool insertBanners(QList<QMap<QString, QString> > banners, int seriesId);
+    bool insertSeries(QVariantMap series);
+    bool insertEpisodes(QList<QVariantMap> episodes, int seriesId);
+    bool insertBanners(QList<QVariantMap> banners, int seriesId);
 
     bool updateSeries();
     bool updateEpisode();
@@ -55,10 +55,11 @@ public:
     bool deleteSeries(int seriesID);
     bool deleteAllSeries();
 
-    QList<QMap<QString, QString> > getSeries();
-    QList<QMap<QString, QString> > getStartPageSeries();
-    QList<QMap<QString, QString> > getEpisodes(int seriesID, int seasonNumber);
-    QMap<QString, QString> getNextEpisodeDetails(int seriesID);
+    QList<QVariantMap> getSeries();
+    QList<QVariantMap> getStartPageSeries();
+    QList<QVariantMap> getEpisodes(int seriesID, int seasonNumber);
+    QVariantMap getNextEpisodeDetails(int seriesID);
+
     QString getStatus(int seriesID);
     QString getSeasonBanner(int seriesID, int season);
 
@@ -81,7 +82,6 @@ public:
     int getWatchedSeriesCount();
     int getWatchedSeasonsCount();
     int getAllSeasonsCount();
-    QString getLastRefresh();
 
     QMultiMap<int, QMap<QString, QStringList> > getMostWatchedDirectors();
     QMultiMap<int, QMap<QString, QStringList> > getMostWatchedActors();

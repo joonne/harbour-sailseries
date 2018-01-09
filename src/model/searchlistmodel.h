@@ -7,7 +7,7 @@
 
 #include "seriesdata.h"
 #include "../databasemanager.h"
-#include "../xmlreader.h"
+#include "../api.h"
 
 class SearchListModel : public QObject
 {
@@ -26,10 +26,10 @@ class SearchListModel : public QObject
     Q_PROPERTY(bool Loading READ getLoading WRITE setLoading NOTIFY loadingChanged)
     Q_PROPERTY(bool Added READ getAdded WRITE setAdded NOTIFY addedChanged)
 public:
-    explicit SearchListModel(QObject *parent = 0, DatabaseManager* dbmanager = 0, XMLReader* xmlreader = 0 );
+    explicit SearchListModel(QObject *parent = 0, DatabaseManager* dbmanager = 0, Api* api = 0 );
     ~SearchListModel();
 
-    void populateSearchModel();
+    void populateSearchModel(QList<QVariantMap> foundSeries);
 
     Q_INVOKABLE void searchSeries(QString text);
     Q_INVOKABLE void selectSeries(int index);
@@ -53,9 +53,9 @@ public:
     bool getAdded();
     void setAdded(bool cond);
 
-    void storeSeries();
-    void storeEpisodes();
-    void storeBanners();
+    void storeSeries(QList<QVariantMap> series);
+    void storeEpisodes(QList<QVariantMap> episodes);
+    void storeBanners(QList<QVariantMap> banners);
 
 signals:
     void searchModelChanged();
@@ -74,15 +74,15 @@ signals:
     void updateModels();
 
 public slots:
-    void xmlParseFinished();
-    void getFullSeriesRecordFinished();
+    void searchFinished(QList<QVariantMap> series);
+    void getAllFinished(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners);
 
 private:
-    XMLReader* m_reader;
+    Api* m_api;
     DatabaseManager* m_dbmanager;
-    QList<QMap<QString,QString> > m_series;
-    QList<QMap<QString,QString> > m_episodes;
-    QList<QMap<QString,QString> > m_banners;
+    QList<QVariantMap> m_series;
+    QList<QVariantMap> m_episodes;
+    QList<QVariantMap> m_banners;
     QList<SeriesData*> m_searchListModel;
     SeriesData* m_info;
 
