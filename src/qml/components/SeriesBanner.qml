@@ -11,7 +11,7 @@ Image {
     sourceSize.width: sourceWidth
     anchors.left: parent.left
     anchors.leftMargin: {
-        return (sourceSize.width - width) / 2
+        return sourceSize.width - width <= 0 ? Theme.paddingMedium : ((sourceSize.width - width) / 2 + Theme.paddingMedium)
     }
 
     onStatusChanged: {
