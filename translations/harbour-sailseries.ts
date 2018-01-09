@@ -24,18 +24,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="117"/>
-        <source>This software is licenced under GPLv2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="121"/>
         <source>Content</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="129"/>
-        <source>SailSeries utilises the public API at TheTVDB.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -61,6 +51,16 @@
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="74"/>
         <source>Jonne Pihlanen, &apos;joonne&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/AboutPage.qml" line="117"/>
+        <source>This software is licenced under MIT.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/AboutPage.qml" line="129"/>
+        <source>SailSeries utilises TheTVDB API v2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -314,32 +314,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="57"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="51"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="59"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="53"/>
         <source>Removing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="68"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="62"/>
         <source>Update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="95"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="89"/>
         <source>Status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="104"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="98"/>
         <source>Rating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="115"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="109"/>
         <source>Genre</source>
         <translation type="unfinished"></translation>
     </message>

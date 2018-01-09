@@ -845,6 +845,7 @@ QVariantMap DatabaseManager::getNextEpisodeDetails(int seriesID)
             QVariantMap temp;
             
             auto episodeName = query.value(0).toString();
+            episodeName.replace("''", "'");
             temp["nextEpisodeName"] = episodeName;
             
             auto episodeNumber = query.value(1).toString();

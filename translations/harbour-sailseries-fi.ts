@@ -24,19 +24,9 @@
         <translation>Lisenssi</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="117"/>
-        <source>This software is licenced under GPLv2.</source>
-        <translation>Tämä ohjelmisto on lisensoitu GPLv2:n mukaisesti.</translation>
-    </message>
-    <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="121"/>
         <source>Content</source>
         <translation>Sisältö</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="129"/>
-        <source>SailSeries utilises the public API at TheTVDB.</source>
-        <translation>Sailseries käyttää TheTVDB:n tarjoamaa julkista rajapintaa.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="150"/>
@@ -62,6 +52,16 @@
         <location filename="../src/qml/pages/AboutPage.qml" line="74"/>
         <source>Jonne Pihlanen, &apos;joonne&apos;</source>
         <translation>Jonne Pihlanen, &apos;joonne&apos;</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/AboutPage.qml" line="117"/>
+        <source>This software is licenced under MIT.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/AboutPage.qml" line="129"/>
+        <source>SailSeries utilises TheTVDB API v2.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="155"/>
@@ -314,32 +314,32 @@
         <translation>Päättynyt</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="57"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="51"/>
         <source>Remove</source>
         <translation>Poista</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="59"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="53"/>
         <source>Removing</source>
         <translation>Poistetaan</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="68"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="62"/>
         <source>Update</source>
         <translation>Päivitä</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="95"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="89"/>
         <source>Status</source>
         <translation>Tila</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="104"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="98"/>
         <source>Rating</source>
         <translation>Luokitus</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="115"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="109"/>
         <source>Genre</source>
         <translation>Tyylilaji</translation>
     </message>

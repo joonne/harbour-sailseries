@@ -12,7 +12,7 @@ Page {
         timer.start()
     }
 
-    Component.onDestruction:{
+    Component.onDestruction: {
         if (engine) {
             engine.SeriesListModel.Mode = "default"
         }
@@ -28,24 +28,18 @@ Page {
 
     function setStatus(status) {
         switch(status) {
-        case "Continuing":
-            return qsTr("Continuing")
-        case "Ended":
-            return qsTr("Ended")
+            case "Continuing":
+                return qsTr("Continuing")
+            case "Ended":
+                return qsTr("Ended")
+            default:
+                 return ""
         }
     }
 
-    // processes tubes "|" out of the given string
-    function process(string) {
-        if (string.charAt(0) === "|" && string.charAt(string.length - 1) === "|") {
-            var newstring = string.split("|").join(", ")
-            return newstring.substr(2,(newstring.length - 4))
-        } else if (string.charAt(0) === "|") {
-            return string.split("|").join(", ").substr(2)
-        } else {
-            return string.split("|").join(", ")
-        }
-    }
+    // add spaces to the given string after columns
+    // "asd,asd,asd" => "asd, asd, asd"
+    function process(string) { return string.split(",").join(", "); }
 
     SilicaFlickable {
         id: listView
