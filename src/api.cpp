@@ -6,16 +6,16 @@
 Api::Api(QObject *parent) :
     QObject(parent),
     m_nam(new QNetworkAccessManager),
-    m_fullRecord(false),
-    m_update(false),
-    m_jwt(""),
     m_seriesFinished(false),
     m_episodesFinished(false),
     m_actorsFinished(false),
     m_fanartImagesFinished(false),
     m_seasonImagesFinished(false),
     m_seriesImagesFinished(false),
-    m_posterImagesFinished(false)
+    m_posterImagesFinished(false),
+    m_fullRecord(false),
+    m_update(false),
+    m_jwt("")
 {
     getAuthenticationToken();
 

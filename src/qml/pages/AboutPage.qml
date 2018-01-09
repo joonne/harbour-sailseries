@@ -114,7 +114,7 @@ Page {
                 readOnly: true
                 color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeSmall
-                text: qsTr("This software is licenced under GPLv2.")
+                text: qsTr("This software is licenced under MIT.")
             }
 
             SectionHeader {
@@ -126,7 +126,7 @@ Page {
                 readOnly: true
                 color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeSmall
-                text: qsTr("SailSeries utilises the public API at TheTVDB.")
+                text: qsTr("SailSeries utilises TheTVDB API v2.")
             }
 
             Button {

@@ -21,7 +21,7 @@ void DatabaseManager::setUpDB()
         } else {
             
             QSqlQuery query(m_db);
-            query.exec("SELECT name,version FROM information;");
+            query.exec("SELECT name, version FROM information;");
             if (query.isSelect()) {
                 while (query.next()) {
                     QString name = query.value(0).toString();
@@ -100,6 +100,7 @@ bool DatabaseManager::initializeInfoTable()
         return query.exec(QString("INSERT INTO information VALUES(%1,'%2')")
                           .arg(1.0).arg("SailSeries"));
     }
+
     return false;
 }
 
@@ -114,6 +115,7 @@ bool DatabaseManager::createInfoTable()
                          "(version real primary key, "
                          "name varchar(50))");
     }
+
     return ret;
 }
 
@@ -125,26 +127,26 @@ bool DatabaseManager::updateInfoTable(double version)
         QSqlQuery query(m_db);
         ret = query.exec(QString("UPDATE information SET version = %1;").arg(version));
     }
+
     return ret;
 }
 
 bool DatabaseManager::createDB()
-{
-    qDebug() << "creating database!";
-    
+{    
     if (m_db.isOpen()) {
         
         if (initializeInfoTable()) {
             qDebug() << "information table created";
         }
         
-        if (createSeriesTable() and createEpisodeTable() and createBannerTable()) {
+        if (createSeriesTable() && createEpisodeTable() && createBannerTable()) {
             
             qDebug() << "Tables created";
             
             updateInfoTable(2.0);
         }
     }
+
     return true;
 }
 
@@ -180,6 +182,7 @@ bool DatabaseManager::createSeriesTable()
                                  "zap2itID VARCHAR(20), "
                                  "watched INTEGER DEFAULT 0)"));
     }
+
     return ret;
 }
 
@@ -217,10 +220,8 @@ bool DatabaseManager::createEpisodeTable()
                                  "thumbHeight INTEGER, "
                                  "thumbWidth INTEGER, "
                                  "watched INTEGER DEFAULT 0)"));
-        
-        qDebug() << query.lastError();
-        qDebug() << query.lastQuery();
     }
+
     return ret;
 }
 
@@ -238,10 +239,8 @@ bool DatabaseManager::createBannerTable()
                                  "bannerType2 VARCHAR(50), "
                                  "language VARCHAR(2), "
                                  "season INTEGER)"));
-        
-        qDebug() << query.lastError();
-        qDebug() << query.lastQuery();
     }
+
     return ret;
 }
 
@@ -253,10 +252,8 @@ bool DatabaseManager::deleteDuplicateEpisodes()
         QSqlQuery query(m_db);
         ret = query.exec("DELETE FROM episode "
                          "WHERE (firstAired = '' OR firstAired IS NULL) AND (episodeName IS NULL OR episodeName = '');");
-
-        qDebug() << query.lastError();
-        qDebug() << query.lastQuery();
     }
+
     return ret;
 }
 
@@ -294,9 +291,7 @@ bool DatabaseManager::insertSeries(QVariantMap series)
     overview.replace("'", "''");
     actors.replace("'", "''");
     seriesName.replace("'", "''");
-    
-    qDebug() << "insertSeries() " << seriesName;
-    
+        
     if (m_db.isOpen()) {
         
         QSqlQuery query(m_db);
@@ -340,10 +335,8 @@ bool DatabaseManager::insertSeries(QVariantMap series)
     return ret;
 }
 
-bool DatabaseManager::insertEpisodes(QList<QVariantMap> episodes, int seriesId) {
-
-    qDebug() << "insertEpisodes() ";
-    
+bool DatabaseManager::insertEpisodes(QList<QVariantMap> episodes, int seriesId)
+{
     bool ret = false;
     
     startTransaction();
@@ -571,6 +564,7 @@ QList<QVariantMap> DatabaseManager::getStartPageSeries()
                 temp["nextEpisodeId"] = episodeId;
                 
                 auto episodeName = query.value(7).toString();
+                episodeName.replace("''", "'");
                 temp["nextEpisodeName"] = episodeName;
                 
                 auto episodeNumber = query.value(8).toString();
@@ -590,7 +584,7 @@ QList<QVariantMap> DatabaseManager::getStartPageSeries()
                 temp["nextEpisodeBanner"] = banner;
                 
                 auto overview = query.value(12).toString();
-                overview.replace("''","'");
+                overview.replace("''", "'");
                 temp["nextEpisodeOverview"] = overview;
                 
                 auto guestStars = query.value(13).toString();
@@ -627,14 +621,14 @@ QList<QVariantMap> DatabaseManager::getEpisodes(int seriesID, int seasonNumber) 
             QVariantMap episode;
 
             QString episodeName = query.value(0).toString();
-            episodeName.replace("''","'");
+            episodeName.replace("''", "'");
             episode["episodeName"] = episodeName;
 
             QString episodeNumber = query.value(1).toString();
             episode["episodeNumber"] = episodeNumber;
 
             QString overview = query.value(2).toString();
-            overview.replace("''","'");
+            overview.replace("''", "'");
             episode["overview"] = overview;
 
             QString seasonNumber = query.value(3).toString();
@@ -737,6 +731,7 @@ bool DatabaseManager::isAlreadyAdded(int seriesId, QString name)
             }
         }
     }
+
     return ret2;
 }
 
@@ -752,6 +747,7 @@ int DatabaseManager::watchedCount(int seriesID)
             watchedCount = query.value(0).toInt();
         }
     }
+
     return watchedCount;
 }
 
@@ -767,6 +763,7 @@ int DatabaseManager::watchedCountBySeason(int seriesID, int seasonNumber)
             watchedCount = query.value(0).toInt();
         }
     }
+
     return watchedCount;
 }
 
@@ -782,8 +779,8 @@ int DatabaseManager::totalCount(int seriesID)
             totalCount = query.value(0).toInt();
         }
     }
+
     return totalCount;
-    
 }
 
 int DatabaseManager::totalCountBySeason(int seriesID, int seasonNumber)
@@ -798,6 +795,7 @@ int DatabaseManager::totalCountBySeason(int seriesID, int seasonNumber)
             totalCount = query.value(0).toInt();
         }
     }
+
     return totalCount;
 }
 
@@ -813,6 +811,7 @@ int DatabaseManager::seasonCount(int seriesID)
             seasonCount = query.value(0).toInt();
         }
     }
+
     return seasonCount;
 }
 
@@ -896,6 +895,7 @@ QString DatabaseManager::getStatus(int seriesID)
             status = query.value(0).toString();
         }
     }
+
     return status;
 }
 
@@ -912,6 +912,7 @@ QString DatabaseManager::getSeasonBanner(int seriesID, int season)
             banner = query.value(0).toString();
         }
     }
+
     return banner;
 }
 
@@ -929,6 +930,7 @@ int DatabaseManager::getWatchedEpisodesDuration()
             duration = query.value(0).toInt();
         }
     }
+
     return duration;
 }
 
@@ -946,6 +948,7 @@ double DatabaseManager::getAverageWatchedEpisodesDuration()
             duration = query.value(0).toDouble();
         }
     }
+
     return duration;
 }
 
@@ -963,6 +966,7 @@ int DatabaseManager::getWatchedEpisodesCount()
             count = query.value(0).toInt();
         }
     }
+
     return count;
 }
 
@@ -980,6 +984,7 @@ int DatabaseManager::getAllEpisodesCount()
             count = query.value(0).toInt();
         }
     }
+
     return count;
 }
 
@@ -995,6 +1000,7 @@ int DatabaseManager::getAllSeriesCount()
             count = query.value(0).toInt();
         }
     }
+
     return count;
 }
 
@@ -1012,6 +1018,7 @@ int DatabaseManager::getEndedSeriesCount()
             count = query.value(0).toInt();
         }
     }
+
     return count;
 }
 
@@ -1040,6 +1047,7 @@ int DatabaseManager::getWatchedSeriesCount()
             allSeriesCount = query.value(0).toInt();
         }
     }
+
     return allSeriesCount - inProgressSeriesCount;
 }
 
@@ -1058,6 +1066,7 @@ int DatabaseManager::getWatchedSeasonsCount()
             count += 1;
         }
     }
+
     return count;
 }
 
@@ -1074,6 +1083,7 @@ int DatabaseManager::getAllSeasonsCount()
             count = query.value(0).toInt();
         }
     }
+
     return count;
 }
 

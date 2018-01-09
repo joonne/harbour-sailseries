@@ -21,7 +21,6 @@ Page {
             banner.source = "http://thetvdb.com/banners/" + episode.filename
             writerField.text = episode.writers.join(", ")
             guestStarsField.text = episode.guestStars.join(", ")
-            console.log(JSON.stringify(episode))
         }
     }
 

@@ -140,17 +140,17 @@
 <context>
     <name>EpisodeOverviewPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="73"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="72"/>
         <source>Original air date</source>
         <translation>Sändningsdatum</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="106"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="105"/>
         <source>Writer</source>
         <translation>Författare</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="114"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="113"/>
         <source>Guest Stars</source>
         <translation>Gäststjärnor</translation>
     </message>
@@ -179,29 +179,6 @@
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="147"/>
-        <source>No episodes.</source>
-        <translation>Inga episoder.</translation>
-    </message>
-</context>
-<context>
-    <name>Episodes_orig</name>
-    <message>
-        <location filename="../src/qml/pages/Episodes_orig.qml" line="34"/>
-        <source>Episodes</source>
-        <translation>Episoder</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/Episodes_orig.qml" line="83"/>
-        <source>Season</source>
-        <translation>Säsong</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/Episodes_orig.qml" line="90"/>
-        <source>Episode</source>
-        <translation>Episod</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/Episodes_orig.qml" line="158"/>
         <source>No episodes.</source>
         <translation>Inga episoder.</translation>
     </message>
