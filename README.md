@@ -16,6 +16,10 @@ SailSeries stores all data except images into local database, so it is possible 
 
 **Changelog:**
 
+1.3.1
+
+- Transition to TheTVDB API v2
+
 1.2.1
 
 - Added deutch translations
