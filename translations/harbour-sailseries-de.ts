@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="de">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="de" version="2.1">
 <context>
     <name>AboutPage</name>
     <message>
@@ -56,12 +54,12 @@
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="117"/>
         <source>This software is licenced under MIT.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="129"/>
         <source>SailSeries utilises TheTVDB API v2.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="155"/>
@@ -142,7 +140,7 @@
     <message>
         <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="72"/>
         <source>Original air date</source>
-        <translation>Ursprüngliches Veröffentlichungsdatum</translation>
+        <translation>Veröffentlichungsdatum</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="105"/>
@@ -188,7 +186,7 @@
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="18"/>
         <source>This show has ended</source>
-        <translation>Diese Show ist beendet</translation>
+        <translation>Diese Sendung ist beendet</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="20"/>
@@ -359,12 +357,12 @@
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="24"/>
         <source>Publish notifications (experimental)</source>
-        <translation>Veröffentlichungsbenachrichtigungen (experimentell)</translation>
+        <translation>Veröffentlichungen (experimentell)</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="25"/>
         <source>SailSeries publishes notifications on app startup and when updating/adding series if an episode airs today.</source>
-        <translation>SailSeries schickt Benachrichtigungen beim Start der Anwendung und beim Aktualisieren und Hinzufügen von Serien wenn eine Folge heute veröffentlicht wird.</translation>
+        <translation>SailSeries schickt Benachrichtigungen beim Start der Anwendung und beim Aktualisieren und Hinzufügen von Serien, wenn eine Folge heute veröffentlicht wird.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="32"/>
@@ -379,17 +377,17 @@
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="36"/>
         <source>SailSeries refreshes local content every one hour. Requires app to be open at background. Might cause a small hickup when content is being updated.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="45"/>
         <source>SailSeries will update also the content of ended series when this is applied.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="44"/>
         <source>Update content of ended series</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="52"/>
@@ -457,7 +455,7 @@
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="65"/>
         <source>Search for a Series</source>
-        <translation>Suche eine Serie</translation>
+        <translation>Serie suchen</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="70"/>
@@ -525,7 +523,7 @@
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="29"/>
         <source>Numbers</source>
-        <translation>Nummern</translation>
+        <translation>Zahlen</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="44"/>
@@ -535,12 +533,12 @@
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="52"/>
         <source>All episodes</source>
-        <translation>Alle Folgen</translation>
+        <translation>Folgen insgesamt</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="153"/>
         <source>All series</source>
-        <translation>Alle Serien</translation>
+        <translation>Serien insgesamt</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="95"/>
@@ -550,7 +548,7 @@
     <message>
         <location filename="../src/qml/pages/StatisticsPage.qml" line="103"/>
         <source>All seasons</source>
-        <translation>Alle Staffeln</translation>
+        <translation>Staffeln insgesamt</translation>
     </message>
 </context>
 <context>

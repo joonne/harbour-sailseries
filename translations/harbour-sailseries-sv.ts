@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sv">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="sv" version="2.1">
 <context>
     <name>AboutPage</name>
     <message>
@@ -56,12 +54,12 @@
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="117"/>
         <source>This software is licenced under MIT.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="129"/>
         <source>SailSeries utilises TheTVDB API v2.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="155"/>
@@ -170,7 +168,7 @@
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="90"/>
         <source>Season</source>
-        <translation>Säsong</translation>
+        <translation>Säsonger</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="97"/>
@@ -379,17 +377,17 @@
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="36"/>
         <source>SailSeries refreshes local content every one hour. Requires app to be open at background. Might cause a small hickup when content is being updated.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="45"/>
         <source>SailSeries will update also the content of ended series when this is applied.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="44"/>
         <source>Update content of ended series</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="52"/>
