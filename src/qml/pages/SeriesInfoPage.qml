@@ -40,20 +40,10 @@ Page {
                 title: engine.SearchModel.SeriesName
             }
 
-            Image {
+            SeriesBanner {
                 id: banner
-                source: "http://thetvdb.com/banners/" + engine.SearchModel.Banner
-                sourceSize.width: infopage.width - Theme.paddingMedium * 2
-                anchors.left: parent.left
-                anchors.leftMargin: Theme.paddingMedium
-
-                onStatusChanged: {
-                    var fallback = "qrc:///images/series-banner-fallback.jpg";
-                    if (status === Image.Error || status === Image.Null) {
-                        source = fallback;
-                    }
-                }
-
+                bannerPath: engine.SearchModel.Banner
+                sourceWidth: infopage.width - Theme.paddingMedium * 2
             }
 
             HorizontalSeparator { }

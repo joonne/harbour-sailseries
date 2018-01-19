@@ -296,7 +296,7 @@
         <translation>Redan tillagd</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="69"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="59"/>
         <source>Network</source>
         <translation>Nätverk</translation>
     </message>

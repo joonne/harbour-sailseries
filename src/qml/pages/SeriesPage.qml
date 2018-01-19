@@ -39,7 +39,7 @@ Page {
 
     // add spaces to the given string after columns
     // "asd,asd,asd" => "asd, asd, asd"
-    function process(string) { return string.split(",").join(", "); }
+    function process(string) { return string.split(",").join(", ") }
 
     SilicaFlickable {
         id: listView
