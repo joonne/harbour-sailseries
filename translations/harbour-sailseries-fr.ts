@@ -54,12 +54,12 @@
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="117"/>
         <source>This software is licenced under MIT.</source>
-        <translation type="unfinished"/>
+        <translation>Cette application est sous licence MIT.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="129"/>
         <source>SailSeries utilises TheTVDB API v2.</source>
-        <translation type="unfinished"/>
+        <translation>SailSeries utilise l&apos;API TheTVDB v2</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="155"/>
@@ -377,17 +377,17 @@
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="36"/>
         <source>SailSeries refreshes local content every one hour. Requires app to be open at background. Might cause a small hickup when content is being updated.</source>
-        <translation type="unfinished"/>
+        <translation>SailSeries rafraîchit sont contenu local toutes les heures. Cela nécessite d&apos;avoir l&apos;application ouverte en tâche de fond. Peut occasionner un petit lag pendant la mise à jour du contenu.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="45"/>
         <source>SailSeries will update also the content of ended series when this is applied.</source>
-        <translation type="unfinished"/>
+        <translation>Lorsque activé, SailSeries mettra également à jour les séries terminées.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="44"/>
         <source>Update content of ended series</source>
-        <translation type="unfinished"/>
+        <translation>Mettre à jour le contenu des séries terminées</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="52"/>
