@@ -1,5 +1,5 @@
 import QtQuick 2.2
-import org.nemomobile.notifications 1.0
+import Nemo.Notifications 1.0
 
 Item {
     id: item
@@ -17,13 +17,8 @@ Item {
     }
 
     function findNotificationId(seriesName) {
-        var id = 0;
-        notifications.forEach(function(item) {
-            if (item.seriesName === seriesName) {
-                id = item.id;
-            }
-        });
-        return id;
+        var notification = notifications.filter(function(item) { return item.seriesName === seriesName; });
+        return (notification && notification.id) || 0;
     }
 
     function clearNotifications() {
@@ -37,7 +32,6 @@ Item {
     }
 
     function publish(summary, body, previewSummary, previewBody) {
-
         var replacesId = findNotificationId(summary);
 
         if (replacesId === 0) {
