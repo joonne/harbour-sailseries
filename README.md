@@ -59,4 +59,3 @@ SailSeries stores all data except images into local database, so it is possible 
 - Code refactoring
 
 - little polishes and fixes
-
