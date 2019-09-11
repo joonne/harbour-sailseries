@@ -113,7 +113,7 @@ private:
     QString m_nextEpisodeSeasonNumber;
     QString m_daysToNextEpisode;
 
-    QString mode;
+    QString m_mode;
 
 };
 

@@ -19,22 +19,22 @@
         <translation>Tekijä</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="109"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="110"/>
         <source>Licence</source>
         <translation>Lisenssi</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="121"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="122"/>
         <source>Content</source>
         <translation>Sisältö</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="150"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="151"/>
         <source>The source code is available at GitHub. Contributions, ideas and bug reports are welcome.</source>
         <translation>Lähdekoodi on saatavilla GitHub palvelussa. Auttaminen, ideat sekä virheraportit ovat tervetulleita.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="142"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="143"/>
         <source>Source Code</source>
         <translation>Lähdekoodi</translation>
     </message>
@@ -54,32 +54,32 @@
         <translation>Jonne Pihlanen, &apos;joonne&apos;</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="117"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="118"/>
         <source>This software is licenced under MIT.</source>
         <translation>Tämä ohjelmisto on lisensoitu MIT:n mukaisesti.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="129"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="130"/>
         <source>SailSeries utilises TheTVDB API v2.</source>
         <translation>SailSeries käyttää TheTVDB API v2 -rajapintaa.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="155"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="156"/>
         <source>Project in GitHub</source>
         <translation>Projekti GitHubissa</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="163"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="164"/>
         <source>Translations</source>
         <translation>Käännökset</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="171"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="172"/>
         <source>SailSeries uses the Transifex translation platform to host the translations.</source>
         <translation>SailSeries käyttää Transifex käännöspalvelua käännösten hallintaan.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="176"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="177"/>
         <source>Help with translations</source>
         <translation>Auta käännösten kanssa</translation>
     </message>
@@ -186,27 +186,27 @@
 <context>
     <name>MySeriesPage</name>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="18"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="17"/>
         <source>This show has ended</source>
         <translation>Tämä sarja on päättynyt</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="20"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="19"/>
         <source>%1 airs tonight</source>
         <translation>%1 lähetetään tänään</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="22"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="21"/>
         <source>%1 airs tomorrow</source>
         <translation>%1 lähetetään huomenna</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="24"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="23"/>
         <source>%1 airs in %2 days</source>
         <translation>%1 lähetetään %2 päivän kuluttua</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="26"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="25"/>
         <source>Next episode airs in %1 days</source>
         <translation>Seuraava jakso lähetetään %1 päivän kuluttua</translation>
     </message>
@@ -216,14 +216,19 @@
         <translation>Ei tietoa seuraavasta jaksosta</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="38"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="37"/>
         <source>Update All</source>
         <translation>Päivitä kaikki</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="52"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="51"/>
         <source>My Series</source>
         <translation>Omat sarjat</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="52"/>
+        <source>loading...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="120"/>
@@ -296,7 +301,12 @@
         <translation>Lisätty aiemmin</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="59"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="41"/>
+        <source>loading...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="60"/>
         <source>Network</source>
         <translation>Kanava</translation>
     </message>
@@ -314,32 +324,32 @@
         <translation>Päättynyt</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="51"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="49"/>
         <source>Remove</source>
         <translation>Poista</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="53"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="51"/>
         <source>Removing</source>
         <translation>Poistetaan</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="62"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="60"/>
         <source>Update</source>
         <translation>Päivitä</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="89"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="87"/>
         <source>Status</source>
         <translation>Tila</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="98"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="96"/>
         <source>Rating</source>
         <translation>Luokitus</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="109"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="107"/>
         <source>Genre</source>
         <translation>Tyylilaji</translation>
     </message>

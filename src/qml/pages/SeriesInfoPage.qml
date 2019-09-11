@@ -17,7 +17,7 @@ Page {
             }
 
             MenuItem {
-                visible: engine.SearchModel.Added === false
+                visible: !engine.SearchModel.Added
                 text: qsTr("Add to my series")
                 onClicked: {
                     engine.SearchModel.getFullSeriesRecord(engine.SearchModel.ID)
@@ -25,8 +25,8 @@ Page {
             }
 
             MenuItem {
-                enabled: engine.SearchModel.Added === false
-                visible: engine.SearchModel.Added === true
+                enabled: !engine.SearchModel.Added
+                visible: engine.SearchModel.Added
                 text: qsTr("Already added")
             }
         }
@@ -38,6 +38,7 @@ Page {
             PageHeader {
                 id: header
                 title: engine.SearchModel.SeriesName
+                description: engine.SearchModel.Loading ? qsTr("loading...") : ""
             }
 
             SeriesBanner {
@@ -63,12 +64,5 @@ Page {
                 width: infopage.width
             }
         }
-    }
-
-    BusyIndicator {
-        id: busyIndicator
-        anchors.centerIn: parent
-        size: BusyIndicatorSize.Large
-        running: engine.SearchModel.Loading ? true : false
     }
 }

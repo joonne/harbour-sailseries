@@ -96,12 +96,13 @@ Page {
 
                 model: ["bonapart", "lunatix", "pakoR", "Mariusmssj", "vicosoft", "eson", "inta"]
 
-                TextField {
+                Label {
                     width: aboutpage.width
-                    readOnly: true
                     color: Theme.primaryColor
                     font.pixelSize: Theme.fontSizeSmall
                     text: modelData
+                    anchors.left: parent.left
+                    anchors.leftMargin: Theme.horizontalPageMargin
                 }
             }
 

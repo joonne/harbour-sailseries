@@ -19,22 +19,22 @@
         <translation>Urheber</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="109"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="110"/>
         <source>Licence</source>
         <translation>Lizenz</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="121"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="122"/>
         <source>Content</source>
         <translation>Inhalt</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="150"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="151"/>
         <source>The source code is available at GitHub. Contributions, ideas and bug reports are welcome.</source>
         <translation>Der Quelltext ist auf GitHub verfügbar. Beiträge, Ideen und Fehlerberichte sind willkommen.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="142"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="143"/>
         <source>Source Code</source>
         <translation>Quelltext</translation>
     </message>
@@ -54,32 +54,32 @@
         <translation>Jonne &apos;joonne&apos; Pihlanen</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="117"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="118"/>
         <source>This software is licenced under MIT.</source>
         <translation>Diese Software ist unter MIT lizenziert.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="129"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="130"/>
         <source>SailSeries utilises TheTVDB API v2.</source>
         <translation>SailSeries nutzt die API v2 von theTVDB.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="155"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="156"/>
         <source>Project in GitHub</source>
         <translation>Projekt auf GitHub</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="163"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="164"/>
         <source>Translations</source>
         <translation>Übersetzungen</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="171"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="172"/>
         <source>SailSeries uses the Transifex translation platform to host the translations.</source>
         <translation>SailSeries nutzt Transifex als Plattform für die Übersetzungen.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="176"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="177"/>
         <source>Help with translations</source>
         <translation>Hilf bei der Übersetzung</translation>
     </message>
@@ -186,27 +186,27 @@
 <context>
     <name>MySeriesPage</name>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="18"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="17"/>
         <source>This show has ended</source>
         <translation>Diese Sendung ist beendet</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="20"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="19"/>
         <source>%1 airs tonight</source>
         <translation>%1 Veröffentlichungen heute</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="22"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="21"/>
         <source>%1 airs tomorrow</source>
         <translation>%1 Veröffentlichungen morgen</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="24"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="23"/>
         <source>%1 airs in %2 days</source>
         <translation>%1 Veröffentlichungen in %2 Tagen</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="26"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="25"/>
         <source>Next episode airs in %1 days</source>
         <translation>Nächste Folge wird in %1 Tagen veröffentlicht</translation>
     </message>
@@ -216,14 +216,19 @@
         <translation>Keine Informationen über die nächste Folge</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="38"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="37"/>
         <source>Update All</source>
         <translation>Alle aktualisieren</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="52"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="51"/>
         <source>My Series</source>
         <translation>Meine Serien</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="52"/>
+        <source>loading...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="120"/>
@@ -296,7 +301,12 @@
         <translation>Bereits hinzugefügt</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="59"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="41"/>
+        <source>loading...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="60"/>
         <source>Network</source>
         <translation>Sender</translation>
     </message>
@@ -314,32 +324,32 @@
         <translation>Beendet</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="51"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="49"/>
         <source>Remove</source>
         <translation>Entfernen</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="53"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="51"/>
         <source>Removing</source>
         <translation>Entferne</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="62"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="60"/>
         <source>Update</source>
         <translation>Aktualisieren</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="89"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="87"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="98"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="96"/>
         <source>Rating</source>
         <translation>Bewertung</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="109"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="107"/>
         <source>Genre</source>
         <translation>Genre</translation>
     </message>

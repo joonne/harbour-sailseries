@@ -3,11 +3,10 @@
 SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager, Api *api) :
     QObject(parent)
 {
-
     m_api = api;
     m_dbmanager = dbmanager;
 
-    mode = "default";
+    m_mode = "default";
 
     connect(m_api,
             SIGNAL(readyToUpdateSeries(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)),
@@ -175,12 +174,12 @@ void SeriesListModel::setLoading(bool state)
 
 QString SeriesListModel::getPoster() { return m_poster; }
 
-QString SeriesListModel::getMode() { return mode; }
+QString SeriesListModel::getMode() { return m_mode; }
 
 void SeriesListModel::setMode(QString newmode)
 {
-    if (mode != newmode) {
-        mode = newmode;
+    if (m_mode != newmode) {
+        m_mode = newmode;
         emit modeChanged();
     }
 }

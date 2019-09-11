@@ -6,7 +6,7 @@ import "../components"
 Page {
     id: seriespage
 
-    property string seriesID
+    property string seriesId
 
     Component.onCompleted: {
         timer.start()
@@ -37,9 +37,7 @@ Page {
         }
     }
 
-    // add spaces to the given string after columns
-    // "asd,asd,asd" => "asd, asd, asd"
-    function process(string) { return string.split(",").join(", ") }
+    function addSpaces(str) { return str.split(",").join(", ") }
 
     SilicaFlickable {
         id: listView
@@ -52,7 +50,7 @@ Page {
                 onClicked: {
                     remorse.execute(qsTr("Removing"),
                                     function() {
-                                        engine.SeriesListModel.deleteSeries(seriesID);
+                                        engine.SeriesListModel.deleteSeries(seriesId);
                                         pageStack.pop()
                                     });
                 }
@@ -61,7 +59,7 @@ Page {
             MenuItem {
                 text:qsTr("Update")
                 onClicked: {
-                    engine.SeriesListModel.updateSeries(seriesID);
+                    engine.SeriesListModel.updateSeries(seriesId);
                 }
             }
         }
@@ -108,7 +106,7 @@ Page {
                 id: genre
                 label: qsTr("Genre")
                 width: seriespage.width
-                text: process(engine.SeriesListModel.Genre)
+                text: addSpaces(engine.SeriesListModel.Genre)
                 color: Theme.secondaryColor
                 readOnly: true
             }
