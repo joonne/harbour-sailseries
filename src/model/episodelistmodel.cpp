@@ -4,14 +4,14 @@ EpisodeListModel::EpisodeListModel(QObject *parent, DatabaseManager *dbmanager) 
     QObject(parent), m_dbmanager(dbmanager)
 {
     connect(this,
-            SIGNAL(getEpisodesRequested(int,int)),
+            SIGNAL(getEpisodesRequested(int, int)),
             m_dbmanager,
-            SLOT(getEpisodes(int,int)));
+            SLOT(getEpisodes(int, int)));
 
     connect(m_dbmanager,
-            SIGNAL(populateEpisodeList(MapList)),
+            SIGNAL(populateEpisodeList(QList<QVariantMap>)),
             this,
-            SLOT(populateEpisodeList(MapList)));
+            SLOT(populateEpisodeList(QList<QVariantMap>)));
 
     connect(this,
             SIGNAL(toggleWatchedRequested(QString, QString, int)),
@@ -58,7 +58,7 @@ void EpisodeListModel::getEpisodes(QString seriesId, int seasonNumber)
     emit getEpisodesRequested(seriesId.toInt(), seasonNumber);
 }
 
-void EpisodeListModel::populateEpisodeList(QList<QMap<QString, QString> > episodes)
+void EpisodeListModel::populateEpisodeList(QList<QVariantMap> episodes)
 {
     m_episodeListModel.clear();
     emit episodeListChanged();

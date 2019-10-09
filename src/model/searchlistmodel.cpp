@@ -16,20 +16,10 @@ SearchListModel::SearchListModel(QObject *parent, DatabaseManager *dbmanager, Ap
             this,
             SLOT(getAllFinished(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)));
 
-    connect(m_reader,
-            SIGNAL(readyToPopulateSeries(MapOfMapLists)),
-            this,
-            SLOT(populateSearchModel(MapOfMapLists)));
-
-    connect(m_reader,
-            SIGNAL(readyToStoreSeries(MapOfMapLists)),
-            this,
-            SLOT(getFullSeriesRecordFinished(MapOfMapLists)));
-
     connect(this,
-            SIGNAL(storeSeriesRequested(MapOfMapLists)),
+            SIGNAL(storeSeriesRequested(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)),
             m_dbmanager,
-            SLOT(storeSeries(MapOfMapLists)));
+            SLOT(storeSeries(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)));
 
     connect(m_dbmanager,
             SIGNAL(seriesStored()),
@@ -74,7 +64,6 @@ void SearchListModel::searchListClear(QQmlListProperty<SeriesData>* prop)
     qobject_cast<SearchListModel*>(prop->object)->m_searchListModel.clear();
 }
 
-<<<<<<< HEAD
 void SearchListModel::searchFinished(QList<QVariantMap> series)
 {
     populateSearchModel(series);
@@ -82,29 +71,13 @@ void SearchListModel::searchFinished(QList<QVariantMap> series)
 
 void SearchListModel::getAllFinished(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners)
 {
-    storeSeries(series);
-    storeEpisodes(episodes);
-    storeBanners(banners);
-    setLoading(false);
-    emit updateModels();
+    emit storeSeriesRequested(series, episodes, banners);
 }
 
 void SearchListModel::populateSearchModel(QList<QVariantMap> foundSeries)
 {
     if (!foundSeries.empty()) {
         for (auto series : foundSeries) {
-=======
-void SearchListModel::getFullSeriesRecordFinished(QMap<QString, QList<QMap<QString, QString> > > seriesData)
-{
-    emit storeSeriesRequested(seriesData);
-}
-
-void SearchListModel::populateSearchModel(QMap<QString, QList<QMap<QString, QString> > > allSeries)
-{
-    m_series = allSeries["series"];
-    if (!m_series.empty()) {
-        for (auto series : m_series) {
->>>>>>> searchmodel threaded
             SeriesData* seriesData = new SeriesData(this, series);
             m_searchListModel.append(seriesData);
         }
@@ -116,7 +89,7 @@ void SearchListModel::populateSearchModel(QMap<QString, QList<QMap<QString, QStr
 void SearchListModel::seriesStored()
 {
     setLoading(false);
-//    emit updateModels();
+    emit updateModels();
     setAdded(true);
 }
 
@@ -140,29 +113,6 @@ void SearchListModel::getFullSeriesRecord(QString id)
     setLoading(true);
 }
 
-<<<<<<< HEAD
-void SearchListModel::storeSeries(QList<QVariantMap> series)
-{
-    if (!series.isEmpty()) {
-        m_dbmanager->insertSeries(series.first());
-    }
-}
-
-void SearchListModel::storeEpisodes(QList<QVariantMap> episodes)
-{
-    auto seriesId = m_info->getID().toInt();
-    m_dbmanager->insertEpisodes(episodes, seriesId);
-    setAdded(true);
-}
-
-void SearchListModel::storeBanners(QList<QVariantMap> banners)
-{
-    auto seriesId = m_info->getID().toInt();
-    m_dbmanager->insertBanners(banners, seriesId);
-}
-
-=======
->>>>>>> searchmodel threaded
 QString SearchListModel::getID() { return m_info->getID(); }
 
 QString SearchListModel::getLanguage() { return m_info->getLanguage(); }

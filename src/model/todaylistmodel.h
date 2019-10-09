@@ -26,7 +26,7 @@ signals:
     void getStartPageSeries();
 
 public slots:
-    void populateTodayModel(QList<QMap<QString, QString> > allSeries);
+    void populateTodayModel(QList<QVariantMap> allSeries);
 
 private:
     DatabaseManager* m_dbmanager;

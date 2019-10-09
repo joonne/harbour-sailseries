@@ -53,9 +53,6 @@ public:
 
     bool deleteAllSeries();
 
-    QList<QVariantMap> getSeries();
-    QList<QVariantMap> getStartPageSeries();
-    QList<QVariantMap> getEpisodes(int seriesID, int seasonNumber);
     QVariantMap getNextEpisodeDetails(int seriesID);
     QString getStatus(int seriesID);
     QString getSeasonBanner(int seriesID, int season);
@@ -84,13 +81,13 @@ public:
     QMultiMap<int, QMap<QString, QStringList> > getMostWatchedActors();
 
 signals:
-    void populateTodayModel(QList<QMap<QString, QString> > allSeries);
-    void populateBannerList(QList<QMap<QString, QString> > allSeries);
+    void populateTodayModel(QList<QVariantMap> allSeries);
+    void populateBannerList(QList<QVariantMap> allSeries);
     void seriesDeleted(bool success);
     void seriesStored();
     void updateStatistics(QVariantMap);
     void populateSeasonList(QList<QVariantMap> seasons);
-    void populateEpisodeList(QList<QMap<QString, QString> > episodes);
+    void populateEpisodeList(QList<QVariantMap> episodes);
 
 public slots:
     void getStartPageSeries();
@@ -98,7 +95,7 @@ public slots:
     void getSeasons(int seriesId);
     void getEpisodes(int seriesId, int seasonNumber);
     void deleteSeries(int seriesId);
-    void storeSeries(QMap<QString, QList<QMap<QString, QString> > > seriesData);
+    void storeSeries(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners);
     void getStatistics();
     void toggleWatched(QString episodeId, QString seriesId, int seasonNumber);
 

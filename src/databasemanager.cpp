@@ -438,16 +438,12 @@ bool DatabaseManager::insertBanners(QList<QVariantMap> banners, int seriesId)
     return ret;
 }
 
-void DatabaseManager::storeSeries(QMap<QString, QList<QMap<QString, QString> > > seriesData)
+void DatabaseManager::storeSeries(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners)
 {
-    auto series = seriesData["series"];
-    auto episodes = seriesData["episodes"];
-    auto banners = seriesData["banners"];
-
     if (!series.isEmpty()) {
         insertSeries(series.first());
-        insertEpisodes(episodes);
-        int seriesId = series.first()["id"].toInt();
+        auto seriesId = series.first()["id"].toInt();
+        insertEpisodes(episodes, seriesId);
         insertBanners(banners, seriesId);
     }
 
@@ -719,6 +715,7 @@ void DatabaseManager::getEpisodes(int seriesId, int seasonNumber)
             episodes.append(episode);
         }
     }
+
     emit populateEpisodeList(episodes);
 }
 

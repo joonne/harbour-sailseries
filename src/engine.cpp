@@ -2,19 +2,10 @@
 
 Engine::Engine(QObject *parent) :
     QObject(parent),
-    m_reader(new XMLReader),
+    m_api(new Api),
     m_dbmanager(new DatabaseManager),
     m_loading(false)
 {
-    typedef QList<QVariantMap> VariantList;
-    qRegisterMetaType<VariantList>("VariantList");
-
-    typedef QList<QMap<QString, QString> > MapList;
-    qRegisterMetaType<MapList>("MapList");
-
-    typedef QMap<QString, MapList > MapOfMapLists;
-    qRegisterMetaType<MapOfMapLists>("MapOfMapLists");
-
     QThread* db_thread = new QThread;
     m_dbmanager->moveToThread(db_thread);
     connect(db_thread, SIGNAL(finished()), db_thread, SLOT(deleteLater()));

@@ -145,12 +145,12 @@
         <translation>Fecha de estreno</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="105"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="106"/>
         <source>Writer</source>
         <translation>Autor</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="113"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="114"/>
         <source>Guest Stars</source>
         <translation>Estrellas invitadas</translation>
     </message>
@@ -158,27 +158,27 @@
 <context>
     <name>EpisodesPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="29"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="27"/>
         <source>I have seen these all</source>
         <translation>He visto todo esto</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="41"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="39"/>
         <source>Episodes</source>
         <translation>Episodios</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="90"/>
-        <source>Season</source>
-        <translation>Temporada</translation>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="91"/>
+        <source>Specials: Episode %1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="97"/>
-        <source>Episode</source>
-        <translation>Episodio</translation>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="92"/>
+        <source>Season %1 Episode %2</source>
+        <translation type="unfinished">Temporada %1 Episodio %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="147"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="142"/>
         <source>No episodes.</source>
         <translation>Sin episodios.</translation>
     </message>
@@ -273,17 +273,22 @@
         <translation>Temporadas</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="80"/>
-        <source>Season</source>
-        <translation>Temporada</translation>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="81"/>
+        <source>Specials</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="93"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="81"/>
+        <source>Season %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="94"/>
         <source>Watched</source>
         <translation>Visto</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="135"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="136"/>
         <source>episodes</source>
         <translation>episodios</translation>
     </message>

@@ -53,10 +53,6 @@ public:
     bool getAdded();
     void setAdded(bool cond);
 
-    void storeSeries(QList<QVariantMap> series);
-    void storeEpisodes(QList<QVariantMap> episodes);
-    void storeBanners(QList<QVariantMap> banners);
-
 signals:
     void searchModelChanged();
     void idChanged();
@@ -73,13 +69,11 @@ signals:
     void addedChanged();
     void updateModels();
 
-    void storeSeriesRequested(QMap<QString, QList<QMap<QString, QString> > > seriesData);
+    void storeSeriesRequested(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners);
 
 public slots:
     void searchFinished(QList<QVariantMap> series);
     void getAllFinished(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners);
-    void getFullSeriesRecordFinished(QMap<QString, QList<QMap<QString, QString> > > seriesData);
-    void populateSearchModel(QMap<QString, QList<QMap<QString, QString> > > allSeries);
     void seriesStored();
 
 private:

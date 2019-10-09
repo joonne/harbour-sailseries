@@ -13,20 +13,15 @@ SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager, Ap
             this,
             SLOT(updateFetchFinished(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)));
 
-    // connect(m_reader,
-    //         SIGNAL(readyToUpdateSeries(MapOfMapLists)),
-    //         this,
-    //         SLOT(updateFetchFinished(MapOfMapLists)));
-
     connect(this,
             SIGNAL(getSeries()),
             m_dbmanager,
             SLOT(getSeries()));
 
     connect(m_dbmanager,
-            SIGNAL(populateBannerList(MapList)),
+            SIGNAL(populateBannerList(QList<QVariantMap>)),
             this,
-            SLOT(populateBannerList(MapList)));
+            SLOT(populateBannerList(QList<QVariantMap>)));
 
     connect(this,
             SIGNAL(deleteSeriesRequested(int)),
@@ -39,9 +34,9 @@ SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager, Ap
             SLOT(seriesDeleted(bool)));
 
     connect(this,
-            SIGNAL(storeSeriesRequested(MapOfMapLists)),
+            SIGNAL(storeSeriesRequested(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)),
             m_dbmanager,
-            SLOT(storeSeries(MapOfMapLists)));
+            SLOT(storeSeries(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)));
 
     connect(m_dbmanager,
             SIGNAL(seriesStored()),
@@ -63,11 +58,7 @@ SeriesListModel::~SeriesListModel()
 
 void SeriesListModel::updateFetchFinished(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners)
 {
-    storeSeries(series);
-    storeEpisodes(episodes);
-    storeBanners(banners);
-
-    // emit storeSeriesRequested(seriesData);
+    emit storeSeriesRequested(series, episodes, banners);
 }
 
 void SeriesListModel::seriesStored()
@@ -106,7 +97,7 @@ void SeriesListModel::seriesListClear(QQmlListProperty<SeriesData>* prop)
     qobject_cast<SeriesListModel*>(prop->object)->m_seriesListModel.clear();
 }
 
-void SeriesListModel::populateBannerList(QList<QMap<QString, QString> > allSeries)
+void SeriesListModel::populateBannerList(QList<QVariantMap> allSeries)
 {
     m_seriesListModel.clear();
     emit seriesListChanged();
@@ -139,31 +130,6 @@ void SeriesListModel::selectSeries(int index)
 
     m_daysToNextEpisode = m_info->getDaysToNextEpisode();
     emit daysToNextEpisodeChanged();
-}
-
-void SeriesListModel::storeSeries(QList<QVariantMap> series)
-{
-    m_series = series;
-
-    if (!m_series.isEmpty()) {
-        m_dbmanager->insertSeries(m_series.first());
-    }
-}
-
-void SeriesListModel::storeEpisodes(QList<QVariantMap> episodes)
-{
-    if (!m_series.isEmpty()) {
-        int seriesId = m_series.first()["id"].toInt();
-        m_dbmanager->insertEpisodes(episodes, seriesId);
-    }
-}
-
-void SeriesListModel::storeBanners(QList<QVariantMap> banners)
-{
-    if (!m_series.isEmpty()) {
-        int seriesId = m_series.first()["id"].toInt();
-        m_dbmanager->insertBanners(banners, seriesId);
-    }
 }
 
 QString SeriesListModel::getID() { return m_info->getID(); }
@@ -256,20 +222,6 @@ void SeriesListModel::updateAllSeries(bool updateEndedSeries)
     m_episodes.clear();
     m_banners.clear();
 
-<<<<<<< HEAD
-    auto allSeries = m_dbmanager->getSeries();
-    for (auto series : allSeries) {
-        if (!updateEndedSeries) {
-            if (series["status"] != "Ended") {
-               m_seriesIds.append(series["id"].toString());
-            }
-        } else {
-             m_seriesIds.append(series["id"].toString());
-        }
-    }
-
-=======
     m_seriesIds = m_dbmanager->getSeriesIds(updateEndedSeries);
->>>>>>> updateAll threaded
     updateSeries();
 }

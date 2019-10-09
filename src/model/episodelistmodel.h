@@ -31,7 +31,7 @@ signals:
     void toggleWatchedRequested(QString episodeId, QString seriesId, int seasonNumber);
 
 public slots:
-    void populateEpisodeList(QList<QMap<QString, QString> > episodes);
+    void populateEpisodeList(QList<QVariantMap> episodes);
 
 private:
     QList<EpisodeData*> m_episodeListModel;
