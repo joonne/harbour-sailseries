@@ -31,6 +31,8 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("harbour-sailseries");
     QCoreApplication::setOrganizationName("harbour-sailseries");
 
+    qRegisterMetaType<QList<QVariantMap>>("QVariantMapList");
+
     qmlRegisterType<SeriesData>("harbour.sailseries.model", 1, 0, "SeriesData");
     qmlRegisterType<SeriesListModel>("harbour.sailseries.model", 1, 0, "SeriesListModel");
     qmlRegisterType<SearchListModel>("harbour.sailseries.model", 1, 0, "SearchListModel");
