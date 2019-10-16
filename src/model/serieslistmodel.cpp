@@ -8,11 +8,6 @@ SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager, Ap
 
     m_mode = "default";
 
-    connect(m_api,
-            SIGNAL(readyToUpdateSeries(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)),
-            this,
-            SLOT(updateFetchFinished(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)));
-
     connect(this,
             SIGNAL(getSeries()),
             m_dbmanager,
@@ -29,14 +24,9 @@ SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager, Ap
             SLOT(deleteSeries(int)));
 
     connect(m_dbmanager,
-            SIGNAL(seriesDeleted(bool)),
+            SIGNAL(seriesDeleted()),
             this,
-            SLOT(seriesDeleted(bool)));
-
-    connect(this,
-            SIGNAL(storeSeriesRequested(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)),
-            m_dbmanager,
-            SLOT(storeSeries(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)));
+            SLOT(seriesDeleted()));
 
     connect(m_dbmanager,
             SIGNAL(seriesStored()),
@@ -54,11 +44,6 @@ SeriesListModel::~SeriesListModel()
         delete series;
         series = 0;
     }
-}
-
-void SeriesListModel::updateFetchFinished(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners)
-{
-    emit storeSeriesRequested(series, episodes, banners);
 }
 
 void SeriesListModel::seriesStored()
@@ -194,15 +179,9 @@ void SeriesListModel::deleteSeries(int seriesId)
     emit deleteSeriesRequested(seriesId);
 }
 
-void SeriesListModel::seriesDeleted(bool success)
+void SeriesListModel::seriesDeleted()
 {
-    if (success) {
-        emit getSeries();
-        // emit updateModels(); // TODO: check
-    } else {
-        qDebug() << "series deletion failed";
-    }
-    setLoading(false);
+    emit getSeries();
 }
 
 void SeriesListModel::updateSeries(QString seriesId)
@@ -212,16 +191,11 @@ void SeriesListModel::updateSeries(QString seriesId)
     }
 
     setLoading(true);
-    m_api->getAll(seriesId, "update");
+    m_api->getAll(seriesId);
 }
 
 void SeriesListModel::updateAllSeries(bool updateEndedSeries)
 {
-    m_seriesIds.clear();
-    m_series.clear();
-    m_episodes.clear();
-    m_banners.clear();
-
     m_seriesIds = m_dbmanager->getSeriesIds(updateEndedSeries);
     updateSeries();
 }

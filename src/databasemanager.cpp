@@ -259,43 +259,41 @@ bool DatabaseManager::deleteDuplicateEpisodes()
     return ret;
 }
 
-bool DatabaseManager::insertSeries(QVariantMap series)
-{
-    bool ret = false;
-    int watched = 0;
-    
+void DatabaseManager::storeSeries(QVariantMap series)
+{   
     startTransaction();
     
-    int seriesId = series["id"].toInt();
-    QString actors = series["actors"].toString();
-    QString airsDayOfWeek = series["airsDayOfWeek"].toString();
-    QString airsTime = series["airsTime"].toString();
-    QString contentRating = series["contentRating"].toString();
-    QString firstAired = series["firstAired"].toString();
-    QString genre = series["genre"].toStringList().join(",");
-    QString imdbId = series["imdbId"].toString();
-    QString language = series["language"].toString();
-    QString network = series["network"].toString();
-    QString overview = series["overview"].toString();
-    double rating = series["siteRating"].toDouble();
-    int ratingCount = series["siteRatingCount"].toInt();
-    int runtime = series["runtime"].toInt();
-    QString seriesName = series["seriesName"].toString();
-    QString status = series["status"].toString();
-    QString added = series["added"].toString();
-    int addedBy = series["addedBy"].toInt();
-    QString banner = series["banner"].toString();
-    QString fanart = series["fanart"].toString();
-    QString lastUpdated = series["lastUpdated"].toString();
-    QString poster = series["poster"].toString();
-    QString zap2itId = series["zap2itId"].toString();
+    auto seriesId = series["id"].toInt();
+    auto actors = series["actors"].toString();
+    auto airsDayOfWeek = series["airsDayOfWeek"].toString();
+    auto airsTime = series["airsTime"].toString();
+    auto contentRating = series["contentRating"].toString();
+    auto firstAired = series["firstAired"].toString();
+    auto genre = series["genre"].toStringList().join(",");
+    auto imdbId = series["imdbId"].toString();
+    auto language = series["language"].toString();
+    auto network = series["network"].toString();
+    auto overview = series["overview"].toString();
+    auto rating = series["siteRating"].toDouble();
+    auto ratingCount = series["siteRatingCount"].toInt();
+    auto runtime = series["runtime"].toInt();
+    auto seriesName = series["seriesName"].toString();
+    auto status = series["status"].toString();
+    auto added = series["added"].toString();
+    auto addedBy = series["addedBy"].toInt();
+    auto banner = series["banner"].toString();
+    auto fanart = series["fanart"].toString();
+    auto lastUpdated = series["lastUpdated"].toString();
+    auto poster = series["poster"].toString();
+    auto zap2itId = series["zap2itId"].toString();
+    auto watched = 0;
     
     overview.replace("'", "''");
     actors.replace("'", "''");
     seriesName.replace("'", "''");
         
-    if (m_db.isOpen()) {
-        
+    if (m_db.isOpen())
+    {
         QSqlQuery query(m_db);
         query.prepare(QString("INSERT OR REPLACE INTO Series(id, actors, airsDayOfWeek, airsTime, contentRating, firstAired, genre, imdbID, language, network, overview, rating, ratingCount, runtime, seriesName, status, added, addedBy, banner, fanart, lastupdated, poster, zap2itID, watched) "
                               "VALUES(:seriesId, :actors, :airsDayOfWeek, :airsTime, :contentRating, :firstAired, :genre, :imdbId, :language, :network, :overview, :rating, :ratingCount, :runtime, :seriesName, :status, :added, :addedBy, :banner, :fanart, :lastUpdated, :poster, :zap2itId, :watched)"));
@@ -323,46 +321,45 @@ bool DatabaseManager::insertSeries(QVariantMap series)
         query.bindValue(":poster", poster);
         query.bindValue(":zap2itId", zap2itId);
         query.bindValue(":watched", watched);
-        ret = query.exec();
+        query.exec();
         
         qDebug() << query.lastError();
         
-        if (query.lastError().text() != " ") {
+        if (query.lastError().text() != " ")
+        {
             qDebug() << query.lastQuery();
         }
     }
     
     commit();
-    
-    return ret;
+
+    emit seriesStored();
 }
 
-bool DatabaseManager::insertEpisodes(QList<QVariantMap> episodes, int seriesId)
+void DatabaseManager::storeEpisodes(QString seriesId, QList<QVariantMap> episodes)
 {
-    bool ret = false;
-    
     startTransaction();
 
-    for (auto episode : episodes) {
-        
-        int absoluteNumber = episode["absoluteNumber"].toInt();
-        int episodeNumber = episode["airedEpisodeNumber"].toInt();
-        int seasonNumber = episode["airedSeason"].toInt();
-        int seasonId = episode["airedSeasonID"].toInt();
-        QString episodeName = episode["episodeName"].toString();
-        QString firstAired = episode["firstAired"].toString();
-        int id = episode["id"].toInt();
-        QString language = episode["language"].toMap()["overview"].toString();
-        QString lastUpdated = episode["lastUpdated"].toString();
-        QString overview = episode["overview"].toString();
-        int watched = 0;
+    for (auto episode : episodes)
+    {
+        auto absoluteNumber = episode["absoluteNumber"].toInt();
+        auto episodeNumber = episode["airedEpisodeNumber"].toInt();
+        auto seasonNumber = episode["airedSeason"].toInt();
+        auto seasonId = episode["airedSeasonID"].toInt();
+        auto episodeName = episode["episodeName"].toString();
+        auto firstAired = episode["firstAired"].toString();
+        auto id = episode["id"].toInt();
+        auto language = episode["language"].toMap()["overview"].toString();
+        auto lastUpdated = episode["lastUpdated"].toString();
+        auto overview = episode["overview"].toString();
+        auto watched = 0;
 
         // important!
         overview.replace("'", "''");
         episodeName.replace("'", "''");
         
-        if (m_db.isOpen()) {
-
+        if (m_db.isOpen())
+        {
             // lets get and check the watched flag first, might be slow but this must be done
             // in order to keep the flag state
             QSqlQuery query(m_db);
@@ -370,9 +367,10 @@ bool DatabaseManager::insertEpisodes(QList<QVariantMap> episodes, int seriesId)
             query.bindValue(":id", id);
             query.exec();
             
-            if (query.isSelect()) {
-                
-                while (query.next()) {
+            if (query.isSelect())
+            {
+                while (query.next())
+                {
                     watched = query.value(0).toInt();
                 }
             }
@@ -389,27 +387,21 @@ bool DatabaseManager::insertEpisodes(QList<QVariantMap> episodes, int seriesId)
             query.bindValue(":absoluteNumber", absoluteNumber);
             query.bindValue(":lastUpdated", lastUpdated);
             query.bindValue(":seasonId", seasonId);
-            query.bindValue(":seriesId", seriesId);
+            query.bindValue(":seriesId", seriesId.toInt());
             query.bindValue(":watched", watched);
-            ret = query.exec();
+            query.exec();
         }
     }
     
     commit();
-    
-    return ret;
 }
 
-bool DatabaseManager::insertBanners(QList<QVariantMap> banners, int seriesId)
+void DatabaseManager::storeSeasonImages(QString seriesId, QList<QVariantMap> banners)
 {
-    qDebug() << "insertBanners() ";
-    
-    bool ret = false;
-    
     startTransaction();
 
-    for (auto banner : banners) {
-
+    for (auto banner : banners)
+    {
         auto id = banner["id"].toInt();
         auto bannerPath = banner["bannerPath"].toString();
         auto bannerType = banner["bannerType"].toString();
@@ -417,37 +409,23 @@ bool DatabaseManager::insertBanners(QList<QVariantMap> banners, int seriesId)
         auto language = banner["language"].toString();
         auto season = banner["season"].toInt();
         
-        if (m_db.isOpen()) {
-            
+        if (m_db.isOpen())
+        {
             QSqlQuery query(m_db);
             query.prepare("INSERT OR REPLACE INTO Banner (id, seriesID, bannerPath, bannerType, bannerType2, language, season) "
                           "VALUES (:id, :seriesId, :bannerPath, :bannerType, :bannerType2, :language, :season)");
             query.bindValue(":id", id);
-            query.bindValue(":seriesId", seriesId);
+            query.bindValue(":seriesId", seriesId.toInt());
             query.bindValue(":bannerPath", bannerPath);
             query.bindValue(":bannerType", bannerType);
             query.bindValue(":bannerType2", bannerType2);
             query.bindValue(":language", language);
             query.bindValue(":season", season);
-            ret = query.exec();
+            query.exec();
         }
     }
     
     commit();
-    
-    return ret;
-}
-
-void DatabaseManager::storeSeries(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners)
-{
-    if (!series.isEmpty()) {
-        insertSeries(series.first());
-        auto seriesId = series.first()["id"].toInt();
-        insertEpisodes(episodes, seriesId);
-        insertBanners(banners, seriesId);
-    }
-
-    emit seriesStored();
 }
 
 QStringList DatabaseManager::getSeriesIds(bool updateEndedSeries)
@@ -455,27 +433,33 @@ QStringList DatabaseManager::getSeriesIds(bool updateEndedSeries)
     QStringList seriesIds;
     QString queryString;
 
-    if (updateEndedSeries) {
+    if (updateEndedSeries)
+    {
         queryString = QString("SELECT id "
                               "FROM Series "
                               "ORDER BY seriesName;");
-    } else {
+    }
+    else
+    {
          queryString = QString("SELECT id "
                                "FROM Series "
                                "WHERE status != 'Ended'"
                                "ORDER BY seriesName;");
     }
 
-    if (m_db.isOpen()) {
-
+    if (m_db.isOpen())
+    {
         this->startTransaction();
 
         QSqlQuery query(m_db);
         query.exec(queryString);
+
         this->commit();
 
-        if (query.isSelect()) {
-            while (query.next()) {
+        if (query.isSelect())
+        {
+            while (query.next())
+            {
                 seriesIds.append(query.value(0).toString());
             }
         }
@@ -729,6 +713,57 @@ void DatabaseManager::toggleWatched(QString episodeId, QString seriesId, int sea
     getEpisodes(seriesId.toInt(), seasonNumber);
 }
 
+void DatabaseManager::storePosterImageFor(QString seriesId, QString posterImage)
+{
+    QSqlQuery query(m_db);
+    query.prepare(QString("UPDATE Series "
+                          "SET poster = :poster "
+                          "WHERE id = :seriesId"));
+    query.bindValue(":poster", posterImage);
+    query.bindValue(":seriesId", seriesId);
+    query.exec();
+}
+
+void DatabaseManager::storeBannerImageFor(QString seriesId, QString bannerImage)
+{
+    QSqlQuery query(m_db);
+    query.prepare(QString("UPDATE Series "
+                          "SET banner = :banner "
+                          "WHERE id = :seriesId"));
+    query.bindValue(":banner", bannerImage);
+    query.bindValue(":seriesId", seriesId);
+    query.exec();
+}
+
+void DatabaseManager::storeFanartImageFor(QString seriesId, QString fanartImage)
+{
+    QSqlQuery query(m_db);
+    query.prepare(QString("UPDATE Series "
+                          "SET fanart = :fanart "
+                          "WHERE id = :seriesId"));
+    query.bindValue(":fanart", fanartImage);
+    query.bindValue(":seriesId", seriesId);
+    query.exec();
+}
+
+void DatabaseManager::storeActors(QString seriesId, QList<QVariantMap> actors)
+{
+    auto actorNames = QString("");
+
+    for (auto actor : actors)
+    {
+        actorNames += QString("|%1").arg(actor["name"].toString());
+    }
+
+    QSqlQuery query(m_db);
+    query.prepare(QString("UPDATE Series "
+                          "SET actors = :actorNames "
+                          "WHERE id = :seriesId"));
+    query.bindValue(":actors", actorNames);
+    query.bindValue(":seriesId", seriesId);
+    query.exec();
+}
+
 void DatabaseManager::deleteSeries(int seriesId)
 {
     auto ret1 = false;
@@ -746,9 +781,11 @@ void DatabaseManager::deleteSeries(int seriesId)
         }
     }
 
-    this->commit();
-
-    emit seriesDeleted(ret1 && ret2 && ret3);
+    if (ret1 && ret2 && ret3)
+    {
+        this->commit();
+        emit seriesDeleted();
+    }
 }
 
 bool DatabaseManager::deleteAllSeries()

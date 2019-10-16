@@ -33,60 +33,34 @@ public:
     void getSeries(QString seriesId);
     void getSeasonImages(QString seriesId);
     void getPosterImages(QString seriesId);
-    void getSeriesImages(QString seriesId);
+    void getBannerImages(QString seriesId);
     void getFanartImages(QString seriesId);
     void getActors(QString seriesId);
-    void getEpisodes(QString seriesId, int page);
-    void getAll(QString seriesId, QString method);
+    void getEpisodes(QString seriesId, int page = 1);
+    void getAll(QString seriesId);
     void getEpisode(QString episodeId);
-
-    QList<QVariantMap> series();
-    QList<QVariantMap> episodes();
-    QList<QVariantMap> banners();
-
-    bool getUpdateFlag();
-    void setUpdateFlag(bool state);
-    bool getFullRecordFlag();
-    void setFullRecordFlag(bool state);
-
-    QString findHighestRatedImage(QList<QVariantMap> images);
 
 signals:
     void readyToPopulateSeries(QList<QVariantMap>);
-    void readyToStoreSeries(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>);
-    void readyToUpdateSeries(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>);
-    void readyToCheckIfReady();
+    void storeSeries(QVariantMap);
     void readyToPopulateEpisodeDetails(QVariantMap episode);
+    void storeEpisodes(QString, QList<QVariantMap>);
+    void storePosterImageFor(QString, QString);
+    void storeBannerImageFor(QString, QString);
+    void storeFanartImageFor(QString, QString);
+    void storeActors(QString, QList<QVariantMap>);
+    void storeSeasonImages(QString, QList<QVariantMap>);
 
 public slots:
     void replyFinishedError(QNetworkReply* reply);
-    void checkIfReady();
 
 private:
     QNetworkAccessManager* m_nam;
     QList<QMap<QString,QString> > m_languages;
-
-    QList<QVariantMap> m_series;
-    QList<QVariantMap> m_episodes;
-    QList<QVariantMap> m_actors;
-    QList<QVariantMap> m_fanartImages;
-    QList<QVariantMap> m_seasonImages;
-    QList<QVariantMap> m_seriesImages;
-    QList<QVariantMap> m_posterImages;
-
-    bool m_seriesFinished;
-    bool m_episodesFinished;
-    bool m_actorsFinished;
-    bool m_fanartImagesFinished;
-    bool m_seasonImagesFinished;
-    bool m_seriesImagesFinished;
-    bool m_posterImagesFinished;
-
-    bool m_fullRecord;
-    bool m_update;
     QString m_jwt;
 
     QString getLocale();
+    QString findHighestRatedImage(QList<QVariantMap> images);
 };
 
 #endif // API_H

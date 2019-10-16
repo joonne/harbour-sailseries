@@ -44,10 +44,6 @@ public:
 
     bool deleteDuplicateEpisodes();
 
-    bool insertSeries(QVariantMap series);
-    bool insertEpisodes(QList<QVariantMap> episodes, int seriesId);
-    bool insertBanners(QList<QVariantMap> banners, int seriesId);
-
     bool updateSeries();
     bool updateEpisode();
 
@@ -83,7 +79,7 @@ public:
 signals:
     void populateTodayModel(QList<QVariantMap> allSeries);
     void populateBannerList(QList<QVariantMap> allSeries);
-    void seriesDeleted(bool success);
+    void seriesDeleted();
     void seriesStored();
     void updateStatistics(QVariantMap);
     void populateSeasonList(QList<QVariantMap> seasons);
@@ -95,9 +91,15 @@ public slots:
     void getSeasons(int seriesId);
     void getEpisodes(int seriesId, int seasonNumber);
     void deleteSeries(int seriesId);
-    void storeSeries(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners);
+    void storeSeries(QVariantMap series);
+    void storeEpisodes(QString seriesId, QList<QVariantMap> episodes);
     void getStatistics();
     void toggleWatched(QString episodeId, QString seriesId, int seasonNumber);
+    void storePosterImageFor(QString seriesId, QString posterImage);
+    void storeBannerImageFor(QString seriesId, QString bannerImage);
+    void storeFanartImageFor(QString seriesId, QString fanartImage);
+    void storeActors(QString seriesId, QList<QVariantMap> actors);
+    void storeSeasonImages(QString seriesId, QList<QVariantMap> seasonImages);
 
 private:
     QSqlDatabase m_db;

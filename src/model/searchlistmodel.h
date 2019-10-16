@@ -69,11 +69,11 @@ signals:
     void addedChanged();
     void updateModels();
 
-    void storeSeriesRequested(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners);
+    void storeSeries(QList<QVariantMap> series, QList<QVariantMap> banners);
+    void storeEpisodes(QString seriesId, QList<QVariantMap> episodes);
 
 public slots:
     void searchFinished(QList<QVariantMap> series);
-    void getAllFinished(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners);
     void seriesStored();
 
 private:

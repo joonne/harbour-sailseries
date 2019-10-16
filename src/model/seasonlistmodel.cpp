@@ -11,9 +11,9 @@ SeasonListModel::SeasonListModel(QObject *parent,  DatabaseManager* dbmanager) :
             SLOT(getSeasons(int)));
 
     connect(m_dbmanager,
-            SIGNAL(populateSeasonList(VariantList)),
+            SIGNAL(populateSeasonList(QList<QVariantMap>)),
             this,
-            SLOT(populateSeasonList(VariantList)));
+            SLOT(populateSeasonList(QList<QVariantMap>)));
 }
 
 SeasonListModel::~SeasonListModel()

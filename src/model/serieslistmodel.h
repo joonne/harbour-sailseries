@@ -85,12 +85,10 @@ signals:
 
     void getSeries();
     void deleteSeriesRequested(int SeriesId);
-    void storeSeriesRequested(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners);
 
 public slots:
-    void updateFetchFinished(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners);
     void populateBannerList(QList<QVariantMap> allSeries);
-    void seriesDeleted(bool success);
+    void seriesDeleted();
     void seriesStored();
 
 private:

@@ -6,10 +6,10 @@ Engine::Engine(QObject *parent) :
     m_dbmanager(new DatabaseManager),
     m_loading(false)
 {
-    QThread* db_thread = new QThread;
-    m_dbmanager->moveToThread(db_thread);
-    connect(db_thread, SIGNAL(finished()), db_thread, SLOT(deleteLater()));
-    db_thread->start();
+    QThread* dbThread = new QThread;
+    m_dbmanager->moveToThread(dbThread);
+    connect(dbThread, SIGNAL(finished()), dbThread, SLOT(deleteLater()));
+    dbThread->start();
 
     m_seriesListModel = new SeriesListModel(this, m_dbmanager, m_api);
     m_searchListModel = new SearchListModel(this, m_dbmanager, m_api);
@@ -32,6 +32,31 @@ Engine::Engine(QObject *parent) :
             SIGNAL(readyToPopulateEpisodeDetails(QVariantMap)),
             this,
             SLOT(readyToUpdateEpisodeDetails(QVariantMap)));
+
+    connect(m_api,
+            SIGNAL(storePosterImageFor(QString,QString)),
+            m_dbmanager,
+            SLOT(storePosterImageFor(QString,QString)));
+
+    connect(m_api,
+            SIGNAL(storeBannerImageFor(QString,QString)),
+            m_dbmanager,
+            SLOT(storeBannerImageFor(QString,QString)));
+
+    connect(m_api,
+            SIGNAL(storeFanartImageFor(QString,QString)),
+            m_dbmanager,
+            SLOT(storeFanartImageFor(QString,QString)));
+
+    connect(m_api,
+            SIGNAL(storeEpisodes(QString, QList<QVariantMap>)),
+            m_dbmanager,
+            SLOT(storeEpisodes(QString, QList<QVariantMap>)));
+
+    connect(m_api,
+            SIGNAL(storeSeries(QVariantMap)),
+            m_dbmanager,
+            SLOT(storeSeries(QVariantMap)));
 }
 
 Engine::~Engine()

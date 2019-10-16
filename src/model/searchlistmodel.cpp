@@ -11,16 +11,6 @@ SearchListModel::SearchListModel(QObject *parent, DatabaseManager *dbmanager, Ap
             this,
             SLOT(searchFinished(QList<QVariantMap>)));
 
-    connect(m_api,
-            SIGNAL(readyToStoreSeries(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)),
-            this,
-            SLOT(getAllFinished(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)));
-
-    connect(this,
-            SIGNAL(storeSeriesRequested(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)),
-            m_dbmanager,
-            SLOT(storeSeries(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)));
-
     connect(m_dbmanager,
             SIGNAL(seriesStored()),
             this,
@@ -69,11 +59,6 @@ void SearchListModel::searchFinished(QList<QVariantMap> series)
     populateSearchModel(series);
 }
 
-void SearchListModel::getAllFinished(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners)
-{
-    emit storeSeriesRequested(series, episodes, banners);
-}
-
 void SearchListModel::populateSearchModel(QList<QVariantMap> foundSeries)
 {
     if (!foundSeries.empty()) {
@@ -109,7 +94,7 @@ void SearchListModel::selectSeries(int index)
 
 void SearchListModel::getFullSeriesRecord(QString id)
 {
-    m_api->getAll(id, "full");
+    m_api->getAll(id);
     setLoading(true);
 }
 
