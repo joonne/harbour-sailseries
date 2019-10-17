@@ -66,11 +66,11 @@ public:
     QString getPoster();
 
     QString getMode();
-    void setMode(QString newmode);
+    void setMode(QString mode);
 
     Q_INVOKABLE void deleteSeries(int seriesId);
-    Q_INVOKABLE void updateSeries(QString seriesId = "");
-    Q_INVOKABLE void updateAllSeries(bool updateEndedSeries = true);
+    Q_INVOKABLE void updateSeries(const QString &seriesId = "");
+    Q_INVOKABLE void updateAllSeries(const bool &updateEndedSeries = true);
 
 signals:
     void seriesListChanged();
@@ -94,12 +94,8 @@ public slots:
 private:
     Api* m_api;
     DatabaseManager* m_dbmanager;
-    QList<QVariantMap> m_series;
-    QList<QVariantMap> m_episodes;
-    QList<QVariantMap> m_banners;
     QList<SeriesData*> m_seriesListModel;
     SeriesData* m_info;
-    QList<QString> m_seriesIds;
 
     static int seriesListCount(QQmlListProperty<SeriesData> *prop);
     static SeriesData* seriesListAt(QQmlListProperty<SeriesData> *prop, int index);

@@ -49,9 +49,9 @@ public:
 
     bool deleteAllSeries();
 
-    QVariantMap getNextEpisodeDetails(int seriesID);
-    QString getStatus(int seriesID);
-    QString getSeasonBanner(int seriesID, int season);
+    QVariantMap getNextEpisodeDetails(const int &seriesId);
+    QString getStatus(const int &seriesId);
+    QString getSeasonBanner(const int &seriesId, const int &season);
     QStringList getSeriesIds(bool updateEndedSeries);
 
     void markSeasonWatched(int seriesID, int season);

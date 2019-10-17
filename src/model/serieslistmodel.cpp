@@ -40,7 +40,8 @@ SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager, Ap
 
 SeriesListModel::~SeriesListModel()
 {
-    for (auto series : m_seriesListModel) {
+    for (auto series : m_seriesListModel)
+    {
         delete series;
         series = 0;
     }
@@ -48,10 +49,6 @@ SeriesListModel::~SeriesListModel()
 
 void SeriesListModel::seriesStored()
 {
-    if (!m_seriesIds.isEmpty()) {
-        return updateSeries();
-    }
-
     setLoading(false);
     emit getSeries();
 }
@@ -87,13 +84,12 @@ void SeriesListModel::populateBannerList(QList<QVariantMap> allSeries)
     m_seriesListModel.clear();
     emit seriesListChanged();
 
-    for (auto series : allSeries) {
-        auto id = series["id"];
-        auto nextEpisodeDetails = m_dbmanager->getNextEpisodeDetails(id.toInt());
-        series.unite(nextEpisodeDetails);
+    for (auto series : allSeries)
+    {
         auto seriesData = new SeriesData(this, series);
         m_seriesListModel.append(seriesData);
     }
+
     emit seriesListChanged();
 }
 
@@ -165,10 +161,10 @@ QString SeriesListModel::getPoster() { return m_poster; }
 
 QString SeriesListModel::getMode() { return m_mode; }
 
-void SeriesListModel::setMode(QString newmode)
+void SeriesListModel::setMode(QString mode)
 {
-    if (m_mode != newmode) {
-        m_mode = newmode;
+    if (m_mode != mode) {
+        m_mode = mode;
         emit modeChanged();
     }
 }
@@ -184,18 +180,19 @@ void SeriesListModel::seriesDeleted()
     emit getSeries();
 }
 
-void SeriesListModel::updateSeries(QString seriesId)
+void SeriesListModel::updateSeries(const QString &seriesId)
 {
-    if (!m_seriesIds.isEmpty() && seriesId.isEmpty()) {
-        seriesId = m_seriesIds.takeFirst();
+    if (seriesId.isEmpty())
+    {
+        return;
     }
 
-    setLoading(true);
     m_api->getAll(seriesId);
+    setLoading(true);
 }
 
-void SeriesListModel::updateAllSeries(bool updateEndedSeries)
+void SeriesListModel::updateAllSeries(const bool &updateEndedSeries)
 {
-    m_seriesIds = m_dbmanager->getSeriesIds(updateEndedSeries);
-    updateSeries();
+    auto seriesIds = m_dbmanager->getSeriesIds(updateEndedSeries);
+    for (auto seriesId: seriesIds) updateSeries(seriesId);
 }
