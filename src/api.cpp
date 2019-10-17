@@ -288,7 +288,7 @@ void Api::getEpisode(QString episodeId)
     });
 }
 
-QString Api::findHighestRatedImage(QList<QVariantMap> images)
+QString Api::findHighestRatedImage(const QList<QVariantMap> images)
 {
     auto result = !images.isEmpty() ? images.first() : QVariantMap();
 

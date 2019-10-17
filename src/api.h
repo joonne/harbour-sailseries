@@ -60,7 +60,7 @@ private:
     QString m_jwt;
 
     QString getLocale();
-    QString findHighestRatedImage(QList<QVariantMap> images);
+    QString findHighestRatedImage(const QList<QVariantMap> images);
 };
 
 #endif // API_H
