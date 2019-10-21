@@ -33,6 +33,7 @@ public:
 
     bool startTransaction();
     bool commit();
+    bool rollback();
 
     bool initializeInfoTable();
     bool createInfoTable();
@@ -43,25 +44,21 @@ public:
     bool createBannerTable();
 
     bool deleteDuplicateEpisodes();
-
-    bool updateSeries();
-    bool updateEpisode();
-
     bool deleteAllSeries();
 
     QVariantMap getNextEpisodeDetails(const int &seriesId);
     QString getStatus(const int &seriesId);
     QString getSeasonBanner(const int &seriesId, const int &season);
-    QStringList getSeriesIds(bool updateEndedSeries);
+    QStringList getSeriesIds(bool includeEndedSeries);
 
-    void markSeasonWatched(int seriesID, int season);
+    void markSeasonWatched(const int &seriesId, const int &seasonNumber);
 
-    bool isAlreadyAdded(int seriesId, QString name);
-    int watchedCount(int seriesID);
-    int watchedCountBySeason(int seriesID, int seasonNumber);
-    int totalCount(int seriesID);
-    int totalCountBySeason(int seriesID, int seasonNumber);
-    int seasonCount(int seriesID);
+    bool isAlreadyAdded(const int &seriesId, const QString &name);
+    int watchedCount(int seriesId);
+    int watchedCountBySeason(int seriesId, int seasonNumber);
+    int totalCount(int seriesId);
+    int totalCountBySeason(int seriesId, int seasonNumber);
+    int seasonCount(int seriesId);
 
     int getWatchedEpisodesDuration();
     double getAverageWatchedEpisodesDuration();
@@ -90,7 +87,7 @@ public slots:
     void getSeries();
     void getSeasons(int seriesId);
     void getEpisodes(int seriesId, int seasonNumber);
-    void deleteSeries(int seriesId);
+    void deleteSeries(const int &seriesId);
     void storeSeries(QVariantMap series);
     void storeEpisodes(QString seriesId, QList<QVariantMap> episodes);
     void getStatistics();
