@@ -46,9 +46,9 @@ public:
     bool deleteDuplicateEpisodes();
     bool deleteAllSeries();
 
-    QVariantMap getNextEpisodeDetails(const int &seriesId);
-    QString getStatus(const int &seriesId);
-    QString getSeasonBanner(const int &seriesId, const int &season);
+    QVariantMap getNextEpisodeDetails(const int &seriesId) const;
+    QString getStatus(const int &seriesId) const;
+    QString getSeasonBanner(const int &seriesId, const int &season) const;
     QStringList getSeriesIds(bool includeEndedSeries);
 
     void markSeasonWatched(const int &seriesId, const int &seasonNumber);
