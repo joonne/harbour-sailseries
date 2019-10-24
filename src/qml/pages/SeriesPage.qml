@@ -72,6 +72,7 @@ Page {
             PageHeader {
                 id: header
                 title: engine.SeriesListModel.SeriesName
+                description: engine.SeriesListModel.Loading ? qsTr("loading...") : ""
             }
 
             SeriesBanner {
@@ -125,12 +126,6 @@ Page {
                 anchors.leftMargin: (seriespage.width - imdb.width) / 2
             }
         }
-    }
-
-    BusyIndicator {
-        size: BusyIndicatorSize.Large
-        anchors.centerIn: parent
-        running: engine.SeriesListModel.Loading
     }
 
     RemorsePopup { id: remorse }
