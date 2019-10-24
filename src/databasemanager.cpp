@@ -630,8 +630,10 @@ void DatabaseManager::getStartPageSeries()
                 temp["nextEpisodeFirstAired"] = firstAired;
                 
                 // Sometimes the series info airsDayOfWeek is wrong so lets take it from the episode directly then
-                auto airsDayOfWeekFromEpisode = locale.toString(QDate::fromString(firstAired, Qt::ISODate), "dddd");
-                temp["airsDayOfWeek"] = airsDayOfWeek == airsDayOfWeekFromEpisode ? airsDayOfWeek : airsDayOfWeekFromEpisode;
+                temp["airsDayOfWeek"] = [locale, firstAired, airsDayOfWeek](){
+                    auto airsDayOfWeekFromEpisode = locale.toString(QDate::fromString(firstAired, Qt::ISODate), "dddd");
+                    return airsDayOfWeek == airsDayOfWeekFromEpisode ? airsDayOfWeek : airsDayOfWeekFromEpisode;
+                }();
                 
                 auto banner = query.value(11).toString();
                 temp["nextEpisodeBanner"] = banner;
