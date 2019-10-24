@@ -231,7 +231,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="120"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="119"/>
         <source>Search for series first.</source>
         <translation>Primeiro busque series.</translation>
     </message>
@@ -344,17 +344,22 @@
         <translation>Actualizar</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="87"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="75"/>
+        <source>loading...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="88"/>
         <source>Status</source>
         <translation>Estado</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="96"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="97"/>
         <source>Rating</source>
         <translation>Valoración</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="107"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="108"/>
         <source>Genre</source>
         <translation>Xénero</translation>
     </message>
