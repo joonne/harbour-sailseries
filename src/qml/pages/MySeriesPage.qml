@@ -72,7 +72,6 @@ Page {
                     anchors.right: parent.right
                     anchors.rightMargin: Theme.paddingMedium
                     onClicked: {
-                        engine.SeriesListModel.Mode = "m_series"
                         engine.SeriesListModel.selectSeries(index)
                         pageStack.push(Qt.resolvedUrl("SeriesPage.qml"), { seriesId: ID })
                     }
