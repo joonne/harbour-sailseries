@@ -40,6 +40,9 @@ public:
     ~SeriesListModel();
 
     Q_INVOKABLE void selectSeries(int index);
+    Q_INVOKABLE void deleteSeries(int seriesId);
+    Q_INVOKABLE void updateSeries(QString seriesId);
+    Q_INVOKABLE void updateAllSeries(bool includeEndedSeries = true);
 
     QQmlListProperty<SeriesData> getSeriesList();
     QString getID();
@@ -59,18 +62,13 @@ public:
     QString getStatus();
     QString getRating();
     QString getGenre();
+    QString getPoster();
 
     bool getLoading();
-    void setLoading(bool state);
-
-    QString getPoster();
+    void setLoading(bool isLoading);
 
     QString getMode();
     void setMode(QString mode);
-
-    Q_INVOKABLE void deleteSeries(int seriesId);
-    Q_INVOKABLE void updateSeries(const QString &seriesId = "");
-    Q_INVOKABLE void updateAllSeries(const bool &updateEndedSeries = true);
 
 signals:
     void seriesListChanged();
@@ -84,7 +82,7 @@ signals:
     void daysToNextEpisodeChanged();
 
     void getSeries();
-    void deleteSeriesRequested(int SeriesId);
+    void deleteSeriesWith(int seriesId);
 
 public slots:
     void populateBannerList(QList<QVariantMap> allSeries);
@@ -96,22 +94,13 @@ private:
     DatabaseManager* m_dbmanager;
     QList<SeriesData*> m_seriesListModel;
     SeriesData* m_info;
+    QString m_mode;
+    bool m_isLoading;
 
     static int seriesListCount(QQmlListProperty<SeriesData> *prop);
     static SeriesData* seriesListAt(QQmlListProperty<SeriesData> *prop, int index);
     static void seriesListAppend(QQmlListProperty<SeriesData>* prop, SeriesData* val);
     static void seriesListClear(QQmlListProperty<SeriesData>* prop);
-
-    bool m_loading;
-
-    QString m_poster;
-    QString m_nextEpisodeName;
-    QString m_nextEpisodeNumber;
-    QString m_nextEpisodeSeasonNumber;
-    QString m_daysToNextEpisode;
-
-    QString m_mode;
-
 };
 
 #endif // SERIESLISTMODEL_H

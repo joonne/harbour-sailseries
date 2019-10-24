@@ -1,13 +1,12 @@
 #include "serieslistmodel.h"
 
 SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager, Api *api) :
-    QObject(parent)
+    QObject(parent),
+    m_api(api),
+    m_dbmanager(dbmanager),
+    m_mode("default"),
+    m_isLoading(false)
 {
-    m_api = api;
-    m_dbmanager = dbmanager;
-
-    m_mode = "default";
-
     connect(this,
             SIGNAL(getSeries()),
             m_dbmanager,
@@ -19,7 +18,7 @@ SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager, Ap
             SLOT(populateBannerList(QList<QVariantMap>)));
 
     connect(this,
-            SIGNAL(deleteSeriesRequested(int)),
+            SIGNAL(deleteSeriesWith(int)),
             m_dbmanager,
             SLOT(deleteSeries(int)));
 
@@ -34,8 +33,6 @@ SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager, Ap
             SLOT(seriesStored()));
 
     emit getSeries();
-
-    m_loading = false;
 }
 
 SeriesListModel::~SeriesListModel()
@@ -86,7 +83,7 @@ void SeriesListModel::populateBannerList(QList<QVariantMap> allSeries)
 
     for (auto series : allSeries)
     {
-        auto seriesData = new SeriesData(this, series);
+        const auto seriesData = new SeriesData(this, series);
         m_seriesListModel.append(seriesData);
     }
 
@@ -96,20 +93,12 @@ void SeriesListModel::populateBannerList(QList<QVariantMap> allSeries)
 void SeriesListModel::selectSeries(int index)
 {
     m_info = m_seriesListModel.at(index);
+    setMode("m_series");
 
-    m_poster = m_info->getPoster();
     emit posterChanged();
-
-    m_nextEpisodeName = m_info->getNextEpisodeName();
     emit nextEpisodeNameChanged();
-
-    m_nextEpisodeNumber = m_info->getNextEpisodeNumber();
     emit nextEpisodeNumberChanged();
-
-    m_nextEpisodeSeasonNumber = m_info->getNextEpisodeSeasonNumber();
     emit nextEpisodeSeasonNumberChanged();
-
-    m_daysToNextEpisode = m_info->getDaysToNextEpisode();
     emit daysToNextEpisodeChanged();
 }
 
@@ -133,13 +122,13 @@ QString SeriesListModel::getZap2it_ID() { return m_info->getZap2it_ID(); }
 
 QString SeriesListModel::getNetwork() { return m_info->getNetwork(); }
 
-QString SeriesListModel::getNextEpisodeName() { return m_nextEpisodeName; }
+QString SeriesListModel::getNextEpisodeName() { return m_info->getNextEpisodeName(); }
 
-QString SeriesListModel::getNextEpisodeNumber() { return m_nextEpisodeNumber; }
+QString SeriesListModel::getNextEpisodeNumber() { return m_info->getNextEpisodeNumber(); }
 
-QString SeriesListModel::getNextEpisodeSeasonNumber() { return m_nextEpisodeSeasonNumber; }
+QString SeriesListModel::getNextEpisodeSeasonNumber() { return m_info->getNextEpisodeSeasonNumber(); }
 
-QString SeriesListModel::getDaysToNextEpisode() { return m_daysToNextEpisode; }
+QString SeriesListModel::getDaysToNextEpisode() { return m_info->getDaysToNextEpisode(); }
 
 QString SeriesListModel::getStatus() { return m_info->getStatus(); }
 
@@ -147,40 +136,47 @@ QString SeriesListModel::getRating() { return m_info->getRating(); }
 
 QString SeriesListModel::getGenre() { return m_info->getGenre(); }
 
-bool SeriesListModel::getLoading() { return m_loading; }
+bool SeriesListModel::getLoading() { return m_isLoading; }
 
-void SeriesListModel::setLoading(bool state)
+void SeriesListModel::setLoading(bool isLoading)
 {
-    if (m_loading != state) {
-        m_loading = state;
-        emit loadingChanged();
+    if (m_isLoading == isLoading)
+    {
+        return;
     }
+
+    m_isLoading = isLoading;
+    emit loadingChanged();
 }
 
-QString SeriesListModel::getPoster() { return m_poster; }
+QString SeriesListModel::getPoster() { return m_info->getPoster(); }
 
 QString SeriesListModel::getMode() { return m_mode; }
 
 void SeriesListModel::setMode(QString mode)
 {
-    if (m_mode != mode) {
-        m_mode = mode;
-        emit modeChanged();
+    if (m_mode == mode)
+    {
+        return;
     }
+
+    m_mode = mode;
+    emit modeChanged();
 }
 
 void SeriesListModel::deleteSeries(int seriesId)
 {
     setLoading(true);
-    emit deleteSeriesRequested(seriesId);
+    emit deleteSeriesWith(seriesId);
 }
 
 void SeriesListModel::seriesDeleted()
 {
-    emit getSeries();
+    emit updateModels();
+    setLoading(false);
 }
 
-void SeriesListModel::updateSeries(const QString &seriesId)
+void SeriesListModel::updateSeries(QString seriesId)
 {
     if (seriesId.isEmpty())
     {
@@ -191,8 +187,11 @@ void SeriesListModel::updateSeries(const QString &seriesId)
     setLoading(true);
 }
 
-void SeriesListModel::updateAllSeries(const bool &updateEndedSeries)
+void SeriesListModel::updateAllSeries(bool includeEndedSeries)
 {
-    auto seriesIds = m_dbmanager->getSeriesIds(updateEndedSeries);
-    for (auto seriesId: seriesIds) updateSeries(seriesId);
+    const auto seriesIds = m_dbmanager->getSeriesIds(includeEndedSeries);
+    for (auto seriesId: seriesIds)
+    {
+        updateSeries(seriesId);
+    }
 }
