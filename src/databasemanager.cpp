@@ -108,7 +108,7 @@ bool DatabaseManager::initializeInfoTable()
     if (createInfoTable())
     {
         QSqlQuery query(m_db);
-        query.prepare("INSERT INTO information VALUES(:version,':name')");
+        query.prepare("INSERT INTO information VALUES(:version, :name)");
         query.bindValue(":version", 1.0);
         query.bindValue(":name", "SailSeries");
         ret = query.exec();
@@ -274,7 +274,7 @@ bool DatabaseManager::deleteDuplicateEpisodes()
     return ret;
 }
 
-void DatabaseManager::storeSeries(QVariantMap series)
+void DatabaseManager::storeSeries(const QVariantMap &series)
 {   
     auto seriesId = series["id"].toInt();
     auto actors = series["actors"].toString();
@@ -310,8 +310,8 @@ void DatabaseManager::storeSeries(QVariantMap series)
     if (m_db.isOpen())
     {
         QSqlQuery query(m_db);
-        query.prepare(QString("INSERT OR REPLACE INTO Series(id, actors, airsDayOfWeek, airsTime, contentRating, firstAired, genre, imdbID, language, network, overview, rating, ratingCount, runtime, seriesName, status, added, addedBy, banner, fanart, lastupdated, poster, zap2itID, watched) "
-                              "VALUES(:seriesId, :actors, :airsDayOfWeek, :airsTime, :contentRating, :firstAired, :genre, :imdbId, :language, :network, :overview, :rating, :ratingCount, :runtime, :seriesName, :status, :added, :addedBy, :banner, :fanart, :lastUpdated, :poster, :zap2itId, :watched)"));
+        query.prepare("INSERT OR REPLACE INTO Series(id, actors, airsDayOfWeek, airsTime, contentRating, firstAired, genre, imdbID, language, network, overview, rating, ratingCount, runtime, seriesName, status, added, addedBy, banner, fanart, lastupdated, poster, zap2itID, watched) "
+                      "VALUES(:seriesId, :actors, :airsDayOfWeek, :airsTime, :contentRating, :firstAired, :genre, :imdbId, :language, :network, :overview, :rating, :ratingCount, :runtime, :seriesName, :status, :added, :addedBy, :banner, :fanart, :lastUpdated, :poster, :zap2itId, :watched)");
         query.bindValue(":seriesId", seriesId);
         query.bindValue(":actors", actors);
         query.bindValue(":airsDayOfWeek", airsDayOfWeek);
@@ -342,7 +342,7 @@ void DatabaseManager::storeSeries(QVariantMap series)
         
         if (query.lastError().text() != " ")
         {
-            qDebug() << query.lastQuery();
+            qDebug() << query.executedQuery();
         }
     }
     
@@ -351,7 +351,7 @@ void DatabaseManager::storeSeries(QVariantMap series)
     emit seriesStored();
 }
 
-void DatabaseManager::storeEpisodes(QString seriesId, QList<QVariantMap> episodes)
+void DatabaseManager::storeEpisodes(const QString &seriesId, const QList<QVariantMap> &episodes)
 {
     startTransaction();
 
@@ -389,6 +389,9 @@ void DatabaseManager::storeEpisodes(QString seriesId, QList<QVariantMap> episode
                     watched = query.value(0).toInt();
                 }
             }
+
+            qDebug() << query.lastError();
+            qDebug() << query.executedQuery();
             
             query.prepare("INSERT OR REPLACE INTO Episode (id, episodeName, episodeNumber, firstAired, language, overview, seasonNumber, absoluteNumber, lastupdated, seasonID, seriesID, watched) "
                           "VALUES (:id, :episodeName, :episodeNumber, :firstAired, :language, :overview, :seasonNumber, :absoluteNumber, :lastUpdated, :seasonId, :seriesId, :watched)");
@@ -413,7 +416,7 @@ void DatabaseManager::storeEpisodes(QString seriesId, QList<QVariantMap> episode
     commit();
 }
 
-void DatabaseManager::storeSeasonImages(QString seriesId, QList<QVariantMap> banners)
+void DatabaseManager::storeSeasonImages(const QString &seriesId, const QList<QVariantMap> &banners)
 {
     startTransaction();
 
@@ -495,14 +498,10 @@ void DatabaseManager::getSeries()
     
     if (m_db.isOpen())
     {
-        this->startTransaction();
-
         QSqlQuery query(m_db);
         query.exec("SELECT banner, poster, seriesName, status, id, overview, imdbID, rating, genre "
                    "FROM Series "
-                   "ORDER BY seriesName;");
-
-        this->commit();
+                   "ORDER BY seriesName");
 
         qDebug() << query.lastError();
         
@@ -547,7 +546,7 @@ void DatabaseManager::getSeries()
                 const auto totalCount = QString::number(this->totalCount(id));
                 series["totalCount"] = totalCount;
 
-                // enrich with next episode details
+                // enrich with next episode's details
                 series.unite(getNextEpisodeDetails(id));
                 
                 allSeries.append(series);
@@ -574,12 +573,15 @@ void DatabaseManager::getStartPageSeries()
         QSqlQuery query(m_db);
         query.prepare("SELECT Series.seriesName, Series.network, Series.airsTime, Series.airsDayOfWeek, Series.status, Series.id, Episode.id, Episode.episodeName, Episode.episodeNumber, Episode.seasonNumber, Episode.firstAired, Episode.filename, Episode.overview, Episode.guestStars, Episode.writer, Episode.watched "
                       "FROM Series, Episode "
-                      "WHERE Series.status = ':status' AND Episode.firstAired BETWEEN ':firstAiredStart' AND ':firstAiredEnd' AND Series.id = Episode.seriesID "
+                      "WHERE Series.status = :status AND Episode.firstAired BETWEEN :firstAiredStart AND :firstAiredEnd AND Series.id = Episode.seriesID "
                       "ORDER BY Episode.firstAired");
         query.bindValue(":status", status);
         query.bindValue(":firstAiredStart", firstAiredStart);
         query.bindValue(":firstAiredEnd", firstAiredEnd);
         query.exec();
+
+        qDebug() << query.executedQuery();
+        qDebug() << query.lastError();
         
         if (query.isSelect())
         {
@@ -630,7 +632,7 @@ void DatabaseManager::getStartPageSeries()
                 const auto firstAired = query.value(10).toString();
                 series["nextEpisodeFirstAired"] = firstAired;
                 
-                // Sometimes the series info airsDayOfWeek is wrong so lets take it from the episode directly then
+                // Sometimes the series' airsDayOfWeek is wrong so lets take it from the episode directly in that case
                 series["airsDayOfWeek"] = [locale, firstAired, airsDayOfWeek](){
                     auto airsDayOfWeekFromEpisode = locale.toString(QDate::fromString(firstAired, Qt::ISODate), "dddd");
                     return airsDayOfWeek == airsDayOfWeekFromEpisode ? airsDayOfWeek : airsDayOfWeekFromEpisode;
@@ -672,6 +674,7 @@ void DatabaseManager::getSeasons(int seriesId)
         season["totalCount"] = totalCountBySeason(seriesId, i);
         seasons.append(season);
     }
+
     emit populateSeasonList(seasons);
 }
 
@@ -776,7 +779,7 @@ void DatabaseManager::storeFanartImageFor(QString seriesId, QString fanartImage)
     query.exec();
 }
 
-void DatabaseManager::storeActors(QString seriesId, QList<QVariantMap> actors)
+void DatabaseManager::storeActors(const QString &seriesId, const QList<QVariantMap> &actors)
 {
     auto actorNames = QString("");
 
@@ -910,13 +913,14 @@ int DatabaseManager::watchedCountBySeason(int seriesId, int seasonNumber)
     auto watchedCount = 0;
 
     QSqlQuery query(m_db);
-    query.prepare("SELECT COUNT(episodeName) "
+    query.prepare("SELECT COUNT(*) "
                   "FROM Episode "
                   "WHERE seriesID = :seriesId AND watched = 1 AND seasonNumber = :seasonNumber");
     query.bindValue(":seriesId", seriesId);
     query.bindValue(":seasonNumber", seasonNumber);
     query.exec();
 
+    qDebug() << query.executedQuery();
     qDebug() << query.lastError();
 
     if (query.isSelect())
@@ -959,7 +963,7 @@ int DatabaseManager::totalCountBySeason(int seriesId, int seasonNumber)
     auto totalCount = 0;
 
     QSqlQuery query(m_db);
-    query.prepare("SELECT COUNT(episodeName) "
+    query.prepare("SELECT COUNT(*) "
                   "FROM Episode "
                   "WHERE seriesID = :seriesId AND seasonNumber = :seasonNumber");
     query.bindValue(":seriesId", seriesId);
@@ -1013,6 +1017,7 @@ void DatabaseManager::markSeasonWatched(const int &seriesId, const int &seasonNu
     query.bindValue(":seasonNumber", seasonNumber);
     query.exec();
 
+    qDebug() << query.executedQuery();
     qDebug() << query.lastError();
 }
 
@@ -1025,14 +1030,13 @@ QVariantMap DatabaseManager::getNextEpisodeDetails(const int &seriesId) const
     QSqlQuery query(m_db);
     query.prepare("SELECT episodeName, episodeNumber, seasonNumber, firstAired "
                   "FROM Episode "
-                  "WHERE seriesID = :seriesId AND firstAired >= ':today' "
+                  "WHERE seriesID = :seriesId AND firstAired >= :today "
                   "ORDER BY episodeNumber "
                   "LIMIT 1");
     query.bindValue(":seriesId", seriesId);
     query.bindValue(":today", today);
     query.exec();
 
-    qDebug() << query.lastQuery();
     qDebug() << query.lastError();
     
     if (query.isSelect())
@@ -1116,7 +1120,7 @@ QString DatabaseManager::getSeasonBanner(const int &seriesId, const int &season)
     QSqlQuery query(m_db);
     query.prepare("SELECT bannerPath "
                   "FROM Banner "
-                  "WHERE seriesID = :seriesId AND bannerType = ':bannerType' AND season = :season");
+                  "WHERE seriesID = :seriesId AND bannerType = :bannerType AND season = :season");
     query.bindValue(":seriesId", seriesId);
     query.bindValue(":bannerType", bannerType);
     query.bindValue(":season", season);
@@ -1184,7 +1188,7 @@ int DatabaseManager::getWatchedEpisodesCount()
     auto count = 0;
 
     QSqlQuery query(m_db);
-    query.exec("SELECT COUNT(episodeName) "
+    query.exec("SELECT COUNT(*) "
                "FROM episode "
                "WHERE episode.watched = 1");
 
@@ -1207,8 +1211,7 @@ int DatabaseManager::getAllEpisodesCount()
 
     QSqlQuery query(m_db);
     query.exec("SELECT COUNT(*) "
-               "FROM episode "
-               "WHERE episode.seasonNumber != 0");
+               "FROM episode");
 
     qDebug() << query.lastError();
 
@@ -1275,7 +1278,7 @@ int DatabaseManager::getWatchedSeriesCount()
                "FROM "
                "(SELECT episode.id, episode.seriesID "
                "FROM episode, series "
-               "WHERE episode.seriesID = series.id AND episode.watched = 0 and episode.seasonNumber != 0)");
+               "WHERE episode.seriesID = series.id AND episode.watched = 0)");
 
     qDebug() << query.lastError();
 

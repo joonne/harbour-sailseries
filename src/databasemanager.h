@@ -88,15 +88,15 @@ public slots:
     void getSeasons(int seriesId);
     void getEpisodes(int seriesId, int seasonNumber);
     void deleteSeries(const int &seriesId);
-    void storeSeries(QVariantMap series);
-    void storeEpisodes(QString seriesId, QList<QVariantMap> episodes);
+    void storeSeries(const QVariantMap &series);
+    void storeEpisodes(const QString &seriesId, const QList<QVariantMap> &episodes);
     void getStatistics();
     void toggleWatched(QString episodeId, QString seriesId, int seasonNumber);
     void storePosterImageFor(QString seriesId, QString posterImage);
     void storeBannerImageFor(QString seriesId, QString bannerImage);
     void storeFanartImageFor(QString seriesId, QString fanartImage);
-    void storeActors(QString seriesId, QList<QVariantMap> actors);
-    void storeSeasonImages(QString seriesId, QList<QVariantMap> seasonImages);
+    void storeActors(const QString &seriesId, const QList<QVariantMap> &actors);
+    void storeSeasonImages(const QString &seriesId, const QList<QVariantMap> &seasonImages);
 
 private:
     QSqlDatabase m_db;
