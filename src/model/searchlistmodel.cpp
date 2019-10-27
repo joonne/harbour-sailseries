@@ -1,22 +1,11 @@
 #include "searchlistmodel.h"
 
-SearchListModel::SearchListModel(QObject *parent, DatabaseManager *dbmanager, Api *api) :
+SearchListModel::SearchListModel(QObject *parent, DatabaseManager *dbmanager) :
     QObject(parent),
     m_dbmanager(dbmanager),
-    m_api(api),
     m_loading(false),
     m_added(false)
-{
-    connect(m_api,
-            SIGNAL(readyToPopulateSeries(QList<QVariantMap>)),
-            this,
-            SLOT(searchFinished(QList<QVariantMap>)));
-
-    connect(m_dbmanager,
-            SIGNAL(seriesStored()),
-            this,
-            SLOT(seriesStored()));
-}
+{}
 
 SearchListModel::~SearchListModel()
 {
@@ -79,12 +68,10 @@ void SearchListModel::seriesStored()
     setAdded(true);
 }
 
-void SearchListModel::searchSeries(QString text)
+void SearchListModel::searchSeries(const QString &text)
 {
     setLoading(true);
-    m_searchListModel.clear();
-    emit searchModelChanged();
-    m_api->searchSeries(text);
+    emit searchSeriesRequested(text);
 }
 
 void SearchListModel::selectSeries(int index)
@@ -92,9 +79,9 @@ void SearchListModel::selectSeries(int index)
     m_info = m_searchListModel.at(index);
 }
 
-void SearchListModel::getAll(const int &id)
+void SearchListModel::getAll(const int &seriesId)
 {
-    m_api->getAll(id);
+    emit getAllRequested(seriesId);
     setLoading(true);
 }
 

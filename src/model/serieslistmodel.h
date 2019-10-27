@@ -36,7 +36,7 @@ class SeriesListModel : public QObject
     Q_PROPERTY(QString Genre READ getGenre CONSTANT)
 
 public:
-    explicit SeriesListModel(QObject *parent = 0, DatabaseManager *dbmanager = 0, Api* api = 0);
+    explicit SeriesListModel(QObject *parent = 0, DatabaseManager *dbmanager = 0);
     ~SeriesListModel();
 
     Q_INVOKABLE void selectSeries(int index);
@@ -82,7 +82,8 @@ signals:
     void daysToNextEpisodeChanged();
 
     void getSeries();
-    void deleteSeriesWith(int seriesId);
+    void deleteSeriesWith(int);
+    void getAllRequested(int);
 
 public slots:
     void populateBannerList(QList<QVariantMap> allSeries);
@@ -90,7 +91,6 @@ public slots:
     void seriesStored();
 
 private:
-    Api* m_api;
     DatabaseManager* m_dbmanager;
     QList<SeriesData*> m_seriesListModel;
     SeriesData* m_info;

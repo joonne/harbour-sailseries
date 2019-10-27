@@ -29,7 +29,6 @@ public:
 
     void getAuthenticationToken();
     void getLanguages();
-    void searchSeries(const QString &seriesName);
     void getSeries(const int &seriesId);
     void getSeasonImages(const int &seriesId);
     void getPosterImages(const int &seriesId);
@@ -37,8 +36,6 @@ public:
     void getFanartImages(const int &seriesId);
     void getActors(const int &seriesId);
     void getEpisodes(const int &seriesId, const int &page = 1);
-    void getAll(const int &seriesId);
-    void getEpisode(const int &episodeId);
 
 signals:
     void readyToPopulateSeries(QList<QVariantMap>);
@@ -53,6 +50,9 @@ signals:
 
 public slots:
     void replyFinishedError(QNetworkReply* reply);
+    void searchSeries(const QString &seriesName);
+    void getAll(const int &seriesId);
+    void getEpisode(const int &episodeId);
 
 private:
     QNetworkAccessManager* m_nam;

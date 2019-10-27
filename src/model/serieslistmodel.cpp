@@ -1,8 +1,7 @@
 #include "serieslistmodel.h"
 
-SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager, Api *api) :
+SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager) :
     QObject(parent),
-    m_api(api),
     m_dbmanager(dbmanager),
     m_mode("default"),
     m_isLoading(false)
@@ -183,7 +182,7 @@ void SeriesListModel::updateSeries(const QString &seriesId)
         return;
     }
 
-    m_api->getAll(seriesId.toInt());
+    emit getAllRequested(seriesId.toInt());
     setLoading(true);
 }
 

@@ -49,6 +49,7 @@ signals:
     void loadingChanged();
     void updateEpisodeDetails(const QVariantMap &episode);
     void setUpDb();
+    void getEpisode(int);
 
 public slots:
     void readyToUpdateModels();

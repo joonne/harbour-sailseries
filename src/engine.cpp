@@ -16,8 +16,8 @@ Engine::Engine(QObject *parent) :
     connect(apiThread, SIGNAL(finished()), apiThread, SLOT(deleteLater()));
     apiThread->start();
 
-    m_seriesListModel = new SeriesListModel(this, m_dbmanager, m_api);
-    m_searchListModel = new SearchListModel(this, m_dbmanager, m_api);
+    m_seriesListModel = new SeriesListModel(this, m_dbmanager);
+    m_searchListModel = new SearchListModel(this, m_dbmanager);
     m_todayListModel = new TodayListModel(this, m_dbmanager, m_api);
     m_episodeListModel = new EpisodeListModel(this);
     m_seasonListModel = new SeasonListModel(this);
@@ -92,6 +92,36 @@ Engine::Engine(QObject *parent) :
             SIGNAL(populateSeasonList(QList<QVariantMap>)),
             m_seasonListModel,
             SLOT(populateSeasonList(QList<QVariantMap>)));
+
+    connect(m_searchListModel,
+            SIGNAL(searchSeriesRequested(QString)),
+            m_api,
+            SLOT(searchSeries(QString)));
+
+    connect(m_searchListModel,
+            SIGNAL(getAllRequested(int)),
+            m_api,
+            SLOT(getAll(int)));
+
+    connect(m_seriesListModel,
+            SIGNAL(getAllRequested(int)),
+            m_api,
+            SLOT(getAll(int)));
+
+    connect(this,
+            SIGNAL(getEpisode(int)),
+            m_api,
+            SLOT(getEpisode(int)));
+
+    connect(m_api,
+            SIGNAL(readyToPopulateSeries(QList<QVariantMap>)),
+            m_searchListModel,
+            SLOT(searchFinished(QList<QVariantMap>)));
+
+    connect(m_dbmanager,
+            SIGNAL(seriesStored()),
+            m_searchListModel,
+            SLOT(seriesStored()));
 }
 
 Engine::~Engine()
@@ -140,6 +170,12 @@ void Engine::readyToUpdateEpisodeDetails(const QVariantMap &episode)
 
 void Engine::toggleLoading(bool state) { m_loading = state; }
 
-bool Engine::deleteDuplicateEpisodes() { return m_dbmanager->deleteDuplicateEpisodes(); }
+bool Engine::deleteDuplicateEpisodes()
+{
+    return m_dbmanager->deleteDuplicateEpisodes();
+}
 
-void Engine::requestEpisodeDetails(const int &id) { m_api->getEpisode(id); }
+void Engine::requestEpisodeDetails(const int &id)
+{
+    emit getEpisode(id);
+}
