@@ -114,7 +114,8 @@ Page {
                                        firstAired: NextEpisodeFirstAired,
                                        watched: NextEpisodeWatched,
                                        episodeId: NextEpisodeId,
-                                       seriesId: ID });
+                                       seriesId: ID,
+                                       seasonNumber: NextEpisodeSeasonNumber });
                 }
 
                 Column {

@@ -1,27 +1,13 @@
 #include "episodelistmodel.h"
 
-EpisodeListModel::EpisodeListModel(QObject *parent, DatabaseManager *dbmanager) :
-    QObject(parent), m_dbmanager(dbmanager)
-{
-    connect(this,
-            SIGNAL(getEpisodesRequested(int, int)),
-            m_dbmanager,
-            SLOT(getEpisodes(int, int)));
-
-    connect(m_dbmanager,
-            SIGNAL(populateEpisodeList(QList<QVariantMap>)),
-            this,
-            SLOT(populateEpisodeList(QList<QVariantMap>)));
-
-    connect(this,
-            SIGNAL(toggleWatchedRequested(QString, QString, int)),
-            m_dbmanager,
-            SLOT(toggleWatched(QString, QString, int)));
-}
+EpisodeListModel::EpisodeListModel(QObject *parent) :
+    QObject(parent)
+{}
 
 EpisodeListModel::~EpisodeListModel()
 {
-    for (auto episode : m_episodeListModel) {
+    for (auto episode : m_episodeListModel)
+    {
         delete episode;
         episode = 0;
     }
@@ -53,38 +39,31 @@ void EpisodeListModel::episodeListClear(QQmlListProperty<EpisodeData>* prop)
     qobject_cast<EpisodeListModel*>(prop->object)->m_episodeListModel.clear();
 }
 
-void EpisodeListModel::getEpisodes(QString seriesId, int seasonNumber)
+void EpisodeListModel::getEpisodes(const int &seriesId, const int &seasonNumber)
 {
-    emit getEpisodesRequested(seriesId.toInt(), seasonNumber);
+    emit getEpisodesRequested(seriesId, seasonNumber);
 }
 
-void EpisodeListModel::populateEpisodeList(QList<QVariantMap> episodes)
+void EpisodeListModel::populateEpisodeList(const QList<QVariantMap> &episodes)
 {
     m_episodeListModel.clear();
     emit episodeListChanged();
 
-    if (episodes.size() != 0) {
-        for (auto episode : episodes) {
-            auto episodeData = new EpisodeData(this, episode);
-            m_episodeListModel.append(episodeData);
-        }
-
-        emit episodeListChanged();
+    for (auto episode : episodes)
+    {
+        auto episodeData = new EpisodeData(this, episode);
+        m_episodeListModel.append(episodeData);
     }
+
+    emit episodeListChanged();
 }
 
-void EpisodeListModel::toggleWatched(QString episodeId, QString seriesId, int seasonNumber)
+void EpisodeListModel::toggleWatched(const int &episodeId, const int &seriesId, const int &seasonNumber)
 {
     emit toggleWatchedRequested(episodeId, seriesId, seasonNumber);
 }
 
-void EpisodeListModel::markSeasonWatched(QString seriesId, int season)
+void EpisodeListModel::markSeasonAsWatched(const int &seriesId, const int &season)
 {
-    m_dbmanager->markSeasonWatched(seriesId.toInt(), season);
-    emit getEpisodesRequested(seriesId.toInt(), season);
-}
-
-int EpisodeListModel::getSeasonCount(QString seriesId)
-{
-    return m_dbmanager->seasonCount(seriesId.toInt());
+    emit markSeasonAsWatchedRequested(seriesId, season);
 }

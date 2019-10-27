@@ -14,7 +14,7 @@ class SeriesListModel : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QQmlListProperty<SeriesData> SeriesList READ getSeriesList NOTIFY seriesListChanged)
-    Q_PROPERTY(QString ID READ getID CONSTANT)
+    Q_PROPERTY(int ID READ getID CONSTANT)
     Q_PROPERTY(QString Language READ getLanguage CONSTANT)
     Q_PROPERTY(QString SeriesName READ getSeriesName CONSTANT)
     Q_PROPERTY(QString AliasNames READ getAliasNames CONSTANT)
@@ -41,11 +41,11 @@ public:
 
     Q_INVOKABLE void selectSeries(int index);
     Q_INVOKABLE void deleteSeries(int seriesId);
-    Q_INVOKABLE void updateSeries(QString seriesId);
+    Q_INVOKABLE void updateSeries(const QString &seriesId);
     Q_INVOKABLE void updateAllSeries(bool includeEndedSeries = true);
 
     QQmlListProperty<SeriesData> getSeriesList();
-    QString getID();
+    int getID();
     QString getLanguage();
     QString getSeriesName();
     QString getAliasNames();

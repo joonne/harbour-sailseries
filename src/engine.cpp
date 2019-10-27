@@ -6,16 +6,21 @@ Engine::Engine(QObject *parent) :
     m_dbmanager(new DatabaseManager),
     m_loading(false)
 {
-    QThread* dbThread = new QThread;
+    auto dbThread = new QThread;
     m_dbmanager->moveToThread(dbThread);
     connect(dbThread, SIGNAL(finished()), dbThread, SLOT(deleteLater()));
     dbThread->start();
 
+    auto apiThread = new QThread;
+    m_api->moveToThread(apiThread);
+    connect(apiThread, SIGNAL(finished()), apiThread, SLOT(deleteLater()));
+    apiThread->start();
+
     m_seriesListModel = new SeriesListModel(this, m_dbmanager, m_api);
     m_searchListModel = new SearchListModel(this, m_dbmanager, m_api);
     m_todayListModel = new TodayListModel(this, m_dbmanager, m_api);
-    m_episodeListModel = new EpisodeListModel(this, m_dbmanager);
-    m_seasonListModel = new SeasonListModel(this, m_dbmanager);
+    m_episodeListModel = new EpisodeListModel(this);
+    m_seasonListModel = new SeasonListModel(this);
     m_statistics = new Statistics(this, m_dbmanager);
 
     connect(m_searchListModel,
@@ -34,29 +39,59 @@ Engine::Engine(QObject *parent) :
             SLOT(readyToUpdateEpisodeDetails(QVariantMap)));
 
     connect(m_api,
-            SIGNAL(storePosterImageFor(QString,QString)),
+            SIGNAL(storePosterImageFor(int,QString)),
             m_dbmanager,
-            SLOT(storePosterImageFor(QString,QString)));
+            SLOT(storePosterImageFor(int,QString)));
 
     connect(m_api,
-            SIGNAL(storeBannerImageFor(QString,QString)),
+            SIGNAL(storeBannerImageFor(int,QString)),
             m_dbmanager,
-            SLOT(storeBannerImageFor(QString,QString)));
+            SLOT(storeBannerImageFor(int,QString)));
 
     connect(m_api,
-            SIGNAL(storeFanartImageFor(QString,QString)),
+            SIGNAL(storeFanartImageFor(int,QString)),
             m_dbmanager,
-            SLOT(storeFanartImageFor(QString,QString)));
+            SLOT(storeFanartImageFor(int,QString)));
 
     connect(m_api,
-            SIGNAL(storeEpisodes(QString, QList<QVariantMap>)),
+            SIGNAL(storeEpisodes(int, QList<QVariantMap>)),
             m_dbmanager,
-            SLOT(storeEpisodes(QString, QList<QVariantMap>)));
+            SLOT(storeEpisodes(int, QList<QVariantMap>)));
 
     connect(m_api,
             SIGNAL(storeSeries(QVariantMap)),
             m_dbmanager,
             SLOT(storeSeries(QVariantMap)));
+
+    connect(m_episodeListModel,
+            SIGNAL(getEpisodesRequested(int,int)),
+            m_dbmanager,
+            SLOT(getEpisodes(int,int)));
+
+    connect(m_dbmanager,
+            SIGNAL(populateEpisodeList(QList<QVariantMap>)),
+            m_episodeListModel,
+            SLOT(populateEpisodeList(QList<QVariantMap>)));
+
+    connect(m_episodeListModel,
+            SIGNAL(toggleWatchedRequested(int,int,int)),
+            m_dbmanager,
+            SLOT(toggleWatched(int,int,int)));
+
+    connect(m_episodeListModel,
+            SIGNAL(markSeasonAsWatchedRequested(int,int)),
+            m_dbmanager,
+            SLOT(markSeasonAsWatched(int,int)));
+
+    connect(m_seasonListModel,
+            SIGNAL(getSeasonsRequested(int)),
+            m_dbmanager,
+            SLOT(getSeasons(int)));
+
+    connect(m_dbmanager,
+            SIGNAL(populateSeasonList(QList<QVariantMap>)),
+            m_seasonListModel,
+            SLOT(populateSeasonList(QList<QVariantMap>)));
 }
 
 Engine::~Engine()
@@ -86,6 +121,8 @@ void Engine::readyToUpdateModels()
 {
     emit m_todayListModel->getStartPageSeries();
     emit m_seriesListModel->getSeries();
+    emit m_statistics->requestStatistics();
+    emit m_seasonListModel->getSeasons(m_seriesListModel->getID());
 }
 
 void Engine::updateModels()
@@ -93,9 +130,10 @@ void Engine::updateModels()
     emit m_todayListModel->getStartPageSeries();
     emit m_seriesListModel->getSeries();
     emit m_statistics->requestStatistics();
+    emit m_seasonListModel->getSeasons(m_seriesListModel->getID());
 }
 
-void Engine::readyToUpdateEpisodeDetails(QVariantMap episode)
+void Engine::readyToUpdateEpisodeDetails(const QVariantMap &episode)
 {
     emit updateEpisodeDetails(episode);
 }
@@ -104,4 +142,4 @@ void Engine::toggleLoading(bool state) { m_loading = state; }
 
 bool Engine::deleteDuplicateEpisodes() { return m_dbmanager->deleteDuplicateEpisodes(); }
 
-void Engine::requestEpisodeDetails(QString id) { m_api->getEpisode(id); }
+void Engine::requestEpisodeDetails(const int &id) { m_api->getEpisode(id); }

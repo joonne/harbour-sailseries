@@ -86,7 +86,7 @@ void Api::getLanguages()
     });
 }
 
-void Api::searchSeries(QString text)
+void Api::searchSeries(const QString &text)
 {
     QUrl url(QString("%1/search/series?name=%2").arg(QString(MIRRORPATH)).arg(text));
     auto reply = get(url);
@@ -105,7 +105,7 @@ void Api::searchSeries(QString text)
     });
 }
 
-void Api::getAll(QString seriesId)
+void Api::getAll(const int &seriesId)
 {
     getSeries(seriesId);
     getEpisodes(seriesId);
@@ -116,7 +116,7 @@ void Api::getAll(QString seriesId)
     getFanartImages(seriesId);
 }
 
-void Api::getSeries(QString seriesId)
+void Api::getSeries(const int &seriesId)
 {
     QUrl url(QString("%1/series/%2").arg(QString(MIRRORPATH)).arg(seriesId));
     auto reply = get(url);
@@ -135,7 +135,7 @@ void Api::getSeries(QString seriesId)
     });
 }
 
-void Api::getSeasonImages(QString seriesId)
+void Api::getSeasonImages(const int &seriesId)
 {
     QUrl url(QString("%1/series/%2/images/query?keyType=season").arg(QString(MIRRORPATH)).arg(seriesId));
     auto reply = get(url);
@@ -169,7 +169,7 @@ void Api::getSeasonImages(QString seriesId)
     });
 }
 
-void Api::getPosterImages(QString seriesId)
+void Api::getPosterImages(const int &seriesId)
 {
     QUrl url(QString("%1/series/%2/images/query?keyType=poster").arg(QString(MIRRORPATH)).arg(seriesId));
     auto reply = get(url);
@@ -188,7 +188,7 @@ void Api::getPosterImages(QString seriesId)
     });
 }
 
-void Api::getBannerImages(QString seriesId)
+void Api::getBannerImages(const int &seriesId)
 {
     QUrl url(QString("%1/series/%2/images/query?keyType=series").arg(QString(MIRRORPATH)).arg(seriesId));
     auto reply = get(url);
@@ -207,7 +207,7 @@ void Api::getBannerImages(QString seriesId)
     });
 }
 
-void Api::getFanartImages(QString seriesId)
+void Api::getFanartImages(const int &seriesId)
 {
     QUrl url(QString("%1/series/%2/images/query?keyType=fanart").arg(QString(MIRRORPATH)).arg(seriesId));
     auto reply = get(url);
@@ -226,7 +226,7 @@ void Api::getFanartImages(QString seriesId)
     });
 }
 
-void Api::getActors(QString seriesId)
+void Api::getActors(const int &seriesId)
 {
     QUrl url(QString("%1/series/%2/actors").arg(QString(MIRRORPATH)).arg(seriesId));
     auto reply = get(url);
@@ -245,7 +245,7 @@ void Api::getActors(QString seriesId)
     });
 }
 
-void Api::getEpisodes(QString seriesId, int page)
+void Api::getEpisodes(const int &seriesId, const int &page)
 {
     QUrl url(QString("%1/series/%2/episodes?page=%3").arg(QString(MIRRORPATH)).arg(seriesId).arg(page));
     auto reply = get(url);
@@ -271,7 +271,7 @@ void Api::getEpisodes(QString seriesId, int page)
     });
 }
 
-void Api::getEpisode(QString episodeId)
+void Api::getEpisode(const int &episodeId)
 {
     QUrl url(QString("%1/episodes/%2").arg(QString(MIRRORPATH)).arg(episodeId));
     auto reply = get(url);

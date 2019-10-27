@@ -12,8 +12,9 @@ Page {
     property string episodeName
     property string firstAired
     property int watched
-    property string episodeId
-    property string seriesId
+    property int episodeId
+    property int seriesId
+    property int seasonNumber
 
     Connections {
         target: engine
@@ -84,11 +85,7 @@ Page {
                         anchors.fill: parent
                         onClicked: {
                             watched === 1 ? watched = 0 : watched = 1
-                            engine.EpisodeListModel.toggleWatched(episodeId)
-                            engine.EpisodeListModel.toggleWatchedInModel(episodeId, watched)
-                            engine.SeasonListModel.populateSeasonList(seriesId)
-                            // TODO: check how/where to call this
-                            // engine.TodayModel.populateTodayModel()
+                            engine.EpisodeListModel.toggleWatched(episodeId, seriesId, seasonNumber)
                         }
                     }
                 }

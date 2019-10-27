@@ -1,24 +1,13 @@
 #include "seasonlistmodel.h"
 
-SeasonListModel::SeasonListModel(QObject *parent,  DatabaseManager* dbmanager) :
+SeasonListModel::SeasonListModel(QObject *parent) :
     QObject(parent)
-{
-    m_dbmanager = dbmanager;
-
-    connect(this,
-            SIGNAL(getSeasonsRequested(int)),
-            m_dbmanager,
-            SLOT(getSeasons(int)));
-
-    connect(m_dbmanager,
-            SIGNAL(populateSeasonList(QList<QVariantMap>)),
-            this,
-            SLOT(populateSeasonList(QList<QVariantMap>)));
-}
+{}
 
 SeasonListModel::~SeasonListModel()
 {
-    for (auto season : m_seasonListModel) {
+    for (auto season : m_seasonListModel)
+    {
         delete season;
         season = 0;
     }
@@ -50,24 +39,27 @@ void SeasonListModel::seasonListClear(QQmlListProperty<SeasonData>* prop)
     qobject_cast<SeasonListModel*>(prop->object)->m_seasonListModel.clear();
 }
 
-void SeasonListModel::getSeasons(QString seriesId)
+void SeasonListModel::getSeasons(const int &seriesId)
 {
-    emit getSeasonsRequested(seriesId.toInt());
+    qDebug() << seriesId;
+    emit getSeasonsRequested(seriesId);
 }
 
 void SeasonListModel::populateSeasonList(QList<QVariantMap> seasons)
 {
     m_seasonListModel.clear();
 
-    auto length = seasons.size();
-    for (auto i = 0; i < length; ++i) {
+    const auto length = seasons.size();
+    for (auto i = 0; i < length; ++i)
+    {
         auto season = seasons.at(i);
-        QString banner = season["banner"].toString();
-        int watchedCount = season["watchedCount"].toInt();
-        int totalCount = season["totalCount"].toInt();
+        auto banner = season["banner"].toString();
+        auto watchedCount = season["watchedCount"].toInt();
+        auto totalCount = season["totalCount"].toInt();
 
-        SeasonData* seasonData = new SeasonData(this, i, banner, watchedCount, totalCount);
+        auto seasonData = new SeasonData(this, i, banner, watchedCount, totalCount);
         m_seasonListModel.append(seasonData);
     }
+
     emit seasonListChanged();
 }

@@ -32,7 +32,7 @@ class EpisodeData : public QObject
     Q_PROPERTY(QString ThumbAdded READ getThumbAdded NOTIFY thumbAddedChanged)
     Q_PROPERTY(int ThumbHeight READ getThumbHeight NOTIFY thumbHeightChanged)
     Q_PROPERTY(int ThumbWidth READ getThumbWidth NOTIFY thumbWidthChanged)
-    Q_PROPERTY(int Watched READ getWatched WRITE setWatched NOTIFY watchedChanged)
+    Q_PROPERTY(int Watched READ getWatched NOTIFY watchedChanged)
 
 public:
     explicit EpisodeData(QObject *parent = 0, QVariantMap params = QVariantMap());
@@ -63,7 +63,6 @@ public:
     int getThumbHeight();
     int getThumbWidth();
     int getWatched();
-    void setWatched(int watched);
 
 signals:
     void IDChanged();
@@ -93,10 +92,7 @@ signals:
     void thumbWidthChanged();
     void watchedChanged();
 
-public slots:
-
 private:
-
     int m_id;
     QString m_director;
     int m_epimgflag;

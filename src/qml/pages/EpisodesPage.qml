@@ -4,14 +4,12 @@ import Sailfish.Silica 1.0
 Page {
     id: episodespage
 
-    property string seriesId
+    property int seriesId
     property int seasonNumber
 
-    Component.onCompleted: {
-        initialize(seriesId, seasonNumber)
-    }
+    Component.onCompleted: initialize(seriesId, seasonNumber)
 
-    function initialize(seriesID, seasonNumber) {
+    function initialize(seriesId, seasonNumber) {
         engine.EpisodeListModel.getEpisodes(seriesId, seasonNumber)
     }
 
@@ -26,7 +24,7 @@ Page {
             MenuItem {
                 text: qsTr("I have seen these all")
                 onClicked: {
-                    engine.EpisodeListModel.markSeasonWatched(seriesId, seasonNumber)
+                    engine.EpisodeListModel.markSeasonAsWatched(seriesId, seasonNumber)
                     engine.SeasonListModel.getSeasons(seriesId)
                     // pageStack.pop() // keep or not?
                 }
@@ -73,7 +71,8 @@ Page {
                                      firstAired: FirstAired,
                                      watched: Watched,
                                      episodeId: ID,
-                                     seriesId: seriesId })
+                                     seriesId: seriesId,
+                                     seasonNumber: SeasonNumber })
 
                 }
             }
@@ -122,10 +121,7 @@ Page {
                 MouseArea {
                     id: clickarea
                     onClicked: {
-//                        Watched === 0 ? Watched = 1 : Watched = 0
                         engine.EpisodeListModel.toggleWatched(ID, seriesId, SeasonNumber)
-                        engine.SeasonListModel.getSeasons(seriesId) // can maybe be removed also
-//                        engine.TodayModel.populateTodayModel()
                     }
                     anchors.fill: parent
                 }

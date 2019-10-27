@@ -51,8 +51,6 @@ public:
     QString getSeasonBanner(const int &seriesId, const int &season) const;
     QStringList getSeriesIds(bool includeEndedSeries);
 
-    void markSeasonWatched(const int &seriesId, const int &seasonNumber);
-
     bool isAlreadyAdded(const int &seriesId, const QString &name);
     int watchedCount(int seriesId);
     int watchedCountBySeason(int seriesId, int seasonNumber);
@@ -74,29 +72,30 @@ public:
     QMultiMap<int, QMap<QString, QStringList> > getMostWatchedActors();
 
 signals:
-    void populateTodayModel(QList<QVariantMap> allSeries);
-    void populateBannerList(QList<QVariantMap> allSeries);
+    void populateTodayModel(QList<QVariantMap>);
+    void populateBannerList(QList<QVariantMap>);
     void seriesDeleted();
     void seriesStored();
     void updateStatistics(QVariantMap);
-    void populateSeasonList(QList<QVariantMap> seasons);
-    void populateEpisodeList(QList<QVariantMap> episodes);
+    void populateSeasonList(QList<QVariantMap>);
+    void populateEpisodeList(QList<QVariantMap>);
 
 public slots:
     void getStartPageSeries();
     void getSeries();
-    void getSeasons(int seriesId);
-    void getEpisodes(int seriesId, int seasonNumber);
+    void getSeasons(const int &seriesId);
+    void getEpisodes(const int &seriesId, const int &seasonNumber);
     void deleteSeries(const int &seriesId);
     void storeSeries(const QVariantMap &series);
-    void storeEpisodes(const QString &seriesId, const QList<QVariantMap> &episodes);
+    void storeEpisodes(const int &seriesId, const QList<QVariantMap> &episodes);
     void getStatistics();
-    void toggleWatched(QString episodeId, QString seriesId, int seasonNumber);
-    void storePosterImageFor(QString seriesId, QString posterImage);
-    void storeBannerImageFor(QString seriesId, QString bannerImage);
-    void storeFanartImageFor(QString seriesId, QString fanartImage);
-    void storeActors(const QString &seriesId, const QList<QVariantMap> &actors);
+    void toggleWatched(const int &episodeId, const int &seriesId, const int &seasonNumber);
+    void storePosterImageFor(const int &seriesId, const QString &posterImage) const;
+    void storeBannerImageFor(const int &seriesId, const QString &bannerImage) const;
+    void storeFanartImageFor(const int &seriesId, const QString &fanartImage) const;
+    void storeActors(const int &seriesId, const QList<QVariantMap> &actors) const;
     void storeSeasonImages(const QString &seriesId, const QList<QVariantMap> &seasonImages);
+    void markSeasonAsWatched(const int &seriesId, const int &seasonNumber);
 
 private:
     QSqlDatabase m_db;

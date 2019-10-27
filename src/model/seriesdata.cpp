@@ -4,7 +4,7 @@ SeriesData::SeriesData(QObject *parent, QVariantMap params) :
     QObject(parent)
 {
 
-    m_id = params["id"].toString();
+    m_id = params["id"].toInt();
     m_actors = params["actors"].toString();
     m_airsDayOfWeek = params["airsDayOfWeek"].toString();
     m_airsTime = params["airsTime"].toString();
@@ -42,7 +42,7 @@ SeriesData::SeriesData(QObject *parent, QVariantMap params) :
     m_nextEpisodeWatched = params["nextEpisodeWatched"].toInt();
 }
 
-QString SeriesData::getID() { return m_id; }
+int SeriesData::getID() { return m_id; }
 
 QString SeriesData::getActors() { return m_actors; }
 

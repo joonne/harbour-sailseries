@@ -29,27 +29,27 @@ public:
 
     void getAuthenticationToken();
     void getLanguages();
-    void searchSeries(QString seriesName);
-    void getSeries(QString seriesId);
-    void getSeasonImages(QString seriesId);
-    void getPosterImages(QString seriesId);
-    void getBannerImages(QString seriesId);
-    void getFanartImages(QString seriesId);
-    void getActors(QString seriesId);
-    void getEpisodes(QString seriesId, int page = 1);
-    void getAll(QString seriesId);
-    void getEpisode(QString episodeId);
+    void searchSeries(const QString &seriesName);
+    void getSeries(const int &seriesId);
+    void getSeasonImages(const int &seriesId);
+    void getPosterImages(const int &seriesId);
+    void getBannerImages(const int &seriesId);
+    void getFanartImages(const int &seriesId);
+    void getActors(const int &seriesId);
+    void getEpisodes(const int &seriesId, const int &page = 1);
+    void getAll(const int &seriesId);
+    void getEpisode(const int &episodeId);
 
 signals:
     void readyToPopulateSeries(QList<QVariantMap>);
     void storeSeries(QVariantMap);
     void readyToPopulateEpisodeDetails(QVariantMap episode);
-    void storeEpisodes(QString, QList<QVariantMap>);
-    void storePosterImageFor(QString, QString);
-    void storeBannerImageFor(QString, QString);
-    void storeFanartImageFor(QString, QString);
-    void storeActors(QString, QList<QVariantMap>);
-    void storeSeasonImages(QString, QList<QVariantMap>);
+    void storeEpisodes(const int&, const QList<QVariantMap>&);
+    void storePosterImageFor(const int&, const QString&);
+    void storeBannerImageFor(const int&, const QString&);
+    void storeFanartImageFor(const int&, const QString&);
+    void storeActors(const int&, const QList<QVariantMap>&);
+    void storeSeasonImages(const int&, const QList<QVariantMap>&);
 
 public slots:
     void replyFinishedError(QNetworkReply* reply);

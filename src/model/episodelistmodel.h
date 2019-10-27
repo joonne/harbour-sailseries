@@ -15,27 +15,26 @@ class EpisodeListModel : public QObject
     Q_OBJECT
     Q_PROPERTY(QQmlListProperty<EpisodeData> episodeList READ getEpisodeList NOTIFY episodeListChanged)
 public:
-    explicit EpisodeListModel(QObject *parent = 0,DatabaseManager* dbmanager = 0);
+    explicit EpisodeListModel(QObject *parent = 0);
     ~EpisodeListModel();
 
     QQmlListProperty<EpisodeData> getEpisodeList();
 
-    Q_INVOKABLE void getEpisodes(QString seriesId, int seasonNumber);
-    Q_INVOKABLE void toggleWatched(QString episodeId, QString seriesId, int seasonNumber);
-    Q_INVOKABLE void markSeasonWatched(QString seriesId, int season);
-    Q_INVOKABLE int getSeasonCount(QString seriesId);
+    Q_INVOKABLE void getEpisodes(const int &seriesId, const int &seasonNumber);
+    Q_INVOKABLE void toggleWatched(const int &episodeId, const int &seriesId, const int &seasonNumber);
+    Q_INVOKABLE void markSeasonAsWatched(const int &seriesId, const int &season);
 
 signals:
     void episodeListChanged();
-    void getEpisodesRequested(int seriesId, int seasonNumber);
-    void toggleWatchedRequested(QString episodeId, QString seriesId, int seasonNumber);
+    void getEpisodesRequested(const int &seriesId, const int &seasonNumber);
+    void toggleWatchedRequested(const int &episodeId, const int &seriesId, const int &seasonNumber);
+    void markSeasonAsWatchedRequested(const int &seriesId, const int &season);
 
 public slots:
-    void populateEpisodeList(QList<QVariantMap> episodes);
+    void populateEpisodeList(const QList<QVariantMap> &episodes);
 
 private:
     QList<EpisodeData*> m_episodeListModel;
-    DatabaseManager* m_dbmanager;
 
     static int episodeListCount(QQmlListProperty<EpisodeData> *prop);
     static EpisodeData* episodeListAt(QQmlListProperty<EpisodeData> *prop, int index);

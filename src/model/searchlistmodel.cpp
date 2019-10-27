@@ -1,11 +1,12 @@
 #include "searchlistmodel.h"
 
 SearchListModel::SearchListModel(QObject *parent, DatabaseManager *dbmanager, Api *api) :
-    QObject(parent)
+    QObject(parent),
+    m_dbmanager(dbmanager),
+    m_api(api),
+    m_loading(false),
+    m_added(false)
 {
-    m_dbmanager = dbmanager;
-    m_api = api;
-
     connect(m_api,
             SIGNAL(readyToPopulateSeries(QList<QVariantMap>)),
             this,
@@ -15,14 +16,12 @@ SearchListModel::SearchListModel(QObject *parent, DatabaseManager *dbmanager, Ap
             SIGNAL(seriesStored()),
             this,
             SLOT(seriesStored()));
-
-    m_loading = false;
-    m_added = false;
 }
 
 SearchListModel::~SearchListModel()
 {
-    for (auto series : m_searchListModel) {
+    for (auto series : m_searchListModel)
+    {
         delete series;
         series = 0;
     }
@@ -61,8 +60,10 @@ void SearchListModel::searchFinished(QList<QVariantMap> series)
 
 void SearchListModel::populateSearchModel(QList<QVariantMap> foundSeries)
 {
-    if (!foundSeries.empty()) {
-        for (auto series : foundSeries) {
+    if (!foundSeries.empty())
+    {
+        for (auto series : foundSeries)
+        {
             SeriesData* seriesData = new SeriesData(this, series);
             m_searchListModel.append(seriesData);
         }
@@ -82,7 +83,6 @@ void SearchListModel::searchSeries(QString text)
 {
     setLoading(true);
     m_searchListModel.clear();
-    m_series.clear();
     emit searchModelChanged();
     m_api->searchSeries(text);
 }
@@ -92,13 +92,13 @@ void SearchListModel::selectSeries(int index)
     m_info = m_searchListModel.at(index);
 }
 
-void SearchListModel::getFullSeriesRecord(QString id)
+void SearchListModel::getAll(const int &id)
 {
     m_api->getAll(id);
     setLoading(true);
 }
 
-QString SearchListModel::getID() { return m_info->getID(); }
+int SearchListModel::getID() { return m_info->getID(); }
 
 QString SearchListModel::getLanguage() { return m_info->getLanguage(); }
 
@@ -130,10 +130,13 @@ bool SearchListModel::getAdded() { return m_added; }
 
 void SearchListModel::setAdded(bool cond)
 {
-    if (m_added != cond) {
-        m_added = cond;
-        emit addedChanged();
+    if (m_added == cond)
+    {
+        return;
     }
+
+    m_added = cond;
+    emit addedChanged();
 }
 
 void SearchListModel::clearList()

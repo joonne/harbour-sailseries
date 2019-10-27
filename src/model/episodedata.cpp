@@ -82,11 +82,3 @@ int EpisodeData::getThumbHeight() { return m_thumbHeight; }
 int EpisodeData::getThumbWidth() { return m_thumbWidth; }
 
 int EpisodeData::getWatched() { return m_watched; }
-
-void EpisodeData::setWatched(int watched)
-{
-    if (m_watched != watched) {
-        m_watched = watched;
-        emit watchedChanged();
-    }
-}

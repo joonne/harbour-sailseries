@@ -7,7 +7,7 @@
 class SeriesData : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString ID READ getID CONSTANT)
+    Q_PROPERTY(int ID READ getID CONSTANT)
     Q_PROPERTY(QString Actors READ getActors CONSTANT)
     Q_PROPERTY(QString AirsDayOfWeek READ getAirsDayOfWeek CONSTANT)
     Q_PROPERTY(QString AirsTime READ getAirsTime CONSTANT)
@@ -50,7 +50,7 @@ class SeriesData : public QObject
 public:
     explicit SeriesData(QObject *parent = 0, QVariantMap params = QVariantMap());
 
-    QString getID();
+    int getID();
     QString getActors();
     QString getAirsDayOfWeek();
     QString getAirsTime();
@@ -101,7 +101,7 @@ public slots:
 
 private:
 
-    QString m_id;
+    int m_id;
     QString m_actors;
     QString m_airsDayOfWeek;
     QString m_airsTime;
@@ -142,7 +142,6 @@ private:
     QString m_nextEpisodeGuestStars;
     QString m_nextEpisodeWriter;
     int m_nextEpisodeWatched;
-
 };
 
 #endif // SERIESDATA_H

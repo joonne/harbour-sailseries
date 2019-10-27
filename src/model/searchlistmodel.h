@@ -13,7 +13,7 @@ class SearchListModel : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QQmlListProperty<SeriesData> SearchModel READ getSearchModel NOTIFY searchModelChanged)
-    Q_PROPERTY(QString ID READ getID NOTIFY idChanged)
+    Q_PROPERTY(int ID READ getID NOTIFY idChanged)
     Q_PROPERTY(QString Language READ getLanguage NOTIFY languageChanged)
     Q_PROPERTY(QString SeriesName READ getSeriesName NOTIFY seriesNameChanged)
     Q_PROPERTY(QString AliasNames READ getAliasNames NOTIFY aliasNamesChanged)
@@ -33,12 +33,12 @@ public:
 
     Q_INVOKABLE void searchSeries(QString text);
     Q_INVOKABLE void selectSeries(int index);
-    Q_INVOKABLE void getFullSeriesRecord(QString id);
+    Q_INVOKABLE void getAll(const int &id);
     Q_INVOKABLE void clearList();
     Q_INVOKABLE void checkIfAdded(QString id, QString name);
 
     QQmlListProperty<SeriesData> getSearchModel();
-    QString getID();
+    int getID();
     QString getLanguage();
     QString getSeriesName();
     QString getAliasNames();
@@ -77,27 +77,17 @@ public slots:
     void seriesStored();
 
 private:
-    Api* m_api;
     DatabaseManager* m_dbmanager;
-    QList<QVariantMap> m_series;
-    QList<QVariantMap> m_episodes;
-    QList<QVariantMap> m_banners;
+    Api* m_api;
     QList<SeriesData*> m_searchListModel;
     SeriesData* m_info;
+    bool m_loading;
+    bool m_added;
 
     static int searchListCount(QQmlListProperty<SeriesData> *prop);
     static SeriesData* searchListAt(QQmlListProperty<SeriesData> *prop, int index);
     static void searchListAppend(QQmlListProperty<SeriesData>* prop, SeriesData* val);
     static void searchListClear(QQmlListProperty<SeriesData>* prop);
-
-    bool m_loading;
-    bool m_added;
-
-    QList<QString> m_posters;
-    int m_posterIndex;
-
-    QString mode;
-
 };
 
 #endif // SEARCHLISTMODEL_H

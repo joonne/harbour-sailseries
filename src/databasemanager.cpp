@@ -276,7 +276,7 @@ bool DatabaseManager::deleteDuplicateEpisodes()
 
 void DatabaseManager::storeSeries(const QVariantMap &series)
 {   
-    auto seriesId = series["id"].toInt();
+    auto id = series["id"].toInt();
     auto actors = series["actors"].toString();
     auto airsDayOfWeek = series["airsDayOfWeek"].toString();
     auto airsTime = series["airsTime"].toString();
@@ -311,8 +311,8 @@ void DatabaseManager::storeSeries(const QVariantMap &series)
     {
         QSqlQuery query(m_db);
         query.prepare("INSERT OR REPLACE INTO Series(id, actors, airsDayOfWeek, airsTime, contentRating, firstAired, genre, imdbID, language, network, overview, rating, ratingCount, runtime, seriesName, status, added, addedBy, banner, fanart, lastupdated, poster, zap2itID, watched) "
-                      "VALUES(:seriesId, :actors, :airsDayOfWeek, :airsTime, :contentRating, :firstAired, :genre, :imdbId, :language, :network, :overview, :rating, :ratingCount, :runtime, :seriesName, :status, :added, :addedBy, :banner, :fanart, :lastUpdated, :poster, :zap2itId, :watched)");
-        query.bindValue(":seriesId", seriesId);
+                      "VALUES(:id, :actors, :airsDayOfWeek, :airsTime, :contentRating, :firstAired, :genre, :imdbId, :language, :network, :overview, :rating, :ratingCount, :runtime, :seriesName, :status, :added, :addedBy, :banner, :fanart, :lastUpdated, :poster, :zap2itId, :watched)");
+        query.bindValue(":id", id);
         query.bindValue(":actors", actors);
         query.bindValue(":airsDayOfWeek", airsDayOfWeek);
         query.bindValue(":airsTime", airsTime);
@@ -351,7 +351,7 @@ void DatabaseManager::storeSeries(const QVariantMap &series)
     emit seriesStored();
 }
 
-void DatabaseManager::storeEpisodes(const QString &seriesId, const QList<QVariantMap> &episodes)
+void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap> &episodes)
 {
     startTransaction();
 
@@ -405,7 +405,7 @@ void DatabaseManager::storeEpisodes(const QString &seriesId, const QList<QVarian
             query.bindValue(":absoluteNumber", absoluteNumber);
             query.bindValue(":lastUpdated", lastUpdated);
             query.bindValue(":seasonId", seasonId);
-            query.bindValue(":seriesId", seriesId.toInt());
+            query.bindValue(":seriesId", seriesId);
             query.bindValue(":watched", watched);
             query.exec();
 
@@ -662,11 +662,11 @@ void DatabaseManager::getStartPageSeries()
     emit populateTodayModel(allSeries);
 }
 
-void DatabaseManager::getSeasons(int seriesId)
+void DatabaseManager::getSeasons(const int &seriesId)
 {
     QList<QVariantMap> seasons;
 
-    int seasonsCount = seasonCount(seriesId);
+    const int seasonsCount = seasonCount(seriesId);
     for (int i = 0; i <= seasonsCount; ++i) {
         QVariantMap season;
         season["banner"] = getSeasonBanner(seriesId, i);
@@ -678,20 +678,26 @@ void DatabaseManager::getSeasons(int seriesId)
     emit populateSeasonList(seasons);
 }
 
-void DatabaseManager::getEpisodes(int seriesId, int seasonNumber)
+void DatabaseManager::getEpisodes(const int &seriesId, const int &seasonNumber)
 {
     QList<QVariantMap> episodes;
     
     QSqlQuery query(m_db);
-    query.exec(QString("SELECT episodeName, episodeNumber, overview, seasonNumber, absoluteNumber, filename, watched, id, guestStars, writer, firstAired "
-                       "FROM Episode "
-                       "WHERE seriesID = %1 AND seasonNumber = %2 "
-                       "ORDER BY episodeNumber").arg(seriesId).arg(seasonNumber));
-    
-    if (query.isSelect()) {
-        
-        while (query.next()) {
+    query.prepare("SELECT episodeName, episodeNumber, overview, seasonNumber, absoluteNumber, filename, watched, id, guestStars, writer, firstAired "
+                  "FROM Episode "
+                  "WHERE seriesID = :seriesId AND seasonNumber = :seasonNumber "
+                  "ORDER BY episodeNumber");
+    query.bindValue(":seriesId", seriesId);
+    query.bindValue(":seasonNumber", seasonNumber);
+    query.exec();
 
+    qDebug() << query.lastError();
+    qDebug() << query.executedQuery();
+    
+    if (query.isSelect())
+    {
+        while (query.next())
+        {
             QVariantMap episode;
 
             QString episodeName = query.value(0).toString();
@@ -736,17 +742,19 @@ void DatabaseManager::getEpisodes(int seriesId, int seasonNumber)
     emit populateEpisodeList(episodes);
 }
 
-void DatabaseManager::toggleWatched(QString episodeId, QString seriesId, int seasonNumber)
+void DatabaseManager::toggleWatched(const int &episodeId, const int &seriesId, const int &seasonNumber)
 {
-
     QSqlQuery query(m_db);
-    query.exec(QString("UPDATE Episode "
-                       "SET watched = CASE WHEN watched = 0 THEN 1 ELSE 0 END "
-                       "WHERE id = %1").arg(episodeId.toInt()));
-    getEpisodes(seriesId.toInt(), seasonNumber);
+    query.prepare("UPDATE Episode "
+                  "SET watched = CASE WHEN watched = 0 THEN 1 ELSE 0 END "
+                  "WHERE id = :episodeId");
+    query.bindValue(":episodeId", episodeId);
+    query.exec();
+
+    getEpisodes(seriesId, seasonNumber);
 }
 
-void DatabaseManager::storePosterImageFor(QString seriesId, QString posterImage)
+void DatabaseManager::storePosterImageFor(const int &seriesId, const QString &posterImage) const
 {
     QSqlQuery query(m_db);
     query.prepare(QString("UPDATE Series "
@@ -755,9 +763,13 @@ void DatabaseManager::storePosterImageFor(QString seriesId, QString posterImage)
     query.bindValue(":poster", posterImage);
     query.bindValue(":seriesId", seriesId);
     query.exec();
+
+    qDebug() << query.lastError();
+    qDebug() << query.boundValues();
+    qDebug() << query.executedQuery();
 }
 
-void DatabaseManager::storeBannerImageFor(QString seriesId, QString bannerImage)
+void DatabaseManager::storeBannerImageFor(const int &seriesId, const QString &bannerImage) const
 {
     QSqlQuery query(m_db);
     query.prepare(QString("UPDATE Series "
@@ -766,9 +778,13 @@ void DatabaseManager::storeBannerImageFor(QString seriesId, QString bannerImage)
     query.bindValue(":banner", bannerImage);
     query.bindValue(":seriesId", seriesId);
     query.exec();
+
+    qDebug() << query.lastError();
+    qDebug() << query.boundValues();
+    qDebug() << query.executedQuery();
 }
 
-void DatabaseManager::storeFanartImageFor(QString seriesId, QString fanartImage)
+void DatabaseManager::storeFanartImageFor(const int &seriesId, const QString &fanartImage) const
 {
     QSqlQuery query(m_db);
     query.prepare(QString("UPDATE Series "
@@ -777,9 +793,13 @@ void DatabaseManager::storeFanartImageFor(QString seriesId, QString fanartImage)
     query.bindValue(":fanart", fanartImage);
     query.bindValue(":seriesId", seriesId);
     query.exec();
+
+    qDebug() << query.lastError();
+    qDebug() << query.boundValues();
+    qDebug() << query.executedQuery();
 }
 
-void DatabaseManager::storeActors(const QString &seriesId, const QList<QVariantMap> &actors)
+void DatabaseManager::storeActors(const int &seriesId, const QList<QVariantMap> &actors) const
 {
     auto actorNames = QString("");
 
@@ -789,12 +809,16 @@ void DatabaseManager::storeActors(const QString &seriesId, const QList<QVariantM
     }
 
     QSqlQuery query(m_db);
-    query.prepare(QString("UPDATE Series "
-                          "SET actors = :actorNames "
-                          "WHERE id = :seriesId"));
+    query.prepare("UPDATE Series "
+                  "SET actors = :actorNames "
+                  "WHERE id = :seriesId");
     query.bindValue(":actors", actorNames);
     query.bindValue(":seriesId", seriesId);
     query.exec();
+
+    qDebug() << query.lastError();
+    qDebug() << query.boundValues();
+    qDebug() << query.executedQuery();
 }
 
 void DatabaseManager::deleteSeries(const int &seriesId)
@@ -1007,7 +1031,7 @@ int DatabaseManager::seasonCount(int seriesId)
     return seasonCount;
 }
 
-void DatabaseManager::markSeasonWatched(const int &seriesId, const int &seasonNumber)
+void DatabaseManager::markSeasonAsWatched(const int &seriesId, const int &seasonNumber)
 {
     QSqlQuery query(m_db);
     query.prepare("UPDATE Episode "

@@ -102,7 +102,7 @@ void SeriesListModel::selectSeries(int index)
     emit daysToNextEpisodeChanged();
 }
 
-QString SeriesListModel::getID() { return m_info->getID(); }
+int SeriesListModel::getID() { return m_info->getID(); }
 
 QString SeriesListModel::getLanguage() { return m_info->getLanguage(); }
 
@@ -176,14 +176,14 @@ void SeriesListModel::seriesDeleted()
     setLoading(false);
 }
 
-void SeriesListModel::updateSeries(QString seriesId)
+void SeriesListModel::updateSeries(const QString &seriesId)
 {
     if (seriesId.isEmpty())
     {
         return;
     }
 
-    m_api->getAll(seriesId);
+    m_api->getAll(seriesId.toInt());
     setLoading(true);
 }
 

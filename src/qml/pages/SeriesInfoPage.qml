@@ -20,7 +20,7 @@ Page {
                 visible: !engine.SearchModel.Added
                 text: qsTr("Add to my series")
                 onClicked: {
-                    engine.SearchModel.getFullSeriesRecord(engine.SearchModel.ID)
+                    engine.SearchModel.getAll(engine.SearchModel.ID)
                 }
             }
 

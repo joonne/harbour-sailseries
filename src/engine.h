@@ -33,12 +33,11 @@ public:
     EpisodeListModel* getEpisodeListModel();
     SeasonListModel* getSeasonListModel();
     Statistics* getStatistics();
-
-    Q_INVOKABLE void updateModels();
     bool getLoading();
 
+    Q_INVOKABLE void updateModels();
     Q_INVOKABLE bool deleteDuplicateEpisodes();
-    Q_INVOKABLE void requestEpisodeDetails(QString id);
+    Q_INVOKABLE void requestEpisodeDetails(const int &id);
 
 signals:
     void seriesListModelChanged();
@@ -48,12 +47,12 @@ signals:
     void episodeListModelChanged();
     void seasonListModelChanged();
     void loadingChanged();
-    void updateEpisodeDetails(QVariantMap episode);
+    void updateEpisodeDetails(const QVariantMap &episode);
     void setUpDb();
 
 public slots:
     void readyToUpdateModels();
-    void readyToUpdateEpisodeDetails(QVariantMap episode);
+    void readyToUpdateEpisodeDetails(const QVariantMap &episode);
 
 private:
     SeriesListModel* m_seriesListModel;
