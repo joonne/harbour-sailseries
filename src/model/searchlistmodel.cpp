@@ -1,8 +1,7 @@
 #include "searchlistmodel.h"
 
-SearchListModel::SearchListModel(QObject *parent, DatabaseManager *dbmanager) :
+SearchListModel::SearchListModel(QObject *parent) :
     QObject(parent),
-    m_dbmanager(dbmanager),
     m_loading(false),
     m_added(false)
 {}
@@ -49,16 +48,19 @@ void SearchListModel::searchFinished(QList<QVariantMap> series)
 
 void SearchListModel::populateSearchModel(QList<QVariantMap> foundSeries)
 {
-    if (!foundSeries.empty())
+    if (foundSeries.empty())
     {
-        for (auto series : foundSeries)
-        {
-            SeriesData* seriesData = new SeriesData(this, series);
-            m_searchListModel.append(seriesData);
-        }
-        emit searchModelChanged();
-        setLoading(false);
+        return;
     }
+
+    for (auto series : foundSeries)
+    {
+        auto seriesData = new SeriesData(this, series);
+        m_searchListModel.append(seriesData);
+    }
+
+    emit searchModelChanged();
+    setLoading(false);
 }
 
 void SearchListModel::seriesStored()
@@ -74,9 +76,10 @@ void SearchListModel::searchSeries(const QString &text)
     emit searchSeriesRequested(text);
 }
 
-void SearchListModel::selectSeries(int index)
+void SearchListModel::selectSeries(const int &index)
 {
     m_info = m_searchListModel.at(index);
+    emit checkIfAddedRequested(m_info->getID(), m_info->getSeriesName());
 }
 
 void SearchListModel::getAll(const int &seriesId)
@@ -115,14 +118,14 @@ void SearchListModel::setLoading(bool state)
 
 bool SearchListModel::getAdded() { return m_added; }
 
-void SearchListModel::setAdded(bool cond)
+void SearchListModel::setAdded(bool isAdded)
 {
-    if (m_added == cond)
+    if (m_added == isAdded)
     {
         return;
     }
 
-    m_added = cond;
+    m_added = isAdded;
     emit addedChanged();
 }
 
@@ -132,7 +135,7 @@ void SearchListModel::clearList()
     emit searchModelChanged();
 }
 
-void SearchListModel::checkIfAdded(QString id, QString name)
+void SearchListModel::checkIfAddedReady(const bool &isAdded)
 {
-    setAdded(m_dbmanager->isAlreadyAdded(id.toInt(), name));
+    setAdded(isAdded);
 }

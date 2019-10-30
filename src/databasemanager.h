@@ -51,7 +51,6 @@ public:
     QString getSeasonBanner(const int &seriesId, const int &season) const;
     QStringList getSeriesIds(bool includeEndedSeries);
 
-    bool isAlreadyAdded(const int &seriesId, const QString &name);
     int watchedCount(int seriesId);
     int watchedCountBySeason(int seriesId, int seasonNumber);
     int totalCount(int seriesId);
@@ -79,6 +78,7 @@ signals:
     void updateStatistics(QVariantMap);
     void populateSeasonList(QList<QVariantMap>);
     void populateEpisodeList(QList<QVariantMap>);
+    void checkIfAddedReady(bool);
 
 public slots:
     void getStartPageSeries();
@@ -96,6 +96,7 @@ public slots:
     void storeActors(const int &seriesId, const QList<QVariantMap> &actors) const;
     void storeSeasonImages(const QString &seriesId, const QList<QVariantMap> &seasonImages);
     void markSeasonAsWatched(const int &seriesId, const int &seasonNumber);
+    void checkIfAdded(const int &seriesId, const QString &name);
 
 private:
     QSqlDatabase m_db;

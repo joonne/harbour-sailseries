@@ -11,13 +11,8 @@ Engine::Engine(QObject *parent) :
     connect(dbThread, SIGNAL(finished()), dbThread, SLOT(deleteLater()));
     dbThread->start();
 
-    auto apiThread = new QThread;
-    m_api->moveToThread(apiThread);
-    connect(apiThread, SIGNAL(finished()), apiThread, SLOT(deleteLater()));
-    apiThread->start();
-
     m_seriesListModel = new SeriesListModel(this, m_dbmanager);
-    m_searchListModel = new SearchListModel(this, m_dbmanager);
+    m_searchListModel = new SearchListModel(this);
     m_todayListModel = new TodayListModel(this, m_dbmanager, m_api);
     m_episodeListModel = new EpisodeListModel(this);
     m_seasonListModel = new SeasonListModel(this);
@@ -122,6 +117,16 @@ Engine::Engine(QObject *parent) :
             SIGNAL(seriesStored()),
             m_searchListModel,
             SLOT(seriesStored()));
+
+    connect(m_searchListModel,
+            SIGNAL(checkIfAddedRequested(int,QString)),
+            m_dbmanager,
+            SLOT(checkIfAdded(int,QString)));
+
+    connect(m_dbmanager,
+            SIGNAL(checkIfAddedReady(bool)),
+            m_searchListModel,
+            SLOT(checkIfAddedReady(bool)));
 }
 
 Engine::~Engine()

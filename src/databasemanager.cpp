@@ -883,7 +883,7 @@ bool DatabaseManager::deleteAllSeries()
     return result ? this->commit() : this->rollback(), result;
 }
 
-bool DatabaseManager::isAlreadyAdded(const int &seriesId, const QString &name)
+void DatabaseManager::checkIfAdded(const int &seriesId, const QString &name)
 {
     auto isAdded = false;
     
@@ -905,7 +905,7 @@ bool DatabaseManager::isAlreadyAdded(const int &seriesId, const QString &name)
         }
     }
 
-    return isAdded;
+    emit checkIfAddedReady(isAdded);
 }
 
 int DatabaseManager::watchedCount(int seriesId)

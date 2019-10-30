@@ -52,7 +52,6 @@ Page {
             contentWidth: listView.width
             onClicked: {
                 engine.SearchModel.selectSeries(index)
-                engine.SearchModel.checkIfAdded(ID,SeriesName)
                 pageStack.push(Qt.resolvedUrl("SeriesInfoPage.qml"))
             }
 

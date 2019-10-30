@@ -26,16 +26,15 @@ class SearchListModel : public QObject
     Q_PROPERTY(bool Loading READ getLoading WRITE setLoading NOTIFY loadingChanged)
     Q_PROPERTY(bool Added READ getAdded WRITE setAdded NOTIFY addedChanged)
 public:
-    explicit SearchListModel(QObject *parent = 0, DatabaseManager* dbmanager = 0);
+    explicit SearchListModel(QObject *parent = 0);
     ~SearchListModel();
 
     void populateSearchModel(QList<QVariantMap> foundSeries);
 
     Q_INVOKABLE void searchSeries(const QString &text);
-    Q_INVOKABLE void selectSeries(int index);
+    Q_INVOKABLE void selectSeries(const int &index);
     Q_INVOKABLE void getAll(const int &seriesId);
     Q_INVOKABLE void clearList();
-    Q_INVOKABLE void checkIfAdded(QString id, QString name);
 
     QQmlListProperty<SeriesData> getSearchModel();
     int getID();
@@ -51,7 +50,7 @@ public:
     bool getLoading();
     void setLoading(bool state);
     bool getAdded();
-    void setAdded(bool cond);
+    void setAdded(bool isAdded);
 
 signals:
     void searchModelChanged();
@@ -70,13 +69,14 @@ signals:
     void updateModels();
     void searchSeriesRequested(QString);
     void getAllRequested(int);
+    void checkIfAddedRequested(int, QString);
 
 public slots:
     void searchFinished(QList<QVariantMap> series);
     void seriesStored();
+    void checkIfAddedReady(const bool &isAdded);
 
 private:
-    DatabaseManager* m_dbmanager;
     QList<SeriesData*> m_searchListModel;
     SeriesData* m_info;
     bool m_loading;
