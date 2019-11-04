@@ -15,7 +15,7 @@ class EpisodeListModel : public QObject
     Q_OBJECT
     Q_PROPERTY(QQmlListProperty<EpisodeData> episodeList READ getEpisodeList NOTIFY episodeListChanged)
 public:
-    explicit EpisodeListModel(QObject *parent = 0);
+    explicit EpisodeListModel(QObject *parent = 0, DatabaseManager *dbmanager = 0);
     ~EpisodeListModel();
 
     QQmlListProperty<EpisodeData> getEpisodeList();
@@ -35,6 +35,7 @@ public slots:
 
 private:
     QList<EpisodeData*> m_episodeListModel;
+    DatabaseManager* m_dbmanager;
 
     static int episodeListCount(QQmlListProperty<EpisodeData> *prop);
     static EpisodeData* episodeListAt(QQmlListProperty<EpisodeData> *prop, int index);

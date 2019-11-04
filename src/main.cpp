@@ -27,7 +27,6 @@
 
 int main(int argc, char *argv[])
 {
-
     QCoreApplication::setApplicationName("harbour-sailseries");
     QCoreApplication::setOrganizationName("harbour-sailseries");
 
@@ -44,16 +43,12 @@ int main(int argc, char *argv[])
     qmlRegisterType<SeasonListModel>("harbour.sailseries.model", 1, 0, "SeasonListModel");
     qmlRegisterType<Statistics>("harbour.sailseries.model", 1, 0, "Statistics");
 
-    // For this example, wizard-generates single line code would be good enough,
-    // but very soon it won't be enough for you anyway, so use this more detailed example from start
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
     QScopedPointer<QQuickView> view(SailfishApp::createView());
 
-    // That is how you can access version strings in C++. And pass them on to QML
     view->rootContext()->setContextProperty("appVersion", APP_VERSION);
     view->rootContext()->setContextProperty("appBuildNum", APP_BUILDNUM);
 
-    // This is the public QML datacontroller
     QScopedPointer<Engine> engine(new Engine);
     QQmlContext* context = view->rootContext();
     context->setContextProperty("engine", engine.data());

@@ -26,7 +26,7 @@ class SearchListModel : public QObject
     Q_PROPERTY(bool Loading READ getLoading WRITE setLoading NOTIFY loadingChanged)
     Q_PROPERTY(bool Added READ getAdded WRITE setAdded NOTIFY addedChanged)
 public:
-    explicit SearchListModel(QObject *parent = 0);
+    explicit SearchListModel(QObject *parent = 0, Api *api = 0, DatabaseManager *dbmanager = 0);
     ~SearchListModel();
 
     void populateSearchModel(QList<QVariantMap> foundSeries);
@@ -78,6 +78,8 @@ public slots:
 
 private:
     QList<SeriesData*> m_searchListModel;
+    Api* m_api;
+    DatabaseManager* m_dbmanager;
     SeriesData* m_info;
     bool m_loading;
     bool m_added;

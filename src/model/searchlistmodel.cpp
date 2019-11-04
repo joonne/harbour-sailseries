@@ -1,10 +1,42 @@
 #include "searchlistmodel.h"
 
-SearchListModel::SearchListModel(QObject *parent) :
+SearchListModel::SearchListModel(QObject *parent, Api* api, DatabaseManager *dbmanager) :
     QObject(parent),
+    m_api(api),
+    m_dbmanager(dbmanager),
     m_loading(false),
     m_added(false)
-{}
+{
+    connect(this,
+            SIGNAL(searchSeriesRequested(QString)),
+            m_api,
+            SLOT(searchSeries(QString)));
+
+    connect(this,
+            SIGNAL(getAllRequested(int)),
+            m_api,
+            SLOT(getAll(int)));
+
+    connect(m_api,
+            SIGNAL(readyToPopulateSeries(QList<QVariantMap>)),
+            this,
+            SLOT(searchFinished(QList<QVariantMap>)));
+
+    connect(m_dbmanager,
+            SIGNAL(seriesStored()),
+            this,
+            SLOT(seriesStored()));
+
+    connect(this,
+            SIGNAL(checkIfAddedRequested(int,QString)),
+            m_dbmanager,
+            SLOT(checkIfAdded(int,QString)));
+
+    connect(m_dbmanager,
+            SIGNAL(checkIfAddedReady(bool)),
+            this,
+            SLOT(checkIfAddedReady(bool)));
+}
 
 SearchListModel::~SearchListModel()
 {

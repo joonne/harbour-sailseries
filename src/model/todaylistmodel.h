@@ -16,7 +16,7 @@ class TodayListModel : public QObject
     Q_OBJECT
     Q_PROPERTY(QQmlListProperty<SeriesData> TodayModel READ getTodayModel NOTIFY todayModelChanged)
 public:
-    explicit TodayListModel(QObject *parent = 0, DatabaseManager* dbmanager = 0, Api* api = 0);
+    explicit TodayListModel(QObject *parent = 0, DatabaseManager* dbmanager = 0);
     ~TodayListModel();
 
     QQmlListProperty<SeriesData> getTodayModel();

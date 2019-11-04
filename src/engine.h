@@ -36,7 +36,7 @@ public:
     bool getLoading();
 
     Q_INVOKABLE void updateModels();
-    Q_INVOKABLE bool deleteDuplicateEpisodes();
+    Q_INVOKABLE void deleteDuplicateEpisodes();
     Q_INVOKABLE void requestEpisodeDetails(const int &id);
 
 signals:
@@ -50,6 +50,7 @@ signals:
     void updateEpisodeDetails(const QVariantMap &episode);
     void setUpDb();
     void getEpisode(int);
+    void deleteDuplicateEpisodesRequested();
 
 public slots:
     void readyToUpdateModels();

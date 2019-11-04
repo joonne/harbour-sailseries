@@ -36,13 +36,13 @@ class SeriesListModel : public QObject
     Q_PROPERTY(QString Genre READ getGenre CONSTANT)
 
 public:
-    explicit SeriesListModel(QObject *parent = 0, DatabaseManager *dbmanager = 0);
+    explicit SeriesListModel(QObject *parent = 0, Api *api = 0, DatabaseManager *dbmanager = 0);
     ~SeriesListModel();
 
-    Q_INVOKABLE void selectSeries(int index);
-    Q_INVOKABLE void deleteSeries(int seriesId);
-    Q_INVOKABLE void updateSeries(const QString &seriesId);
-    Q_INVOKABLE void updateAllSeries(bool includeEndedSeries = true);
+    Q_INVOKABLE void selectSeries(const int &index);
+    Q_INVOKABLE void deleteSeries(const int &seriesId);
+    Q_INVOKABLE void updateSeries(const int &seriesId);
+    Q_INVOKABLE void updateAllSeries(const bool &includeEndedSeries = true);
 
     QQmlListProperty<SeriesData> getSeriesList();
     int getID();
@@ -84,13 +84,15 @@ signals:
     void getSeries();
     void deleteSeriesWith(int);
     void getAllRequested(int);
+    void getSeriesIds(bool);
 
 public slots:
-    void populateBannerList(QList<QVariantMap> allSeries);
+    void populateBannerList(const QList<QVariantMap> &allSeries);
     void seriesDeleted();
     void seriesStored();
 
 private:
+    Api* m_api;
     DatabaseManager* m_dbmanager;
     QList<SeriesData*> m_seriesListModel;
     SeriesData* m_info;

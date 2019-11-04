@@ -1,8 +1,19 @@
 #include "seasonlistmodel.h"
 
-SeasonListModel::SeasonListModel(QObject *parent) :
-    QObject(parent)
-{}
+SeasonListModel::SeasonListModel(QObject *parent, DatabaseManager *dbmanager) :
+    QObject(parent),
+    m_dbmanager(dbmanager)
+{
+    connect(this,
+            SIGNAL(getSeasonsRequested(int)),
+            m_dbmanager,
+            SLOT(getSeasons(int)));
+
+    connect(m_dbmanager,
+            SIGNAL(populateSeasonList(QList<QVariantMap>)),
+            this,
+            SLOT(populateSeasonList(QList<QVariantMap>)));
+}
 
 SeasonListModel::~SeasonListModel()
 {
@@ -41,11 +52,10 @@ void SeasonListModel::seasonListClear(QQmlListProperty<SeasonData>* prop)
 
 void SeasonListModel::getSeasons(const int &seriesId)
 {
-    qDebug() << seriesId;
     emit getSeasonsRequested(seriesId);
 }
 
-void SeasonListModel::populateSeasonList(QList<QVariantMap> seasons)
+void SeasonListModel::populateSeasonList(const QList<QVariantMap> &seasons)
 {
     m_seasonListModel.clear();
 

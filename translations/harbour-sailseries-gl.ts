@@ -260,7 +260,7 @@
         <translation>Busqueda de series</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SearchPage.qml" line="85"/>
+        <location filename="../src/qml/pages/SearchPage.qml" line="84"/>
         <source>Here will be stuff when you search for something</source>
         <translation>Aqui sairan cando fagas a búsqueda</translation>
     </message>

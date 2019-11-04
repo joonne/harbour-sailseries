@@ -1,10 +1,9 @@
 #include "todaylistmodel.h"
 
-TodayListModel::TodayListModel(QObject *parent, DatabaseManager *dbmanager, Api *api) :
+TodayListModel::TodayListModel(QObject *parent, DatabaseManager *dbmanager) :
     QObject(parent)
 {
     m_dbmanager = dbmanager;
-    m_api = api;
 
     connect(this,
             SIGNAL(getStartPageSeries()),
@@ -21,7 +20,8 @@ TodayListModel::TodayListModel(QObject *parent, DatabaseManager *dbmanager, Api 
 
 TodayListModel::~TodayListModel()
 {
-    for (auto series : m_todayListModel) {
+    for (auto series : m_todayListModel)
+    {
         delete series;
         series = 0;
     }
@@ -58,10 +58,12 @@ void TodayListModel::populateTodayModel(QList<QVariantMap> allSeries)
     m_todayListModel.clear();
     emit todayModelChanged();
 
-    for (auto series : allSeries) {
+    for (auto series : allSeries)
+    {
         auto seriesData = new SeriesData(this, series);
         m_todayListModel.append(seriesData);
     }
+
     emit todayModelChanged();
 }
 

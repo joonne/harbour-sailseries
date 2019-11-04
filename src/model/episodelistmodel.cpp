@@ -1,8 +1,29 @@
 #include "episodelistmodel.h"
 
-EpisodeListModel::EpisodeListModel(QObject *parent) :
-    QObject(parent)
-{}
+EpisodeListModel::EpisodeListModel(QObject *parent, DatabaseManager *dbmanager) :
+    QObject(parent),
+    m_dbmanager(dbmanager)
+{
+    connect(this,
+            SIGNAL(getEpisodesRequested(int,int)),
+            m_dbmanager,
+            SLOT(getEpisodes(int,int)));
+
+    connect(m_dbmanager,
+            SIGNAL(populateEpisodeList(QList<QVariantMap>)),
+            this,
+            SLOT(populateEpisodeList(QList<QVariantMap>)));
+
+    connect(this,
+            SIGNAL(toggleWatchedRequested(int,int,int)),
+            m_dbmanager,
+            SLOT(toggleWatched(int,int,int)));
+
+    connect(this,
+            SIGNAL(markSeasonAsWatchedRequested(int,int)),
+            m_dbmanager,
+            SLOT(markSeasonAsWatched(int,int)));
+}
 
 EpisodeListModel::~EpisodeListModel()
 {

@@ -13,7 +13,7 @@ class SeasonListModel : public QObject
     Q_OBJECT
     Q_PROPERTY(QQmlListProperty<SeasonData> SeasonList READ getSeasonList NOTIFY seasonListChanged)
 public:
-    explicit SeasonListModel(QObject *parent = 0);
+    explicit SeasonListModel(QObject *parent = 0, DatabaseManager *dbmanager = 0);
     ~SeasonListModel();
 
     QQmlListProperty<SeasonData> getSeasonList();
@@ -25,7 +25,7 @@ signals:
     void getSeasonsRequested(const int &seriesId);
 
 public slots:
-    void populateSeasonList(QList<QVariantMap> seasons);
+    void populateSeasonList(const QList<QVariantMap> &seasons);
 
 private:
     QList<SeasonData*> m_seasonListModel;

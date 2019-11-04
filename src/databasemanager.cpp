@@ -261,17 +261,14 @@ bool DatabaseManager::createBannerTable()
     return ret;
 }
 
-bool DatabaseManager::deleteDuplicateEpisodes()
+void DatabaseManager::deleteDuplicateEpisodes()
 {
-    bool ret = false;
     if (m_db.isOpen())
     {
         QSqlQuery query(m_db);
-        ret = query.exec("DELETE FROM episode "
-                         "WHERE (firstAired = '' OR firstAired IS NULL) AND (episodeName IS NULL OR episodeName = '')");
+        query.exec("DELETE FROM episode "
+                   "WHERE (firstAired = '' OR firstAired IS NULL) AND (episodeName IS NULL OR episodeName = '')");
     }
-
-    return ret;
 }
 
 void DatabaseManager::storeSeries(const QVariantMap &series)
@@ -450,9 +447,9 @@ void DatabaseManager::storeSeasonImages(const QString &seriesId, const QList<QVa
     commit();
 }
 
-QStringList DatabaseManager::getSeriesIds(bool includeEndedSeries)
+void DatabaseManager::getSeriesIds(const bool &includeEndedSeries)
 {
-    QStringList seriesIds;
+    QList<int> seriesIds;
     QString queryString;
 
     if (includeEndedSeries)
@@ -465,31 +462,31 @@ QStringList DatabaseManager::getSeriesIds(bool includeEndedSeries)
     {
          queryString = "SELECT id "
                        "FROM Series "
-                       "WHERE status != 'Ended'"
+                       "WHERE status != 'Ended' "
                        "ORDER BY seriesName";
     }
 
     if (m_db.isOpen())
     {
-        this->startTransaction();
+        startTransaction();
 
         QSqlQuery query(m_db);
         query.exec(queryString);
 
         qDebug() << query.lastError();
 
-        this->commit();
+        commit();
 
         if (query.isSelect())
         {
             while (query.next())
             {
-                seriesIds.append(query.value(0).toString());
+                seriesIds.append(query.value(0).toInt());
             }
         }
     }
 
-    return seriesIds;
+    emit getSeriesIdsReady(seriesIds);
 }
 
 void DatabaseManager::getSeries()
@@ -675,6 +672,7 @@ void DatabaseManager::getSeasons(const int &seriesId)
         seasons.append(season);
     }
 
+    qDebug() << seasons;
     emit populateSeasonList(seasons);
 }
 

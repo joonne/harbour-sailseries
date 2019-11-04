@@ -11,11 +11,11 @@ Engine::Engine(QObject *parent) :
     connect(dbThread, SIGNAL(finished()), dbThread, SLOT(deleteLater()));
     dbThread->start();
 
-    m_seriesListModel = new SeriesListModel(this, m_dbmanager);
-    m_searchListModel = new SearchListModel(this);
-    m_todayListModel = new TodayListModel(this, m_dbmanager, m_api);
-    m_episodeListModel = new EpisodeListModel(this);
-    m_seasonListModel = new SeasonListModel(this);
+    m_seriesListModel = new SeriesListModel(this, m_api, m_dbmanager);
+    m_searchListModel = new SearchListModel(this, m_api, m_dbmanager);
+    m_todayListModel = new TodayListModel(this, m_dbmanager);
+    m_episodeListModel = new EpisodeListModel(this, m_dbmanager);
+    m_seasonListModel = new SeasonListModel(this, m_dbmanager);
     m_statistics = new Statistics(this, m_dbmanager);
 
     connect(m_searchListModel,
@@ -58,75 +58,10 @@ Engine::Engine(QObject *parent) :
             m_dbmanager,
             SLOT(storeSeries(QVariantMap)));
 
-    connect(m_episodeListModel,
-            SIGNAL(getEpisodesRequested(int,int)),
-            m_dbmanager,
-            SLOT(getEpisodes(int,int)));
-
-    connect(m_dbmanager,
-            SIGNAL(populateEpisodeList(QList<QVariantMap>)),
-            m_episodeListModel,
-            SLOT(populateEpisodeList(QList<QVariantMap>)));
-
-    connect(m_episodeListModel,
-            SIGNAL(toggleWatchedRequested(int,int,int)),
-            m_dbmanager,
-            SLOT(toggleWatched(int,int,int)));
-
-    connect(m_episodeListModel,
-            SIGNAL(markSeasonAsWatchedRequested(int,int)),
-            m_dbmanager,
-            SLOT(markSeasonAsWatched(int,int)));
-
-    connect(m_seasonListModel,
-            SIGNAL(getSeasonsRequested(int)),
-            m_dbmanager,
-            SLOT(getSeasons(int)));
-
-    connect(m_dbmanager,
-            SIGNAL(populateSeasonList(QList<QVariantMap>)),
-            m_seasonListModel,
-            SLOT(populateSeasonList(QList<QVariantMap>)));
-
-    connect(m_searchListModel,
-            SIGNAL(searchSeriesRequested(QString)),
-            m_api,
-            SLOT(searchSeries(QString)));
-
-    connect(m_searchListModel,
-            SIGNAL(getAllRequested(int)),
-            m_api,
-            SLOT(getAll(int)));
-
-    connect(m_seriesListModel,
-            SIGNAL(getAllRequested(int)),
-            m_api,
-            SLOT(getAll(int)));
-
     connect(this,
             SIGNAL(getEpisode(int)),
             m_api,
             SLOT(getEpisode(int)));
-
-    connect(m_api,
-            SIGNAL(readyToPopulateSeries(QList<QVariantMap>)),
-            m_searchListModel,
-            SLOT(searchFinished(QList<QVariantMap>)));
-
-    connect(m_dbmanager,
-            SIGNAL(seriesStored()),
-            m_searchListModel,
-            SLOT(seriesStored()));
-
-    connect(m_searchListModel,
-            SIGNAL(checkIfAddedRequested(int,QString)),
-            m_dbmanager,
-            SLOT(checkIfAdded(int,QString)));
-
-    connect(m_dbmanager,
-            SIGNAL(checkIfAddedReady(bool)),
-            m_searchListModel,
-            SLOT(checkIfAddedReady(bool)));
 }
 
 Engine::~Engine()
@@ -173,11 +108,14 @@ void Engine::readyToUpdateEpisodeDetails(const QVariantMap &episode)
     emit updateEpisodeDetails(episode);
 }
 
-void Engine::toggleLoading(bool state) { m_loading = state; }
-
-bool Engine::deleteDuplicateEpisodes()
+void Engine::toggleLoading(bool state)
 {
-    return m_dbmanager->deleteDuplicateEpisodes();
+    m_loading = state;
+}
+
+void Engine::deleteDuplicateEpisodes()
+{
+    emit deleteDuplicateEpisodesRequested();
 }
 
 void Engine::requestEpisodeDetails(const int &id)

@@ -260,7 +260,7 @@
         <translation>Ieškoti serijalu</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SearchPage.qml" line="85"/>
+        <location filename="../src/qml/pages/SearchPage.qml" line="84"/>
         <source>Here will be stuff when you search for something</source>
         <translation>Čia bus dalykai, kai konors ieškosite </translation>
     </message>

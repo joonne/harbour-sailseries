@@ -6,7 +6,7 @@ import "../components"
 Page {
     id: seriespage
 
-    property string seriesId
+    property int seriesId
 
     Component.onCompleted: {
         timer.start()

@@ -1,7 +1,8 @@
 #include "serieslistmodel.h"
 
-SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager) :
+SeriesListModel::SeriesListModel(QObject *parent, Api *api, DatabaseManager* dbmanager) :
     QObject(parent),
+    m_api(api),
     m_dbmanager(dbmanager),
     m_mode("default"),
     m_isLoading(false)
@@ -31,6 +32,16 @@ SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager) :
             this,
             SLOT(seriesStored()));
 
+    connect(this,
+            SIGNAL(getAllRequested(int)),
+            m_api,
+            SLOT(getAll(int)));
+
+    connect(this,
+            SIGNAL(getSeriesIds(bool)),
+            m_dbmanager,
+            SLOT(getSeriesIds(bool)));
+
     emit getSeries();
 }
 
@@ -46,7 +57,7 @@ SeriesListModel::~SeriesListModel()
 void SeriesListModel::seriesStored()
 {
     setLoading(false);
-    emit getSeries();
+    emit updateModels();
 }
 
 QQmlListProperty<SeriesData> SeriesListModel::getSeriesList()
@@ -75,7 +86,7 @@ void SeriesListModel::seriesListClear(QQmlListProperty<SeriesData>* prop)
     qobject_cast<SeriesListModel*>(prop->object)->m_seriesListModel.clear();
 }
 
-void SeriesListModel::populateBannerList(QList<QVariantMap> allSeries)
+void SeriesListModel::populateBannerList(const QList<QVariantMap> &allSeries)
 {
     m_seriesListModel.clear();
     emit seriesListChanged();
@@ -89,7 +100,7 @@ void SeriesListModel::populateBannerList(QList<QVariantMap> allSeries)
     emit seriesListChanged();
 }
 
-void SeriesListModel::selectSeries(int index)
+void SeriesListModel::selectSeries(const int &index)
 {
     m_info = m_seriesListModel.at(index);
     setMode("m_series");
@@ -103,39 +114,95 @@ void SeriesListModel::selectSeries(int index)
 
 int SeriesListModel::getID() { return m_info->getID(); }
 
-QString SeriesListModel::getLanguage() { return m_info->getLanguage(); }
+QString SeriesListModel::getLanguage()
+{
+    return m_info->getLanguage();
+}
 
-QString SeriesListModel::getSeriesName() { return m_info->getSeriesName(); }
+QString SeriesListModel::getSeriesName()
+{
+    return m_info->getSeriesName();
+}
 
-QString SeriesListModel::getAliasNames() { return m_info->getAliasNames(); }
+QString SeriesListModel::getAliasNames()
+{
+    return m_info->getAliasNames();
+}
 
-QString SeriesListModel::getBanner() { return m_info->getBanner(); }
+QString SeriesListModel::getBanner()
+{
+    return m_info->getBanner();
+}
 
-QString SeriesListModel::getOverview() { return m_info->getOverview(); }
+QString SeriesListModel::getOverview()
+{
+    return m_info->getOverview();
+}
 
-QString SeriesListModel::getFirstAired() { return m_info->getFirstAired(); }
+QString SeriesListModel::getFirstAired()
+{
+    return m_info->getFirstAired();
+}
 
-QString SeriesListModel::getIMDB_ID() { return m_info->getIMDB_ID(); }
+QString SeriesListModel::getIMDB_ID()
+{
+    return m_info->getIMDB_ID();
+}
 
-QString SeriesListModel::getZap2it_ID() { return m_info->getZap2it_ID(); }
+QString SeriesListModel::getZap2it_ID()
+{
+    return m_info->getZap2it_ID();
+}
 
-QString SeriesListModel::getNetwork() { return m_info->getNetwork(); }
+QString SeriesListModel::getNetwork()
+{
+    return m_info->getNetwork();
+}
 
-QString SeriesListModel::getNextEpisodeName() { return m_info->getNextEpisodeName(); }
+QString SeriesListModel::getNextEpisodeName()
+{
+    return m_info->getNextEpisodeName();
+}
 
-QString SeriesListModel::getNextEpisodeNumber() { return m_info->getNextEpisodeNumber(); }
+QString SeriesListModel::getNextEpisodeNumber()
+{
+    return m_info->getNextEpisodeNumber();
+}
 
-QString SeriesListModel::getNextEpisodeSeasonNumber() { return m_info->getNextEpisodeSeasonNumber(); }
+QString SeriesListModel::getNextEpisodeSeasonNumber()
+{
+    return m_info->getNextEpisodeSeasonNumber();
+}
 
-QString SeriesListModel::getDaysToNextEpisode() { return m_info->getDaysToNextEpisode(); }
+QString SeriesListModel::getDaysToNextEpisode()
+{
+    return m_info->getDaysToNextEpisode();
+}
 
-QString SeriesListModel::getStatus() { return m_info->getStatus(); }
+QString SeriesListModel::getStatus()
+{
+    return m_info->getStatus();
+}
 
-QString SeriesListModel::getRating() { return m_info->getRating(); }
+QString SeriesListModel::getRating()
+{
+    return m_info->getRating();
+}
 
-QString SeriesListModel::getGenre() { return m_info->getGenre(); }
+QString SeriesListModel::getGenre()
+{
+    return m_info->getGenre();
+}
 
-bool SeriesListModel::getLoading() { return m_isLoading; }
+QString SeriesListModel::getPoster()
+{
+    return m_info->getPoster();
+}
+
+bool SeriesListModel::getLoading()
+{
+    return m_isLoading;
+}
 
 void SeriesListModel::setLoading(bool isLoading)
 {
@@ -148,9 +215,10 @@ void SeriesListModel::setLoading(bool isLoading)
     emit loadingChanged();
 }
 
-QString SeriesListModel::getPoster() { return m_info->getPoster(); }
-
-QString SeriesListModel::getMode() { return m_mode; }
+QString SeriesListModel::getMode()
+{
+    return m_mode;
+}
 
 void SeriesListModel::setMode(QString mode)
 {
@@ -163,7 +231,7 @@ void SeriesListModel::setMode(QString mode)
     emit modeChanged();
 }
 
-void SeriesListModel::deleteSeries(int seriesId)
+void SeriesListModel::deleteSeries(const int &seriesId)
 {
     setLoading(true);
     emit deleteSeriesWith(seriesId);
@@ -175,22 +243,21 @@ void SeriesListModel::seriesDeleted()
     setLoading(false);
 }
 
-void SeriesListModel::updateSeries(const QString &seriesId)
+void SeriesListModel::updateSeries(const int &seriesId)
 {
-    if (seriesId.isEmpty())
-    {
-        return;
-    }
-
-    emit getAllRequested(seriesId.toInt());
+    emit getAllRequested(seriesId);
     setLoading(true);
 }
 
-void SeriesListModel::updateAllSeries(bool includeEndedSeries)
+void SeriesListModel::updateAllSeries(const bool &includeEndedSeries)
 {
-    const auto seriesIds = m_dbmanager->getSeriesIds(includeEndedSeries);
-    for (auto seriesId: seriesIds)
+    connect(m_dbmanager, &DatabaseManager::getSeriesIdsReady, [=](const QList<int> seriesIds)
     {
-        updateSeries(seriesId);
-    }
+        for (auto seriesId: seriesIds)
+        {
+            updateSeries(seriesId);
+        }
+    });
+
+    emit getSeriesIds(includeEndedSeries);
 }
