@@ -21,22 +21,6 @@ public:
     explicit Api(QObject *parent = 0);
     ~Api();
 
-    QList<QVariantMap> parseSeries(QJsonObject obj);
-    QList<QVariantMap> parseJSON(QJsonObject obj);
-    QVariantMap parseEpisode(QJsonObject obj);
-
-    QNetworkReply* get(QUrl url);
-
-    void getAuthenticationToken();
-    void getLanguages();
-    void getSeries(const int &seriesId);
-    void getSeasonImages(const int &seriesId);
-    void getPosterImages(const int &seriesId);
-    void getBannerImages(const int &seriesId);
-    void getFanartImages(const int &seriesId);
-    void getActors(const int &seriesId);
-    void getEpisodes(const int &seriesId, const int &page = 1);
-
 signals:
     void readyToPopulateSeries(QList<QVariantMap>);
     void storeSeries(QVariantMap);
@@ -59,8 +43,19 @@ private:
     QList<QMap<QString,QString> > m_languages;
     QString m_jwt;
 
+    void getAuthenticationToken();
+    void getLanguages();
+    void getSeries(const int &seriesId);
+    void getSeasonImages(const int &seriesId);
+    void getPosterImages(const int &seriesId);
+    void getBannerImages(const int &seriesId);
+    void getFanartImages(const int &seriesId);
+    void getActors(const int &seriesId);
+    void getEpisodes(const int &seriesId, const int &page = 1);
+    QList<QVariantMap> parseJson(const QJsonObject &obj);
+    QNetworkReply* get(QUrl url);
     QString getLocale();
-    QString findHighestRatedImage(const QList<QVariantMap> images);
+    QString findHighestRatedImage(const QList<QVariantMap> &images);
 };
 
 #endif // API_H

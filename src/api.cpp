@@ -97,7 +97,7 @@ void Api::searchSeries(const QString &text)
 
         if (!document.isNull())
         {
-            auto series = parseSeries(document.object());
+            auto series = parseJson(document.object());
             emit(readyToPopulateSeries(series));
         }
 
@@ -127,8 +127,8 @@ void Api::getSeries(const int &seriesId)
 
        if (!jsonDocument.isNull())
        {
-           auto series = parseSeries(jsonDocument.object());
-           emit storeSeries(series.first());
+           auto series = parseJson(jsonDocument.object()).first();
+           emit storeSeries(series);
        }
 
        reply->deleteLater();
@@ -146,7 +146,7 @@ void Api::getSeasonImages(const int &seriesId)
 
        if (!jsonDocument.isNull())
        {
-           auto seasonImages = parseJSON(jsonDocument.object());
+           auto seasonImages = parseJson(jsonDocument.object());
 
            std::transform(seasonImages.begin(), seasonImages.end(), seasonImages.begin(), [seriesId](QVariantMap seasonImage)
            {
@@ -180,7 +180,7 @@ void Api::getPosterImages(const int &seriesId)
 
        if (!jsonDocument.isNull())
        {
-           auto posters = parseJSON(jsonDocument.object());
+           auto posters = parseJson(jsonDocument.object());
            emit storePosterImageFor(seriesId, findHighestRatedImage(posters));
        }
 
@@ -199,7 +199,7 @@ void Api::getBannerImages(const int &seriesId)
 
        if (!jsonDocument.isNull())
        {
-           auto banners = parseJSON(jsonDocument.object());
+           auto banners = parseJson(jsonDocument.object());
            emit storeBannerImageFor(seriesId, findHighestRatedImage(banners));
        }
 
@@ -218,7 +218,7 @@ void Api::getFanartImages(const int &seriesId)
 
        if (!jsonDocument.isNull())
        {
-           auto fanartImages = parseJSON(jsonDocument.object());
+           auto fanartImages = parseJson(jsonDocument.object());
            emit storeFanartImageFor(seriesId, findHighestRatedImage(fanartImages));
        }
 
@@ -237,7 +237,7 @@ void Api::getActors(const int &seriesId)
 
        if (!jsonDocument.isNull())
        {
-           auto actors = parseJSON(jsonDocument.object());
+           auto actors = parseJson(jsonDocument.object());
            emit storeActors(seriesId, actors);
        }
 
@@ -263,7 +263,7 @@ void Api::getEpisodes(const int &seriesId, const int &page)
            }
 
            qDebug() << "store episodes for " << seriesId;
-           emit storeEpisodes(seriesId, parseJSON(jsonDocument.object()));
+           emit storeEpisodes(seriesId, parseJson(jsonDocument.object()));
 
            qDebug() << "try to get more episodes for " << seriesId;
            getEpisodes(seriesId, page + 1);
@@ -282,13 +282,13 @@ void Api::getEpisode(const int &episodeId)
 
        if (!jsonDocument.isNull())
        {
-           auto episode = parseEpisode(jsonDocument.object());
+           auto episode = parseJson(jsonDocument.object()).first();
            emit readyToPopulateEpisodeDetails(episode);
        }
     });
 }
 
-QString Api::findHighestRatedImage(const QList<QVariantMap> images)
+QString Api::findHighestRatedImage(const QList<QVariantMap> &images)
 {
     auto result = !images.isEmpty() ? images.first() : QVariantMap();
 
@@ -309,76 +309,34 @@ QString Api::findHighestRatedImage(const QList<QVariantMap> images)
     return result["fileName"].toString();
 }
 
-// ---------------------------------------------------
-// slots
-// ---------------------------------------------------
-
 void Api::replyFinishedError(QNetworkReply *reply)
 {
-    qDebug() << reply->url() << reply->errorString();
-    
-    QVariantMap temp;
-    temp.insert("SeriesName", "Error, try again later.");
+    QVariantMap series;
+    series.insert("seriesName", "Error, try again later.");
 
-    QList<QVariantMap> series;
-    series.append(temp);
+    QList<QVariantMap> allSeries;
+    allSeries.append(series);
 
-    emit readyToPopulateSeries(series);
+    emit readyToPopulateSeries(allSeries);
 
     reply->deleteLater();
 }
 
-// ---------------------------------------------------
-// JSON handling
-// ---------------------------------------------------
-
-QList<QVariantMap> Api::parseSeries(QJsonObject obj)
-{
-    QList<QVariantMap> allSeries;
-
-    QJsonArray foundSeries;
-
-    if (obj.value("data").isArray()) {
-        foundSeries = obj.value("data").toArray();
-    } else if (obj.value("data").isObject()) {
-        foundSeries.append(obj.value("data"));
-    }
-
-    for (auto item : foundSeries) {
-        QVariantMap series;
-
-        auto jsonObject = item.toObject();
-        auto keys = jsonObject.keys();
-        for (auto key : keys) {
-            series.insert(key, jsonObject.value(key).toVariant());
-        }
-
-        allSeries.append(series);
-    }
-
-    return allSeries;
-}
-
-QVariantMap Api::parseEpisode(QJsonObject obj)
-{
-    QJsonObject jsonObject = obj.value("data").toObject();
-
-    QVariantMap episode;
-
-    auto keys = jsonObject.keys();
-    for (auto key : keys)
-    {
-        episode.insert(key, jsonObject.value(key).toVariant());
-    }
-
-    return episode;
-}
-
-QList<QVariantMap> Api::parseJSON(QJsonObject obj)
+QList<QVariantMap> Api::parseJson(const QJsonObject &obj)
 {
     QList<QVariantMap> results;
 
-    auto jsonArray = obj.value("data").toArray();
+    QJsonArray jsonArray;
+
+    if (obj.value("data").isArray())
+    {
+        jsonArray = obj.value("data").toArray();
+    }
+
+    if (obj.value("data").isObject())
+    {
+        jsonArray.append(obj.value("data"));
+    }
 
     for (auto item : jsonArray)
     {
