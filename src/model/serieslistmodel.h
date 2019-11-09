@@ -39,6 +39,7 @@ public:
     explicit SeriesListModel(QObject *parent = 0, Api *api = 0, DatabaseManager *dbmanager = 0);
     ~SeriesListModel();
 
+    Q_INVOKABLE void populate();
     Q_INVOKABLE void selectSeries(const int &index);
     Q_INVOKABLE void deleteSeries(const int &seriesId);
     Q_INVOKABLE void updateSeries(const int &seriesId);

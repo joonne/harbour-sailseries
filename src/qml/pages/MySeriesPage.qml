@@ -6,6 +6,10 @@ import "../components";
 Page {
     id: myseriespage
 
+    Component.onCompleted: {
+        engine.SeriesListModel.populate();
+    }
+
     Component.onDestruction: {
         if (engine) {
             engine.SeriesListModel.Mode = "default"

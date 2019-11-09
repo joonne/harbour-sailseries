@@ -186,52 +186,52 @@
 <context>
     <name>MySeriesPage</name>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="17"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="21"/>
         <source>This show has ended</source>
         <translation>Ši laida yra pasibaigusi</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="19"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="23"/>
         <source>%1 airs tonight</source>
         <translation>%1 transliuoja šį vakarą</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="21"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="25"/>
         <source>%1 airs tomorrow</source>
         <translation>%1 transliuos rytoj</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="23"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="27"/>
         <source>%1 airs in %2 days</source>
         <translation>%1 translious po %2 dienu</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="25"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="29"/>
         <source>Next episode airs in %1 days</source>
         <translation>Sekantis epizodas transliuos po %1 dienu</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="28"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="32"/>
         <source>No information about next episode</source>
         <translation>Nera imformacijos apie sekanti epizoda</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="37"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="41"/>
         <source>Update All</source>
         <translation>Atnaujinti Viska</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="51"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="55"/>
         <source>My Series</source>
         <translation>Mano Serijalai</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="52"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="56"/>
         <source>loading...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="119"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="123"/>
         <source>Search for series first.</source>
         <translation>Ieškoti serijas pirma.</translation>
     </message>

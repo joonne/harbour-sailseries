@@ -186,52 +186,52 @@
 <context>
     <name>MySeriesPage</name>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="17"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="21"/>
         <source>This show has ended</source>
         <translation>Tämä sarja on päättynyt</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="19"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="23"/>
         <source>%1 airs tonight</source>
         <translation>%1 lähetetään tänään</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="21"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="25"/>
         <source>%1 airs tomorrow</source>
         <translation>%1 lähetetään huomenna</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="23"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="27"/>
         <source>%1 airs in %2 days</source>
         <translation>%1 lähetetään %2 päivän kuluttua</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="25"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="29"/>
         <source>Next episode airs in %1 days</source>
         <translation>Seuraava jakso lähetetään %1 päivän kuluttua</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="28"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="32"/>
         <source>No information about next episode</source>
         <translation>Ei tietoa seuraavasta jaksosta</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="37"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="41"/>
         <source>Update All</source>
         <translation>Päivitä kaikki</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="51"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="55"/>
         <source>My Series</source>
         <translation>Omat sarjat</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="52"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="56"/>
         <source>loading...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="119"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="123"/>
         <source>Search for series first.</source>
         <translation>Etsi ensin sarjoja.</translation>
     </message>

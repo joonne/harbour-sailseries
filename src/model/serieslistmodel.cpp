@@ -41,8 +41,6 @@ SeriesListModel::SeriesListModel(QObject *parent, Api *api, DatabaseManager* dbm
             SIGNAL(getSeriesIds(bool)),
             m_dbmanager,
             SLOT(getSeriesIds(bool)));
-
-    emit getSeries();
 }
 
 SeriesListModel::~SeriesListModel()
@@ -98,6 +96,11 @@ void SeriesListModel::populateBannerList(const QList<QVariantMap> &allSeries)
     }
 
     emit seriesListChanged();
+}
+
+void SeriesListModel::populate()
+{
+    emit getSeries();
 }
 
 void SeriesListModel::selectSeries(const int &index)
