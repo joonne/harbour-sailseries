@@ -336,16 +336,9 @@ void DatabaseManager::storeSeries(const QVariantMap &series)
         query.exec();
         
         qDebug() << query.lastError();
-        
-        if (query.lastError().text() != " ")
-        {
-            qDebug() << query.executedQuery();
-        }
     }
     
     commit();
-
-    emit seriesStored();
 }
 
 void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap> &episodes)
@@ -386,9 +379,6 @@ void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap
                     watched = query.value(0).toInt();
                 }
             }
-
-            qDebug() << query.lastError();
-            qDebug() << query.executedQuery();
             
             query.prepare("INSERT OR REPLACE INTO Episode (id, episodeName, episodeNumber, firstAired, language, overview, seasonNumber, absoluteNumber, lastupdated, seasonID, seriesID, watched) "
                           "VALUES (:id, :episodeName, :episodeNumber, :firstAired, :language, :overview, :seasonNumber, :absoluteNumber, :lastUpdated, :seasonId, :seriesId, :watched)");
@@ -405,26 +395,24 @@ void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap
             query.bindValue(":seriesId", seriesId);
             query.bindValue(":watched", watched);
             query.exec();
-
-            qDebug() << query.lastError();
         }
     }
-    
+
     commit();
 }
 
-void DatabaseManager::storeSeasonImages(const QString &seriesId, const QList<QVariantMap> &banners)
+void DatabaseManager::storeSeasonImages(const int &seriesId, const QList<QVariantMap> &banners)
 {
     startTransaction();
 
     for (auto banner : banners)
     {
-        auto id = banner["id"].toInt();
-        auto bannerPath = banner["bannerPath"].toString();
-        auto bannerType = banner["bannerType"].toString();
-        auto bannerType2 = banner["bannerType2"].toString();
-        auto language = banner["language"].toString();
-        auto season = banner["season"].toInt();
+        const auto id = banner["id"].toInt();
+        const auto bannerPath = banner["bannerPath"].toString();
+        const auto bannerType = banner["bannerType"].toString();
+        const auto bannerType2 = banner["bannerType2"].toString();
+        const auto language = banner["language"].toString();
+        const auto season = banner["season"].toInt();
         
         if (m_db.isOpen())
         {
@@ -432,7 +420,7 @@ void DatabaseManager::storeSeasonImages(const QString &seriesId, const QList<QVa
             query.prepare("INSERT OR REPLACE INTO Banner (id, seriesID, bannerPath, bannerType, bannerType2, language, season) "
                           "VALUES (:id, :seriesId, :bannerPath, :bannerType, :bannerType2, :language, :season)");
             query.bindValue(":id", id);
-            query.bindValue(":seriesId", seriesId.toInt());
+            query.bindValue(":seriesId", seriesId);
             query.bindValue(":bannerPath", bannerPath);
             query.bindValue(":bannerType", bannerType);
             query.bindValue(":bannerType2", bannerType2);
@@ -450,21 +438,20 @@ void DatabaseManager::storeSeasonImages(const QString &seriesId, const QList<QVa
 void DatabaseManager::getSeriesIds(const bool &includeEndedSeries)
 {
     QList<int> seriesIds;
-    QString queryString;
+    QString queryString = [=]()
+    {
+        if (includeEndedSeries)
+        {
+            return "SELECT id "
+                   "FROM Series "
+                   "ORDER BY seriesName";
+        }
 
-    if (includeEndedSeries)
-    {
-        queryString = "SELECT id "
-                      "FROM Series "
-                      "ORDER BY seriesName";
-    }
-    else
-    {
-         queryString = "SELECT id "
-                       "FROM Series "
-                       "WHERE status != 'Ended' "
-                       "ORDER BY seriesName";
-    }
+        return "SELECT id "
+               "FROM Series "
+               "WHERE status != 'Ended' "
+               "ORDER BY seriesName";
+    }();
 
     if (m_db.isOpen())
     {
@@ -593,7 +580,8 @@ void DatabaseManager::getStartPageSeries()
                 series["network"] = network;
                 
                 auto airsTime = query.value(2).toString();
-                const auto time = [&airsTime](){
+                const auto time = [&airsTime]()
+                {
                     if (airsTime.contains("PM"))
                     {
                         airsTime.resize(airsTime.indexOf("PM") - 1);
@@ -630,7 +618,8 @@ void DatabaseManager::getStartPageSeries()
                 series["nextEpisodeFirstAired"] = firstAired;
                 
                 // Sometimes the series' airsDayOfWeek is wrong so lets take it from the episode directly in that case
-                series["airsDayOfWeek"] = [locale, firstAired, airsDayOfWeek](){
+                series["airsDayOfWeek"] = [locale, firstAired, airsDayOfWeek]()
+                {
                     auto airsDayOfWeekFromEpisode = locale.toString(QDate::fromString(firstAired, Qt::ISODate), "dddd");
                     return airsDayOfWeek == airsDayOfWeekFromEpisode ? airsDayOfWeek : airsDayOfWeekFromEpisode;
                 }();
@@ -672,7 +661,6 @@ void DatabaseManager::getSeasons(const int &seriesId)
         seasons.append(season);
     }
 
-    qDebug() << seasons;
     emit populateSeasonList(seasons);
 }
 

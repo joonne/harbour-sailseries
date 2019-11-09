@@ -93,7 +93,7 @@ public slots:
     void storeBannerImageFor(const int &seriesId, const QString &bannerImage) const;
     void storeFanartImageFor(const int &seriesId, const QString &fanartImage) const;
     void storeActors(const int &seriesId, const QList<QVariantMap> &actors) const;
-    void storeSeasonImages(const QString &seriesId, const QList<QVariantMap> &seasonImages);
+    void storeSeasonImages(const int &seriesId, const QList<QVariantMap> &seasonImages);
     void markSeasonAsWatched(const int &seriesId, const int &seasonNumber);
     void checkIfAdded(const int &seriesId, const QString &name);
     void getSeriesIds(const bool &includeEndedSeries);

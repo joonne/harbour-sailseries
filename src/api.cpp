@@ -156,7 +156,7 @@ void Api::getSeasonImages(const int &seriesId)
                image.insert("bannerPath", seasonImage["fileName"]);
                image.insert("bannerType", seasonImage["keyType"]);
                image.insert("bannerType2", "");
-               image.insert("language", seasonImage["id"]);
+               image.insert("language", seasonImage["languageId"]);
                image.insert("season", seasonImage["subKey"]);
 
                return image;

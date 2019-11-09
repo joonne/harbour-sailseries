@@ -58,6 +58,11 @@ Engine::Engine(QObject *parent) :
             m_dbmanager,
             SLOT(storeSeries(QVariantMap)));
 
+    connect(m_api,
+            SIGNAL(storeSeasonImages(int,QList<QVariantMap>)),
+            m_dbmanager,
+            SLOT(storeSeasonImages(int,QList<QVariantMap>)));
+
     connect(this,
             SIGNAL(getEpisode(int)),
             m_api,
