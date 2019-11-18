@@ -46,10 +46,8 @@ OTHER_FILES = \
     qml/cover/CoverPage.qml \
     qml/pages/AboutPage.qml \
     qml/components/MoreIndicator.qml \
-    qml/components/TextExpander.qml \
     qml/pages/EpisodeOverviewPage.qml \
-    qml/pages/EpisodesPage.qml \
-    qml/pages/ProgramOverviewPage.qml
+    qml/pages/EpisodesPage.qml
 
 INCLUDEPATH += $$PWD
 
@@ -69,7 +67,6 @@ HEADERS += \
     api.h
 
 DISTFILES += \
-    qml/components/HorizontalSeparator.qml \
     qml/pages/SeasonsPage.qml \
     qml/pages/SeriesPage.qml \
     qml/pages/NotificationHandler.qml \

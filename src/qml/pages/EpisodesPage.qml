@@ -25,8 +25,6 @@ Page {
                 text: qsTr("I have seen these all")
                 onClicked: {
                     engine.EpisodeListModel.markSeasonAsWatched(seriesId, seasonNumber)
-                    engine.SeasonListModel.getSeasons(seriesId)
-                    // pageStack.pop() // keep or not?
                 }
             }
         }

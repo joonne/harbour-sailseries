@@ -45,6 +45,7 @@ Page {
         }
 
         PullDownMenu {
+            busy: engine.Loading
 
             MenuItem {
                 text: qsTr("About")
@@ -165,12 +166,6 @@ Page {
                 enabled: listView.count === 0
                 text: qsTr("Nothing airs this week")
                 anchors.centerIn: listView
-            }
-
-            BusyIndicator {
-                size: BusyIndicatorSize.Large
-                anchors.centerIn: parent
-                running: engine.Loading
             }
         }
     }

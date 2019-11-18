@@ -11,6 +11,8 @@ Page {
         contentHeight: column.height
 
         PullDownMenu {
+            busy: engine.SearchModel.Loading
+
             MenuItem {
                 text: "IMDB"
                 onClicked: Qt.openUrlExternally("http://www.imdb.com/title/" + engine.SearchModel.IMDB_ID)
@@ -21,6 +23,7 @@ Page {
                 text: qsTr("Add to my series")
                 onClicked: {
                     engine.SearchModel.getAll(engine.SearchModel.ID)
+                    appWindow.notificationhandler.publish("summary", "body", "previewSummary", "previewBody")
                 }
             }
 
@@ -38,7 +41,7 @@ Page {
             PageHeader {
                 id: header
                 title: engine.SearchModel.SeriesName
-                description: engine.SearchModel.Loading ? qsTr("loading...") : ""
+                description: engine.SearchModel.Network
             }
 
             SeriesBanner {
@@ -47,21 +50,11 @@ Page {
                 sourceWidth: infopage.width - Theme.paddingMedium * 2
             }
 
-            HorizontalSeparator { }
-
-            TextExpander {
-                id: expander
+            TextArea {
+                label: qsTr("Overview")
                 width: infopage.width
-                textContent: engine.SearchModel.Overview
-            }
-
-            TextField {
-                id: network
-                label: qsTr("Network")
-                text: engine.SearchModel.Network
-                color: Theme.secondaryColor
+                text:  engine.SearchModel.Overview
                 readOnly: true
-                width: infopage.width
             }
         }
     }

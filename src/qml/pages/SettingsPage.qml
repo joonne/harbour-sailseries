@@ -51,10 +51,6 @@ Page {
 
             SectionHeader { text: qsTr("Maintenance") }
 
-            HorizontalSeparator { }
-
-            HorizontalSeparator { }
-
             Button {
                 text: qsTr("Remove duplicate episodes")
                 anchors {

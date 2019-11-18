@@ -9,82 +9,82 @@
         <translation>Apie</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="53"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="49"/>
         <source>General</source>
         <translation>Bendras</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="65"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="61"/>
         <source>Creator</source>
         <translation>Kūrėjas</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="110"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="104"/>
         <source>Licence</source>
         <translation>Licenzija</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="122"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="116"/>
         <source>Content</source>
         <translation>Turinys</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="151"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="145"/>
         <source>The source code is available at GitHub. Contributions, ideas and bug reports are welcome.</source>
         <translation>Programines įrangos kodas yra pasiekiamas GitHub. Prisidėjimas, idėjos ir klaidu pranešimai yra laukiami.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="143"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="137"/>
         <source>Source Code</source>
         <translation>Šaltinio kodas</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="43"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="41"/>
         <source>Version %1.%2</source>
         <translation>Versija %1.%2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="61"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="57"/>
         <source>SailSeries is a tv-series tracking application for SailfishOS. It aims to be a good looking and simple app that can help you to stay on track while following your favourite series.</source>
         <translation>SailSeries yra televizijos seriju sekimo programa ant SailfishOS. Jos pagrindas yra buti graži ir paprasta programa kuri galėtu padeti sekti jūsų mėgstamiausius televizijos serijalus. </translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="74"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="70"/>
         <source>Jonne Pihlanen, &apos;joonne&apos;</source>
         <translation>Jonne Pihlanen, &apos;joonne&apos;</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="118"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="112"/>
         <source>This software is licenced under MIT.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="130"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="124"/>
         <source>SailSeries utilises TheTVDB API v2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="156"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="150"/>
         <source>Project in GitHub</source>
         <translation>GitHub projectas</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="164"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="158"/>
         <source>Translations</source>
         <translation>Vertimai</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="172"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="166"/>
         <source>SailSeries uses the Transifex translation platform to host the translations.</source>
         <translation>SailSeries naudoja Transifex platforma vertimams.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="177"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="171"/>
         <source>Help with translations</source>
         <translation>Padeti išversti</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="92"/>
+        <location filename="../src/qml/pages/AboutPage.qml" line="86"/>
         <source>Contributors</source>
         <translation>Prisidėjimai</translation>
     </message>
@@ -140,9 +140,14 @@
 <context>
     <name>EpisodeOverviewPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="73"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="72"/>
         <source>Original air date</source>
         <translation>Originali translicijos diena</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="95"/>
+        <source>Overview</source>
+        <translation type="unfinished">Apžvalga</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="103"/>
@@ -150,7 +155,7 @@
         <translation>Rašytojas</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="111"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="110"/>
         <source>Guest Stars</source>
         <translation>Svečių Žvaigždės</translation>
     </message>
@@ -163,22 +168,22 @@
         <translation>Aš mačiau visa tai</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="37"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="35"/>
         <source>Episodes</source>
         <translation>Epizodai</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="90"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="88"/>
         <source>Specials: Episode %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="91"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="89"/>
         <source>Season %1 Episode %2</source>
         <translation type="unfinished">Sezonas %1 Epizodas %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="138"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="136"/>
         <source>No episodes.</source>
         <translation>Nera epizodu.</translation>
     </message>
@@ -231,17 +236,9 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="123"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="120"/>
         <source>Search for series first.</source>
         <translation>Ieškoti serijas pirma.</translation>
-    </message>
-</context>
-<context>
-    <name>ProgramOverviewPage</name>
-    <message>
-        <location filename="../src/qml/pages/ProgramOverviewPage.qml" line="42"/>
-        <source>Time</source>
-        <translation>Laikas</translation>
     </message>
 </context>
 <context>
@@ -296,24 +293,19 @@
 <context>
     <name>SeriesInfoPage</name>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="21"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="23"/>
         <source>Add to my series</source>
         <translation>Įtraukti į mano serijas</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="30"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="33"/>
         <source>Already added</source>
         <translation>Jau įtraukta</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="41"/>
-        <source>loading...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="60"/>
-        <source>Network</source>
-        <translation>Tinklas</translation>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="54"/>
+        <source>Overview</source>
+        <translation type="unfinished">Apžvalga</translation>
     </message>
 </context>
 <context>
@@ -329,39 +321,39 @@
         <translation>Baigėsi</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="49"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="51"/>
         <source>Remove</source>
         <translation>Pasalinti</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="51"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="53"/>
         <source>Removing</source>
         <translation>Pašalinama</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="60"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="62"/>
         <source>Update</source>
         <translation>Atnaujinti</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="75"/>
-        <source>loading...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="88"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="95"/>
         <source>Status</source>
         <translation>Statusas</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="97"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="103"/>
         <source>Rating</source>
         <translation>Įvertinimas</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="108"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="113"/>
         <source>Genre</source>
         <translation>Žanras</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="120"/>
+        <source>Overview</source>
+        <translation type="unfinished">Apžvalga</translation>
     </message>
 </context>
 <context>
@@ -417,7 +409,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="59"/>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="55"/>
         <source>Remove duplicate episodes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -460,42 +452,42 @@
         <translation>Sekmadienis</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="50"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="51"/>
         <source>About</source>
         <translation>Apie</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="55"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="56"/>
         <source>Statistics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="60"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="61"/>
         <source>Settings</source>
         <translation>Nustatymai</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="65"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="66"/>
         <source>Search for a Series</source>
         <translation>Ieškoti serijalu</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="70"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="71"/>
         <source>My Series</source>
         <translation>Mano Serijalai</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="77"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="78"/>
         <source>This Week</source>
         <translation>Ši Savaite</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="133"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="134"/>
         <source>Season %1 Episode %2</source>
         <translation>Sezonas %1 Epizodas %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="166"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="167"/>
         <source>Nothing airs this week</source>
         <translation>Nieko netransliuoja šią savaitę</translation>
     </message>
@@ -508,37 +500,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="145"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="129"/>
         <source>Watched series</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="179"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="159"/>
         <source>Time</source>
         <translation>Laikas</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="187"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="167"/>
         <source>Days spent watching</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="195"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="175"/>
         <source>Hours spent watching</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="203"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="183"/>
         <source>Minutes spent watching</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="210"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="190"/>
         <source>%1 minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="211"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="191"/>
         <source>Average episode duration</source>
         <translation type="unfinished"></translation>
     </message>
@@ -558,27 +550,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="153"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="137"/>
         <source>All series</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="95"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="87"/>
         <source>Watched seasons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="103"/>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="95"/>
         <source>All seasons</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TextExpander</name>
-    <message>
-        <location filename="../src/qml/components/TextExpander.qml" line="29"/>
-        <source>Overview</source>
-        <translation>Apžvalga</translation>
     </message>
 </context>
 </TS>

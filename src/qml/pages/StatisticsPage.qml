@@ -57,10 +57,6 @@ Page {
 
                     width: parent.width / 2
 
-                    HorizontalSeparator { }
-
-                    HorizontalSeparator { }
-
                     ProgressCircle {
 
                         id: episodesProgress
@@ -74,10 +70,6 @@ Page {
                     }
                 }
             }
-
-            HorizontalSeparator { }
-
-            HorizontalSeparator { }
 
             Row {
 
@@ -108,10 +100,6 @@ Page {
 
                     width: parent.width / 2
 
-                    HorizontalSeparator { }
-
-                    HorizontalSeparator { }
-
                     ProgressCircle {
 
                         id: seasonsProgress
@@ -124,10 +112,6 @@ Page {
                     }
                 }
             }
-
-            HorizontalSeparator { }
-
-            HorizontalSeparator { }
 
             Row {
 
@@ -157,10 +141,6 @@ Page {
                 Column {
 
                     width: parent.width / 2
-
-                    HorizontalSeparator { }
-
-                    HorizontalSeparator { }
 
                     ProgressCircle {
 
