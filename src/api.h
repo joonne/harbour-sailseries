@@ -36,7 +36,7 @@ public slots:
     void replyFinishedError(QNetworkReply* reply);
     void searchSeries(const QString &seriesName);
     void getAll(const int &seriesId);
-    void getEpisode(const int &episodeId);
+    void getEpisodeDetails(const int &episodeId);
 
 private:
     QNetworkAccessManager* m_nam;

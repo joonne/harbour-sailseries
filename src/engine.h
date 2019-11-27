@@ -49,12 +49,13 @@ signals:
     void loadingChanged();
     void updateEpisodeDetails(const QVariantMap &episode);
     void setUpDb();
-    void getEpisode(int);
+    void getEpisodeDetails(int);
     void deleteDuplicateEpisodesRequested();
 
 public slots:
     void readyToUpdateModels();
     void readyToUpdateEpisodeDetails(const QVariantMap &episode);
+    void setLoading(bool state);
 
 private:
     SeriesListModel* m_seriesListModel;
@@ -66,7 +67,6 @@ private:
     DatabaseManager* m_dbmanager;
     Statistics* m_statistics;
     bool m_loading;
-    void toggleLoading(bool state);
 };
 
 #endif // ENGINE_H

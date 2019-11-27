@@ -4,8 +4,7 @@ SeriesListModel::SeriesListModel(QObject *parent, Api *api, DatabaseManager* dbm
     QObject(parent),
     m_api(api),
     m_dbmanager(dbmanager),
-    m_mode("default"),
-    m_isLoading(false)
+    m_mode("default")
 {
     connect(this,
             SIGNAL(getSeries()),
@@ -54,7 +53,7 @@ SeriesListModel::~SeriesListModel()
 
 void SeriesListModel::seriesStored()
 {
-    setLoading(false);
+    emit setLoading(false);
     emit updateModels();
 }
 
@@ -202,22 +201,6 @@ QString SeriesListModel::getPoster()
     return m_info->getPoster();
 }
 
-bool SeriesListModel::getLoading()
-{
-    return m_isLoading;
-}
-
-void SeriesListModel::setLoading(bool isLoading)
-{
-    if (m_isLoading == isLoading)
-    {
-        return;
-    }
-
-    m_isLoading = isLoading;
-    emit loadingChanged();
-}
-
 QString SeriesListModel::getMode()
 {
     return m_mode;
@@ -236,20 +219,20 @@ void SeriesListModel::setMode(QString mode)
 
 void SeriesListModel::deleteSeries(const int &seriesId)
 {
-    setLoading(true);
+    emit setLoading(true);
     emit deleteSeriesWith(seriesId);
 }
 
 void SeriesListModel::seriesDeleted()
 {
     emit updateModels();
-    setLoading(false);
+    emit setLoading(false);
 }
 
 void SeriesListModel::updateSeries(const int &seriesId)
 {
     emit getAllRequested(seriesId);
-    setLoading(true);
+    emit setLoading(true);
 }
 
 void SeriesListModel::updateAllSeries(const bool &includeEndedSeries)

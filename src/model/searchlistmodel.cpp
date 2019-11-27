@@ -3,9 +3,7 @@
 SearchListModel::SearchListModel(QObject *parent, Api* api, DatabaseManager *dbmanager) :
     QObject(parent),
     m_api(api),
-    m_dbmanager(dbmanager),
-    m_loading(false),
-    m_added(false)
+    m_dbmanager(dbmanager)
 {
     connect(this,
             SIGNAL(searchSeriesRequested(QString)),
@@ -23,9 +21,9 @@ SearchListModel::SearchListModel(QObject *parent, Api* api, DatabaseManager *dbm
             SLOT(searchFinished(QList<QVariantMap>)));
 
     connect(m_dbmanager,
-            SIGNAL(seriesStored()),
+            SIGNAL(seriesStored(int)),
             this,
-            SLOT(seriesStored()));
+            SLOT(seriesStored(int)));
 
     connect(this,
             SIGNAL(checkIfAddedRequested(int,QString)),
@@ -33,9 +31,9 @@ SearchListModel::SearchListModel(QObject *parent, Api* api, DatabaseManager *dbm
             SLOT(checkIfAdded(int,QString)));
 
     connect(m_dbmanager,
-            SIGNAL(checkIfAddedReady(bool)),
+            SIGNAL(checkIfAddedReady(int,bool)),
             this,
-            SLOT(checkIfAddedReady(bool)));
+            SLOT(checkIfAddedReady(int,bool)));
 }
 
 SearchListModel::~SearchListModel()
@@ -80,85 +78,34 @@ void SearchListModel::searchFinished(QList<QVariantMap> series)
 
 void SearchListModel::populateSearchModel(QList<QVariantMap> foundSeries)
 {
-    if (foundSeries.empty())
-    {
-        return;
-    }
-
     for (auto series : foundSeries)
     {
+        // TODO: change this to be smarter somehow
+        series["isAdded"] = m_dbmanager->checkIfAdded(series["id"].toInt(), series["seriesName"].toString());
         auto seriesData = new SeriesData(this, series);
         m_searchListModel.append(seriesData);
     }
 
     emit searchModelChanged();
-    setLoading(false);
 }
 
-void SearchListModel::seriesStored()
+void SearchListModel::seriesStored(const int &seriesId)
 {
-    setLoading(false);
+    emit setLoading(false);
     emit updateModels();
-    setAdded(true);
+    // set the shown series at SeriesInfoPage as added somehow
 }
 
 void SearchListModel::searchSeries(const QString &text)
 {
-    setLoading(true);
+    emit setLoading(true);
     emit searchSeriesRequested(text);
-}
-
-void SearchListModel::selectSeries(const int &index)
-{
-    m_info = m_searchListModel.at(index);
-    emit checkIfAddedRequested(m_info->getID(), m_info->getSeriesName());
 }
 
 void SearchListModel::getAll(const int &seriesId)
 {
     emit getAllRequested(seriesId);
-    setLoading(true);
-}
-
-int SearchListModel::getID() { return m_info->getID(); }
-
-QString SearchListModel::getLanguage() { return m_info->getLanguage(); }
-
-QString SearchListModel::getSeriesName() { return m_info->getSeriesName(); }
-
-QString SearchListModel::getAliasNames() { return m_info->getAliasNames(); }
-
-QString SearchListModel::getBanner() { return m_info->getBanner(); }
-
-QString SearchListModel::getOverview() { return m_info->getOverview(); }
-
-QString SearchListModel::getFirstAired() { return m_info->getFirstAired(); }
-
-QString SearchListModel::getIMDB_ID() { return m_info->getIMDB_ID(); }
-
-QString SearchListModel::getZap2it_ID() { return m_info->getZap2it_ID(); }
-
-QString SearchListModel::getNetwork() { return m_info->getNetwork(); }
-
-bool SearchListModel::getLoading() { return m_loading; }
-
-void SearchListModel::setLoading(bool state)
-{
-    m_loading = state;
-    emit loadingChanged();
-}
-
-bool SearchListModel::getAdded() { return m_added; }
-
-void SearchListModel::setAdded(bool isAdded)
-{
-    if (m_added == isAdded)
-    {
-        return;
-    }
-
-    m_added = isAdded;
-    emit addedChanged();
+    emit setLoading(true);
 }
 
 void SearchListModel::clearList()
@@ -167,7 +114,12 @@ void SearchListModel::clearList()
     emit searchModelChanged();
 }
 
-void SearchListModel::checkIfAddedReady(const bool &isAdded)
+void SearchListModel::checkIfAddedReady(const int &seriesId, const bool &isAdded)
 {
-    setAdded(isAdded);
+    setAddedFor(seriesId, isAdded);
+}
+
+void SearchListModel::setAddedFor(const int &seriesId, const bool &isAdded)
+{
+    qDebug() << "set added in the model and also into the SeriesInfoPage";
 }

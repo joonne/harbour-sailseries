@@ -6,55 +6,66 @@ import "../components"
 Page {
     id: infopage
 
+    property int id
+    property string name
+    property string network
+    property string banner
+    property string overview
+    property string imdbId
+    property bool isAdded
+
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: column.height
 
         PullDownMenu {
-            busy: engine.SearchModel.Loading
+            busy: engine.Loading
 
             MenuItem {
                 text: "IMDB"
-                onClicked: Qt.openUrlExternally("http://www.imdb.com/title/" + engine.SearchModel.IMDB_ID)
+                onClicked: Qt.openUrlExternally("http://www.imdb.com/title/" + imdbId)
             }
 
             MenuItem {
-                visible: !engine.SearchModel.Added
+                visible: !isAdded
                 text: qsTr("Add to my series")
                 onClicked: {
-                    engine.SearchModel.getAll(engine.SearchModel.ID)
+                    engine.SearchModel.getAll(id)
                     appWindow.notificationhandler.publish("summary", "body", "previewSummary", "previewBody")
                 }
             }
 
             MenuItem {
-                enabled: !engine.SearchModel.Added
-                visible: engine.SearchModel.Added
+                enabled: !isAdded
+                visible: isAdded
                 text: qsTr("Already added")
             }
         }
 
         Column {
             id: column
-            spacing: Theme.paddingSmall
+            spacing: Theme.paddingMedium
 
             PageHeader {
                 id: header
-                title: engine.SearchModel.SeriesName
-                description: engine.SearchModel.Network
+                title: name
+                description: network
             }
 
             SeriesBanner {
-                id: banner
-                bannerPath: engine.SearchModel.Banner
+                bannerPath: banner
                 sourceWidth: infopage.width - Theme.paddingMedium * 2
             }
 
             TextArea {
                 label: qsTr("Overview")
                 width: infopage.width
-                text:  engine.SearchModel.Overview
+                text:  overview
                 readOnly: true
+            }
+
+            VerticalScrollDecorator {
+                id: decorator
             }
         }
     }

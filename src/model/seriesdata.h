@@ -32,6 +32,7 @@ class SeriesData : public QObject
     Q_PROPERTY(QString Poster READ getPoster CONSTANT)
     Q_PROPERTY(QString zap2it_ID READ getZap2it_ID CONSTANT)
     Q_PROPERTY(int Watched READ getWatched WRITE setWatched NOTIFY watchedChanged)
+    Q_PROPERTY(bool IsAdded READ getIsAdded CONSTANT)
 
     Q_PROPERTY(QString NextEpisodeId READ getNextEpisodeId CONSTANT)
     Q_PROPERTY(QString NextEpisodeName READ getNextEpisodeName CONSTANT)
@@ -76,6 +77,7 @@ public:
     QString getZap2it_ID();
     int getWatched();
     void setWatched(int watched);
+    bool getIsAdded();
 
     QString getNextEpisodeId();
     QString getNextEpisodeName();
@@ -126,6 +128,7 @@ private:
     QString m_poster;
     QString m_zap2itId;
     int m_watched;
+    bool m_isAdded;
 
     QString m_nextEpisodeName;
     QString m_nextEpisodeNumber;

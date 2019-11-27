@@ -29,6 +29,7 @@ SeriesData::SeriesData(QObject *parent, QVariantMap params) :
     m_poster = params["poster"].toString();
     m_zap2itId = params["zap2itid"].toString();
     m_watched = params["watched"].toInt();
+    m_isAdded = params["isAdded"].toBool();
     m_nextEpisodeId = params["nextEpisodeId"].toString();
     m_nextEpisodeName = params["nextEpisodeName"].toString();
     m_nextEpisodeNumber = params["nextEpisodeNumber"].toString();
@@ -99,6 +100,8 @@ void SeriesData::setWatched(int watched)
         emit watchedChanged();
     }
 }
+
+bool SeriesData::getIsAdded() { return m_isAdded; }
 
 QString SeriesData::getNextEpisodeId() { return m_nextEpisodeId; }
 

@@ -24,7 +24,6 @@ class SeriesListModel : public QObject
     Q_PROPERTY(QString IMDB_ID READ getIMDB_ID CONSTANT)
     Q_PROPERTY(QString zap2it_ID READ getZap2it_ID CONSTANT)
     Q_PROPERTY(QString Network READ getNetwork CONSTANT)
-    Q_PROPERTY(bool Loading READ getLoading WRITE setLoading NOTIFY loadingChanged)
     Q_PROPERTY(QString Poster READ getPoster NOTIFY posterChanged)
     Q_PROPERTY(QString Mode READ getMode WRITE setMode NOTIFY modeChanged)
     Q_PROPERTY(QString NextEpisodeName READ getNextEpisodeName NOTIFY nextEpisodeNameChanged)
@@ -64,16 +63,11 @@ public:
     QString getRating();
     QString getGenre();
     QString getPoster();
-
-    bool getLoading();
-    void setLoading(bool isLoading);
-
     QString getMode();
     void setMode(QString mode);
 
 signals:
     void seriesListChanged();
-    void loadingChanged();
     void posterChanged();
     void modeChanged();
     void updateModels();
@@ -86,6 +80,7 @@ signals:
     void deleteSeriesWith(int);
     void getAllRequested(int);
     void getSeriesIds(bool);
+    void setLoading(bool);
 
 public slots:
     void populateBannerList(const QList<QVariantMap> &allSeries);
@@ -98,7 +93,6 @@ private:
     QList<SeriesData*> m_seriesListModel;
     SeriesData* m_info;
     QString m_mode;
-    bool m_isLoading;
 
     static int seriesListCount(QQmlListProperty<SeriesData> *prop);
     static SeriesData* seriesListAt(QQmlListProperty<SeriesData> *prop, int index);

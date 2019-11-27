@@ -45,7 +45,7 @@ Page {
         contentHeight: column.height
 
         PullDownMenu {
-            busy: engine.SeriesListModel.Loading
+            busy: engine.Loading
 
             MenuItem {
                 text: qsTr("Remove")
@@ -121,6 +121,10 @@ Page {
                 width: seriespage.width
                 text:  engine.SeriesListModel.Overview
                 readOnly: true
+            }
+
+            VerticalScrollDecorator {
+                id: decorator
             }
         }
     }

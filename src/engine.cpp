@@ -64,9 +64,19 @@ Engine::Engine(QObject *parent) :
             SLOT(storeSeasonImages(int,QList<QVariantMap>)));
 
     connect(this,
-            SIGNAL(getEpisode(int)),
+            SIGNAL(getEpisodeDetails(int)),
             m_api,
-            SLOT(getEpisode(int)));
+            SLOT(getEpisodeDetails(int)));
+
+    connect(m_searchListModel,
+            SIGNAL(setLoading(bool)),
+            this,
+            SLOT(setLoading(bool)));
+
+    connect(m_seriesListModel,
+            SIGNAL(setLoading(bool)),
+            this,
+            SLOT(setLoading(bool)));
 }
 
 Engine::~Engine()
@@ -94,10 +104,7 @@ bool Engine::getLoading() { return m_loading; }
 
 void Engine::readyToUpdateModels()
 {
-    emit m_todayListModel->getStartPageSeries();
-    emit m_seriesListModel->getSeries();
-    emit m_statistics->requestStatistics();
-    emit m_seasonListModel->getSeasons(m_seriesListModel->getID());
+    updateModels();
 }
 
 void Engine::updateModels()
@@ -113,9 +120,10 @@ void Engine::readyToUpdateEpisodeDetails(const QVariantMap &episode)
     emit updateEpisodeDetails(episode);
 }
 
-void Engine::toggleLoading(bool state)
+void Engine::setLoading(bool state)
 {
     m_loading = state;
+    emit loadingChanged();
 }
 
 void Engine::deleteDuplicateEpisodes()
@@ -125,5 +133,5 @@ void Engine::deleteDuplicateEpisodes()
 
 void Engine::requestEpisodeDetails(const int &id)
 {
-    emit getEpisode(id);
+    emit getEpisodeDetails(id);
 }

@@ -98,7 +98,7 @@ void Api::searchSeries(const QString &text)
         if (!document.isNull())
         {
             auto series = parseJson(document.object());
-            emit(readyToPopulateSeries(series));
+            emit readyToPopulateSeries(series);
         }
 
         reply->deleteLater();
@@ -259,6 +259,8 @@ void Api::getEpisodes(const int &seriesId, const int &page)
            if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 404)
            {
                qDebug() << "all episodes for " << seriesId << " fetched";
+               // this is a safe bet to to turn loading indicator off
+               // emit episodesFetched();
                return;
            }
 
@@ -271,7 +273,7 @@ void Api::getEpisodes(const int &seriesId, const int &page)
     });
 }
 
-void Api::getEpisode(const int &episodeId)
+void Api::getEpisodeDetails(const int &episodeId)
 {
     QUrl url(QString("%1/episodes/%2").arg(QString(MIRRORPATH)).arg(episodeId));
     auto reply = get(url);
@@ -342,8 +344,8 @@ QList<QVariantMap> Api::parseJson(const QJsonObject &obj)
     {
         QVariantMap result;
 
-        auto jsonObject = item.toObject();
-        auto keys = jsonObject.keys();
+        const auto jsonObject = item.toObject();
+        const auto keys = jsonObject.keys();
         for (auto key : keys)
         {
             result.insert(key, jsonObject.value(key).toVariant());

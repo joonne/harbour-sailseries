@@ -221,19 +221,14 @@
         <translation>Pas d&apos;information sur le prochain épisode</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="41"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="42"/>
         <source>Update All</source>
         <translation>Tout mettre à jour</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="55"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="56"/>
         <source>My Series</source>
         <translation>Mes Séries</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="56"/>
-        <source>loading...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/qml/pages/MySeriesPage.qml" line="120"/>
@@ -257,7 +252,7 @@
         <translation>Rechercher une série</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SearchPage.qml" line="84"/>
+        <location filename="../src/qml/pages/SearchPage.qml" line="89"/>
         <source>Here will be stuff when you search for something</source>
         <translation>Les résultats de votre recherche se trouveront ici</translation>
     </message>
@@ -293,17 +288,17 @@
 <context>
     <name>SeriesInfoPage</name>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="23"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="31"/>
         <source>Add to my series</source>
         <translation>Ajouter à mes séries</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="33"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="41"/>
         <source>Already added</source>
         <translation>Déjà ajoutée</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="54"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="61"/>
         <source>Overview</source>
         <translation type="unfinished">Présentation</translation>
     </message>

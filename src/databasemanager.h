@@ -72,11 +72,11 @@ signals:
     void populateTodayModel(QList<QVariantMap>);
     void populateBannerList(QList<QVariantMap>);
     void seriesDeleted();
-    void seriesStored();
+    void seriesStored(int);
     void updateStatistics(QVariantMap);
     void populateSeasonList(QList<QVariantMap>);
     void populateEpisodeList(QList<QVariantMap>);
-    void checkIfAddedReady(bool);
+    void checkIfAddedReady(int, bool);
     void getSeriesIdsReady(QList<int>);
 
 public slots:
@@ -95,7 +95,7 @@ public slots:
     void storeActors(const int &seriesId, const QList<QVariantMap> &actors) const;
     void storeSeasonImages(const int &seriesId, const QList<QVariantMap> &seasonImages);
     void markSeasonAsWatched(const int &seriesId, const int &seasonNumber);
-    void checkIfAdded(const int &seriesId, const QString &name);
+    bool checkIfAdded(const int &seriesId, const QString &name);
     void getSeriesIds(const bool &includeEndedSeries);
     void deleteDuplicateEpisodes();
 

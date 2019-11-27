@@ -335,6 +335,7 @@ void DatabaseManager::storeSeries(const QVariantMap &series)
     }
     
     commit();
+    emit seriesStored(id);
 }
 
 void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap> &episodes)
@@ -855,8 +856,9 @@ bool DatabaseManager::deleteAllSeries()
     return result ? this->commit() : this->rollback(), result;
 }
 
-void DatabaseManager::checkIfAdded(const int &seriesId, const QString &name)
+bool DatabaseManager::checkIfAdded(const int &seriesId, const QString &name)
 {
+    qDebug() << seriesId << name;
     auto isAdded = false;
     
     QSqlQuery query(m_db);
@@ -877,7 +879,8 @@ void DatabaseManager::checkIfAdded(const int &seriesId, const QString &name)
         }
     }
 
-    emit checkIfAddedReady(isAdded);
+    // emit checkIfAddedReady(seriesId, isAdded);
+    return isAdded;
 }
 
 int DatabaseManager::watchedCount(int seriesId)
