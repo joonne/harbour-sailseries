@@ -92,47 +92,47 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="9"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="16"/>
         <source>Nothing airs this week</source>
         <translation>Keine Veröffentlichung diese Woche</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="47"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="53"/>
         <source>Monday</source>
         <translation>Montag</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="49"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="55"/>
         <source>Tuesday</source>
         <translation>Dienstag</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="51"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="57"/>
         <source>Wednesday</source>
         <translation>Mittwoch</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="53"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="59"/>
         <source>Thursday</source>
         <translation>Donnerstag</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="55"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="61"/>
         <source>Friday</source>
         <translation>Freitag</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="57"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="63"/>
         <source>Saturday</source>
         <translation>Samstag</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="59"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="65"/>
         <source>Sunday</source>
         <translation>Sonntag</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="96"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="102"/>
         <source>Season %1 Episode %2</source>
         <translation>Staffel %1 Folge %2</translation>
     </message>
@@ -231,7 +231,7 @@
         <translation>Meine Serien</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="120"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="131"/>
         <source>Search for series first.</source>
         <translation>Suche zuerst nach einer Serie.</translation>
     </message>
@@ -260,27 +260,27 @@
 <context>
     <name>SeasonsPage</name>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="18"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="20"/>
         <source>Seasons</source>
         <translation>Staffeln</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="81"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="83"/>
         <source>Specials</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="81"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="83"/>
         <source>Season %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="94"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="96"/>
         <source>Watched</source>
         <translation>Gesehen</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="136"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="138"/>
         <source>episodes</source>
         <translation>Folgen</translation>
     </message>
@@ -306,47 +306,47 @@
 <context>
     <name>SeriesPage</name>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="32"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="40"/>
         <source>Continuing</source>
         <translation>Fortgeführt</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="34"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="42"/>
         <source>Ended</source>
         <translation>Beendet</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="51"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="65"/>
         <source>Remove</source>
         <translation>Entfernen</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="53"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="67"/>
         <source>Removing</source>
         <translation>Entferne</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="62"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="76"/>
         <source>Update</source>
         <translation>Aktualisieren</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="95"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="106"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="103"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="113"/>
         <source>Rating</source>
         <translation>Bewertung</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="113"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="122"/>
         <source>Genre</source>
         <translation>Genre</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="120"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="129"/>
         <source>Overview</source>
         <translation type="unfinished">Überblick</translation>
     </message>

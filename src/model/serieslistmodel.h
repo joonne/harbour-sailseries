@@ -14,25 +14,7 @@ class SeriesListModel : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QQmlListProperty<SeriesData> SeriesList READ getSeriesList NOTIFY seriesListChanged)
-    Q_PROPERTY(int ID READ getID CONSTANT)
-    Q_PROPERTY(QString Language READ getLanguage CONSTANT)
-    Q_PROPERTY(QString SeriesName READ getSeriesName CONSTANT)
-    Q_PROPERTY(QString AliasNames READ getAliasNames CONSTANT)
-    Q_PROPERTY(QString Banner READ getBanner CONSTANT)
-    Q_PROPERTY(QString Overview READ getOverview CONSTANT)
-    Q_PROPERTY(QString FirstAired READ getFirstAired CONSTANT)
-    Q_PROPERTY(QString IMDB_ID READ getIMDB_ID CONSTANT)
-    Q_PROPERTY(QString zap2it_ID READ getZap2it_ID CONSTANT)
-    Q_PROPERTY(QString Network READ getNetwork CONSTANT)
-    Q_PROPERTY(QString Poster READ getPoster NOTIFY posterChanged)
     Q_PROPERTY(QString Mode READ getMode WRITE setMode NOTIFY modeChanged)
-    Q_PROPERTY(QString NextEpisodeName READ getNextEpisodeName NOTIFY nextEpisodeNameChanged)
-    Q_PROPERTY(QString NextEpisodeNumber READ getNextEpisodeNumber NOTIFY nextEpisodeNumberChanged)
-    Q_PROPERTY(QString NextEpisodeSeasonNumber READ getNextEpisodeSeasonNumber NOTIFY nextEpisodeSeasonNumberChanged)
-    Q_PROPERTY(QString DaysToNextEpisode READ getDaysToNextEpisode NOTIFY daysToNextEpisodeChanged)
-    Q_PROPERTY(QString Status READ getStatus CONSTANT)
-    Q_PROPERTY(QString Rating READ getRating CONSTANT)
-    Q_PROPERTY(QString Genre READ getGenre CONSTANT)
 
 public:
     explicit SeriesListModel(QObject *parent = 0, Api *api = 0, DatabaseManager *dbmanager = 0);
@@ -45,30 +27,12 @@ public:
     Q_INVOKABLE void updateAllSeries(const bool &includeEndedSeries = true);
 
     QQmlListProperty<SeriesData> getSeriesList();
-    int getID();
-    QString getLanguage();
-    QString getSeriesName();
-    QString getAliasNames();
-    QString getBanner();
-    QString getOverview();
-    QString getFirstAired();
-    QString getIMDB_ID();
-    QString getZap2it_ID();
-    QString getNetwork();
-    QString getNextEpisodeName();
-    QString getNextEpisodeNumber();
-    QString getNextEpisodeSeasonNumber();
-    QString getDaysToNextEpisode();
-    QString getStatus();
-    QString getRating();
-    QString getGenre();
-    QString getPoster();
     QString getMode();
     void setMode(QString mode);
 
 signals:
     void seriesListChanged();
-    void posterChanged();
+    void posterChanged(const QString &aPoster);
     void modeChanged();
     void updateModels();
     void nextEpisodeNameChanged();
@@ -91,7 +55,6 @@ private:
     Api* m_api;
     DatabaseManager* m_dbmanager;
     QList<SeriesData*> m_seriesListModel;
-    SeriesData* m_info;
     QString m_mode;
 
     static int seriesListCount(QQmlListProperty<SeriesData> *prop);

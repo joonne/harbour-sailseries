@@ -4,6 +4,13 @@ import Sailfish.Silica 1.0
 CoverBackground {
     id: cover
 
+    Connections {
+        target: engine.SeriesListModel
+        onPosterChanged: {
+            poster.source = setPosterVisible(aPoster)
+        }
+    }
+
     Label {
         id: placeholder
         text: qsTr("Nothing airs this week")
@@ -17,15 +24,14 @@ CoverBackground {
     // This is the "m_series" coverPage
     //---------------------------------
 
-    function setPosterVisible() {
-        if (engine.SeriesListModel.Mode === "m_series" && engine.SeriesListModel.Poster) {
-            return "http://thetvdb.com/banners/" + engine.SeriesListModel.Poster;
+    function setPosterVisible(aPoster) {
+        if (engine.SeriesListModel.Mode === "m_series" && aPoster) {
+            return "http://thetvdb.com/banners/" + aPoster;
         }
     }
 
     Image {
         id: poster
-        source: setPosterVisible()
         anchors.top: parent.top
         width: parent.width
         height: parent.height

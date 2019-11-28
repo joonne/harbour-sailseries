@@ -112,7 +112,7 @@ void Engine::updateModels()
     emit m_todayListModel->getStartPageSeries();
     emit m_seriesListModel->getSeries();
     emit m_statistics->requestStatistics();
-    emit m_seasonListModel->getSeasons(m_seriesListModel->getID());
+    // emit m_seasonListModel->getSeasons(m_seriesListModel->getID());
 }
 
 void Engine::readyToUpdateEpisodeDetails(const QVariantMap &episode)

@@ -7,7 +7,7 @@ Page {
     id: myseriespage
 
     Component.onCompleted: {
-        engine.SeriesListModel.populate();
+        engine.SeriesListModel.populate()
     }
 
     Component.onDestruction: {
@@ -36,7 +36,7 @@ Page {
         anchors.fill: parent
 
         PullDownMenu {
-            busy: engine.SeriesListModel.Loading
+            busy: engine.Loading
 
             MenuItem {
                 text: qsTr("Update All")
@@ -77,7 +77,18 @@ Page {
                     anchors.rightMargin: Theme.paddingMedium
                     onClicked: {
                         engine.SeriesListModel.selectSeries(index)
-                        pageStack.push(Qt.resolvedUrl("SeriesPage.qml"), { seriesId: ID })
+                        pageStack.push(Qt.resolvedUrl("SeriesPage.qml"),
+                                       {
+                                           seriesId: ID,
+                                           imdbId: IMDB_ID,
+                                           seriesName: SeriesName,
+                                           network: Network,
+                                           banner: Banner,
+                                           seriesStatus: Status,
+                                           rating: Rating,
+                                           genre: Genre,
+                                           overview: Overview
+                                       })
                     }
                 }
 

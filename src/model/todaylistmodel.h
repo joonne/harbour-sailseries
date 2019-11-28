@@ -31,8 +31,6 @@ public slots:
 private:
     DatabaseManager* m_dbmanager;
     Api* m_api;
-    QList<QMap<QString,QString> > m_series;
-    QList<QMap<QString,QString> > m_episodes;
     QList<SeriesData*> m_todayListModel;
 
     static int todayListCount(QQmlListProperty<SeriesData> *prop);

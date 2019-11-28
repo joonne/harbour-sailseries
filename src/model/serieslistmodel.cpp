@@ -104,101 +104,10 @@ void SeriesListModel::populate()
 
 void SeriesListModel::selectSeries(const int &index)
 {
-    m_info = m_seriesListModel.at(index);
     setMode("m_series");
 
-    emit posterChanged();
-    emit nextEpisodeNameChanged();
-    emit nextEpisodeNumberChanged();
-    emit nextEpisodeSeasonNumberChanged();
-    emit daysToNextEpisodeChanged();
-}
-
-int SeriesListModel::getID() { return m_info->getID(); }
-
-QString SeriesListModel::getLanguage()
-{
-    return m_info->getLanguage();
-}
-
-QString SeriesListModel::getSeriesName()
-{
-    return m_info->getSeriesName();
-}
-
-QString SeriesListModel::getAliasNames()
-{
-    return m_info->getAliasNames();
-}
-
-QString SeriesListModel::getBanner()
-{
-    return m_info->getBanner();
-}
-
-QString SeriesListModel::getOverview()
-{
-    return m_info->getOverview();
-}
-
-QString SeriesListModel::getFirstAired()
-{
-    return m_info->getFirstAired();
-}
-
-QString SeriesListModel::getIMDB_ID()
-{
-    return m_info->getIMDB_ID();
-}
-
-QString SeriesListModel::getZap2it_ID()
-{
-    return m_info->getZap2it_ID();
-}
-
-QString SeriesListModel::getNetwork()
-{
-    return m_info->getNetwork();
-}
-
-QString SeriesListModel::getNextEpisodeName()
-{
-    return m_info->getNextEpisodeName();
-}
-
-QString SeriesListModel::getNextEpisodeNumber()
-{
-    return m_info->getNextEpisodeNumber();
-}
-
-QString SeriesListModel::getNextEpisodeSeasonNumber()
-{
-    return m_info->getNextEpisodeSeasonNumber();
-}
-
-QString SeriesListModel::getDaysToNextEpisode()
-{
-    return m_info->getDaysToNextEpisode();
-}
-
-QString SeriesListModel::getStatus()
-{
-    return m_info->getStatus();
-}
-
-QString SeriesListModel::getRating()
-{
-    return m_info->getRating();
-}
-
-QString SeriesListModel::getGenre()
-{
-    return m_info->getGenre();
-}
-
-QString SeriesListModel::getPoster()
-{
-    return m_info->getPoster();
+    const auto poster = m_seriesListModel.at(index)->getPoster();
+    emit posterChanged(poster);
 }
 
 QString SeriesListModel::getMode()

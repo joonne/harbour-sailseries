@@ -4,8 +4,10 @@ import Sailfish.Silica 1.0
 Page {
     id: seasonspage
 
+    property string seriesId
+
     Component.onCompleted: {
-        engine.SeasonListModel.getSeasons(engine.SeriesListModel.ID)
+        engine.SeasonListModel.getSeasons(seriesId)
     }
 
     SilicaListView {
@@ -40,7 +42,7 @@ Page {
                 anchors.rightMargin: Theme.paddingMedium
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("EpisodesPage.qml"), {
-                                       seriesId: engine.SeriesListModel.ID,
+                                       seriesId: seriesId,
                                        seasonNumber: index
                                    });
                 }

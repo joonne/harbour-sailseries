@@ -7,6 +7,14 @@ Page {
     id: seriespage
 
     property int seriesId
+    property string imdbId
+    property string seriesName
+    property string network
+    property string banner
+    property string seriesStatus
+    property string rating
+    property string genre
+    property string overview
 
     Component.onCompleted: {
         timer.start()
@@ -22,22 +30,28 @@ Page {
         id: timer
         interval: 500
         onTriggered: {
-            pageStack.pushAttached(Qt.resolvedUrl("SeasonsPage.qml"))
+            pageStack.pushAttached(Qt.resolvedUrl("SeasonsPage.qml"), { seriesId: seriesId })
         }
     }
 
-    function setStatus(status) {
-        switch(status) {
+    function getStatus(aStatus) {
+        switch(aStatus) {
             case "Continuing":
                 return qsTr("Continuing")
             case "Ended":
                 return qsTr("Ended")
             default:
-                 return ""
+                return ""
         }
     }
 
-    function addSpaces(str) { return str.split(",").join(", ") }
+    function formatRating(aRating) {
+        return parseFloat(aRating).toFixed(1)
+    }
+
+    function formatGenre(aGenre) {
+        return aGenre.split(",").join(", ")
+    }
 
     SilicaFlickable {
         id: listView
@@ -52,7 +66,7 @@ Page {
                 onClicked: {
                     remorse.execute(qsTr("Removing"),
                                     function() {
-                                        engine.SeriesListModel.deleteSeries(seriesId);
+                                        engine.SeriesListModel.deleteSeries(seriesId)
                                         pageStack.pop()
                                     });
                 }
@@ -61,13 +75,13 @@ Page {
             MenuItem {
                 text:qsTr("Update")
                 onClicked: {
-                    engine.SeriesListModel.updateSeries(seriesId);
+                    engine.SeriesListModel.updateSeries(seriesId)
                 }
             }
 
             MenuItem {
                 text: "IMDB"
-                onClicked: Qt.openUrlExternally("http://www.imdb.com/title/" + engine.SeriesListModel.IMDB_ID)
+                onClicked: Qt.openUrlExternally("http://www.imdb.com/title/" + imdbId)
             }
         }
 
@@ -78,48 +92,43 @@ Page {
 
             PageHeader {
                 id: header
-                title: engine.SeriesListModel.SeriesName
-                description: engine.SeriesListModel.Network
+                title: seriesName
+                description: network
             }
 
             SeriesBanner {
-                id: banner
-                bannerPath: engine.SeriesListModel.Banner
+                bannerPath: banner
                 sourceWidth: seriespage.width - Theme.paddingMedium * 2
             }
 
             Row {
-
                 TextField {
-                    id: status
                     label: qsTr("Status")
                     width: seriespage.width / 2
-                    text: setStatus(engine.SeriesListModel.Status)
+                    text: getStatus(seriesStatus)
                     readOnly: true
                 }
 
                 TextField {
-                    id: rating
                     label: qsTr("Rating")
                     width: seriespage.width / 2
-                    text: parseFloat(engine.SeriesListModel.Rating).toFixed(1)
+                    text: formatRating(rating)
                     readOnly: true
                 }
 
             }
 
             TextField {
-                id: genre
                 label: qsTr("Genre")
                 width: seriespage.width
-                text: addSpaces(engine.SeriesListModel.Genre)
+                text: formatGenre(genre)
                 readOnly: true
             }
 
             TextArea {
                 label: qsTr("Overview")
                 width: seriespage.width
-                text:  engine.SeriesListModel.Overview
+                text:  overview
                 readOnly: true
             }
 
