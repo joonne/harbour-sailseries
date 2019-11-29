@@ -35,10 +35,6 @@ signals:
     void posterChanged(const QString &aPoster);
     void modeChanged();
     void updateModels();
-    void nextEpisodeNameChanged();
-    void nextEpisodeNumberChanged();
-    void nextEpisodeSeasonNumberChanged();
-    void daysToNextEpisodeChanged();
 
     void getSeries();
     void deleteSeriesWith(int);
@@ -49,7 +45,6 @@ signals:
 public slots:
     void populateBannerList(const QList<QVariantMap> &allSeries);
     void seriesDeleted();
-    void seriesStored();
 
 private:
     Api* m_api;

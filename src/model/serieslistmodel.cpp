@@ -26,11 +26,6 @@ SeriesListModel::SeriesListModel(QObject *parent, Api *api, DatabaseManager* dbm
             this,
             SLOT(seriesDeleted()));
 
-    connect(m_dbmanager,
-            SIGNAL(seriesStored()),
-            this,
-            SLOT(seriesStored()));
-
     connect(this,
             SIGNAL(getAllRequested(int)),
             m_api,
@@ -49,12 +44,6 @@ SeriesListModel::~SeriesListModel()
         delete series;
         series = 0;
     }
-}
-
-void SeriesListModel::seriesStored()
-{
-    emit setLoading(false);
-    emit updateModels();
 }
 
 QQmlListProperty<SeriesData> SeriesListModel::getSeriesList()

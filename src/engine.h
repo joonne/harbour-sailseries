@@ -56,6 +56,7 @@ public slots:
     void readyToUpdateModels();
     void readyToUpdateEpisodeDetails(const QVariantMap &episode);
     void setLoading(bool state);
+    void seriesStored(const int &seriesId);
 
 private:
     SeriesListModel* m_seriesListModel;

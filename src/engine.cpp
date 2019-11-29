@@ -77,6 +77,11 @@ Engine::Engine(QObject *parent) :
             SIGNAL(setLoading(bool)),
             this,
             SLOT(setLoading(bool)));
+
+    connect(m_dbmanager,
+            SIGNAL(seriesStored(int)),
+            this,
+            SLOT(seriesStored(int)));
 }
 
 Engine::~Engine()
@@ -124,6 +129,11 @@ void Engine::setLoading(bool state)
 {
     m_loading = state;
     emit loadingChanged();
+}
+
+void Engine::seriesStored(const int &seriesId)
+{
+    setLoading(false);
 }
 
 void Engine::deleteDuplicateEpisodes()
