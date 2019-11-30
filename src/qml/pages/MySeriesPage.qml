@@ -12,7 +12,7 @@ Page {
 
     Component.onDestruction: {
         if (engine) {
-            engine.SeriesListModel.Mode = "default"
+            engine.Mode = "default"
         }
     }
 

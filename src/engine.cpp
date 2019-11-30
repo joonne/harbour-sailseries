@@ -4,7 +4,8 @@ Engine::Engine(QObject *parent) :
     QObject(parent),
     m_api(new Api),
     m_dbmanager(new DatabaseManager),
-    m_loading(false)
+    m_loading(false),
+    m_mode("default")
 {
     auto dbThread = new QThread;
     m_dbmanager->moveToThread(dbThread);
@@ -82,6 +83,11 @@ Engine::Engine(QObject *parent) :
             SIGNAL(seriesStored(int)),
             this,
             SLOT(seriesStored(int)));
+
+    connect(m_seriesListModel,
+            SIGNAL(setMode(QString)),
+            this,
+            SLOT(setMode(QString)));
 }
 
 Engine::~Engine()
@@ -129,6 +135,17 @@ void Engine::setLoading(bool state)
 {
     m_loading = state;
     emit loadingChanged();
+}
+
+QString Engine::getMode()
+{
+    return m_mode;
+}
+
+void Engine::setMode(QString mode)
+{
+    m_mode = mode;
+    emit modeChanged();
 }
 
 void Engine::seriesStored(const int &seriesId)

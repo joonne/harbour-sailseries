@@ -17,7 +17,7 @@ CoverBackground {
         font.pixelSize: Theme.fontSizeTiny
         color: Theme.secondaryColor
         anchors.centerIn: cover
-        visible: listView.count === 0 && engine.SeriesListModel.Mode === "default"
+        visible: listView.count === 0 && engine.Mode === "default"
     }
 
     //---------------------------------
@@ -25,7 +25,7 @@ CoverBackground {
     //---------------------------------
 
     function setPosterVisible(aPoster) {
-        if (engine.SeriesListModel.Mode === "m_series" && aPoster) {
+        if (engine.Mode === "m_series" && aPoster) {
             return "http://thetvdb.com/banners/" + aPoster;
         }
     }
@@ -35,7 +35,7 @@ CoverBackground {
         anchors.top: parent.top
         width: parent.width
         height: parent.height
-        visible: engine.SeriesListModel.Mode === "m_series"
+        visible: engine.Mode === "m_series"
         opacity: 1.0
     }
 
@@ -44,7 +44,7 @@ CoverBackground {
     //--------------------------------
 
     function defaultVisibility() {
-        return engine.SeriesListModel.Mode === "default"
+        return engine.Mode === "default"
     }
 
     function getWeekday(weekday) {

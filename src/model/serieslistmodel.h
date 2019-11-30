@@ -14,7 +14,6 @@ class SeriesListModel : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QQmlListProperty<SeriesData> SeriesList READ getSeriesList NOTIFY seriesListChanged)
-    Q_PROPERTY(QString Mode READ getMode WRITE setMode NOTIFY modeChanged)
 
 public:
     explicit SeriesListModel(QObject *parent = 0, Api *api = 0, DatabaseManager *dbmanager = 0);
@@ -27,8 +26,6 @@ public:
     Q_INVOKABLE void updateAllSeries(const bool &includeEndedSeries = true);
 
     QQmlListProperty<SeriesData> getSeriesList();
-    QString getMode();
-    void setMode(QString mode);
 
 signals:
     void seriesListChanged();
@@ -41,6 +38,7 @@ signals:
     void getAllRequested(int);
     void getSeriesIds(bool);
     void setLoading(bool);
+    void setMode(QString);
 
 public slots:
     void populateBannerList(const QList<QVariantMap> &allSeries);

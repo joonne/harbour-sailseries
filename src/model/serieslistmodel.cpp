@@ -3,8 +3,7 @@
 SeriesListModel::SeriesListModel(QObject *parent, Api *api, DatabaseManager* dbmanager) :
     QObject(parent),
     m_api(api),
-    m_dbmanager(dbmanager),
-    m_mode("default")
+    m_dbmanager(dbmanager)
 {
     connect(this,
             SIGNAL(getSeries()),
@@ -93,26 +92,10 @@ void SeriesListModel::populate()
 
 void SeriesListModel::selectSeries(const int &index)
 {
-    setMode("m_series");
+    emit setMode("m_series");
 
     const auto poster = m_seriesListModel.at(index)->getPoster();
     emit posterChanged(poster);
-}
-
-QString SeriesListModel::getMode()
-{
-    return m_mode;
-}
-
-void SeriesListModel::setMode(QString mode)
-{
-    if (m_mode == mode)
-    {
-        return;
-    }
-
-    m_mode = mode;
-    emit modeChanged();
 }
 
 void SeriesListModel::deleteSeries(const int &seriesId)
