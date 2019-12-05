@@ -39,9 +39,7 @@ Page {
         anchors.fill: parent
 
         delegate: ListItem {
-
             id: item
-
             contentHeight: background.height + Theme.paddingMedium
             contentWidth: listView.width
 
@@ -109,7 +107,7 @@ Page {
 
             Image {
                 id: watched
-                source: Watched === 0 ? star : favorite
+                source: Watched ? favorite : star
                 anchors.right: container.right
                 anchors.rightMargin: Theme.paddingMedium
                 anchors.top: container.top
@@ -119,7 +117,8 @@ Page {
                 MouseArea {
                     id: clickarea
                     onClicked: {
-                        engine.EpisodeListModel.toggleWatched(ID, seriesId, SeasonNumber)
+                        Watched = !Watched
+                        engine.EpisodeListModel.setWatched(ID, seriesId, Watched)
                     }
                     anchors.fill: parent
                 }

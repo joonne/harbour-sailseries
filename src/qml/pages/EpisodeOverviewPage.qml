@@ -83,7 +83,7 @@ Page {
                         anchors.fill: parent
                         onClicked: {
                             watched = !watched
-                            engine.EpisodeListModel.toggleWatched(episodeId, seriesId, seasonNumber)
+                            engine.EpisodeListModel.setWatched(episodeId, seriesId, watched)
                         }
                     }
                 }

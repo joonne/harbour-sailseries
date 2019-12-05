@@ -21,7 +21,7 @@ class Engine : public QObject
     Q_PROPERTY(EpisodeListModel* EpisodeListModel READ getEpisodeListModel NOTIFY episodeListModelChanged)
     Q_PROPERTY(SeasonListModel* SeasonListModel READ getSeasonListModel NOTIFY seasonListModelChanged)
     Q_PROPERTY(bool Loading READ getLoading NOTIFY loadingChanged)
-    Q_PROPERTY(QString Mode READ getMode WRITE setMode NOTIFY modeChanged)
+    Q_PROPERTY(QString Mode READ getMode NOTIFY modeChanged)
     Q_PROPERTY(Statistics* Statistics READ getStatistics)
 
 public:
@@ -40,6 +40,7 @@ public:
     Q_INVOKABLE void updateModels();
     Q_INVOKABLE void deleteDuplicateEpisodes();
     Q_INVOKABLE void requestEpisodeDetails(const int &id);
+    Q_INVOKABLE void resetMode();
 
 signals:
     void seriesListModelChanged();
@@ -49,6 +50,7 @@ signals:
     void episodeListModelChanged();
     void seasonListModelChanged();
     void loadingChanged();
+    void modeChanged();
     void updateEpisodeDetails(const QVariantMap &episode);
     void setUpDb();
     void getEpisodeDetails(int);
@@ -57,9 +59,9 @@ signals:
 public slots:
     void readyToUpdateModels();
     void readyToUpdateEpisodeDetails(const QVariantMap &episode);
-    void setLoading(bool state);
+    void setLoading(const bool &state);
     void seriesStored(const int &seriesId);
-    void setMode(QString mode);
+    void setMode(const QString &mode);
 
 private:
     SeriesListModel* m_seriesListModel;

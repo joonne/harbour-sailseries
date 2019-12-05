@@ -15,9 +15,9 @@ EpisodeListModel::EpisodeListModel(QObject *parent, DatabaseManager *dbmanager) 
             SLOT(populateEpisodeList(QList<QVariantMap>)));
 
     connect(this,
-            SIGNAL(toggleWatchedRequested(int,int,int)),
+            SIGNAL(setWatchedRequested(int,int,bool)),
             m_dbmanager,
-            SLOT(toggleWatched(int,int,int)));
+            SLOT(setWatched(int,int,bool)));
 
     connect(this,
             SIGNAL(markSeasonAsWatchedRequested(int,int)),
@@ -79,9 +79,9 @@ void EpisodeListModel::populateEpisodeList(const QList<QVariantMap> &episodes)
     emit episodeListChanged();
 }
 
-void EpisodeListModel::toggleWatched(const int &episodeId, const int &seriesId, const int &seasonNumber)
+void EpisodeListModel::setWatched(const int &episodeId, const int &seriesId, const bool &watched)
 {
-    emit toggleWatchedRequested(episodeId, seriesId, seasonNumber);
+    emit setWatchedRequested(episodeId, seriesId, watched);
 }
 
 void EpisodeListModel::markSeasonAsWatched(const int &seriesId, const int &season)

@@ -12,7 +12,7 @@ Page {
 
     Component.onDestruction: {
         if (engine) {
-            engine.Mode = "default"
+            engine.resetMode()
         }
     }
 

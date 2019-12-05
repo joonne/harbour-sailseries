@@ -131,7 +131,7 @@ void Engine::readyToUpdateEpisodeDetails(const QVariantMap &episode)
     emit updateEpisodeDetails(episode);
 }
 
-void Engine::setLoading(bool state)
+void Engine::setLoading(const bool &state)
 {
     m_loading = state;
     emit loadingChanged();
@@ -142,7 +142,7 @@ QString Engine::getMode()
     return m_mode;
 }
 
-void Engine::setMode(QString mode)
+void Engine::setMode(const QString &mode)
 {
     m_mode = mode;
     emit modeChanged();
@@ -161,4 +161,10 @@ void Engine::deleteDuplicateEpisodes()
 void Engine::requestEpisodeDetails(const int &id)
 {
     emit getEpisodeDetails(id);
+}
+
+void Engine::resetMode()
+{
+   m_mode = "default";
+   emit modeChanged();
 }

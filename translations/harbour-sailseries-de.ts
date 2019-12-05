@@ -173,17 +173,17 @@
         <translation>Folgen</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="88"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="86"/>
         <source>Specials: Episode %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="89"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="87"/>
         <source>Season %1 Episode %2</source>
         <translation type="unfinished">Staffel %1 Folge %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="136"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="135"/>
         <source>No episodes.</source>
         <translation>Keine Folgen</translation>
     </message>

@@ -21,13 +21,13 @@ public:
     QQmlListProperty<EpisodeData> getEpisodeList();
 
     Q_INVOKABLE void getEpisodes(const int &seriesId, const int &seasonNumber);
-    Q_INVOKABLE void toggleWatched(const int &episodeId, const int &seriesId, const int &seasonNumber);
+    Q_INVOKABLE void setWatched(const int &episodeId, const int &seriesId, const bool &watched);
     Q_INVOKABLE void markSeasonAsWatched(const int &seriesId, const int &season);
 
 signals:
     void episodeListChanged();
     void getEpisodesRequested(const int &seriesId, const int &seasonNumber);
-    void toggleWatchedRequested(const int &episodeId, const int &seriesId, const int &seasonNumber);
+    void setWatchedRequested(const int &episodeId, const int &seriesId, const bool &watched);
     void markSeasonAsWatchedRequested(const int &seriesId, const int &season);
 
 public slots:

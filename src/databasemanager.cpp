@@ -721,17 +721,17 @@ void DatabaseManager::getEpisodes(const int &seriesId, const int &seasonNumber)
     emit populateEpisodeList(episodes);
 }
 
-void DatabaseManager::toggleWatched(const int &episodeId, const int &seriesId, const int &seasonNumber)
+void DatabaseManager::setWatched(const int &episodeId, const int &seriesId, const bool &watched)
 {
     QSqlQuery query(m_db);
     query.prepare("UPDATE Episode "
-                  "SET watched = CASE WHEN watched = 0 THEN 1 ELSE 0 END "
+                  "SET watched = :watched "
                   "WHERE id = :episodeId");
+    query.bindValue(":watched", watched ? 1 : 0);
     query.bindValue(":episodeId", episodeId);
     query.exec();
 
     getSeasons(seriesId);
-    getEpisodes(seriesId, seasonNumber);
     getStartPageSeries();
 }
 

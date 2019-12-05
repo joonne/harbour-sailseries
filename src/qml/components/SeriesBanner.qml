@@ -7,7 +7,7 @@ Image {
     property string bannerPath
     property int sourceWidth
 
-    source: bannerPath.indexOf("banners") === -1 ? "https://thetvdb.com/banners/" + bannerPath : "https://thetvdb.com/" + bannerPath
+    source: bannerPath.indexOf("banners") === -1 ? "https://thetvdb.com/banners/" + bannerPath : "https://thetvdb.com" + bannerPath
     sourceSize.width: sourceWidth
     anchors.left: parent.left
     anchors.leftMargin: {

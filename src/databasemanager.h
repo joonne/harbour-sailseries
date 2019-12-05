@@ -88,7 +88,7 @@ public slots:
     void storeSeries(const QVariantMap &series);
     void storeEpisodes(const int &seriesId, const QList<QVariantMap> &episodes);
     void getStatistics();
-    void toggleWatched(const int &episodeId, const int &seriesId, const int &seasonNumber);
+    void setWatched(const int &episodeId, const int &seriesId, const bool &watched);
     void storePosterImageFor(const int &seriesId, const QString &posterImage) const;
     void storeBannerImageFor(const int &seriesId, const QString &bannerImage) const;
     void storeFanartImageFor(const int &seriesId, const QString &fanartImage) const;
