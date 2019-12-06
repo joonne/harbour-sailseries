@@ -7,7 +7,7 @@
 class SeriesData : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString ID READ getID CONSTANT)
+    Q_PROPERTY(int ID READ getID CONSTANT)
     Q_PROPERTY(QString Actors READ getActors CONSTANT)
     Q_PROPERTY(QString AirsDayOfWeek READ getAirsDayOfWeek CONSTANT)
     Q_PROPERTY(QString AirsTime READ getAirsTime CONSTANT)
@@ -32,6 +32,7 @@ class SeriesData : public QObject
     Q_PROPERTY(QString Poster READ getPoster CONSTANT)
     Q_PROPERTY(QString zap2it_ID READ getZap2it_ID CONSTANT)
     Q_PROPERTY(int Watched READ getWatched WRITE setWatched NOTIFY watchedChanged)
+    Q_PROPERTY(bool IsAdded READ getIsAdded CONSTANT)
 
     Q_PROPERTY(QString NextEpisodeId READ getNextEpisodeId CONSTANT)
     Q_PROPERTY(QString NextEpisodeName READ getNextEpisodeName CONSTANT)
@@ -50,7 +51,7 @@ class SeriesData : public QObject
 public:
     explicit SeriesData(QObject *parent = 0, QVariantMap params = QVariantMap());
 
-    QString getID();
+    int getID();
     QString getActors();
     QString getAirsDayOfWeek();
     QString getAirsTime();
@@ -76,6 +77,7 @@ public:
     QString getZap2it_ID();
     int getWatched();
     void setWatched(int watched);
+    bool getIsAdded();
 
     QString getNextEpisodeId();
     QString getNextEpisodeName();
@@ -101,7 +103,7 @@ public slots:
 
 private:
 
-    QString m_id;
+    int m_id;
     QString m_actors;
     QString m_airsDayOfWeek;
     QString m_airsTime;
@@ -126,6 +128,7 @@ private:
     QString m_poster;
     QString m_zap2itId;
     int m_watched;
+    bool m_isAdded;
 
     QString m_nextEpisodeName;
     QString m_nextEpisodeNumber;
@@ -142,7 +145,6 @@ private:
     QString m_nextEpisodeGuestStars;
     QString m_nextEpisodeWriter;
     int m_nextEpisodeWatched;
-
 };
 
 #endif // SERIESDATA_H

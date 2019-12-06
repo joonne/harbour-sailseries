@@ -28,7 +28,7 @@ EpisodeData::EpisodeData(QObject *parent, QVariantMap params) :
     m_thumbAdded = "";
     m_thumbHeight  = 0;
     m_thumbWidth = 0;
-    m_watched = params["watched"].toInt();
+    m_watched = params["watched"].toInt() == 0 ? false : true;
 }
 
 int EpisodeData::getID() { return m_id; }
@@ -81,12 +81,10 @@ int EpisodeData::getThumbHeight() { return m_thumbHeight; }
 
 int EpisodeData::getThumbWidth() { return m_thumbWidth; }
 
-int EpisodeData::getWatched() { return m_watched; }
+bool EpisodeData::getWatched() { return m_watched; }
 
-void EpisodeData::setWatched(int watched)
+void EpisodeData::setWatched(const bool &watched)
 {
-    if (m_watched != watched) {
-        m_watched = watched;
-        emit watchedChanged();
-    }
+    m_watched = watched;
+    emit watchedChanged();
 }

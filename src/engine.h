@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "api.h"
+#include <QThread>
 #include "databasemanager.h"
 #include "statistics.h"
 #include "./model/serieslistmodel.h"
@@ -20,6 +21,7 @@ class Engine : public QObject
     Q_PROPERTY(EpisodeListModel* EpisodeListModel READ getEpisodeListModel NOTIFY episodeListModelChanged)
     Q_PROPERTY(SeasonListModel* SeasonListModel READ getSeasonListModel NOTIFY seasonListModelChanged)
     Q_PROPERTY(bool Loading READ getLoading NOTIFY loadingChanged)
+    Q_PROPERTY(QString Mode READ getMode NOTIFY modeChanged)
     Q_PROPERTY(Statistics* Statistics READ getStatistics)
 
 public:
@@ -32,12 +34,13 @@ public:
     EpisodeListModel* getEpisodeListModel();
     SeasonListModel* getSeasonListModel();
     Statistics* getStatistics();
+    bool getLoading();
+    QString getMode();
 
     Q_INVOKABLE void updateModels();
-    bool getLoading();
-
-    Q_INVOKABLE bool deleteDuplicateEpisodes();
-    Q_INVOKABLE void requestEpisodeDetails(QString id);
+    Q_INVOKABLE void deleteDuplicateEpisodes();
+    Q_INVOKABLE void requestEpisodeDetails(const int &id);
+    Q_INVOKABLE void resetMode();
 
 signals:
     void seriesListModelChanged();
@@ -47,11 +50,18 @@ signals:
     void episodeListModelChanged();
     void seasonListModelChanged();
     void loadingChanged();
-    void updateEpisodeDetails(QVariantMap episode);
+    void modeChanged();
+    void updateEpisodeDetails(const QVariantMap &episode);
+    void setUpDb();
+    void getEpisodeDetails(int);
+    void deleteDuplicateEpisodesRequested();
 
 public slots:
     void readyToUpdateModels();
-    void readyToUpdateEpisodeDetails(QVariantMap episode);
+    void readyToUpdateEpisodeDetails(const QVariantMap &episode);
+    void setLoading(const bool &state);
+    void seriesStored(const int &seriesId);
+    void setMode(const QString &mode);
 
 private:
     SeriesListModel* m_seriesListModel;
@@ -63,7 +73,7 @@ private:
     DatabaseManager* m_dbmanager;
     Statistics* m_statistics;
     bool m_loading;
-    void toggleLoading(bool state);
+    QString m_mode;
 };
 
 #endif // ENGINE_H

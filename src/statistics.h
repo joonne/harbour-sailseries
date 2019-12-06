@@ -20,7 +20,7 @@ class Statistics : public QObject
 public:
     explicit Statistics(QObject *parent = 0, DatabaseManager *dbmanager = 0);
 
-    Q_INVOKABLE void updateStatistics();
+    Q_INVOKABLE void requestStatistics();
 
     int getWatchedEpisodesDuration();
     int getWatchedEpisodesCount();
@@ -40,6 +40,11 @@ signals:
     void allSeasonsCountChanged();
     void watchedSeasonsCountChanged();
     void averageWatchedEpisodesDurationChanged();
+
+    void statisticsRequested();
+
+public slots:
+    void updateStatistics(QVariantMap statistics);
 
 private:
     DatabaseManager* m_dbmanager;

@@ -4,32 +4,38 @@ import Sailfish.Silica 1.0
 CoverBackground {
     id: cover
 
+    Connections {
+        target: engine.SeriesListModel
+        onPosterChanged: {
+            poster.source = setPosterVisible(aPoster)
+        }
+    }
+
     Label {
         id: placeholder
         text: qsTr("Nothing airs this week")
         font.pixelSize: Theme.fontSizeTiny
         color: Theme.secondaryColor
         anchors.centerIn: cover
-        visible: listView.count === 0 && engine.SeriesListModel.Mode === "default"
+        visible: listView.count === 0 && engine.Mode === "default"
     }
 
     //---------------------------------
     // This is the "m_series" coverPage
     //---------------------------------
 
-    function setPosterVisible() {
-        if (engine.SeriesListModel.Mode === "m_series" && engine.SeriesListModel.Poster !== null) {
-            return "http://thetvdb.com/banners/" + engine.SeriesListModel.Poster;
+    function setPosterVisible(aPoster) {
+        if (engine.Mode === "m_series" && aPoster) {
+            return "http://thetvdb.com/banners/" + aPoster;
         }
     }
 
     Image {
         id: poster
-        source: setPosterVisible()
         anchors.top: parent.top
         width: parent.width
         height: parent.height
-        visible: engine.SeriesListModel.Mode === "m_series"
+        visible: engine.Mode === "m_series"
         opacity: 1.0
     }
 
@@ -38,7 +44,7 @@ CoverBackground {
     //--------------------------------
 
     function defaultVisibility() {
-        return engine.SeriesListModel.Mode === "default"
+        return engine.Mode === "default"
     }
 
     function getWeekday(weekday) {

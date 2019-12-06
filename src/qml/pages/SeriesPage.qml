@@ -6,7 +6,15 @@ import "../components"
 Page {
     id: seriespage
 
-    property string seriesId
+    property int seriesId
+    property string imdbId
+    property string seriesName
+    property string network
+    property string banner
+    property string seriesStatus
+    property string rating
+    property string genre
+    property string overview
 
     Component.onCompleted: {
         timer.start()
@@ -14,7 +22,7 @@ Page {
 
     Component.onDestruction: {
         if (engine) {
-            engine.SeriesListModel.Mode = "default"
+            engine.resetMode()
         }
     }
 
@@ -22,22 +30,28 @@ Page {
         id: timer
         interval: 500
         onTriggered: {
-            pageStack.pushAttached(Qt.resolvedUrl("SeasonsPage.qml"))
+            pageStack.pushAttached(Qt.resolvedUrl("SeasonsPage.qml"), { seriesId: seriesId })
         }
     }
 
-    function setStatus(status) {
-        switch(status) {
+    function getStatus(aStatus) {
+        switch(aStatus) {
             case "Continuing":
                 return qsTr("Continuing")
             case "Ended":
                 return qsTr("Ended")
             default:
-                 return ""
+                return ""
         }
     }
 
-    function addSpaces(str) { return str.split(",").join(", ") }
+    function formatRating(aRating) {
+        return parseFloat(aRating).toFixed(1)
+    }
+
+    function formatGenre(aGenre) {
+        return aGenre.split(",").join(", ")
+    }
 
     SilicaFlickable {
         id: listView
@@ -45,12 +59,14 @@ Page {
         contentHeight: column.height
 
         PullDownMenu {
+            busy: engine.Loading
+
             MenuItem {
                 text: qsTr("Remove")
                 onClicked: {
                     remorse.execute(qsTr("Removing"),
                                     function() {
-                                        engine.SeriesListModel.deleteSeries(seriesId);
+                                        engine.SeriesListModel.deleteSeries(seriesId)
                                         pageStack.pop()
                                     });
                 }
@@ -59,8 +75,13 @@ Page {
             MenuItem {
                 text:qsTr("Update")
                 onClicked: {
-                    engine.SeriesListModel.updateSeries(seriesId);
+                    engine.SeriesListModel.updateSeries(seriesId)
                 }
+            }
+
+            MenuItem {
+                text: "IMDB"
+                onClicked: Qt.openUrlExternally("http://www.imdb.com/title/" + imdbId)
             }
         }
 
@@ -71,66 +92,50 @@ Page {
 
             PageHeader {
                 id: header
-                title: engine.SeriesListModel.SeriesName
+                title: seriesName
+                description: network
             }
 
             SeriesBanner {
-                id: banner
-                bannerPath: engine.SeriesListModel.Banner
+                bannerPath: banner
                 sourceWidth: seriespage.width - Theme.paddingMedium * 2
             }
 
             Row {
-
                 TextField {
-                    id: status
                     label: qsTr("Status")
                     width: seriespage.width / 2
-                    text: setStatus(engine.SeriesListModel.Status)
-                    color: Theme.secondaryColor
+                    text: getStatus(seriesStatus)
                     readOnly: true
                 }
 
                 TextField {
-                    id: rating
                     label: qsTr("Rating")
                     width: seriespage.width / 2
-                    text: parseFloat(engine.SeriesListModel.Rating).toFixed(1)
-                    color: Theme.secondaryColor
+                    text: formatRating(rating)
                     readOnly: true
                 }
 
             }
 
             TextField {
-                id: genre
                 label: qsTr("Genre")
                 width: seriespage.width
-                text: addSpaces(engine.SeriesListModel.Genre)
-                color: Theme.secondaryColor
+                text: formatGenre(genre)
                 readOnly: true
             }
 
-            TextExpander {
-                id: expander
+            TextArea {
+                label: qsTr("Overview")
                 width: seriespage.width
-                textContent: engine.SeriesListModel.Overview
+                text:  overview
+                readOnly: true
             }
 
-            Button {
-                id: imdb
-                text: "IMDB"
-                onClicked: Qt.openUrlExternally("http://www.imdb.com/title/" + engine.SeriesListModel.IMDB_ID)
-                anchors.left: parent.left
-                anchors.leftMargin: (seriespage.width - imdb.width) / 2
+            VerticalScrollDecorator {
+                id: decorator
             }
         }
-    }
-
-    BusyIndicator {
-        size: BusyIndicatorSize.Large
-        anchors.centerIn: parent
-        running: engine.SeriesListModel.Loading
     }
 
     RemorsePopup { id: remorse }

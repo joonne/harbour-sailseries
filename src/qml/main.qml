@@ -7,7 +7,7 @@ import "components"
 ApplicationWindow {
     id: appWindow
 
-    initialPage: StartPage { }
+    initialPage: Component { StartPage { } }
     cover: CoverPage { }
 
     NotificationHandler {

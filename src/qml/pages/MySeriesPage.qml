@@ -1,14 +1,18 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-import "../components";
+import "../components"
 
 Page {
     id: myseriespage
 
+    Component.onCompleted: {
+        engine.SeriesListModel.populate()
+    }
+
     Component.onDestruction: {
         if (engine) {
-            engine.SeriesListModel.Mode = "default"
+            engine.resetMode()
         }
     }
 
@@ -32,6 +36,7 @@ Page {
         anchors.fill: parent
 
         PullDownMenu {
+            busy: engine.Loading
 
             MenuItem {
                 text: qsTr("Update All")
@@ -49,7 +54,6 @@ Page {
             header: PageHeader {
                 id: header
                 title: qsTr("My Series")
-                description: engine.SeriesListModel.Loading ? qsTr("loading...") : ""
             }
 
             delegate: ListItem {
@@ -72,9 +76,19 @@ Page {
                     anchors.right: parent.right
                     anchors.rightMargin: Theme.paddingMedium
                     onClicked: {
-                        engine.SeriesListModel.Mode = "m_series"
                         engine.SeriesListModel.selectSeries(index)
-                        pageStack.push(Qt.resolvedUrl("SeriesPage.qml"), { seriesId: ID })
+                        pageStack.push(Qt.resolvedUrl("SeriesPage.qml"),
+                                       {
+                                           seriesId: ID,
+                                           imdbId: IMDB_ID,
+                                           seriesName: SeriesName,
+                                           network: Network,
+                                           banner: Banner,
+                                           seriesStatus: Status,
+                                           rating: Rating,
+                                           genre: Genre,
+                                           overview: Overview
+                                       })
                     }
                 }
 
@@ -94,8 +108,6 @@ Page {
                         anchors.left: parent.left
                         anchors.leftMargin: 2 * Theme.paddingMedium
                         font.pixelSize: Theme.fontSizeSmall
-                        color: Theme.primaryColor
-
                     }
 
                     Label {
@@ -106,7 +118,6 @@ Page {
                         truncationMode: TruncationMode.Fade
                         width: column.width - Theme.paddingLarge
                         font.pixelSize: Theme.fontSizeTiny
-                        color: Theme.primaryColor
                     }
                 }
             }

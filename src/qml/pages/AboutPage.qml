@@ -28,8 +28,6 @@ Page {
                 anchors.leftMargin: (aboutpage.width - icon.width) / 2
             }
 
-            HorizontalSeparator { }
-
             Label {
                 id: appname
                 text: "SailSeries"
@@ -46,8 +44,6 @@ Page {
                 color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeExtraSmall
             }
-
-            HorizontalSeparator { }
 
             SectionHeader {
                 text: qsTr("General")
@@ -85,8 +81,6 @@ Page {
                 anchors.left: parent.left
                 anchors.leftMargin: (aboutpage.width - email.width) / 2
             }
-
-            HorizontalSeparator { }
 
             SectionHeader {
                 text: qsTr("Contributors")
@@ -180,8 +174,6 @@ Page {
                 anchors.leftMargin: (aboutpage.width - sourcecode.width) / 2
                 width: email.width
             }
-
-            HorizontalSeparator { }
         }
 
         VerticalScrollDecorator { }

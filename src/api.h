@@ -21,72 +21,41 @@ public:
     explicit Api(QObject *parent = 0);
     ~Api();
 
-    QList<QVariantMap> parseSeries(QJsonObject obj);
-    QList<QVariantMap> parseJSON(QJsonObject obj);
-    QVariantMap parseEpisode(QJsonObject obj);
-
-    QNetworkReply* get(QUrl url);
-
-    void getAuthenticationToken();
-    void getLanguages();
-    void searchSeries(QString seriesName);
-    void getSeries(QString seriesId);
-    void getSeasonImages(QString seriesId);
-    void getPosterImages(QString seriesId);
-    void getSeriesImages(QString seriesId);
-    void getFanartImages(QString seriesId);
-    void getActors(QString seriesId);
-    void getEpisodes(QString seriesId, int page);
-    void getAll(QString seriesId, QString method);
-    void getEpisode(QString episodeId);
-
-    QList<QVariantMap> series();
-    QList<QVariantMap> episodes();
-    QList<QVariantMap> banners();
-
-    bool getUpdateFlag();
-    void setUpdateFlag(bool state);
-    bool getFullRecordFlag();
-    void setFullRecordFlag(bool state);
-
-    QString findHighestRatedImage(QList<QVariantMap> images);
-
 signals:
     void readyToPopulateSeries(QList<QVariantMap>);
-    void readyToStoreSeries(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>);
-    void readyToUpdateSeries(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>);
-    void readyToCheckIfReady();
+    void storeSeries(QVariantMap);
     void readyToPopulateEpisodeDetails(QVariantMap episode);
+    void storeEpisodes(const int&, const QList<QVariantMap>&);
+    void storePosterImageFor(const int&, const QString&);
+    void storeBannerImageFor(const int&, const QString&);
+    void storeFanartImageFor(const int&, const QString&);
+    void storeActors(const int&, const QList<QVariantMap>&);
+    void storeSeasonImages(const int&, const QList<QVariantMap>&);
 
 public slots:
     void replyFinishedError(QNetworkReply* reply);
-    void checkIfReady();
+    void searchSeries(const QString &seriesName);
+    void getAll(const int &seriesId);
+    void getEpisodeDetails(const int &episodeId);
 
 private:
     QNetworkAccessManager* m_nam;
     QList<QMap<QString,QString> > m_languages;
-
-    QList<QVariantMap> m_series;
-    QList<QVariantMap> m_episodes;
-    QList<QVariantMap> m_actors;
-    QList<QVariantMap> m_fanartImages;
-    QList<QVariantMap> m_seasonImages;
-    QList<QVariantMap> m_seriesImages;
-    QList<QVariantMap> m_posterImages;
-
-    bool m_seriesFinished;
-    bool m_episodesFinished;
-    bool m_actorsFinished;
-    bool m_fanartImagesFinished;
-    bool m_seasonImagesFinished;
-    bool m_seriesImagesFinished;
-    bool m_posterImagesFinished;
-
-    bool m_fullRecord;
-    bool m_update;
     QString m_jwt;
 
+    void getAuthenticationToken();
+    void getLanguages();
+    void getSeries(const int &seriesId);
+    void getSeasonImages(const int &seriesId);
+    void getPosterImages(const int &seriesId);
+    void getBannerImages(const int &seriesId);
+    void getFanartImages(const int &seriesId);
+    void getActors(const int &seriesId);
+    void getEpisodes(const int &seriesId, const int &page = 1);
+    QList<QVariantMap> parseJson(const QJsonObject &obj);
+    QNetworkReply* get(QUrl url);
     QString getLocale();
+    QString findHighestRatedImage(const QList<QVariantMap> &images);
 };
 
 #endif // API_H

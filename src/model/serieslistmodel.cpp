@@ -1,44 +1,48 @@
 #include "serieslistmodel.h"
 
-SeriesListModel::SeriesListModel(QObject *parent, DatabaseManager* dbmanager, Api *api) :
-    QObject(parent)
+SeriesListModel::SeriesListModel(QObject *parent, Api *api, DatabaseManager* dbmanager) :
+    QObject(parent),
+    m_api(api),
+    m_dbmanager(dbmanager)
 {
-    m_api = api;
-    m_dbmanager = dbmanager;
+    connect(this,
+            SIGNAL(getSeries()),
+            m_dbmanager,
+            SLOT(getSeries()));
 
-    m_mode = "default";
-
-    connect(m_api,
-            SIGNAL(readyToUpdateSeries(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)),
+    connect(m_dbmanager,
+            SIGNAL(populateBannerList(QList<QVariantMap>)),
             this,
-            SLOT(updateFetchFinished(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)));
+            SLOT(populateBannerList(QList<QVariantMap>)));
 
-    populateBannerList();
+    connect(this,
+            SIGNAL(deleteSeriesWith(int)),
+            m_dbmanager,
+            SLOT(deleteSeries(int)));
 
-    m_loading = false;
+    connect(m_dbmanager,
+            SIGNAL(seriesDeleted()),
+            this,
+            SLOT(seriesDeleted()));
+
+    connect(this,
+            SIGNAL(getAllRequested(int)),
+            m_api,
+            SLOT(getAll(int)));
+
+    connect(this,
+            SIGNAL(getSeriesIds(bool)),
+            m_dbmanager,
+            SLOT(getSeriesIds(bool)));
 }
 
 SeriesListModel::~SeriesListModel()
 {
-    for (auto series : m_seriesListModel) {
+    for (auto series : m_seriesListModel)
+    {
         delete series;
         series = 0;
     }
-}
-
-void SeriesListModel::updateFetchFinished(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners)
-{
-    storeSeries(series);
-    storeEpisodes(episodes);
-    storeBanners(banners);
-
-    if (!m_seriesIds.isEmpty()) {
-        updateSeries();
-        return;
-    }
-
-    setLoading(false);
-    populateBannerList();
 }
 
 QQmlListProperty<SeriesData> SeriesListModel::getSeriesList()
@@ -67,163 +71,60 @@ void SeriesListModel::seriesListClear(QQmlListProperty<SeriesData>* prop)
     qobject_cast<SeriesListModel*>(prop->object)->m_seriesListModel.clear();
 }
 
-void SeriesListModel::populateBannerList()
+void SeriesListModel::populateBannerList(const QList<QVariantMap> &allSeries)
 {
     m_seriesListModel.clear();
     emit seriesListChanged();
 
-    auto allSeries = m_dbmanager->getSeries();
-    for (auto series : allSeries) {
-        auto id = series["id"];
-        auto nextEpisodeDetails = m_dbmanager->getNextEpisodeDetails(id.toInt());
-        series.unite(nextEpisodeDetails);
-        auto seriesData = new SeriesData(this, series);
+    for (auto series : allSeries)
+    {
+        const auto seriesData = new SeriesData(this, series);
         m_seriesListModel.append(seriesData);
     }
+
     emit seriesListChanged();
 }
 
-void SeriesListModel::selectSeries(int index)
+void SeriesListModel::populate()
 {
-    m_info = m_seriesListModel.at(index);
-
-    m_poster = m_info->getPoster();
-    emit posterChanged();
-
-    m_nextEpisodeName = m_info->getNextEpisodeName();
-    emit nextEpisodeNameChanged();
-
-    m_nextEpisodeNumber = m_info->getNextEpisodeNumber();
-    emit nextEpisodeNumberChanged();
-
-    m_nextEpisodeSeasonNumber = m_info->getNextEpisodeSeasonNumber();
-    emit nextEpisodeSeasonNumberChanged();
-
-    m_daysToNextEpisode = m_info->getDaysToNextEpisode();
-    emit daysToNextEpisodeChanged();
+    emit getSeries();
 }
 
-void SeriesListModel::storeSeries(QList<QVariantMap> series)
+void SeriesListModel::selectSeries(const int &index)
 {
-    m_series = series;
+    emit setMode("m_series");
 
-    if (!m_series.isEmpty()) {
-        m_dbmanager->insertSeries(m_series.first());
-    }
+    const auto poster = m_seriesListModel.at(index)->getPoster();
+    emit posterChanged(poster);
 }
 
-void SeriesListModel::storeEpisodes(QList<QVariantMap> episodes)
+void SeriesListModel::deleteSeries(const int &seriesId)
 {
-    if (!m_series.isEmpty()) {
-        int seriesId = m_series.first()["id"].toInt();
-        m_dbmanager->insertEpisodes(episodes, seriesId);
-    }
+    emit setLoading(true);
+    emit deleteSeriesWith(seriesId);
 }
 
-void SeriesListModel::storeBanners(QList<QVariantMap> banners)
+void SeriesListModel::seriesDeleted()
 {
-    if (!m_series.isEmpty()) {
-        int seriesId = m_series.first()["id"].toInt();
-        m_dbmanager->insertBanners(banners, seriesId);
-    }
+    emit updateModels();
+    emit setLoading(false);
 }
 
-QString SeriesListModel::getID() { return m_info->getID(); }
-
-QString SeriesListModel::getLanguage() { return m_info->getLanguage(); }
-
-QString SeriesListModel::getSeriesName() { return m_info->getSeriesName(); }
-
-QString SeriesListModel::getAliasNames() { return m_info->getAliasNames(); }
-
-QString SeriesListModel::getBanner() { return m_info->getBanner(); }
-
-QString SeriesListModel::getOverview() { return m_info->getOverview(); }
-
-QString SeriesListModel::getFirstAired() { return m_info->getFirstAired(); }
-
-QString SeriesListModel::getIMDB_ID() { return m_info->getIMDB_ID(); }
-
-QString SeriesListModel::getZap2it_ID() { return m_info->getZap2it_ID(); }
-
-QString SeriesListModel::getNetwork() { return m_info->getNetwork(); }
-
-QString SeriesListModel::getNextEpisodeName() { return m_nextEpisodeName; }
-
-QString SeriesListModel::getNextEpisodeNumber() { return m_nextEpisodeNumber; }
-
-QString SeriesListModel::getNextEpisodeSeasonNumber() { return m_nextEpisodeSeasonNumber; }
-
-QString SeriesListModel::getDaysToNextEpisode() { return m_daysToNextEpisode; }
-
-QString SeriesListModel::getStatus() { return m_info->getStatus(); }
-
-QString SeriesListModel::getRating() { return m_info->getRating(); }
-
-QString SeriesListModel::getGenre() { return m_info->getGenre(); }
-
-bool SeriesListModel::getLoading() { return m_loading; }
-
-void SeriesListModel::setLoading(bool state)
+void SeriesListModel::updateSeries(const int &seriesId)
 {
-    if (m_loading != state) {
-        m_loading = state;
-        emit loadingChanged();
-    }
+    emit getAllRequested(seriesId);
+    emit setLoading(true);
 }
 
-QString SeriesListModel::getPoster() { return m_poster; }
-
-QString SeriesListModel::getMode() { return m_mode; }
-
-void SeriesListModel::setMode(QString newmode)
+void SeriesListModel::updateAllSeries(const bool &includeEndedSeries)
 {
-    if (m_mode != newmode) {
-        m_mode = newmode;
-        emit modeChanged();
-    }
-}
-
-void SeriesListModel::deleteSeries(int seriesId)
-{
-    setLoading(true);
-    if (m_dbmanager->deleteSeries(seriesId)) {
-        populateBannerList();
-        emit updateModels();
-    }
-    setLoading(false);
-}
-
-void SeriesListModel::updateSeries(QString seriesId)
-{
-    if (!m_seriesIds.isEmpty() && seriesId.isEmpty()) {
-        seriesId = m_seriesIds.takeFirst();
-    }
-
-    setLoading(true);
-    m_api->getAll(seriesId, "update");
-
-}
-
-void SeriesListModel::updateAllSeries(bool updateEndedSeries)
-{
-    m_seriesIds.clear();
-    m_series.clear();
-    m_episodes.clear();
-    m_banners.clear();
-
-    auto allSeries = m_dbmanager->getSeries();
-    for (auto series : allSeries) {
-        if (!updateEndedSeries) {
-            if (series["status"] != "Ended") {
-               m_seriesIds.append(series["id"].toString());
-            }
-        } else {
-             m_seriesIds.append(series["id"].toString());
+    connect(m_dbmanager, &DatabaseManager::getSeriesIdsReady, [=](const QList<int> seriesIds)
+    {
+        for (auto seriesId: seriesIds)
+        {
+            updateSeries(seriesId);
         }
-    }
+    });
 
-    qDebug() << "m_seriesIds" << m_seriesIds;
-
-    updateSeries();
+    emit getSeriesIds(includeEndedSeries);
 }

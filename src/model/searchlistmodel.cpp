@@ -1,28 +1,45 @@
 #include "searchlistmodel.h"
 
-SearchListModel::SearchListModel(QObject *parent, DatabaseManager *dbmanager, Api *api) :
-    QObject(parent)
+SearchListModel::SearchListModel(QObject *parent, Api* api, DatabaseManager *dbmanager) :
+    QObject(parent),
+    m_api(api),
+    m_dbmanager(dbmanager)
 {
-    m_dbmanager = dbmanager;
-    m_api = api;
+    connect(this,
+            SIGNAL(searchSeriesRequested(QString)),
+            m_api,
+            SLOT(searchSeries(QString)));
+
+    connect(this,
+            SIGNAL(getAllRequested(int)),
+            m_api,
+            SLOT(getAll(int)));
 
     connect(m_api,
             SIGNAL(readyToPopulateSeries(QList<QVariantMap>)),
             this,
             SLOT(searchFinished(QList<QVariantMap>)));
 
-    connect(m_api,
-            SIGNAL(readyToStoreSeries(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)),
+    connect(m_dbmanager,
+            SIGNAL(seriesStored(int)),
             this,
-            SLOT(getAllFinished(QList<QVariantMap>, QList<QVariantMap>, QList<QVariantMap>)));
+            SLOT(seriesStored(int)));
 
-    m_loading = false;
-    m_added = false;
+    connect(this,
+            SIGNAL(checkIfAddedRequested(int,QString)),
+            m_dbmanager,
+            SLOT(checkIfAdded(int,QString)));
+
+    connect(m_dbmanager,
+            SIGNAL(checkIfAddedReady(int,bool)),
+            this,
+            SLOT(checkIfAddedReady(int,bool)));
 }
 
 SearchListModel::~SearchListModel()
 {
-    for (auto series : m_searchListModel) {
+    for (auto series : m_searchListModel)
+    {
         delete series;
         series = 0;
     }
@@ -32,8 +49,6 @@ QQmlListProperty<SeriesData> SearchListModel::getSearchModel()
 {
     return QQmlListProperty<SeriesData>(this, &m_searchListModel, &SearchListModel::searchListCount, &SearchListModel::searchListAt);
 }
-
-// List handling methods
 
 void SearchListModel::searchListAppend(QQmlListProperty<SeriesData>* prop, SeriesData* val)
 {
@@ -61,103 +76,36 @@ void SearchListModel::searchFinished(QList<QVariantMap> series)
     populateSearchModel(series);
 }
 
-void SearchListModel::getAllFinished(QList<QVariantMap> series, QList<QVariantMap> episodes, QList<QVariantMap> banners)
-{
-    storeSeries(series);
-    storeEpisodes(episodes);
-    storeBanners(banners);
-    setLoading(false);
-    emit updateModels();
-}
-
 void SearchListModel::populateSearchModel(QList<QVariantMap> foundSeries)
 {
-    if (!foundSeries.empty()) {
-        for (auto series : foundSeries) {
-            SeriesData* seriesData = new SeriesData(this, series);
-            m_searchListModel.append(seriesData);
-        }
-        emit searchModelChanged();
-        setLoading(false);
+    for (auto series : foundSeries)
+    {
+        // TODO: change this to be smarter somehow
+        series["isAdded"] = m_dbmanager->checkIfAdded(series["id"].toInt(), series["seriesName"].toString());
+        auto seriesData = new SeriesData(this, series);
+        m_searchListModel.append(seriesData);
     }
-}
 
-void SearchListModel::searchSeries(QString text)
-{
-    setLoading(true);
-    m_searchListModel.clear();
-    m_series.clear();
     emit searchModelChanged();
-    m_api->searchSeries(text);
 }
 
-void SearchListModel::selectSeries(int index)
+void SearchListModel::seriesStored(const int &seriesId)
 {
-    m_info = m_searchListModel.at(index);
+    emit setLoading(false);
+    emit updateModels();
+    // set the shown series at SeriesInfoPage as added somehow
 }
 
-void SearchListModel::getFullSeriesRecord(QString id)
+void SearchListModel::searchSeries(const QString &text)
 {
-    m_api->getAll(id, "full");
-    setLoading(true);
+    emit setLoading(true);
+    emit searchSeriesRequested(text);
 }
 
-void SearchListModel::storeSeries(QList<QVariantMap> series)
+void SearchListModel::getAll(const int &seriesId)
 {
-    if (!series.isEmpty()) {
-        m_dbmanager->insertSeries(series.first());
-    }
-}
-
-void SearchListModel::storeEpisodes(QList<QVariantMap> episodes)
-{
-    auto seriesId = m_info->getID().toInt();
-    m_dbmanager->insertEpisodes(episodes, seriesId);
-    setAdded(true);
-}
-
-void SearchListModel::storeBanners(QList<QVariantMap> banners)
-{
-    auto seriesId = m_info->getID().toInt();
-    m_dbmanager->insertBanners(banners, seriesId);
-}
-
-QString SearchListModel::getID() { return m_info->getID(); }
-
-QString SearchListModel::getLanguage() { return m_info->getLanguage(); }
-
-QString SearchListModel::getSeriesName() { return m_info->getSeriesName(); }
-
-QString SearchListModel::getAliasNames() { return m_info->getAliasNames(); }
-
-QString SearchListModel::getBanner() { return m_info->getBanner(); }
-
-QString SearchListModel::getOverview() { return m_info->getOverview(); }
-
-QString SearchListModel::getFirstAired() { return m_info->getFirstAired(); }
-
-QString SearchListModel::getIMDB_ID() { return m_info->getIMDB_ID(); }
-
-QString SearchListModel::getZap2it_ID() { return m_info->getZap2it_ID(); }
-
-QString SearchListModel::getNetwork() { return m_info->getNetwork(); }
-
-bool SearchListModel::getLoading() { return m_loading; }
-
-void SearchListModel::setLoading(bool state)
-{
-    m_loading = state;
-    emit loadingChanged();
-}
-
-bool SearchListModel::getAdded() { return m_added; }
-
-void SearchListModel::setAdded(bool cond)
-{
-    if (m_added != cond) {
-        m_added = cond;
-        emit addedChanged();
-    }
+    emit getAllRequested(seriesId);
+    emit setLoading(true);
 }
 
 void SearchListModel::clearList()
@@ -166,7 +114,12 @@ void SearchListModel::clearList()
     emit searchModelChanged();
 }
 
-void SearchListModel::checkIfAdded(QString id, QString name)
+void SearchListModel::checkIfAddedReady(const int &seriesId, const bool &isAdded)
 {
-    setAdded(m_dbmanager->isAlreadyAdded(id.toInt(), name));
+    setAddedFor(seriesId, isAdded);
+}
+
+void SearchListModel::setAddedFor(const int &seriesId, const bool &isAdded)
+{
+    qDebug() << "set added in the model and also into the SeriesInfoPage";
 }

@@ -11,9 +11,10 @@ Page {
     property string episodeOverview
     property string episodeName
     property string firstAired
-    property int watched
-    property string episodeId
-    property string seriesId
+    property bool watched
+    property int episodeId
+    property int seriesId
+    property int seasonNumber
 
     Connections {
         target: engine
@@ -25,7 +26,7 @@ Page {
     }
 
     Component.onCompleted: {
-        engine.requestEpisodeDetails(episodeId);
+        engine.requestEpisodeDetails(episodeId)
     }
 
     SilicaFlickable {
@@ -68,42 +69,38 @@ Page {
                     id: firstAiredField
                     text: firstAired
                     readOnly: true
-                    color: Theme.secondaryColor
                     label: qsTr("Original air date")
-                    font.pixelSize: Theme.fontSizeSmall
                     width: parent.width - watched_image.width - Theme.paddingLarge
 
                 }
 
                 Image {
                     id: watched_image
-                    source: watched === 0 ? "image://theme/icon-m-favorite" : "image://theme/icon-m-favorite-selected"
+                    source: watched ? "image://theme/icon-m-favorite-selected" : "image://theme/icon-m-favorite"
 
                     MouseArea {
                         id: clickarea
                         anchors.fill: parent
                         onClicked: {
-                            watched === 1 ? watched = 0 : watched = 1
-                            engine.EpisodeListModel.toggleWatched(episodeId)
-                            engine.EpisodeListModel.toggleWatchedInModel(episodeId, watched)
-                            engine.SeasonListModel.populateSeasonList(seriesId)
-                            engine.TodayModel.populateTodayModel()
+                            watched = !watched
+                            engine.EpisodeListModel.setWatched(episodeId, seriesId, watched)
                         }
                     }
                 }
             }
 
-            TextExpander {
-                id: expander
+            TextArea {
+                id: overviewField
                 width: episodeoverviewpage.width
-                textContent: episodeOverview
+                label: qsTr("Overview")
+                text:  episodeOverview
+                readOnly: true
             }
 
             TextArea {
                 id: writerField
                 width: episodeoverviewpage.width
                 label: qsTr("Writer")
-                color: Theme.secondaryColor
                 readOnly: true
             }
 
@@ -111,7 +108,6 @@ Page {
                 id: guestStarsField
                 width: episodeoverviewpage.width
                 label: qsTr("Guest Stars")
-                color: Theme.secondaryColor
                 readOnly: true
             }
         }

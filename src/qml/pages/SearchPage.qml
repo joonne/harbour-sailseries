@@ -50,11 +50,15 @@ Page {
             id: listItem
             contentHeight: Theme.itemSizeSmall
             contentWidth: listView.width
-            onClicked: {
-                engine.SearchModel.selectSeries(index)
-                engine.SearchModel.checkIfAdded(ID,SeriesName)
-                pageStack.push(Qt.resolvedUrl("SeriesInfoPage.qml"))
-            }
+            onClicked: pageStack.push(Qt.resolvedUrl("SeriesInfoPage.qml"), {
+                                          id: ID,
+                                          name: SeriesName,
+                                          network: Network,
+                                          banner: Banner,
+                                          overview: Overview,
+                                          imdbId: IMDB_ID,
+                                          isAdded: IsAdded
+                                      })
 
             Column {
                 x: Theme.paddingLarge
