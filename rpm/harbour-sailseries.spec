@@ -12,11 +12,11 @@ Name:       harbour-sailseries
 %{!?qtc_qmake5:%define qtc_qmake5 %qmake5}
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
-Summary:    harbour-sailseries
-Version:    1.3
+Summary:    SailSeries for Sailfish
+Version:    2.0
 Release:    1
 Group:      Qt/Qt
-License:    MIT
+License:    GPLv2
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-sailseries.yaml
 Requires:   libsailfishapp
