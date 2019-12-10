@@ -30,11 +30,6 @@ Engine::Engine(QObject *parent) :
             SLOT(readyToUpdateModels()));
 
     connect(m_api,
-            SIGNAL(readyToPopulateEpisodeDetails(QVariantMap)),
-            this,
-            SLOT(readyToUpdateEpisodeDetails(QVariantMap)));
-
-    connect(m_api,
             SIGNAL(storePosterImageFor(int,QString)),
             m_dbmanager,
             SLOT(storePosterImageFor(int,QString)));
@@ -63,11 +58,6 @@ Engine::Engine(QObject *parent) :
             SIGNAL(storeSeasonImages(int,QList<QVariantMap>)),
             m_dbmanager,
             SLOT(storeSeasonImages(int,QList<QVariantMap>)));
-
-    connect(this,
-            SIGNAL(getEpisodeDetails(int)),
-            m_api,
-            SLOT(getEpisodeDetails(int)));
 
     connect(m_searchListModel,
             SIGNAL(setLoading(bool)),
@@ -126,11 +116,6 @@ void Engine::updateModels()
     // emit m_seasonListModel->getSeasons(m_seriesListModel->getID());
 }
 
-void Engine::readyToUpdateEpisodeDetails(const QVariantMap &episode)
-{
-    emit updateEpisodeDetails(episode);
-}
-
 void Engine::setLoading(const bool &state)
 {
     m_loading = state;
@@ -156,11 +141,6 @@ void Engine::seriesStored(const int &seriesId)
 void Engine::deleteDuplicateEpisodes()
 {
     emit deleteDuplicateEpisodesRequested();
-}
-
-void Engine::requestEpisodeDetails(const int &id)
-{
-    emit getEpisodeDetails(id);
 }
 
 void Engine::resetMode()

@@ -32,6 +32,7 @@ signals:
 
 public slots:
     void populateEpisodeList(const QList<QVariantMap> &episodes);
+    void setWatchedInModel(const int &episodeId, const bool &watched);
 
 private:
     QList<EpisodeData*> m_episodeListModel;
@@ -41,7 +42,6 @@ private:
     static EpisodeData* episodeListAt(QQmlListProperty<EpisodeData> *prop, int index);
     static void episodeListAppend(QQmlListProperty<EpisodeData>* prop, EpisodeData* val);
     static void episodeListClear(QQmlListProperty<EpisodeData>* prop);
-
 };
 
 #endif // EPISODELISTMODEL_H

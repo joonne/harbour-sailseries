@@ -47,6 +47,7 @@ class SeriesData : public QObject
     Q_PROPERTY(QString NextEpisodeGuestStars READ getNextEpisodeGuestStars CONSTANT)
     Q_PROPERTY(QString NextEpisodeWriter READ getNextEpisodeWriter CONSTANT)
     Q_PROPERTY(int NextEpisodeWatched READ getNextEpisodeWatched WRITE setNextEpisodeWatched NOTIFY nextEpisodeWatchedChanged)
+    Q_PROPERTY(QString NextEpisodeFilename READ getNextEpisodeFilename CONSTANT)
 
 public:
     explicit SeriesData(QObject *parent = 0, QVariantMap params = QVariantMap());
@@ -93,6 +94,7 @@ public:
     QString getNextEpisodeWriter();
     int getNextEpisodeWatched();
     void setNextEpisodeWatched(int watched);
+    QString getNextEpisodeFilename();
 
 signals:
 
@@ -145,6 +147,7 @@ private:
     QString m_nextEpisodeGuestStars;
     QString m_nextEpisodeWriter;
     int m_nextEpisodeWatched;
+    QString m_nextEpisodeFilename;
 };
 
 #endif // SERIESDATA_H

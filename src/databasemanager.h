@@ -78,6 +78,7 @@ signals:
     void populateEpisodeList(QList<QVariantMap>);
     void checkIfAddedReady(int, bool);
     void getSeriesIdsReady(QList<int>);
+    void setWatchedReady(int, bool);
 
 public slots:
     void getStartPageSeries();

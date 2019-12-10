@@ -111,12 +111,13 @@ Page {
                                        episodeOverview: NextEpisodeOverview,
                                        episodeName: NextEpisodeName,
                                        guestStars: NextEpisodeGuestStars,
-                                       writer: NextEpisodeWriter,
+                                       writers: NextEpisodeWriter,
                                        firstAired: NextEpisodeFirstAired,
                                        watched: NextEpisodeWatched,
                                        episodeId: NextEpisodeId,
                                        seriesId: ID,
-                                       seasonNumber: NextEpisodeSeasonNumber });
+                                       seasonNumber: NextEpisodeSeasonNumber,
+                                   filename: NextEpisodeFilename });
                 }
 
                 Column {

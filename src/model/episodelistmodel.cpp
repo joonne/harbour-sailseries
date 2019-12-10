@@ -23,6 +23,11 @@ EpisodeListModel::EpisodeListModel(QObject *parent, DatabaseManager *dbmanager) 
             SIGNAL(markSeasonAsWatchedRequested(int,int)),
             m_dbmanager,
             SLOT(markSeasonAsWatched(int,int)));
+
+    connect(m_dbmanager,
+            SIGNAL(setWatchedReady(int,bool)),
+            this,
+            SLOT(setWatchedInModel(int,bool)));
 }
 
 EpisodeListModel::~EpisodeListModel()
@@ -77,6 +82,18 @@ void EpisodeListModel::populateEpisodeList(const QList<QVariantMap> &episodes)
     }
 
     emit episodeListChanged();
+}
+
+void EpisodeListModel::setWatchedInModel(const int &episodeId, const bool &watched)
+{
+    for (auto episode: m_episodeListModel)
+    {
+        if (episode->getID() == episodeId)
+        {
+            episode->setWatched(watched);
+            break;
+        }
+    }
 }
 
 void EpisodeListModel::setWatched(const int &episodeId, const int &seriesId, const bool &watched)

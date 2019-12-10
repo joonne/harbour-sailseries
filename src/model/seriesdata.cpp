@@ -41,6 +41,7 @@ SeriesData::SeriesData(QObject *parent, QVariantMap params) :
     m_nextEpisodeGuestStars = params["nextEpisodeGuestStars"].toString();
     m_nextEpisodeWriter = params["nextEpisodeWriter"].toString();
     m_nextEpisodeWatched = params["nextEpisodeWatched"].toInt();
+    m_nextEpisodeFilename = params["nextEpisodeFilename"].toString();
 }
 
 int SeriesData::getID() { return m_id; }
@@ -135,4 +136,9 @@ void SeriesData::setNextEpisodeWatched(int watched)
         m_nextEpisodeWatched = watched;
         emit nextEpisodeWatchedChanged();
     }
+}
+
+QString SeriesData::getNextEpisodeFilename()
+{
+    return m_nextEpisodeFilename;
 }

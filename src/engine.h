@@ -39,7 +39,6 @@ public:
 
     Q_INVOKABLE void updateModels();
     Q_INVOKABLE void deleteDuplicateEpisodes();
-    Q_INVOKABLE void requestEpisodeDetails(const int &id);
     Q_INVOKABLE void resetMode();
 
 signals:
@@ -51,14 +50,12 @@ signals:
     void seasonListModelChanged();
     void loadingChanged();
     void modeChanged();
-    void updateEpisodeDetails(const QVariantMap &episode);
     void setUpDb();
     void getEpisodeDetails(int);
     void deleteDuplicateEpisodesRequested();
 
 public slots:
     void readyToUpdateModels();
-    void readyToUpdateEpisodeDetails(const QVariantMap &episode);
     void setLoading(const bool &state);
     void seriesStored(const int &seriesId);
     void setMode(const QString &mode);

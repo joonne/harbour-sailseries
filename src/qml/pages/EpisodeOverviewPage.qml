@@ -15,19 +15,9 @@ Page {
     property int episodeId
     property int seriesId
     property int seasonNumber
-
-    Connections {
-        target: engine
-        onUpdateEpisodeDetails: {
-            banner.source = "http://thetvdb.com/banners/" + episode.filename
-            writerField.text = episode.writers.join(", ")
-            guestStarsField.text = episode.guestStars.join(", ")
-        }
-    }
-
-    Component.onCompleted: {
-        engine.requestEpisodeDetails(episodeId)
-    }
+    property string filename
+    property string writers
+    property string guestStars
 
     SilicaFlickable {
         anchors.fill: parent
@@ -45,6 +35,7 @@ Page {
 
             Image {
                 id: banner
+                source: "http://thetvdb.com/banners/" + filename
                 anchors.left: parent.left
                 anchors.leftMargin: (episodeoverviewpage.width - banner.width) / 2
 
@@ -100,8 +91,9 @@ Page {
             TextArea {
                 id: writerField
                 width: episodeoverviewpage.width
-                label: qsTr("Writer")
+                label: writers.indexOf(",") === -1 ? qsTr("Writer") : qsTr("Writers")
                 readOnly: true
+                text: writers
             }
 
             TextArea {
@@ -109,6 +101,7 @@ Page {
                 width: episodeoverviewpage.width
                 label: qsTr("Guest Stars")
                 readOnly: true
+                text: guestStars
             }
         }
     }

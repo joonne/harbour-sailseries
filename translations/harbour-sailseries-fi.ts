@@ -140,22 +140,27 @@
 <context>
     <name>EpisodeOverviewPage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="72"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="63"/>
         <source>Original air date</source>
         <translation>Ensiesitys</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="95"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="86"/>
         <source>Overview</source>
         <translation type="unfinished">Kuvaus</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="103"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="94"/>
         <source>Writer</source>
         <translation>Käsikirjoittaja</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="110"/>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="94"/>
+        <source>Writers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="102"/>
         <source>Guest Stars</source>
         <translation>Vierailevat tähdet</translation>
     </message>
@@ -477,12 +482,12 @@
         <translation>Tällä viikolla</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="134"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="135"/>
         <source>Season %1 Episode %2</source>
         <translation>Kausi %1 Jakso %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="167"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="168"/>
         <source>Nothing airs this week</source>
         <translation>Mitään ei lähetetä tällä viikolla</translation>
     </message>

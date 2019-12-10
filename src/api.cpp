@@ -265,27 +265,11 @@ void Api::getEpisodes(const int &seriesId, const int &page)
            }
 
            qDebug() << "store episodes for " << seriesId;
-           emit storeEpisodes(seriesId, parseJson(jsonDocument.object()));
+           const auto episodes = parseJson(jsonDocument.object());
+           emit storeEpisodes(seriesId, episodes);
 
            qDebug() << "try to get more episodes for " << seriesId;
            getEpisodes(seriesId, page + 1);
-       }
-    });
-}
-
-void Api::getEpisodeDetails(const int &episodeId)
-{
-    QUrl url(QString("%1/episodes/%2").arg(QString(MIRRORPATH)).arg(episodeId));
-    auto reply = get(url);
-
-    connect(reply, &QNetworkReply::finished, [this, reply]()
-    {
-       auto jsonDocument = QJsonDocument::fromJson(reply->readAll());
-
-       if (!jsonDocument.isNull())
-       {
-           auto episode = parseJson(jsonDocument.object()).first();
-           emit readyToPopulateEpisodeDetails(episode);
        }
     });
 }

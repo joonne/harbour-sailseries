@@ -345,6 +345,7 @@ void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap
     for (auto episode : episodes)
     {
         auto absoluteNumber = episode["absoluteNumber"].toInt();
+        auto filename = episode["filename"].toString();
         auto episodeNumber = episode["airedEpisodeNumber"].toInt();
         auto seasonNumber = episode["airedSeason"].toInt();
         auto seasonId = episode["airedSeasonID"].toInt();
@@ -354,6 +355,8 @@ void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap
         auto language = episode["language"].toMap()["overview"].toString();
         auto lastUpdated = episode["lastUpdated"].toString();
         auto overview = episode["overview"].toString();
+        auto guestStars = episode["guestStars"].toStringList().join(", ");
+        auto writers = episode["writers"].toStringList().join(", ");
         auto watched = 0;
 
         // important!
@@ -377,21 +380,26 @@ void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap
                 }
             }
             
-            query.prepare("INSERT OR REPLACE INTO Episode (id, episodeName, episodeNumber, firstAired, language, overview, seasonNumber, absoluteNumber, lastupdated, seasonID, seriesID, watched) "
-                          "VALUES (:id, :episodeName, :episodeNumber, :firstAired, :language, :overview, :seasonNumber, :absoluteNumber, :lastUpdated, :seasonId, :seriesId, :watched)");
+            query.prepare("INSERT OR REPLACE INTO Episode (id, episodeName, episodeNumber, firstAired, guestStars, language, overview, seasonNumber, writer, absoluteNumber, filename, lastupdated, seasonID, seriesID, watched) "
+                          "VALUES (:id, :episodeName, :episodeNumber, :firstAired, :guestStars, :language, :overview, :seasonNumber, :writer, :absoluteNumber, :filename, :lastUpdated, :seasonId, :seriesId, :watched)");
             query.bindValue(":id", id);
             query.bindValue(":episodeName", episodeName);
             query.bindValue(":episodeNumber", episodeNumber);
             query.bindValue(":firstAired", firstAired);
+            query.bindValue(":guestStars", guestStars);
             query.bindValue(":language", language);
             query.bindValue(":overview", overview);
             query.bindValue(":seasonNumber", seasonNumber);
+            query.bindValue(":writer", writers);
             query.bindValue(":absoluteNumber", absoluteNumber);
+            query.bindValue(":filename", filename);
             query.bindValue(":lastUpdated", lastUpdated);
             query.bindValue(":seasonId", seasonId);
             query.bindValue(":seriesId", seriesId);
             query.bindValue(":watched", watched);
             query.exec();
+
+            qDebug() << query.lastError();
         }
     }
 
@@ -552,7 +560,7 @@ void DatabaseManager::getStartPageSeries()
     if (m_db.isOpen())
     {
         QSqlQuery query(m_db);
-        query.prepare("SELECT Series.seriesName, Series.network, Series.airsTime, Series.airsDayOfWeek, Series.status, Series.id, Episode.id, Episode.episodeName, Episode.episodeNumber, Episode.seasonNumber, Episode.firstAired, Episode.filename, Episode.overview, Episode.guestStars, Episode.writer, Episode.watched "
+        query.prepare("SELECT Series.seriesName, Series.network, Series.airsTime, Series.airsDayOfWeek, Series.status, Series.id, Episode.id, Episode.episodeName, Episode.episodeNumber, Episode.seasonNumber, Episode.firstAired, Episode.filename, Episode.overview, Episode.guestStars, Episode.writer, Episode.watched, Episode.filename "
                       "FROM Series, Episode "
                       "WHERE Series.status = :status AND Episode.firstAired BETWEEN :firstAiredStart AND :firstAiredEnd AND Series.id = Episode.seriesID "
                       "ORDER BY Episode.firstAired");
@@ -635,6 +643,9 @@ void DatabaseManager::getStartPageSeries()
                 
                 const auto watched = query.value(15).toString();
                 series["nextEpisodeWatched"] = watched;
+
+                const auto filename = query.value(16).toString();
+                series["nextEpisodeFilename"] = filename;
                 
                 allSeries.append(series);
             }
@@ -729,10 +740,16 @@ void DatabaseManager::setWatched(const int &episodeId, const int &seriesId, cons
                   "WHERE id = :episodeId");
     query.bindValue(":watched", watched ? 1 : 0);
     query.bindValue(":episodeId", episodeId);
-    query.exec();
+    auto result = query.exec();
 
-    getSeasons(seriesId);
-    getStartPageSeries();
+    qDebug() << query.lastError();
+
+    if (result == true)
+    {
+        getSeasons(seriesId);
+        getStartPageSeries();
+        emit setWatchedReady(episodeId, watched);
+    }
 }
 
 void DatabaseManager::storePosterImageFor(const int &seriesId, const QString &posterImage) const
