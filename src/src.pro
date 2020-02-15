@@ -52,6 +52,7 @@ OTHER_FILES = \
 INCLUDEPATH += $$PWD
 
 HEADERS += \
+    model/baselistmodel.h \
     model/seriesdata.h \
     model/serieslistmodel.h \
     databasemanager.h \

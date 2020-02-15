@@ -117,8 +117,7 @@ Page {
                 MouseArea {
                     id: clickarea
                     onClicked: {
-                        Watched = !Watched
-                        engine.EpisodeListModel.setWatched(ID, seriesId, Watched)
+                        engine.EpisodeListModel.setWatched(ID, seriesId, !Watched)
                     }
                     anchors.fill: parent
                 }

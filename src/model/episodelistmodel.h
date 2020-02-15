@@ -5,20 +5,17 @@
 #include <QQmlContext>
 #include <QDebug>
 #include <QQmlListProperty>
-#include <QDate>
 
+#include "baselistmodel.h"
 #include "../databasemanager.h"
 #include "episodedata.h"
 
-class EpisodeListModel : public QObject
+class EpisodeListModel : public QObject, public BaseListModel<EpisodeData>
 {
     Q_OBJECT
-    Q_PROPERTY(QQmlListProperty<EpisodeData> episodeList READ getEpisodeList NOTIFY episodeListChanged)
+    Q_PROPERTY(QQmlListProperty<EpisodeData> episodeList READ getList NOTIFY episodeListChanged)
 public:
     explicit EpisodeListModel(QObject *parent = 0, DatabaseManager *dbmanager = 0);
-    ~EpisodeListModel();
-
-    QQmlListProperty<EpisodeData> getEpisodeList();
 
     Q_INVOKABLE void getEpisodes(const int &seriesId, const int &seasonNumber);
     Q_INVOKABLE void setWatched(const int &episodeId, const int &seriesId, const bool &watched);
@@ -35,13 +32,7 @@ public slots:
     void setWatchedInModel(const int &episodeId, const bool &watched);
 
 private:
-    QList<EpisodeData*> m_episodeListModel;
     DatabaseManager* m_dbmanager;
-
-    static int episodeListCount(QQmlListProperty<EpisodeData> *prop);
-    static EpisodeData* episodeListAt(QQmlListProperty<EpisodeData> *prop, int index);
-    static void episodeListAppend(QQmlListProperty<EpisodeData>* prop, EpisodeData* val);
-    static void episodeListClear(QQmlListProperty<EpisodeData>* prop);
 };
 
 #endif // EPISODELISTMODEL_H

@@ -188,7 +188,7 @@
         <translation type="unfinished">Säsong %1 Episod %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="135"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="134"/>
         <source>No episodes.</source>
         <translation>Inga episoder.</translation>
     </message>
