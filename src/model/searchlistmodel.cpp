@@ -78,6 +78,9 @@ void SearchListModel::searchFinished(QList<QVariantMap> series)
 
 void SearchListModel::populateSearchModel(QList<QVariantMap> foundSeries)
 {
+    m_searchListModel.clear();
+    emit searchModelChanged();
+
     for (auto series : foundSeries)
     {
         // TODO: change this to be smarter somehow
