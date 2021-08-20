@@ -14,10 +14,14 @@ CoverBackground {
     Label {
         id: placeholder
         text: qsTr("Nothing airs this week")
-        font.pixelSize: Theme.fontSizeTiny
+        wrapMode: "WordWrap"
+        font.pixelSize: Theme.fontSizeSmall
         color: Theme.secondaryColor
-        anchors.centerIn: cover
-        visible: listView.count === 0 && engine.Mode === "default"
+        anchors {
+            centerIn: cover
+        }
+        visible: listView.count === 0 && isDefaultVisibility()
+        width: cover.width - (2 * Theme.paddingLarge)
     }
 
     //---------------------------------
@@ -43,7 +47,7 @@ CoverBackground {
     // This is the "default" coverPage
     //--------------------------------
 
-    function defaultVisibility() {
+    function isDefaultVisibility() {
         return engine.Mode === "default"
     }
 
@@ -70,7 +74,7 @@ CoverBackground {
 
     SilicaListView {
         id: listView
-        visible: defaultVisibility()
+        visible: isDefaultVisibility()
         height: cover.height
         anchors {
             top: cover.top
