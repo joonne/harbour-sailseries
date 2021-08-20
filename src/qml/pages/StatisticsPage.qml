@@ -60,7 +60,7 @@ Page {
                     ProgressCircle {
 
                         id: episodesProgress
-                        value: engine.Statistics.WatchedEpisodesCount / engine.Statistics.AllEpisodesCount
+                        value: isNan(engine.Statistics.WatchedEpisodesCount / engine.Statistics.AllEpisodesCount) ? 0 : engine.Statistics.WatchedEpisodesCount / engine.Statistics.AllEpisodesCount;
 
                         anchors {
                             left: parent.left
@@ -103,7 +103,7 @@ Page {
                     ProgressCircle {
 
                         id: seasonsProgress
-                        value: engine.Statistics.WatchedSeasonsCount / engine.Statistics.AllSeasonsCount
+                        value: isNan(engine.Statistics.WatchedSeasonsCount / engine.Statistics.AllSeasonsCount) ? 0 : engine.Statistics.WatchedSeasonsCount / engine.Statistics.AllSeasonsCount;
 
                         anchors {
                             left: parent.left
@@ -145,7 +145,7 @@ Page {
                     ProgressCircle {
 
                         id: seriesProgress
-                        value: engine.Statistics.WatchedSeriesCount / engine.Statistics.AllSeriesCount
+                        value: isNan(engine.Statistics.WatchedSeriesCount / engine.Statistics.AllSeriesCount) ? 0 : engine.Statistics.WatchedSeriesCount / engine.Statistics.AllSeriesCount;
 
                         anchors {
                             left: parent.left
@@ -190,28 +190,6 @@ Page {
                 text: qsTr("%1 minutes").arg((engine.Statistics.AverageWatchedEpisodesDuration).toFixed(2))
                 label: qsTr("Average episode duration")
             }
-
-            /*
-            SectionHeader {
-                text: qsTr("People")
-            }
-
-            TextField {
-                width: statisticspage.width
-                readOnly: true
-                font.pixelSize: Theme.fontSizeSmall
-                text: "Tom Kapinos"
-                label: qsTr("Most seen director")
-            }
-
-            TextField {
-                width: statisticspage.width
-                readOnly: true
-                font.pixelSize: Theme.fontSizeSmall
-                text: "Mandy Patinkin"
-                label: qsTr("Most seen actor")
-            }
-            */
         }
 
         VerticalScrollDecorator { }

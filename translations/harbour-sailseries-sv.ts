@@ -97,42 +97,42 @@
         <translation>Inget sänds denna vecka</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="53"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="57"/>
         <source>Monday</source>
         <translation>Måndag</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="55"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="59"/>
         <source>Tuesday</source>
         <translation>Tisdag</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="57"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="61"/>
         <source>Wednesday</source>
         <translation>Onsdag</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="59"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="63"/>
         <source>Thursday</source>
         <translation>Torsdag</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="61"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="65"/>
         <source>Friday</source>
         <translation>Fredag</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="63"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="67"/>
         <source>Saturday</source>
         <translation>Lördag</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="65"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="69"/>
         <source>Sunday</source>
         <translation>Söndag</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="102"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="106"/>
         <source>Season %1 Episode %2</source>
         <translation>Säsong %1 Episod %2</translation>
     </message>
