@@ -4,10 +4,6 @@
 
 Search, add, view, mark episodes as watched, mark seasons as watched, update all series, week view, active cover.
 
-**TRANSLATIONS**:
-
-english, finnish, french, swedish and spanish
-
 **NOTE**:
 
 The air-times shown in the application are the original air times from the original network.
