@@ -92,47 +92,47 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="16"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="40"/>
         <source>Nothing airs this week</source>
         <translation>Nieko netransliuoja šią savaitę</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="57"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="81"/>
         <source>Monday</source>
         <translation>Pirmadienis</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="59"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="83"/>
         <source>Tuesday</source>
         <translation>Antradienis</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="61"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="85"/>
         <source>Wednesday</source>
         <translation>Trečiadienis</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="63"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="87"/>
         <source>Thursday</source>
         <translation>Ketvirtadienis</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="65"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="89"/>
         <source>Friday</source>
         <translation>Penktadienis</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="67"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="91"/>
         <source>Saturday</source>
         <translation>Šestadienis</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="69"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="93"/>
         <source>Sunday</source>
         <translation>Sekmadienis</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="106"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="130"/>
         <source>Season %1 Episode %2</source>
         <translation>Sezonas %1 Epizodas %2</translation>
     </message>
