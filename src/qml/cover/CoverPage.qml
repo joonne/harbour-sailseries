@@ -11,12 +11,36 @@ CoverBackground {
         }
     }
 
+    Image {
+        id: coverBackgroundImage
+        asynchronous: true
+        fillMode: Image.PreserveAspectFit
+        width: parent.height - Theme.paddingLarge
+        height: width
+        opacity: 0.15
+        source: "qrc:///harbour-sailseries.svg"
+        property int sourceDimension: Math.min(width, height) - Theme.paddingMedium
+        anchors {
+            centerIn: undefined
+            verticalCenter: parent.verticalCenter
+            bottom: parent.bottom
+            bottomMargin: Theme.paddingMedium
+            right: parent.right
+            rightMargin: Theme.paddingMedium
+        }
+        sourceSize {
+            width: sourceDimension
+            height: sourceDimension
+        }
+        visible: isDefaultVisibility()
+    }
+
     Label {
         id: placeholder
         text: qsTr("Nothing airs this week")
         wrapMode: "WordWrap"
         font.pixelSize: Theme.fontSizeSmall
-        color: Theme.secondaryColor
+        color: Theme.primaryColor
         anchors {
             centerIn: cover
         }

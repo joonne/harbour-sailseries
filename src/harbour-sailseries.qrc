@@ -7,5 +7,6 @@
     </qresource>
     <qresource prefix="/">
         <file>qml/components/SeriesBanner.qml</file>
+        <file>harbour-sailseries.svg</file>
     </qresource>
 </RCC>
