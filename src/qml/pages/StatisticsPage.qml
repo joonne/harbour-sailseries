@@ -60,7 +60,7 @@ Page {
                     ProgressCircle {
 
                         id: episodesProgress
-                        value: isNan(engine.Statistics.WatchedEpisodesCount / engine.Statistics.AllEpisodesCount) ? 0 : engine.Statistics.WatchedEpisodesCount / engine.Statistics.AllEpisodesCount;
+                        value: isNaN(engine.Statistics.WatchedEpisodesCount / engine.Statistics.AllEpisodesCount) ? 0 : engine.Statistics.WatchedEpisodesCount / engine.Statistics.AllEpisodesCount;
 
                         anchors {
                             left: parent.left
@@ -103,7 +103,7 @@ Page {
                     ProgressCircle {
 
                         id: seasonsProgress
-                        value: isNan(engine.Statistics.WatchedSeasonsCount / engine.Statistics.AllSeasonsCount) ? 0 : engine.Statistics.WatchedSeasonsCount / engine.Statistics.AllSeasonsCount;
+                        value: isNaN(engine.Statistics.WatchedSeasonsCount / engine.Statistics.AllSeasonsCount) ? 0 : engine.Statistics.WatchedSeasonsCount / engine.Statistics.AllSeasonsCount;
 
                         anchors {
                             left: parent.left
@@ -145,7 +145,7 @@ Page {
                     ProgressCircle {
 
                         id: seriesProgress
-                        value: isNan(engine.Statistics.WatchedSeriesCount / engine.Statistics.AllSeriesCount) ? 0 : engine.Statistics.WatchedSeriesCount / engine.Statistics.AllSeriesCount;
+                        value: isNaN(engine.Statistics.WatchedSeriesCount / engine.Statistics.AllSeriesCount) ? 0 : engine.Statistics.WatchedSeriesCount / engine.Statistics.AllSeriesCount;
 
                         anchors {
                             left: parent.left
