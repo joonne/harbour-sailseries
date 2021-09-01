@@ -84,7 +84,7 @@ void SearchListModel::populateSearchModel(QList<QVariantMap> foundSeries)
     for (auto series : foundSeries)
     {
         // TODO: change this to be smarter somehow
-        series["isAdded"] = m_dbmanager->checkIfAdded(series["id"].toInt(), series["seriesName"].toString());
+        series["isAdded"] = m_dbmanager->checkIfAdded(series["id"].toInt(), series["name"].toString());
         auto seriesData = new SeriesData(this, series);
         m_searchListModel.append(seriesData);
     }

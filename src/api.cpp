@@ -1,7 +1,6 @@
 #include "api.h"
 
-#define APIKEY "88D0BD893851FA78"
-#define MIRRORPATH "https://api.thetvdb.com"
+#define MIRRORPATH "https://api4.thetvdb.com/v4"
 
 Api::Api(QObject *parent) :
     QObject(parent),
@@ -22,7 +21,7 @@ QNetworkReply* Api::get(QUrl url)
     QNetworkRequest request(url);
 
     request.setRawHeader(QByteArray("Content-Type"), QByteArray("application/json"));
-    request.setRawHeader(QByteArray("Authorization"), (QString("Bearer %1").arg(m_jwt)).toLocal8Bit());
+    request.setRawHeader(QByteArray("Authorization"), QByteArray::fromStdString(QString("Bearer %1").arg(m_jwt).toStdString()));
     request.setRawHeader(QByteArray("Accept-Language"), QByteArray("en"));
 
     qDebug() << "REQUESTING" << request.url().toString();
@@ -37,9 +36,9 @@ void Api::getAuthenticationToken()
 
     request.setRawHeader("Content-Type", "application/json");
 
-    QByteArray body = "{\"apikey\": \"88D0BD893851FA78\"}";
+    QByteArray body = QByteArray::fromStdString(QString("{\"apikey\": \"%1\"}").arg(QString(API_KEY)).toStdString());
 
-    QNetworkReply* reply = m_nam->post(request, body);
+    auto reply = m_nam->post(request, body);
 
     connect(reply, &QNetworkReply::finished, [this, reply]()
     {
@@ -47,7 +46,7 @@ void Api::getAuthenticationToken()
 
         if (!jsonDocument.isNull())
         {
-            m_jwt = jsonDocument.object().value("token").toString();
+            m_jwt = jsonDocument.object().value("data").toObject().value("token").toString();
         }
 
         reply->deleteLater();
@@ -88,7 +87,7 @@ void Api::getLanguages()
 
 void Api::searchSeries(const QString &text)
 {
-    QUrl url(QString("%1/search/series?name=%2").arg(QString(MIRRORPATH)).arg(text));
+    QUrl url(QString("%1/search?type=series&q=%2").arg(QString(MIRRORPATH)).arg(text));
     auto reply = get(url);
 
     connect(reply, &QNetworkReply::finished, [this, reply]()
@@ -311,7 +310,6 @@ void Api::replyFinishedError(QNetworkReply *reply)
 QList<QVariantMap> Api::parseJson(const QJsonObject &obj)
 {
     QList<QVariantMap> results;
-
     QJsonArray jsonArray;
 
     if (obj.value("data").isArray())
