@@ -18,7 +18,7 @@ SeriesData::SeriesData(QObject *parent, QVariantMap params) :
     m_rating = params["rating"].toString();
     m_ratingCount = params["ratingCount"].toInt();
     m_runtime = params["runtime"].toInt();
-    m_seriesName = params["seriesName"].toString();
+    m_seriesName = params["name"].toString();
     m_aliasNames = params["aliasNames"].toString();
     m_status = params["status"].toString();
     m_added = params["added"].toString();
