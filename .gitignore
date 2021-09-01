@@ -21,3 +21,5 @@ Makefile
 *.pro.user.*
 
 # other
+
+.env

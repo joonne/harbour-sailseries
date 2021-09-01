@@ -7,7 +7,7 @@ QT += network sql
 LIBS +=-lz
 # In the bright future this config line will do a lot of stuff to you
 CONFIG += sailfishapp
-CONFIG += c++11
+CONFIG += c++14
 
 SOURCES += main.cpp \
     model/seriesdata.cpp \
@@ -28,6 +28,23 @@ DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 DEFINES += APP_BUILDNUM=\\\"$$RELEASE\\\"
 
 message($$DEFINES)
+
+!exists($$PWD/../.env) {
+    error( ".env needs to be defined in the project root" )
+}
+
+DOTENV = "$$cat($$PWD/../.env)"
+for(var, $$list($$DOTENV)) {
+    DEFINES += $$var
+    message($$var)
+}
+
+message($$DEFINES)
+
+REQUIRED = $$find(DEFINES, "API_KEY")
+!count(REQUIRED, 1) {
+   error( "invalid env variables" )
+}
 
 OTHER_FILES = \
 # You DO NOT want .yaml be listed here as Qt Creator's editor is completely not ready for multi package .yaml's
