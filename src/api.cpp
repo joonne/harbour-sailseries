@@ -107,26 +107,26 @@ void Api::searchSeries(const QString &text)
 void Api::getAll(const int &seriesId)
 {
     getSeries(seriesId);
-    getEpisodes(seriesId);
-    getActors(seriesId);
-    getSeasonImages(seriesId);
-    getPosterImages(seriesId);
-    getBannerImages(seriesId);
-    getFanartImages(seriesId);
+//    getEpisodes(seriesId);
+//    getActors(seriesId);
+//    getSeasonImages(seriesId);
+//    getPosterImages(seriesId);
+//    getBannerImages(seriesId);
+//    getFanartImages(seriesId);
 }
 
 void Api::getSeries(const int &seriesId)
 {
-    QUrl url(QString("%1/series/%2").arg(QString(MIRRORPATH)).arg(seriesId));
+    QUrl url(QString("%1/series/%2/extended").arg(QString(MIRRORPATH)).arg(seriesId));
     auto reply = get(url);
 
     connect(reply, &QNetworkReply::finished, [this, reply, seriesId]()
     {
        auto jsonDocument = QJsonDocument::fromJson(reply->readAll());
 
-       if (!jsonDocument.isNull())
+       if (!jsonDocument.isNull() && jsonDocument.object().value("data").isObject())
        {
-           auto series = parseJson(jsonDocument.object()).first();
+           auto series = parseSeries(jsonDocument.object().value("data").toObject());
            emit storeSeries(series);
        }
 
@@ -305,6 +305,93 @@ void Api::replyFinishedError(QNetworkReply *reply)
     emit readyToPopulateSeries(allSeries);
 
     reply->deleteLater();
+}
+
+QVariantMap Api::parseRemoteIds(const QJsonArray &arr)
+{
+    QVariantMap ids;
+
+    for (auto entry : arr)
+    {
+        if (entry.isObject())
+        {
+            ids.insert(entry.toObject().value("sourceName").toString(), entry.toObject().value("id").toString());
+        }
+    }
+
+    return ids;
+}
+
+QVariant Api::parseAirsDays(const QJsonObject &obj)
+{
+    QStringList days;
+    const auto keys = obj.keys();
+
+    for (auto key : keys)
+    {
+        if (obj.value(key).toBool() == true)
+        {
+            days.append(key);
+        }
+    }
+
+    return days.join(",");
+}
+
+QString Api::parseGenres(const QJsonArray &arr)
+{
+    QStringList genres;
+
+    for (auto entry : arr)
+    {
+        if (entry.isObject())
+        {
+            genres.append(entry.toObject().value("name").toString());
+        }
+    }
+
+    return genres.join(",");
+}
+
+QVariantMap Api::parseSeries(const QJsonObject &obj)
+{
+    QVariantMap series;
+
+    const auto keys = obj.keys();
+
+    qDebug() << keys;
+    qDebug() << "overview: " << obj["overview"];
+
+    for (auto key : keys)
+    {
+        if (key == "airsDays" && obj[key].isObject())
+        {
+            series.insert(key, parseAirsDays(obj[key].toObject()));
+            continue;
+        }
+
+        if (key == "remoteIds" && obj[key].isArray())
+        {
+            series.insert(key, parseRemoteIds(obj[key].toArray()));
+            continue;
+        }
+
+        if (key == "genres" && obj[key].isArray())
+        {
+            series.insert(key, parseGenres(obj[key].toArray()));
+            continue;
+        }
+
+        if (key == "status" && obj[key].isObject())
+        {
+            series.insert(key, obj[key].toObject().value("name").toString());
+            continue;
+        }
+
+        series.insert(key, obj[key].toVariant());
+    }
+
+    return series;
 }
 
 QList<QVariantMap> Api::parseJson(const QJsonObject &obj)
