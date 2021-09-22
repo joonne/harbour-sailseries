@@ -268,35 +268,45 @@ void DatabaseManager::deleteDuplicateEpisodes()
 }
 
 void DatabaseManager::storeSeries(const QVariantMap &series)
-{   
-    auto id = series["id"].toInt();
-    auto actors = series["actors"].toString();
-    auto airsDayOfWeek = series["airsDayOfWeek"].toString();
-    auto airsTime = series["airsTime"].toString();
-    auto contentRating = series["contentRating"].toString();
-    auto firstAired = series["firstAired"].toString();
-    auto genre = series["genre"].toStringList().join(",");
-    auto imdbId = series["imdbId"].toString();
-    auto language = series["language"].toString();
-    auto network = series["network"].toString();
-    auto overview = series["overview"].toString();
-    auto rating = series["siteRating"].toDouble();
-    auto ratingCount = series["siteRatingCount"].toInt();
-    auto runtime = series["runtime"].toInt();
-    auto seriesName = series["seriesName"].toString();
-    auto status = series["status"].toString();
-    auto added = series["added"].toString();
-    auto addedBy = series["addedBy"].toInt();
-    auto banner = series["banner"].toString();
-    auto fanart = series["fanart"].toString();
+{
+    auto added = series["added"].toString(); // migrate away
+    auto addedBy = series["addedBy"].toInt(); // migrate away
+    auto actors = series["actors"].toString(); // => characters
+    auto airsDayOfWeek = series["airsDays"].toString(); // needed
+    auto airsTime = series["airsTime"].toString(); // needed
+    auto banner = series["banner"].toString(); // => artworks
+    auto contentRating = series["contentRating"].toString(); // ??
+    auto fanart = series["fanart"].toString(); // nicetohave
+    auto firstAired = series["firstAired"].toString(); // needed
+    auto genres = series["genres"].toString(); // needed
+    auto id = series["id"].toInt(); // needed
+    auto remoteIds = series["remoteIds"].toMap();
+    auto imdbId = remoteIds["IMDB"].toString(); // needed
+    auto zap2itId = remoteIds["Zap2It"].toString(); // migrate away
+    auto language = series["language"].toString(); // needed
     auto lastUpdated = series["lastUpdated"].toString();
-    auto poster = series["poster"].toString();
-    auto zap2itId = series["zap2itId"].toString();
+    auto network = series["network"].toString(); // needed
+    auto overview = series["overview"].toString(); // needed
+    auto poster = series["poster"].toString(); // needed
+    auto rating = series["score"].toDouble(); // needed
+    auto ratingCount = series["siteRatingCount"].toInt(); // nicetohave
+    auto runtime = series["runtime"].toInt(); // needed
+    auto seriesName = series["name"].toString(); // needed
+    auto status = series["status"].toString(); // needed
     auto watched = 0;
     
     overview.replace("'", "''");
     actors.replace("'", "''");
     seriesName.replace("'", "''");
+
+    qDebug() << "id: " << id;
+    qDebug() << "airsDayOfWeek: " << airsDayOfWeek;
+    qDebug() << "name: " << seriesName;
+    qDebug() << "imdbId: " << imdbId;
+    qDebug() << "zap2It: " << zap2itId;
+    qDebug() << "genres: " << genres;
+    qDebug() << "status: " << status;
+    qDebug() << "rating: " << rating;
 
     startTransaction();
         
@@ -311,7 +321,7 @@ void DatabaseManager::storeSeries(const QVariantMap &series)
         query.bindValue(":airsTime", airsTime);
         query.bindValue(":contentRating", contentRating);
         query.bindValue(":firstAired", firstAired);
-        query.bindValue(":genre", genre);
+        query.bindValue(":genre", genres);
         query.bindValue(":imdbId", imdbId);
         query.bindValue(":language", language);
         query.bindValue(":network", network);
@@ -332,6 +342,7 @@ void DatabaseManager::storeSeries(const QVariantMap &series)
         query.exec();
         
         qDebug() << query.lastError();
+        qDebug() << query.lastQuery();
     }
     
     commit();

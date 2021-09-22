@@ -52,6 +52,10 @@ private:
     void getActors(const int &seriesId);
     void getEpisodes(const int &seriesId, const int &page = 1);
     QList<QVariantMap> parseJson(const QJsonObject &obj);
+    QVariantMap parseSeries(const QJsonObject &obj);
+    QVariant parseAirsDays(const QJsonObject &obj);
+    QVariantMap parseRemoteIds(const QJsonArray &arr);
+    QString parseGenres(const QJsonArray &arr);
     QNetworkReply* get(QUrl url);
     QString getLocale();
     QString findHighestRatedImage(const QList<QVariantMap> &images);
