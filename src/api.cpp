@@ -107,6 +107,7 @@ void Api::searchSeries(const QString &text)
 void Api::getAll(const int &seriesId)
 {
     getSeries(seriesId);
+    getTranslations(seriesId, "eng");
 //    getEpisodes(seriesId);
 //    getActors(seriesId);
 //    getSeasonImages(seriesId);
@@ -128,6 +129,25 @@ void Api::getSeries(const int &seriesId)
        {
            auto series = parseSeries(jsonDocument.object().value("data").toObject());
            emit storeSeries(series);
+       }
+
+       reply->deleteLater();
+    });
+}
+
+void Api::getTranslations(const int &seriesId, const QString &language)
+{
+    QUrl url(QString("%1/series/%2/translations/%3").arg(QString(MIRRORPATH)).arg(seriesId).arg(language));
+    auto reply = get(url);
+
+    connect(reply, &QNetworkReply::finished, [this, reply, seriesId]()
+    {
+       auto jsonDocument = QJsonDocument::fromJson(reply->readAll());
+
+       if (!jsonDocument.isNull())
+       {
+           auto translations = parseJson(jsonDocument.object()).first();
+           emit storeTranslations(seriesId, translations);
        }
 
        reply->deleteLater();
@@ -360,7 +380,6 @@ QVariantMap Api::parseSeries(const QJsonObject &obj)
     const auto keys = obj.keys();
 
     qDebug() << keys;
-    qDebug() << "overview: " << obj["overview"];
 
     for (auto key : keys)
     {

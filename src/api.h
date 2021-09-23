@@ -31,6 +31,7 @@ signals:
     void storeFanartImageFor(const int&, const QString&);
     void storeActors(const int&, const QList<QVariantMap>&);
     void storeSeasonImages(const int&, const QList<QVariantMap>&);
+    void storeTranslations(const int&, const QVariantMap&);
 
 public slots:
     void replyFinishedError(QNetworkReply* reply);
@@ -45,6 +46,7 @@ private:
     void getAuthenticationToken();
     void getLanguages();
     void getSeries(const int &seriesId);
+    void getTranslations(const int &seriesId, const QString &language);
     void getSeasonImages(const int &seriesId);
     void getPosterImages(const int &seriesId);
     void getBannerImages(const int &seriesId);
