@@ -52,12 +52,13 @@ private:
     void getBannerImages(const int &seriesId);
     void getFanartImages(const int &seriesId);
     void getActors(const int &seriesId);
-    void getEpisodes(const int &seriesId, const int &page = 1);
+    void getEpisodes(const int &seriesId, const int &page = 0);
     QList<QVariantMap> parseJson(const QJsonObject &obj);
     QVariantMap parseSeries(const QJsonObject &obj);
     QVariant parseAirsDays(const QJsonObject &obj);
     QVariantMap parseRemoteIds(const QJsonArray &arr);
     QString parseGenres(const QJsonArray &arr);
+    QList<QVariantMap> parseEpisodes(const QJsonArray &items);
     QNetworkReply* get(QUrl url);
     QString getLocale();
     QString findHighestRatedImage(const QList<QVariantMap> &images);

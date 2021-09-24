@@ -108,7 +108,7 @@ void Api::getAll(const int &seriesId)
 {
     getSeries(seriesId);
     getTranslations(seriesId, "eng");
-//    getEpisodes(seriesId);
+    getEpisodes(seriesId);
 //    getActors(seriesId);
 //    getSeasonImages(seriesId);
 //    getPosterImages(seriesId);
@@ -266,7 +266,7 @@ void Api::getActors(const int &seriesId)
 
 void Api::getEpisodes(const int &seriesId, const int &page)
 {
-    QUrl url(QString("%1/series/%2/episodes?page=%3").arg(QString(MIRRORPATH)).arg(seriesId).arg(page));
+    QUrl url(QString("%1/series/%2/episodes/default/eng?page=%3").arg(QString(MIRRORPATH)).arg(seriesId).arg(page));
     auto reply = get(url);
 
     connect(reply, &QNetworkReply::finished, [this, reply, seriesId, page]()
@@ -275,7 +275,7 @@ void Api::getEpisodes(const int &seriesId, const int &page)
 
        if (!jsonDocument.isNull())
        {
-           if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 404)
+           if (jsonDocument.object().value("data").toObject().value("episodes").isUndefined())
            {
                qDebug() << "all episodes for " << seriesId << " fetched";
                // this is a safe bet to to turn loading indicator off
@@ -284,12 +284,14 @@ void Api::getEpisodes(const int &seriesId, const int &page)
            }
 
            qDebug() << "store episodes for " << seriesId;
-           const auto episodes = parseJson(jsonDocument.object());
+           const auto episodes = parseEpisodes(jsonDocument.object().value("data").toObject().value("episodes").toArray());
            emit storeEpisodes(seriesId, episodes);
 
            qDebug() << "try to get more episodes for " << seriesId;
            getEpisodes(seriesId, page + 1);
        }
+
+       reply->deleteLater();
     });
 }
 
@@ -411,6 +413,29 @@ QVariantMap Api::parseSeries(const QJsonObject &obj)
     }
 
     return series;
+}
+
+QList<QVariantMap> Api::parseEpisodes(const QJsonArray &items)
+{
+    QList<QVariantMap> episodes;
+
+    for (auto item : items)
+    {
+        if (item.isObject())
+        {
+            QVariantMap episode;
+            const auto keys = item.toObject().keys();
+
+            for (auto key : keys)
+            {
+                episode.insert(key, item.toObject()[key].toVariant());
+            }
+
+            episodes.append(episode);
+        }
+    }
+
+    return episodes;
 }
 
 QList<QVariantMap> Api::parseJson(const QJsonObject &obj)
