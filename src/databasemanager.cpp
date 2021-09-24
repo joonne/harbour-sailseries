@@ -352,7 +352,6 @@ void DatabaseManager::storeSeries(const QVariantMap &series)
 void DatabaseManager::storeTranslations(const int &seriesId, const QVariantMap &translations)
 {
     auto overview = translations.value("overview").toString();
-    qDebug() << overview;
 
     QSqlQuery query(m_db);
     query.prepare("UPDATE Series SET overview = :overview WHERE id = :seriesId");
@@ -369,24 +368,24 @@ void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap
 
     for (auto episode : episodes)
     {
-        auto absoluteNumber = episode["absoluteNumber"].toInt();
-        auto filename = episode["filename"].toString();
-        auto episodeNumber = episode["airedEpisodeNumber"].toInt();
-        auto seasonNumber = episode["airedSeason"].toInt();
+        auto absoluteNumber = episode["number"].toInt();
+        auto image = episode["image"].toString();
+        auto episodeNumber = episode["number"].toInt();
+        auto seasonNumber = episode["seasonNumber"].toInt();
         auto seasonId = episode["airedSeasonID"].toInt();
-        auto episodeName = episode["episodeName"].toString();
-        auto firstAired = episode["firstAired"].toString();
+        auto name = episode["name"].toString();
+        auto firstAired = episode["aired"].toString();
         auto id = episode["id"].toInt();
         auto language = episode["language"].toMap()["overview"].toString();
         auto lastUpdated = episode["lastUpdated"].toString();
         auto overview = episode["overview"].toString();
-        auto guestStars = episode["guestStars"].toStringList().join(", ");
-        auto writers = episode["writers"].toStringList().join(", ");
+        auto guestStars = episode["guestStars"].toStringList().join(", "); // need to find
+        auto writers = episode["writers"].toStringList().join(", "); // need to find
         auto watched = 0;
 
         // important!
         overview.replace("'", "''");
-        episodeName.replace("'", "''");
+        name.replace("'", "''");
         
         if (m_db.isOpen())
         {
@@ -408,7 +407,7 @@ void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap
             query.prepare("INSERT OR REPLACE INTO Episode (id, episodeName, episodeNumber, firstAired, guestStars, language, overview, seasonNumber, writer, absoluteNumber, filename, lastupdated, seasonID, seriesID, watched) "
                           "VALUES (:id, :episodeName, :episodeNumber, :firstAired, :guestStars, :language, :overview, :seasonNumber, :writer, :absoluteNumber, :filename, :lastUpdated, :seasonId, :seriesId, :watched)");
             query.bindValue(":id", id);
-            query.bindValue(":episodeName", episodeName);
+            query.bindValue(":episodeName", name);
             query.bindValue(":episodeNumber", episodeNumber);
             query.bindValue(":firstAired", firstAired);
             query.bindValue(":guestStars", guestStars);
@@ -417,7 +416,7 @@ void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap
             query.bindValue(":seasonNumber", seasonNumber);
             query.bindValue(":writer", writers);
             query.bindValue(":absoluteNumber", absoluteNumber);
-            query.bindValue(":filename", filename);
+            query.bindValue(":filename", image);
             query.bindValue(":lastUpdated", lastUpdated);
             query.bindValue(":seasonId", seasonId);
             query.bindValue(":seriesId", seriesId);
