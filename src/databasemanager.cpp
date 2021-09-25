@@ -342,7 +342,6 @@ void DatabaseManager::storeSeries(const QVariantMap &series)
         query.exec();
         
         qDebug() << query.lastError();
-        qDebug() << query.lastQuery();
     }
     
     commit();

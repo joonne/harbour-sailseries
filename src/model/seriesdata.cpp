@@ -3,7 +3,6 @@
 SeriesData::SeriesData(QObject *parent, QVariantMap params) :
     QObject(parent)
 {
-
     m_id = params["id"].toInt();
     m_actors = params["actors"].toString();
     m_airsDayOfWeek = params["airsDayOfWeek"].toString();
