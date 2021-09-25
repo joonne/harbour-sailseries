@@ -59,6 +59,7 @@ private:
     QVariantMap parseRemoteIds(const QJsonArray &arr);
     QString parseGenres(const QJsonArray &arr);
     QList<QVariantMap> parseEpisodes(const QJsonArray &items);
+    QList<QVariantMap> parseSearchResults(const QJsonArray &items);
     QNetworkReply* get(QUrl url);
     QString getLocale();
     QString findHighestRatedImage(const QList<QVariantMap> &images);

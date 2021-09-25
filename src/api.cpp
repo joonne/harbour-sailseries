@@ -96,7 +96,7 @@ void Api::searchSeries(const QString &text)
 
         if (!document.isNull())
         {
-            auto series = parseJson(document.object());
+            auto series = parseSearchResults(document.object().value("data").toArray());
             emit readyToPopulateSeries(series);
         }
 
@@ -436,6 +436,52 @@ QList<QVariantMap> Api::parseEpisodes(const QJsonArray &items)
     }
 
     return episodes;
+}
+
+QList<QVariantMap> Api::parseSearchResults(const QJsonArray &items)
+{
+    QList<QVariantMap> results;
+
+    for (auto item : items)
+    {
+        QVariantMap result;
+
+        const auto jsonObject = item.toObject();
+        const auto keys = jsonObject.keys();
+        for (auto key : keys)
+        {
+            if (key == "id")
+            {
+                continue;
+            }
+
+            if (key == "tvdb_id")
+            {
+                result.insert("id", jsonObject.value(key).toVariant());
+                continue;
+            }
+
+            if (key == "image_url")
+            {
+                result.insert("banner", jsonObject.value(key).toVariant());
+                qDebug() << "banner: " << jsonObject.value(key).toVariant();
+                continue;
+            }
+
+            if (key == "remote_ids")
+            {
+                auto remoteIds = parseRemoteIds(jsonObject.value(key).toArray());
+                result.insert("imdbId", remoteIds["IMDB"]);
+                continue;
+            }
+
+            result.insert(key, jsonObject.value(key).toVariant());
+        }
+
+        results.append(result);
+    }
+
+    return results;
 }
 
 QList<QVariantMap> Api::parseJson(const QJsonObject &obj)
