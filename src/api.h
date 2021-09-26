@@ -26,8 +26,6 @@ signals:
     void storeSeries(QVariantMap);
     void readyToPopulateEpisodeDetails(QVariantMap episode);
     void storeEpisodes(const int&, const QList<QVariantMap>&);
-    void storePosterImageFor(const int&, const QString&);
-    void storeBannerImageFor(const int&, const QString&);
     void storeFanartImageFor(const int&, const QString&);
     void storeActors(const int&, const QList<QVariantMap>&);
     void storeSeasonImages(const int&, const QList<QVariantMap>&);
@@ -42,6 +40,13 @@ private:
     QNetworkAccessManager* m_nam;
     QList<QMap<QString,QString> > m_languages;
     QString m_jwt;
+
+    enum ARTWORK_TYPE {
+        SERIES_BANNER = 1,
+        SERIES_POSTER = 2,
+        SEASON_BANNER = 6,
+        SEASON_POSTER = 7,
+    };
 
     void getAuthenticationToken();
     void getLanguages();
@@ -60,9 +65,10 @@ private:
     QString parseGenres(const QJsonArray &arr);
     QList<QVariantMap> parseEpisodes(const QJsonArray &items);
     QList<QVariantMap> parseSearchResults(const QJsonArray &items);
+    QList<QVariantMap> parseArtworks(const QJsonArray &items);
     QNetworkReply* get(QUrl url);
     QString getLocale();
-    QString findHighestRatedImage(const QList<QVariantMap> &images);
+    QString findHighestRatedImage(const QList<QVariantMap> &images, ARTWORK_TYPE type);
 };
 
 #endif // API_H

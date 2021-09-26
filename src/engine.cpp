@@ -30,21 +30,6 @@ Engine::Engine(QObject *parent) :
             SLOT(readyToUpdateModels()));
 
     connect(m_api,
-            SIGNAL(storePosterImageFor(int,QString)),
-            m_dbmanager,
-            SLOT(storePosterImageFor(int,QString)));
-
-    connect(m_api,
-            SIGNAL(storeBannerImageFor(int,QString)),
-            m_dbmanager,
-            SLOT(storeBannerImageFor(int,QString)));
-
-    connect(m_api,
-            SIGNAL(storeFanartImageFor(int,QString)),
-            m_dbmanager,
-            SLOT(storeFanartImageFor(int,QString)));
-
-    connect(m_api,
             SIGNAL(storeEpisodes(int, QList<QVariantMap>)),
             m_dbmanager,
             SLOT(storeEpisodes(int, QList<QVariantMap>)));

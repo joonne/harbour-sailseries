@@ -307,6 +307,8 @@ void DatabaseManager::storeSeries(const QVariantMap &series)
     qDebug() << "genres: " << genres;
     qDebug() << "status: " << status;
     qDebug() << "rating: " << rating;
+    qDebug() << "banner: " << banner;
+    qDebug() << "poster: " << poster;
 
     startTransaction();
         
@@ -773,45 +775,6 @@ void DatabaseManager::setWatched(const int &episodeId, const int &seriesId, cons
         getStartPageSeries();
         emit setWatchedReady(episodeId, watched);
     }
-}
-
-void DatabaseManager::storePosterImageFor(const int &seriesId, const QString &posterImage) const
-{
-    QSqlQuery query(m_db);
-    query.prepare(QString("UPDATE Series "
-                          "SET poster = :poster "
-                          "WHERE id = :seriesId"));
-    query.bindValue(":poster", posterImage);
-    query.bindValue(":seriesId", seriesId);
-    query.exec();
-
-    qDebug() << query.lastError();
-}
-
-void DatabaseManager::storeBannerImageFor(const int &seriesId, const QString &bannerImage) const
-{
-    QSqlQuery query(m_db);
-    query.prepare(QString("UPDATE Series "
-                          "SET banner = :banner "
-                          "WHERE id = :seriesId"));
-    query.bindValue(":banner", bannerImage);
-    query.bindValue(":seriesId", seriesId);
-    query.exec();
-
-    qDebug() << query.lastError();
-}
-
-void DatabaseManager::storeFanartImageFor(const int &seriesId, const QString &fanartImage) const
-{
-    QSqlQuery query(m_db);
-    query.prepare(QString("UPDATE Series "
-                          "SET fanart = :fanart "
-                          "WHERE id = :seriesId"));
-    query.bindValue(":fanart", fanartImage);
-    query.bindValue(":seriesId", seriesId);
-    query.exec();
-
-    qDebug() << query.lastError();
 }
 
 void DatabaseManager::storeActors(const int &seriesId, const QList<QVariantMap> &actors) const
