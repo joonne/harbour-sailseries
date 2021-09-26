@@ -111,9 +111,6 @@ void Api::getAll(const int &seriesId)
     getEpisodes(seriesId);
 //    getActors(seriesId);
 //    getSeasonImages(seriesId);
-//    getPosterImages(seriesId);
-//    getBannerImages(seriesId);
-//    getFanartImages(seriesId);
 }
 
 void Api::getSeries(const int &seriesId)
@@ -188,63 +185,6 @@ void Api::getSeasonImages(const int &seriesId)
     });
 }
 
-void Api::getPosterImages(const int &seriesId)
-{
-    QUrl url(QString("%1/series/%2/images/query?keyType=poster").arg(QString(MIRRORPATH)).arg(seriesId));
-    auto reply = get(url);
-
-    connect(reply, &QNetworkReply::finished, [this, reply, seriesId]()
-    {
-       auto jsonDocument = QJsonDocument::fromJson(reply->readAll());
-
-       if (!jsonDocument.isNull())
-       {
-           auto posters = parseJson(jsonDocument.object());
-           emit storePosterImageFor(seriesId, findHighestRatedImage(posters));
-       }
-
-       reply->deleteLater();
-    });
-}
-
-void Api::getBannerImages(const int &seriesId)
-{
-    QUrl url(QString("%1/series/%2/images/query?keyType=series").arg(QString(MIRRORPATH)).arg(seriesId));
-    auto reply = get(url);
-
-    connect(reply, &QNetworkReply::finished, [this, reply, seriesId]()
-    {
-       auto jsonDocument = QJsonDocument::fromJson(reply->readAll());
-
-       if (!jsonDocument.isNull())
-       {
-           auto banners = parseJson(jsonDocument.object());
-           emit storeBannerImageFor(seriesId, findHighestRatedImage(banners));
-       }
-
-       reply->deleteLater();
-    });
-}
-
-void Api::getFanartImages(const int &seriesId)
-{
-    QUrl url(QString("%1/series/%2/images/query?keyType=fanart").arg(QString(MIRRORPATH)).arg(seriesId));
-    auto reply = get(url);
-
-    connect(reply, &QNetworkReply::finished, [this, reply, seriesId]()
-    {
-       auto jsonDocument = QJsonDocument::fromJson(reply->readAll());
-
-       if (!jsonDocument.isNull())
-       {
-           auto fanartImages = parseJson(jsonDocument.object());
-           emit storeFanartImageFor(seriesId, findHighestRatedImage(fanartImages));
-       }
-
-       reply->deleteLater();
-    });
-}
-
 void Api::getActors(const int &seriesId)
 {
     QUrl url(QString("%1/series/%2/actors").arg(QString(MIRRORPATH)).arg(seriesId));
@@ -295,25 +235,36 @@ void Api::getEpisodes(const int &seriesId, const int &page)
     });
 }
 
-QString Api::findHighestRatedImage(const QList<QVariantMap> &images)
+QString Api::findHighestRatedImage(const QList<QVariantMap> &artworks, ARTWORK_TYPE type)
 {
-    auto result = !images.isEmpty() ? images.first() : QVariantMap();
+    QVariantMap result;
 
-    for (auto image: images)
-    {
+    for (auto artwork: artworks)
+    {        
         if (
-                image.contains("ratingsInfo") &&
-                image["ratingsInfo"].toMap().contains("average") &&
-                result.contains("ratingsInfo") &&
-                result["ratingsInfo"].toMap().contains("average") &&
-                image["ratingsInfo"].toMap()["average"].toDouble() > result["ratingsInfo"].toMap()["average"].toDouble()
+                result.isEmpty() &&
+                artwork.contains("type") &&
+                artwork.contains("score") &&
+                artwork["type"].toInt() == type
+            )
+        {
+            result = artwork;
+        }
+
+        if (
+                artwork.contains("type") &&
+                artwork.contains("score") &&
+                result.contains("type") &&
+                result.contains("score") &&
+                artwork["type"].toInt() == type &&
+                artwork["score"].toDouble() > result["score"].toDouble()
            )
         {
-            result = image;
+            result = artwork;
         }
     }
 
-    return result["fileName"].toString();
+    return result["image"].toString();
 }
 
 void Api::replyFinishedError(QNetworkReply *reply)
@@ -409,6 +360,19 @@ QVariantMap Api::parseSeries(const QJsonObject &obj)
             continue;
         }
 
+        if (key == "artworks" && obj[key].isArray())
+        {
+            auto artworks = parseArtworks(obj[key].toArray());
+
+            auto poster = findHighestRatedImage(artworks, SERIES_POSTER);
+            series.insert("poster", poster);
+
+            auto banner = findHighestRatedImage(artworks, SERIES_BANNER);
+            series.insert("banner", banner);
+
+            continue;
+        }
+
         series.insert(key, obj[key].toVariant());
     }
 
@@ -445,9 +409,8 @@ QList<QVariantMap> Api::parseSearchResults(const QJsonArray &items)
     for (auto item : items)
     {
         QVariantMap result;
+        const auto keys = item.toObject().keys();
 
-        const auto jsonObject = item.toObject();
-        const auto keys = jsonObject.keys();
         for (auto key : keys)
         {
             if (key == "id")
@@ -457,25 +420,24 @@ QList<QVariantMap> Api::parseSearchResults(const QJsonArray &items)
 
             if (key == "tvdb_id")
             {
-                result.insert("id", jsonObject.value(key).toVariant());
+                result.insert("id", item.toObject().value(key).toVariant());
                 continue;
             }
 
             if (key == "image_url")
             {
-                result.insert("banner", jsonObject.value(key).toVariant());
-                qDebug() << "banner: " << jsonObject.value(key).toVariant();
+                result.insert("banner", item.toObject().value(key).toVariant());
                 continue;
             }
 
-            if (key == "remote_ids")
+            if (key == "remote_ids" && item.toObject().value(key).isArray())
             {
-                auto remoteIds = parseRemoteIds(jsonObject.value(key).toArray());
+                auto remoteIds = parseRemoteIds(item.toObject().value(key).toArray());
                 result.insert("imdbId", remoteIds["IMDB"]);
                 continue;
             }
 
-            result.insert(key, jsonObject.value(key).toVariant());
+            result.insert(key, item.toObject().value(key).toVariant());
         }
 
         results.append(result);
@@ -484,30 +446,49 @@ QList<QVariantMap> Api::parseSearchResults(const QJsonArray &items)
     return results;
 }
 
+QList<QVariantMap> Api::parseArtworks(const QJsonArray &items)
+{
+    QList<QVariantMap> artworks;
+
+    for (auto item : items)
+    {
+        QVariantMap artwork;
+        const auto keys = item.toObject().keys();
+
+        for (auto key : keys)
+        {
+            artwork.insert(key, item.toObject().value(key).toVariant());
+        }
+
+        artworks.append(artwork);
+    }
+
+    return artworks;
+}
+
 QList<QVariantMap> Api::parseJson(const QJsonObject &obj)
 {
     QList<QVariantMap> results;
-    QJsonArray jsonArray;
+    QJsonArray items;
 
     if (obj.value("data").isArray())
     {
-        jsonArray = obj.value("data").toArray();
+        items = obj.value("data").toArray();
     }
 
     if (obj.value("data").isObject())
     {
-        jsonArray.append(obj.value("data"));
+        items.append(obj.value("data"));
     }
 
-    for (auto item : jsonArray)
+    for (auto item : items)
     {
         QVariantMap result;
+        const auto keys = item.toObject().keys();
 
-        const auto jsonObject = item.toObject();
-        const auto keys = jsonObject.keys();
         for (auto key : keys)
         {
-            result.insert(key, jsonObject.value(key).toVariant());
+            result.insert(key, item.toObject().value(key).toVariant());
         }
 
         results.append(result);
