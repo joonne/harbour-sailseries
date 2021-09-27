@@ -52,10 +52,6 @@ private:
     void getLanguages();
     void getSeries(const int &seriesId);
     void getTranslations(const int &seriesId, const QString &language);
-    void getSeasonImages(const int &seriesId);
-    void getPosterImages(const int &seriesId);
-    void getBannerImages(const int &seriesId);
-    void getFanartImages(const int &seriesId);
     void getActors(const int &seriesId);
     void getEpisodes(const int &seriesId, const int &page = 0);
     QList<QVariantMap> parseJson(const QJsonObject &obj);
@@ -66,6 +62,8 @@ private:
     QList<QVariantMap> parseEpisodes(const QJsonArray &items);
     QList<QVariantMap> parseSearchResults(const QJsonArray &items);
     QList<QVariantMap> parseArtworks(const QJsonArray &items);
+    QList<QVariantMap> parseSeasons(const QJsonObject &obj);
+    QList<QVariantMap> toSeasonImages(const QList<QVariantMap> &seasons);
     QNetworkReply* get(QUrl url);
     QString getLocale();
     QString findHighestRatedImage(const QList<QVariantMap> &images, ARTWORK_TYPE type);
