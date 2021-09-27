@@ -354,6 +354,8 @@ void DatabaseManager::storeTranslations(const int &seriesId, const QVariantMap &
 {
     auto overview = translations.value("overview").toString();
 
+    qDebug() << overview;
+
     QSqlQuery query(m_db);
     query.prepare("UPDATE Series SET overview = :overview WHERE id = :seriesId");
     query.bindValue(":overview", overview);
@@ -798,40 +800,30 @@ void DatabaseManager::storeActors(const int &seriesId, const QList<QVariantMap> 
 }
 
 void DatabaseManager::deleteSeries(const int &seriesId)
-{
-    auto seriesDeleted = false;
-    auto episodesDeleted = false;
-    auto bannersDeleted = false;
-    
-    this->startTransaction();
+{   
+    startTransaction();
     
     QSqlQuery query(m_db);
     query.prepare("DELETE FROM Series WHERE id = :seriesId");
     query.bindValue(":seriesId", seriesId);
-    seriesDeleted = query.exec();
+    auto seriesDeleted = query.exec();
 
-    if (seriesDeleted)
-    {
-        query.prepare("DELETE FROM Episode WHERE seriesID = :seriesId");
-        query.bindValue(":seriesId", seriesId);
-        episodesDeleted = query.exec();
+    query.prepare("DELETE FROM Episode WHERE seriesID = :seriesId");
+    query.bindValue(":seriesId", seriesId);
+    auto episodesDeleted = query.exec();
 
-        if (seriesDeleted && episodesDeleted)
-        {
-            query.prepare("DELETE FROM Banner WHERE seriesID = :seriesId");
-            query.bindValue(":series", seriesId);
-            bannersDeleted = query.exec();
-        }
-    }
+    query.prepare("DELETE FROM Banner WHERE seriesID = :seriesId");
+    query.bindValue(":seriesId", seriesId);
+    auto bannersDeleted = query.exec();
 
     if (seriesDeleted && episodesDeleted && bannersDeleted)
     {
-        this->commit();
+        commit();
         emit this->seriesDeleted();
     }
     else
     {
-        this->rollback();
+        rollback();
     }
 }
 
