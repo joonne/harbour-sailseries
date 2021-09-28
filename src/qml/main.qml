@@ -9,20 +9,4 @@ ApplicationWindow {
 
     initialPage: Component { StartPage { } }
     cover: CoverPage { }
-
-    NotificationHandler {
-        id: notificationhandler
-    }
-
-    Timer {
-        id: updateTimer
-        interval: 3600000
-        repeat: true
-        onTriggered: engine.updateModels()
-        Component.onCompleted: {
-            if (settings.getContentUpdatePreference()) {
-                start()
-            }
-        }
-    }
 }
