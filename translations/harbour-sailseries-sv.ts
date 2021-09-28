@@ -149,21 +149,6 @@
         <source>Overview</source>
         <translation type="unfinished">Översikt</translation>
     </message>
-    <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="94"/>
-        <source>Writer</source>
-        <translation>Författare</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="94"/>
-        <source>Writers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="102"/>
-        <source>Guest Stars</source>
-        <translation>Gäststjärnor</translation>
-    </message>
 </context>
 <context>
     <name>EpisodesPage</name>

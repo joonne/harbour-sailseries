@@ -87,22 +87,6 @@ Page {
                 text:  episodeOverview
                 readOnly: true
             }
-
-            TextArea {
-                id: writerField
-                width: episodeoverviewpage.width
-                label: writers.indexOf(",") === -1 ? qsTr("Writer") : qsTr("Writers")
-                readOnly: true
-                text: writers
-            }
-
-            TextArea {
-                id: guestStarsField
-                width: episodeoverviewpage.width
-                label: qsTr("Guest Stars")
-                readOnly: true
-                text: guestStars
-            }
         }
     }
 }

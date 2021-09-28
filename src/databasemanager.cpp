@@ -291,24 +291,13 @@ void DatabaseManager::storeSeries(const QVariantMap &series)
     auto rating = series["score"].toDouble(); // needed
     auto ratingCount = series["siteRatingCount"].toInt(); // nicetohave
     auto runtime = series["runtime"].toInt(); // needed
-    auto seriesName = series["name"].toString(); // needed
+    auto seriesName = series["seriesName"].toString(); // needed
     auto status = series["status"].toString(); // needed
     auto watched = 0;
     
     overview.replace("'", "''");
     actors.replace("'", "''");
     seriesName.replace("'", "''");
-
-    qDebug() << "id: " << id;
-    qDebug() << "airsDayOfWeek: " << airsDayOfWeek;
-    qDebug() << "name: " << seriesName;
-    qDebug() << "imdbId: " << imdbId;
-    qDebug() << "zap2It: " << zap2itId;
-    qDebug() << "genres: " << genres;
-    qDebug() << "status: " << status;
-    qDebug() << "rating: " << rating;
-    qDebug() << "banner: " << banner;
-    qDebug() << "poster: " << poster;
 
     startTransaction();
         
