@@ -87,7 +87,6 @@ public slots:
     void getEpisodes(const int &seriesId, const int &seasonNumber);
     void deleteSeries(const int &seriesId);
     void storeSeries(const QVariantMap &series);
-    void storeTranslations(const int &seriesId, const QVariantMap &translations);
     void storeEpisodes(const int &seriesId, const QList<QVariantMap> &episodes);
     void getStatistics();
     void setWatched(const int &episodeId, const int &seriesId, const bool &watched);

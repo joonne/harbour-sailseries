@@ -339,21 +339,6 @@ void DatabaseManager::storeSeries(const QVariantMap &series)
     emit seriesStored(id);
 }
 
-void DatabaseManager::storeTranslations(const int &seriesId, const QVariantMap &translations)
-{
-    auto overview = translations.value("overview").toString();
-
-    qDebug() << overview;
-
-    QSqlQuery query(m_db);
-    query.prepare("UPDATE Series SET overview = :overview WHERE id = :seriesId");
-    query.bindValue(":overview", overview);
-    query.bindValue(":seriesId", seriesId);
-    query.exec();
-
-    qDebug() << query.lastError();
-}
-
 void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap> &episodes)
 {
     startTransaction();
