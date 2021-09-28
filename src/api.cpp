@@ -110,7 +110,6 @@ void Api::getAll(const int &seriesId)
     getTranslations(seriesId, "eng");
     getEpisodes(seriesId);
     //    getActors(seriesId);
-    //    getSeasonImages(seriesId);
 }
 
 void Api::getSeries(const int &seriesId)
@@ -127,7 +126,7 @@ void Api::getSeries(const int &seriesId)
             auto series = parseSeries(jsonDocument.object().value("data").toObject());
             emit storeSeries(series);
 
-            auto seasons = parseSeasons(jsonDocument.object().value("data").toObject());
+            auto seasons = parseJsonArray(jsonDocument.object().value("data").toObject().value("seasons").toArray());
             auto seasonImages = toSeasonImages(seasons);
             emit storeSeasonImages(seriesId, seasonImages);
         }
@@ -147,60 +146,12 @@ void Api::getTranslations(const int &seriesId, const QString &language)
 
         if (!jsonDocument.isNull())
         {
-            auto translations = parseJson(jsonDocument.object()).first();
+            auto translations = parseJsonObject(jsonDocument.object());
             emit storeTranslations(seriesId, translations);
         }
 
         reply->deleteLater();
     });
-}
-
-QList<QVariantMap> Api::parseSeasons(const QJsonObject &obj)
-{
-    QList<QVariantMap> seasons;
-
-    auto items = obj["seasons"].toArray();
-    for (auto item : items)
-    {
-        auto keys = item.toObject().keys();
-        QVariantMap season;
-
-        for (auto key : keys)
-        {
-            season.insert(key, item.toObject().value(key).toVariant());
-        }
-
-        seasons.append(season);
-    }
-
-    return seasons;
-}
-
-QList<QVariantMap> Api::toSeasonImages(const QList<QVariantMap> &seasons)
-{   
-    QList<QVariantMap> seasonImages;
-
-    for (auto season : seasons)
-    {
-        if (season["image"].toString().isEmpty())
-        {
-            qDebug() << "empty image: " << season;
-            continue;
-        }
-
-        QVariantMap image;
-        image.insert("id", season["id"]);
-        image.insert("seriesId", season["seriesId"]);
-        image.insert("bannerPath", season["image"]);
-        image.insert("bannerType", "season");
-        image.insert("bannerType2", "season");
-        image.insert("language", "");
-        image.insert("season", season["number"]);
-
-        seasonImages.append(image);
-    }
-
-    return seasonImages;
 }
 
 void Api::getActors(const int &seriesId)
@@ -214,7 +165,7 @@ void Api::getActors(const int &seriesId)
 
         if (!jsonDocument.isNull())
         {
-            auto actors = parseJson(jsonDocument.object());
+            auto actors = parseJsonArray(jsonDocument.array());
             emit storeActors(seriesId, actors);
         }
 
@@ -242,7 +193,7 @@ void Api::getEpisodes(const int &seriesId, const int &page)
             }
 
             qDebug() << "store episodes for " << seriesId;
-            const auto episodes = parseEpisodes(jsonDocument.object().value("data").toObject().value("episodes").toArray());
+            const auto episodes = parseJsonArray(jsonDocument.object().value("data").toObject().value("episodes").toArray());
             emit storeEpisodes(seriesId, episodes);
 
             qDebug() << "try to get more episodes for " << seriesId;
@@ -350,8 +301,6 @@ QVariantMap Api::parseSeries(const QJsonObject &obj)
 
     const auto keys = obj.keys();
 
-    qDebug() << keys;
-
     for (auto key : keys)
     {
         if (key == "airsDays" && obj[key].isObject())
@@ -380,7 +329,7 @@ QVariantMap Api::parseSeries(const QJsonObject &obj)
 
         if (key == "artworks" && obj[key].isArray())
         {
-            auto artworks = parseArtworks(obj[key].toArray());
+            auto artworks = parseJsonArray(obj[key].toArray());
 
             auto poster = findHighestRatedImage(artworks, SERIES_POSTER);
             series.insert("poster", poster);
@@ -400,29 +349,6 @@ QVariantMap Api::parseSeries(const QJsonObject &obj)
     }
 
     return series;
-}
-
-QList<QVariantMap> Api::parseEpisodes(const QJsonArray &items)
-{
-    QList<QVariantMap> episodes;
-
-    for (auto item : items)
-    {
-        if (item.isObject())
-        {
-            QVariantMap episode;
-            const auto keys = item.toObject().keys();
-
-            for (auto key : keys)
-            {
-                episode.insert(key, item.toObject()[key].toVariant());
-            }
-
-            episodes.append(episode);
-        }
-    }
-
-    return episodes;
 }
 
 QList<QVariantMap> Api::parseSearchResults(const QJsonArray &items)
@@ -469,40 +395,48 @@ QList<QVariantMap> Api::parseSearchResults(const QJsonArray &items)
     return results;
 }
 
-QList<QVariantMap> Api::parseArtworks(const QJsonArray &items)
+QList<QVariantMap> Api::toSeasonImages(const QList<QVariantMap> &seasons)
 {
-    QList<QVariantMap> artworks;
+    QList<QVariantMap> seasonImages;
 
-    for (auto item : items)
+    for (auto season : seasons)
     {
-        QVariantMap artwork;
-        const auto keys = item.toObject().keys();
-
-        for (auto key : keys)
+        if (season["image"].toString().isEmpty())
         {
-            artwork.insert(key, item.toObject().value(key).toVariant());
+            continue;
         }
 
-        artworks.append(artwork);
+        QVariantMap image;
+        image.insert("id", season["id"]);
+        image.insert("seriesId", season["seriesId"]);
+        image.insert("bannerPath", season["image"]);
+        image.insert("bannerType", "season");
+        image.insert("bannerType2", "season");
+        image.insert("language", "");
+        image.insert("season", season["number"]);
+
+        seasonImages.append(image);
     }
 
-    return artworks;
+    return seasonImages;
 }
 
-QList<QVariantMap> Api::parseJson(const QJsonObject &obj)
+QVariantMap Api::parseJsonObject(const QJsonObject &item)
+{
+    QVariantMap result;
+    const auto keys = item.keys();
+
+    for (auto key : keys)
+    {
+        result.insert(key, item.value(key).toVariant());
+    }
+
+    return result;
+}
+
+QList<QVariantMap> Api::parseJsonArray(const QJsonArray &items)
 {
     QList<QVariantMap> results;
-    QJsonArray items;
-
-    if (obj.value("data").isArray())
-    {
-        items = obj.value("data").toArray();
-    }
-
-    if (obj.value("data").isObject())
-    {
-        items.append(obj.value("data"));
-    }
 
     for (auto item : items)
     {

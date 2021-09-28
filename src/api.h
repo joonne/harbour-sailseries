@@ -48,24 +48,24 @@ private:
         SEASON_POSTER = 7,
     };
 
+    QNetworkReply* get(QUrl url);
+    QString getLocale();
+
     void getAuthenticationToken();
     void getLanguages();
     void getSeries(const int &seriesId);
     void getTranslations(const int &seriesId, const QString &language);
     void getActors(const int &seriesId);
     void getEpisodes(const int &seriesId, const int &page = 0);
-    QList<QVariantMap> parseJson(const QJsonObject &obj);
+
+    QVariantMap parseJsonObject(const QJsonObject &item);
+    QList<QVariantMap> parseJsonArray(const QJsonArray &items);
     QVariantMap parseSeries(const QJsonObject &obj);
     QVariant parseAirsDays(const QJsonObject &obj);
     QVariantMap parseRemoteIds(const QJsonArray &arr);
     QString parseGenres(const QJsonArray &arr);
-    QList<QVariantMap> parseEpisodes(const QJsonArray &items);
     QList<QVariantMap> parseSearchResults(const QJsonArray &items);
-    QList<QVariantMap> parseArtworks(const QJsonArray &items);
-    QList<QVariantMap> parseSeasons(const QJsonObject &obj);
     QList<QVariantMap> toSeasonImages(const QList<QVariantMap> &seasons);
-    QNetworkReply* get(QUrl url);
-    QString getLocale();
     QString findHighestRatedImage(const QList<QVariantMap> &images, ARTWORK_TYPE type);
 };
 
