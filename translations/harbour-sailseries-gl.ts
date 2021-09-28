@@ -283,12 +283,12 @@
         <translation>Engadir as miñas series</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="41"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="40"/>
         <source>Already added</source>
         <translation>Xa está engadido</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="61"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="60"/>
         <source>Overview</source>
         <translation type="unfinished">Resume</translation>
     </message>
@@ -350,129 +350,94 @@
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="21"/>
-        <source>Notifications</source>
-        <translation>Notificacións</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="24"/>
-        <source>Publish notifications (experimental)</source>
-        <translation>Publicar notificacións (experimental)</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="25"/>
-        <source>SailSeries publishes notifications on app startup and when updating/adding series if an episode airs today.</source>
-        <translation>SailSeries publicada notificacións na inicialización da aplicación e cando actualizar / engadir serie, un episodio vai ao aire hoxe.</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="32"/>
         <source>Content updates</source>
         <translation>As actualizacións de contido</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="35"/>
-        <source>Periodic updates of content (experimental)</source>
-        <translation>Actualizacións periódicas de contido (experimental)</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="36"/>
-        <source>SailSeries refreshes local content every one hour. Requires app to be open at background. Might cause a small hickup when content is being updated.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="45"/>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="25"/>
         <source>SailSeries will update also the content of ended series when this is applied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="44"/>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="24"/>
         <source>Update content of ended series</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="52"/>
-        <source>Maintenance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="55"/>
-        <source>Remove duplicate episodes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>StartPage</name>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="21"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="10"/>
         <source>Monday</source>
         <translation>Luns</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="23"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="12"/>
         <source>Tuesday</source>
         <translation>Martes</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="25"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="14"/>
         <source>Wednesday</source>
         <translation>Mércores</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="27"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="16"/>
         <source>Thursday</source>
         <translation>Xoves</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="29"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="18"/>
         <source>Friday</source>
         <translation>Venres</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="31"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="20"/>
         <source>Saturday</source>
         <translation>Sábado</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="33"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="22"/>
         <source>Sunday</source>
         <translation>Domingo</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="51"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="40"/>
         <source>About</source>
         <translation>Acerca de</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="56"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="45"/>
         <source>Statistics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="61"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="50"/>
         <source>Settings</source>
         <translation>Configuración</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="66"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="55"/>
         <source>Search for a Series</source>
         <translation>Busqueda de series</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="71"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="60"/>
         <source>My Series</source>
         <translation>As miñas series</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="78"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="67"/>
         <source>This Week</source>
         <translation>Esta semana</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="135"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="124"/>
         <source>Season %1 Episode %2</source>
         <translation>Tempada %1 Episodio %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="168"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="152"/>
         <source>Nothing airs this week</source>
         <translation>Sen emisións nesta semana</translation>
     </message>

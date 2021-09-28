@@ -283,12 +283,12 @@
         <translation>Lisää omiin sarjoihin</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="41"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="40"/>
         <source>Already added</source>
         <translation>Lisätty aiemmin</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="61"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="60"/>
         <source>Overview</source>
         <translation type="unfinished">Kuvaus</translation>
     </message>
@@ -350,129 +350,94 @@
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="21"/>
-        <source>Notifications</source>
-        <translation>Ilmoitukset</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="24"/>
-        <source>Publish notifications (experimental)</source>
-        <translation>Julkaise ilmoituksia (kokeellinen)</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="25"/>
-        <source>SailSeries publishes notifications on app startup and when updating/adding series if an episode airs today.</source>
-        <translation>SailSeries julkaisee ilmoituksia sovelluksen käynnistyksen, sarjan päivityksen sekä sarjan lisäämisen yhteydessä.</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="32"/>
         <source>Content updates</source>
         <translation>Sisällön päivitykset</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="35"/>
-        <source>Periodic updates of content (experimental)</source>
-        <translation>Ajastetut sisällön päivitykset (kokeellinen)</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="36"/>
-        <source>SailSeries refreshes local content every one hour. Requires app to be open at background. Might cause a small hickup when content is being updated.</source>
-        <translation>SailSeries päivittää sisällön kerran tunnissa. Sovelluksen tulee tällöin olla auki taustalla. Saattaa aiheuttaa hidastelua päivityksen aikana.</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="45"/>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="25"/>
         <source>SailSeries will update also the content of ended series when this is applied.</source>
         <translation>Kun tämä on valittuna, SailSeries päivittää myös päättyneiden sarjojen sisällön.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="44"/>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="24"/>
         <source>Update content of ended series</source>
         <translation>Päivitä päättyneiden sarjojen sisältö.</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="52"/>
-        <source>Maintenance</source>
-        <translation>Kunnossapito</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="55"/>
-        <source>Remove duplicate episodes</source>
-        <translation>Poista päällekkäiset jaksot</translation>
     </message>
 </context>
 <context>
     <name>StartPage</name>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="21"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="10"/>
         <source>Monday</source>
         <translation>Maanantai</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="23"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="12"/>
         <source>Tuesday</source>
         <translation>Tiistai</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="25"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="14"/>
         <source>Wednesday</source>
         <translation>Keskiviikko</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="27"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="16"/>
         <source>Thursday</source>
         <translation>Torstai</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="29"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="18"/>
         <source>Friday</source>
         <translation>Perjantai</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="31"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="20"/>
         <source>Saturday</source>
         <translation>Lauantai</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="33"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="22"/>
         <source>Sunday</source>
         <translation>Sunnuntai</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="51"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="40"/>
         <source>About</source>
         <translation>Tietoa</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="56"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="45"/>
         <source>Statistics</source>
         <translation>Tilastot</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="61"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="50"/>
         <source>Settings</source>
         <translation>Asetukset</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="66"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="55"/>
         <source>Search for a Series</source>
         <translation>Etsi sarjaa</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="71"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="60"/>
         <source>My Series</source>
         <translation>Omat sarjat</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="78"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="67"/>
         <source>This Week</source>
         <translation>Tällä viikolla</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="135"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="124"/>
         <source>Season %1 Episode %2</source>
         <translation>Kausi %1 Jakso %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="168"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="152"/>
         <source>Nothing airs this week</source>
         <translation>Mitään ei lähetetä tällä viikolla</translation>
     </message>
