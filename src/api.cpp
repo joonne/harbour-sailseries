@@ -107,7 +107,6 @@ void Api::searchSeries(const QString &text)
 void Api::getAll(const int &seriesId)
 {
     getSeries(seriesId);
-    getTranslations(seriesId, "eng");
     getEpisodes(seriesId);
     //    getActors(seriesId);
 }
@@ -124,7 +123,7 @@ void Api::getSeries(const int &seriesId)
         if (!jsonDocument.isNull() && jsonDocument.object().value("data").isObject())
         {
             auto series = parseSeries(jsonDocument.object().value("data").toObject());
-            emit storeSeries(series);
+            getTranslations(seriesId, "eng", series);
 
             auto seasons = parseJsonArray(jsonDocument.object().value("data").toObject().value("seasons").toArray());
             auto seasonImages = toSeasonImages(seasons);
@@ -135,19 +134,25 @@ void Api::getSeries(const int &seriesId)
     });
 }
 
-void Api::getTranslations(const int &seriesId, const QString &language)
+void Api::getTranslations(const int &seriesId, const QString &language, const QVariantMap &series)
 {
     QUrl url(QString("%1/series/%2/translations/%3").arg(QString(MIRRORPATH)).arg(seriesId).arg(language));
     auto reply = get(url);
 
-    connect(reply, &QNetworkReply::finished, [this, reply, seriesId]()
+    connect(reply, &QNetworkReply::finished, [this, reply, seriesId, series]()
     {
         auto jsonDocument = QJsonDocument::fromJson(reply->readAll());
 
         if (!jsonDocument.isNull())
         {
-            auto translations = parseJsonObject(jsonDocument.object());
-            emit storeTranslations(seriesId, translations);
+            auto overview = jsonDocument.object().value("data").toObject().value("overview");
+            auto seriesCopy = QVariantMap(series);
+            seriesCopy.insert("overview", overview);
+
+            emit storeSeries(seriesCopy);
+        } else {
+            qDebug() << "Overview is missing, store series without it";
+            emit storeSeries(series);
         }
 
         reply->deleteLater();
