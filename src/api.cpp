@@ -303,6 +303,12 @@ QVariantMap Api::parseSeries(const QJsonObject &obj)
 
     for (auto key : keys)
     {
+        if (key == "name")
+        {
+            series.insert("seriesName", obj[key].toVariant());
+            continue;
+        }
+
         if (key == "airsDays" && obj[key].isObject())
         {
             series.insert(key, parseAirsDays(obj[key].toObject()));
@@ -362,6 +368,12 @@ QList<QVariantMap> Api::parseSearchResults(const QJsonArray &items)
 
         for (auto key : keys)
         {
+            if (key == "name")
+            {
+                result.insert("seriesName", item.toObject().value(key).toVariant());
+                continue;
+            }
+
             if (key == "id")
             {
                 continue;
