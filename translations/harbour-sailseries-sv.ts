@@ -437,7 +437,7 @@
         <translation>Säsong %1 Episod %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="152"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="153"/>
         <source>Nothing airs this week</source>
         <translation>Inget sänds denna vecka</translation>
     </message>

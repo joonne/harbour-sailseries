@@ -437,7 +437,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="152"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="153"/>
         <source>Nothing airs this week</source>
         <translation type="unfinished"></translation>
     </message>

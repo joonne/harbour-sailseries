@@ -63,6 +63,11 @@ Engine::Engine(QObject *parent) :
             SIGNAL(setMode(QString)),
             this,
             SLOT(setMode(QString)));
+
+    connect(m_searchListModel,
+            SIGNAL(getSeriesNames()),
+            m_dbmanager,
+            SLOT(getSeriesNames()));
 }
 
 Engine::~Engine()

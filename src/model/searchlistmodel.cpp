@@ -78,18 +78,22 @@ void SearchListModel::searchFinished(QList<QVariantMap> series)
 
 void SearchListModel::populateSearchModel(QList<QVariantMap> foundSeries)
 {
-    m_searchListModel.clear();
-    emit searchModelChanged();
-
-    for (auto series : foundSeries)
+    connect(m_dbmanager, &DatabaseManager::getSeriesNamesReady, [this, foundSeries](QSet<QString> seriesNames)
     {
-        // TODO: change this to be smarter somehow
-        series["isAdded"] = m_dbmanager->checkIfAdded(series["id"].toInt(), series["name"].toString());
-        auto seriesData = new SeriesData(this, series);
-        m_searchListModel.append(seriesData);
-    }
+        m_searchListModel.clear();
+        emit searchModelChanged();
 
-    emit searchModelChanged();
+        for (auto series : foundSeries)
+        {
+            series["isAdded"] = seriesNames.contains(series["seriesName"].toString());
+            auto seriesData = new SeriesData(0, series);
+            m_searchListModel.append(seriesData);
+        }
+
+        emit searchModelChanged();
+    });
+
+    emit getSeriesNames();
 }
 
 void SearchListModel::seriesStored(const int &seriesId)

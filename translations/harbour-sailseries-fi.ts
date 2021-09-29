@@ -437,7 +437,7 @@
         <translation>Kausi %1 Jakso %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="152"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="153"/>
         <source>Nothing airs this week</source>
         <translation>Mitään ei lähetetä tällä viikolla</translation>
     </message>
