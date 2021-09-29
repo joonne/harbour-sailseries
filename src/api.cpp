@@ -108,7 +108,6 @@ void Api::getAll(const int &seriesId)
 {
     getSeries(seriesId);
     getEpisodes(seriesId);
-    //    getActors(seriesId);
 }
 
 void Api::getSeries(const int &seriesId)
@@ -153,25 +152,6 @@ void Api::getTranslations(const int &seriesId, const QString &language, const QV
         } else {
             qDebug() << "Overview is missing, store series without it";
             emit storeSeries(series);
-        }
-
-        reply->deleteLater();
-    });
-}
-
-void Api::getActors(const int &seriesId)
-{
-    QUrl url(QString("%1/series/%2/actors").arg(QString(MIRRORPATH)).arg(seriesId));
-    auto reply = get(url);
-
-    connect(reply, &QNetworkReply::finished, [this, reply, seriesId]()
-    {
-        auto jsonDocument = QJsonDocument::fromJson(reply->readAll());
-
-        if (!jsonDocument.isNull())
-        {
-            auto actors = parseJsonArray(jsonDocument.array());
-            emit storeActors(seriesId, actors);
         }
 
         reply->deleteLater();
@@ -353,6 +333,21 @@ QVariantMap Api::parseSeries(const QJsonObject &obj)
 
         if (key == "seasons" && obj[key].isArray())
         {
+            continue;
+        }
+
+        if (key == "characters" && obj[key].isArray())
+        {
+            auto characters = parseJsonArray(obj[key].toArray());
+            auto personNames = QSet<QString>();
+
+            for (auto character : characters)
+            {
+                personNames.insert(character["personName"].toString());
+            }
+
+            series.insert("actors", personNames.toList().join("|"));
+
             continue;
         }
 

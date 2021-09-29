@@ -753,26 +753,6 @@ void DatabaseManager::setWatched(const int &episodeId, const int &seriesId, cons
     }
 }
 
-void DatabaseManager::storeActors(const int &seriesId, const QList<QVariantMap> &actors) const
-{
-    auto actorNames = QString("");
-
-    for (auto actor : actors)
-    {
-        actorNames += QString("|%1").arg(actor["name"].toString());
-    }
-
-    QSqlQuery query(m_db);
-    query.prepare("UPDATE Series "
-                  "SET actors = :actorNames "
-                  "WHERE id = :seriesId");
-    query.bindValue(":actors", actorNames);
-    query.bindValue(":seriesId", seriesId);
-    query.exec();
-
-    qDebug() << query.lastError();
-}
-
 void DatabaseManager::deleteSeries(const int &seriesId)
 {   
     startTransaction();
