@@ -27,7 +27,6 @@ signals:
     void readyToPopulateEpisodeDetails(QVariantMap episode);
     void storeEpisodes(const int&, const QList<QVariantMap>&);
     void storeFanartImageFor(const int&, const QString&);
-    void storeActors(const int&, const QList<QVariantMap>&);
     void storeSeasonImages(const int&, const QList<QVariantMap>&);
 
 public slots:
@@ -54,7 +53,6 @@ private:
     void getLanguages();
     void getSeries(const int &seriesId);
     void getTranslations(const int &seriesId, const QString &language, const QVariantMap &series);
-    void getActors(const int &seriesId);
     void getEpisodes(const int &seriesId, const int &page = 0);
 
     QVariantMap parseJsonObject(const QJsonObject &item);
