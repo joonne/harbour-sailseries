@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sv">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="sv" version="2.1">
 <context>
     <name>AboutPage</name>
     <message>
@@ -147,7 +145,7 @@
     <message>
         <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="86"/>
         <source>Overview</source>
-        <translation type="unfinished">Översikt</translation>
+        <translation>Översikt</translation>
     </message>
 </context>
 <context>
@@ -165,12 +163,12 @@
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="86"/>
         <source>Specials: Episode %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Specialerbjudande: Episod %1</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="87"/>
         <source>Season %1 Episode %2</source>
-        <translation type="unfinished">Säsong %1 Episod %2</translation>
+        <translation>Säsong %1 Episod %2</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="135"/>
@@ -257,12 +255,12 @@
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="83"/>
         <source>Specials</source>
-        <translation type="unfinished"></translation>
+        <translation>Specialerbjudande</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="83"/>
         <source>Season %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Säsong %1</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="96"/>
@@ -290,7 +288,7 @@
     <message>
         <location filename="../src/qml/pages/SeriesInfoPage.qml" line="60"/>
         <source>Overview</source>
-        <translation type="unfinished">Översikt</translation>
+        <translation>Översikt</translation>
     </message>
 </context>
 <context>
@@ -338,7 +336,7 @@
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="129"/>
         <source>Overview</source>
-        <translation type="unfinished">Översikt</translation>
+        <translation>Översikt</translation>
     </message>
 </context>
 <context>
