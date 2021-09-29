@@ -805,31 +805,24 @@ bool DatabaseManager::deleteAllSeries()
     return result ? this->commit() : this->rollback(), result;
 }
 
-bool DatabaseManager::checkIfAdded(const int &seriesId, const QString &name)
+void DatabaseManager::getSeriesNames()
 {
-    qDebug() << seriesId << name;
-    auto isAdded = false;
-    
     QSqlQuery query(m_db);
-    query.prepare("SELECT seriesName FROM Series WHERE id = :seriesId");
-    query.bindValue(":seriesId", seriesId);
-    query.exec();
+    query.exec("SELECT seriesName FROM Series;");
 
     qDebug() << query.lastError();
+
+    QSet<QString> seriesNames;
 
     if (query.isSelect())
     {
         while (query.next())
         {
-            if (query.value(0).toString() == name)
-            {
-                isAdded = true;
-            }
+            seriesNames.insert(query.value(0).toString());
         }
     }
 
-    // emit checkIfAddedReady(seriesId, isAdded);
-    return isAdded;
+    emit getSeriesNamesReady(seriesNames);
 }
 
 int DatabaseManager::watchedCount(int seriesId)

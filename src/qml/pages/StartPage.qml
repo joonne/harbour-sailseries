@@ -139,6 +139,7 @@ Page {
                         text: AirsTime + " @ " + Network
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.secondaryColor
+                        visible: AirsTime && Network
                     }
                 }
             }

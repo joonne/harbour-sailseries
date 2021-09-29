@@ -437,7 +437,7 @@
         <translation>Saison %1 Episode %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="152"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="153"/>
         <source>Nothing airs this week</source>
         <translation>Rien n&apos;est diffusé cette semaine</translation>
     </message>

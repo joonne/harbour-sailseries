@@ -66,7 +66,7 @@ public:
     int getAllSeasonsCount();
 
     QMultiMap<int, QMap<QString, QStringList> > getMostWatchedDirectors();
-    QMultiMap<int, QMap<QString, QStringList> > getMostWatchedActors();
+    QMultiMap<int, QMap<QString, QStringList> > getMostWatchedActors();    
 
 signals:
     void populateTodayModel(QList<QVariantMap>);
@@ -76,7 +76,7 @@ signals:
     void updateStatistics(QVariantMap);
     void populateSeasonList(QList<QVariantMap>);
     void populateEpisodeList(QList<QVariantMap>);
-    void checkIfAddedReady(int, bool);
+    void getSeriesNamesReady(QSet<QString>);
     void getSeriesIdsReady(QList<int>);
     void setWatchedReady(int, bool);
 
@@ -92,9 +92,9 @@ public slots:
     void setWatched(const int &episodeId, const int &seriesId, const bool &watched);
     void storeSeasonImages(const int &seriesId, const QList<QVariantMap> &seasonImages);
     void markSeasonAsWatched(const int &seriesId, const int &seasonNumber);
-    bool checkIfAdded(const int &seriesId, const QString &name);
     void getSeriesIds(const bool &includeEndedSeries);
     void deleteDuplicateEpisodes();
+    void getSeriesNames();
 
 private:
     QSqlDatabase m_db;
