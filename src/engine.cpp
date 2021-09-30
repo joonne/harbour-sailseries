@@ -128,11 +128,6 @@ void Engine::seriesStored(const int &seriesId)
     setLoading(false);
 }
 
-void Engine::deleteDuplicateEpisodes()
-{
-    emit deleteDuplicateEpisodesRequested();
-}
-
 void Engine::resetMode()
 {
    m_mode = "default";

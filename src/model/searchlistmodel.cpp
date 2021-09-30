@@ -24,16 +24,6 @@ SearchListModel::SearchListModel(QObject *parent, Api* api, DatabaseManager *dbm
             SIGNAL(seriesStored(int)),
             this,
             SLOT(seriesStored(int)));
-
-    connect(this,
-            SIGNAL(checkIfAddedRequested(int,QString)),
-            m_dbmanager,
-            SLOT(checkIfAdded(int,QString)));
-
-    connect(m_dbmanager,
-            SIGNAL(checkIfAddedReady(int,bool)),
-            this,
-            SLOT(checkIfAddedReady(int,bool)));
 }
 
 SearchListModel::~SearchListModel()
