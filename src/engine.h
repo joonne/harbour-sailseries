@@ -38,7 +38,6 @@ public:
     QString getMode();
 
     Q_INVOKABLE void updateModels();
-    Q_INVOKABLE void deleteDuplicateEpisodes();
     Q_INVOKABLE void resetMode();
 
 signals:
@@ -52,7 +51,6 @@ signals:
     void modeChanged();
     void setUpDb();
     void getEpisodeDetails(int);
-    void deleteDuplicateEpisodesRequested();
 
 public slots:
     void readyToUpdateModels();

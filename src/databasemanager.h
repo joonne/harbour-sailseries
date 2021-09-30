@@ -24,26 +24,21 @@ public:
     explicit DatabaseManager(QObject *parent = 0);
     ~DatabaseManager();
 
-    bool openDB();
-    bool deleteDB();
-    QSqlError lastError();
+    bool open();
     void close();
-    bool createDB();
-    void setUpDB();
+    void migrate();
 
-    bool startTransaction();
+    bool transaction();
     bool commit();
     bool rollback();
 
-    bool initializeInfoTable();
     bool createInfoTable();
     bool updateInfoTable(double version);
 
     bool createSeriesTable();
     bool createEpisodeTable();
     bool createBannerTable();
-
-    bool deleteAllSeries();
+    bool addRuntimeToEpisode();
 
     QVariantMap getNextEpisodeDetails(const int &seriesId) const;
     QString getStatus(const int &seriesId) const;
@@ -64,9 +59,6 @@ public:
     int getWatchedSeriesCount();
     int getWatchedSeasonsCount();
     int getAllSeasonsCount();
-
-    QMultiMap<int, QMap<QString, QStringList> > getMostWatchedDirectors();
-    QMultiMap<int, QMap<QString, QStringList> > getMostWatchedActors();    
 
 signals:
     void populateTodayModel(QList<QVariantMap>);
@@ -93,7 +85,6 @@ public slots:
     void storeSeasonImages(const int &seriesId, const QList<QVariantMap> &seasonImages);
     void markSeasonAsWatched(const int &seriesId, const int &seasonNumber);
     void getSeriesIds(const bool &includeEndedSeries);
-    void deleteDuplicateEpisodes();
     void getSeriesNames();
 
 private:
