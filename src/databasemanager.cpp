@@ -324,7 +324,7 @@ void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap
         auto image = episode["image"].toString();
         auto episodeNumber = episode["number"].toInt();
         auto seasonNumber = episode["seasonNumber"].toInt();
-        auto seasonId = episode["airedSeasonID"].toInt();
+        auto seasonId = episode["seasonId"].toInt();
         auto name = episode["name"].toString();
         auto firstAired = episode["aired"].toString();
         auto id = episode["id"].toInt();
@@ -334,6 +334,7 @@ void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap
         auto guestStars = episode["guestStars"].toStringList().join(", "); // need to find
         auto writers = episode["writers"].toStringList().join(", "); // need to find
         auto watched = 0;
+        auto runtime = episode["runtime"].toInt();
 
         // important!
         overview.replace("'", "''");
@@ -356,8 +357,8 @@ void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap
                 }
             }
             
-            query.prepare("INSERT OR REPLACE INTO Episode (id, episodeName, episodeNumber, firstAired, guestStars, language, overview, seasonNumber, writer, absoluteNumber, filename, lastupdated, seasonID, seriesID, watched) "
-                          "VALUES (:id, :episodeName, :episodeNumber, :firstAired, :guestStars, :language, :overview, :seasonNumber, :writer, :absoluteNumber, :filename, :lastUpdated, :seasonId, :seriesId, :watched)");
+            query.prepare("INSERT OR REPLACE INTO Episode (id, episodeName, episodeNumber, firstAired, guestStars, language, overview, seasonNumber, writer, absoluteNumber, filename, lastupdated, seasonID, seriesID, watched, runtime) "
+                          "VALUES (:id, :episodeName, :episodeNumber, :firstAired, :guestStars, :language, :overview, :seasonNumber, :writer, :absoluteNumber, :filename, :lastUpdated, :seasonId, :seriesId, :watched, :runtime)");
             query.bindValue(":id", id);
             query.bindValue(":episodeName", name);
             query.bindValue(":episodeNumber", episodeNumber);
@@ -373,6 +374,7 @@ void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap
             query.bindValue(":seasonId", seasonId);
             query.bindValue(":seriesId", seriesId);
             query.bindValue(":watched", watched);
+            query.bindValue(":runtime", runtime);
             query.exec();
 
             qDebug() << query.lastError();
@@ -1036,8 +1038,8 @@ int DatabaseManager::getWatchedEpisodesDuration()
 
     QSqlQuery query(m_db);
     query.exec("SELECT SUM(runtime) "
-               "FROM series "
-               "LEFT JOIN episode ON episode.seriesID = series.id AND episode.watched = 1");
+               "FROM episode "
+               "WHERE episode.watched = 1");
 
     qDebug() << query.lastError();
 
@@ -1058,8 +1060,8 @@ double DatabaseManager::getAverageWatchedEpisodesDuration()
 
     QSqlQuery query(m_db);
     query.exec("SELECT AVG(runtime) "
-               "FROM series "
-               "LEFT JOIN episode ON episode.seriesID = series.id AND episode.watched = 1");
+               "FROM episode "
+               "WHERE episode.watched = 1");
 
     qDebug() << query.lastError();
 
