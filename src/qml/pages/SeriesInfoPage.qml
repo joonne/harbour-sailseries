@@ -31,7 +31,6 @@ Page {
                 text: qsTr("Add to my series")
                 onClicked: {
                     engine.SearchModel.getAll(id)
-                    appWindow.notificationhandler.publish("summary", "body", "previewSummary", "previewBody")
                 }
             }
 

@@ -3,51 +3,63 @@
 DatabaseManager::DatabaseManager(QObject *parent) :
     QObject(parent)
 {
-    setUpDB();
+    migrate();
 }
 
 DatabaseManager::~DatabaseManager()
 {
-    this->close();
+    close();
 }
 
-void DatabaseManager::setUpDB()
+void DatabaseManager::migrate()
 {
-    if (openDB())
+    if (!open())
     {
-        if (m_db.tables().size() == 0)
+        qDebug() << "Database could not be opened!";
+        return;
+    }
+
+    if (m_db.tables().size() == 0)
+    {
+        transaction();
+        if (createInfoTable() && createSeriesTable() && createEpisodeTable())
         {
-            createDB();
-            
+            updateInfoTable(1);
+            commit();
         }
-        else
+    }
+
+    QSqlQuery query(m_db);
+    query.exec("SELECT name, version FROM information");
+    qDebug() << query.lastError();
+
+    if (query.isSelect())
+    {
+        while (query.next())
         {
-            
-            QSqlQuery query(m_db);
-            query.exec("SELECT name, version FROM information");
-            if (query.isSelect())
+            auto name = query.value(0).toString();
+            auto version = query.value(1).toInt();
+            qDebug() << "App name: " << name;
+            qDebug() << "Database version: " << version;
+
+            if (version == 1)
             {
-                while (query.next())
+                if (createBannerTable())
                 {
-                    auto name = query.value(0).toString();
-                    auto version = query.value(1).toDouble();
-                    qDebug() << "App name: " << name;
-                    qDebug() << "Database version: " << version;
-                    
-                    if (version == 1.0)
-                    {
-                        if (createBannerTable())
-                        {
-                            updateInfoTable(2.0);
-                        }
-                    }
+                    updateInfoTable(2);
+                }
+            } else if (version == 2)
+            {
+                if (addRuntimeToEpisode())
+                {
+                    updateInfoTable(3);
                 }
             }
         }
     }
 }
 
-bool DatabaseManager::openDB()
+bool DatabaseManager::open()
 {
     auto dbname = "sailSeries.db.sqlite";
     auto dbpath = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QDir::separator() + dbname;
@@ -63,26 +75,12 @@ bool DatabaseManager::openDB()
     return m_db.open();
 }
 
-QSqlError DatabaseManager::lastError()
-{
-    return m_db.lastError();
-}
-
 void DatabaseManager::close()
 {
-    m_db.close();   
-}
-
-bool DatabaseManager::deleteDB()
-{
     m_db.close();
-    
-    QString dbname = "sailSeries.db.sqlite";
-    QString dbpath = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QDir::separator() + dbname;
-    return QFile::remove(dbpath);
 }
 
-bool DatabaseManager::startTransaction()
+bool DatabaseManager::transaction()
 {
     return m_db.transaction();
 }
@@ -97,35 +95,24 @@ bool DatabaseManager::rollback()
     return m_db.rollback();
 }
 
-bool DatabaseManager::initializeInfoTable()
-{
-    bool ret = false;
-
-    if (createInfoTable())
-    {
-        QSqlQuery query(m_db);
-        query.prepare("INSERT INTO information VALUES(:version, :name)");
-        query.bindValue(":version", 1.0);
-        query.bindValue(":name", "SailSeries");
-        ret = query.exec();
-    }
-
-    return ret;
-}
-
 bool DatabaseManager::createInfoTable()
 {
-    bool result = false;
+    bool isCreated = false;
+    bool isInitted = false;
     
     if (m_db.isOpen())
     {
         QSqlQuery query(m_db);
-        result = query.exec("CREATE TABLE information"
-                         "(version real primary key, "
-                         "name varchar(50))");
+        isCreated = query.exec("CREATE TABLE information"
+                         "(version REAL DEFAULT 0 PRIMARY KEY, "
+                         "name VARCHAR(50) DEFAULT SailSeries)");
+        qDebug() << query.lastError();
+
+        isInitted = query.exec("INSERT INTO information VALUES(0, 'SailSeries');");
+        qDebug()<< query.lastError();
     }
 
-    return result;
+    return isCreated && isInitted;
 }
 
 bool DatabaseManager::updateInfoTable(double version)
@@ -138,29 +125,10 @@ bool DatabaseManager::updateInfoTable(double version)
         query.prepare("UPDATE information SET version = :version");
         query.bindValue(":version", version);
         result = query.exec();
+        qDebug() << query.lastError();
     }
 
     return result;
-}
-
-bool DatabaseManager::createDB()
-{    
-    if (m_db.isOpen())
-    {
-        
-        if (initializeInfoTable())
-        {
-            qDebug() << "information table created";
-        }
-        
-        if (createSeriesTable() && createEpisodeTable() && createBannerTable())
-        {
-            qDebug() << "Tables created";   
-            updateInfoTable(2.0);
-        }
-    }
-
-    return true;
 }
 
 bool DatabaseManager::createSeriesTable()
@@ -194,6 +162,7 @@ bool DatabaseManager::createSeriesTable()
                          "poster VARCHAR(50), "
                          "zap2itID VARCHAR(20), "
                          "watched INTEGER DEFAULT 0)");
+        qDebug() << query.lastError();
     }
 
     return result;
@@ -233,6 +202,7 @@ bool DatabaseManager::createEpisodeTable()
                          "thumbHeight INTEGER, "
                          "thumbWidth INTEGER, "
                          "watched INTEGER DEFAULT 0)");
+        qDebug() << query.lastError();
     }
 
     return result;
@@ -252,54 +222,60 @@ bool DatabaseManager::createBannerTable()
                          "bannerType2 VARCHAR(50), "
                          "language VARCHAR(2), "
                          "season INTEGER)");
+        qDebug() << query.lastError();
     }
 
     return result;
 }
 
-void DatabaseManager::deleteDuplicateEpisodes()
+bool DatabaseManager::addRuntimeToEpisode()
 {
+    auto result = false;
+
     if (m_db.isOpen())
     {
         QSqlQuery query(m_db);
-        query.exec("DELETE FROM episode "
-                   "WHERE (firstAired = '' OR firstAired IS NULL) AND (episodeName IS NULL OR episodeName = '')");
+        result = query.exec("ALTER TABLE Episode ADD COLUMN runtime INTEGER;");
+        qDebug() << query.lastError();
     }
+
+    return result;
 }
 
 void DatabaseManager::storeSeries(const QVariantMap &series)
-{   
-    auto id = series["id"].toInt();
-    auto actors = series["actors"].toString();
-    auto airsDayOfWeek = series["airsDayOfWeek"].toString();
-    auto airsTime = series["airsTime"].toString();
-    auto contentRating = series["contentRating"].toString();
-    auto firstAired = series["firstAired"].toString();
-    auto genre = series["genre"].toStringList().join(",");
-    auto imdbId = series["imdbId"].toString();
-    auto language = series["language"].toString();
-    auto network = series["network"].toString();
-    auto overview = series["overview"].toString();
-    auto rating = series["siteRating"].toDouble();
-    auto ratingCount = series["siteRatingCount"].toInt();
-    auto runtime = series["runtime"].toInt();
-    auto seriesName = series["seriesName"].toString();
-    auto status = series["status"].toString();
-    auto added = series["added"].toString();
-    auto addedBy = series["addedBy"].toInt();
-    auto banner = series["banner"].toString();
-    auto fanart = series["fanart"].toString();
+{
+    auto added = series["added"].toString(); // migrate away
+    auto addedBy = series["addedBy"].toInt(); // migrate away
+    auto actors = series["actors"].toString(); // => characters
+    auto airsDayOfWeek = series["airsDays"].toString(); // needed
+    auto airsTime = series["airsTime"].toString(); // needed
+    auto banner = series["banner"].toString(); // => artworks
+    auto contentRating = series["contentRating"].toString(); // ??
+    auto fanart = series["fanart"].toString(); // nicetohave
+    auto firstAired = series["firstAired"].toString(); // needed
+    auto genres = series["genres"].toString(); // needed
+    auto id = series["id"].toInt(); // needed
+    auto remoteIds = series["remoteIds"].toMap();
+    auto imdbId = remoteIds["IMDB"].toString(); // needed
+    auto zap2itId = remoteIds["Zap2It"].toString(); // migrate away
+    auto language = series["language"].toString(); // needed
     auto lastUpdated = series["lastUpdated"].toString();
-    auto poster = series["poster"].toString();
-    auto zap2itId = series["zap2itId"].toString();
+    auto network = series["network"].toString(); // needed
+    auto overview = series["overview"].toString(); // needed
+    auto poster = series["poster"].toString(); // needed
+    auto rating = series["score"].toDouble(); // needed
+    auto ratingCount = series["siteRatingCount"].toInt(); // nicetohave
+    auto runtime = series["runtime"].toInt(); // needed
+    auto seriesName = series["seriesName"].toString(); // needed
+    auto status = series["status"].toString(); // needed
     auto watched = 0;
     
     overview.replace("'", "''");
     actors.replace("'", "''");
     seriesName.replace("'", "''");
 
-    startTransaction();
-        
+    transaction();
+
     if (m_db.isOpen())
     {
         QSqlQuery query(m_db);
@@ -311,7 +287,7 @@ void DatabaseManager::storeSeries(const QVariantMap &series)
         query.bindValue(":airsTime", airsTime);
         query.bindValue(":contentRating", contentRating);
         query.bindValue(":firstAired", firstAired);
-        query.bindValue(":genre", genre);
+        query.bindValue(":genre", genres);
         query.bindValue(":imdbId", imdbId);
         query.bindValue(":language", language);
         query.bindValue(":network", network);
@@ -340,28 +316,29 @@ void DatabaseManager::storeSeries(const QVariantMap &series)
 
 void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap> &episodes)
 {
-    startTransaction();
+    transaction();
 
     for (auto episode : episodes)
     {
-        auto absoluteNumber = episode["absoluteNumber"].toInt();
-        auto filename = episode["filename"].toString();
-        auto episodeNumber = episode["airedEpisodeNumber"].toInt();
-        auto seasonNumber = episode["airedSeason"].toInt();
-        auto seasonId = episode["airedSeasonID"].toInt();
-        auto episodeName = episode["episodeName"].toString();
-        auto firstAired = episode["firstAired"].toString();
+        auto absoluteNumber = episode["number"].toInt();
+        auto image = episode["image"].toString();
+        auto episodeNumber = episode["number"].toInt();
+        auto seasonNumber = episode["seasonNumber"].toInt();
+        auto seasonId = episode["seasonId"].toInt();
+        auto name = episode["name"].toString();
+        auto firstAired = episode["aired"].toString();
         auto id = episode["id"].toInt();
         auto language = episode["language"].toMap()["overview"].toString();
         auto lastUpdated = episode["lastUpdated"].toString();
         auto overview = episode["overview"].toString();
-        auto guestStars = episode["guestStars"].toStringList().join(", ");
-        auto writers = episode["writers"].toStringList().join(", ");
+        auto guestStars = episode["guestStars"].toStringList().join(", "); // need to find
+        auto writers = episode["writers"].toStringList().join(", "); // need to find
         auto watched = 0;
+        auto runtime = episode["runtime"].toInt();
 
         // important!
         overview.replace("'", "''");
-        episodeName.replace("'", "''");
+        name.replace("'", "''");
         
         if (m_db.isOpen())
         {
@@ -380,10 +357,10 @@ void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap
                 }
             }
             
-            query.prepare("INSERT OR REPLACE INTO Episode (id, episodeName, episodeNumber, firstAired, guestStars, language, overview, seasonNumber, writer, absoluteNumber, filename, lastupdated, seasonID, seriesID, watched) "
-                          "VALUES (:id, :episodeName, :episodeNumber, :firstAired, :guestStars, :language, :overview, :seasonNumber, :writer, :absoluteNumber, :filename, :lastUpdated, :seasonId, :seriesId, :watched)");
+            query.prepare("INSERT OR REPLACE INTO Episode (id, episodeName, episodeNumber, firstAired, guestStars, language, overview, seasonNumber, writer, absoluteNumber, filename, lastupdated, seasonID, seriesID, watched, runtime) "
+                          "VALUES (:id, :episodeName, :episodeNumber, :firstAired, :guestStars, :language, :overview, :seasonNumber, :writer, :absoluteNumber, :filename, :lastUpdated, :seasonId, :seriesId, :watched, :runtime)");
             query.bindValue(":id", id);
-            query.bindValue(":episodeName", episodeName);
+            query.bindValue(":episodeName", name);
             query.bindValue(":episodeNumber", episodeNumber);
             query.bindValue(":firstAired", firstAired);
             query.bindValue(":guestStars", guestStars);
@@ -392,11 +369,12 @@ void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap
             query.bindValue(":seasonNumber", seasonNumber);
             query.bindValue(":writer", writers);
             query.bindValue(":absoluteNumber", absoluteNumber);
-            query.bindValue(":filename", filename);
+            query.bindValue(":filename", image);
             query.bindValue(":lastUpdated", lastUpdated);
             query.bindValue(":seasonId", seasonId);
             query.bindValue(":seriesId", seriesId);
             query.bindValue(":watched", watched);
+            query.bindValue(":runtime", runtime);
             query.exec();
 
             qDebug() << query.lastError();
@@ -408,7 +386,7 @@ void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap
 
 void DatabaseManager::storeSeasonImages(const int &seriesId, const QList<QVariantMap> &banners)
 {
-    startTransaction();
+    transaction();
 
     for (auto banner : banners)
     {
@@ -460,7 +438,7 @@ void DatabaseManager::getSeriesIds(const bool &includeEndedSeries)
 
     if (m_db.isOpen())
     {
-        startTransaction();
+        transaction();
 
         QSqlQuery query(m_db);
         query.exec(queryString);
@@ -752,152 +730,53 @@ void DatabaseManager::setWatched(const int &episodeId, const int &seriesId, cons
     }
 }
 
-void DatabaseManager::storePosterImageFor(const int &seriesId, const QString &posterImage) const
-{
-    QSqlQuery query(m_db);
-    query.prepare(QString("UPDATE Series "
-                          "SET poster = :poster "
-                          "WHERE id = :seriesId"));
-    query.bindValue(":poster", posterImage);
-    query.bindValue(":seriesId", seriesId);
-    query.exec();
-
-    qDebug() << query.lastError();
-}
-
-void DatabaseManager::storeBannerImageFor(const int &seriesId, const QString &bannerImage) const
-{
-    QSqlQuery query(m_db);
-    query.prepare(QString("UPDATE Series "
-                          "SET banner = :banner "
-                          "WHERE id = :seriesId"));
-    query.bindValue(":banner", bannerImage);
-    query.bindValue(":seriesId", seriesId);
-    query.exec();
-
-    qDebug() << query.lastError();
-}
-
-void DatabaseManager::storeFanartImageFor(const int &seriesId, const QString &fanartImage) const
-{
-    QSqlQuery query(m_db);
-    query.prepare(QString("UPDATE Series "
-                          "SET fanart = :fanart "
-                          "WHERE id = :seriesId"));
-    query.bindValue(":fanart", fanartImage);
-    query.bindValue(":seriesId", seriesId);
-    query.exec();
-
-    qDebug() << query.lastError();
-}
-
-void DatabaseManager::storeActors(const int &seriesId, const QList<QVariantMap> &actors) const
-{
-    auto actorNames = QString("");
-
-    for (auto actor : actors)
-    {
-        actorNames += QString("|%1").arg(actor["name"].toString());
-    }
-
-    QSqlQuery query(m_db);
-    query.prepare("UPDATE Series "
-                  "SET actors = :actorNames "
-                  "WHERE id = :seriesId");
-    query.bindValue(":actors", actorNames);
-    query.bindValue(":seriesId", seriesId);
-    query.exec();
-
-    qDebug() << query.lastError();
-}
-
 void DatabaseManager::deleteSeries(const int &seriesId)
-{
-    auto seriesDeleted = false;
-    auto episodesDeleted = false;
-    auto bannersDeleted = false;
-    
-    this->startTransaction();
+{   
+    transaction();
     
     QSqlQuery query(m_db);
     query.prepare("DELETE FROM Series WHERE id = :seriesId");
     query.bindValue(":seriesId", seriesId);
-    seriesDeleted = query.exec();
+    auto seriesDeleted = query.exec();
 
-    if (seriesDeleted)
-    {
-        query.prepare("DELETE FROM Episode WHERE seriesID = :seriesId");
-        query.bindValue(":seriesId", seriesId);
-        episodesDeleted = query.exec();
+    query.prepare("DELETE FROM Episode WHERE seriesID = :seriesId");
+    query.bindValue(":seriesId", seriesId);
+    auto episodesDeleted = query.exec();
 
-        if (seriesDeleted && episodesDeleted)
-        {
-            query.prepare("DELETE FROM Banner WHERE seriesID = :seriesId");
-            query.bindValue(":series", seriesId);
-            bannersDeleted = query.exec();
-        }
-    }
+    query.prepare("DELETE FROM Banner WHERE seriesID = :seriesId");
+    query.bindValue(":seriesId", seriesId);
+    auto bannersDeleted = query.exec();
 
     if (seriesDeleted && episodesDeleted && bannersDeleted)
     {
-        this->commit();
+        commit();
         emit this->seriesDeleted();
     }
     else
     {
-        this->rollback();
+        qDebug() << "Delete failed for " << seriesId;
+        rollback();
     }
 }
 
-bool DatabaseManager::deleteAllSeries()
+void DatabaseManager::getSeriesNames()
 {
-    auto seriesDeleted = false;
-    auto episodesDeleted = false;
-    auto bannersDeleted = false;
-    
-    this->startTransaction();
-    
     QSqlQuery query(m_db);
-    seriesDeleted = query.exec("DELETE FROM Series");
-    if (seriesDeleted)
-    {
-        query.exec("DELETE FROM Episode");
-        if (seriesDeleted && episodesDeleted)
-        {
-            bannersDeleted = query.exec("DELETE FROM Banner");
-        }
-    }
-     
-    auto result = seriesDeleted && episodesDeleted && bannersDeleted;
-    
-    return result ? this->commit() : this->rollback(), result;
-}
-
-bool DatabaseManager::checkIfAdded(const int &seriesId, const QString &name)
-{
-    qDebug() << seriesId << name;
-    auto isAdded = false;
-    
-    QSqlQuery query(m_db);
-    query.prepare("SELECT seriesName FROM Series WHERE id = :seriesId");
-    query.bindValue(":seriesId", seriesId);
-    query.exec();
+    query.exec("SELECT seriesName FROM Series;");
 
     qDebug() << query.lastError();
+
+    QSet<QString> seriesNames;
 
     if (query.isSelect())
     {
         while (query.next())
         {
-            if (query.value(0).toString() == name)
-            {
-                isAdded = true;
-            }
+            seriesNames.insert(query.value(0).toString());
         }
     }
 
-    // emit checkIfAddedReady(seriesId, isAdded);
-    return isAdded;
+    emit getSeriesNamesReady(seriesNames);
 }
 
 int DatabaseManager::watchedCount(int seriesId)
@@ -1159,8 +1038,8 @@ int DatabaseManager::getWatchedEpisodesDuration()
 
     QSqlQuery query(m_db);
     query.exec("SELECT SUM(runtime) "
-               "FROM series "
-               "LEFT JOIN episode ON episode.seriesID = series.id AND episode.watched = 1");
+               "FROM episode "
+               "WHERE episode.watched = 1");
 
     qDebug() << query.lastError();
 
@@ -1181,8 +1060,8 @@ double DatabaseManager::getAverageWatchedEpisodesDuration()
 
     QSqlQuery query(m_db);
     query.exec("SELECT AVG(runtime) "
-               "FROM series "
-               "LEFT JOIN episode ON episode.seriesID = series.id AND episode.watched = 1");
+               "FROM episode "
+               "WHERE episode.watched = 1");
 
     qDebug() << query.lastError();
 
@@ -1376,108 +1255,4 @@ int DatabaseManager::getAllSeasonsCount()
     }
 
     return count;
-}
-
-QMultiMap<int, QMap<QString, QStringList> > DatabaseManager::getMostWatchedDirectors()
-{
-    QList<QMap<QString, QString> > directors;
-
-    QSqlQuery query(m_db);
-    query.exec("SELECT director, seriesName "
-               "FROM series "
-               "LEFT JOIN episode "
-               "ON episode.seriesID = series.id AND episode.watched = 1");
-
-    if (query.isSelect())
-    {
-        while (query.next())
-        {
-            auto directorString = query.value(0).toString();
-            auto seriesName = query.value(1).toString();
-
-            if (directorString.contains("|"))
-            {
-                auto parsed = directorString.split("|");
-                parsed.removeAll("");
-                for (auto director : parsed)
-                {
-                    QMap<QString, QString> temp;
-                    temp.insert(director, seriesName);
-                    directors.append(temp);
-                }
-            }
-            else
-            {
-                QMap<QString, QString> temp;
-                temp.insert(directorString, seriesName);
-                directors.append(temp);
-            }
-        }
-    }
-
-    QMap<QString, QStringList> occurences;
-    for (auto director : directors)
-    {
-        occurences[director.firstKey()].append(director.first());
-    }
-
-    QMultiMap<int, QMap<QString, QStringList> > result;
-    auto itr = occurences.begin();
-    while (itr != occurences.end())
-    {
-        auto size = itr.value().size();
-        QMap<QString, QStringList> temp;
-        temp.insert(itr.key(), itr.value());
-        result.insert(size, temp);
-        ++itr;
-    }
-
-    qDebug() << result;
-    return result;
-}
-
-QMultiMap<int, QMap<QString, QStringList> > DatabaseManager::getMostWatchedActors()
-{
-    QList<QMultiMap<QString, QString> > actors;
-
-    QSqlQuery query(m_db);
-    query.exec("SELECT actors, seriesName FROM series");
-
-    if (query.isSelect())
-    {
-        while (query.next())
-        {
-            auto actor = query.value(0).toString();
-            auto seriesName = query.value(1).toString();
-
-            auto parsed = actor.split("|");
-            parsed.removeAll("");
-            for (auto actor : parsed)
-            {
-                QMultiMap<QString, QString> temp;
-                temp.insert(actor, seriesName);
-                actors.append(temp);
-            }
-        }
-    }
-
-    QMap<QString, QStringList> occurences;
-    for (auto item : actors)
-    {
-        occurences[item.firstKey()].append(item.first());
-    }
-
-    QMultiMap<int, QMap<QString, QStringList> > result;
-    auto itr = occurences.begin();
-    while (itr != occurences.end())
-    {
-        auto size = itr.value().size();
-        QMap<QString, QStringList> temp;
-        temp.insert(itr.key(), itr.value());
-        result.insert(size, temp);
-        ++itr;
-    }
-
-    qDebug() << result;
-    return result;
 }

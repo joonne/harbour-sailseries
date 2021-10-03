@@ -4,18 +4,7 @@ import Sailfish.Silica 1.0
 Page {
     id: startpage
 
-    function checkNotification(weekday, seriesName, episodeName, airsTime) {
-        if (weekday === new Date().toLocaleString(Qt.locale("en_EN"), "dddd")) {
-            var summary = seriesName;
-            var body = episodeName ? episodeName + '\n' + airsTime : airsTime;
-            var previewSummary = seriesName;
-            var previewBody = episodeName;
-            notificationhandler.publish(summary, body, previewSummary, previewBody);
-        }
-    }
-
     function getWeekday(weekday) {
-
         switch(weekday) {
         case "Monday":
             return qsTr("Monday");
@@ -117,7 +106,7 @@ Page {
                                        episodeId: NextEpisodeId,
                                        seriesId: ID,
                                        seasonNumber: NextEpisodeSeasonNumber,
-                                   filename: NextEpisodeFilename });
+                                       filename: NextEpisodeFilename });
                 }
 
                 Column {
@@ -150,12 +139,8 @@ Page {
                         text: AirsTime + " @ " + Network
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.secondaryColor
+                        visible: AirsTime && Network
                     }
-                }
-
-                Component.onCompleted: {
-                    if (settings.getNotificationPreference())
-                        checkNotification(AirsDayOfWeek, SeriesName, NextEpisodeName, AirsTime)
                 }
             }
 

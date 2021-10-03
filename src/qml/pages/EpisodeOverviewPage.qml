@@ -35,7 +35,7 @@ Page {
 
             Image {
                 id: banner
-                source: "http://thetvdb.com/banners/" + filename
+                source: "http://thetvdb.com" + filename
                 anchors.left: parent.left
                 anchors.leftMargin: (episodeoverviewpage.width - banner.width) / 2
 
@@ -86,22 +86,6 @@ Page {
                 label: qsTr("Overview")
                 text:  episodeOverview
                 readOnly: true
-            }
-
-            TextArea {
-                id: writerField
-                width: episodeoverviewpage.width
-                label: writers.indexOf(",") === -1 ? qsTr("Writer") : qsTr("Writers")
-                readOnly: true
-                text: writers
-            }
-
-            TextArea {
-                id: guestStarsField
-                width: episodeoverviewpage.width
-                label: qsTr("Guest Stars")
-                readOnly: true
-                text: guestStars
             }
         }
     }

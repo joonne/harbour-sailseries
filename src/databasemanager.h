@@ -24,26 +24,21 @@ public:
     explicit DatabaseManager(QObject *parent = 0);
     ~DatabaseManager();
 
-    bool openDB();
-    bool deleteDB();
-    QSqlError lastError();
+    bool open();
     void close();
-    bool createDB();
-    void setUpDB();
+    void migrate();
 
-    bool startTransaction();
+    bool transaction();
     bool commit();
     bool rollback();
 
-    bool initializeInfoTable();
     bool createInfoTable();
     bool updateInfoTable(double version);
 
     bool createSeriesTable();
     bool createEpisodeTable();
     bool createBannerTable();
-
-    bool deleteAllSeries();
+    bool addRuntimeToEpisode();
 
     QVariantMap getNextEpisodeDetails(const int &seriesId) const;
     QString getStatus(const int &seriesId) const;
@@ -65,9 +60,6 @@ public:
     int getWatchedSeasonsCount();
     int getAllSeasonsCount();
 
-    QMultiMap<int, QMap<QString, QStringList> > getMostWatchedDirectors();
-    QMultiMap<int, QMap<QString, QStringList> > getMostWatchedActors();
-
 signals:
     void populateTodayModel(QList<QVariantMap>);
     void populateBannerList(QList<QVariantMap>);
@@ -76,7 +68,7 @@ signals:
     void updateStatistics(QVariantMap);
     void populateSeasonList(QList<QVariantMap>);
     void populateEpisodeList(QList<QVariantMap>);
-    void checkIfAddedReady(int, bool);
+    void getSeriesNamesReady(QSet<QString>);
     void getSeriesIdsReady(QList<int>);
     void setWatchedReady(int, bool);
 
@@ -90,15 +82,10 @@ public slots:
     void storeEpisodes(const int &seriesId, const QList<QVariantMap> &episodes);
     void getStatistics();
     void setWatched(const int &episodeId, const int &seriesId, const bool &watched);
-    void storePosterImageFor(const int &seriesId, const QString &posterImage) const;
-    void storeBannerImageFor(const int &seriesId, const QString &bannerImage) const;
-    void storeFanartImageFor(const int &seriesId, const QString &fanartImage) const;
-    void storeActors(const int &seriesId, const QList<QVariantMap> &actors) const;
     void storeSeasonImages(const int &seriesId, const QList<QVariantMap> &seasonImages);
     void markSeasonAsWatched(const int &seriesId, const int &seasonNumber);
-    bool checkIfAdded(const int &seriesId, const QString &name);
     void getSeriesIds(const bool &includeEndedSeries);
-    void deleteDuplicateEpisodes();
+    void getSeriesNames();
 
 private:
     QSqlDatabase m_db;

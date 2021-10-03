@@ -147,22 +147,7 @@
     <message>
         <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="86"/>
         <source>Overview</source>
-        <translation type="unfinished">Översikt</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="94"/>
-        <source>Writer</source>
-        <translation>Författare</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="94"/>
-        <source>Writers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="102"/>
-        <source>Guest Stars</source>
-        <translation>Gäststjärnor</translation>
+        <translation>Översikt</translation>
     </message>
 </context>
 <context>
@@ -180,12 +165,12 @@
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="86"/>
         <source>Specials: Episode %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Specialerbjudande: Episod %1</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="87"/>
         <source>Season %1 Episode %2</source>
-        <translation type="unfinished">Säsong %1 Episod %2</translation>
+        <translation>Säsong %1 Episod %2</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="135"/>
@@ -272,12 +257,12 @@
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="83"/>
         <source>Specials</source>
-        <translation type="unfinished"></translation>
+        <translation>Specialerbjudande</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="83"/>
         <source>Season %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Säsong %1</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="96"/>
@@ -298,14 +283,14 @@
         <translation>Lägg till bland mina serier</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="41"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="40"/>
         <source>Already added</source>
         <translation>Redan tillagd</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="61"/>
+        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="60"/>
         <source>Overview</source>
-        <translation type="unfinished">Översikt</translation>
+        <translation>Översikt</translation>
     </message>
 </context>
 <context>
@@ -353,7 +338,7 @@
     <message>
         <location filename="../src/qml/pages/SeriesPage.qml" line="129"/>
         <source>Overview</source>
-        <translation type="unfinished">Översikt</translation>
+        <translation>Översikt</translation>
     </message>
 </context>
 <context>
@@ -365,129 +350,94 @@
     </message>
     <message>
         <location filename="../src/qml/pages/SettingsPage.qml" line="21"/>
-        <source>Notifications</source>
-        <translation>Aviseringar</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="24"/>
-        <source>Publish notifications (experimental)</source>
-        <translation>Publicera meddelanden (experimentell)</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="25"/>
-        <source>SailSeries publishes notifications on app startup and when updating/adding series if an episode airs today.</source>
-        <translation>SailSeries publicerar meddelanden om app start och när du uppdaterar / lägger till serien om en episod sänds idag.</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="32"/>
         <source>Content updates</source>
         <translation>Innehållsuppdateringar</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="35"/>
-        <source>Periodic updates of content (experimental)</source>
-        <translation>Regelbundna uppdateringar av innehåll (experimentell)</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="36"/>
-        <source>SailSeries refreshes local content every one hour. Requires app to be open at background. Might cause a small hickup when content is being updated.</source>
-        <translation>SailSeries uppdaterar lokalt innehåll varje timma. Detta kräver att appen är öppen i bakgrunden. Det kan uppstå ett litet lagg när innehållet uppdateras.</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="45"/>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="25"/>
         <source>SailSeries will update also the content of ended series when this is applied.</source>
         <translation>SailSeries uppdaterar också innehållet för avslutade serier när detta tillämpas.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="44"/>
+        <location filename="../src/qml/pages/SettingsPage.qml" line="24"/>
         <source>Update content of ended series</source>
         <translation>Uppdatera innehållet för avslutade serier</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="52"/>
-        <source>Maintenance</source>
-        <translation>Underhåll</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="55"/>
-        <source>Remove duplicate episodes</source>
-        <translation>Ta bort dubblettepisoder</translation>
     </message>
 </context>
 <context>
     <name>StartPage</name>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="21"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="10"/>
         <source>Monday</source>
         <translation>Måndag</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="23"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="12"/>
         <source>Tuesday</source>
         <translation>Tisdag</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="25"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="14"/>
         <source>Wednesday</source>
         <translation>Onsdag</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="27"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="16"/>
         <source>Thursday</source>
         <translation>Torsdag</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="29"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="18"/>
         <source>Friday</source>
         <translation>Fredag</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="31"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="20"/>
         <source>Saturday</source>
         <translation>Lördag</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="33"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="22"/>
         <source>Sunday</source>
         <translation>Söndag</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="51"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="40"/>
         <source>About</source>
         <translation>Om</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="56"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="45"/>
         <source>Statistics</source>
         <translation>Statistik</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="61"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="50"/>
         <source>Settings</source>
         <translation>Inställningar</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="66"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="55"/>
         <source>Search for a Series</source>
         <translation>Sök efter en serie</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="71"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="60"/>
         <source>My Series</source>
         <translation>Mina serier</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="78"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="67"/>
         <source>This Week</source>
         <translation>Denna vecka</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="135"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="124"/>
         <source>Season %1 Episode %2</source>
         <translation>Säsong %1 Episod %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="168"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="153"/>
         <source>Nothing airs this week</source>
         <translation>Inget sänds denna vecka</translation>
     </message>

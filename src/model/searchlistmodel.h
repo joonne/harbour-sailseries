@@ -31,7 +31,7 @@ signals:
     void searchModelChanged();
     void searchSeriesRequested(QString);
     void getAllRequested(int);
-    void checkIfAddedRequested(int, QString);
+    void getSeriesNames();
     void setLoading(bool);
     void updateModels();
 

@@ -24,16 +24,6 @@ SearchListModel::SearchListModel(QObject *parent, Api* api, DatabaseManager *dbm
             SIGNAL(seriesStored(int)),
             this,
             SLOT(seriesStored(int)));
-
-    connect(this,
-            SIGNAL(checkIfAddedRequested(int,QString)),
-            m_dbmanager,
-            SLOT(checkIfAdded(int,QString)));
-
-    connect(m_dbmanager,
-            SIGNAL(checkIfAddedReady(int,bool)),
-            this,
-            SLOT(checkIfAddedReady(int,bool)));
 }
 
 SearchListModel::~SearchListModel()
@@ -78,18 +68,22 @@ void SearchListModel::searchFinished(QList<QVariantMap> series)
 
 void SearchListModel::populateSearchModel(QList<QVariantMap> foundSeries)
 {
-    m_searchListModel.clear();
-    emit searchModelChanged();
-
-    for (auto series : foundSeries)
+    connect(m_dbmanager, &DatabaseManager::getSeriesNamesReady, [this, foundSeries](QSet<QString> seriesNames)
     {
-        // TODO: change this to be smarter somehow
-        series["isAdded"] = m_dbmanager->checkIfAdded(series["id"].toInt(), series["seriesName"].toString());
-        auto seriesData = new SeriesData(this, series);
-        m_searchListModel.append(seriesData);
-    }
+        m_searchListModel.clear();
+        emit searchModelChanged();
 
-    emit searchModelChanged();
+        for (auto series : foundSeries)
+        {
+            series["isAdded"] = seriesNames.contains(series["seriesName"].toString());
+            auto seriesData = new SeriesData(0, series);
+            m_searchListModel.append(seriesData);
+        }
+
+        emit searchModelChanged();
+    });
+
+    emit getSeriesNames();
 }
 
 void SearchListModel::seriesStored(const int &seriesId)

@@ -54,7 +54,7 @@ CoverBackground {
 
     function setPosterVisible(aPoster) {
         if (engine.Mode === "m_series" && aPoster) {
-            return "http://thetvdb.com/banners/" + aPoster;
+            return aPoster;
         }
     }
 

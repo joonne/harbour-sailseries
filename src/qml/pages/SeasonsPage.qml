@@ -50,7 +50,7 @@ Page {
 
             Image {
                 id: banner
-                source: "http://thetvdb.com/banners/" + SeasonBanner
+                source: SeasonBanner
                 sourceSize.height: 10 * Theme.paddingLarge
                 anchors.left: background.left
                 anchors.leftMargin: banner.width === 0 ? 0 : Theme.paddingMedium
