@@ -62,8 +62,10 @@ private:
     QVariantMap parseRemoteIds(const QJsonArray &arr);
     QString parseGenres(const QJsonArray &arr);
     QList<QVariantMap> parseSearchResults(const QJsonArray &items);
+    QList<QVariantMap> parseEpisodes(const QJsonArray & items);
     QList<QVariantMap> toSeasonImages(const QList<QVariantMap> &seasons);
     QString findHighestRatedImage(const QList<QVariantMap> &images, ARTWORK_TYPE type);
+    int findSeasonId(const int &seasonNumber, const QList<QVariantMap> &seasons);
 };
 
 #endif // API_H

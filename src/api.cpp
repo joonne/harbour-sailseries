@@ -160,7 +160,7 @@ void Api::getTranslations(const int &seriesId, const QString &language, const QV
 
 void Api::getEpisodes(const int &seriesId, const int &page)
 {
-    QUrl url(QString("%1/series/%2/episodes/default/eng?page=%3").arg(QString(MIRRORPATH)).arg(seriesId).arg(page));
+    QUrl url(QString("%1/series/%2/episodes/official/eng?page=%3").arg(QString(MIRRORPATH)).arg(seriesId).arg(page));
     auto reply = get(url);
 
     connect(reply, &QNetworkReply::finished, [this, reply, seriesId, page]()
@@ -178,7 +178,7 @@ void Api::getEpisodes(const int &seriesId, const int &page)
             }
 
             qDebug() << "store episodes for " << seriesId;
-            const auto episodes = parseJsonArray(jsonDocument.object().value("data").toObject().value("episodes").toArray());
+            const auto episodes = parseEpisodes(jsonDocument.object().value("data").toObject().value("episodes").toArray());
             emit storeEpisodes(seriesId, episodes);
 
             qDebug() << "try to get more episodes for " << seriesId;
@@ -219,6 +219,23 @@ QString Api::findHighestRatedImage(const QList<QVariantMap> &artworks, ARTWORK_T
     }
 
     return result["image"].toString();
+}
+
+int Api::findSeasonId(const int &seasonNumber, const QList<QVariantMap> &seasons)
+{
+    int seasonId = -1;
+
+    for (auto season : seasons)
+    {
+        if (season["number"].toInt() == seasonNumber)
+        {
+            qDebug() << "season: " << season;
+            seasonId = season["id"].toInt();
+            break;
+        }
+    }
+
+    return seasonId;
 }
 
 void Api::replyFinishedError(QNetworkReply *reply)
@@ -405,6 +422,33 @@ QList<QVariantMap> Api::parseSearchResults(const QJsonArray &items)
     }
 
     return results;
+}
+
+QList<QVariantMap> Api::parseEpisodes(const QJsonArray &items)
+{
+    QList<QVariantMap> episodes;
+
+    for (auto item : items)
+    {
+        QVariantMap episode;
+        const auto keys = item.toObject().keys();
+
+        for (auto key : keys)
+        {
+            if (key == "seasons")
+            {
+                auto seasonNumber = item.toObject().value("seasonNumber").toInt();
+                episode["seasonId"] = findSeasonId(seasonNumber, parseJsonArray(item.toObject().value(key).toArray()));
+                continue;
+            }
+
+            episode.insert(key, item.toObject().value(key).toVariant());
+        }
+
+        episodes.append(episode);
+    }
+
+    return episodes;
 }
 
 QList<QVariantMap> Api::toSeasonImages(const QList<QVariantMap> &seasons)
