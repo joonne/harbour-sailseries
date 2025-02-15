@@ -50,22 +50,11 @@ public:
     int totalCountBySeason(int seriesId, int seasonNumber);
     int seasonCount(int seriesId);
 
-    int getWatchedEpisodesDuration();
-    double getAverageWatchedEpisodesDuration();
-    int getWatchedEpisodesCount();
-    int getAllEpisodesCount();
-    int getAllSeriesCount();
-    int getEndedSeriesCount();
-    int getWatchedSeriesCount();
-    int getWatchedSeasonsCount();
-    int getAllSeasonsCount();
-
 signals:
     void populateTodayModel(QList<QVariantMap>);
     void populateBannerList(QList<QVariantMap>);
     void seriesDeleted();
     void seriesStored(int);
-    void updateStatistics(QVariantMap);
     void populateSeasonList(QList<QVariantMap>);
     void populateEpisodeList(QList<QVariantMap>);
     void getSeriesNamesReady(QSet<QString>);
@@ -80,11 +69,10 @@ public slots:
     void deleteSeries(const int &seriesId);
     void storeSeries(const QVariantMap &series);
     void storeEpisodes(const int &seriesId, const QList<QVariantMap> &episodes);
-    void getStatistics();
     void setWatched(const int &episodeId, const int &seriesId, const bool &watched);
     void storeSeasonImages(const int &seriesId, const QList<QVariantMap> &seasonImages);
     void markSeasonAsWatched(const int &seriesId, const int &seasonNumber);
-    void getSeriesIds(const bool &includeEndedSeries);
+    void getSeriesIds();
     void getSeriesNames();
 
 private:

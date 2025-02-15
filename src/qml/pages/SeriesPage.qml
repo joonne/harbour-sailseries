@@ -101,20 +101,11 @@ Page {
                 sourceWidth: seriespage.width - Theme.paddingMedium * 2
             }
 
-            Row {
-                TextField {
-                    label: qsTr("Status")
-                    width: seriespage.width / 2
-                    text: getStatus(seriesStatus)
-                    readOnly: true
-                }
-
-                TextField {
-                    label: qsTr("Rating")
-                    width: seriespage.width / 2
-                    text: formatRating(rating)
-                    readOnly: true
-                }
+            TextField {
+                label: qsTr("Status")
+                width: seriespage.width
+                text: getStatus(seriesStatus)
+                readOnly: true
             }
 
             TextField {
