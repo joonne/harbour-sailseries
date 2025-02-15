@@ -20,7 +20,6 @@ SOURCES += main.cpp \
     model/seasondata.cpp \
     model/seasonlistmodel.cpp \
     engine.cpp \
-    settings.cpp \
     statistics.cpp \
     api.cpp
 
@@ -79,14 +78,12 @@ HEADERS += \
     model/seasondata.h \
     model/seasonlistmodel.h \
     engine.h \
-    settings.h \
     statistics.h \
     api.h
 
 DISTFILES += \
     qml/pages/SeasonsPage.qml \
     qml/pages/SeriesPage.qml \
-    qml/pages/SettingsPage.qml \
     qml/pages/StatisticsPage.qml \
     qml/components/ProgressCircle.qml \
     qml/js/http.js \

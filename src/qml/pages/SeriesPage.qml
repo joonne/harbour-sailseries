@@ -115,7 +115,6 @@ Page {
                     text: formatRating(rating)
                     readOnly: true
                 }
-
             }
 
             TextField {

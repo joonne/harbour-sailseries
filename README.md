@@ -4,6 +4,20 @@
 
 Search, add, view, mark episodes as watched, mark seasons as watched, update all series, week view, active cover.
 
+**DATA**:
+
+* [tvdb](https://thetvdb.com/)
+* [API](https://thetvdb.github.io/v4-api/#/)
+
+**DEVELOPMENT**:
+
+* Install SailfishOS SDK
+* Add API_KEY into `.env`-file in project root:
+
+```sh
+API_KEY=\"AP_KEY\"
+```
+
 **NOTE**:
 
 The air-times shown in the application are the original air times from the original network.

@@ -77,8 +77,8 @@ void Api::getLanguages()
         auto document = QJsonDocument::fromJson(reply->readAll());
 
         if (!document.isNull()) {
-            auto jsonArray = document.object().value("data").toArray();
-            qDebug() << jsonArray;
+            auto languages = document.object().value("data").toArray();
+            qInfo() << "languages: " << languages;
         }
 
         reply->deleteLater();
@@ -150,7 +150,7 @@ void Api::getTranslations(const int &seriesId, const QString &language, const QV
 
             emit storeSeries(seriesCopy);
         } else {
-            qDebug() << "Overview is missing, store series without it";
+            qInfo() << "Overview is missing, store series without it";
             emit storeSeries(series);
         }
 
@@ -160,7 +160,7 @@ void Api::getTranslations(const int &seriesId, const QString &language, const QV
 
 void Api::getEpisodes(const int &seriesId, const int &page)
 {
-    QUrl url(QString("%1/series/%2/episodes/official/eng?page=%3").arg(QString(MIRRORPATH)).arg(seriesId).arg(page));
+    QUrl url(QString("%1/series/%2/episodes/default?page=%3").arg(QString(MIRRORPATH)).arg(seriesId).arg(page));
     auto reply = get(url);
 
     connect(reply, &QNetworkReply::finished, [this, reply, seriesId, page]()
@@ -169,19 +169,19 @@ void Api::getEpisodes(const int &seriesId, const int &page)
 
         if (!jsonDocument.isNull())
         {
-            if (jsonDocument.object().value("data").toObject().value("episodes").isUndefined())
+            if (jsonDocument.object().value("data").toObject().value("episodes").toArray().isEmpty())
             {
-                qDebug() << "all episodes for " << seriesId << " fetched";
+                qInfo() << "all episodes for " << seriesId << " fetched";
                 // this is a safe bet to to turn loading indicator off
                 // emit episodesFetched();
                 return;
             }
 
-            qDebug() << "store episodes for " << seriesId;
+            qInfo() << "store episodes for " << seriesId;
             const auto episodes = parseEpisodes(jsonDocument.object().value("data").toObject().value("episodes").toArray());
             emit storeEpisodes(seriesId, episodes);
 
-            qDebug() << "try to get more episodes for " << seriesId;
+            qInfo() << "try to get more episodes for " << seriesId;
             getEpisodes(seriesId, page + 1);
         }
 
@@ -229,7 +229,6 @@ int Api::findSeasonId(const int &seasonNumber, const QList<QVariantMap> &seasons
     {
         if (season["number"].toInt() == seasonNumber)
         {
-            qDebug() << "season: " << season;
             seasonId = season["id"].toInt();
             break;
         }
@@ -307,7 +306,7 @@ QVariantMap Api::parseSeries(const QJsonObject &obj)
     {
         if (key == "name")
         {
-            series.insert("seriesName", obj[key].toVariant());
+            series.insert("name", obj[key].toVariant());
             continue;
         }
 
@@ -435,6 +434,7 @@ QList<QVariantMap> Api::parseEpisodes(const QJsonArray &items)
 
         for (auto key : keys)
         {
+            // seasons is null for default, absolute & official season-types
             if (key == "seasons")
             {
                 auto seasonNumber = item.toObject().value("seasonNumber").toInt();

@@ -14,7 +14,6 @@
 #include <QSettings>
 
 #include "engine.h"
-#include "settings.h"
 #include "statistics.h"
 #include "model/seriesdata.h"
 #include "model/serieslistmodel.h"
@@ -52,9 +51,6 @@ int main(int argc, char *argv[])
     QScopedPointer<Engine> engine(new Engine);
     QQmlContext* context = view->rootContext();
     context->setContextProperty("engine", engine.data());
-
-    Settings settings;
-    view->rootContext()->setContextProperty("settings", &settings);
 
     view->engine()->addImportPath(SailfishApp::pathTo("qml/components").toString());
     view->setSource(SailfishApp::pathTo("qml/main.qml"));

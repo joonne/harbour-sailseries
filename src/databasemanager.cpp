@@ -246,7 +246,7 @@ void DatabaseManager::storeSeries(const QVariantMap &series)
 {
     auto added = series["added"].toString(); // migrate away
     auto addedBy = series["addedBy"].toInt(); // migrate away
-    auto actors = series["actors"].toString(); // => characters
+    auto actors = series["actors"].toString(); // needed
     auto airsDayOfWeek = series["airsDays"].toString(); // needed
     auto airsTime = series["airsTime"].toString(); // needed
     auto banner = series["banner"].toString(); // => artworks
@@ -266,7 +266,7 @@ void DatabaseManager::storeSeries(const QVariantMap &series)
     auto rating = series["score"].toDouble(); // needed
     auto ratingCount = series["siteRatingCount"].toInt(); // nicetohave
     auto runtime = series["runtime"].toInt(); // needed
-    auto seriesName = series["seriesName"].toString(); // needed
+    auto seriesName = series["name"].toString(); // needed
     auto status = series["status"].toString(); // needed
     auto watched = 0;
     

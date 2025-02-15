@@ -10,6 +10,12 @@ Page {
         engine.SeasonListModel.getSeasons(seriesId)
     }
 
+    function getBanner(seasonBanner) {
+        return seasonBanner.indexOf("artworks.thetvdb.com") !== -1
+                ? seasonBanner
+                : "https://artworks.thetvdb.com/banners/" + seasonBanner
+    }
+
     SilicaListView {
         id: listView
         anchors.fill: parent
@@ -50,7 +56,7 @@ Page {
 
             Image {
                 id: banner
-                source: SeasonBanner
+                source: getBanner(SeasonBanner)
                 sourceSize.height: 10 * Theme.paddingLarge
                 anchors.left: background.left
                 anchors.leftMargin: banner.width === 0 ? 0 : Theme.paddingMedium
