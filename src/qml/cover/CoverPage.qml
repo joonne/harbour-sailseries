@@ -127,7 +127,9 @@ CoverBackground {
 
                 Label {
                     id: episodeNumber
-                    text: qsTr("Season %1 Episode %2").arg(NextEpisodeSeasonNumber).arg(NextEpisodeNumber);
+                    text: NextEpisodeSeasonNumber == 0
+                          ? qsTr("Special Episode %1").arg(NextEpisodeNumber)
+                          : qsTr("Season %1 Episode %2").arg(NextEpisodeSeasonNumber).arg(NextEpisodeNumber);
                     font.pixelSize: Theme.fontSizeExtraSmall
                     color: Theme.secondaryColor
                     truncationMode: TruncationMode.Fade
@@ -147,7 +149,7 @@ CoverBackground {
 
                 Label {
                     id: network
-                    text: getWeekday(AirsDayOfWeek) + " " + AirsTime + " @ " + Network
+                    text: getWeekday(AirsDayOfWeek) + " " + AirsTime + (Network ? " @ " + Network : "")
                     font.pixelSize: Theme.fontSizeExtraSmall
                     color: Theme.secondaryColor
                     truncationMode: TruncationMode.Fade

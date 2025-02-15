@@ -132,7 +132,12 @@
         <translation>Domingo</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="130"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="131"/>
+        <source>Special Episode %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/cover/CoverPage.qml" line="132"/>
         <source>Season %1 Episode %2</source>
         <translation>Temporada %1 Episodio %2</translation>
     </message>
@@ -250,27 +255,27 @@
 <context>
     <name>SeasonsPage</name>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="20"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="24"/>
         <source>Seasons</source>
         <translation>Temporadas</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="83"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="87"/>
         <source>Specials</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="83"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="87"/>
         <source>Season %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="96"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="100"/>
         <source>Watched</source>
         <translation>Visto</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="138"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="142"/>
         <source>episodes</source>
         <translation>episodios</translation>
     </message>
@@ -331,37 +336,14 @@
         <translation>Valoración</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="122"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="121"/>
         <source>Genre</source>
         <translation>Genero</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="129"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="128"/>
         <source>Overview</source>
         <translation type="unfinished">Resumen</translation>
-    </message>
-</context>
-<context>
-    <name>SettingsPage</name>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="18"/>
-        <source>Settings</source>
-        <translation>Ajustes</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="21"/>
-        <source>Content updates</source>
-        <translation>Actualizaciones de contenido</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="25"/>
-        <source>SailSeries will update also the content of ended series when this is applied.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="24"/>
-        <source>Update content of ended series</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -413,31 +395,31 @@
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="50"/>
-        <source>Settings</source>
-        <translation>Ajustes</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="55"/>
         <source>Search for a Series</source>
         <translation>Busqueda de series</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="60"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="55"/>
         <source>My Series</source>
         <translation>Mis Series</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="67"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="62"/>
         <source>This Week</source>
         <translation>Esta Semana</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="124"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="120"/>
+        <source>Special Episode %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="121"/>
         <source>Season %1 Episode %2</source>
         <translation>Temporada %1 Episodio %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="153"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="149"/>
         <source>Nothing airs this week</source>
         <translation>No hay emisiones esta semana</translation>
     </message>

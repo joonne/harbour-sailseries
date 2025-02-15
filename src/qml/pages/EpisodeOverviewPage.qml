@@ -35,7 +35,7 @@ Page {
 
             Image {
                 id: banner
-                source: "http://thetvdb.com" + filename
+                source: filename
                 anchors.left: parent.left
                 anchors.leftMargin: (episodeoverviewpage.width - banner.width) / 2
 

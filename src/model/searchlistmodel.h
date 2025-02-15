@@ -25,7 +25,6 @@ public:
     Q_INVOKABLE void clearList();
 
     QQmlListProperty<SeriesData> getSearchModel();
-    void setAddedFor(const int &seriesId, const bool &isAdded);
 
 signals:
     void searchModelChanged();
@@ -38,7 +37,6 @@ signals:
 public slots:
     void searchFinished(QList<QVariantMap> series);
     void seriesStored(const int &seriesId);
-    void checkIfAddedReady(const int &seriesId, const bool &isAdded);
 
 private:
     QList<SeriesData*> m_searchListModel;

@@ -132,7 +132,12 @@
         <translation>Sunnuntai</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="130"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="131"/>
+        <source>Special Episode %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/cover/CoverPage.qml" line="132"/>
         <source>Season %1 Episode %2</source>
         <translation>Kausi %1 Jakso %2</translation>
     </message>
@@ -250,27 +255,27 @@
 <context>
     <name>SeasonsPage</name>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="20"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="24"/>
         <source>Seasons</source>
         <translation>Kaudet</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="83"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="87"/>
         <source>Specials</source>
         <translation>Erikoisjaksot</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="83"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="87"/>
         <source>Season %1</source>
         <translation>Kausi %1</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="96"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="100"/>
         <source>Watched</source>
         <translation>Nähty</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="138"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="142"/>
         <source>episodes</source>
         <translation>jaksot</translation>
     </message>
@@ -331,37 +336,14 @@
         <translation>Luokitus</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="122"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="121"/>
         <source>Genre</source>
         <translation>Tyylilaji</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="129"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="128"/>
         <source>Overview</source>
         <translation>Kuvaus</translation>
-    </message>
-</context>
-<context>
-    <name>SettingsPage</name>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="18"/>
-        <source>Settings</source>
-        <translation>Asetukset</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="21"/>
-        <source>Content updates</source>
-        <translation>Sisällön päivitykset</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="25"/>
-        <source>SailSeries will update also the content of ended series when this is applied.</source>
-        <translation>Kun tämä on valittuna, SailSeries päivittää myös päättyneiden sarjojen sisällön.</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="24"/>
-        <source>Update content of ended series</source>
-        <translation>Päivitä päättyneiden sarjojen sisältö.</translation>
     </message>
 </context>
 <context>
@@ -413,31 +395,31 @@
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="50"/>
-        <source>Settings</source>
-        <translation>Asetukset</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="55"/>
         <source>Search for a Series</source>
         <translation>Etsi sarjaa</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="60"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="55"/>
         <source>My Series</source>
         <translation>Omat sarjat</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="67"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="62"/>
         <source>This Week</source>
         <translation>Tällä viikolla</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="124"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="120"/>
+        <source>Special Episode %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="121"/>
         <source>Season %1 Episode %2</source>
         <translation>Kausi %1 Jakso %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="153"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="149"/>
         <source>Nothing airs this week</source>
         <translation>Mitään ei lähetetä tällä viikolla</translation>
     </message>

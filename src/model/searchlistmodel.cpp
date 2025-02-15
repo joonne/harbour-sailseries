@@ -90,7 +90,6 @@ void SearchListModel::seriesStored(const int &seriesId)
 {
     emit setLoading(false);
     emit updateModels();
-    // set the shown series at SeriesInfoPage as added somehow
 }
 
 void SearchListModel::searchSeries(const QString &text)
@@ -109,14 +108,4 @@ void SearchListModel::clearList()
 {
     m_searchListModel.clear();
     emit searchModelChanged();
-}
-
-void SearchListModel::checkIfAddedReady(const int &seriesId, const bool &isAdded)
-{
-    setAddedFor(seriesId, isAdded);
-}
-
-void SearchListModel::setAddedFor(const int &seriesId, const bool &isAdded)
-{
-    qDebug() << "set added in the model and also into the SeriesInfoPage";
 }
