@@ -36,7 +36,6 @@ public slots:
 
 private:
     QNetworkAccessManager* m_nam;
-    QList<QMap<QString,QString> > m_languages;
     QString m_jwt;
 
     enum ARTWORK_TYPE {
@@ -47,10 +46,8 @@ private:
     };
 
     QNetworkReply* get(QUrl url);
-    QString getLocale();
 
     void getAuthenticationToken();
-    void getLanguages();
     void getSeries(const int &seriesId);
     void getTranslations(const int &seriesId, const QString &language, const QVariantMap &series);
     void getEpisodes(const int &seriesId, const int &page = 0);
