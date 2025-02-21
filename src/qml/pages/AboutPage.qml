@@ -67,7 +67,7 @@ Page {
                 readOnly: true
                 color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeSmall
-                text: qsTr("Jonne Pihlanen, 'joonne'")
+                text: "Jonne Pihlanen, 'joonne'"
                 anchors {
                     left: parent.left
                     leftMargin: (aboutpage.width - creator.width) / 2
@@ -76,7 +76,7 @@ Page {
 
             Button {
                 id: email
-                text: "jonne.pihlanen@gmail.com"
+                text: qsTr("Email")
                 onClicked: Qt.openUrlExternally("mailto:jonne.pihlanen@gmail.com?subject=SailSeries&body=")
                 anchors.left: parent.left
                 anchors.leftMargin: (aboutpage.width - email.width) / 2
@@ -121,7 +121,7 @@ Page {
                 readOnly: true
                 color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeSmall
-                text: qsTr("SailSeries utilises TheTVDB API v2.")
+                text: qsTr("SailSeries utilises TheTVDB API v4.")
             }
 
             Button {

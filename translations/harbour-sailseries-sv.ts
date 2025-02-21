@@ -29,6 +29,11 @@
         <translation>Innehåll</translation>
     </message>
     <message>
+        <location filename="../src/qml/pages/AboutPage.qml" line="124"/>
+        <source>SailSeries utilises TheTVDB API v4.</source>
+        <translation type="unfinished">SailSeries använder TheTVDB API v2. {4.?}</translation>
+    </message>
+    <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="145"/>
         <source>The source code is available at GitHub. Contributions, ideas and bug reports are welcome.</source>
         <translation>Källkoden finns tillgänglig på GitHub. Bidrag, idéer och felrapporter är välkommna.</translation>
@@ -49,19 +54,14 @@
         <translation>SailSeries är en TV-serieapp för SailfishOS. Det siktar på att bli en enkel och smakfull app som hjälper dig att hålla koll på de TV-serier du följer.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="70"/>
-        <source>Jonne Pihlanen, &apos;joonne&apos;</source>
-        <translation>Jonne Pihlanen, &apos;joonne&apos;</translation>
+        <location filename="../src/qml/pages/AboutPage.qml" line="79"/>
+        <source>Email</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="112"/>
         <source>This software is licenced under MIT.</source>
         <translation>Denna mjukvara är licensierad under MIT.</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="124"/>
-        <source>SailSeries utilises TheTVDB API v2.</source>
-        <translation>SailSeries använder TheTVDB API v2.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="150"/>
