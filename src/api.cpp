@@ -53,38 +53,6 @@ void Api::getAuthenticationToken()
     });
 }
 
-QString Api::getLocale()
-{
-    auto systemLocale = QLocale::system().name();
-    QString locale = "en";
-
-    for (auto language : m_languages) {
-        if (language["abbreviation"] == systemLocale) {
-            locale = language["abbreviation"];
-        }
-    }
-
-    return locale;
-}
-
-void Api::getLanguages()
-{
-    QUrl url(QString("%1/languages").arg(QString(MIRRORPATH)));
-    auto reply = get(url);
-
-    connect(reply, &QNetworkReply::finished, [this, reply]()
-    {
-        auto document = QJsonDocument::fromJson(reply->readAll());
-
-        if (!document.isNull()) {
-            auto languages = document.object().value("data").toArray();
-            qInfo() << "languages: " << languages;
-        }
-
-        reply->deleteLater();
-    });
-}
-
 void Api::searchSeries(const QString &text)
 {
     QUrl url(QString("%1/search?type=series&q=%2").arg(QString(MIRRORPATH)).arg(text));
