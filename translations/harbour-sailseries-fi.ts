@@ -29,6 +29,11 @@
         <translation>Sisältö</translation>
     </message>
     <message>
+        <location filename="../src/qml/pages/AboutPage.qml" line="124"/>
+        <source>SailSeries utilises TheTVDB API v4.</source>
+        <translation type="unfinished">SailSeries käyttää TheTVDB API v2 -rajapintaa. {4.?}</translation>
+    </message>
+    <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="145"/>
         <source>The source code is available at GitHub. Contributions, ideas and bug reports are welcome.</source>
         <translation>Lähdekoodi on saatavilla GitHub palvelussa. Auttaminen, ideat sekä virheraportit ovat tervetulleita.</translation>
@@ -49,19 +54,14 @@
         <translation>SailSeries on tv-ohjelmien seuraamiseen tarkoitettu sovellus. Sen tarkoituksena on olla hyvännäköinen ja yksinkertainen sovellus, joka auttaa sinua pysymään kartalla seuratessasi useita sarjoja samanaikaisesti.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="70"/>
-        <source>Jonne Pihlanen, &apos;joonne&apos;</source>
-        <translation>Jonne Pihlanen, &apos;joonne&apos;</translation>
+        <location filename="../src/qml/pages/AboutPage.qml" line="79"/>
+        <source>Email</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="112"/>
         <source>This software is licenced under MIT.</source>
         <translation>Tämä ohjelmisto on lisensoitu MIT:n mukaisesti.</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="124"/>
-        <source>SailSeries utilises TheTVDB API v2.</source>
-        <translation>SailSeries käyttää TheTVDB API v2 -rajapintaa.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="150"/>

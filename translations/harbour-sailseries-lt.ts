@@ -29,6 +29,11 @@
         <translation>Turinys</translation>
     </message>
     <message>
+        <location filename="../src/qml/pages/AboutPage.qml" line="124"/>
+        <source>SailSeries utilises TheTVDB API v4.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="145"/>
         <source>The source code is available at GitHub. Contributions, ideas and bug reports are welcome.</source>
         <translation>Programines įrangos kodas yra pasiekiamas GitHub. Prisidėjimas, idėjos ir klaidu pranešimai yra laukiami.</translation>
@@ -49,18 +54,13 @@
         <translation>SailSeries yra televizijos seriju sekimo programa ant SailfishOS. Jos pagrindas yra buti graži ir paprasta programa kuri galėtu padeti sekti jūsų mėgstamiausius televizijos serijalus. </translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="70"/>
-        <source>Jonne Pihlanen, &apos;joonne&apos;</source>
-        <translation>Jonne Pihlanen, &apos;joonne&apos;</translation>
+        <location filename="../src/qml/pages/AboutPage.qml" line="79"/>
+        <source>Email</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="112"/>
         <source>This software is licenced under MIT.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="124"/>
-        <source>SailSeries utilises TheTVDB API v2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

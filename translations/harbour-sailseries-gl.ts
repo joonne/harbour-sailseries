@@ -29,6 +29,11 @@
         <translation>Contido</translation>
     </message>
     <message>
+        <location filename="../src/qml/pages/AboutPage.qml" line="124"/>
+        <source>SailSeries utilises TheTVDB API v4.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="145"/>
         <source>The source code is available at GitHub. Contributions, ideas and bug reports are welcome.</source>
         <translation>O código fonte está dispoñibel en GitHub. Contribucións, ideas e información de bugs son benvidos.</translation>
@@ -49,18 +54,13 @@
         <translation>SailSeries é unha aplicación de seguimento de series de televisión para SailfishOS. A sua meta é ser unha aplicación sinxela e doada de manexar para axudarte a levar un seguimento das tuas series favoritas.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="70"/>
-        <source>Jonne Pihlanen, &apos;joonne&apos;</source>
-        <translation>Jonne Pihlanen, &apos;joonne&apos;</translation>
+        <location filename="../src/qml/pages/AboutPage.qml" line="79"/>
+        <source>Email</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="112"/>
         <source>This software is licenced under MIT.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="124"/>
-        <source>SailSeries utilises TheTVDB API v2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
