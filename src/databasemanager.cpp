@@ -3,7 +3,11 @@
 DatabaseManager::DatabaseManager(QObject *parent) :
     QObject(parent)
 {
-    migrate();
+    if (open()) {
+       migrate();
+    } else {
+        qInfo() << "Database could not be opened";
+    }
 }
 
 DatabaseManager::~DatabaseManager()
@@ -11,48 +15,79 @@ DatabaseManager::~DatabaseManager()
     close();
 }
 
-void DatabaseManager::migrate()
-{
-    if (!open())
-    {
-        qDebug() << "Database could not be opened!";
-        return;
-    }
+DatabaseManager::DbVersion DatabaseManager::getVersion() {
+    DbVersion result = { .number = -1, .appName = "" };
 
-    if (m_db.tables().size() == 0)
+    if (m_db.isOpen())
     {
-        transaction();
-        if (createInfoTable() && createSeriesTable() && createEpisodeTable())
+        QSqlQuery query(m_db);
+        query.exec("SELECT name, version FROM information");
+        qDebug() << query.lastError();
+
+        if (query.isSelect())
         {
-            updateInfoTable(1);
-            commit();
+            while (query.next())
+            {
+                auto name = query.value(0).toString();
+                auto version = query.value(1).toInt();
+                result = { .number = version, .appName = name };
+                return result;
+            }
         }
     }
 
-    QSqlQuery query(m_db);
-    query.exec("SELECT name, version FROM information");
-    qDebug() << query.lastError();
+    return result;
+}
 
-    if (query.isSelect())
+void DatabaseManager::migrate()
+{
+    if (m_db.isOpen())
     {
-        while (query.next())
+        if (m_db.tables().size() == 0)
         {
-            auto name = query.value(0).toString();
-            auto version = query.value(1).toInt();
-            qDebug() << "App name: " << name;
-            qDebug() << "Database version: " << version;
+            if (createInfoTable())
+            {
+                qInfo() << "Information table created";
+            }
+        }
 
-            if (version == 1)
-            {
-                if (createBannerTable())
-                {
-                    updateInfoTable(2);
+        auto version = getVersion();
+
+        qInfo() << "App name: " << version.appName;
+        qInfo() << "Database version: " << version.number;
+
+        QList<Migration> migrations = {
+            Migration {
+                .version = 0,
+                .operations = {
+                    [this](){ createSeriesTable(); },
+                    [this](){ createEpisodeTable(); },
+                    [this](){ updateInfoTable(1); }
                 }
-            } else if (version == 2)
-            {
-                if (addRuntimeToEpisode())
-                {
-                    updateInfoTable(3);
+            },
+            Migration {
+                .version = 1,
+                .operations = {
+                    [this](){ createBannerTable(); },
+                    [this]() { updateInfoTable(2); }
+                }
+            },
+            Migration {
+                .version = 2,
+                .operations = {
+                    [this]() { addRuntimeToEpisode(); },
+                    [this]() { updateInfoTable(3); }
+                }
+            }
+        };
+
+        for (auto migration: migrations) {
+            if (migration.version >= version.number) {
+                qInfo() << "Applying migration: " << migration.version;
+                for (auto operation: migration.operations) {
+                    transaction();
+                    operation();
+                    commit();
                 }
             }
         }

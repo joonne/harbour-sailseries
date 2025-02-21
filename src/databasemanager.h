@@ -16,6 +16,7 @@
 #include <QDate>
 #include <QLocale>
 #include <QDateTime>
+#include <functional>
 
 class DatabaseManager : public QObject
 {
@@ -49,6 +50,17 @@ public:
     int totalCount(int seriesId);
     int totalCountBySeason(int seriesId, int seasonNumber);
     int seasonCount(int seriesId);
+
+    struct Migration {
+        int version;
+        QList<std::function<void()>> operations;
+    };
+
+    struct DbVersion {
+        int number;
+        QString appName;
+    };
+    DbVersion getVersion();
 
 signals:
     void populateTodayModel(QList<QVariantMap>);
