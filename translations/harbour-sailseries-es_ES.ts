@@ -1,4 +1,4 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="es_ES" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="es_ES">
 <context>
     <name>AboutPage</name>
     <message>
@@ -27,6 +27,11 @@
         <translation>Contenido</translation>
     </message>
     <message>
+        <location filename="../src/qml/pages/AboutPage.qml" line="124"/>
+        <source>SailSeries utilises TheTVDB API v4.</source>
+        <translation>SailSeries utiliza la API pública TheTVDB.</translation>
+    </message>
+    <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="145"/>
         <source>The source code is available at GitHub. Contributions, ideas and bug reports are welcome.</source>
         <translation>El código fuente está disponible en GitHub. Contribuciones, ideas e información de bugs son bienvenidos.</translation>
@@ -47,19 +52,14 @@
         <translation>SailSeries es una aplicación de seguimiento de series de televisión para SailfishOS. Una aplicación sencilla y fácil de manejar que te puede ayudar para realizar un seguimiento de tus series favoritas y tenerlas controladas en todo momento.</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="70"/>
-        <source>Jonne Pihlanen, &apos;joonne&apos;</source>
-        <translation>Jonne Pihlanen, &apos;joonne&apos;</translation>
+        <location filename="../src/qml/pages/AboutPage.qml" line="79"/>
+        <source>Email</source>
+        <translation>Correo electrónico</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="112"/>
         <source>This software is licenced under MIT.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/AboutPage.qml" line="124"/>
-        <source>SailSeries utilises TheTVDB API v2.</source>
-        <translation type="unfinished"/>
+        <translation>Este software esta bajo licencia MIT</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="150"/>
@@ -130,7 +130,12 @@
         <translation>Domingo</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="130"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="131"/>
+        <source>Special Episode %1</source>
+        <translation>Episodio especial %1</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/cover/CoverPage.qml" line="132"/>
         <source>Season %1 Episode %2</source>
         <translation>Temporada %1 Episodio %2</translation>
     </message>
@@ -163,7 +168,7 @@
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="86"/>
         <source>Specials: Episode %1</source>
-        <translation type="unfinished"/>
+        <translation>Especiales: Episodio %1</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="87"/>
@@ -229,7 +234,7 @@
     <message>
         <location filename="../src/qml/components/ProgressCircle.qml" line="23"/>
         <source>%1 %</source>
-        <translation type="unfinished"/>
+        <translation>%1 %</translation>
     </message>
 </context>
 <context>
@@ -248,27 +253,27 @@
 <context>
     <name>SeasonsPage</name>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="20"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="26"/>
         <source>Seasons</source>
         <translation>Temporadas</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="83"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="89"/>
         <source>Specials</source>
-        <translation type="unfinished"/>
+        <translation>Especiales</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="83"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="89"/>
         <source>Season %1</source>
-        <translation type="unfinished"/>
+        <translation>Temporada %1</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="96"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="102"/>
         <source>Watched</source>
         <translation>Visto</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="138"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="144"/>
         <source>episodes</source>
         <translation>episodios</translation>
     </message>
@@ -319,47 +324,19 @@
         <translation>Actualizar</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="106"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="105"/>
         <source>Status</source>
         <translation>Estado</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="113"/>
-        <source>Rating</source>
-        <translation>Valoración</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="122"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="112"/>
         <source>Genre</source>
         <translation>Genero</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="129"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="119"/>
         <source>Overview</source>
         <translation>Resumen</translation>
-    </message>
-</context>
-<context>
-    <name>SettingsPage</name>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="18"/>
-        <source>Settings</source>
-        <translation>Ajustes</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="21"/>
-        <source>Content updates</source>
-        <translation>Actualizaciones de contenido</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="25"/>
-        <source>SailSeries will update also the content of ended series when this is applied.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SettingsPage.qml" line="24"/>
-        <source>Update content of ended series</source>
-        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -406,111 +383,33 @@
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="45"/>
-        <source>Statistics</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="50"/>
-        <source>Settings</source>
-        <translation>Ajustes</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="55"/>
         <source>Search for a Series</source>
         <translation>Busqueda de series</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="60"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="50"/>
         <source>My Series</source>
         <translation>Mis Series</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="67"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="57"/>
         <source>This Week</source>
         <translation>Esta Semana</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="124"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="115"/>
+        <source>Special Episode %1</source>
+        <translation>Episodio especial %1</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="116"/>
         <source>Season %1 Episode %2</source>
         <translation>Temporada %1 Episodio %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="153"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="144"/>
         <source>Nothing airs this week</source>
         <translation>No hay emisiones esta semana</translation>
-    </message>
-</context>
-<context>
-    <name>StatisticsPage</name>
-    <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="25"/>
-        <source>Statistics</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="129"/>
-        <source>Watched series</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="159"/>
-        <source>Time</source>
-        <translation>Hora</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="167"/>
-        <source>Days spent watching</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="175"/>
-        <source>Hours spent watching</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="183"/>
-        <source>Minutes spent watching</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="190"/>
-        <source>%1 minutes</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="191"/>
-        <source>Average episode duration</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="29"/>
-        <source>Numbers</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="44"/>
-        <source>Watched episodes</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="52"/>
-        <source>All episodes</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="137"/>
-        <source>All series</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="87"/>
-        <source>Watched seasons</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/StatisticsPage.qml" line="95"/>
-        <source>All seasons</source>
-        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

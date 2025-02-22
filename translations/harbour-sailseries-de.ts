@@ -31,7 +31,7 @@
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="124"/>
         <source>SailSeries utilises TheTVDB API v4.</source>
-        <translation type="unfinished">SailSeries nutzt die API v2 von theTVDB. {4.?}</translation>
+        <translation>SailSeries nutzt die API v4 von theTVDB.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="145"/>
@@ -56,7 +56,7 @@
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="79"/>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>E-Mail</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="112"/>
@@ -134,7 +134,7 @@
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="131"/>
         <source>Special Episode %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sonderfolge %1</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="132"/>
@@ -170,7 +170,7 @@
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="86"/>
         <source>Specials: Episode %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Specials: Folge %1</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="87"/>
@@ -262,12 +262,12 @@
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="89"/>
         <source>Specials</source>
-        <translation type="unfinished"></translation>
+        <translation>Besonderheiten</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="89"/>
         <source>Season %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Staffel %1</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="102"/>
@@ -401,7 +401,7 @@
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="115"/>
         <source>Special Episode %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sonderfolge %1</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="116"/>

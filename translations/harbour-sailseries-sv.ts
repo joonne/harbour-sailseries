@@ -31,7 +31,7 @@
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="124"/>
         <source>SailSeries utilises TheTVDB API v4.</source>
-        <translation type="unfinished">SailSeries använder TheTVDB API v2. {4.?}</translation>
+        <translation>SailSeries använder TVDB API v4.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="145"/>
@@ -56,7 +56,7 @@
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="79"/>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>E-post</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="112"/>
@@ -134,7 +134,7 @@
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="131"/>
         <source>Special Episode %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Specialerbjudande: Episod %1</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="132"/>
@@ -401,7 +401,7 @@
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="115"/>
         <source>Special Episode %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Specialerbjudande: Episod %1</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="116"/>
