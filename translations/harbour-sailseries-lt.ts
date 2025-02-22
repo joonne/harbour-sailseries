@@ -31,7 +31,7 @@
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="124"/>
         <source>SailSeries utilises TheTVDB API v4.</source>
-        <translation type="unfinished"></translation>
+        <translation>SailSeries naudoja vieša TheTVDB API.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="145"/>
@@ -56,12 +56,12 @@
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="79"/>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Elektroninį laišką</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="112"/>
         <source>This software is licenced under MIT.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ši programinė įranga naudoja MIT licenzija.</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/AboutPage.qml" line="150"/>
@@ -134,7 +134,7 @@
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="131"/>
         <source>Special Episode %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Specialusis epizodas %1</translation>
     </message>
     <message>
         <location filename="../src/qml/cover/CoverPage.qml" line="132"/>
@@ -170,7 +170,7 @@
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="86"/>
         <source>Specials: Episode %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Specialusis: epizodas %1</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodesPage.qml" line="87"/>
@@ -236,7 +236,7 @@
     <message>
         <location filename="../src/qml/components/ProgressCircle.qml" line="23"/>
         <source>%1 %</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %</translation>
     </message>
 </context>
 <context>
@@ -262,12 +262,12 @@
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="89"/>
         <source>Specials</source>
-        <translation type="unfinished"></translation>
+        <translation>Specialusis</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="89"/>
         <source>Season %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sezonas %1</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="102"/>
@@ -401,7 +401,7 @@
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="115"/>
         <source>Special Episode %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Specialusis epizodas %1</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="116"/>
