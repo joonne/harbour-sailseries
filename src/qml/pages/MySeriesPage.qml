@@ -127,7 +127,7 @@ Page {
             }
 
             ViewPlaceholder {
-                visible: listView.count === 0
+                enabled: listView.count === 0
                 text: qsTr("Search for series first.")
                 anchors.centerIn: listView
             }
