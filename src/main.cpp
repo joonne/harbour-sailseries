@@ -19,7 +19,6 @@
 #include "model/episodedata.h"
 #include "model/episodelistmodel.h"
 #include "model/searchlistmodel.h"
-#include "model/todaylistmodel.h"
 #include "model/seasondata.h"
 #include "model/seasonlistmodel.h"
 
@@ -33,7 +32,6 @@ int main(int argc, char *argv[])
     qmlRegisterType<SeriesData>("harbour.sailseries.model", 1, 0, "SeriesData");
     qmlRegisterType<SeriesListModel>("harbour.sailseries.model", 1, 0, "SeriesListModel");
     qmlRegisterType<SearchListModel>("harbour.sailseries.model", 1, 0, "SearchListModel");
-    qmlRegisterType<TodayListModel>("harbour.sailseries.model", 1, 0, "TodayListModel");
     qmlRegisterType<Engine>("harbour.sailseries.model", 1, 0, "engine");
     qmlRegisterType<EpisodeData>("harbour.sailseries.model", 1, 0, "EpisodeData");
     qmlRegisterType<EpisodeListModel>("harbour.sailseries.model", 1, 0, "EpisodeListModel");

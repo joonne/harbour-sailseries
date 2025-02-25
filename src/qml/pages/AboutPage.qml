@@ -24,8 +24,10 @@ Page {
             Image {
                 id: icon
                 source: "image://theme/harbour-sailseries"
-                anchors.left: parent.left
-                anchors.leftMargin: (aboutpage.width - icon.width) / 2
+                anchors {
+                    left: parent.left
+                    leftMargin: (aboutpage.width - icon.width) / 2
+                }
             }
 
             Label {
@@ -39,8 +41,10 @@ Page {
             Label {
                 id: version
                 text: qsTr("Version %1.%2").arg(_APP_VERSION).arg(_APP_BUILD_NUMBER)
-                anchors.left: parent.left
-                anchors.leftMargin: (aboutpage.width - version.width) / 2
+                anchors {
+                    left: parent.left
+                    leftMargin: (aboutpage.width - version.width) / 2
+                }
                 color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeExtraSmall
             }
@@ -95,8 +99,10 @@ Page {
                     color: Theme.primaryColor
                     font.pixelSize: Theme.fontSizeSmall
                     text: modelData
-                    anchors.left: parent.left
-                    anchors.leftMargin: Theme.horizontalPageMargin
+                    anchors {
+                        left: parent.left
+                        leftMargin: Theme.horizontalPageMargin
+                    }
                 }
             }
 
@@ -128,9 +134,11 @@ Page {
                 id: thetvdb
                 text: "TheTVDB"
                 onClicked: Qt.openUrlExternally("http://www.thetvdb.com/")
-                anchors.left: parent.left
-                anchors.leftMargin: (aboutpage.width - thetvdb.width) / 2
-                width: email.width
+                anchors {
+                    left: parent.left
+                    leftMargin: (aboutpage.width - thetvdb.width) / 2
+                }
+                width: transifex.width
             }
 
             SectionHeader {
@@ -149,9 +157,11 @@ Page {
                 id: sourcecode
                 text: qsTr("Project in GitHub")
                 onClicked: Qt.openUrlExternally("https://github.com/joonne/harbour-sailseries")
-                anchors.left: parent.left
-                anchors.leftMargin: (aboutpage.width - sourcecode.width) / 2
-                width: email.width
+                anchors {
+                    left: parent.left
+                    leftMargin: (aboutpage.width - sourcecode.width) / 2
+                }
+                width: transifex.width
             }
 
             SectionHeader {
@@ -170,9 +180,10 @@ Page {
                 id: transifex
                 text: qsTr("Help with translations")
                 onClicked: Qt.openUrlExternally("https://www.transifex.com/joonne/sailseries/")
-                anchors.left: parent.left
-                anchors.leftMargin: (aboutpage.width - sourcecode.width) / 2
-                width: email.width
+                anchors {
+                    left: parent.left
+                    leftMargin: (aboutpage.width - sourcecode.width) / 2
+                }
             }
         }
 
