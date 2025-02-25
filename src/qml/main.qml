@@ -7,6 +7,6 @@ import "components"
 ApplicationWindow {
     id: appWindow
 
-    initialPage: Component { StartPage { } }
+    initialPage: Component { MySeriesPage { } }
     cover: CoverPage { }
 }

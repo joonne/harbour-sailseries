@@ -39,10 +39,20 @@ Page {
             busy: engine.Loading
 
             MenuItem {
+                text: qsTr("About")
+                onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
+            }
+
+            MenuItem {
                 text: qsTr("Update All")
                 onClicked: {
                     engine.SeriesListModel.updateAllSeries()
                 }
+            }
+
+            MenuItem {
+                text: qsTr("Search for a Series")
+                onClicked: pageStack.push(Qt.resolvedUrl("SearchPage.qml"))
             }
         }
 
@@ -127,8 +137,8 @@ Page {
             }
 
             ViewPlaceholder {
-                visible: listView.count === 0
-                text: qsTr("Search for series first.")
+                enabled: listView.count === 0
+                text: qsTr("Hey, add series from the pull down menu")
                 anchors.centerIn: listView
             }
         }

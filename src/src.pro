@@ -16,11 +16,9 @@ SOURCES += main.cpp \
     model/episodedata.cpp \
     model/episodelistmodel.cpp \
     model/searchlistmodel.cpp \
-    model/todaylistmodel.cpp \
     model/seasondata.cpp \
     model/seasonlistmodel.cpp \
     engine.cpp \
-    statistics.cpp \
     api.cpp
 
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
@@ -74,11 +72,9 @@ HEADERS += \
     model/episodedata.h \
     model/episodelistmodel.h \
     model/searchlistmodel.h \
-    model/todaylistmodel.h \
     model/seasondata.h \
     model/seasonlistmodel.h \
     engine.h \
-    statistics.h \
     api.h
 
 DISTFILES += \

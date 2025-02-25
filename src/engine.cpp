@@ -14,7 +14,6 @@ Engine::Engine(QObject *parent) :
 
     m_seriesListModel = new SeriesListModel(this, m_api, m_dbmanager);
     m_searchListModel = new SearchListModel(this, m_api, m_dbmanager);
-    m_todayListModel = new TodayListModel(this, m_dbmanager);
     m_episodeListModel = new EpisodeListModel(this, m_dbmanager);
     m_seasonListModel = new SeasonListModel(this, m_dbmanager);
 
@@ -82,8 +81,6 @@ SeriesListModel* Engine::getSeriesListModel() { return m_seriesListModel; }
 
 SearchListModel *Engine::getSearchModel() { return m_searchListModel; }
 
-TodayListModel* Engine::getTodayModel() { return m_todayListModel; }
-
 EpisodeListModel* Engine::getEpisodeListModel() { return m_episodeListModel; }
 
 SeasonListModel* Engine::getSeasonListModel() { return m_seasonListModel; }
@@ -97,7 +94,6 @@ void Engine::readyToUpdateModels()
 
 void Engine::updateModels()
 {
-    emit m_todayListModel->getStartPageSeries();
     emit m_seriesListModel->getSeries();
 }
 
