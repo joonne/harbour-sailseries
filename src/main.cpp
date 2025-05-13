@@ -14,6 +14,7 @@
 #include <QSettings>
 
 #include "engine.h"
+#include "statistics.h"
 #include "model/seriesdata.h"
 #include "model/serieslistmodel.h"
 #include "model/episodedata.h"
@@ -39,6 +40,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<EpisodeListModel>("harbour.sailseries.model", 1, 0, "EpisodeListModel");
     qmlRegisterType<SeasonData>("harbour.sailseries.model", 1, 0, "SeasonData");
     qmlRegisterType<SeasonListModel>("harbour.sailseries.model", 1, 0, "SeasonListModel");
+    qmlRegisterType<Statistics>("harbour.sailseries.model", 1, 0, "Statistics");
 
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
     QScopedPointer<QQuickView> view(SailfishApp::createView());

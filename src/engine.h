@@ -22,6 +22,7 @@ class Engine : public QObject
     Q_PROPERTY(SeasonListModel* SeasonListModel READ getSeasonListModel NOTIFY seasonListModelChanged)
     Q_PROPERTY(bool Loading READ getLoading NOTIFY loadingChanged)
     Q_PROPERTY(QString Mode READ getMode NOTIFY modeChanged)
+    Q_PROPERTY(Statistics* Statistics READ getStatistics)
 
 public:
     explicit Engine(QObject *parent = 0);
@@ -65,6 +66,7 @@ private:
     SeasonListModel* m_seasonListModel;
     Api* m_api;
     DatabaseManager* m_dbmanager;
+    Statistics* m_statistics;
     bool m_loading;
     QString m_mode;
 };

@@ -23,7 +23,7 @@ public:
     Q_INVOKABLE void selectSeries(const int &index);
     Q_INVOKABLE void deleteSeries(const int &seriesId);
     Q_INVOKABLE void updateSeries(const int &seriesId);
-    Q_INVOKABLE void updateAllSeries();
+    Q_INVOKABLE void updateAllSeries(const bool &includeEndedSeries = true);
 
     QQmlListProperty<SeriesData> getSeriesList();
 
@@ -36,7 +36,7 @@ signals:
     void getSeries();
     void deleteSeriesWith(int);
     void getAllRequested(int);
-    void getSeriesIds();
+    void getSeriesIds(bool);
     void setLoading(bool);
     void setMode(QString);
 

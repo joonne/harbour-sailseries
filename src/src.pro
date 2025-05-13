@@ -73,6 +73,7 @@ HEADERS += \
 DISTFILES += \
     qml/pages/SeasonsPage.qml \
     qml/pages/SeriesPage.qml \
+    qml/pages/StatisticsPage.qml \
     qml/components/ProgressCircle.qml \
     qml/js/http.js \
     qml/js/promise.js \

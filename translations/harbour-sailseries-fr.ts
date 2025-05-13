@@ -326,17 +326,22 @@
         <translation>Mettre à jour</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="105"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="106"/>
         <source>Status</source>
         <translation>Statut</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="112"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="113"/>
+        <source>Rating</source>
+        <translation>Note</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="121"/>
         <source>Genre</source>
         <translation>Genre</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="119"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="128"/>
         <source>Overview</source>
         <translation>Présentation</translation>
     </message>
@@ -385,33 +390,111 @@
     </message>
     <message>
         <location filename="../src/qml/pages/StartPage.qml" line="45"/>
+        <source>Statistics</source>
+        <translation>Statistiques</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StartPage.qml" line="50"/>
         <source>Search for a Series</source>
         <translation>Rechercher une série</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="50"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="55"/>
         <source>My Series</source>
         <translation>Mes Séries</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="57"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="62"/>
         <source>This Week</source>
         <translation>Cette semaine</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="115"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="120"/>
         <source>Special Episode %1</source>
         <translation>Épisode spécial %1</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="116"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="121"/>
         <source>Season %1 Episode %2</source>
         <translation>Saison %1 Episode %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="144"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="149"/>
         <source>Nothing airs this week</source>
         <translation>Rien n&apos;est diffusé cette semaine</translation>
+    </message>
+</context>
+<context>
+    <name>StatisticsPage</name>
+    <message>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="25"/>
+        <source>Statistics</source>
+        <translation>Statistiques</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="129"/>
+        <source>Watched series</source>
+        <translation>Séries visionnées</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="159"/>
+        <source>Time</source>
+        <translation>Horaire</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="167"/>
+        <source>Days spent watching</source>
+        <translation>Journées passées à visionner</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="175"/>
+        <source>Hours spent watching</source>
+        <translation>Heures passées à visionner</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="183"/>
+        <source>Minutes spent watching</source>
+        <translation>Minutes passées à visionner</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="190"/>
+        <source>%1 minutes</source>
+        <translation>%1 minutes</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="191"/>
+        <source>Average episode duration</source>
+        <translation>Durée moyenne par épisode</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="29"/>
+        <source>Numbers</source>
+        <translation>Chiffres</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="44"/>
+        <source>Watched episodes</source>
+        <translation>Episodes visionnés</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="52"/>
+        <source>All episodes</source>
+        <translation>Tous les épisodes</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="137"/>
+        <source>All series</source>
+        <translation>Toutes les séries</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="87"/>
+        <source>Watched seasons</source>
+        <translation>Saisons visionnées</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/StatisticsPage.qml" line="95"/>
+        <source>All seasons</source>
+        <translation>Toutes les saisons</translation>
     </message>
 </context>
 </TS>
