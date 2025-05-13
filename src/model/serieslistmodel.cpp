@@ -31,9 +31,9 @@ SeriesListModel::SeriesListModel(QObject *parent, Api *api, DatabaseManager* dbm
             SLOT(getAll(int)));
 
     connect(this,
-            SIGNAL(getSeriesIds()),
+            SIGNAL(getSeriesIds(bool)),
             m_dbmanager,
-            SLOT(getSeriesIds()));
+            SLOT(getSeriesIds(bool)));
 }
 
 SeriesListModel::~SeriesListModel()
@@ -116,7 +116,7 @@ void SeriesListModel::updateSeries(const int &seriesId)
     emit setLoading(true);
 }
 
-void SeriesListModel::updateAllSeries()
+void SeriesListModel::updateAllSeries(const bool &includeEndedSeries)
 {
     connect(m_dbmanager, &DatabaseManager::getSeriesIdsReady, [=](const QList<int> seriesIds)
     {
@@ -126,5 +126,5 @@ void SeriesListModel::updateAllSeries()
         }
     });
 
-    emit getSeriesIds();
+    emit getSeriesIds(includeEndedSeries);
 }
