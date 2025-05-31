@@ -103,7 +103,6 @@ void Engine::updateModels()
     emit m_todayListModel->getStartPageSeries();
     emit m_seriesListModel->getSeries();
     emit m_statistics->requestStatistics();
-    // emit m_seasonListModel->getSeasons(m_seriesListModel->getID());
 }
 
 void Engine::setLoading(const bool &state)
@@ -125,6 +124,7 @@ void Engine::setMode(const QString &mode)
 
 void Engine::seriesStored(const int &seriesId)
 {
+    Q_UNUSED(seriesId);
     setLoading(false);
 }
 

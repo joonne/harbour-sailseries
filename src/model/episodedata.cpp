@@ -29,6 +29,7 @@ EpisodeData::EpisodeData(QObject *parent, QVariantMap params) :
     m_thumbHeight  = 0;
     m_thumbWidth = 0;
     m_watched = params["watched"].toInt() == 0 ? false : true;
+    m_runtime = params["runtime"].toInt();
 }
 
 int EpisodeData::getID() { return m_id; }
@@ -88,3 +89,5 @@ void EpisodeData::setWatched(const bool &watched)
     m_watched = watched;
     emit watchedChanged();
 }
+
+int EpisodeData::getRuntime() { return m_runtime; }

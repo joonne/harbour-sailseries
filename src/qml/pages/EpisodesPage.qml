@@ -58,7 +58,7 @@ Page {
                 anchors.right: parent.right
                 anchors.rightMargin: Theme.paddingMedium
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("EpisodeOverviewPage.qml"),
+                    pageStack.push(Qt.resolvedUrl("EpisodePage.qml"),
                                    { filename: Filename,
                                      episodeOverview: Overview,
                                      episodeName: EpisodeName,
@@ -68,7 +68,9 @@ Page {
                                      watched: Watched,
                                      episodeId: ID,
                                      seriesId: seriesId,
-                                     seasonNumber: SeasonNumber })
+                                     seasonNumber: SeasonNumber,
+                                     runtime: Runtime
+                                   })
 
                 }
             }

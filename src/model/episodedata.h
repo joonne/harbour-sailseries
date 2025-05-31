@@ -33,6 +33,7 @@ class EpisodeData : public QObject
     Q_PROPERTY(int ThumbHeight READ getThumbHeight CONSTANT)
     Q_PROPERTY(int ThumbWidth READ getThumbWidth CONSTANT)
     Q_PROPERTY(int Watched READ getWatched WRITE setWatched NOTIFY watchedChanged)
+    Q_PROPERTY(int Runtime READ getRuntime CONSTANT)
 
 public:
     explicit EpisodeData(QObject *parent = 0, QVariantMap params = QVariantMap());
@@ -64,6 +65,7 @@ public:
     int getThumbWidth();
     bool getWatched();
     void setWatched(const bool &watched);
+    int getRuntime();
 
 signals:
     void watchedChanged();
@@ -96,6 +98,7 @@ private:
     int m_thumbWidth;
     int m_watched;
     QString m_watchedFlagImage;
+    int m_runtime;
 };
 
 #endif // EPISODEDATA_H

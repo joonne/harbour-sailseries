@@ -92,67 +92,77 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="40"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="44"/>
         <source>Nothing airs this week</source>
         <translation>Sen emisións nesta semana</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="81"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="89"/>
         <source>Monday</source>
         <translation>Luns</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="83"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="91"/>
         <source>Tuesday</source>
         <translation>Martes</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="85"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="93"/>
         <source>Wednesday</source>
         <translation>Mércores</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="87"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="95"/>
         <source>Thursday</source>
         <translation>Xoves</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="89"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="97"/>
         <source>Friday</source>
         <translation>Venres</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="91"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="99"/>
         <source>Saturday</source>
         <translation>Sábado</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="93"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="101"/>
         <source>Sunday</source>
         <translation>Domingo</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="131"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="139"/>
         <source>Special Episode %1</source>
         <translation>Episodio especial %1</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="132"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="140"/>
         <source>Season %1 Episode %2</source>
         <translation>Tempada %1 Episodio %2</translation>
     </message>
 </context>
 <context>
-    <name>EpisodeOverviewPage</name>
+    <name>EpisodePage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="63"/>
+        <location filename="../src/qml/pages/EpisodePage.qml" line="66"/>
         <source>Original air date</source>
-        <translation>Data de estrea</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodeOverviewPage.qml" line="86"/>
+        <location filename="../src/qml/pages/EpisodePage.qml" line="88"/>
+        <source>%1 minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/EpisodePage.qml" line="90"/>
+        <source>Runtime</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/EpisodePage.qml" line="98"/>
         <source>Overview</source>
-        <translation>Resume</translation>
+        <translation type="unfinished">Resume</translation>
     </message>
 </context>
 <context>
@@ -168,17 +178,17 @@
         <translation>Episodios</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="86"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="88"/>
         <source>Specials: Episode %1</source>
         <translation>Especial: Episodio %1</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="87"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="89"/>
         <source>Season %1 Episode %2</source>
         <translation>Tempada %1 Episodio %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodesPage.qml" line="135"/>
+        <location filename="../src/qml/pages/EpisodesPage.qml" line="137"/>
         <source>No episodes.</source>
         <translation>Sen episodios.</translation>
     </message>
@@ -253,6 +263,24 @@
     </message>
 </context>
 <context>
+    <name>SearchResultPage</name>
+    <message>
+        <location filename="../src/qml/pages/SearchResultPage.qml" line="31"/>
+        <source>Add to my series</source>
+        <translation type="unfinished">Engadir as miñas series</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SearchResultPage.qml" line="40"/>
+        <source>Already added</source>
+        <translation type="unfinished">Xa está engadido</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/SearchResultPage.qml" line="60"/>
+        <source>Overview</source>
+        <translation type="unfinished">Resume</translation>
+    </message>
+</context>
+<context>
     <name>SeasonsPage</name>
     <message>
         <location filename="../src/qml/pages/SeasonsPage.qml" line="26"/>
@@ -278,24 +306,6 @@
         <location filename="../src/qml/pages/SeasonsPage.qml" line="144"/>
         <source>episodes</source>
         <translation>episodios</translation>
-    </message>
-</context>
-<context>
-    <name>SeriesInfoPage</name>
-    <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="31"/>
-        <source>Add to my series</source>
-        <translation>Engadir as miñas series</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="40"/>
-        <source>Already added</source>
-        <translation>Xa está engadido</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SeriesInfoPage.qml" line="60"/>
-        <source>Overview</source>
-        <translation>Resume</translation>
     </message>
 </context>
 <context>
