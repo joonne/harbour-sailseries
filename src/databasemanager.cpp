@@ -379,6 +379,7 @@ void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap
         {
             // lets get and check the watched flag first, might be slow but this must be done
             // in order to keep the flag state
+            // TODO: do this as a cte?
             QSqlQuery query(m_db);
             query.prepare("SELECT watched FROM Episode WHERE id = :id");
             query.bindValue(":id", id);
@@ -689,7 +690,7 @@ void DatabaseManager::getEpisodes(const int &seriesId, const int &seasonNumber)
     QList<QVariantMap> episodes;
     
     QSqlQuery query(m_db);
-    query.prepare("SELECT episodeName, episodeNumber, overview, seasonNumber, absoluteNumber, filename, watched, id, guestStars, writer, firstAired "
+    query.prepare("SELECT episodeName, episodeNumber, overview, seasonNumber, absoluteNumber, filename, watched, id, guestStars, writer, firstAired, runtime "
                   "FROM Episode "
                   "WHERE seriesID = :seriesId AND seasonNumber = :seasonNumber "
                   "ORDER BY episodeNumber");
@@ -737,6 +738,9 @@ void DatabaseManager::getEpisodes(const int &seriesId, const int &seasonNumber)
 
             QString firstAired = query.value(10).toString();
             episode["firstAired"] = firstAired;
+
+            int runtime = query.value(11).toInt();
+            episode["runtime"] = runtime;
 
             episodes.append(episode);
         }

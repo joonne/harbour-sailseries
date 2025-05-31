@@ -1,11 +1,8 @@
 TEMPLATE=app
-# The name of your app binary (and it's better if you think it is the whole app name as it's referred to many times)
-# Must start with "harbour-"
 TARGET = harbour-sailseries
 
 QT += network sql
 LIBS +=-lz
-# In the bright future this config line will do a lot of stuff to you
 CONFIG += sailfishapp
 CONFIG += c++14
 
@@ -35,23 +32,17 @@ DEFINES += API_KEY=\"$$API_KEY\"
 message($$DEFINES)
 
 OTHER_FILES = \
-# You DO NOT want .yaml be listed here as Qt Creator's editor is completely not ready for multi package .yaml's
-#
-# Also Qt Creator as of Nov 2013 will anyway try to rewrite your .yaml whenever you change your .pro
-# Well, you will just have to restore .yaml from version control again and again unless you figure out
-# how to kill this particular Creator's plugin
-#    ../rpm/harbour-sailseries.yaml \
     ../rpm/harbour-sailseries.spec \
     qml/main.qml \
+    qml/pages/EpisodePage.qml \
+    qml/pages/SearchResultPage.qml \
     qml/pages/StartPage.qml \
-    qml/pages/SeriesInfoPage.qml \
     qml/pages/SearchPage.qml \
     qml/pages/MySeriesPage.qml \
     qml/pages/CoverPage.qml \
     qml/cover/CoverPage.qml \
     qml/pages/AboutPage.qml \
     qml/components/MoreIndicator.qml \
-    qml/pages/EpisodeOverviewPage.qml \
     qml/pages/EpisodesPage.qml
 
 INCLUDEPATH += $$PWD

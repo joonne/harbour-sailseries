@@ -99,7 +99,7 @@ Page {
                     SeriesBanner {
                         id: banner
                         bannerPath: Banner
-                        sourceWidth: container.width
+                        bannerWidth: container.width
                     }
 
                     Label {

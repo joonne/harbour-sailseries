@@ -98,7 +98,7 @@ Page {
 
             SeriesBanner {
                 bannerPath: banner
-                sourceWidth: seriespage.width - Theme.paddingMedium * 2
+                bannerWidth: seriespage.width - Theme.paddingMedium * 2
             }
 
             Row {

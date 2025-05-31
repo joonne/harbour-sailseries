@@ -5,14 +5,12 @@ Image {
     id: banner
 
     property string bannerPath
-    property int sourceWidth
+    property int bannerWidth
 
     source: bannerPath
-    sourceSize.width: sourceWidth
+    width: bannerWidth
     anchors.left: parent.left
-    anchors.leftMargin: {
-        return sourceSize.width - width <= 0 ? Theme.paddingMedium : ((sourceSize.width - width) / 2 + Theme.paddingMedium)
-    }
+    anchors.leftMargin: Theme.paddingMedium
 
     onStatusChanged: {
         if (status === Image.Error || status === Image.Null) {

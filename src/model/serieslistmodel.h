@@ -48,7 +48,6 @@ private:
     Api* m_api;
     DatabaseManager* m_dbmanager;
     QList<SeriesData*> m_seriesListModel;
-    QString m_mode;
 
     static int seriesListCount(QQmlListProperty<SeriesData> *prop);
     static SeriesData* seriesListAt(QQmlListProperty<SeriesData> *prop, int index);

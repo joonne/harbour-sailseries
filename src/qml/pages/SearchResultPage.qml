@@ -4,7 +4,7 @@ import Sailfish.Silica 1.0
 import "../components"
 
 Page {
-    id: infopage
+    id: searchresultpage
 
     property int id
     property string name
@@ -53,12 +53,12 @@ Page {
 
             SeriesBanner {
                 bannerPath: banner
-                sourceWidth: infopage.width - Theme.paddingMedium * 2
+                bannerWidth: searchresultpage.width - Theme.paddingMedium * 2
             }
 
             TextArea {
                 label: qsTr("Overview")
-                width: infopage.width
+                width: searchresultpage.width
                 text:  overview
                 readOnly: true
             }

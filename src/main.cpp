@@ -11,7 +11,6 @@
 #include <QQmlComponent>
 #include <QTranslator>
 #include <QDebug>
-#include <QSettings>
 
 #include "engine.h"
 #include "statistics.h"
