@@ -32,7 +32,7 @@ CoverBackground {
             width: sourceDimension
             height: sourceDimension
         }
-        visible: isDefaultVisibility()
+        visible: isDefaultMode()
     }
 
     Label {
@@ -44,16 +44,16 @@ CoverBackground {
         anchors {
             centerIn: cover
         }
-        visible: listView.count === 0 && isDefaultVisibility()
+        visible: listView.count === 0 && isDefaultMode()
         width: cover.width - (2 * Theme.paddingLarge)
     }
 
     //---------------------------------
-    // This is the "m_series" coverPage
+    // This is the "my_series" coverPage
     //---------------------------------
 
     function setPosterVisible(aPoster) {
-        if (engine.Mode === "m_series" && aPoster) {
+        if (isMySeriesMode() && aPoster) {
             return aPoster;
         }
     }
@@ -63,7 +63,7 @@ CoverBackground {
         anchors.top: parent.top
         width: parent.width
         height: parent.height
-        visible: engine.Mode === "m_series"
+        visible: isMySeriesMode()
         opacity: 1.0
     }
 
@@ -71,8 +71,12 @@ CoverBackground {
     // This is the "default" coverPage
     //--------------------------------
 
-    function isDefaultVisibility() {
+    function isDefaultMode() {
         return engine.Mode === "default"
+    }
+
+    function isMySeriesMode() {
+        return engine.Mode === "my_series"
     }
 
     function getWeekday(weekday) {
@@ -98,7 +102,7 @@ CoverBackground {
 
     SilicaListView {
         id: listView
-        visible: isDefaultVisibility()
+        visible: isDefaultMode()
         height: cover.height
         anchors {
             top: cover.top

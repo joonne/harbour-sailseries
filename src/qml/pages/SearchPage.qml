@@ -50,7 +50,7 @@ Page {
             id: listItem
             contentHeight: Theme.itemSizeSmall
             contentWidth: listView.width
-            onClicked: pageStack.push(Qt.resolvedUrl("SeriesInfoPage.qml"), {
+            onClicked: pageStack.push(Qt.resolvedUrl("SearchResultPage.qml"), {
                                           id: ID,
                                           name: SeriesName,
                                           network: Network,
