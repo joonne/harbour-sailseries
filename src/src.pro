@@ -28,15 +28,9 @@ DEFINES += APP_BUILDNUM=\\\"$$RELEASE\\\"
 
 message($$DEFINES)
 
-!exists($$PWD/../.env) {
-    error( ".env needs to be defined in the project root" )
-}
-
-DOTENV = "$$cat($$PWD/../.env)"
-for(var, $$list($$DOTENV)) {
-    DEFINES += $$var
-    message($$var)
-}
+API_KEY = $$getenv("API_KEY")
+isEmpty(API_KEY): error("Required environment variable API_KEY is not set. Build aborted.")
+DEFINES += API_KEY=\"$$API_KEY\"
 
 message($$DEFINES)
 

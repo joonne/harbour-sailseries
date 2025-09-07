@@ -12,11 +12,7 @@ Search, add, view, mark episodes as watched, mark seasons as watched, update all
 **DEVELOPMENT**:
 
 * Install SailfishOS SDK
-* Add API_KEY into `.env`-file in project root:
-
-```sh
-API_KEY=\"AP_KEY\"
-```
+* Ensure thetvdb's `API_KEY` is provided as an environment variable
 
 **NOTE**:
 
