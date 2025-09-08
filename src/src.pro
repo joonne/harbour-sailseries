@@ -34,11 +34,6 @@ DEFINES += API_KEY=\"$$API_KEY\"
 
 message($$DEFINES)
 
-REQUIRED = $$find(DEFINES, "API_KEY")
-!count(REQUIRED, 1) {
-   error( "invalid env variables" )
-}
-
 OTHER_FILES = \
 # You DO NOT want .yaml be listed here as Qt Creator's editor is completely not ready for multi package .yaml's
 #
