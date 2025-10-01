@@ -96,7 +96,7 @@ public slots:
     void setWatched(const int &episodeId, const int &seriesId, const bool &watched);
     void storeSeasonImages(const int &seriesId, const QList<QVariantMap> &seasonImages);
     void markSeasonAsWatched(const int &seriesId, const int &seasonNumber);
-    void getSeriesIds(const bool &includeEndedSeries);
+    void getSeriesIds();
     void getSeriesNames();
 
 private:

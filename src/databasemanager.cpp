@@ -454,30 +454,16 @@ void DatabaseManager::storeSeasonImages(const int &seriesId, const QList<QVarian
     commit();
 }
 
-void DatabaseManager::getSeriesIds(const bool &includeEndedSeries)
+void DatabaseManager::getSeriesIds()
 {
     QList<int> seriesIds;
-    QString queryString = [=]()
-    {
-        if (includeEndedSeries)
-        {
-            return "SELECT id "
-                   "FROM Series "
-                   "ORDER BY seriesName";
-        }
-
-        return "SELECT id "
-               "FROM Series "
-               "WHERE status != 'Ended' "
-               "ORDER BY seriesName";
-    }();
 
     if (m_db.isOpen())
     {
         transaction();
 
         QSqlQuery query(m_db);
-        query.exec(queryString);
+        query.exec("SELECT id FROM Series ORDER BY seriesName");
 
         qDebug() << query.lastError();
 
