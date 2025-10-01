@@ -23,3 +23,5 @@ Makefile
 # other
 
 .env
+moc_*
+qrc_*
