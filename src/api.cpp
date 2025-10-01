@@ -36,7 +36,7 @@ void Api::getAuthenticationToken()
 
     request.setRawHeader("Content-Type", "application/json");
 
-    QByteArray body = QByteArray::fromStdString(QString("{\"apikey\": \"%1\"}").arg(QString(API_KEY)).toStdString());
+    QByteArray body = QByteArray::fromStdString(QString("{\"apikey\": \"%1\"}").arg(QString(TVDB_API_KEY)).toStdString());
 
     auto reply = m_nam->post(request, body);
 

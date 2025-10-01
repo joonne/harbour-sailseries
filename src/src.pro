@@ -25,9 +25,9 @@ DEFINES += APP_BUILDNUM=\\\"$$RELEASE\\\"
 
 message($$DEFINES)
 
-API_KEY = $$getenv("API_KEY")
-isEmpty(API_KEY): error("Required environment variable API_KEY is not set. Build aborted.")
-DEFINES += API_KEY=\"$$API_KEY\"
+TVDB_API_KEY = $$getenv(TVDB_API_KEY)
+isEmpty(TVDB_API_KEY): error("Required environment variable TVDB_API_KEY is not set. Build aborted.")
+DEFINES += TVDB_API_KEY=\\\"$$TVDB_API_KEY\\\"
 
 message($$DEFINES)
 

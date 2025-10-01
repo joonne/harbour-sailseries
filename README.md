@@ -6,17 +6,16 @@ Search, add, view, mark episodes as watched, mark seasons as watched, update all
 
 **DATA**:
 
-* [tvdb](https://thetvdb.com/)
-* [API](https://thetvdb.github.io/v4-api/#/)
+- [tvdb](https://thetvdb.com/)
+- [API](https://thetvdb.github.io/v4-api/#/)
 
 **DEVELOPMENT**:
 
-* Install SailfishOS SDK
-* Ensure thetvdb's `API_KEY` is provided as an environment variable
+- Install SailfishOS SDK
+- Ensure thetvdb's `TVDB_API_KEY` is provided as an environment variable
 
 **NOTE**:
 
 The air-times shown in the application are the original air times from the original network.
 
 SailSeries stores all data except images into local database, so it is possible to use the app also without internet connection.
-
