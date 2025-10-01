@@ -50,7 +50,7 @@ Page {
     }
 
     function formatGenre(aGenre) {
-        return aGenre.split(",").join(", ")
+        return typeof aGenre === "string" ? aGenre.split(",").join(", ") : ""
     }
 
     SilicaFlickable {
@@ -96,25 +96,19 @@ Page {
                 description: network
             }
 
-            SeriesBanner {
-                bannerPath: banner
-                bannerWidth: seriespage.width - Theme.paddingMedium * 2
+            Image {
+                source: banner
+                width: seriespage.width
+                anchors.left: parent.left
+                anchors.verticalCenter: parent
+                fillMode: Image.PreserveAspectFit
             }
 
-            Row {
-                TextField {
-                    label: qsTr("Status")
-                    width: seriespage.width / 2
-                    text: getStatus(seriesStatus)
-                    readOnly: true
-                }
-
-                TextField {
-                    label: qsTr("Rating")
-                    width: seriespage.width / 2
-                    text: formatRating(rating)
-                    readOnly: true
-                }
+            TextField {
+                label: qsTr("Status")
+                width: seriespage.width
+                text: getStatus(seriesStatus)
+                readOnly: true
             }
 
             TextField {

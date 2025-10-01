@@ -92,52 +92,52 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="44"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="40"/>
         <source>Nothing airs this week</source>
         <translation>Mitään ei lähetetä tällä viikolla</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="89"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="85"/>
         <source>Monday</source>
         <translation>Maanantai</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="91"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="87"/>
         <source>Tuesday</source>
         <translation>Tiistai</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="93"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="89"/>
         <source>Wednesday</source>
         <translation>Keskiviikko</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="95"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="91"/>
         <source>Thursday</source>
         <translation>Torstai</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="97"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="93"/>
         <source>Friday</source>
         <translation>Perjantai</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="99"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="95"/>
         <source>Saturday</source>
         <translation>Lauantai</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="101"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="97"/>
         <source>Sunday</source>
         <translation>Sunnuntai</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="139"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="135"/>
         <source>Special Episode %1</source>
         <translation>Erikoisjaksot: Jakso %1</translation>
     </message>
     <message>
-        <location filename="../src/qml/cover/CoverPage.qml" line="140"/>
+        <location filename="../src/qml/cover/CoverPage.qml" line="136"/>
         <source>Season %1 Episode %2</source>
         <translation>Kausi %1 Jakso %2</translation>
     </message>
@@ -145,22 +145,22 @@
 <context>
     <name>EpisodePage</name>
     <message>
-        <location filename="../src/qml/pages/EpisodePage.qml" line="66"/>
+        <location filename="../src/qml/pages/EpisodePage.qml" line="59"/>
         <source>Original air date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodePage.qml" line="88"/>
+        <location filename="../src/qml/pages/EpisodePage.qml" line="81"/>
         <source>%1 minutes</source>
         <translation type="unfinished">%1 minuuttia</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodePage.qml" line="90"/>
+        <location filename="../src/qml/pages/EpisodePage.qml" line="83"/>
         <source>Runtime</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/EpisodePage.qml" line="98"/>
+        <location filename="../src/qml/pages/EpisodePage.qml" line="91"/>
         <source>Overview</source>
         <translation type="unfinished">Kuvaus</translation>
     </message>
@@ -236,7 +236,7 @@
         <translation>Omat sarjat</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="131"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="135"/>
         <source>Search for series first.</source>
         <translation>Etsi ensin sarjoja.</translation>
     </message>
@@ -275,7 +275,7 @@
         <translation type="unfinished">Lisätty aiemmin</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SearchResultPage.qml" line="60"/>
+        <location filename="../src/qml/pages/SearchResultPage.qml" line="63"/>
         <source>Overview</source>
         <translation type="unfinished">Kuvaus</translation>
     </message>
@@ -288,22 +288,22 @@
         <translation>Kaudet</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="89"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="83"/>
         <source>Specials</source>
         <translation>Erikoisjaksot</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="89"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="83"/>
         <source>Season %1</source>
         <translation>Kausi %1</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="102"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="96"/>
         <source>Watched</source>
         <translation>Nähty</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeasonsPage.qml" line="144"/>
+        <location filename="../src/qml/pages/SeasonsPage.qml" line="138"/>
         <source>episodes</source>
         <translation>jaksot</translation>
     </message>
@@ -336,22 +336,17 @@
         <translation>Päivitä</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="106"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="108"/>
         <source>Status</source>
         <translation>Tila</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="113"/>
-        <source>Rating</source>
-        <translation>Luokitus</translation>
-    </message>
-    <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="121"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="115"/>
         <source>Genre</source>
         <translation>Tyylilaji</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="128"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="122"/>
         <source>Overview</source>
         <translation>Kuvaus</translation>
     </message>

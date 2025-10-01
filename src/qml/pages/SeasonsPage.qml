@@ -57,6 +57,7 @@ Page {
             Image {
                 id: banner
                 source: getBanner(SeasonBanner)
+                fillMode: Image.PreserveAspectFit
                 sourceSize.height: 10 * Theme.paddingLarge
                 anchors.left: background.left
                 anchors.leftMargin: banner.width === 0 ? 0 : Theme.paddingMedium
@@ -64,15 +65,8 @@ Page {
                 anchors.topMargin: (background.height - banner.height) / 2
 
                 onWidthChanged: {
-                    if (banner.width > listItem.width) {
+                    if (banner.width > (listItem.width / 2)) {
                         banner.width = 0;
-                    }
-                }
-
-                onStatusChanged: {
-                    var fallback = "qrc:///images/season-banner-fallback.jpg";
-                    if (status === Image.Error || status === Image.Null) {
-                        source = fallback;
                     }
                 }
             }

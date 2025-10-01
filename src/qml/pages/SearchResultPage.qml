@@ -51,9 +51,12 @@ Page {
                 description: network
             }
 
-            SeriesBanner {
-                bannerPath: banner
-                bannerWidth: searchresultpage.width - Theme.paddingMedium * 2
+            Image {
+                source: banner
+                width: searchresultpage.width * (9/16)
+                anchors.left: parent.left
+                anchors.leftMargin: (parent.width - width) / 2
+                fillMode: Image.PreserveAspectFit
             }
 
             TextArea {

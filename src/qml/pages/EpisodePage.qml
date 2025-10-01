@@ -37,17 +37,10 @@ Page {
             Image {
                 id: banner
                 source: filename
-                width: parent.width
-                height: (9/16) * parent.width
+                width: parent.width - (Theme.paddingLarge * 2)
+                height: (9/16) * banner.width
                 anchors.left: parent.left
                 anchors.leftMargin: (episodepage.width - banner.width) / 2
-
-                onStatusChanged: {
-                    var fallback = "qrc:///images/episode-image-fallback.jpg";
-                    if (status === Image.Error || status === Image.Null) {
-                        source = fallback
-                    }
-                }
             }
 
             Item {
