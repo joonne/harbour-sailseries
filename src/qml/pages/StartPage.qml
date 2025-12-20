@@ -90,7 +90,7 @@ Page {
                 contentHeight: column.height * 1.1
                 contentWidth: listView.width
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("EpisodeOverviewPage.qml"),
+                    pageStack.push(Qt.resolvedUrl("EpisodePage.qml"),
                                    { episodeBanner: NextEpisodeBanner,
                                        episodeOverview: NextEpisodeOverview,
                                        episodeName: NextEpisodeName,
