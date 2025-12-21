@@ -102,7 +102,7 @@ void Engine::updateModels()
 {
     emit m_todayListModel->getStartPageSeries();
     emit m_seriesListModel->getSeries();
-    emit m_statistics->requestStatistics();
+    emit m_statistics->statisticsRequested();
 }
 
 void Engine::setLoading(const bool &state)

@@ -91,8 +91,7 @@ Page {
                 contentWidth: listView.width
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("EpisodePage.qml"),
-                                   { episodeBanner: NextEpisodeBanner,
-                                       episodeOverview: NextEpisodeOverview,
+                                   { episodeOverview: NextEpisodeOverview,
                                        episodeName: NextEpisodeName,
                                        guestStars: NextEpisodeGuestStars,
                                        writers: NextEpisodeWriter,

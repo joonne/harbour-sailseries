@@ -414,17 +414,17 @@
         <translation>Tällä viikolla</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="120"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="119"/>
         <source>Special Episode %1</source>
         <translation>Erikoisjaksot: Jakso %1</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="121"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="120"/>
         <source>Season %1 Episode %2</source>
         <translation>Kausi %1 Jakso %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="149"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="148"/>
         <source>Nothing airs this week</source>
         <translation>Mitään ei lähetetä tällä viikolla</translation>
     </message>

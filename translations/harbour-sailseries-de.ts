@@ -414,17 +414,17 @@
         <translation>Diese Woche</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="120"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="119"/>
         <source>Special Episode %1</source>
         <translation>Sonderfolge %1</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="121"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="120"/>
         <source>Season %1 Episode %2</source>
         <translation>Staffel %1 Folge %2</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/StartPage.qml" line="149"/>
+        <location filename="../src/qml/pages/StartPage.qml" line="148"/>
         <source>Nothing airs this week</source>
         <translation>Keine Veröffentlichung diese Woche</translation>
     </message>

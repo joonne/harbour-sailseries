@@ -577,7 +577,7 @@ void DatabaseManager::getStartPageSeries()
             {
                 QVariantMap series;
                 
-                const auto seriesName = query.value(0).toString();
+                const auto seriesName = query.value(0).toString().replace("''", "'");
                 series["seriesName"] = seriesName;
                 
                 const auto network = query.value(1).toString();
@@ -608,8 +608,7 @@ void DatabaseManager::getStartPageSeries()
                 const auto episodeId = query.value(6).toString();
                 series["nextEpisodeId"] = episodeId;
                 
-                auto episodeName = query.value(7).toString();
-                episodeName.replace("''", "'");
+                auto episodeName = query.value(7).toString().replace("''", "'");
                 series["nextEpisodeName"] = episodeName;
                 
                 const auto episodeNumber = query.value(8).toString();
@@ -797,7 +796,7 @@ void DatabaseManager::getSeriesNames()
     {
         while (query.next())
         {
-            seriesNames.insert(query.value(0).toString());
+            seriesNames.insert(query.value(0).toString().replace("''", "'"));
         }
     }
 
