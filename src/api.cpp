@@ -75,7 +75,6 @@ void Api::searchSeries(const QString &text)
 void Api::getAll(const int &seriesId)
 {
     getSeries(seriesId);
-    getEpisodes(seriesId);
 }
 
 void Api::getSeries(const int &seriesId)
@@ -93,6 +92,8 @@ void Api::getSeries(const int &seriesId)
             getTranslations(seriesId, "eng", series);
 
             auto seasons = parseJsonArray(jsonDocument.object().value("data").toObject().value("seasons").toArray());
+            getEpisodes(seriesId, seasons);
+
             auto seasonImages = toSeasonImages(seasons);
             emit storeSeasonImages(seriesId, seasonImages);
         }
@@ -126,12 +127,12 @@ void Api::getTranslations(const int &seriesId, const QString &language, const QV
     });
 }
 
-void Api::getEpisodes(const int &seriesId, const int &page)
+void Api::getEpisodes(const int &seriesId, const QList<QVariantMap> &seasons,  const int &page)
 {
     QUrl url(QString("%1/series/%2/episodes/default?page=%3").arg(QString(MIRRORPATH)).arg(seriesId).arg(page));
     auto reply = get(url);
 
-    connect(reply, &QNetworkReply::finished, [this, reply, seriesId, page]()
+    connect(reply, &QNetworkReply::finished, [this, reply, seriesId, seasons, page]()
     {
         auto jsonDocument = QJsonDocument::fromJson(reply->readAll());
 
@@ -146,11 +147,19 @@ void Api::getEpisodes(const int &seriesId, const int &page)
             }
 
             qInfo() << "store episodes for " << seriesId;
-            const auto episodes = parseEpisodes(jsonDocument.object().value("data").toObject().value("episodes").toArray());
+            auto episodes = parseEpisodes(jsonDocument.object().value("data").toObject().value("episodes").toArray());
+
+            for (QVariantMap &episode: episodes)
+            {
+                auto seasonNumber = episode["seasonNumber"].toInt();
+                auto seasonId = findSeasonId(seasonNumber, seasons);
+                episode["seasonId"] = QVariant::fromValue(seasonId);
+            }
+
             emit storeEpisodes(seriesId, episodes);
 
             qInfo() << "try to get more episodes for " << seriesId;
-            getEpisodes(seriesId, page + 1);
+            getEpisodes(seriesId, seasons, page + 1);
         }
 
         reply->deleteLater();
@@ -402,14 +411,6 @@ QList<QVariantMap> Api::parseEpisodes(const QJsonArray &items)
 
         for (auto key : keys)
         {
-            // seasons is null for default, absolute & official season-types
-            if (key == "seasons")
-            {
-                auto seasonNumber = item.toObject().value("seasonNumber").toInt();
-                episode["seasonId"] = findSeasonId(seasonNumber, parseJsonArray(item.toObject().value(key).toArray()));
-                continue;
-            }
-
             episode.insert(key, item.toObject().value(key).toVariant());
         }
 
