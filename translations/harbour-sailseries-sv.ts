@@ -147,22 +147,22 @@
     <message>
         <location filename="../src/qml/pages/EpisodePage.qml" line="59"/>
         <source>Original air date</source>
-        <translation type="unfinished"></translation>
+        <translation>Sändningsdatum</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodePage.qml" line="81"/>
         <source>%1 minutes</source>
-        <translation type="unfinished">%1 minuter</translation>
+        <translation>%1 minuter</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodePage.qml" line="83"/>
         <source>Runtime</source>
-        <translation type="unfinished"></translation>
+        <translation>Körtid</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodePage.qml" line="91"/>
         <source>Overview</source>
-        <translation type="unfinished">Översikt</translation>
+        <translation>Översikt</translation>
     </message>
 </context>
 <context>
@@ -267,17 +267,17 @@
     <message>
         <location filename="../src/qml/pages/SearchResultPage.qml" line="31"/>
         <source>Add to my series</source>
-        <translation type="unfinished">Lägg till bland mina serier</translation>
+        <translation>Lägg till bland mina serier</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SearchResultPage.qml" line="40"/>
         <source>Already added</source>
-        <translation type="unfinished">Redan tillagd</translation>
+        <translation>Redan tillagd</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SearchResultPage.qml" line="63"/>
         <source>Overview</source>
-        <translation type="unfinished">Översikt</translation>
+        <translation>Översikt</translation>
     </message>
 </context>
 <context>

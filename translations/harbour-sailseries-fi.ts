@@ -147,22 +147,22 @@
     <message>
         <location filename="../src/qml/pages/EpisodePage.qml" line="59"/>
         <source>Original air date</source>
-        <translation type="unfinished"></translation>
+        <translation>Ensiesitys</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodePage.qml" line="81"/>
         <source>%1 minutes</source>
-        <translation type="unfinished">%1 minuuttia</translation>
+        <translation>%1 minuuttia</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodePage.qml" line="83"/>
         <source>Runtime</source>
-        <translation type="unfinished"></translation>
+        <translation>Kesto</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodePage.qml" line="91"/>
         <source>Overview</source>
-        <translation type="unfinished">Kuvaus</translation>
+        <translation>Kuvaus</translation>
     </message>
 </context>
 <context>
@@ -267,17 +267,17 @@
     <message>
         <location filename="../src/qml/pages/SearchResultPage.qml" line="31"/>
         <source>Add to my series</source>
-        <translation type="unfinished">Lisää omiin sarjoihin</translation>
+        <translation>Lisää omiin sarjoihin</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SearchResultPage.qml" line="40"/>
         <source>Already added</source>
-        <translation type="unfinished">Lisätty aiemmin</translation>
+        <translation>Lisätty aiemmin</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SearchResultPage.qml" line="63"/>
         <source>Overview</source>
-        <translation type="unfinished">Kuvaus</translation>
+        <translation>Kuvaus</translation>
     </message>
 </context>
 <context>

@@ -147,7 +147,7 @@
     <message>
         <location filename="../src/qml/pages/EpisodePage.qml" line="59"/>
         <source>Original air date</source>
-        <translation type="unfinished"></translation>
+        <translation>Data de estrea</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodePage.qml" line="81"/>
@@ -162,7 +162,7 @@
     <message>
         <location filename="../src/qml/pages/EpisodePage.qml" line="91"/>
         <source>Overview</source>
-        <translation type="unfinished">Resume</translation>
+        <translation>Resume</translation>
     </message>
 </context>
 <context>
@@ -267,17 +267,17 @@
     <message>
         <location filename="../src/qml/pages/SearchResultPage.qml" line="31"/>
         <source>Add to my series</source>
-        <translation type="unfinished">Engadir as miñas series</translation>
+        <translation>Engadir as miñas series</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SearchResultPage.qml" line="40"/>
         <source>Already added</source>
-        <translation type="unfinished">Xa está engadido</translation>
+        <translation>Xa está engadido</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SearchResultPage.qml" line="63"/>
         <source>Overview</source>
-        <translation type="unfinished">Resume</translation>
+        <translation>Resume</translation>
     </message>
 </context>
 <context>

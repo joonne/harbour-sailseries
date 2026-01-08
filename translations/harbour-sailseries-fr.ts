@@ -147,22 +147,22 @@
     <message>
         <location filename="../src/qml/pages/EpisodePage.qml" line="59"/>
         <source>Original air date</source>
-        <translation type="unfinished"></translation>
+        <translation>Date de première diffusion</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodePage.qml" line="81"/>
         <source>%1 minutes</source>
-        <translation type="unfinished">%1 minutes</translation>
+        <translation>%1 minutes</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodePage.qml" line="83"/>
         <source>Runtime</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/EpisodePage.qml" line="91"/>
         <source>Overview</source>
-        <translation type="unfinished">Présentation</translation>
+        <translation>Présentation</translation>
     </message>
 </context>
 <context>
@@ -267,17 +267,17 @@
     <message>
         <location filename="../src/qml/pages/SearchResultPage.qml" line="31"/>
         <source>Add to my series</source>
-        <translation type="unfinished">Ajouter à mes séries</translation>
+        <translation>Ajouter à mes séries</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SearchResultPage.qml" line="40"/>
         <source>Already added</source>
-        <translation type="unfinished">Déjà ajoutée</translation>
+        <translation>Déjà ajoutée</translation>
     </message>
     <message>
         <location filename="../src/qml/pages/SearchResultPage.qml" line="63"/>
         <source>Overview</source>
-        <translation type="unfinished">Présentation</translation>
+        <translation>Présentation</translation>
     </message>
 </context>
 <context>
