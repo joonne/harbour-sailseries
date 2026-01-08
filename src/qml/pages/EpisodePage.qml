@@ -5,7 +5,7 @@ import "../components"
 
 Page {
 
-    id: episodeoverviewpage
+    id: episodepage
 
     // these are pushed from previous page with the pageStack
     property string episodeOverview
@@ -18,6 +18,7 @@ Page {
     property string filename
     property string writers
     property string guestStars
+    property int runtime
 
     SilicaFlickable {
         anchors.fill: parent
@@ -36,21 +37,16 @@ Page {
             Image {
                 id: banner
                 source: filename
+                width: parent.width - (Theme.paddingLarge * 2)
+                height: (9/16) * banner.width
                 anchors.left: parent.left
-                anchors.leftMargin: (episodeoverviewpage.width - banner.width) / 2
-
-                onStatusChanged: {
-                    var fallback = "qrc:///images/episode-image-fallback.jpg";
-                    if (status === Image.Error || status === Image.Null) {
-                        source = fallback
-                    }
-                }
+                anchors.leftMargin: (episodepage.width - banner.width) / 2
             }
 
             Item {
                 id: padding
                 height: Theme.paddingLarge
-                width: episodeoverviewpage.width
+                width: episodepage.width
             }
 
             Row {
@@ -80,9 +76,18 @@ Page {
                 }
             }
 
+            TextField {
+                id: runtimeField
+                text: qsTr("%1 minutes").arg(runtime)
+                readOnly: true
+                label: qsTr("Runtime")
+                width: parent.width - Theme.paddingLarge
+                visible: runtime && runtime !== 0
+            }
+
             TextArea {
                 id: overviewField
-                width: episodeoverviewpage.width
+                width: episodepage.width
                 label: qsTr("Overview")
                 text:  episodeOverview
                 readOnly: true

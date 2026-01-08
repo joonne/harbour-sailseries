@@ -50,7 +50,7 @@ private:
     void getAuthenticationToken();
     void getSeries(const int &seriesId);
     void getTranslations(const int &seriesId, const QString &language, const QVariantMap &series);
-    void getEpisodes(const int &seriesId, const int &page = 0);
+    void getEpisodes(const int &seriesId, const QList<QVariantMap> &seasons, const int &page = 0);
 
     QVariantMap parseJsonObject(const QJsonObject &item);
     QList<QVariantMap> parseJsonArray(const QJsonArray &items);

@@ -92,10 +92,13 @@ void SeriesListModel::populate()
 
 void SeriesListModel::selectSeries(const int &index)
 {
-    emit setMode("m_series");
+    emit setMode("my_series");
 
-    const auto poster = m_seriesListModel.at(index)->getPoster();
-    emit posterChanged(poster);
+    if (m_seriesListModel.at(index) != nullptr)
+    {
+        const auto poster = m_seriesListModel.at(index)->getPoster();
+        emit posterChanged(poster);
+    }
 }
 
 void SeriesListModel::deleteSeries(const int &seriesId)

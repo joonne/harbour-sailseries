@@ -96,10 +96,14 @@ Page {
                     id: column
                     spacing: Theme.paddingSmall
 
-                    SeriesBanner {
+
+                    Image {
                         id: banner
-                        bannerPath: Banner
-                        sourceWidth: container.width
+                        source: Banner
+                        width: container.width
+                        anchors.left: parent.left
+                        anchors.leftMargin: ((container.width - width) / 2) + Theme.paddingMedium
+                        fillMode: Image.PreserveAspectFit
                     }
 
                     Label {

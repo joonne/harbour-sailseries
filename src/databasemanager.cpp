@@ -379,6 +379,7 @@ void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap
         {
             // lets get and check the watched flag first, might be slow but this must be done
             // in order to keep the flag state
+            // TODO: do this as a cte?
             QSqlQuery query(m_db);
             query.prepare("SELECT watched FROM Episode WHERE id = :id");
             query.bindValue(":id", id);
@@ -456,14 +457,13 @@ void DatabaseManager::storeSeasonImages(const int &seriesId, const QList<QVarian
 void DatabaseManager::getSeriesIds()
 {
     QList<int> seriesIds;
-    QString queryString = "SELECT id FROM Series ORDER BY seriesName";
 
     if (m_db.isOpen())
     {
         transaction();
 
         QSqlQuery query(m_db);
-        query.exec(queryString);
+        query.exec("SELECT id FROM Series ORDER BY seriesName");
 
         qDebug() << query.lastError();
 
@@ -577,7 +577,7 @@ void DatabaseManager::getStartPageSeries()
             {
                 QVariantMap series;
                 
-                const auto seriesName = query.value(0).toString();
+                const auto seriesName = query.value(0).toString().replace("''", "'");
                 series["seriesName"] = seriesName;
                 
                 const auto network = query.value(1).toString();
@@ -608,8 +608,7 @@ void DatabaseManager::getStartPageSeries()
                 const auto episodeId = query.value(6).toString();
                 series["nextEpisodeId"] = episodeId;
                 
-                auto episodeName = query.value(7).toString();
-                episodeName.replace("''", "'");
+                auto episodeName = query.value(7).toString().replace("''", "'");
                 series["nextEpisodeName"] = episodeName;
                 
                 const auto episodeNumber = query.value(8).toString();
@@ -676,7 +675,7 @@ void DatabaseManager::getEpisodes(const int &seriesId, const int &seasonNumber)
     QList<QVariantMap> episodes;
     
     QSqlQuery query(m_db);
-    query.prepare("SELECT episodeName, episodeNumber, overview, seasonNumber, absoluteNumber, filename, watched, id, guestStars, writer, firstAired "
+    query.prepare("SELECT episodeName, episodeNumber, overview, seasonNumber, absoluteNumber, filename, watched, id, guestStars, writer, firstAired, runtime "
                   "FROM Episode "
                   "WHERE seriesID = :seriesId AND seasonNumber = :seasonNumber "
                   "ORDER BY episodeNumber");
@@ -724,6 +723,9 @@ void DatabaseManager::getEpisodes(const int &seriesId, const int &seasonNumber)
 
             QString firstAired = query.value(10).toString();
             episode["firstAired"] = firstAired;
+
+            int runtime = query.value(11).toInt();
+            episode["runtime"] = runtime;
 
             episodes.append(episode);
         }
@@ -794,7 +796,7 @@ void DatabaseManager::getSeriesNames()
     {
         while (query.next())
         {
-            seriesNames.insert(query.value(0).toString());
+            seriesNames.insert(query.value(0).toString().replace("''", "'"));
         }
     }
 
@@ -1052,4 +1054,229 @@ QString DatabaseManager::getSeasonBanner(const int &seriesId, const int &season)
     }
 
     return banner;
+}
+
+int DatabaseManager::getWatchedEpisodesDuration()
+{
+    auto duration = 0;
+
+    QSqlQuery query(m_db);
+    query.exec("SELECT SUM(runtime) "
+               "FROM episode "
+               "WHERE episode.watched = 1");
+
+    qDebug() << query.lastError();
+
+    if (query.isSelect())
+    {
+        while (query.next())
+        {
+            duration = query.value(0).toInt();
+        }
+    }
+
+    return duration;
+}
+
+double DatabaseManager::getAverageWatchedEpisodesDuration()
+{
+    auto duration = 0;
+
+    QSqlQuery query(m_db);
+    query.exec("SELECT AVG(runtime) "
+               "FROM episode "
+               "WHERE episode.watched = 1");
+
+    qDebug() << query.lastError();
+
+    if (query.isSelect())
+    {
+        while (query.next())
+        {
+            duration = query.value(0).toDouble();
+        }
+    }
+
+    return duration;
+}
+
+int DatabaseManager::getWatchedEpisodesCount()
+{
+    auto count = 0;
+
+    QSqlQuery query(m_db);
+    query.exec("SELECT COUNT(*) "
+               "FROM episode "
+               "WHERE episode.watched = 1");
+
+    qDebug() << query.lastError();
+
+    if (query.isSelect())
+    {
+        while (query.next())
+        {
+            count = query.value(0).toInt();
+        }
+    }
+
+    return count;
+}
+
+int DatabaseManager::getAllEpisodesCount()
+{
+    auto count = 0;
+
+    QSqlQuery query(m_db);
+    query.exec("SELECT COUNT(*) "
+               "FROM episode");
+
+    qDebug() << query.lastError();
+
+    if (query.isSelect())
+    {
+        while (query.next())
+        {
+            count = query.value(0).toInt();
+        }
+    }
+
+    return count;
+}
+
+int DatabaseManager::getAllSeriesCount()
+{
+    auto count = 0;
+
+    QSqlQuery query(m_db);
+    query.exec("SELECT COUNT(*) FROM series");
+
+    qDebug() << query.lastError();
+
+    if (query.isSelect())
+    {
+        while (query.next())
+        {
+            count = query.value(0).toInt();
+        }
+    }
+
+    return count;
+}
+
+int DatabaseManager::getEndedSeriesCount()
+{
+    auto count = 0;
+
+    QSqlQuery query(m_db);
+    query.exec("SELECT COUNT(*) "
+               "FROM series "
+               "WHERE series.status = 'Ended'");
+
+    qDebug() << query.lastError();
+
+    if (query.isSelect())
+    {
+        while (query.next())
+        {
+            count = query.value(0).toInt();
+        }
+    }
+
+    return count;
+}
+
+int DatabaseManager::getWatchedSeriesCount()
+{
+    auto inProgressSeriesCount = 0;
+    auto allSeriesCount = 0;
+    QSqlQuery query(m_db);
+
+    query.exec("SELECT COUNT (DISTINCT seriesID) "
+               "FROM "
+               "(SELECT episode.id, episode.seriesID "
+               "FROM episode, series "
+               "WHERE episode.seriesID = series.id AND episode.watched = 0)");
+
+    qDebug() << query.lastError();
+
+    if (query.isSelect())
+    {
+        while (query.next())
+        {
+            inProgressSeriesCount = query.value(0).toInt();
+        }
+    }
+
+    query.exec("SELECT COUNT(id) FROM series");
+
+    qDebug() << query.lastError();
+
+    if (query.isSelect())
+    {
+        while (query.next())
+        {
+            allSeriesCount = query.value(0).toInt();
+        }
+    }
+
+    return allSeriesCount - inProgressSeriesCount;
+}
+
+void DatabaseManager::getStatistics()
+{
+    QVariantMap statistics;
+    statistics["watchedEpisodesDuration"] = getWatchedEpisodesDuration();
+    statistics["watchedEpisodesCount"] = getWatchedEpisodesCount();
+    statistics["allEpisodesCount"] = getAllEpisodesCount();
+    statistics["allSeriesCount"] = getAllSeriesCount();
+    statistics["watchedSeriesCount"] = getWatchedSeriesCount();
+    statistics["allSeasonsCount"] = getAllSeasonsCount();
+    statistics["watchedSeasonsCount"] = getWatchedSeasonsCount();
+    statistics["averageWatchedEpisodesDuration"] = getAverageWatchedEpisodesDuration();
+
+    emit updateStatistics(statistics);
+}
+
+int DatabaseManager::getWatchedSeasonsCount()
+{
+    auto count = 0;
+
+    QSqlQuery query(m_db);
+    query.exec("SELECT * "
+               "FROM (SELECT MAX(episodeNumber) AS episodes, SUM(watched) AS watched, seasonID FROM episode GROUP BY seasonID) "
+               "GROUP BY seasonID "
+               "HAVING episodes = watched");
+
+    qDebug() << query.lastError();
+
+    if (query.isSelect())
+    {
+        while (query.next())
+        {
+            count += 1;
+        }
+    }
+
+    return count;
+}
+
+int DatabaseManager::getAllSeasonsCount()
+{
+    auto count = 0;
+
+    QSqlQuery query(m_db);
+    query.exec("SELECT SUM(seasonCount) "
+               "FROM (SELECT MAX(seasonNumber) AS seasonCount FROM episode GROUP BY seriesID)");
+
+    qDebug() << query.lastError();
+
+    if (query.isSelect())
+    {
+        while (query.next())
+        {
+            count = query.value(0).toInt();
+        }
+    }
+
+    return count;
 }

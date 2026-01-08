@@ -17,6 +17,7 @@ Engine::Engine(QObject *parent) :
     m_todayListModel = new TodayListModel(this, m_dbmanager);
     m_episodeListModel = new EpisodeListModel(this, m_dbmanager);
     m_seasonListModel = new SeasonListModel(this, m_dbmanager);
+    m_statistics = new Statistics(this, m_dbmanager);
 
     connect(m_searchListModel,
             SIGNAL(updateModels()),
@@ -88,6 +89,8 @@ EpisodeListModel* Engine::getEpisodeListModel() { return m_episodeListModel; }
 
 SeasonListModel* Engine::getSeasonListModel() { return m_seasonListModel; }
 
+Statistics* Engine::getStatistics() { return m_statistics; }
+
 bool Engine::getLoading() { return m_loading; }
 
 void Engine::readyToUpdateModels()
@@ -99,6 +102,7 @@ void Engine::updateModels()
 {
     emit m_todayListModel->getStartPageSeries();
     emit m_seriesListModel->getSeries();
+    emit m_statistics->statisticsRequested();
 }
 
 void Engine::setLoading(const bool &state)
@@ -120,6 +124,7 @@ void Engine::setMode(const QString &mode)
 
 void Engine::seriesStored(const int &seriesId)
 {
+    Q_UNUSED(seriesId);
     setLoading(false);
 }
 

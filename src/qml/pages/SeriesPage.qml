@@ -50,7 +50,7 @@ Page {
     }
 
     function formatGenre(aGenre) {
-        return aGenre.split(",").join(", ")
+        return typeof aGenre === "string" ? aGenre.split(",").join(", ") : ""
     }
 
     SilicaFlickable {
@@ -96,9 +96,12 @@ Page {
                 description: network
             }
 
-            SeriesBanner {
-                bannerPath: banner
-                sourceWidth: seriespage.width - Theme.paddingMedium * 2
+            Image {
+                source: banner
+                width: seriespage.width
+                anchors.left: parent.left
+                anchors.verticalCenter: parent
+                fillMode: Image.PreserveAspectFit
             }
 
             TextField {

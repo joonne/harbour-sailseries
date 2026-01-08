@@ -4,7 +4,7 @@ import Sailfish.Silica 1.0
 import "../components"
 
 Page {
-    id: infopage
+    id: searchresultpage
 
     property int id
     property string name
@@ -51,14 +51,17 @@ Page {
                 description: network
             }
 
-            SeriesBanner {
-                bannerPath: banner
-                sourceWidth: infopage.width - Theme.paddingMedium * 2
+            Image {
+                source: banner
+                width: searchresultpage.width * (9/16)
+                anchors.left: parent.left
+                anchors.leftMargin: (parent.width - width) / 2
+                fillMode: Image.PreserveAspectFit
             }
 
             TextArea {
                 label: qsTr("Overview")
-                width: infopage.width
+                width: searchresultpage.width
                 text:  overview
                 readOnly: true
             }

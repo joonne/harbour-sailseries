@@ -42,6 +42,11 @@ Page {
             }
 
             MenuItem {
+                text: qsTr("Statistics")
+                onClicked: pageStack.push(Qt.resolvedUrl("StatisticsPage.qml"))
+            }
+
+            MenuItem {
                 text: qsTr("Search for a Series")
                 onClicked: pageStack.push(Qt.resolvedUrl("SearchPage.qml"))
             }
@@ -85,9 +90,8 @@ Page {
                 contentHeight: column.height * 1.1
                 contentWidth: listView.width
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("EpisodeOverviewPage.qml"),
-                                   { episodeBanner: NextEpisodeBanner,
-                                       episodeOverview: NextEpisodeOverview,
+                    pageStack.push(Qt.resolvedUrl("EpisodePage.qml"),
+                                   { episodeOverview: NextEpisodeOverview,
                                        episodeName: NextEpisodeName,
                                        guestStars: NextEpisodeGuestStars,
                                        writers: NextEpisodeWriter,
