@@ -9,3 +9,4 @@ TRANSLATIONS += translations/harbour-sailseries-de.ts \
                 translations/harbour-sailseries-gl.ts \
                 translations/harbour-sailseries-lt.ts \
                 translations/harbour-sailseries-sv.ts \
+                translations/harbour-sailseries-it.ts \
