@@ -66,6 +66,7 @@ private:
     SeasonListModel* m_seasonListModel;
     Api* m_api;
     DatabaseManager* m_dbmanager;
+    QThread* m_dbThread;
     Statistics* m_statistics;
     bool m_loading;
     QString m_mode;

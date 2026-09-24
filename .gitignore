@@ -25,3 +25,4 @@ Makefile
 .env
 moc_*
 qrc_*
+translations/*.qm

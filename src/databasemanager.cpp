@@ -78,6 +78,13 @@ void DatabaseManager::migrate()
                     [this]() { addRuntimeToEpisode(); },
                     [this]() { updateInfoTable(3); }
                 }
+            },
+            Migration {
+                .version = 3,
+                .operations = {
+                    [this]() { removeEscapedQuotes(); },
+                    [this]() { updateInfoTable(4); }
+                }
             }
         };
 
@@ -277,6 +284,41 @@ bool DatabaseManager::addRuntimeToEpisode()
     return result;
 }
 
+bool DatabaseManager::removeEscapedQuotes()
+{
+    auto result = false;
+
+    if (m_db.isOpen())
+    {
+        QSqlQuery query(m_db);
+
+        query.prepare("UPDATE Series SET "
+                     "seriesName = REPLACE(seriesName, :find, :replace), "
+                     "overview = REPLACE(overview, :find2, :replace2), "
+                     "actors = REPLACE(actors, :find3, :replace3)");
+        query.bindValue(":find", "''");
+        query.bindValue(":replace", "'");
+        query.bindValue(":find2", "''");
+        query.bindValue(":replace2", "'");
+        query.bindValue(":find3", "''");
+        query.bindValue(":replace3", "'");
+        result = query.exec();
+        qDebug() << query.lastError();
+
+        query.prepare("UPDATE Episode SET "
+                     "episodeName = REPLACE(episodeName, :find, :replace), "
+                     "overview = REPLACE(overview, :find2, :replace2)");
+        query.bindValue(":find", "''");
+        query.bindValue(":replace", "'");
+        query.bindValue(":find2", "''");
+        query.bindValue(":replace2", "'");
+        result = result && query.exec();
+        qDebug() << query.lastError();
+    }
+
+    return result;
+}
+
 void DatabaseManager::storeSeries(const QVariantMap &series)
 {
     auto added = series["added"].toString(); // migrate away
@@ -305,10 +347,6 @@ void DatabaseManager::storeSeries(const QVariantMap &series)
     auto status = series["status"].toString(); // needed
     auto watched = 0;
     
-    overview.replace("'", "''");
-    actors.replace("'", "''");
-    seriesName.replace("'", "''");
-
     transaction();
 
     if (m_db.isOpen())
@@ -371,10 +409,6 @@ void DatabaseManager::storeEpisodes(const int &seriesId, const QList<QVariantMap
         auto watched = 0;
         auto runtime = episode["runtime"].toInt();
 
-        // important!
-        overview.replace("'", "''");
-        name.replace("'", "''");
-        
         if (m_db.isOpen())
         {
             // lets get and check the watched flag first, might be slow but this must be done
@@ -507,7 +541,6 @@ void DatabaseManager::getSeries()
                 series["poster"] = poster;
                 
                 auto seriesName = query.value(2).toString();
-                seriesName.replace("''", "'");
                 series["seriesName"] = seriesName;
                 
                 const auto status = query.value(3).toString();
@@ -517,7 +550,6 @@ void DatabaseManager::getSeries()
                 series["id"] = QString::number(id);
                 
                 auto overview = query.value(5).toString();
-                overview.replace("''", "'");
                 series["overview"] = overview;
                 
                 const auto imdbId = query.value(6).toString();
@@ -577,7 +609,7 @@ void DatabaseManager::getStartPageSeries()
             {
                 QVariantMap series;
                 
-                const auto seriesName = query.value(0).toString().replace("''", "'");
+                const auto seriesName = query.value(0).toString();
                 series["seriesName"] = seriesName;
                 
                 const auto network = query.value(1).toString();
@@ -608,7 +640,7 @@ void DatabaseManager::getStartPageSeries()
                 const auto episodeId = query.value(6).toString();
                 series["nextEpisodeId"] = episodeId;
                 
-                auto episodeName = query.value(7).toString().replace("''", "'");
+                auto episodeName = query.value(7).toString();
                 series["nextEpisodeName"] = episodeName;
                 
                 const auto episodeNumber = query.value(8).toString();
@@ -631,7 +663,6 @@ void DatabaseManager::getStartPageSeries()
                 series["nextEpisodeBanner"] = banner;
                 
                 auto overview = query.value(12).toString();
-                overview.replace("''", "'");
                 series["nextEpisodeOverview"] = overview;
                 
                 const auto guestStars = query.value(13).toString();
@@ -690,14 +721,12 @@ void DatabaseManager::getEpisodes(const int &seriesId, const int &seasonNumber)
             QVariantMap episode;
 
             QString episodeName = query.value(0).toString();
-            episodeName.replace("''", "'");
             episode["episodeName"] = episodeName;
 
             QString episodeNumber = query.value(1).toString();
             episode["episodeNumber"] = episodeNumber;
 
             QString overview = query.value(2).toString();
-            overview.replace("''", "'");
             episode["overview"] = overview;
 
             QString seasonNumber = query.value(3).toString();
@@ -796,7 +825,7 @@ void DatabaseManager::getSeriesNames()
     {
         while (query.next())
         {
-            seriesNames.insert(query.value(0).toString().replace("''", "'"));
+            seriesNames.insert(query.value(0).toString());
         }
     }
 
@@ -966,7 +995,6 @@ QVariantMap DatabaseManager::getNextEpisodeDetails(const int &seriesId) const
             QVariantMap episode;
             
             auto episodeName = query.value(0).toString();
-            episodeName.replace("''", "'");
             episode["nextEpisodeName"] = episodeName;
             
             const auto episodeNumber = query.value(1).toString();

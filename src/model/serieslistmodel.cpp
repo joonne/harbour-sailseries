@@ -1,4 +1,5 @@
 #include "serieslistmodel.h"
+#include <memory>
 
 SeriesListModel::SeriesListModel(QObject *parent, Api *api, DatabaseManager* dbmanager) :
     QObject(parent),
@@ -121,8 +122,12 @@ void SeriesListModel::updateSeries(const int &seriesId)
 
 void SeriesListModel::updateAllSeries()
 {
-    connect(m_dbmanager, &DatabaseManager::getSeriesIdsReady, [=](const QList<int> seriesIds)
+    auto conn = std::make_shared<QMetaObject::Connection>();
+
+    *conn = connect(m_dbmanager, &DatabaseManager::getSeriesIdsReady, [=](const QList<int> seriesIds)
     {
+        disconnect(*conn);
+
         for (auto seriesId: seriesIds)
         {
             updateSeries(seriesId);

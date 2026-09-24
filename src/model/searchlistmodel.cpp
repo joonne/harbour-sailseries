@@ -1,4 +1,5 @@
 #include "searchlistmodel.h"
+#include <memory>
 
 SearchListModel::SearchListModel(QObject *parent, Api* api, DatabaseManager *dbmanager) :
     QObject(parent),
@@ -68,8 +69,11 @@ void SearchListModel::searchFinished(QList<QVariantMap> series)
 
 void SearchListModel::populateSearchModel(QList<QVariantMap> foundSeries)
 {
-    connect(m_dbmanager, &DatabaseManager::getSeriesNamesReady, [this, foundSeries](QSet<QString> seriesNames)
+    auto conn = std::make_shared<QMetaObject::Connection>();
+
+    *conn = connect(m_dbmanager, &DatabaseManager::getSeriesNamesReady, [this, foundSeries, conn](QSet<QString> seriesNames)
     {
+        disconnect(*conn);
         m_searchListModel.clear();
         emit searchModelChanged();
 
