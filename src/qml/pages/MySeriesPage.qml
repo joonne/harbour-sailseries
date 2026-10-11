@@ -36,7 +36,7 @@ Page {
         anchors.fill: parent
 
         PullDownMenu {
-            busy: engine.Loading
+            busy: engine.Loading === true
 
             MenuItem {
                 text: qsTr("Update All")

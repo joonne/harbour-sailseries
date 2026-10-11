@@ -128,7 +128,7 @@ void Engine::setMode(const QString &mode)
 void Engine::seriesStored(const int &seriesId)
 {
     Q_UNUSED(seriesId);
-    setLoading(false);
+    // setLoading(false);
 }
 
 void Engine::resetMode()

@@ -93,20 +93,17 @@ void SearchListModel::populateSearchModel(QList<QVariantMap> foundSeries)
 void SearchListModel::seriesStored(const int &seriesId)
 {
     Q_UNUSED(seriesId);
-    emit setLoading(false);
     emit updateModels();
 }
 
 void SearchListModel::searchSeries(const QString &text)
 {
-    emit setLoading(true);
     emit searchSeriesRequested(text);
 }
 
 void SearchListModel::getAll(const int &seriesId)
 {
     emit getAllRequested(seriesId);
-    emit setLoading(true);
 }
 
 void SearchListModel::clearList()

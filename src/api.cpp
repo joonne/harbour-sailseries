@@ -123,6 +123,7 @@ void Api::getTranslations(const int &seriesId, const QString &language, const QV
             emit storeSeries(series);
         }
 
+        emit seriesRetrieved(seriesId);
         reply->deleteLater();
     });
 }
