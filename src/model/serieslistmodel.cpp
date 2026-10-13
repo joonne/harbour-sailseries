@@ -1,4 +1,5 @@
 #include "serieslistmodel.h"
+#include <memory>
 
 SeriesListModel::SeriesListModel(QObject *parent, Api *api, DatabaseManager* dbmanager) :
     QObject(parent),
@@ -34,6 +35,11 @@ SeriesListModel::SeriesListModel(QObject *parent, Api *api, DatabaseManager* dbm
             SIGNAL(getSeriesIds()),
             m_dbmanager,
             SLOT(getSeriesIds()));
+
+    connect(m_api,
+            SIGNAL(seriesRetrieved(int)),
+            this,
+            SLOT(seriesRetrieved(int)));
 }
 
 SeriesListModel::~SeriesListModel()
@@ -115,19 +121,41 @@ void SeriesListModel::seriesDeleted()
 
 void SeriesListModel::updateSeries(const int &seriesId)
 {
-    emit getAllRequested(seriesId);
     emit setLoading(true);
+    emit getAllRequested(seriesId);
 }
 
 void SeriesListModel::updateAllSeries()
 {
-    connect(m_dbmanager, &DatabaseManager::getSeriesIdsReady, [=](const QList<int> seriesIds)
+    if (!m_updates.isEmpty())
     {
-        for (auto seriesId: seriesIds)
-        {
-            updateSeries(seriesId);
-        }
+        return;
+    }
+
+    emit setLoading(true);
+
+    auto conn = std::make_shared<QMetaObject::Connection>();
+
+    *conn = connect(m_dbmanager, &DatabaseManager::getSeriesIdsReady, [=](const QList<int> seriesIds)
+    {
+        disconnect(*conn);
+        m_updates = seriesIds;
+        auto next = m_updates.first();
+        updateSeries(next);
     });
 
     emit getSeriesIds();
+}
+
+void SeriesListModel::seriesRetrieved(const int &seriesId)
+{
+    m_updates.removeAll(seriesId);
+
+    if (m_updates.isEmpty())
+    {
+        return emit setLoading(false);
+    }
+
+    auto next = m_updates.first();
+    updateSeries(next);
 }

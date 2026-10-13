@@ -7,10 +7,10 @@ Engine::Engine(QObject *parent) :
     m_loading(false),
     m_mode("default")
 {
-    auto dbThread = new QThread;
-    m_dbmanager->moveToThread(dbThread);
-    connect(dbThread, SIGNAL(finished()), dbThread, SLOT(deleteLater()));
-    dbThread->start();
+    m_dbThread = new QThread;
+    m_dbmanager->moveToThread(m_dbThread);
+    connect(m_dbThread, SIGNAL(finished()), m_dbThread, SLOT(deleteLater()));
+    m_dbThread->start();
 
     m_seriesListModel = new SeriesListModel(this, m_api, m_dbmanager);
     m_searchListModel = new SearchListModel(this, m_api, m_dbmanager);
@@ -75,6 +75,9 @@ Engine::~Engine()
     delete m_api;
     m_api = 0;
 
+    m_dbThread->quit();
+    m_dbThread->wait();
+
     delete m_dbmanager;
     m_dbmanager = 0;
 }
@@ -125,7 +128,7 @@ void Engine::setMode(const QString &mode)
 void Engine::seriesStored(const int &seriesId)
 {
     Q_UNUSED(seriesId);
-    setLoading(false);
+    // setLoading(false);
 }
 
 void Engine::resetMode()

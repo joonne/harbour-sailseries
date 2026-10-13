@@ -37,6 +37,7 @@ signals:
 public slots:
     void searchFinished(QList<QVariantMap> series);
     void seriesStored(const int &seriesId);
+    void seriesRetrieved(const int &seriesId);
 
 private:
     QList<SeriesData*> m_searchListModel;

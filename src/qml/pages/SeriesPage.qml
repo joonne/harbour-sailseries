@@ -62,6 +62,7 @@ Page {
             busy: engine.Loading
 
             MenuItem {
+                enabled: !engine.Loading
                 text: qsTr("Remove")
                 onClicked: {
                     remorse.execute(qsTr("Removing"),
@@ -73,7 +74,8 @@ Page {
             }
 
             MenuItem {
-                text:qsTr("Update")
+                enabled: !engine.Loading
+                text: qsTr("Update")
                 onClicked: {
                     engine.SeriesListModel.updateSeries(seriesId)
                 }

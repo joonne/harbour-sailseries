@@ -1,4 +1,5 @@
 #include "searchlistmodel.h"
+#include <memory>
 
 SearchListModel::SearchListModel(QObject *parent, Api* api, DatabaseManager *dbmanager) :
     QObject(parent),
@@ -24,6 +25,11 @@ SearchListModel::SearchListModel(QObject *parent, Api* api, DatabaseManager *dbm
             SIGNAL(seriesStored(int)),
             this,
             SLOT(seriesStored(int)));
+
+    connect(m_api,
+            SIGNAL(seriesRetrieved(int)),
+            this,
+            SLOT(seriesRetrieved(int)));
 }
 
 SearchListModel::~SearchListModel()
@@ -68,8 +74,11 @@ void SearchListModel::searchFinished(QList<QVariantMap> series)
 
 void SearchListModel::populateSearchModel(QList<QVariantMap> foundSeries)
 {
-    connect(m_dbmanager, &DatabaseManager::getSeriesNamesReady, [this, foundSeries](QSet<QString> seriesNames)
+    auto conn = std::make_shared<QMetaObject::Connection>();
+
+    *conn = connect(m_dbmanager, &DatabaseManager::getSeriesNamesReady, [this, foundSeries, conn](QSet<QString> seriesNames)
     {
+        disconnect(*conn);
         m_searchListModel.clear();
         emit searchModelChanged();
 
@@ -89,20 +98,18 @@ void SearchListModel::populateSearchModel(QList<QVariantMap> foundSeries)
 void SearchListModel::seriesStored(const int &seriesId)
 {
     Q_UNUSED(seriesId);
-    emit setLoading(false);
     emit updateModels();
 }
 
 void SearchListModel::searchSeries(const QString &text)
 {
-    emit setLoading(true);
     emit searchSeriesRequested(text);
 }
 
 void SearchListModel::getAll(const int &seriesId)
 {
-    emit getAllRequested(seriesId);
     emit setLoading(true);
+    emit getAllRequested(seriesId);
 }
 
 void SearchListModel::clearList()
@@ -110,3 +117,10 @@ void SearchListModel::clearList()
     m_searchListModel.clear();
     emit searchModelChanged();
 }
+
+void SearchListModel::seriesRetrieved(const int &seriesId)
+{
+    Q_UNUSED(seriesId);
+    emit setLoading(false);
+}
+

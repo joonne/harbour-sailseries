@@ -39,6 +39,7 @@ Page {
             busy: engine.Loading
 
             MenuItem {
+                enabled: !engine.Loading
                 text: qsTr("Update All")
                 onClicked: {
                     engine.SeriesListModel.updateAllSeries()

@@ -6,6 +6,7 @@ import "../components"
 Page {
     id: searchresultpage
 
+    // props
     property int id
     property string name
     property string network
@@ -27,17 +28,11 @@ Page {
             }
 
             MenuItem {
-                visible: !isAdded
-                text: qsTr("Add to my series")
+                enabled: !engine.Loading && !isAdded
+                text: !isAdded ? qsTr("Add to my series") : qsTr("Already added")
                 onClicked: {
                     engine.SearchModel.getAll(id)
                 }
-            }
-
-            MenuItem {
-                enabled: !isAdded
-                visible: isAdded
-                text: qsTr("Already added")
             }
         }
 

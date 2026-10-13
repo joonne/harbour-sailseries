@@ -29,6 +29,9 @@ signals:
     void storeFanartImageFor(const int&, const QString&);
     void storeSeasonImages(const int&, const QList<QVariantMap>&);
 
+    // loading status handling
+    void seriesRetrieved(const int&);
+
 public slots:
     void replyFinishedError(QNetworkReply* reply);
     void searchSeries(const QString &seriesName);

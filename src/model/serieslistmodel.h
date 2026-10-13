@@ -43,11 +43,13 @@ signals:
 public slots:
     void populateBannerList(const QList<QVariantMap> &allSeries);
     void seriesDeleted();
+    void seriesRetrieved(const int& seriesId);
 
 private:
     Api* m_api;
     DatabaseManager* m_dbmanager;
     QList<SeriesData*> m_seriesListModel;
+    QList<int> m_updates;
 
     static int seriesListCount(QQmlListProperty<SeriesData> *prop);
     static SeriesData* seriesListAt(QQmlListProperty<SeriesData> *prop, int index);

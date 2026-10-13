@@ -40,6 +40,7 @@ public:
     bool createEpisodeTable();
     bool createBannerTable();
     bool addRuntimeToEpisode();
+    bool removeEscapedQuotes();
 
     QVariantMap getNextEpisodeDetails(const int &seriesId) const;
     QString getStatus(const int &seriesId) const;
