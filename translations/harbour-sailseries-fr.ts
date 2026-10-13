@@ -226,17 +226,17 @@
         <translation>Pas d&apos;information sur le prochain épisode</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="42"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="43"/>
         <source>Update All</source>
         <translation>Tout mettre à jour</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="56"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="57"/>
         <source>My Series</source>
         <translation>Mes Séries</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/MySeriesPage.qml" line="135"/>
+        <location filename="../src/qml/pages/MySeriesPage.qml" line="136"/>
         <source>Search for series first.</source>
         <translation>Commencez par chercher des séries.</translation>
     </message>
@@ -265,17 +265,17 @@
 <context>
     <name>SearchResultPage</name>
     <message>
-        <location filename="../src/qml/pages/SearchResultPage.qml" line="31"/>
+        <location filename="../src/qml/pages/SearchResultPage.qml" line="39"/>
         <source>Add to my series</source>
         <translation>Ajouter à mes séries</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SearchResultPage.qml" line="40"/>
+        <location filename="../src/qml/pages/SearchResultPage.qml" line="39"/>
         <source>Already added</source>
         <translation>Déjà ajoutée</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SearchResultPage.qml" line="63"/>
+        <location filename="../src/qml/pages/SearchResultPage.qml" line="65"/>
         <source>Overview</source>
         <translation>Présentation</translation>
     </message>
@@ -321,32 +321,32 @@
         <translation>Terminée</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="65"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="66"/>
         <source>Remove</source>
         <translation>Retirer</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="67"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="68"/>
         <source>Removing</source>
         <translation>Retrait en cours</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="76"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="78"/>
         <source>Update</source>
         <translation>Mettre à jour</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="108"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="110"/>
         <source>Status</source>
         <translation>Statut</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="115"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="117"/>
         <source>Genre</source>
         <translation>Genre</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/SeriesPage.qml" line="122"/>
+        <location filename="../src/qml/pages/SeriesPage.qml" line="124"/>
         <source>Overview</source>
         <translation>Présentation</translation>
     </message>

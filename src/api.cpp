@@ -123,7 +123,6 @@ void Api::getTranslations(const int &seriesId, const QString &language, const QV
             emit storeSeries(series);
         }
 
-        emit seriesRetrieved(seriesId);
         reply->deleteLater();
     });
 }
@@ -143,7 +142,7 @@ void Api::getEpisodes(const int &seriesId, const QList<QVariantMap> &seasons,  c
             {
                 qInfo() << "all episodes for " << seriesId << " fetched";
                 // this is a safe bet to to turn loading indicator off
-                // emit episodesFetched();
+                emit seriesRetrieved(seriesId);
                 return;
             }
 

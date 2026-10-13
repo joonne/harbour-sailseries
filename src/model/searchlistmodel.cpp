@@ -25,6 +25,11 @@ SearchListModel::SearchListModel(QObject *parent, Api* api, DatabaseManager *dbm
             SIGNAL(seriesStored(int)),
             this,
             SLOT(seriesStored(int)));
+
+    connect(m_api,
+            SIGNAL(seriesRetrieved(int)),
+            this,
+            SLOT(seriesRetrieved(int)));
 }
 
 SearchListModel::~SearchListModel()
@@ -103,6 +108,7 @@ void SearchListModel::searchSeries(const QString &text)
 
 void SearchListModel::getAll(const int &seriesId)
 {
+    emit setLoading(true);
     emit getAllRequested(seriesId);
 }
 
@@ -111,3 +117,10 @@ void SearchListModel::clearList()
     m_searchListModel.clear();
     emit searchModelChanged();
 }
+
+void SearchListModel::seriesRetrieved(const int &seriesId)
+{
+    Q_UNUSED(seriesId);
+    emit setLoading(false);
+}
+

@@ -121,6 +121,7 @@ void SeriesListModel::seriesDeleted()
 
 void SeriesListModel::updateSeries(const int &seriesId)
 {
+    emit setLoading(true);
     emit getAllRequested(seriesId);
 }
 
